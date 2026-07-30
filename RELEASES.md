@@ -8,7 +8,7 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Refreshed Settings and moved it to the lower-left corner.
+- Changed Settings with a refreshed design and moved it to the lower-left corner.
 - Changed child-task reports to a dedicated view.
 - Added per-device names and color icons to identify connected PWA devices.
 - Improved in-app browser clicks, typing, scrolling, and key actions by verifying their results.
