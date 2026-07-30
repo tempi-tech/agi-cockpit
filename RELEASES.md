@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.42.0 — 2026-07-31
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Changed Settings with a refreshed design and moved it to the lower-left corner.
 - Changed child-task reports to a dedicated view.
