@@ -12,7 +12,7 @@ English is the primary language for these generated release notes. Download the 
 - Changed child-task reports to a dedicated view.
 - Added per-device names and color icons to identify connected PWA devices.
 - Improved in-app browser clicks, typing, scrolling, and key actions by verifying their results.
-- Made the in-app browser side panel resize area easier to grab.
+- Improved the in-app browser side panel by making its resize area easier to grab.
 - Improved update checks to retry temporary network errors and show failure reasons with manual update guidance.
 - Fixed remote access not recovering after sign-in or membership status changes.
 - Fixed Autorun stopping incorrectly after expired authentication or temporary membership verification failures.
