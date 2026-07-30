@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.42.0 — 2026-07-31
+
+**Type:** minor · **Platforms:** macOS
+
+- Refreshed Settings and moved it to the lower-left corner.
+- Changed child-task reports to a dedicated view.
+- Added per-device names and color icons to identify connected PWA devices.
+- Improved in-app browser clicks, typing, scrolling, and key actions by verifying their results.
+- Made the in-app browser side panel resize area easier to grab.
+- Improved update checks to retry temporary network errors and show failure reasons with manual update guidance.
+- Fixed remote access not recovering after sign-in or membership status changes.
+- Fixed Autorun stopping incorrectly after expired authentication or temporary membership verification failures.
+- Fixed Cursor Visual task history not restoring correctly after resuming a task.
+- Fixed Grok Build Visual task history and active workflows not restoring correctly after resuming a task.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 設定画面を刷新し、左下に移動
+- 子タスクからの報告を専用表示に変更
+- PWAを接続端末ごとの名前とカラーアイコンで識別できるように対応
+- アプリ内ブラウザーのクリック・入力・スクロール・キー操作を実行結果まで検証するように改善
+- アプリ内ブラウザーのサイドパネルをリサイズする領域をつかみやすく改善
+- アップデート確認で一時的な通信エラーを再試行し、失敗理由と手動更新の案内を表示するように改善
+- サインインや会員資格の更新後にリモートアクセスが復旧しない問題を修正
+- 認証切れや一時的な会員資格確認エラーでAutorunが不適切に停止する問題を修正
+- CursorのVisualタスクを再開した際に履歴が正しく復元されない問題を修正
+- Grok BuildのVisualタスクを再開した際に履歴や進行中のワークフローが正しく復元されない問題を修正
+
+</details>
+
 ## v4.41.0 — 2026-07-29
 
 **Type:** minor · **Platforms:** macOS, Linux
