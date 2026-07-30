@@ -35,7 +35,7 @@ The mobile PWA connects to the Cockpit running on your computer. It is designed 
 | --- | --- |
 | ![AGI Cockpit mobile task list](./assets/cockpit-mobile-tasks.png) | ![AGI Cockpit mobile Ask](./assets/cockpit-mobile-ask.png) |
 
-PWA remote access and Autorun require an AGI Labo membership. Regular desktop tasks can be started in guest mode.
+All local features are free and unlimited with no account required. An [AGI Labo membership](https://agi-labo.com/en?ref=cockpit-app#pricing) ($20/month or $200/year, with a 7-day free trial) adds exactly two Cockpit features: Autorun and remote access through the PWA.
 
 ## Get started
 

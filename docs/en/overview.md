@@ -27,7 +27,7 @@ Cockpit does not move the work itself into the cloud. Agent processes and workin
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
 | `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, and other Cockpit surfaces | AI agents and people |
 
-Remote access through the PWA and Autorun require an AGI Labo membership. You can start regular tasks in guest mode.
+Every local feature is free and unlimited, with no account required. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds exactly two Cockpit features: Autorun and remote access through the PWA.
 
 ## Where to start
 
@@ -36,14 +36,14 @@ Remote access through the PWA and Autorun require an AGI Labo membership. You ca
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - Start a new task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
-## Guest mode and AGI Labo membership
+## Free access and AGI Labo membership
 
 | Access | Scope covered by these docs |
 | --- | --- |
-| Guest mode | Create a task in Desktop, run an agent, and review the result and history dashboard |
-| AGI Labo member | Everything in guest mode, plus Autorun and PWA remote access |
+| Free access | Create a task in Desktop, run an agent, and review the result and history dashboard. Every local feature is free and unlimited |
+| AGI Labo membership | Everything in free access, plus Autorun and PWA remote access |
 
-A lock on a feature means that feature requires sign-in. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Labo sign-in.
+A lock on a feature means that feature requires an active AGI Labo membership. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Labo sign-in.
 
 ## Next step
 
