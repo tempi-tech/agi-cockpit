@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.41.0 on 2026-07-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.42.0 on 2026-07-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -20,7 +20,7 @@ Open the [AGI Cockpit download page](https://agi-labo.com/en/tools/cockpit) and 
 
 On Windows, install AGI Cockpit from Microsoft Store. On macOS, open the `.dmg` and move AGI Cockpit to Applications. On Linux, use the distributed AppImage or `.deb` package.
 
-On a first run with no existing tasks, Cockpit opens a setup flow. It introduces the app, checks the supported task-agent CLIs, configures the Cockpit integration, then offers AGI Labo sign-in. One available agent is enough to continue. Choose **Start without signing in** at the final step if you want to use guest mode; sign in as an AGI Labo member if you need Autorun or remote access from another device. You can revisit the flow later from **First-run setup** in Settings.
+On a first run with no existing tasks, Cockpit opens a setup flow. It introduces the app, checks the supported task-agent CLIs, configures the Cockpit integration, then offers AGI Labo sign-in. One available agent is enough to continue. Choose **Start without signing in** at the final step if you want to use guest mode; sign in as an AGI Labo member if you need Autorun or remote access from another device. You can revisit the flow later by opening the app menu in the lower-left corner, then selecting **Setup** and **First-run setup**.
 
 AGI Cockpit stores credentials and API keys in encrypted operating-system storage such as Keychain or a keyring. If encrypted storage is unavailable, Cockpit does not fall back to plaintext. It rejects the save and shows recovery guidance. Enable the operating-system Keychain or keyring, then sign in again.
 
@@ -32,7 +32,7 @@ The setup flow checks Claude Code, Codex CLI, Antigravity CLI, Cursor CLI, and G
 
 If the new-task screen later shows **Install**, use it to install the corresponding CLI. If it shows **Open Settings**, confirm the launch command in Settings. Return to the new-task screen after installation; the agent is ready when it becomes selectable.
 
-The integration step automatically installs or refreshes the `cockpit` skill for detected Claude Code, Codex CLI, Antigravity CLI, Cursor CLI, and Grok Build installations. It also installs the `cockpit` command and adds its directory to your shell configuration on macOS and Linux or to your user `PATH` on Windows. This writes the generated skill into each detected agent's user-level skill directory and updates the applicable user-level path configuration. HTML Mode is optional and remains a separate installation. Cockpit refreshes the core skill and command on later app starts; open **View skill integration** in Settings to review their status after adding another agent.
+The integration step automatically installs or refreshes the `cockpit` skill for detected Claude Code, Codex CLI, Antigravity CLI, Cursor CLI, and Grok Build installations. It also installs the `cockpit` command and adds its directory to your shell configuration on macOS and Linux or to your user `PATH` on Windows. This writes the generated skill into each detected agent's user-level skill directory and updates the applicable user-level path configuration. HTML Mode is optional and remains a separate installation. Cockpit refreshes the core skill and command on later app starts; open **Skills** from the lower-left app menu to review their status after adding another agent.
 
 When you use Claude Code, Codex, or Grok Build in Native UI, you can start before authenticating. Task details then shows sign-in guidance, and Cockpit retries the first instruction in the same task after authentication succeeds. This guidance and automatic retry do not apply to Terminal UI or the Terminal agent. In those modes, complete the CLI's sign-in flow inside the terminal, then resume or recreate the task.
 
@@ -69,9 +69,11 @@ When the work is finished, select **Complete** in task details. Completed tasks 
 
 ## 5. Update AGI Cockpit
 
-Check for a new version from the update notice in the header or **Check for Updates** in Settings. On platforms where Cockpit downloads the update, use the on-screen action to restart and install it when ready. On Linux, the notice opens the download page that matches the current display language.
+Check for a new version from the update notice in the lower-left corner or open **Updates** from the app menu in the same location. On platforms where Cockpit downloads the update, use the on-screen action to restart and install it when ready. On Linux, the notice opens the download page that matches the current display language.
 
 When Cockpit requires a newer version before continuing, the screen shows release notes and a download destination in the app's current language. Review the Japanese guidance in the Japanese UI or the English guidance in the English UI before updating.
+
+If an update check fails because of a temporary network or server problem, Cockpit retries it once automatically. If the check still fails, the Updates panel shows guidance for the failure and offers **Try again** and **Update manually**. If Cockpit cannot validate the update data, it does not continue with automatic installation; follow the manual-update guidance instead.
 
 ## 6. If the task does not start
 

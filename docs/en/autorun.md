@@ -4,13 +4,13 @@
 
 Learn how Autorun starts a new task from a one-time, interval, or cron schedule and keeps the result as a regular Cockpit task.
 
-> Verified with AGI Cockpit 4.41.0 on 2026-07-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.42.0 on 2026-07-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task automatically at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start the same kind of work when it is needed.
 
 ## Requirements
 
-Autorun requires an AGI Labo membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Requests from guests and inactive members return an explicit error. Cockpit also rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Labo in Desktop.
+Autorun requires an AGI Labo membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Labo in Desktop.
 
 Schedules run inside the AGI Cockpit app process. They do not fire while Cockpit is closed, and the operating-system scheduler does not launch Cockpit for them.
 
@@ -26,7 +26,7 @@ In the cron weekday field, `0` means Sunday. For example, `0 9 * * 1-5` runs at 
 
 ## Create an Autorun task
 
-1. Open **Autorun Tasks** at the top of Desktop.
+1. Open the app menu in the lower-left corner of Desktop, then select **Autorun tasks**.
 2. Select **New Autorun**.
 3. Enter a name and the instruction to send when the task starts.
 4. Choose the working directory. When running as the Master Agent, Cockpit uses the Master's working location.
@@ -60,7 +60,7 @@ The Desktop form requires a directory unless the Autorun runs as the Master Agen
 
 If the agent fails to start, the task remains in the task list with an **Error** state. A one-time Autorun still becomes disabled; an interval or cron Autorun remains enabled and calculates its next run. Open the created task details to inspect the cause.
 
-If Cockpit confirms that the account is a guest or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If a temporary network or API failure prevents verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so a temporary outage does not consume its only run.
+If Cockpit confirms that the account is a guest or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If the sign-in session needs renewal or a temporary network or API failure prevents membership verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so authentication renewal or a temporary outage does not consume its only run.
 
 ## Create from the CLI
 
