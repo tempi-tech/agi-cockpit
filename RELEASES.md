@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.43.0 — 2026-08-01
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added App Surface so agents can inspect and operate a connected Android emulator, Android device, or booted iOS Simulator.
 - Added isolated Browser Identities for tasks and Autoruns so sign-in state and site data can be kept separate.
