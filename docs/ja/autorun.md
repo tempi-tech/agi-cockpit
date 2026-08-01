@@ -4,7 +4,7 @@
 
 Autorunが一度、一定間隔、cronのスケジュールに基づいて新しいタスクを起動し、その結果を通常のタスクとして残す仕組みを説明します。
 
-> AGI Cockpit 4.42.0で2026-07-31に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
+> AGI Cockpit 4.43.0で2026-08-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 Autorunは、指定した時刻、一定間隔、cron式に基づいて、新しいタスクを自動起動する仕組みです。複数エージェントを連携させる機能ではなく、同じ条件の仕事を必要なタイミングで開始するための独立した機能です。
 
@@ -35,6 +35,8 @@ cronの曜日は`0`が日曜日です。例として、平日の午前9時は`0 
 7. 保存後、一覧に次回実行時刻が表示されることを確認します。
 
 Autorunは保存時のランタイム設定をスナップショットとして保持します。後からグローバル設定を変更しても、既存Autorunのモデル、推論レベル、service tier、system prompt、承認モード、アカウント、UIモードは自動で変わりません。保存済みのモデルやアカウントを利用できなくなった場合、Cockpitは別の設定へ無言で切り替えず、そのAutorunを無効にして「要確認」を表示します。
+
+Browser Identityの割り当てもAutorunごとに保存され、発火時に作成されるタスクへ引き継がれます。Identityを指定しないAutorunはDefault Identityを使います。v4.43.0では、Autorunへの割り当てと変更はCLIから行います。Identityそのものの作成、名前と色の変更、データ消去、削除は、画面左下のアプリメニューにある「Browser Identity」またはCLIから行えます。
 
 DesktopとPWAでは、選択したエージェントとUIモードで利用できる設定だけが表示されます。CLIとAPIも同じ対応情報を使い、非対応の組み合わせを保存前に明示的なエラーで拒否します。
 
@@ -75,6 +77,7 @@ cockpit autorun create \
   --effort high \
   --service-tier fast \
   --approval-mode accept-edits \
+  --browser-identity work \
   --type cron \
   --expression "0 9 * * 1-5"
 ```
@@ -84,6 +87,7 @@ cockpit autorun list
 cockpit autorun get <id>
 cockpit autorun run <id>
 cockpit autorun toggle <id>
+cockpit autorun update <id> --browser-identity default
 ```
 
 ## 関連ページ

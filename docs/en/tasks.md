@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, task details, task states, follow-up instructions, quotes, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.42.0 on 2026-07-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.43.0 on 2026-08-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -62,6 +62,14 @@ A child task's status report to its parent appears as **Child task report**, sep
 
 In the PWA, a down-arrow button appears above the composer after you scroll away from the latest message. Select it to jump to the end of the conversation and resume following new output.
 
+## Browser Identity and App Surface
+
+Each task has one assigned Browser Identity. The in-app browser stores cookies, cache, localStorage, permissions, and related data in a persistent area owned by that Identity and does not copy the data to another Identity. A task without an explicit assignment uses the Default Identity, which preserves the existing browser profile and sign-ins.
+
+The browser side panel shows the current Identity by name and color and lets you switch it. Switching changes the task assignment, and the next browser session uses the selected Identity's area. Existing sessions remain with their original Identity and become available again if you switch back. Create, rename, recolor, clear, or remove an Identity from **Browser Identity** in the lower-left app menu or from the CLI. The Default Identity cannot be removed.
+
+App Surface connects a running Android emulator, Android physical device, or booted iOS Simulator to one task so a person and agent can inspect and operate its screen from a side panel. Cockpit does not boot the target or install, launch, or terminate its app, and one target cannot be attached to several tasks at the same time. The first connection to an Android physical device requires explicit approval through a Cockpit Ask. Completing or deleting the task detaches the target without terminating its app.
+
 ## Attach files
 
 In Desktop and the PWA, the new-task screen and task-details composer can attach images, text, source code, JSON, CSV, PDFs, audio, video, and office documents. When the selected agent supports a format natively, Cockpit sends it as a native attachment. Otherwise, Cockpit supplies its local path and metadata for the name, MIME type, and size. Handling varies by agent, UI mode, and model, so not every combination can interpret every format directly.
@@ -90,9 +98,12 @@ Completing a task in a temporary folder deletes that working directory automatic
 ```bash
 cockpit task list
 cockpit task get <id>
+cockpit task browser-identity <id>
 ```
 
 `task get` returns `status`, `waitingReason`, `readyForNextPrompt`, and `needsResume`, together with the latest conversation and terminal output.
+
+Use `cockpit task browser-identity <id> <name|id|default>` to change the Browser Identity assigned to a task. When creating a task, use `cockpit task create ... --browser-identity <name|id|default>` to assign one immediately.
 
 ## Related pages
 

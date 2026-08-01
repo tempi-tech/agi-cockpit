@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.42.0 on 2026-07-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.43.0 on 2026-08-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -13,10 +13,12 @@ AGI Cockpit is a desktop app for handing work to multiple AI agents and supervis
 1. Give a task an objective and a working directory.
 2. Start the selected AI agent.
 3. Use the task list to distinguish running, awaiting confirmation, completed, and failed work.
-4. Open task details to review the conversation, confirmation requests, diffs, files, pages, and other results.
+4. Open task details to review the conversation, confirmation requests, diffs, files, web pages, connected app screens, and other results.
 5. Send another instruction, answer an Ask, resume the task, or complete it.
 
 Cockpit does not move the work itself into the cloud. Agent processes and working files remain on the computer running Cockpit. Network access by an agent or another service follows that product's own configuration.
+
+The in-app browser stores sign-in state and site data in the local persistent area owned by the Browser Identity assigned to a task or Autorun. Each Identity has a separate area. Tasks and Autoruns without an explicit assignment use the Default Identity, which preserves the existing browser sign-ins.
 
 ## Four product surfaces
 
@@ -25,7 +27,7 @@ Cockpit does not move the work itself into the cloud. Agent processes and workin
 | Desktop | Main place to create, list, inspect, configure, and review tasks | People |
 | Agent process | Executes instructions and returns conversation or changes to the task | AI agents |
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
-| `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, and other Cockpit surfaces | AI agents and people |
+| `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, App Surface, and other Cockpit surfaces | AI agents and people |
 
 Every local feature is free and unlimited, with no account required. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds exactly two Cockpit features: Autorun and remote access through the PWA.
 

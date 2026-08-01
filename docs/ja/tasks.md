@@ -4,7 +4,7 @@
 
 タスク一覧、オーバービュー、タスク詳細の役割と、タスク状態、追加指示、引用、添付、再開、完了の違いを説明します。
 
-> AGI Cockpit 4.42.0で2026-07-31に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.43.0で2026-08-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は「次にどの仕事を見るか」を選ぶ場所、タスク詳細は「選んだ仕事を理解して動かす」場所です。オーバービューは、タスク、プロジェクト、エージェントを横断して探すために使います。
 
@@ -62,6 +62,14 @@ CursorとGrok BuildのネイティブUIでは、再開時に接続先の保存�
 
 PWAでは、最新メッセージから離れた位置までスクロールすると、入力欄の上に下向き矢印のボタンが表示されます。選ぶと会話の末尾へ移動し、新しい出力を追う状態へ戻ります。
 
+## Browser IdentityとApp Surface
+
+各タスクにはBrowser Identityが一つ割り当てられます。アプリ内ブラウザーのCookie、キャッシュ、localStorage、権限などはIdentityごとの永続領域に保存され、ほかのIdentityへコピーされません。指定しないタスクは、従来のブラウザープロファイルとログイン状態を引き継ぐDefault Identityを使います。
+
+ブラウザーのサイドパネルでは、現在のIdentityを名前と色で確認して切り替えられます。切り替えるとそのタスクの割り当てが変わり、次に開くブラウザーセッションは切り替え先の領域を使います。すでに存在するセッションは元のIdentityに残り、元へ戻したときに再び利用できます。Identityの作成、名前と色の変更、データ消去、削除は、画面左下のアプリメニューにある「Browser Identity」またはCLIから行います。Default Identityは削除できません。
+
+App Surfaceは、起動済みのAndroidエミュレーター、Android実機、または起動済みのiOS Simulatorを一つのタスクへ接続し、画面を人とエージェントで確認・操作するサイドパネルです。対象の起動、アプリのインストールや起動・終了は行わず、同じ対象を複数タスクへ同時接続しません。Android実機への初回接続ではCockpitのAskによる明示的な承認が必要です。タスクを完了または削除すると接続は解除されますが、対象のアプリは終了しません。
+
 ## ファイルを添付する
 
 DesktopとPWAでは、新しいタスクとタスク詳細の入力欄から、画像、テキスト、ソースコード、JSON、CSV、PDF、音声、動画、Office文書を添付できます。Cockpitがその形式をエージェントへ直接渡せる場合はネイティブ添付として扱い、それ以外はローカルパスと名前、MIME、サイズのメタデータを渡します。対応方法はエージェント、UIモード、モデルによって異なるため、すべての形式をすべての組み合わせで直接解釈できるとは限りません。
@@ -90,9 +98,12 @@ DesktopとPWAでは、新しいタスクとタスク詳細の入力欄から、�
 ```bash
 cockpit task list
 cockpit task get <id>
+cockpit task browser-identity <id>
 ```
 
 `task get`では、`status`、`waitingReason`、`readyForNextPrompt`、`needsResume`に加え、直近の会話とターミナル出力を確認できます。
+
+`cockpit task browser-identity <id> <name|id|default>`を使うと、タスクに割り当てるBrowser Identityを変更できます。新しいタスクには`cockpit task create ... --browser-identity <name|id|default>`で指定できます。
 
 ## 関連ページ
 
