@@ -4,6 +4,45 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.43.0 — 2026-08-01
+
+**Type:** minor · **Platforms:** macOS
+
+- Added App Surface so agents can inspect and operate a connected Android emulator, Android device, or booted iOS Simulator.
+- Added isolated Browser Identities for tasks and Autoruns so sign-in state and site data can be kept separate.
+- Added Browser Identity creation, editing, data clearing, and removal in Settings and the CLI.
+- Added post-click checks to the in-app browser for URLs, visible text, element state, and network responses.
+- Fixed controls not being clickable in fullscreen HTML Surfaces.
+- Fixed chat auto-follow stopping while new output was still arriving.
+- Fixed approval-mode changes not being saved in Settings.
+- Fixed Linux update notifications downloading an AppImage for the wrong architecture.
+- Fixed app-server settings interfering across multiple Codex Native UI tasks.
+- Fixed Grok Build rate limits not being reflected correctly in task failure state and usage.
+- Fixed ARM64 AppImages failing to start on Ubuntu 24.
+- Fixed the Project Explorer not refreshing automatically after file changes.
+- Improved authentication errors with clearer Japanese and English messages.
+- Fixed controls not being clickable in the image lightbox.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 起動済みのAndroidエミュレーター・Android実機・iOS Simulatorをタスクに接続し、画面の確認と操作をエージェントに任せられるApp Surfaceを追加
+- タスクやAutorunごとに独立したBrowser Identityを割り当て、ログイン状態とサイトデータを分離できるように対応
+- Browser Identityを設定画面とCLIから作成・編集・消去・削除できるように対応
+- アプリ内ブラウザーのクリック後にURL、表示テキスト、要素状態、通信結果を待って検証できるように対応
+- HTML Surfaceの全画面表示で操作ボタンをクリックできない問題を修正
+- チャットの自動追従が新しい出力の途中で止まる問題を修正
+- 設定画面で承認モードの変更が保存されない問題を修正
+- Linuxのアップデート通知から正しいアーキテクチャのAppImageをダウンロードできない問題を修正
+- 複数のCodexネイティブUIタスクでapp-server設定が干渉する問題を修正
+- Grok Buildのレート制限時に失敗状態と使用量を正しく表示できない問題を修正
+- Ubuntu 24のARM64環境でAppImageが起動しない問題を修正
+- プロジェクトエクスプローラーがファイル変更を自動反映しない問題を修正
+- 認証エラーを日本語と英語で分かりやすく表示するように改善
+- 画像ライトボックスの操作ボタンをクリックできない問題を修正
+
+</details>
+
 ## v4.42.0 — 2026-07-31
 
 **Type:** minor · **Platforms:** macOS, Linux
