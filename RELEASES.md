@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.43.1 — 2026-08-03
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Improved site compatibility by having the in-app browser present its native Chromium identity to websites.
 - Changed the app platform to Electron 43 with a newer Chromium engine.
