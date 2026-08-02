@@ -9,7 +9,7 @@ English is the primary language for these generated release notes. Download the 
 **Type:** patch · **Platforms:** macOS
 
 - Improved site compatibility by having the in-app browser present its native Chromium identity to websites.
-- Updated the app platform to Electron 43 with a newer Chromium engine.
+- Changed the app platform to Electron 43 with a newer Chromium engine.
 
 <details>
 <summary>日本語のリリースノート</summary>
