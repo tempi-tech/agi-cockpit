@@ -4,6 +4,21 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.43.1 — 2026-08-03
+
+**Type:** patch · **Platforms:** macOS
+
+- Improved site compatibility by having the in-app browser present its native Chromium identity to websites.
+- Updated the app platform to Electron 43 with a newer Chromium engine.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- アプリ内ブラウザーがChromium本来のブラウザー情報でサイトにアクセスするようになり、サイトの互換性を改善
+- アプリの基盤をElectron 43（新しいChromiumエンジン）に更新
+
+</details>
+
 ## v4.43.0 — 2026-08-01
 
 **Type:** minor · **Platforms:** macOS, Linux
