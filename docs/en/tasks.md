@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, task details, task states, follow-up instructions, quotes, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.43.0 on 2026-08-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.44.0 on 2026-08-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -61,6 +61,12 @@ A message sent by another Cockpit task is labeled **Sent from another task** and
 A child task's status report to its parent appears as **Child task report**, separately from a regular message. The report identifies the child task and whether it is waiting for another instruction, permission, an answer, or review, or whether it encountered an error. When that child is still in the current task list, select **Go to task** to open it; expand **Technical details** to inspect the original machine-readable report.
 
 In the PWA, a down-arrow button appears above the composer after you scroll away from the latest message. Select it to jump to the end of the conversation and resume following new output.
+
+## Review and edit files
+
+In the task-details right side panel, the pencil button can directly edit both files in Project Explorer and text files explicitly opened in File Preview. This includes files outside the project when they were opened by absolute path. Cockpit saves edits automatically after input and flushes unsaved content when you stop editing or move to another view.
+
+Direct editing is limited to existing regular text files of 1 MB or less that the current user can write. Binary files, images, video, audio, PDFs, and files over 1 MB cannot be edited. Cockpit does not show a save confirmation or provide an in-app undo after writing, so verify the path at the top of the panel before selecting the pencil button. Changes to a file outside the project might not appear in the task's Git diff.
 
 ## Browser Identity and App Surface
 
