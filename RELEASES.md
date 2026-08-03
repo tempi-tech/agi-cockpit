@@ -9,7 +9,7 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added Qoder as an agent for tasks and Autoruns.
-- Redesigned the app into three columns for the task list, workspace, and settings, making key information and actions easier to access.
+- Changed the app to a three-column layout for the task list, workspace, and settings, making key information and actions easier to access.
 - Added direct editing and automatic saving of text files from the file preview, including files outside the project.
 - Changed task creation to show only agents that are available.
 - Fixed Grok Build device-code sign-in not completing.
