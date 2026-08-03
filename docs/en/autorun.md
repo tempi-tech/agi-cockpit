@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task from a one-time, interval, or cron schedule and keeps the result as a regular Cockpit task.
 
-> Verified with AGI Cockpit 4.43.0 on 2026-08-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.44.0 on 2026-08-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task automatically at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start the same kind of work when it is needed.
 
@@ -41,6 +41,8 @@ An Autorun also keeps its Browser Identity assignment and passes it to every tas
 Desktop and the PWA show only settings supported by the selected agent and UI mode. The CLI and API use the same capability data and reject unsupported combinations with an explicit error before saving.
 
 Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor's available model and approval mode in Desktop, the PWA, and CLI-backed creation. Cursor does not expose reasoning-effort, service-tier, system-prompt, or account-profile settings.
+
+Qoder Autoruns can also use **Native UI** or **Terminal**. Native UI exposes Qoder's available model, system prompt, and approval mode in Desktop, the PWA, and CLI-backed creation. Qoder does not expose reasoning-effort, service-tier, or account-profile settings.
 
 ## Review a run
 

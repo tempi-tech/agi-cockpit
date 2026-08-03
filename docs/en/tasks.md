@@ -8,15 +8,17 @@ Understand the task list, Overview, task details, task states, follow-up instruc
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
-## Three views
+## Desktop three-column layout and Overview
 
-| View | Primary role |
+The Desktop task screen places the task list, the selected task's work area, and an operation panel side by side. You can resize or collapse the task list and close the operation panel to give the work area more room.
+
+| Area | Primary role |
 | --- | --- |
-| Task list | Keeps active work visible and sorts it by priority, status, creation time, or update time |
-| Overview | Searches across tasks, projects, and agents, including completed work |
-| Task details | Shows the conversation, progress, confirmation requests, composer, and entry points to results |
+| Task list | Shows active work and sorts it by priority, status, creation time, or update time |
+| Work area | Shows the selected task's conversation, progress, confirmation requests, and composer |
+| Operation panel | Shows settings, files, diffs, the browser, the terminal, or other content needed for the current action |
 
-The task list can filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each task continues independently.
+Overview is not one of the task-screen columns. It searches across tasks, projects, and agents, including completed work. The task list can filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each task continues independently.
 
 ## Task states
 
@@ -50,7 +52,7 @@ The task list can filter by agent and pin a task or project. Switching the selec
 
 `needsResume` is not a task state. It is additional information indicating that an unfinished task lost its process and requires a resume action.
 
-In Cursor and Grok Build Native UI, resuming also restores the saved conversation from the connected session. A Grok Build workflow that was still in progress remains visible as in progress after the task resumes.
+In Cursor, Qoder, and Grok Build Native UI, resuming also restores the saved conversation from the connected session. A Grok Build workflow that was still in progress remains visible as in progress after the task resumes.
 
 ## Conversation, quotes, and inter-task messages
 
