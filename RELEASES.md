@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.44.0 — 2026-08-03
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Qoder as an agent for tasks and Autoruns.
 - Changed the app to a three-column layout for the task list, workspace, and settings, making key information and actions easier to access.
