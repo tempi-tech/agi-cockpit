@@ -4,6 +4,35 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.44.0 — 2026-08-03
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Qoder as an agent for tasks and Autoruns.
+- Redesigned the app into three columns for the task list, workspace, and settings, making key information and actions easier to access.
+- Added direct editing and automatic saving of text files from the file preview, including files outside the project.
+- Changed task creation to show only agents that are available.
+- Fixed Grok Build device-code sign-in not completing.
+- Fixed unstable text selection and external-link handling in Markdown previews.
+- Fixed account, usage, and Git information below the composer breaking on narrow layouts.
+- Fixed renewed HTTPS certificates not being applied to the running remote-access server.
+- Improved execution safety by preventing video-generation providers from recursively invoking cockpit gen-video.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Qoderをタスクとオートランで利用できるエージェントとして追加
+- タスク一覧・作業エリア・設定操作を3列に整理し、主要な情報と操作へアクセスしやすい画面構成に刷新
+- ファイルプレビューから、プロジェクト外を含むテキストファイルを直接編集・自動保存できるように
+- タスク作成画面で利用可能なエージェントだけを表示するように改善
+- Grok Buildのデバイスコードログインが完了しない問題を修正
+- Markdownプレビューでテキスト選択と外部リンク操作が不安定になる問題を修正
+- 狭い画面で入力欄下のアカウント・使用量・Git情報が崩れる問題を修正
+- リモートアクセスのHTTPS証明書更新後、稼働中のサーバーへ新しい証明書が反映されない問題を修正
+- 動画生成プロバイダーによるcockpit gen-videoの再帰実行を防ぎ、実行の安全性を改善
+
+</details>
+
 ## v4.43.1 — 2026-08-03
 
 **Type:** patch · **Platforms:** macOS, Linux
