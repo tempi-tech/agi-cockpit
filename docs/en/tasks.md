@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, task details, task states, follow-up instructions, quotes, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.44.0 on 2026-08-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.45.0 on 2026-08-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -76,7 +76,7 @@ Each task has one assigned Browser Identity. The in-app browser stores cookies, 
 
 The browser side panel shows the current Identity by name and color and lets you switch it. Switching changes the task assignment, and the next browser session uses the selected Identity's area. Existing sessions remain with their original Identity and become available again if you switch back. Create, rename, recolor, clear, or remove an Identity from **Browser Identity** in the lower-left app menu or from the CLI. The Default Identity cannot be removed.
 
-App Surface connects a running Android emulator, Android physical device, or booted iOS Simulator to one task so a person and agent can inspect and operate its screen from a side panel. Cockpit does not boot the target or install, launch, or terminate its app, and one target cannot be attached to several tasks at the same time. The first connection to an Android physical device requires explicit approval through a Cockpit Ask. Completing or deleting the task detaches the target without terminating its app.
+App Surface connects a running Android emulator, Android physical device, or booted iOS Simulator to one task so a person and agent can inspect and operate its screen from a side panel. Cockpit does not boot the target or install, launch, or terminate its app, and one target cannot be attached to several tasks at the same time. The first connection to an Android physical device requires explicit approval through a Cockpit Ask. If the surface becomes **Detached** or **Stale**, select **Reconnect target** in the same panel to reconnect the previously selected target. Completing or deleting the task detaches the target without terminating its app.
 
 ## Attach files
 
