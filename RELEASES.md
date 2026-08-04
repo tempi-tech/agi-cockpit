@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.45.0 — 2026-08-04
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a reconnect action for detached or stale App Surface targets.
 - Fixed the chat account switcher menu being clipped at the edge of the window and becoming unusable.
