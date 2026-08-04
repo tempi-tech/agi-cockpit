@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.45.0 — 2026-08-04
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a reconnect action for detached or stale App Surface targets.
+- Fixed the chat account switcher menu being clipped at the edge of the window and becoming unusable.
+- Fixed a crash on Linux.
+- Streamlined the task header and panel-switching controls while the right side panel is open.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- App Surfaceが切断または一時停止したとき、同じパネルから対象へ再接続できるように
+- チャットのアカウント切替メニューが画面端で隠れ、操作できない問題を修正
+- Linuxでアプリがクラッシュする問題を修正
+- 右サイドパネル表示中のタスクヘッダーと切替操作を整理し、操作領域を見やすく改善
+
+</details>
+
 ## v4.44.0 — 2026-08-03
 
 **Type:** minor · **Platforms:** macOS, Linux
