@@ -11,7 +11,7 @@ English is the primary language for these generated release notes. Download the 
 - Added a reconnect action for detached or stale App Surface targets.
 - Fixed the chat account switcher menu being clipped at the edge of the window and becoming unusable.
 - Fixed a crash on Linux.
-- Streamlined the task header and panel-switching controls while the right side panel is open.
+- Improved the task header and panel-switching controls while the right side panel is open.
 
 <details>
 <summary>日本語のリリースノート</summary>
