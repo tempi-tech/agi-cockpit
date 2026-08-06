@@ -4,6 +4,35 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.46.0 — 2026-08-07
+
+**Type:** minor · **Platforms:** macOS
+
+- Added the new Fleet feature and the Fleet skill for designing and running Fleets.
+- Added safe diagnostic data export from the Help menu without prompts or credentials.
+- Added Qoder usage reporting alongside the other agents.
+- Moved enabled Autoruns to the top of the list so active schedules are easier to find.
+- Fixed Codex model discovery sometimes not completing before task creation, preventing selection of the latest models.
+- Fixed long-running Claude context compaction timing out and failing the task.
+- Fixed API-key authentication being selected even when Grok native authentication was available.
+- Fixed browser actions sometimes failing to verify the response or page change after a click.
+- Fixed fallback file-change diffs sometimes being attributed to the wrong task.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 新機能Fleetと、Fleetの設計・実行を支援するFleetスキルを追加
+- ヘルプメニューから、プロンプトや認証情報を含まない安全な診断データをエクスポートできるように
+- Qoderの使用量を、他のエージェントと同じ画面で確認できるように
+- 有効なオートランを一覧の先頭に表示し、実行中の設定を見つけやすく改善
+- Codexのモデル一覧がタスク作成前に読み込まれず、最新モデルを選べないことがある問題を修正
+- Claudeのコンテキスト圧縮時に、長い処理がタイムアウトしてタスクが失敗する問題を修正
+- Grokのネイティブ認証が利用可能でも、誤ってAPIキー認証が選ばれる問題を修正
+- ブラウザ操作で、クリック後の応答や画面変化を正しく検証できない場合がある問題を修正
+- ファイル変更の差分表示で、変更元を誤ってタスクに帰属することがある問題を修正
+
+</details>
+
 ## v4.45.0 — 2026-08-04
 
 **Type:** minor · **Platforms:** macOS, Linux
