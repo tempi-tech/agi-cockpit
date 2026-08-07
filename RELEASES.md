@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.47.0 — 2026-08-08
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added multiple account profiles for Grok Build, Cursor, and Qoder, with per-task, Autorun, and Fleet selection and switching.
 - Added bounded Fleet loops that repeat work until a completion condition is met.
