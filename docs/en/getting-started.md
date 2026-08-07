@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.44.0 on 2026-08-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.47.0 on 2026-08-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -38,6 +38,8 @@ When you use Claude Code, Codex, or Grok Build in Native UI, you can start befor
 
 An AI agent's subscription and authentication are separate from your AGI Labo sign-in. Signing in as an AGI Labo member does not authenticate Claude Code, Codex, or another task agent.
 
+Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Cursor, and Qoder. Each profile isolates authentication and connection settings. You can select an account for a new task, Autorun, or Fleet and switch accounts on supported running tasks. Antigravity does not support account profiles because its CLI does not provide a safe authentication store separate from the operating-system keychain.
+
 ## 3. Create your first task
 
 1. Open **New task** at the top of the window.
@@ -49,9 +51,9 @@ An AI agent's subscription and authentication are separate from your AGI Labo si
 
 The settings shown depend on the agent and UI mode. Desktop, PWA, CLI, and Autorun use the same capability data. An unsupported combination of model, reasoning effort, service tier, system prompt, account, or approval mode is hidden or rejected with an explicit error before creation.
 
-Cursor CLI supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Cursor's available models and approval mode; reasoning-effort and service-tier controls are not available for Cursor.
+Cursor CLI supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Cursor's available models, approval mode, and account profiles; reasoning-effort and service-tier controls are not available for Cursor.
 
-Qoder CLI also supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Qoder's available models, system prompt, and approval mode. Reasoning-effort, service-tier, and account-profile controls are not available for Qoder.
+Qoder CLI also supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Qoder's available models, system prompt, approval mode, and account profiles. Reasoning-effort and service-tier controls are not available for Qoder.
 
 A read-only request is a safe first check.
 

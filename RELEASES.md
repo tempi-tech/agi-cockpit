@@ -4,14 +4,47 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
-## v4.46.0 — 2026-08-07
+## v4.47.0 — 2026-08-08
 
 **Type:** minor · **Platforms:** macOS
+
+- Added multiple account profiles for Grok Build, Cursor, and Qoder, with per-task, Autorun, and Fleet selection and switching.
+- Added bounded Fleet loops that repeat work until a completion condition is met.
+- Fixed Fleet nodes being marked complete before the user answered a request from the agent.
+- Improved Fleet validation to catch invalid model, reasoning-effort, and service-tier selections before a run starts.
+- Fixed Fleet tasks sometimes running more than once when stop, resume, and retry operations overlapped.
+- Fixed native-UI tasks with long histories continually increasing memory usage and sometimes stopping the app.
+- Fixed Qoder usage retrieval failing depending on how the app was launched.
+- Fixed Claude sign-in and authentication checks ignoring the account selected for the task.
+- Fixed retrying after Claude authentication recovery restarting from the beginning without the existing conversation.
+- Fixed connection settings being shared between Codex account profiles.
+- Fixed authentication screens sometimes appearing behind other screens and becoming unusable.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Grok Build、Cursor、Qoderでも複数のアカウントプロファイルを作成し、タスク・Autorun・Fleetごとに選択または切り替えられるように
+- Fleetに、終了条件を満たすまで処理を繰り返せる回数制限付きループを追加
+- Fleet内のエージェントが確認を求めた際、回答前にノードが完了扱いになる問題を修正
+- Fleetで無効なモデル・推論レベル・サービスティアを実行前に正しく検出できるように改善
+- Fleetの停止・再開・再試行が重なった際、タスクが重複実行されることがある問題を修正
+- 長い履歴を持つネイティブUIタスクでメモリ使用量が増え続け、アプリが停止することがある問題を修正
+- Qoderの使用量取得が、アプリの起動方法によって失敗する問題を修正
+- Claudeへのサインインと認証確認で、タスクに設定したアカウントが使われない問題を修正
+- Claudeの認証回復後に再試行すると、会話履歴を失って最初から実行される問題を修正
+- Codexのアカウントプロファイル間で接続設定が共有される問題を修正
+- 認証画面が他の画面の背後に隠れ、操作できないことがある問題を修正
+
+</details>
+
+## v4.46.0 — 2026-08-07
+
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added the new Fleet feature and the Fleet skill for designing and running Fleets.
 - Added safe diagnostic data export from the Help menu without prompts or credentials.
 - Added Qoder usage reporting alongside the other agents.
-- Moved enabled Autoruns to the top of the list so active schedules are easier to find.
+- Improved the Autorun list by moving enabled schedules to the top so active schedules are easier to find.
 - Fixed Codex model discovery sometimes not completing before task creation, preventing selection of the latest models.
 - Fixed long-running Claude context compaction timing out and failing the task.
 - Fixed API-key authentication being selected even when Grok native authentication was available.
