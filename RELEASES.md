@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.48.0 — 2026-08-08
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added model selection for Grok Build visual tasks created through the CLI or Fleet.
 - Fixed Grok Build, Cursor, and Qoder task views showing usage for the default account instead of the selected account profile.
