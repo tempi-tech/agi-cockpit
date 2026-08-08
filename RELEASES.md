@@ -4,35 +4,6 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
-## v4.48.0 — 2026-08-08
-
-**Type:** minor · **Platforms:** macOS, Linux
-
-- Added model selection for Grok Build visual tasks created through the CLI or Fleet.
-- Fixed Grok Build, Cursor, and Qoder task views showing usage for the default account instead of the selected account profile.
-- Improved bounded Fleet loops to display as loop containers with their internal nodes, dependencies, and progress.
-- Fixed Fleet completion conditions and command gates failing to evaluate real multi-line reports correctly.
-- Fixed memory usage spiking when reopening Codex visual tasks with long histories.
-- Fixed parts of a Codex visual task conversation sometimes being missing after reconnecting or restoring history.
-- Fixed saved conversation history not being restored for Qoder visual tasks.
-- Fixed new visual-task messages sometimes disappearing when they arrived while the PWA was loading history.
-- Improved the Codex credit reset control to clearly appear disabled when reset is unavailable.
-
-<details>
-<summary>日本語のリリースノート</summary>
-
-- Grok Buildのビジュアルタスクで、CLIやFleetから使用するモデルを指定できるように
-- Grok Build、Cursor、Qoderのタスク画面で、選択したアカウントプロファイルの使用量が正しく表示されるように修正
-- Fleetの回数制限付きループを、内部ノード・依存関係・進行状況が分かるループコンテナとして表示するように改善
-- Fleetの終了条件とコマンドゲートが、実際の複数行レポートを正しく評価できない問題を修正
-- 長い履歴を持つCodexビジュアルタスクの再表示時に、メモリ使用量が急増する問題を修正
-- Codexビジュアルタスクの再接続や履歴復元で、会話の一部が欠けることがある問題を修正
-- Qoderのビジュアルタスクで、保存済みの会話履歴が復元されない問題を修正
-- PWAでビジュアルタスクの履歴を読み込んでいる間に届いた新しいメッセージが消えることがある問題を修正
-- Codexのクレジットリセットが利用できないとき、ボタンが無効であることを分かりやすく表示するように改善
-
-</details>
-
 ## v4.47.0 — 2026-08-08
 
 **Type:** minor · **Platforms:** macOS, Linux
