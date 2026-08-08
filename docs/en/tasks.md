@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, task details, task states, follow-up instructions, quotes, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.47.0 on 2026-08-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.48.1 on 2026-08-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -102,6 +102,12 @@ The history dashboard in the header is available in guest mode. Alongside Cockpi
 Complete moves a task out of active work and into completed work. Delete removes the task record from Cockpit. They are different operations.
 
 Completing a task in a temporary folder deletes that working directory automatically. Completing a Git-worktree task in Desktop silently preserves the worktree. By contrast, `cockpit task complete <id>` deletes the worktree by default and preserves it only with `--keep-worktree`. Before completing a task from the CLI, confirm where the required changes are stored and which option you need.
+
+## Protect and recover task data
+
+When saved tasks already exist, AGI Cockpit does not let an empty task list overwrite them unless you explicitly delete the final task.
+
+If Cockpit cannot read `state.json` at startup, it stops before writing any task data and shows recovery guidance. Select **Open Data Folder**, restore `state.json` from the adjacent `backups` folder, and reopen AGI Cockpit. Cockpit does not continue startup by saving an empty task list over unreadable task data.
 
 ## Inspect state from the CLI
 
