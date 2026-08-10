@@ -4,6 +4,51 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.49.0 — 2026-08-11
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a setting to choose Enter or Cmd/Ctrl+Enter as the chat send key.
+- Added in-place rename for sidebar tasks from the row overflow menu.
+- Unified the sidebar and child-task action menus so both surfaces share the same actions.
+- Fleet graphs now show unset models as the agent default instead of an unspecified warning.
+- Fleet loop containers now show a back edge that makes the whole loop body repeat.
+- Fleet loop bodies now show parallel ranks as parallel clusters, matching the top-level graph.
+- Removed automatic child-to-parent report-back; use wait commands to collect child results.
+- Fixed per-message attachment limits for long-running tasks and made the remaining count clearer.
+- Fixed task action menus closing when unrelated panes scroll.
+- Froze sidebar task order while a row menu, rename, or delete confirmation is open.
+- Fixed navigation from a Fleet Run back to its definition.
+- Fixed terminal tasks sometimes recovering with a stale runtime state.
+- Kept header and window controls usable while the task list preview is open.
+- Fixed Claude visual model options listing the same model more than once.
+- Handled Codex plugin-install confirmation prompts in visual tasks.
+- Fixed Grok visual progress not updating when a tool turn arrived late.
+- Separated child-task header navigation from content so header actions no longer collide with the body.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- チャット入力の送信キーを、Enter または Cmd/Ctrl+Enter から設定できるように
+- サイドバーのタスク行を「…」メニューからその場で名前変更できるように
+- サイドバーと子タスク一覧の操作メニューを統一し、どちらからも同じ操作ができるように
+- Fleetのグラフで、モデル未指定のノードをエージェント既定モデルとして表示するように
+- Fleetのループで、本体全体が繰り返されることが分かる戻りの矢印を表示するように
+- Fleetのループ本体内で並列実行される行を、トップレベルと同様に並列クラスターとして表示するように
+- 子タスクが親へ自動で報告する report-back を廃止し、待機コマンドで結果を取る方式に統一
+- 長時間動いているタスクでも、1メッセージあたりの添付上限が正しく適用され、件数も分かりやすく表示されるように修正
+- タスク操作メニューが、無関係なスクロールで閉じないように修正
+- メニュー操作や名前変更中に、サイドバーのタスク並びが変わらないように修正
+- Fleet Runから定義へ戻るときの遷移を修正
+- ターミナルタスクのランタイム復旧が古いまま残ることがある問題を修正
+- タスク一覧プレビュー中も、ヘッダー操作やウィンドウ操作ができるように修正
+- Claudeビジュアルのモデル一覧で、同一モデルが重複表示されないように修正
+- Codexビジュアルで、プラグイン導入の確認ダイアログを正しく扱えるように
+- Grokビジュアルで、ツール実行が遅れて届いたときに進行状態が表示されない問題を修正
+- 子タスクのヘッダー操作と本文の操作領域を分離し、誤操作を防ぐように改善
+
+</details>
+
 ## v4.48.1 — 2026-08-09
 
 **Type:** patch · **Platforms:** macOS, Linux
