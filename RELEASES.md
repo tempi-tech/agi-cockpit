@@ -10,21 +10,21 @@ English is the primary language for these generated release notes. Download the 
 
 - Added a setting to choose Enter or Cmd/Ctrl+Enter as the chat send key.
 - Added in-place rename for sidebar tasks from the row overflow menu.
-- Unified the sidebar and child-task action menus so both surfaces share the same actions.
-- Fleet graphs now show unset models as the agent default instead of an unspecified warning.
-- Fleet loop containers now show a back edge that makes the whole loop body repeat.
-- Fleet loop bodies now show parallel ranks as parallel clusters, matching the top-level graph.
+- Improved the sidebar and child-task action menus so both surfaces share the same actions.
+- Improved Fleet graphs to show unset models as the agent default instead of an unspecified warning.
+- Improved Fleet loop containers to show a back edge that makes the whole loop body repeat.
+- Improved Fleet loop bodies to show parallel ranks as parallel clusters, matching the top-level graph.
 - Removed automatic child-to-parent report-back; use wait commands to collect child results.
 - Fixed per-message attachment limits for long-running tasks and made the remaining count clearer.
 - Fixed task action menus closing when unrelated panes scroll.
-- Froze sidebar task order while a row menu, rename, or delete confirmation is open.
+- Fixed sidebar task order so it stays stable while a row menu, rename, or delete confirmation is open.
 - Fixed navigation from a Fleet Run back to its definition.
 - Fixed terminal tasks sometimes recovering with a stale runtime state.
-- Kept header and window controls usable while the task list preview is open.
+- Fixed header and window controls so they stay usable while the task list preview is open.
 - Fixed Claude visual model options listing the same model more than once.
-- Handled Codex plugin-install confirmation prompts in visual tasks.
+- Fixed Codex visual tasks so plugin-install confirmation prompts are handled correctly.
 - Fixed Grok visual progress not updating when a tool turn arrived late.
-- Separated child-task header navigation from content so header actions no longer collide with the body.
+- Improved child-task header navigation so header actions no longer collide with the body.
 
 <details>
 <summary>日本語のリリースノート</summary>
