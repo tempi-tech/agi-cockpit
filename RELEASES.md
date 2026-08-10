@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.49.0 — 2026-08-11
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a setting to choose Enter or Cmd/Ctrl+Enter as the chat send key.
 - Added in-place rename for sidebar tasks from the row overflow menu.
