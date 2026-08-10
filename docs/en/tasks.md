@@ -86,7 +86,7 @@ In Desktop and the PWA, the new-task screen and task-details composer can attach
 
 Attachments have these limits:
 
-- Up to eight files, 512 MB per file, and 1 GB in total
+- Up to eight files per message, 512 MB per file, and 1 GB per message in total
 - JSON files are limited to 25 MB each
 - Archives and executable formats are not supported
 - Cockpit validates the extension, MIME type, actual size, and content, then stores the upload under a randomized name rather than its original file name
