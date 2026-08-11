@@ -2,9 +2,9 @@
 
 # Task list and task details
 
-Understand the task list, Overview, task details, task states, follow-up instructions, quotes, attachments, resume, and completion.
+Understand the task list, Overview, task details, renaming, send keys, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.48.1 on 2026-08-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.49.0 on 2026-08-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -19,6 +19,10 @@ The Desktop task screen places the task list, the selected task's work area, and
 | Operation panel | Shows settings, files, diffs, the browser, the terminal, or other content needed for the current action |
 
 Overview is not one of the task-screen columns. It searches across tasks, projects, and agents, including completed work. The task list can filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each task continues independently.
+
+In both sidebar task rows and the child-task list, the **...** action menu provides the same way to rename, pin or unpin, complete, copy the task ID, and delete a task. Child tasks also offer **Detach from parent**. Renaming happens in the row: press Enter to save or Escape to cancel. An empty name is not saved, and names are limited to 50 characters.
+
+While a menu, rename field, or delete confirmation is open, automatic sorting does not move the task row you are operating. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
 
 ## Task states
 
@@ -52,9 +56,17 @@ Overview is not one of the task-screen columns. It searches across tasks, projec
 
 `needsResume` is not a task state. It is additional information indicating that an unfinished task lost its process and requires a resume action.
 
+A Terminal task cannot restore its previous shell process. Resuming it starts a fresh shell in the same directory.
+
 In Cursor, Qoder, and Grok Build Native UI, resuming also restores the saved conversation from the connected session. A Grok Build workflow that was still in progress remains visible as in progress after the task resumes.
 
 For Claude, Codex, Grok Build, Cursor, and Qoder, you can select an isolated account profile when creating a task. On a supported running task, switch from the account control beside the composer or with `cockpit task account <id> <name|id|default>`. Cockpit stops the current execution, moves the saved conversation, and resumes the same task under the selected profile.
+
+## Message input and the send key
+
+On Desktop, choose **Send key** under **Shortcuts** in Settings to send chat messages with Enter or Cmd/Ctrl+Enter. Enter is the default. With Cmd/Ctrl+Enter selected, use Cmd+Enter on macOS or Ctrl+Enter on Windows and Linux to send; Enter inserts a line break. Shift+Enter inserts a line break with either setting.
+
+The setting is shared by Desktop chat composers, including new tasks, task details, Native UI, and Talk Rooms. In the PWA, use the on-screen send button.
 
 ## Conversation, quotes, and inter-task messages
 
@@ -62,7 +74,7 @@ Selecting text in the chat reveals **Quote selection**. Activating it inserts th
 
 A message sent by another Cockpit task is labeled **Sent from another task** and shows the source task name or short ID. When the source task still exists in the current list, select its name to navigate to it.
 
-A child task's status report to its parent appears as **Child task report**, separately from a regular message. The report identifies the child task and whether it is waiting for another instruction, permission, an answer, or review, or whether it encountered an error. When that child is still in the current task list, select **Go to task** to open it; expand **Technical details** to inspect the original machine-readable report.
+The parent-child relationship represents hierarchy in the task list and child-task list. A child result is not sent to its parent automatically, and it does not resume the parent task. When an AI agent needs a child result, it explicitly retrieves it with `task run`, `task wait`, or `task send --wait` as described below.
 
 In the PWA, a down-arrow button appears above the composer after you scroll away from the latest message. Select it to jump to the end of the conversation and resume following new output.
 
@@ -91,6 +103,8 @@ Attachments have these limits:
 - Archives and executable formats are not supported
 - Cockpit validates the extension, MIME type, actual size, and content, then stores the upload under a randomized name rather than its original file name
 
+The composer shows how many files are attached to the current message, such as **3 / 8 files attached**. At eight files, it prevents another attachment. If a selection would exceed the limit, the error shows the current count, the incoming count, and how many files must be removed. The eight-file limit is evaluated per message, so attachments sent earlier in the same task do not count against the next message.
+
 An attachment's name and content are not automatically trusted instructions. State which file the agent should use and what result you expect in the message itself.
 
 ## History dashboard
@@ -115,9 +129,14 @@ If Cockpit cannot read `state.json` at startup, it stops before writing any task
 cockpit task list
 cockpit task get <id>
 cockpit task browser-identity <id>
+cockpit task run --instruction "Instruction text" --directory /path/to/project
+cockpit task wait <id> --since <seq>
+cockpit task send <id> --text "Follow-up" --wait
 ```
 
 `task get` returns `status`, `waitingReason`, `readyForNextPrompt`, and `needsResume`, together with the latest conversation and terminal output.
+
+`task run` creates a task and waits for its first report. `task wait` returns a stored report or the next report after `--since`. Reports never inject instructions into another task. `--parent-task-id` only sets the hierarchy shown in the task list.
 
 Use `cockpit task browser-identity <id> <name|id|default>` to change the Browser Identity assigned to a task. When creating a task, use `cockpit task create ... --browser-identity <name|id|default>` to assign one immediately.
 
