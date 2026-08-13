@@ -4,6 +4,67 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.50.0 — 2026-08-14
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Cockpit CLI commands to inspect and change allowlisted AGI Cockpit settings.
+- Added Cockpit CLI commands to create, sign in to, and remove agent account profiles.
+- Added Cockpit CLI commands to configure and control Remote Access.
+- Added Cockpit CLI commands to check, download, and install updates.
+- Added Cockpit CLI commands to inspect and manage CLI and built-in skill setup.
+- Added Cockpit CLI commands to open Settings, Usage, Remote Access, and Autorun screens directly.
+- Added Fleet enabled and excluded states so runtime arguments can safely omit nodes.
+- Improved usage-limit recovery so stopped tasks can switch to another account and resume instead of failing.
+- Added Auto account selection for tasks, Fleets, and Autoruns based on the usage remaining across signed-in accounts.
+- Added automatic failover so work continues on another account when the account selected by Auto reaches its usage limit.
+- Added reasoning-effort selection for supported Grok visual models.
+- Updated new Grok visual tasks to default to Grok 4.6 with xhigh reasoning effort.
+- Added Cockpit CLI browser tab summaries with each tab's selection state and page preview.
+- Added Cockpit CLI commands to close a selected browser tab or every other tab.
+- Added select-box option selection to Cockpit CLI browser controls.
+- Added scrolling a specified element into view to Cockpit CLI browser controls.
+- Added JavaScript and HTML dialog handling to Cockpit CLI browser controls.
+- Added double-click support to Cockpit CLI browser controls.
+- Added detection and waiting for newly opened tabs to Cockpit CLI browser controls.
+- Fixed Cockpit CLI browser clicks so selecting a child element correctly activates its clickable parent.
+- Improved task search to match visible task names, project names, and task IDs of at least four characters.
+- Improved the sidebar so task ordering stays stable while a task is hovered.
+- Improved rich-text paste handling so text is inserted instead of creating unnecessary file attachments.
+- Fixed unread notifications for visual-agent tasks in the PWA.
+- Fixed file-type tooltips and Chrome session-import errors appearing in Japanese when the app is set to English.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Cockpit CLIから、許可されたAGI Cockpitの設定を確認・変更できるように
+- Cockpit CLIから、エージェントのアカウントプロファイルを作成・ログイン・削除できるように
+- Cockpit CLIから、リモートアクセスを設定・操作できるように
+- Cockpit CLIから、アップデートの確認・ダウンロード・インストールができるように
+- Cockpit CLIから、CLIと組み込みスキルのセットアップを確認・管理できるように
+- Cockpit CLIから、設定・使用状況・リモートアクセス・オートランの各画面を直接開けるように
+- Fleetで、実行時の引数に応じてノードを安全に除外できる enabled / excluded 機構を追加
+- 利用上限で停止したタスクを失敗扱いにせず、別アカウントへ切り替えて再開できるように
+- タスク・Fleet・オートランで、利用状況に応じてログイン済みアカウントを自動選択するAutoを追加
+- Autoで選択したアカウントが利用上限に達した際、別アカウントへ自動切り替えして処理を続行するように
+- Grokビジュアルで、対応モデルの推論レベルを選べるように
+- 新しいGrokビジュアルタスクの既定モデルをGrok 4.6、既定の推論レベルをxhighに更新
+- Cockpit CLIから、ブラウザで開いている各タブの選択状態と内容の要約を確認できるように
+- Cockpit CLIから、ブラウザの指定タブまたは指定タブ以外を閉じられるように
+- Cockpit CLIのブラウザ操作で、セレクトボックスの項目を選択できるように
+- Cockpit CLIのブラウザ操作で、指定した要素を画面内へスクロールできるように
+- Cockpit CLIのブラウザ操作で、JavaScriptとHTMLのダイアログを処理できるように
+- Cockpit CLIのブラウザ操作で、ダブルクリックできるように
+- Cockpit CLIのブラウザ操作で、新しく開いたタブを検出して待機できるように
+- Cockpit CLIのブラウザ操作で、子要素を指定した場合も操作可能な親要素を正しくクリックするように修正
+- タスク検索を、表示中のタスク名・プロジェクト名・4文字以上のタスクIDへ正確に絞り込むように改善
+- タスクにマウスを重ねている間、サイドバーの並び順が変わらないように改善
+- 書式付きテキストを貼り付けた際、不要なファイル添付ではなくテキストとして入力するように改善
+- PWAでビジュアルエージェントの未読通知が正しく更新されない問題を修正
+- 英語表示で、ファイル種別のツールチップとChromeセッション取り込みエラーが日本語になる問題を修正
+
+</details>
+
 ## v4.49.0 — 2026-08-11
 
 **Type:** minor · **Platforms:** macOS, Linux
