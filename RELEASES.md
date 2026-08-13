@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.50.0 — 2026-08-14
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Cockpit CLI commands to inspect and change allowlisted AGI Cockpit settings.
 - Added Cockpit CLI commands to create, sign in to, and remove agent account profiles.
