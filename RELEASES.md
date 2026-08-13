@@ -19,7 +19,7 @@ English is the primary language for these generated release notes. Download the 
 - Added Auto account selection for tasks, Fleets, and Autoruns based on the usage remaining across signed-in accounts.
 - Added automatic failover so work continues on another account when the account selected by Auto reaches its usage limit.
 - Added reasoning-effort selection for supported Grok visual models.
-- Updated new Grok visual tasks to default to Grok 4.6 with xhigh reasoning effort.
+- Changed new Grok visual tasks to default to Grok 4.6 with xhigh reasoning effort.
 - Added Cockpit CLI browser tab summaries with each tab's selection state and page preview.
 - Added Cockpit CLI commands to close a selected browser tab or every other tab.
 - Added select-box option selection to Cockpit CLI browser controls.
