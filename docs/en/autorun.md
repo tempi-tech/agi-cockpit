@@ -12,7 +12,7 @@ Autorun starts a new task automatically at a specified time, interval, or cron s
 
 Autorun requires an AGI Labo membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Labo in Desktop.
 
-Schedules run inside the AGI Cockpit app process. They do not fire while Cockpit is closed, and the operating-system scheduler does not launch Cockpit for them.
+Schedules run inside the AGI Cockpit app process. Closing every window on macOS does not stop the scheduler. The operating-system scheduler does not launch Cockpit after the process exits, but Cockpit performs one catch-up per Autorun when it restarts or resumes within 24 hours of an unhandled scheduled time. Older occurrences are recorded as missed instead of silently starting stale work.
 
 ## Schedule types
 
@@ -57,6 +57,9 @@ The Autorun manager supports:
 - delete
 - **Run Now**
 - previous and next run times
+- the latest run status and created task ID
+
+Every scheduled occurrence records one of `created`, `skipped-membership`, `skipped-lock`, `skipped-period`, `missed`, or `failed`. Authentication or membership skips, missed runs, and startup failures are marked as needing attention in Desktop and the PWA and produce a desktop notification. Overlap and period-dedup skips remain informational. `cockpit autorun list` and `cockpit autorun get` expose the same `lastRunStatus`, `lastRunScheduledAt`, `lastRunDetail`, and `lastTaskId` fields. `nextRunAt` is the next attempt time, while `nextRunScheduledAt` preserves the original occurrence during retries. Cockpit also appends one JSON line per occurrence to `data/cockpit/logs/autorun-executions.jsonl` under the AGI Tools data directory. Repeated retries with the same outcome are recorded once; the log rotates at 5 MB and keeps two archives.
 
 Cockpit does not start another scheduled run while the previous execution turn from the same Autorun is still processing. Visual Runtime, shown as Native UI in the app, releases the lock when the turn completes, the runtime settles it, or a runtime error occurs. Terminal UI and the Terminal agent release it when the launched process exits or is cleaned up. The lock does not wait for a person to mark the Cockpit task **Completed**. Startup failures and cleanup paths also release it, and a 24-hour expiry is the final safeguard against an abandoned lock.
 
