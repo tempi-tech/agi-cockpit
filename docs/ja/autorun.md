@@ -4,7 +4,7 @@
 
 Autorunが一度、一定間隔、cronのスケジュールに基づいて新しいタスクを起動し、その結果を通常のタスクとして残す仕組みを説明します。
 
-> AGI Cockpit 4.47.0で2026-08-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
+> AGI Cockpit 4.50.0で2026-08-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 Autorunは、指定した時刻、一定間隔、cron式に基づいて、新しいタスクを自動起動する仕組みです。複数エージェントを連携させる機能ではなく、同じ条件の仕事を必要なタイミングで開始するための独立した機能です。
 
@@ -30,11 +30,11 @@ cronの曜日は`0`が日曜日です。例として、平日の午前9時は`0 
 2. 「新規作成」を選びます。
 3. 名前と、起動時に送る指示を入力します。
 4. 作業するディレクトリを選びます。Master Agentとして実行する場合は、Masterの作業場所が使われます。
-5. エージェントを選び、表示される場合はUIモード、アカウント、モデル、推論レベル、service tier、system prompt、承認モードを確認します。
+5. エージェントを選び、表示される場合はUIモード、アカウント、モデル、推論レベル、service tier、system prompt、承認モードを確認します。アカウントを選べるエージェントの既定は「Auto」です。
 6. 一度のみ、間隔、Cronから実行タイミングを選びます。
 7. 保存後、一覧に次回実行時刻が表示されることを確認します。
 
-Autorunは保存時のランタイム設定をスナップショットとして保持します。後からグローバル設定を変更しても、既存Autorunのモデル、推論レベル、service tier、system prompt、承認モード、アカウント、UIモードは自動で変わりません。保存済みのモデルやアカウントを利用できなくなった場合、Cockpitは別の設定へ無言で切り替えず、そのAutorunを無効にして「要確認」を表示します。
+Autorunは保存時のランタイム設定をスナップショットとして保持します。後からグローバル設定を変更しても、既存Autorunのモデル、推論レベル、service tier、system prompt、承認モード、アカウントの選択方法、UIモードは自動で変わりません。固定したモデルやアカウントを利用できなくなった場合、Cockpitは別の設定へ無言で切り替えず、そのAutorunを無効にして「要確認」を表示します。
 
 Browser Identityの割り当てもAutorunごとに保存され、発火時に作成されるタスクへ引き継がれます。Identityを指定しないAutorunはDefault Identityを使います。v4.43.0では、Autorunへの割り当てと変更はCLIから行います。Identityそのものの作成、名前と色の変更、データ消去、削除は、画面左下のアプリメニューにある「Browser Identity」またはCLIから行えます。
 
@@ -44,7 +44,7 @@ CursorのAutorunは「ネイティブUI」と「ターミナル」を利用で�
 
 QoderのAutorunも「ネイティブUI」と「ターミナル」を利用できます。ネイティブUIでは、Desktop、PWA、CLIからの作成時にQoderで利用可能なモデル、system prompt、承認モード、アカウントプロファイルを選べます。Qoderでは、推論レベルとservice tierは利用できません。
 
-Claude、Codex、Grok Build、Cursor、QoderのAutorunは、保存したアカウントプロファイルを実行時に使用します。CLIでは`--account <name|id|default>`で指定できます。
+Claude、Codex、Grok Build、Cursor、Qoderでは、「Auto」または固定アカウントをAutorunへ保存します。新しいAutorunの既定はAutoです。Autoは具体的なプロファイルではなく選択方法として保存され、発火するたびにログイン済みアカウントの利用状況から実行先を選び直します。作成されたタスクで利用上限に達した場合も、利用可能な別アカウントへ切り替えて処理を続けます。固定する場合、CLIでは`--account <name|id|default>`を使い、Autoへ戻す場合は`--account auto`を使います。
 
 ## 実行結果を確認する
 
@@ -79,6 +79,7 @@ cockpit autorun create \
   --instruction "このプロジェクトの未完了タスクを確認し、優先順に要約してください。" \
   --directory /path/to/project \
   --agent-type codex \
+  --account auto \
   --ui-mode visual \
   --model gpt-5.4 \
   --effort high \

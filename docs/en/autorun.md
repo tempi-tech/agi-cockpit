@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task from a one-time, interval, or cron schedule and keeps the result as a regular Cockpit task.
 
-> Verified with AGI Cockpit 4.47.0 on 2026-08-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.50.0 on 2026-08-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task automatically at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start the same kind of work when it is needed.
 
@@ -30,11 +30,11 @@ In the cron weekday field, `0` means Sunday. For example, `0 9 * * 1-5` runs at 
 2. Select **New Autorun**.
 3. Enter a name and the instruction to send when the task starts.
 4. Choose the working directory. When running as the Master Agent, Cockpit uses the Master's working location.
-5. Select an agent and, when shown, review its UI mode, account, model, reasoning effort, service tier, system prompt, and approval mode.
+5. Select an agent and, when shown, review its UI mode, account, model, reasoning effort, service tier, system prompt, and approval mode. **Auto** is the default for agents with account selection.
 6. Choose **Once**, **Interval**, or **Cron** and configure the timing.
 7. Save the Autorun and confirm that the list shows its next run time.
 
-Autorun keeps the runtime settings from the time it is saved as a snapshot. Changing global settings later does not silently change an existing Autorun's model, reasoning effort, service tier, system prompt, approval mode, account, or UI mode. If a saved model or account becomes unavailable, Cockpit does not substitute another setting. It disables that Autorun and marks it as needing attention.
+Autorun keeps the runtime settings from the time it is saved as a snapshot. Changing global settings later does not silently change an existing Autorun's model, reasoning effort, service tier, system prompt, approval mode, account-selection method, or UI mode. If a pinned model or account becomes unavailable, Cockpit does not substitute another setting. It disables that Autorun and marks it as needing attention.
 
 An Autorun also keeps its Browser Identity assignment and passes it to every task the schedule creates. An Autorun without an explicit assignment uses the Default Identity. In v4.43.0, assign or change an Autorun's Identity from the CLI. Create, rename, recolor, clear, or remove the Identity itself from **Browser Identity** in the lower-left app menu or from the CLI.
 
@@ -44,7 +44,7 @@ Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor'
 
 Qoder Autoruns can also use **Native UI** or **Terminal**. Native UI exposes Qoder's available model, system prompt, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Qoder does not expose reasoning-effort or service-tier settings.
 
-Claude, Codex, Grok Build, Cursor, and Qoder Autoruns use the saved account profile when the schedule runs. From the CLI, select it with `--account <name|id|default>`.
+Claude, Codex, Grok Build, Cursor, and Qoder Autoruns store either **Auto** or a pinned account. Auto is the default for new Autoruns. It is stored as a selection method rather than as one concrete profile, so every execution chooses again from the usage state of signed-in accounts. If the created task reaches a usage limit, Cockpit also switches to another available account and continues processing. Use `--account <name|id|default>` to pin an account from the CLI and `--account auto` to select Auto.
 
 ## Review a run
 
@@ -79,6 +79,7 @@ cockpit autorun create \
   --instruction "Review the unfinished work in this project and summarize it in priority order." \
   --directory /path/to/project \
   --agent-type codex \
+  --account auto \
   --ui-mode visual \
   --model gpt-5.4 \
   --effort high \

@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.47.0 on 2026-08-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.50.0 on 2026-08-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -38,7 +38,7 @@ When you use Claude Code, Codex, or Grok Build in Native UI, you can start befor
 
 An AI agent's subscription and authentication are separate from your AGI Labo sign-in. Signing in as an AGI Labo member does not authenticate Claude Code, Codex, or another task agent.
 
-Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Cursor, and Qoder. Each profile isolates authentication and connection settings. You can select an account for a new task, Autorun, or Fleet and switch accounts on supported running tasks. Antigravity does not support account profiles because its CLI does not provide a safe authentication store separate from the operating-system keychain.
+Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Cursor, and Qoder. Each profile isolates authentication and connection settings. New tasks, Autoruns, and Fleets default to **Auto**, which selects a signed-in account from its usage state. You can instead pin the default account or a specific profile and can switch accounts later on supported running tasks. Antigravity does not support account profiles because its CLI does not provide a safe authentication store separate from the operating-system keychain.
 
 ## 3. Create your first task
 
@@ -46,14 +46,17 @@ Under **Agents** in Settings, you can create account profiles for Claude Code, C
 2. Choose **Project workspace** or **Temporary folder**. For an existing project, select only the directory you intend the agent to inspect.
 3. Select an AI agent.
 4. For supported agents, choose **Native UI** or **Terminal** as the UI mode.
-5. For this first check, choose **Supervised** approval mode and enter a short request with a clear completion condition.
-6. Create the task.
+5. For an agent with account selection, keep **Auto** or pin the default account or a specific profile.
+6. For this first check, choose **Supervised** approval mode and enter a short request with a clear completion condition.
+7. Create the task.
 
 The settings shown depend on the agent and UI mode. Desktop, PWA, CLI, and Autorun use the same capability data. An unsupported combination of model, reasoning effort, service tier, system prompt, account, or approval mode is hidden or rejected with an explicit error before creation.
 
 Cursor CLI supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Cursor's available models, approval mode, and account profiles; reasoning-effort and service-tier controls are not available for Cursor.
 
 Qoder CLI also supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Qoder's available models, system prompt, approval mode, and account profiles. Reasoning-effort and service-tier controls are not available for Qoder.
+
+In Grok Build Native UI, reasoning effort is available only for models that advertise support for it. New Grok visual tasks default to Grok 4.6 with `xhigh` reasoning effort.
 
 A read-only request is a safe first check.
 

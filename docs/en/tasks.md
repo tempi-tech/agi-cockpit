@@ -2,9 +2,9 @@
 
 # Task list and task details
 
-Understand the task list, Overview, task details, renaming, send keys, attachments, resume, and completion.
+Understand task lists, search, task details, Auto accounts, usage limits, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.49.0 on 2026-08-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.50.0 on 2026-08-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -20,9 +20,11 @@ The Desktop task screen places the task list, the selected task's work area, and
 
 Overview is not one of the task-screen columns. It searches across tasks, projects, and agents, including completed work. The task list can filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each task continues independently.
 
+Task search uses partial matches against the task name and project name shown in the interface. A task ID becomes searchable only after you enter at least four characters. Instructions, working-directory paths, and internal metadata are not searched.
+
 In both sidebar task rows and the child-task list, the **...** action menu provides the same way to rename, pin or unpin, complete, copy the task ID, and delete a task. Child tasks also offer **Detach from parent**. Renaming happens in the row: press Enter to save or Escape to cancel. An empty name is not saved, and names are limited to 50 characters.
 
-While a menu, rename field, or delete confirmation is open, automatic sorting does not move the task row you are operating. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
+While the pointer is over the task list, or while a menu, rename field, or delete confirmation is open, automatic sorting does not move the visible task rows. The current order is applied after the pointer leaves. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
 
 ## Task states
 
@@ -42,6 +44,7 @@ While a menu, rename field, or delete confirmation is open, automatic sorting do
 | `question` | The running agent needs an answer to its own question |
 | `terminal_prompt` | The terminal is waiting for input |
 | `runtime_error` | The runtime reported an error |
+| `usage_limit` | The current agent account reached its usage limit and the turn stopped |
 | `idle_timeout` | Idle detection considers the task ready for input |
 | `unknown` | Cockpit cannot identify a safe, specific waiting reason |
 
@@ -60,7 +63,9 @@ A Terminal task cannot restore its previous shell process. Resuming it starts a 
 
 In Cursor, Qoder, and Grok Build Native UI, resuming also restores the saved conversation from the connected session. A Grok Build workflow that was still in progress remains visible as in progress after the task resumes.
 
-For Claude, Codex, Grok Build, Cursor, and Qoder, you can select an isolated account profile when creating a task. On a supported running task, switch from the account control beside the composer or with `cockpit task account <id> <name|id|default>`. Cockpit stops the current execution, moves the saved conversation, and resumes the same task under the selected profile.
+New Claude, Codex, Grok Build, Cursor, and Qoder tasks default to the **Auto** account setting. Auto selects from signed-in accounts using their usage state and current assignments. If the selected account reaches its usage limit, Cockpit switches to another available account and continues the same task. You can instead pin the default account or a specific profile.
+
+A usage limit is not a task failure. Cockpit represents it as `waiting_confirmation` with `usage_limit`. If Auto has no replacement or the task is pinned to an account, switch to another signed-in account beside the composer or with `cockpit task account <id> <name|id|default>`, then send a follow-up to continue. Cockpit stops the current execution, moves the saved conversation, and resumes the same task under the selected profile. If Cockpit shows a reset time, you can also retry the same account after that time.
 
 ## Message input and the send key
 
@@ -105,6 +110,8 @@ Attachments have these limits:
 
 The composer shows how many files are attached to the current message, such as **3 / 8 files attached**. At eight files, it prevents another attachment. If a selection would exceed the limit, the error shows the current count, the incoming count, and how many files must be removed. The eight-file limit is evaluated per message, so attachments sent earlier in the same task do not count against the next message.
 
+When you paste rich text from the clipboard, Cockpit inserts text whenever a plain-text representation is available. It does not add image or file representations supplied by the source as unnecessary attachments. A clipboard that contains files without plain text is still handled as an attachment paste.
+
 An attachment's name and content are not automatically trusted instructions. State which file the agent should use and what result you expect in the message itself.
 
 ## History dashboard
@@ -128,6 +135,8 @@ If Cockpit cannot read `state.json` at startup, it stops before writing any task
 ```bash
 cockpit task list
 cockpit task get <id>
+cockpit task account <id>
+cockpit task account <id> auto
 cockpit task browser-identity <id>
 cockpit task run --instruction "Instruction text" --directory /path/to/project
 cockpit task wait <id> --since <seq>
