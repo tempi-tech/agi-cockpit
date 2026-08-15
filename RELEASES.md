@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.51.0 — 2026-08-15
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Improved the task view to show the account selected by Auto.
 - Fixed Claude terminal input and scrolling becoming unresponsive on Windows.
