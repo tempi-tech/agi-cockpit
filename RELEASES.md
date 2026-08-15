@@ -4,6 +4,69 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.51.0 — 2026-08-15
+
+**Type:** minor · **Platforms:** macOS
+
+- Show the account selected by Auto in the task view.
+- Fixed Claude terminal input and scrolling becoming unresponsive on Windows.
+- Fixed Claude terminal image attachments being delivered as metadata only on Windows.
+- Fixed agents being unable to access attachments with Japanese names on Windows.
+- Fixed Cockpit hooks for Antigravity tasks failing during PowerShell expansion on Windows.
+- Fixed usage not appearing for authenticated Antigravity accounts on Windows.
+- Fixed cockpit task send from Git Bash so Japanese and multiline instructions are delivered correctly on Windows.
+- Fixed Fleet command gates to use the login-shell PATH regardless of how the app was launched.
+- Fixed the in-app browser remaining visible on another screen after Mission Control or Spaces changes on macOS.
+- Added one catch-up execution for an Autorun missed while the app was stopped, when it is within 24 hours.
+- Added Autorun outcome, last-task, and skip or failure details across Desktop, PWA, and CLI.
+- Added Desktop notifications for missed or failed Autoruns that need attention.
+- Kept Autorun active after all macOS windows close and re-armed upcoming runs after wake from sleep.
+- Fixed task-list, Overview, and right-side-panel horizontal alignment when their widths change.
+- Fixed restored messages in resumed native-UI conversations completing out of order.
+- Simplified Fleet rows so run state, unread results, and actions are available in one line.
+- Added a confirmed action to delete a finished Fleet Run together with all of its related tasks.
+- Added titles for Fleet Runs so their purpose is easier to identify in task lists, details, and search.
+- Made Fleet flows more compact and easier to scan by distinguishing agents, gates, and loops by shape and state.
+- Reduced state-save load when many tasks update and added safe recovery from write failures.
+- Added registration and selection of custom system prompts for Claude, Codex, Qoder, and Cockpit Agent.
+- Added Autorun delivery to an existing task as an alternative to creating a new task.
+- Added JSON Schema validation for Fleet node results and structured output references in downstream nodes, gates, and loops.
+- Added final-adjudication routing when a bounded Fleet loop reaches its iteration limit.
+- Added continued agent sessions and per-iteration follow-up prompts for Fleet loops.
+- Added Fleet message nodes that send a prompt to an existing Cockpit task and use its next result downstream.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Autoで選ばれたアカウント名をタスク画面に表示するように
+- WindowsのClaudeターミナルで、入力やスクロールが操作不能になる問題を修正
+- WindowsのClaudeターミナルで、画像添付がメタデータだけとして渡される問題を修正
+- Windowsで、日本語名を含む添付ファイルをエージェントが参照できない問題を修正
+- WindowsのAntigravityタスクで、CockpitフックがPowerShell展開エラーになる問題を修正
+- Windowsで、認証済みAntigravityの使用量が表示されない問題を修正
+- WindowsのGit Bashからcockpit task sendで日本語や複数行の指示を正しく送れるように
+- FleetのコマンドGateで、アプリ起動環境にかかわらずログインシェルのPATHを利用するように修正
+- macOSのMission ControlやSpaces切替後も、アプリ内ブラウザーが他の画面へ残らないように修正
+- オートランで、アプリ停止中に逃した実行を24時間以内なら1回だけ補完するように
+- オートランの前回結果・前回タスク・未実行や失敗の理由をDesktop、PWA、CLIで確認できるように
+- オートランで対応が必要な未実行や失敗をDesktop通知で知らせるように
+- オートランを、macOSで全ウィンドウを閉じた後も動作させ、スリープ復帰時に次回実行を再設定するように
+- タスク一覧・オーバービュー・右サイドパネルの横レイアウトが、幅変更時にもずれないように修正
+- ネイティブUIの再開済み会話で、復元メッセージの完了順序が前後しないように修正
+- Fleetの一覧を簡潔化し、実行状態・未読結果・操作メニューを1行で確認できるように
+- 完了したFleetのRunと関連タスクを、確認画面からまとめて削除できるように
+- FleetのRunにタイトルを付け、タスク一覧・詳細・検索で目的を識別しやすく
+- Fleetフローをコンパクトにし、エージェント・Gate・ループを形と状態で区別しやすく
+- 多数のタスクが更新される環境で状態保存の負荷を抑え、書き込み失敗から安全に回復するように
+- Claude、Codex、Qoder、Cockpit Agent向けのカスタムシステムプロンプトを登録・選択できるように
+- オートランから、新規タスク作成に加えて既存タスクへ指示を送信できるように
+- Fleetノードの結果をJSON Schemaで検証し、後続ノード・Gate・ループで構造化データとして利用できるように
+- Fleetの回数制限付きループで、上限到達時に最終判定ノードへ処理を引き継げるように
+- Fleetのループで同じエージェントセッションを継続し、反復ごとのフォローアップ指示を送れるように
+- Fleetから既存のCockpitタスクへメッセージを送り、その次の結果を後続処理で利用できるように
+
+</details>
+
 ## v4.50.0 — 2026-08-14
 
 **Type:** minor · **Platforms:** macOS, Linux

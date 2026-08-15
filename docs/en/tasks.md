@@ -122,6 +122,8 @@ The history dashboard in the header is available in guest mode. Alongside Cockpi
 
 Complete moves a task out of active work and into completed work. Delete removes the task record from Cockpit. They are different operations.
 
+After a Fleet Run finishes, its action menu in the task list offers **Delete Run** and **Delete Run and all tasks**. **Delete Run** removes only the saved Run history and leaves its related tasks in place. **Delete Run and all tasks** removes the Run history and every related task shown in the confirmation dialog. The second action cannot be undone, so confirm that you have preserved every result you need before continuing.
+
 Completing a task in a temporary folder deletes that working directory automatically. Completing a Git-worktree task in Desktop silently preserves the worktree. By contrast, `cockpit task complete <id>` deletes the worktree by default and preserves it only with `--keep-worktree`. Before completing a task from the CLI, confirm where the required changes are stored and which option you need.
 
 ## Protect and recover task data
