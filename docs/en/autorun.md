@@ -2,11 +2,11 @@
 
 # Autorun
 
-Learn how Autorun starts a new task from a one-time, interval, or cron schedule and keeps the result as a regular Cockpit task.
+Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.50.0 on 2026-08-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
-Autorun starts a new task automatically at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start the same kind of work when it is needed.
+Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
 ## Requirements
 
@@ -24,21 +24,22 @@ Schedules run inside the AGI Cockpit app process. Closing every window on macOS 
 
 In the cron weekday field, `0` means Sunday. For example, `0 9 * * 1-5` runs at 9:00 a.m. on weekdays.
 
-## Create an Autorun task
+## Create an Autorun
 
 1. Open the app menu in the lower-left corner of Desktop, then select **Autorun tasks**.
 2. Select **New Autorun**.
 3. Enter a name and the instruction to send when the task starts.
-4. Choose the working directory. When running as the Master Agent, Cockpit uses the Master's working location.
-5. Select an agent and, when shown, review its UI mode, account, model, reasoning effort, service tier, system prompt, and approval mode. **Auto** is the default for agents with account selection.
-6. Choose **Once**, **Interval**, or **Cron** and configure the timing.
-7. Save the Autorun and confirm that the list shows its next run time.
+4. Under **Execution target**, choose **Create a new task** or **Send to an existing task**.
+5. For a new task, choose the working directory and agent, then review any shown UI mode, account, model, reasoning effort, service tier, system prompt, and approval mode. Cockpit uses the Master's working location for Master Agent runs, and **Auto** is the default for agents with account selection.
+6. For an existing task, choose **Target task**. Cockpit creates no new runtime; it uses the target's existing agent, conversation, working directory, and runtime settings.
+7. Choose **Once**, **Interval**, or **Cron** and configure the timing.
+8. Save the Autorun and confirm that the list shows its next run time.
 
-Autorun keeps the runtime settings from the time it is saved as a snapshot. Changing global settings later does not silently change an existing Autorun's model, reasoning effort, service tier, system prompt, approval mode, account-selection method, or UI mode. If a pinned model or account becomes unavailable, Cockpit does not substitute another setting. It disables that Autorun and marks it as needing attention.
+An Autorun that creates a new task keeps its runtime settings from the time it is saved as a snapshot. Changing global settings later does not silently change its model, reasoning effort, service tier, system prompt, approval mode, account-selection method, or UI mode. If a pinned model or account becomes unavailable, Cockpit does not substitute another setting. It disables that Autorun and marks it as needing attention.
 
-An Autorun also keeps its Browser Identity assignment and passes it to every task the schedule creates. An Autorun without an explicit assignment uses the Default Identity. In v4.43.0, assign or change an Autorun's Identity from the CLI. Create, rename, recolor, clear, or remove the Identity itself from **Browser Identity** in the lower-left app menu or from the CLI.
+A new-task Autorun also keeps its Browser Identity assignment and passes it to every task the schedule creates. An Autorun without an explicit assignment uses the Default Identity. In v4.43.0, assign or change an Autorun's Identity from the CLI. Create, rename, recolor, clear, or remove the Identity itself from **Browser Identity** in the lower-left app menu or from the CLI. An existing-task Autorun does not change the Browser Identity already assigned to its target.
 
-Desktop and the PWA show only settings supported by the selected agent and UI mode. The CLI and API use the same capability data and reject unsupported combinations with an explicit error before saving.
+For a new task, Desktop and the PWA show only settings supported by the selected agent and UI mode. The CLI and API use the same capability data and reject unsupported combinations with an explicit error before saving.
 
 Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor's available model, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Cursor does not expose reasoning-effort, service-tier, or system-prompt settings.
 
@@ -48,7 +49,9 @@ Claude, Codex, Grok Build, Cursor, and Qoder Autoruns store either **Auto** or a
 
 ## Review a run
 
-When Autorun fires, it creates a new task in the same form as any regular task. Select it from the task list, then use task details to review its conversation, confirmation requests, errors, and results. The new task keeps a reference to the Autorun ID that created it.
+When a new-task Autorun fires, it creates a task in the same form as any regular task. Select it from the task list, then use task details to review its conversation, confirmation requests, errors, and results. The new task keeps a reference to the Autorun ID that created it.
+
+An existing-task Autorun sends its text as that task's next instruction. If the target can accept input, delivery happens immediately. If it is running or stopped by a usage limit, Cockpit stores the instruction in a persistent main-process queue until the task becomes ready. The queue has no timeout, and completed or errored targets are resumed automatically when possible. Delivery fails, disables the Autorun, and marks it as needing attention if the target is deleted, cannot be resumed, or is a Windows Terminal task whose foreground process cannot be verified safely.
 
 The Autorun manager supports:
 
@@ -57,15 +60,15 @@ The Autorun manager supports:
 - delete
 - **Run Now**
 - previous and next run times
-- the latest run status and created task ID
+- the latest run status and the created or target task ID
 
-Every scheduled occurrence records one of `created`, `skipped-membership`, `skipped-lock`, `skipped-period`, `missed`, or `failed`. Authentication or membership skips, missed runs, and startup failures are marked as needing attention in Desktop and the PWA and produce a desktop notification. Overlap and period-dedup skips remain informational. `cockpit autorun list` and `cockpit autorun get` expose the same `lastRunStatus`, `lastRunScheduledAt`, `lastRunDetail`, and `lastTaskId` fields. `nextRunAt` is the next attempt time, while `nextRunScheduledAt` preserves the original occurrence during retries. Cockpit also appends one JSON line per occurrence to `data/cockpit/logs/autorun-executions.jsonl` under the AGI Tools data directory. Repeated retries with the same outcome are recorded once; the log rotates at 5 MB and keeps two archives.
+Every scheduled occurrence records one of `created`, `queued`, `delivered`, `skipped-membership`, `skipped-lock`, `skipped-period`, `missed`, or `failed`. `queued` means an existing-task instruction is waiting; `delivered` means it was sent. Authentication or membership skips, missed runs, and startup or delivery failures are marked as needing attention in Desktop and the PWA and produce a desktop notification. Overlap and period-dedup skips remain informational. `cockpit autorun list` and `cockpit autorun get` expose the same `lastRunStatus`, `lastRunScheduledAt`, `lastRunDetail`, and `lastTaskId` fields, plus `executionTarget` and `targetTaskId`. `nextRunAt` is the next attempt time, while `nextRunScheduledAt` preserves the original occurrence during retries. Cockpit also appends one JSON line per occurrence to `data/cockpit/logs/autorun-executions.jsonl` under the AGI Tools data directory. A queued occurrence receives a later delivery or failure record. Repeated retries with the same outcome are recorded once; the log rotates at 5 MB and keeps two archives.
 
-Cockpit does not start another scheduled run while the previous execution turn from the same Autorun is still processing. Visual Runtime, shown as Native UI in the app, releases the lock when the turn completes, the runtime settles it, or a runtime error occurs. Terminal UI and the Terminal agent release it when the launched process exits or is cleaned up. The lock does not wait for a person to mark the Cockpit task **Completed**. Startup failures and cleanup paths also release it, and a 24-hour expiry is the final safeguard against an abandoned lock.
+For a new-task Autorun, Cockpit does not start another scheduled run while the previous execution turn is still processing. Visual Runtime, shown as Native UI in the app, releases the lock when the turn completes, the runtime settles it, or a runtime error occurs. Terminal UI and the Terminal agent release it when the launched process exits or is cleaned up. The lock does not wait for a person to mark the Cockpit task **Completed**. Startup failures and cleanup paths also release it, and a 24-hour expiry is the final safeguard against an abandoned lock. Existing-task delivery releases the scheduling lock after the occurrence is queued or delivered; pending instructions are processed in order for each target task.
 
 ## Working directory and failures
 
-The Desktop form requires a directory unless the Autorun runs as the Master Agent. If the CLI omits the directory, Cockpit creates an `agi-cockpit` directory inside the operating-system temporary folder.
+For a new task, the Desktop form requires a directory unless the Autorun runs as the Master Agent. If the CLI omits the directory, Cockpit creates an `agi-cockpit` directory inside the operating-system temporary folder. Existing-task delivery uses the target's working directory and does not take a separate Autorun directory.
 
 If the agent fails to start, the task remains in the task list with an **Error** state. A one-time Autorun still becomes disabled; an interval or cron Autorun remains enabled and calculates its next run. Open the created task details to inspect the cause.
 
@@ -96,6 +99,18 @@ cockpit autorun get <id>
 cockpit autorun run <id>
 cockpit autorun toggle <id>
 cockpit autorun update <id> --browser-identity default
+```
+
+To send to an existing task, specify the execution target and task ID:
+
+```bash
+cockpit autorun create \
+  --name "Continue review" \
+  --instruction "Check progress and continue with the next step." \
+  --execution-target existing-task \
+  --target-task <task-id> \
+  --type interval \
+  --minutes 30
 ```
 
 ## Related pages

@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.43.0 on 2026-08-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -36,7 +36,7 @@ Every local feature is free and unlimited, with no account required. An AGI Labo
 - Go from installation to reviewing a result: [Install and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 - Keep multiple pieces of work distinct: [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
-- Start a new task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+- Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 ## Free access and AGI Labo membership
 

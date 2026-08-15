@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.50.0 on 2026-08-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -40,6 +40,15 @@ An AI agent's subscription and authentication are separate from your AGI Labo si
 
 Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Cursor, and Qoder. Each profile isolates authentication and connection settings. New tasks, Autoruns, and Fleets default to **Auto**, which selects a signed-in account from its usage state. You can instead pin the default account or a specific profile and can switch accounts later on supported running tasks. Antigravity does not support account profiles because its CLI does not provide a safe authentication store separate from the operating-system keychain.
 
+Claude, Codex, and Qoder Native UI tasks and Cockpit Agent can select a custom system prompt in addition to their built-in choices. Register one with `cockpit system-prompt add`; it then appears in the system-prompt picker for new tasks and Autoruns in Desktop and the PWA.
+
+```bash
+cockpit system-prompt add reviewer --prompt "Review changes for correctness and clarity."
+cockpit system-prompt list
+```
+
+The default `append` mode adds the content after Cockpit's standard system prompt and preserves its built-in Cockpit CLI knowledge. `--mode replace` replaces the standard prompt, leaving that knowledge available only through the installed Cockpit skill. Custom prompts are stored as user-owned Markdown in the AGI Tools data area and are not overwritten when Master Agent files are redeployed. Their content is sent to the selected agent, so do not include credentials or secrets. Cursor, Grok Build, Antigravity, Terminal, and terminal UI modes do not accept custom prompts.
+
 ## 3. Create your first task
 
 1. Open **New task** at the top of the window.
@@ -47,8 +56,9 @@ Under **Agents** in Settings, you can create account profiles for Claude Code, C
 3. Select an AI agent.
 4. For supported agents, choose **Native UI** or **Terminal** as the UI mode.
 5. For an agent with account selection, keep **Auto** or pin the default account or a specific profile.
-6. For this first check, choose **Supervised** approval mode and enter a short request with a clear completion condition.
-7. Create the task.
+6. If a system-prompt choice is available, keep its built-in default for this first check.
+7. Choose **Supervised** approval mode and enter a short request with a clear completion condition.
+8. Create the task.
 
 The settings shown depend on the agent and UI mode. Desktop, PWA, CLI, and Autorun use the same capability data. An unsupported combination of model, reasoning effort, service tier, system prompt, account, or approval mode is hidden or rejected with an explicit error before creation.
 

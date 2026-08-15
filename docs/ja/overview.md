@@ -4,7 +4,7 @@
 
 AGI CockpitがどこでAIエージェントを動かし、タスク一覧とタスク詳細を通じて人の判断と成果確認をつなぐのかを説明します。
 
-> AGI Cockpit 4.43.0で2026-08-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs)
+> AGI Cockpit 4.51.0で2026-08-15に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs)
 
 AGI Cockpitは、複数のAIエージェントへ仕事を渡し、進捗、判断要求、成果を一つの場所で監督するデスクトップアプリです。タスクを作るところから、結果を確認し、追加指示を送り、完了にするところまでを同じ作業単位で扱います。
 
@@ -36,7 +36,7 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 - 初回セットアップから結果確認まで進める: [インストールと最初のタスク](https://agi-labo.com/tools/cockpit/docs/getting-started)
 - 複数の仕事を見分ける: [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
 - エージェントから人へ判断を渡す: [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
-- 時刻や間隔に基づいて新しいタスクを起動する: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 ## 無料利用とAGIラボ会員
 

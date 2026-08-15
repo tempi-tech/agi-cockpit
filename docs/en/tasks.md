@@ -4,7 +4,7 @@
 
 Understand task lists, search, task details, Auto accounts, usage limits, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.50.0 on 2026-08-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -65,6 +65,8 @@ In Cursor, Qoder, and Grok Build Native UI, resuming also restores the saved con
 
 New Claude, Codex, Grok Build, Cursor, and Qoder tasks default to the **Auto** account setting. Auto selects from signed-in accounts using their usage state and current assignments. If the selected account reaches its usage limit, Cockpit switches to another available account and continues the same task. You can instead pin the default account or a specific profile.
 
+For a task running with Auto, Desktop and the PWA show **Auto · account name** beside the composer so you can identify the account currently selected for execution. If Auto switches accounts, this label reflects the new selection.
+
 A usage limit is not a task failure. Cockpit represents it as `waiting_confirmation` with `usage_limit`. If Auto has no replacement or the task is pinned to an account, switch to another signed-in account beside the composer or with `cockpit task account <id> <name|id|default>`, then send a follow-up to continue. Cockpit stops the current execution, moves the saved conversation, and resumes the same task under the selected profile. If Cockpit shows a reset time, you can also retry the same account after that time.
 
 ## Message input and the send key
@@ -123,6 +125,8 @@ The history dashboard in the header is available in guest mode. Alongside Cockpi
 Complete moves a task out of active work and into completed work. Delete removes the task record from Cockpit. They are different operations.
 
 After a Fleet Run finishes, its action menu in the task list offers **Delete Run** and **Delete Run and all tasks**. **Delete Run** removes only the saved Run history and leaves its related tasks in place. **Delete Run and all tasks** removes the Run history and every related task shown in the confirmation dialog. The second action cannot be undone, so confirm that you have preserved every result you need before continuing.
+
+When a Fleet Run has a title, the task-list Fleet group and Fleet details show it, and each node task includes it as **Run title / node name**. The Run title is therefore searchable in the same way as an ordinary task name.
 
 Completing a task in a temporary folder deletes that working directory automatically. Completing a Git-worktree task in Desktop silently preserves the worktree. By contrast, `cockpit task complete <id>` deletes the worktree by default and preserves it only with `--keep-worktree`. Before completing a task from the CLI, confirm where the required changes are stored and which option you need.
 
