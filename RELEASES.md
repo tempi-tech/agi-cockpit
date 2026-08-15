@@ -8,7 +8,7 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Show the account selected by Auto in the task view.
+- Improved the task view to show the account selected by Auto.
 - Fixed Claude terminal input and scrolling becoming unresponsive on Windows.
 - Fixed Claude terminal image attachments being delivered as metadata only on Windows.
 - Fixed agents being unable to access attachments with Japanese names on Windows.
@@ -20,14 +20,14 @@ English is the primary language for these generated release notes. Download the 
 - Added one catch-up execution for an Autorun missed while the app was stopped, when it is within 24 hours.
 - Added Autorun outcome, last-task, and skip or failure details across Desktop, PWA, and CLI.
 - Added Desktop notifications for missed or failed Autoruns that need attention.
-- Kept Autorun active after all macOS windows close and re-armed upcoming runs after wake from sleep.
+- Changed Autorun to remain active after all macOS windows close and re-arm upcoming runs after wake from sleep.
 - Fixed task-list, Overview, and right-side-panel horizontal alignment when their widths change.
 - Fixed restored messages in resumed native-UI conversations completing out of order.
-- Simplified Fleet rows so run state, unread results, and actions are available in one line.
+- Improved Fleet rows so run state, unread results, and actions are available in one line.
 - Added a confirmed action to delete a finished Fleet Run together with all of its related tasks.
 - Added titles for Fleet Runs so their purpose is easier to identify in task lists, details, and search.
-- Made Fleet flows more compact and easier to scan by distinguishing agents, gates, and loops by shape and state.
-- Reduced state-save load when many tasks update and added safe recovery from write failures.
+- Improved Fleet flow presentation by distinguishing agents, gates, and loops by shape and state.
+- Improved state saving to reduce load when many tasks update and recover safely from write failures.
 - Added registration and selection of custom system prompts for Claude, Codex, Qoder, and Cockpit Agent.
 - Added Autorun delivery to an existing task as an alternative to creating a new task.
 - Added JSON Schema validation for Fleet node results and structured output references in downstream nodes, gates, and loops.
