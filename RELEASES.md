@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.52.0 — 2026-08-17
+
+**Type:** minor · **Platforms:** macOS
+
+- Added node IDs, settings, and gate or loop conditions to Fleet definition flows.
+- Improved active Fleet flows with a compact view focused on run progress.
+- Added automatic recovery from transient Fleet node runtime errors, including across app restarts.
+- Changed Fleet loop retries to preserve cumulative iteration counts and require an explicit grant after the limit is reached.
+- Fixed clicks and other input not being reliably dispatched to background in-app browser tabs.
+- Fixed Codex approval cards appearing before newer output or locally sent messages.
+- Fixed completed reports appearing twice in Codex visual conversations.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Fleet定義のフローに、ノードID・設定値・Gateやループの条件を表示するように
+- Fleet実行中のフローを、進行状況に集中できるコンパクトな表示に改善
+- Fleetノードの一時的な実行エラーを自動再試行し、アプリ再起動後も復旧を継続するように
+- Fleetのループ再試行で累積回数を保持し、上限到達後は追加回数を明示して再開できるように
+- バックグラウンドのアプリ内ブラウザータブへクリックや入力を確実に送れるように修正
+- Codexの承認カードが最新の出力や送信済みメッセージより前に表示される問題を修正
+- Codexのビジュアル会話で完了レポートが重複表示される問題を修正
+
+</details>
+
 ## v4.51.0 — 2026-08-15
 
 **Type:** minor · **Platforms:** macOS, Linux
