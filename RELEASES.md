@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.52.0 — 2026-08-17
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added node IDs, settings, and gate or loop conditions to Fleet definition flows.
 - Improved active Fleet flows with a compact view focused on run progress.
