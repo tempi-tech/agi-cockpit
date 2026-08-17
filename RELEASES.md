@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.53.0 — 2026-08-18
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Run history to Fleet definition views so each Run can be opened immediately.
 - Added back and forward navigation across Fleet definitions, Runs, and nodes viewed in the Fleet panel.
