@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.53.0 — 2026-08-18
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Run history to Fleet definition views so each Run can be opened immediately.
+- Added back and forward navigation across Fleet definitions, Runs, and nodes viewed in the Fleet panel.
+- Improved the Fleet layout so parallel groups and node cards are easier to compare.
+- Added cockpit fleet wait for reconnectable waiting without missing Fleet attention events.
+- Moved Fleet structured output to cockpit fleet output for immediate validation, persistence, and separation from report text.
+- Stopped counting Fleet node output as unread user messages.
+- Improved in-app browser reliability for dialog actions and input sent to background tabs.
+- Stabilized agent availability while the PWA task creation screen is loading.
+- Fixed empty task lists flashing before the PWA finishes its initial sync.
+- Updated context usage immediately after a successful /compact.
+- Fixed Japanese punctuation and brackets after chat URLs being included in the link.
+- Added a combined all-agent account view to cockpit accounts.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Fleet定義画面に実行履歴を表示し、各Runの詳細をすぐ確認できるように
+- Fleetパネルで閲覧した定義・Run・ノードを戻る／進む操作で移動できるように
+- Fleetの並列グループとノードカードを見比べやすい配置に改善
+- cockpit fleet waitで、切断後もイベントを取りこぼさずにFleetの要対応状態を待機できるように
+- Fleetの構造化出力をcockpit fleet outputで即時検証・保存し、レポート本文と分離するように
+- Fleetノードの出力をユーザーからの未読メッセージとして数えないように
+- アプリ内ブラウザーでダイアログ操作やバックグラウンドタブへの入力をより確実に処理するように修正
+- PWAのタスク作成画面で利用可能なエージェント情報を保持し、読み込み中の表示を安定させるように
+- PWAの初回同期前に空のタスク一覧が一瞬表示される問題を修正
+- /compact成功後にコンテキスト使用量をすぐ更新するように
+- チャット内のURLに続く日本語の句読点や括弧がリンクに含まれる問題を修正
+- cockpit accountsで全エージェントのアカウントをまとめて確認できるように
+
+</details>
+
 ## v4.52.0 — 2026-08-17
 
 **Type:** minor · **Platforms:** macOS, Linux
