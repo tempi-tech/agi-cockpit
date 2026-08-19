@@ -4,6 +4,19 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.55.0 — 2026-08-19
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Fleet {{needs.<id>.task_id}} so later nodes can continue the Cockpit task that ran an earlier node.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Fleetで、前のノードが動かしたCockpitタスクのidを {{needs.<id>.task_id}} で参照できるように
+
+</details>
+
 ## v4.54.0 — 2026-08-19
 
 **Type:** minor · **Platforms:** macOS, Linux
