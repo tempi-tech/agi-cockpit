@@ -8,19 +8,19 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Restored Antigravity Visual Mode.
-- Split Antigravity Visual model and reasoning effort into separate selections.
+- Added Antigravity Visual Mode back.
+- Changed Antigravity Visual model and reasoning effort into separate selections.
 - Added reasoning effort selection for Cursor visual tasks and Fleet nodes.
 - Added reasoning effort selection for Qoder visual tasks and Fleet nodes.
 - Changed new Claude and Antigravity tasks to default to Native UI without overwriting a saved Terminal preference.
-- Stopped Codex spark models from sending unsupported reasoning values so those tasks can start.
+- Fixed Codex spark models sending unsupported reasoning values so those tasks can start.
 - Fixed usage fetching for named Cursor profiles.
 - Added Cursor and Antigravity account emails to the usage panel.
 - Added Qoder account emails to the usage panel.
-- Revealed task list and child-task entries 20 at a time with show more.
-- Kept unanswered task Asks visible by showing them again when they would otherwise disappear.
+- Changed task list and child-task entries to reveal 20 at a time with show more.
+- Fixed unanswered task Asks disappearing by showing them again.
 - Fixed Autorun skipping a scheduled occurrence when its timer fired early.
-- Capped Fleet retry --grant-iterations so the Run iteration limit cannot be exceeded.
+- Changed Fleet retry --grant-iterations so the Run iteration limit cannot be exceeded.
 
 <details>
 <summary>日本語のリリースノート</summary>
