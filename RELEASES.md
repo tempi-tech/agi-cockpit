@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.54.0 — 2026-08-19
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Antigravity Visual Mode back.
 - Changed Antigravity Visual model and reasoning effort into separate selections.
