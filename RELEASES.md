@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.55.0 — 2026-08-19
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Fleet {{needs.<id>.task_id}} so later nodes can continue the Cockpit task that ran an earlier node.
 
