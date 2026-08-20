@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.56.0 — 2026-08-20
+
+**Type:** minor · **Platforms:** macOS
+
+- Talk Room can now resume completed tasks and recall participants who have left.
+- New Talk Room messages now wake participants whose turns have ended and deliver the message content.
+- Fleet retry and resume can now clear saved runtime settings with --unset.
+- Auto accounts now detect plan-restriction responses and switch to another eligible account.
+- Autorun now launches the next scheduled run even when the previously created task is still unfinished.
+- Fixed Antigravity Visual failing to send messages with agy 1.1.15 and later.
+- Fixed an individual MCP tool failure ending the entire Grok Visual task.
+- Fixed long-running Grok Visual tool updates causing conversation history to be lost.
+- Fixed Grok Visual tool-only updates increasing the unread state.
+- Fixed long visual conversations moving away from the position you were reading.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Talk Roomで、完了したタスクを再開して退出済みの参加者を再び呼び出せるように
+- Talk Roomの新しいメッセージが、ターンを終えた参加者を起こして内容を届けるように
+- Fleetのretryとresumeで、保存済みの実行設定を--unsetで解除できるように
+- Autoアカウントがプラン制限の応答を検知し、利用可能な別アカウントへ切り替えるように
+- Autorunで、前回作成したタスクが未完了でも次回のスケジュールを実行するように
+- Antigravity Visualで、agy 1.1.15以降にメッセージを送信できない問題を修正
+- Grok Visualで、MCPツール単体の失敗によってタスク全体が終了する問題を修正
+- Grok Visualで、長時間のツール更新によって会話履歴が失われる問題を修正
+- Grok Visualで、ツール更新だけで未読状態が増える問題を修正
+- 長いビジュアル会話で、読んでいる位置が勝手に上下へ移動する問題を修正
+
+</details>
+
 ## v4.55.0 — 2026-08-19
 
 **Type:** minor · **Platforms:** macOS, Linux
