@@ -2,9 +2,9 @@
 
 # Task list and task details
 
-Understand task lists, search, task details, Auto accounts, usage limits, attachments, resume, and completion.
+Understand task lists, search, task details, Auto accounts, account restrictions, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.56.0 on 2026-08-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -44,7 +44,7 @@ While the pointer is over the task list, or while a menu, rename field, or delet
 | `question` | The running agent needs an answer to its own question |
 | `terminal_prompt` | The terminal is waiting for input |
 | `runtime_error` | The runtime reported an error |
-| `usage_limit` | The current agent account reached its usage limit and the turn stopped |
+| `usage_limit` | The current agent account reached a usage or plan restriction and the turn stopped |
 | `idle_timeout` | Idle detection considers the task ready for input |
 | `unknown` | Cockpit cannot identify a safe, specific waiting reason |
 
@@ -63,11 +63,11 @@ A Terminal task cannot restore its previous shell process. Resuming it starts a 
 
 In Cursor, Qoder, and Grok Build Native UI, resuming also restores the saved conversation from the connected session. A Grok Build workflow that was still in progress remains visible as in progress after the task resumes.
 
-New Claude, Codex, Grok Build, Cursor, and Qoder tasks default to the **Auto** account setting. Auto selects from signed-in accounts using their usage state and current assignments. If the selected account reaches its usage limit, Cockpit switches to another available account and continues the same task. You can instead pin the default account or a specific profile.
+New Claude, Codex, Grok Build, Cursor, and Qoder tasks default to the **Auto** account setting. Auto selects from signed-in accounts using their usage state and current assignments. If the selected account reaches its usage limit or returns a plan-restriction response, Cockpit switches to another available account and continues the same task. You can instead pin the default account or a specific profile.
 
 For a task running with Auto, Desktop and the PWA show **Auto · account name** beside the composer so you can identify the account currently selected for execution. If Auto switches accounts, this label reflects the new selection.
 
-A usage limit is not a task failure. Cockpit represents it as `waiting_confirmation` with `usage_limit`. If Auto has no replacement or the task is pinned to an account, switch to another signed-in account beside the composer or with `cockpit task account <id> <name|id|default>`, then send a follow-up to continue. Cockpit stops the current execution, moves the saved conversation, and resumes the same task under the selected profile. If Cockpit shows a reset time, you can also retry the same account after that time.
+A stop caused by a usage or plan restriction is not a task failure. Cockpit represents it as `waiting_confirmation` with `usage_limit`. If Auto has no replacement or the task is pinned to an account, switch to another signed-in account beside the composer or with `cockpit task account <id> <name|id|default>`, then send a follow-up to continue. Cockpit stops the current execution, moves the saved conversation, and resumes the same task under the selected profile. If Cockpit shows a usage-limit reset time, you can also retry the same account after that time.
 
 ## Message input and the send key
 
