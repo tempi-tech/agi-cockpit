@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.57.0 — 2026-08-21
+
+**Type:** minor · **Platforms:** macOS
+
+- Added per-participant Talk Room wake modes for all messages, @mentions only, or no notifications.
+- Added @mention wake-ups for Talk Room participants who have reduced notifications.
+- Serialized Fleet command gates across Runs in the same repository to prevent collisions over resources such as ports.
+- Added the captured output tail to failed Fleet command-gate Run logs so the cause is visible.
+- Added validated structured output to Fleet command gates and until.run as JSON environment variables and execution directories.
+- Changed isolated Fleet nodes to create their worktrees in the repository specified by the node.
+- Changed Fleet worktree failures to stop before starting a task in the source checkout.
+- Fixed Grok Visual failing the initial prompt when a configured MCP server returns an authentication error.
+- Fixed interrupted turns with no new answer redisplaying the previous answer or user input as a fresh completion report.
+- Made the PWA task list appear faster by prioritizing unfinished and attention-needed tasks and streaming older tasks in chunks.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Talk Roomで、参加者ごとに全メッセージ・@メンションのみ・通知なしからタスクを起こす条件を選べるように
+- Talk Roomで、通知を抑えた参加者も@メンションで起こせるように
+- Fleetのコマンドゲートを同じリポジトリ間で直列化し、並列Runのポートなどの競合を防ぐように
+- Fleetの失敗したコマンドゲートで、原因を確認できるよう出力末尾をRunログに記録するように
+- Fleetのコマンドゲートとuntil.runで、検証済みの構造化出力をJSON環境変数や実行ディレクトリとして利用できるように
+- Fleetのisolatedノードが、ノード自身で指定したリポジトリにworktreeを作成するように
+- Fleetでworktreeを作成できない場合、元のcheckoutでタスクを開始せずエラーにするように
+- Grok Visualで、設定済みMCPサーバーの認証エラーによって初回プロンプトが失敗する問題を修正
+- 回答を生成する前に中断したターンで、直前の回答やユーザー入力が新しい完了報告として再表示される問題を修正
+- PWAの初期同期で未完了・要確認タスクを優先し、過去のタスクを分割配信して一覧表示を高速化
+
+</details>
+
 ## v4.56.0 — 2026-08-20
 
 **Type:** minor · **Platforms:** macOS, Linux
