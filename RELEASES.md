@@ -10,14 +10,14 @@ English is the primary language for these generated release notes. Download the 
 
 - Added per-participant Talk Room wake modes for all messages, @mentions only, or no notifications.
 - Added @mention wake-ups for Talk Room participants who have reduced notifications.
-- Serialized Fleet command gates across Runs in the same repository to prevent collisions over resources such as ports.
+- Changed Fleet command gates to run serially across Runs in the same repository, preventing collisions over resources such as ports.
 - Added the captured output tail to failed Fleet command-gate Run logs so the cause is visible.
 - Added validated structured output to Fleet command gates and until.run as JSON environment variables and execution directories.
 - Changed isolated Fleet nodes to create their worktrees in the repository specified by the node.
 - Changed Fleet worktree failures to stop before starting a task in the source checkout.
 - Fixed Grok Visual failing the initial prompt when a configured MCP server returns an authentication error.
 - Fixed interrupted turns with no new answer redisplaying the previous answer or user input as a fresh completion report.
-- Made the PWA task list appear faster by prioritizing unfinished and attention-needed tasks and streaming older tasks in chunks.
+- Improved PWA task-list loading by prioritizing unfinished and attention-needed tasks and streaming older tasks in chunks.
 
 <details>
 <summary>日本語のリリースノート</summary>
