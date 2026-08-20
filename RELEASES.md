@@ -8,11 +8,11 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Talk Room can now resume completed tasks and recall participants who have left.
-- New Talk Room messages now wake participants whose turns have ended and deliver the message content.
-- Fleet retry and resume can now clear saved runtime settings with --unset.
-- Auto accounts now detect plan-restriction responses and switch to another eligible account.
-- Autorun now launches the next scheduled run even when the previously created task is still unfinished.
+- Added Talk Room support for resuming completed tasks and recalling participants who have left.
+- Changed Talk Room messages to wake participants whose turns have ended and deliver the message content.
+- Added Fleet --unset support for clearing saved runtime settings during retry and resume.
+- Changed Auto accounts to detect plan-restriction responses and switch to another eligible account.
+- Fixed Autorun skipping the next scheduled run while the previously created task was still unfinished.
 - Fixed Antigravity Visual failing to send messages with agy 1.1.15 and later.
 - Fixed an individual MCP tool failure ending the entire Grok Visual task.
 - Fixed long-running Grok Visual tool updates causing conversation history to be lost.
