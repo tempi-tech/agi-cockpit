@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.57.0 — 2026-08-21
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added per-participant Talk Room wake modes for all messages, @mentions only, or no notifications.
 - Added @mention wake-ups for Talk Room participants who have reduced notifications.
