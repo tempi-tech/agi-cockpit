@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.57.1 — 2026-08-22
+
+**Type:** patch · **Platforms:** macOS
+
+- Changed Talk Room task calls to stop waiting and return a timeout reason when the task does not respond.
+- Added the affected model and estimated reset time to Grok Visual usage-limit errors.
+- Fixed Fleet failing to recover tasks interrupted by usage limits.
+- Added preflight validation for Fleet prompts that reference output fields not guaranteed by the contract.
+- Added detailed causes and recovery guidance for Grok Visual and Antigravity Visual startup and runtime failures.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Talk Roomでタスクを呼び出す際、応答がない場合に待ち続けずタイムアウト理由を返すように
+- Grok Visualの利用上限エラーで、対象モデルとリセット見込み時刻を表示するように
+- Fleetが利用上限で中断したタスクを正しく復旧できない問題を修正
+- Fleetのプロンプトで未保証の出力フィールドを参照した場合、実行前に検出するように
+- Grok VisualとAntigravity Visualの起動・実行失敗時に、原因と対処方法を詳しく表示するように
+
+</details>
+
 ## v4.57.0 — 2026-08-21
 
 **Type:** minor · **Platforms:** macOS, Linux
