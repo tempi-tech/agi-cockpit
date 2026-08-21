@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.57.1 — 2026-08-22
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Changed Talk Room task calls to stop waiting and return a timeout reason when the task does not respond.
 - Added the affected model and estimated reset time to Grok Visual usage-limit errors.
