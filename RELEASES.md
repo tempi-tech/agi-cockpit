@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.58.0 — 2026-08-23
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added multiple Antigravity accounts with automatic account selection and switching for tasks and Autoruns.
 - Changed agents added later to a Talk Room to receive mention-only notifications and added per-participant notification indicators.
