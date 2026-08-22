@@ -13,7 +13,7 @@ English is the primary language for these generated release notes. Download the 
 - Fixed Escape to stop only the task in the focused pane when multiple panes are open.
 - Added retries for failed Fleet loop nodes while preserving completed work from the current iteration.
 - Added completion indicators for tasks while the task list is frozen in place.
-- Separated Cursor Models and Other Models usage windows for display and account selection.
+- Changed Cursor Models and Other Models to use separate usage windows for display and account selection.
 - Added standard-input and file-input support to cockpit CLI task create, task send, ask, and talk say.
 
 <details>
