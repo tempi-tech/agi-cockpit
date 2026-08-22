@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.58.0 — 2026-08-23
+
+**Type:** minor · **Platforms:** macOS
+
+- Added multiple Antigravity accounts with automatic account selection and switching for tasks and Autoruns.
+- Changed agents added later to a Talk Room to receive mention-only notifications and added per-participant notification indicators.
+- Fixed Escape to stop only the task in the focused pane when multiple panes are open.
+- Added retries for failed Fleet loop nodes while preserving completed work from the current iteration.
+- Added completion indicators for tasks while the task list is frozen in place.
+- Separated Cursor Models and Other Models usage windows for display and account selection.
+- Added standard-input and file-input support to cockpit CLI task create, task send, ask, and talk say.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Antigravityで複数アカウントを登録し、タスクやAutorunで自動選択・切り替えできるように
+- Talk Roomに後から参加したエージェントの通知をメンションのみにし、参加者ごとの通知設定を表示するように
+- 複数ペインを開いているとき、Escキーがフォーカス中のペインのタスクだけを停止するように修正
+- Fleetのループ内で失敗したノードを、完了済みの成果を保持したまま再試行できるように
+- 固定表示中のタスク一覧で、完了したタスクに完了状態を表示するように
+- Cursor ModelsとOther Modelsの利用枠を分けて表示・判定するように
+- cockpit CLIのtask create、task send、ask、talk sayで標準入力とファイル入力を利用できるように
+
+</details>
+
 ## v4.57.1 — 2026-08-22
 
 **Type:** patch · **Platforms:** macOS, Linux
