@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.58.0 on 2026-08-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -22,7 +22,7 @@ On Windows, install AGI Cockpit from Microsoft Store. On macOS, open the `.dmg` 
 
 On a first run with no existing tasks, Cockpit opens a setup flow. It introduces the app, checks the supported task-agent CLIs, configures the Cockpit integration, then offers AGI Labo sign-in. One available agent is enough to continue. Choose **Start without signing in** at the final step if you want to use guest mode; sign in as an AGI Labo member if you need Autorun or remote access from another device. You can revisit the flow later by opening the app menu in the lower-left corner, then selecting **Setup** and **First-run setup**.
 
-AGI Cockpit stores credentials and API keys in encrypted operating-system storage such as Keychain or a keyring. If encrypted storage is unavailable, Cockpit does not fall back to plaintext. It rejects the save and shows recovery guidance. Enable the operating-system Keychain or keyring, then sign in again.
+AGI Cockpit stores its own credentials and API keys in encrypted operating-system storage such as Keychain or a keyring. If encrypted storage is unavailable, Cockpit does not fall back to plaintext. It rejects the save and shows recovery guidance. Enable the operating-system Keychain or keyring, then sign in again. Named Antigravity accounts are an exception: their authentication is isolated in the profile-specific app-data area described below.
 
 Remote access defaults to Tailscale-only mode. When Tailscale HTTPS is enabled but its certificate is unavailable, Cockpit does not silently downgrade to HTTP and does not start the connection. Local Wi-Fi mode is unencrypted, so Cockpit enables it only after an explicit confirmation and keeps a warning visible while it is active. Do not use local Wi-Fi mode on a public network.
 
@@ -38,7 +38,7 @@ When you use Claude Code, Codex, or Grok Build in Native UI, you can start befor
 
 An AI agent's subscription and authentication are separate from your AGI Labo sign-in. Signing in as an AGI Labo member does not authenticate Claude Code, Codex, or another task agent.
 
-Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Cursor, and Qoder. Each profile isolates authentication and connection settings. New tasks, Autoruns, and Fleets default to **Auto**, which selects a signed-in account from its usage state. You can instead pin the default account or a specific profile and can switch accounts later on supported running tasks. Antigravity does not support account profiles because its CLI does not provide a safe authentication store separate from the operating-system keychain.
+Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Antigravity, Cursor, and Qoder. Each profile isolates authentication and connection settings. New tasks, Autoruns, and Fleets default to **Auto**, which selects a signed-in account from its usage state. You can instead pin the default account or a specific profile and can switch accounts later on supported running tasks. Antigravity profiles use browser-based Google OAuth and store OAuth tokens, conversations, logs, and usage history in a profile-specific app-data area. Cockpit starts Agy with that selected area and prevents fallback to the shared keyring. Developer shell resources and non-credential Antigravity settings remain shared with the normal home directory.
 
 Claude, Codex, and Qoder Native UI tasks and Cockpit Agent can select a custom system prompt in addition to their built-in choices. Register one with `cockpit system-prompt add`; it then appears in the system-prompt picker for new tasks and Autoruns in Desktop and the PWA.
 
