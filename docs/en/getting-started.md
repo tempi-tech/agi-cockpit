@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.58.0 on 2026-08-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.58.1 on 2026-08-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -62,9 +62,9 @@ The default `append` mode adds the content after Cockpit's standard system promp
 
 The settings shown depend on the agent and UI mode. Desktop, PWA, CLI, and Autorun use the same capability data. An unsupported combination of model, reasoning effort, service tier, system prompt, account, or approval mode is hidden or rejected with an explicit error before creation.
 
-Cursor CLI supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Cursor's available models, approval mode, and account profiles; reasoning-effort and service-tier controls are not available for Cursor.
+Cursor CLI supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Cursor's available models, model-specific reasoning efforts, approval mode, and account profiles. Models without a reasoning effort do not show that control, and Cursor does not support service tiers. For Grok 4.6, choose `low`, `medium`, `high`, or `xhigh`; Cockpit runs the model with the selected effort.
 
-Qoder CLI also supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Qoder's available models, system prompt, approval mode, and account profiles. Reasoning-effort and service-tier controls are not available for Qoder.
+Qoder CLI also supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Qoder's available models, reasoning effort for supported models, system prompt, approval mode, and account profiles. Models without a reasoning effort do not show that control, and Qoder does not support service tiers.
 
 In Grok Build Native UI, reasoning effort is available only for models that advertise support for it. New Grok visual tasks default to Grok 4.6 with `xhigh` reasoning effort.
 

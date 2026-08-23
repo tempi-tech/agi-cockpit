@@ -4,7 +4,7 @@
 
 AGI Cockpitをインストールし、作業場所とエージェントを選び、最初のタスクの結果を確認して完了にするまでの手順です。
 
-> AGI Cockpit 4.58.0で2026-08-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/getting-started)
+> AGI Cockpit 4.58.1で2026-08-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/getting-started)
 
 この手順を終えると、AGI Cockpitを起動し、最初のタスクを実行して、結果を確認し、タスクを完了にできます。
 
@@ -62,9 +62,9 @@ cockpit system-prompt list
 
 表示される設定は、エージェントとUIモードによって異なります。Desktop、PWA、CLI、Autorunは同じ対応情報を参照し、利用できないモデル、推論レベル、service tier、system prompt、アカウント、承認モードの組み合わせを非表示にするか、作成前に明示的なエラーで拒否します。
 
-Cursor CLIは「ネイティブUI」と「ターミナル」の両方に対応しています。ネイティブUIではCursorで利用可能なモデル、承認モード、アカウントプロファイルを選べますが、推論レベルとservice tierは利用できません。
+Cursor CLIは「ネイティブUI」と「ターミナル」の両方に対応しています。ネイティブUIではCursorで利用可能なモデル、モデルごとの推論レベル、承認モード、アカウントプロファイルを選べます。推論レベルがないモデルでは選択肢を表示せず、service tierは利用できません。Grok 4.6では`low`、`medium`、`high`、`xhigh`から選び、選択したレベルで実行します。
 
-Qoder CLIも「ネイティブUI」と「ターミナル」の両方に対応しています。ネイティブUIではQoderで利用可能なモデル、システムプロンプト、承認モード、アカウントプロファイルを選べます。推論レベルとservice tierは利用できません。
+Qoder CLIも「ネイティブUI」と「ターミナル」の両方に対応しています。ネイティブUIではQoderで利用可能なモデル、対応モデルの推論レベル、システムプロンプト、承認モード、アカウントプロファイルを選べます。推論レベルがないモデルでは選択肢を表示せず、service tierは利用できません。
 
 Grok BuildのネイティブUIでは、対応を通知するモデルに限って推論レベルを選べます。新しいGrokビジュアルタスクの既定はGrok 4.6と`xhigh`です。
 
