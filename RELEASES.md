@@ -9,7 +9,7 @@ English is the primary language for these generated release notes. Download the 
 **Type:** patch · **Platforms:** macOS
 
 - Fixed task account selection so it switches correctly between Auto and a fixed account.
-- Stabilized automatic account switching and task resumption after a usage limit in Auto mode, with a clear reason when recovery is unavailable.
+- Fixed automatic account switching and task resumption after a usage limit in Auto mode, with a clear reason when recovery is unavailable.
 - Fixed ACP tasks remaining in the running state after answering a permission request that arrived after the turn ended.
 - Fixed unlimited Qoder organization credits so they appear correctly and count toward available usage.
 - Fixed Cursor Grok 4.6 models so they run with the selected reasoning effort.
