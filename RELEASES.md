@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.58.1 — 2026-08-24
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed task account selection so it switches correctly between Auto and a fixed account.
+- Stabilized automatic account switching and task resumption after a usage limit in Auto mode, with a clear reason when recovery is unavailable.
+- Fixed ACP tasks remaining in the running state after answering a permission request that arrived after the turn ended.
+- Fixed unlimited Qoder organization credits so they appear correctly and count toward available usage.
+- Fixed Cursor Grok 4.6 models so they run with the selected reasoning effort.
+- Improved Qoder BAD_REQUEST errors with diagnostic details and a terminal resume command.
+- Added error details to text copied from chat messages.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスクのアカウント選択をAutoと固定アカウントの間で正しく切り替えられるように修正
+- Auto選択中に利用上限に達した際のアカウント自動切り替えとタスク再開を安定化し、復旧できない場合は理由を表示するように修正
+- ACPエージェントがターン終了後に権限確認を求めた際、応答後もタスクが実行中のままになる問題を修正
+- Qoderの上限なし組織クレジットを利用枠に正しく表示・反映するように修正
+- CursorのGrok 4.6モデルが選択した推論レベルで正しく実行されるように修正
+- QoderのBAD_REQUEST発生時に診断情報とターミナルからの再開コマンドを表示するように改善
+- チャットのコピーボタンでエラー詳細もコピーできるように改善
+
+</details>
+
 ## v4.58.0 — 2026-08-23
 
 **Type:** minor · **Platforms:** macOS, Linux
