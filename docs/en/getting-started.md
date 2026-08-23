@@ -111,7 +111,12 @@ After the Cockpit integration is configured, a supported AI agent can use the `c
 cockpit task create \
   --instruction "Inspect this folder and describe its structure in no more than five points. Do not change any files." \
   --directory /path/to/project
+
+cat instruction.md | cockpit task create --stdin --directory /path/to/project
+cockpit task create --instruction-file instruction.md --directory /path/to/project
 ```
+
+Pass a multiline instruction, or one containing backticks, quotes, `$`, or a code fence, with `--stdin` or `--instruction-file`. These inputs avoid shell substitution and quoting rules and deliver the standard-input or file contents unchanged.
 
 If the command omits the directory, Cockpit starts the task in an operating-system temporary folder.
 

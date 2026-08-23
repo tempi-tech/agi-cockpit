@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.41.0 on 2026-07-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.58.0 on 2026-08-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -76,7 +76,12 @@ cockpit ask \
   --choice-description "Commit, push, and deploy to production" \
   --choice "Revise" \
   --choice-description "Do not publish and wait for another instruction"
+
+cat summary.md | cockpit ask --stdin --choice "Publish" --choice "Revise"
+cockpit ask --summary-file summary.md --questions-file questions.json
 ```
+
+Pass a multiline summary or text that the shell could interpret with `--stdin` or `--summary-file`. A multi-question JSON array can also come from `--questions-stdin` or `--questions-file`. Only one value can consume standard input, so use a file for one part when both the summary and questions need external input. Do not combine command-line, standard-input, and file sources for the same value.
 
 When the command succeeds, it returns an Ask ID. The agent ends its turn at that point and does not poll for the answer.
 

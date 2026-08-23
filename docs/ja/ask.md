@@ -4,7 +4,7 @@
 
 AskがAIエージェントから人へ確認と判断を安全に受け渡し、回答後に同じタスクを再開する仕組みを説明します。
 
-> AGI Cockpit 4.41.0で2026-07-29に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
+> AGI Cockpit 4.58.0で2026-08-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
 
 Askは、AIエージェントが作業をいったん止め、人に確認と判断を委ねるための仕組みです。回答は元のタスクへ構造化されたイベントとして返り、その同じタスクが続きから再開します。
 
@@ -76,7 +76,12 @@ cockpit ask \
   --choice-description "commit、push、本番デプロイへ進みます" \
   --choice "修正する" \
   --choice-description "公開せず、追加指示を待ちます"
+
+cat summary.md | cockpit ask --stdin --choice "公開する" --choice "修正する"
+cockpit ask --summary-file summary.md --questions-file questions.json
 ```
+
+複数行やシェルで解釈される文字を含む説明は、`--stdin`または`--summary-file`で渡します。複数質問のJSON配列は`--questions-stdin`または`--questions-file`からも読み込めます。標準入力は一つだけなので、説明と質問の両方を外部入力にする場合は、片方をファイルから渡します。同じ値に対してコマンド引数、標準入力、ファイル入力を同時には指定できません。
 
 コマンドが成功するとAsk IDが返ります。エージェントはその時点でターンを終え、回答をポーリングしません。
 

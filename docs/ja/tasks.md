@@ -24,7 +24,7 @@ Desktopのタスク画面は、タスク一覧、選択したタスクの作業�
 
 サイドバーのタスク行と子タスク一覧では、「…」の操作メニューから名前変更、ピン留めまたは解除、完了、タスクIDのコピー、削除を同じ手順で実行できます。子タスクでは親からの切り離しも選べます。名前は行内で編集し、Enterで確定、Escapeで取り消します。空の名前は保存されず、上限は50文字です。
 
-タスク一覧へマウスを重ねている間と、メニュー、名前変更、削除確認の操作中は、自動並べ替えによって表示中のタスク行が移動しません。マウスを外すと現在の状態に基づく並び順が反映されます。メニューは無関係な領域のスクロールでは閉じず、タスク行自体がスクロールで移動した場合に閉じます。
+タスク一覧へマウスを重ねている間と、メニュー、名前変更、削除確認の操作中は、自動並べ替えによって表示中のタスク行が移動しません。この固定中にタスクが完了した場合、行はその場に残って「完了」を表示し、固定を解除すると現在の状態に基づく並び順が反映されます。メニューは無関係な領域のスクロールでは閉じず、タスク行自体がスクロールで移動した場合に閉じます。
 
 ## タスク状態
 
@@ -74,6 +74,8 @@ Autoで実行中のタスクでは、DesktopとPWAの入力欄付近に「Auto�
 Desktopでは、設定の「ショートカット」にある「送信キー」で、チャットを送る操作をEnterまたはCmd/Ctrl+Enterから選べます。既定はEnterです。Cmd/Ctrl+Enterを選ぶと、macOSではCmd+Enter、WindowsとLinuxではCtrl+Enterで送信し、Enterは改行になります。Shift+Enterはどちらの設定でも改行に使えます。
 
 この設定は、新しいタスク、タスク詳細、ネイティブUI、Talk RoomなどDesktopのチャット入力で共通して使われます。PWAでは画面の送信ボタンを使います。
+
+実行中のターンはEscapeで停止できます。複数のタスクペインを開いている場合、Escapeはキーボードフォーカスがあるペインのタスクだけを停止します。入力欄などにフォーカスがない場合は、最後に操作したペインが対象になります。
 
 ## 会話、引用、タスク間メッセージ
 
@@ -145,13 +147,19 @@ cockpit task account <id>
 cockpit task account <id> auto
 cockpit task browser-identity <id>
 cockpit task run --instruction "Instruction text" --directory /path/to/project
+cat instruction.md | cockpit task run --stdin --directory /path/to/project
+cockpit task run --instruction-file instruction.md --directory /path/to/project
 cockpit task wait <id> --since <seq>
 cockpit task send <id> --text "Follow-up" --wait
+cat follow-up.md | cockpit task send <id> --stdin --wait
+cockpit task send <id> --text-file follow-up.md --wait
 ```
 
 `task get`では、`status`、`waitingReason`、`readyForNextPrompt`、`needsResume`に加え、直近の会話とターミナル出力を確認できます。
 
 `task run`はタスクを作成して最初のレポートまで待ち、`task wait`は保存済みのレポート、または`--since`より後の次のレポートを返します。レポートは別のタスクへ指示を注入しません。`--parent-task-id`はタスク一覧の親子表示だけを設定します。
+
+複数行やシェルで解釈される文字を含む指示とメッセージは、`--stdin`またはファイル入力を使います。`task run`では`--instruction-file`、`task send`では`--text-file`を指定でき、標準入力またはファイルの内容を変更せずに渡します。
 
 `cockpit task browser-identity <id> <name|id|default>`を使うと、タスクに割り当てるBrowser Identityを変更できます。新しいタスクには`cockpit task create ... --browser-identity <name|id|default>`で指定できます。
 

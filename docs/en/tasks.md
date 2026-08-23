@@ -24,7 +24,7 @@ Task search uses partial matches against the task name and project name shown in
 
 In both sidebar task rows and the child-task list, the **...** action menu provides the same way to rename, pin or unpin, complete, copy the task ID, and delete a task. Child tasks also offer **Detach from parent**. Renaming happens in the row: press Enter to save or Escape to cancel. An empty name is not saved, and names are limited to 50 characters.
 
-While the pointer is over the task list, or while a menu, rename field, or delete confirmation is open, automatic sorting does not move the visible task rows. The current order is applied after the pointer leaves. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
+While the pointer is over the task list, or while a menu, rename field, or delete confirmation is open, automatic sorting does not move the visible task rows. If a task completes while the list is frozen, its row stays in place and shows **Completed** until the freeze ends, then the list applies the current order. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
 
 ## Task states
 
@@ -74,6 +74,8 @@ A stop caused by a usage or plan restriction is not a task failure. Cockpit repr
 On Desktop, choose **Send key** under **Shortcuts** in Settings to send chat messages with Enter or Cmd/Ctrl+Enter. Enter is the default. With Cmd/Ctrl+Enter selected, use Cmd+Enter on macOS or Ctrl+Enter on Windows and Linux to send; Enter inserts a line break. Shift+Enter inserts a line break with either setting.
 
 The setting is shared by Desktop chat composers, including new tasks, task details, Native UI, and Talk Rooms. In the PWA, use the on-screen send button.
+
+Press Escape to stop a running turn. When several task panes are open, Escape stops only the task in the pane with keyboard focus. If no field or control has focus, the pane used most recently owns the shortcut.
 
 ## Conversation, quotes, and inter-task messages
 
@@ -145,13 +147,19 @@ cockpit task account <id>
 cockpit task account <id> auto
 cockpit task browser-identity <id>
 cockpit task run --instruction "Instruction text" --directory /path/to/project
+cat instruction.md | cockpit task run --stdin --directory /path/to/project
+cockpit task run --instruction-file instruction.md --directory /path/to/project
 cockpit task wait <id> --since <seq>
 cockpit task send <id> --text "Follow-up" --wait
+cat follow-up.md | cockpit task send <id> --stdin --wait
+cockpit task send <id> --text-file follow-up.md --wait
 ```
 
 `task get` returns `status`, `waitingReason`, `readyForNextPrompt`, and `needsResume`, together with the latest conversation and terminal output.
 
 `task run` creates a task and waits for its first report. `task wait` returns a stored report or the next report after `--since`. Reports never inject instructions into another task. `--parent-task-id` only sets the hierarchy shown in the task list.
+
+Use `--stdin` or file input for multiline instructions and messages or text that the shell could interpret. `task run` accepts `--instruction-file`, and `task send` accepts `--text-file`; both forms deliver the standard-input or file contents unchanged.
 
 Use `cockpit task browser-identity <id> <name|id|default>` to change the Browser Identity assigned to a task. When creating a task, use `cockpit task create ... --browser-identity <name|id|default>` to assign one immediately.
 

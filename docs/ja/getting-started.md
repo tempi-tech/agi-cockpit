@@ -111,7 +111,12 @@ Cockpit連携の設定後は、対応するAIエージェントから`cockpit`�
 cockpit task create \
   --instruction "このフォルダの構成を5項目以内で説明してください。ファイルは変更しないでください。" \
   --directory /path/to/project
+
+cat instruction.md | cockpit task create --stdin --directory /path/to/project
+cockpit task create --instruction-file instruction.md --directory /path/to/project
 ```
+
+複数行の指示や、バッククォート、引用符、`$`、コードフェンスを含む指示は、`--stdin`または`--instruction-file`で渡します。シェルによる置換や引用符の解釈を避け、ファイルまたは標準入力の内容をそのまま送信できます。
 
 コマンドでディレクトリを省略すると、タスクはOSの一時フォルダで開始します。
 
