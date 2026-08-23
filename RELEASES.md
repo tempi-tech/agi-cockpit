@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.58.1 — 2026-08-24
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed task account selection so it switches correctly between Auto and a fixed account.
 - Fixed automatic account switching and task resumption after a usage limit in Auto mode, with a clear reason when recovery is unavailable.
