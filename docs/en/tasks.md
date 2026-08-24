@@ -4,7 +4,7 @@
 
 Understand task lists, search, task details, Auto accounts, account restrictions, attachments, resume, and completion.
 
-> Verified with AGI Cockpit 4.58.1 on 2026-08-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.59.0 on 2026-08-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose what to look at next. Task details is where you understand and act on the selected work. Overview searches across tasks, projects, and agents.
 
@@ -107,6 +107,8 @@ Each task has one assigned Browser Identity. The in-app browser stores cookies, 
 
 The browser side panel shows the current Identity by name and color and lets you switch it. Switching changes the task assignment, and the next browser session uses the selected Identity's area. Existing sessions remain with their original Identity and become available again if you switch back. Create, rename, recolor, clear, or remove an Identity from **Browser Identity** in the lower-left app menu or from the CLI. The Default Identity cannot be removed.
 
+The in-app browser can hand only `http` and `https` links to the operating system. A `mailto` link opens only after a person's own interaction and explicit confirmation; other URL schemes are rejected. Browser automation by an agent does not count as that person interaction. **Open externally** is unavailable for tabs that are not web pages.
+
 App Surface connects a running Android emulator, Android physical device, or booted iOS Simulator to one task so a person and agent can inspect and operate its screen from a side panel. Cockpit does not boot the target or install, launch, or terminate its app, and one target cannot be attached to several tasks at the same time. The first connection to an Android physical device requires explicit approval through a Cockpit Ask. If the surface becomes **Detached** or **Stale**, select **Reconnect target** in the same panel to reconnect the previously selected target. Completing or deleting the task detaches the target without terminating its app.
 
 ## Attach files
@@ -125,6 +127,8 @@ The composer shows how many files are attached to the current message, such as *
 When you paste rich text from the clipboard, Cockpit inserts text whenever a plain-text representation is available. It does not add image or file representations supplied by the source as unnecessary attachments. A clipboard that contains files without plain text is still handled as an attachment paste.
 
 An attachment's name and content are not automatically trusted instructions. State which file the agent should use and what result you expect in the message itself.
+
+When you open a chat attachment, Cockpit launches only safe formats stored in app-managed locations. It reveals executables and files outside those locations in the file manager instead of launching them. It also refuses to open `file` URLs that name a remote host or data URLs that may contain executable content such as HTML or SVG.
 
 ## History dashboard
 

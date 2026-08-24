@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.59.0 — 2026-08-25
+
+**Type:** minor · **Platforms:** macOS
+
+- Contained native terminal failures within the affected task and now shows the error reason without terminating the whole app.
+- Reduced memory usage when loading large histories to improve History stability.
+- Improved new-task creation so the new task is selected immediately and its terminal connects reliably.
+- Strengthened validation and user confirmation when opening external links from the in-app browser.
+- Improved chat attachment opening by limiting it to safe formats and managed locations.
+- Enabled isolated agent profiles to safely use developer credentials from the macOS Keychain.
+- Contained transient Antigravity tool errors within the affected action and improved tool-result presentation.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- ターミナルのネイティブ障害を該当タスク内に隔離し、アプリ全体を終了させずエラー理由を表示するように改善
+- 大量の履歴を読み込む際のメモリ使用量を抑え、履歴画面の安定性を改善
+- 新しいタスクを作成するとすぐに選択し、ターミナルへ確実に接続するように改善
+- アプリ内ブラウザーから外部リンクを開く際の検証と利用者確認を強化
+- チャットの添付ファイルを安全な形式と保存場所に限定して開くように改善
+- 分離したエージェントプロファイルからmacOSキーチェーンの開発者向け認証情報を安全に利用できるように改善
+- Antigravityの一時的なツールエラーを該当操作に隔離し、ツール実行結果を分かりやすく表示するように改善
+
+</details>
+
 ## v4.58.1 — 2026-08-24
 
 **Type:** patch · **Platforms:** macOS, Linux
