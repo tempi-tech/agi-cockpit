@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.58.1 on 2026-08-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.59.0 on 2026-08-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -38,7 +38,7 @@ When you use Claude Code, Codex, or Grok Build in Native UI, you can start befor
 
 An AI agent's subscription and authentication are separate from your AGI Labo sign-in. Signing in as an AGI Labo member does not authenticate Claude Code, Codex, or another task agent.
 
-Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Antigravity, Cursor, and Qoder. Each profile isolates authentication and connection settings. New tasks, Autoruns, and Fleets default to **Auto**, which selects a signed-in account from its usage state. You can instead pin the default account or a specific profile and can switch accounts later on supported running tasks. Antigravity profiles use browser-based Google OAuth and store OAuth tokens, conversations, logs, and usage history in a profile-specific app-data area. Cockpit starts Agy with that selected area and prevents fallback to the shared keyring. Developer shell resources and non-credential Antigravity settings remain shared with the normal home directory.
+Under **Agents** in Settings, you can create account profiles for Claude Code, Codex, Grok Build, Antigravity, Cursor, and Qoder. Each profile isolates authentication and connection settings. New tasks, Autoruns, and Fleets default to **Auto**, which selects a signed-in account from its usage state. You can instead pin the default account or a specific profile and can switch accounts later on supported running tasks. Antigravity profiles use browser-based Google OAuth and store OAuth tokens, conversations, logs, and usage history in a profile-specific app-data area. Cockpit starts Agy with that selected area and prevents fallback to the shared keyring. Developer shell resources and non-credential Antigravity settings remain shared with the normal home directory. On macOS, isolated profiles can use the host user's Keychain search list, so GitHub CLI, Git credential helpers, and similar developer tools can reuse existing Keychain credentials. This access does not share Antigravity's profile-specific data.
 
 Claude, Codex, and Qoder Native UI tasks and Cockpit Agent can select a custom system prompt in addition to their built-in choices. Register one with `cockpit system-prompt add`; it then appears in the system-prompt picker for new tasks and Autoruns in Desktop and the PWA.
 
@@ -78,7 +78,7 @@ A temporary folder is deleted automatically when the task is completed. Before s
 
 ## 4. Confirm the successful state
 
-The new task appears in the task list and normally starts as **Running**. The task details view shows the instruction you sent and the agent's progress or response.
+When you create a task, Cockpit immediately selects the new entry in the task list, and it normally starts as **Running**. In Terminal UI, if the view opens first, it connects to the same terminal after the runtime is ready. The task details view shows the instruction you sent and the agent's progress or response.
 
 After one response finishes, the task moves to **Awaiting confirmation**. This does not mean the entire task is complete. It means the task can accept another instruction or decision. If the result is incomplete, send a follow-up instruction from the composer in task details.
 

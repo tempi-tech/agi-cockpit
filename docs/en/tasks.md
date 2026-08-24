@@ -35,6 +35,8 @@ While the pointer is over the task list, or while a menu, rename field, or delet
 | Completed (`completed`) | A person marked the whole task complete | Confirm that every result you need has been saved |
 | Error (`error`) | The agent or command failed to start | Read the error in task details |
 
+If a native failure occurs while a terminal process starts, reads or writes data, or resizes, Cockpit marks only the affected task as `error` and shows the exit code, failed operation, or error message in task details. It does not exit the app or stop other tasks. Read the reason, correct the cause, and run the work again in a new task if needed.
+
 **Awaiting confirmation** does not have a single meaning. An AI agent or the `cockpit` CLI should also inspect the waiting reason before acting.
 
 | Waiting reason | Meaning |
