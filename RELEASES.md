@@ -8,13 +8,13 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Contained native terminal failures within the affected task and now shows the error reason without terminating the whole app.
-- Reduced memory usage when loading large histories to improve History stability.
+- Fixed native terminal failures so they stay within the affected task and show the error reason without terminating the whole app.
+- Improved History stability by reducing memory usage when loading large histories.
 - Improved new-task creation so the new task is selected immediately and its terminal connects reliably.
-- Strengthened validation and user confirmation when opening external links from the in-app browser.
+- Improved validation and user confirmation when opening external links from the in-app browser.
 - Improved chat attachment opening by limiting it to safe formats and managed locations.
-- Enabled isolated agent profiles to safely use developer credentials from the macOS Keychain.
-- Contained transient Antigravity tool errors within the affected action and improved tool-result presentation.
+- Improved isolated agent profiles so they can safely use developer credentials from the macOS Keychain.
+- Fixed transient Antigravity tool errors so they stay within the affected action, and improved tool-result presentation.
 
 <details>
 <summary>日本語のリリースノート</summary>
