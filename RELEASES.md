@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.59.0 — 2026-08-25
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Fixed native terminal failures so they stay within the affected task and show the error reason without terminating the whole app.
 - Improved History stability by reducing memory usage when loading large histories.
