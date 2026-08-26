@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.60.0 — 2026-08-26
+
+**Type:** minor · **Platforms:** macOS
+
+- Unified the /goal entry point and goal-status display for supported agents across desktop and PWA.
+- Added paste support and input support for contenteditable editors in the in-app browser.
+- Improved recovery for unresponsive in-app browser tabs by recreating them with the same session and URL.
+- Improved the cockpit CLI so every command consistently accepts the --json flag.
+- Improved long-running visual tasks by rotating older conversation history and making it accessible from desktop, PWA, and CLI.
+- Improved message handling during Claude context compaction so queued messages are neither duplicated nor lost.
+- Reduced save and load overhead with large task collections while preserving changes made during loading.
+- Improved app stability by bounding memory use for growing history and usage logs during long-running sessions.
+- Improved diagnostics by saving a report when the app terminates because of an out-of-memory or similar fatal error.
+- Fixed a crash in the PWA new-task screen on HTTP connections and older WebKit versions.
+- Fixed hidden in-app browser input so it no longer shows a black window or switches macOS Spaces.
+- Improved task and Talk Room CLI connection recovery and made unreachable-instance failures explicit.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 対応エージェントの /goal 導線とゴール状態表示をデスクトップ・PWAで統合
+- アプリ内ブラウザーで貼り付けとcontenteditable形式のエディターへの入力に対応
+- 応答不能になったアプリ内ブラウザーのタブを同じセッション・URLのまま再作成できるように改善
+- cockpit CLIのすべてのコマンドで --json フラグを一貫して受け付けるように改善
+- 長時間のビジュアルタスクで過去の会話をローテーション保存し、デスクトップ・PWA・CLIから遡れるように改善
+- Claudeのコンテキスト圧縮中に送ったメッセージを重複や欠落なく処理するように改善
+- 大量のタスクを扱う際の保存と読み込みを軽量化し、操作中の変更を維持するように改善
+- 長時間利用で増大する履歴や利用量ログのメモリ使用量を制限し、アプリの安定性を改善
+- メモリ不足などによる強制終了時に原因調査用の診断レポートを保存するように改善
+- HTTP接続や古いWebKitでもPWAの新規タスク画面がクラッシュしないように修正
+- 非表示のアプリ内ブラウザーを操作しても黒いウィンドウやmacOSのSpace切り替えが発生しないように修正
+- タスク・Talk Room用CLIの接続失敗を明確に検出し、接続復旧を安定化
+
+</details>
+
 ## v4.59.0 — 2026-08-25
 
 **Type:** minor · **Platforms:** macOS, Linux
