@@ -24,7 +24,7 @@ On a first run with no existing tasks, Cockpit opens a setup flow. It introduces
 
 AGI Cockpit stores its own credentials and API keys in encrypted operating-system storage such as Keychain or a keyring. If encrypted storage is unavailable, Cockpit does not fall back to plaintext. It rejects the save and shows recovery guidance. Enable the operating-system Keychain or keyring, then sign in again. Named Antigravity accounts are an exception: their authentication is isolated in the profile-specific app-data area described below.
 
-Remote access defaults to Tailscale-only mode. When Tailscale HTTPS is enabled but its certificate is unavailable, Cockpit does not silently downgrade to HTTP and does not start the connection. Local Wi-Fi mode is unencrypted, so Cockpit enables it only after an explicit confirmation and keeps a warning visible while it is active. Do not use local Wi-Fi mode on a public network.
+Remote access defaults to Tailscale-only mode. When Tailscale HTTPS is enabled but its certificate is unavailable, Cockpit does not silently downgrade to HTTP and does not start the connection. Local Wi-Fi mode is unencrypted, so Cockpit enables it only after an explicit confirmation and keeps a warning visible while it is active. Do not use local Wi-Fi mode on a public network. See [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for the setup steps.
 
 ## 2. Prepare an agent
 
@@ -123,6 +123,7 @@ If the command omits the directory, Cockpit starts the task in an operating-syst
 ## Related pages
 
 - [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+- [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 - [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 - [Release history](https://agi-labo.com/en/tools/cockpit/docs/releases)

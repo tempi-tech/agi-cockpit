@@ -35,6 +35,7 @@ Every local feature is free and unlimited, with no account required. An AGI Labo
 
 - Go from installation to reviewing a result: [Install and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 - Keep multiple pieces of work distinct: [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+- Supervise work from a phone or another computer: [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 

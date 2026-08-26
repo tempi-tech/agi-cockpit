@@ -24,7 +24,7 @@ WindowsではMicrosoft Storeからインストールします。macOSでは`.dmg
 
 AGI Cockpit自身の認証情報とAPIキーは、OSのキーチェーンまたはキーリングなどの暗号化ストレージに保存します。暗号化ストレージを利用できない場合は平文保存へ切り替えず、保存を拒否して復旧方法を表示します。案内に従ってOSのキーチェーンまたはキーリングを有効にしてから、もう一度サインインしてください。Antigravityの名前付きアカウントは例外として、後述するプロファイル専用のアプリデータ領域で認証を分離します。
 
-リモートアクセスでは、Tailscale限定モードが既定です。TailscaleのHTTPSを有効にした状態で証明書を利用できない場合、CockpitはHTTPへ自動降格せず、接続を開始しません。ローカルWi-Fiモードは通信が暗号化されないため、明示確認後にだけ有効になり、接続中は警告が表示されます。公共Wi-Fiでは使用しないでください。
+リモートアクセスでは、Tailscale限定モードが既定です。TailscaleのHTTPSを有効にした状態で証明書を利用できない場合、CockpitはHTTPへ自動降格せず、接続を開始しません。ローカルWi-Fiモードは通信が暗号化されないため、明示確認後にだけ有効になり、接続中は警告が表示されます。公共Wi-Fiでは使用しないでください。設定手順は[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)を参照してください。
 
 ## 2. 実行するエージェントを準備する
 
@@ -123,6 +123,7 @@ cockpit task create --instruction-file instruction.md --directory /path/to/proje
 ## 関連ページ
 
 - [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
+- [リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)
 - [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
 - [バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)

@@ -35,6 +35,7 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 - 初回セットアップから結果確認まで進める: [インストールと最初のタスク](https://agi-labo.com/tools/cockpit/docs/getting-started)
 - 複数の仕事を見分ける: [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
+- スマートフォンや別のコンピューターから監督する: [リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)
 - エージェントから人へ判断を渡す: [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
 
