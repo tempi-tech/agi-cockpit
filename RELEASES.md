@@ -8,13 +8,13 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Unified the /goal entry point and goal-status display for supported agents across desktop and PWA.
+- Changed supported agents to use a unified /goal entry point and goal-status display across desktop and PWA.
 - Added paste support and input support for contenteditable editors in the in-app browser.
 - Improved recovery for unresponsive in-app browser tabs by recreating them with the same session and URL.
 - Improved the cockpit CLI so every command consistently accepts the --json flag.
 - Improved long-running visual tasks by rotating older conversation history and making it accessible from desktop, PWA, and CLI.
 - Improved message handling during Claude context compaction so queued messages are neither duplicated nor lost.
-- Reduced save and load overhead with large task collections while preserving changes made during loading.
+- Improved save and load efficiency for large task collections while preserving changes made during loading.
 - Improved app stability by bounding memory use for growing history and usage logs during long-running sessions.
 - Improved diagnostics by saving a report when the app terminates because of an out-of-memory or similar fatal error.
 - Fixed a crash in the PWA new-task screen on HTTP connections and older WebKit versions.
