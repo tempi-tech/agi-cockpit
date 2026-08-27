@@ -12,7 +12,7 @@ English is the primary language for these generated release notes. Download the 
 - Improved Antigravity Visual so turns finish after starting background commands and show the process state.
 - Added a Command/Ctrl+K task palette for searching and navigating across projects by task name or instruction text.
 - Fixed the in-app browser covering settings and dialogs when they are open.
-- Prevented unintended reloads from reload shortcuts in the production app.
+- Fixed unintended reloads caused by reload shortcuts in the production app.
 - Fixed app crashes caused by task-status monitoring scanning large temporary directories.
 - Fixed the file-preview toolbar so it no longer covers document content and remains usable in narrow side panels.
 - Improved Cockpit CLI so it automatically switches to file IPC in restricted environments and diagnoses the active connection path.
