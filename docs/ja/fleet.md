@@ -70,7 +70,7 @@ nodes:
       and verification evidence.
 ```
 
-`version`は現在`1`だけを使用します。`name`とノードIDには英数字、`_`、`-`を使用できます。未知のキー、存在しない依存先、循環、解決できないテンプレート、エージェントが対応しない明示設定は検証エラーになります。
+`version`は現在`1`だけを使用します。`name`とノードIDには英数字、`_`、`-`を使用できます。未知のキー、存在しない依存先、循環、解決できない展開式、エージェントが対応しない明示設定は検証エラーになります。
 
 ## 検証してから実行する
 
@@ -223,4 +223,4 @@ FleetパネルでRunが`completed`になったことだけでなく、次を確�
 - human gate後の外部操作は承認された範囲だけで実行され、結果URLやIDを確認できる
 - 最終レポートが変更内容、検証結果、残った制約をまとめている
 
-構文と全オプションは[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)、一件の委任と親子タスクは[オーケストレーション](https://agi-labo.com/tools/cockpit/docs/orchestration)、差分やファイルの確認は[成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)を参照してください。
+構文と全オプションは[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)、一件の委任と親子タスクは[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)、分解方法そのものを任せる場合は[Master Agent](https://agi-labo.com/tools/cockpit/docs/master-agent)を参照してください。

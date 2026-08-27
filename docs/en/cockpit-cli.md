@@ -22,7 +22,7 @@ Exit code 7 or `Cannot reach AGI Cockpit` means the app is not reachable or the 
 
 ## Start and supervise tasks
 
-Use `cockpit task create` or `cockpit task run` to start work, `task get` and `task list` to inspect it, `task send` for follow-up instructions, and `task wait --since <seq>` for incremental reports. Use stdin or a file for multiline instructions rather than embedding them in a shell argument.
+Use `cockpit task create` or `cockpit task run` to start work, `task get` and `task list` to inspect it, `task send` for follow-up instructions, and `task wait --since <seq>` for incremental reports. Use stdin or a file for multiline instructions rather than embedding them in a shell argument. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the full parent-child, reporting, follow-up, and completion flow.
 
 Completion and deletion are separate. Completing a task can affect its temporary directory or Worktree, while deleting removes task history and associated local state. Confirm the exact ID and required artifacts before destructive or bulk actions.
 

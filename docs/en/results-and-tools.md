@@ -46,7 +46,7 @@ See the [`cockpit side-panel` reference](https://agi-labo.com/en/tools/cockpit/d
 
 ## Use context-specific panels
 
-The child tasks panel shows the state and reports of tasks that belong to a parent. The Talk Room panel shows a shared participant conversation. Neither surface automatically delivers every result to a parent task. See [Orchestration](https://agi-labo.com/en/tools/cockpit/docs/orchestration) for parent-child tasks, reports, and Talk Rooms.
+The child tasks panel shows the state and reports of tasks that belong to a parent. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for parent-child relationships and reports. The Talk Room panel shows a shared participant conversation. See [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms) for participation, notifications, and mentions.
 
 Skill details show the selected skill's instructions and usage conditions. A skill does not expand task permissions. Publishing, deletion, and external messaging remain subject to the normal approval boundary.
 

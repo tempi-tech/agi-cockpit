@@ -1,0 +1,129 @@
+<!-- Generated from tempi-tech/AGICockpit — do not edit directly. -->
+
+# Task management (CLI)
+
+Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
+
+> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+
+`cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
+
+## Choose create or run
+
+| Goal | Command | Return behavior |
+| --- | --- | --- |
+| Create a task and receive its id | `cockpit task create` | Returns immediately after creation |
+| Create a task and wait for its first report | `cockpit task run` | Returns at the first stopping point, error, or completion |
+| Run only a shell command | `cockpit task create --agent-type terminal --command "..."` | Creates a Terminal task |
+
+Use `run` when the child result is required for the next decision. Use `create` when work can continue independently and you will inspect it later.
+
+```bash
+cockpit task run \
+  --instruction "Investigate the change and report the cause and evidence" \
+  --directory /path/to/repo \
+  --agent-type codex
+```
+
+Pass long instructions, Markdown, quotes, backticks, or `$` through `--stdin` or `--instruction-file` instead of embedding them in a shell argument.
+
+```bash
+cockpit task run --instruction-file instruction.md \
+  --directory /path/to/repo \
+  --agent-type codex
+```
+
+## Set the workspace and runtime
+
+Specify `--directory` for an existing project. Without it, a task starts in an operating-system temporary directory that may be removed on completion. Use `--worktree` when the task needs an isolated Git Worktree.
+
+The agent, model, reasoning effort, account, approval mode, and Browser Identity are task runtime settings. Unsupported combinations fail instead of silently selecting a different setting. For work on an external site, explicitly assign the Browser Identity that holds the required sign-in state.
+
+```bash
+cockpit task create \
+  --instruction "Verify the publication state in the admin console" \
+  --directory /path/to/repo \
+  --agent-type codex \
+  --browser-identity work
+```
+
+## Create parent and child tasks
+
+A task created from another task is a child of the caller by default. Use `--parent-task-id` to name another parent. The hierarchy groups work in the task list and child tasks panel, but it is not a report-delivery contract.
+
+When a child reaches a stopping point, the parent does not necessarily receive every artifact automatically. The parent must read the return from `task run`, call `task wait` or `task get`, and verify requested evidence such as diffs, tests, or URLs.
+
+## Read state and waiting reasons
+
+```bash
+cockpit task list
+cockpit task list --status waiting_confirmation
+cockpit task get <task-id> --turns 3 --max-lines 500
+```
+
+| Field | Decision |
+| --- | --- |
+| `running` | Work is active. Wait unless a follow-up is genuinely needed |
+| `waiting_confirmation` | Input is required. Read `waitingReason` and `readyForNextPrompt` |
+| `completed` | The process ended. This does not prove that the requested result was verified |
+| `error` | Startup or execution failed. Read `errorMessage` and recent conversation |
+| `needsResume: true` | The process stopped and the same task can be resumed |
+
+If `waitingReason` is `permission` or `question`, an agent-side confirmation is still active. Do not layer another instruction while `readyForNextPrompt` is false. For `usage_limit`, inspect available accounts and the reset time.
+
+## Receive reports in order
+
+`report.seq` increases per task in results from `task run` and `task wait`. Pass the last processed sequence through `--since` to wait for the next report without processing the same one twice.
+
+```bash
+cockpit task wait <task-id> --since <last-seq> --timeout 110
+```
+
+`timeout: true` does not mean the task failed. Inspect current state when needed, then continue from the same `--since`. Use `task wait` for continued monitoring instead of repeatedly polling `task get` at short intervals.
+
+## Send a follow-up
+
+Use `task send` after the task can accept another instruction. Add `--wait` when the next report is required in the same control flow.
+
+```bash
+cockpit task send <task-id> --text "Fix only the failing test and run it again" --wait
+```
+
+Use `--stdin` or `--text-file` for multiline content. To send only Enter to an agent confirmation, run `cockpit task send <task-id>` with no text. Read `waitingReason` first so you know whether you are answering a question, approving a tool, or sending an ordinary follow-up.
+
+## Switch the account or Browser Identity
+
+Supported agents can switch a running task to another signed-in account after a usage limit. Send the appropriate continuation after the switch.
+
+```bash
+cockpit task account <task-id> work
+```
+
+Changing Browser Identity selects the persistent browser partition for the task's next browser session. It does not copy cookies or localStorage between Identities.
+
+```bash
+cockpit task browser-identity <task-id> work
+```
+
+## Distinguish completion, resume, and removal
+
+| Action | Result |
+| --- | --- |
+| `task resume` | Restarts a stopped task with the same history |
+| `task complete` | Stops the process and moves it to completed. The CLI removes its Worktree by default |
+| `task complete --keep-worktree` | Moves it to completed while retaining the Worktree |
+| `task remove` | Deletes the task and its Cockpit history |
+
+Complete or remove a task only when the user explicitly requests it. Save required diffs, artifacts, reports, and publication URLs, then verify the target id before acting.
+
+## Determine completion
+
+Task management is complete only after confirming that:
+
+- Requested results and evidence were collected from the report or actual files.
+- No confirmation, usage limit, error, or timeout remains unresolved.
+- The parent integrated child results in the required order.
+- External publication or deletion stayed within the approved target.
+- Needed changes were saved before a workspace was removed.
+
+See the [`cockpit task` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task) for every option, and [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) plus [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for the corresponding UI.

@@ -28,7 +28,7 @@ Cockpitから起動したタスクには、正しいローカルインスタン�
 
 ## タスクを起動して監督する
 
-単発作成には`task create`、別タスクを起動して最初の報告まで待つ場合は`task run`を使います。`turn_complete`は一つの応答ターンが終わったことを示し、タスク全体の完了ではありません。
+単発作成には`task create`、別タスクを起動して最初の報告まで待つ場合は`task run`を使います。`turn_complete`は一つの応答ターンが終わったことを示し、タスク全体の完了ではありません。親子タスク、レポート、追加指示、完了の流れは[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)を参照してください。
 
 ```bash
 cockpit task run --instruction "Review the change" --directory /path/to/repo

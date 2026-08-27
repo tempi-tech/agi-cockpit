@@ -70,7 +70,7 @@ nodes:
       and verification evidence.
 ```
 
-The only current schema `version` is `1`. Names and node ids accept letters, digits, `_`, and `-`. Unknown keys, missing dependencies, cycles, unresolved templates, and explicitly unsupported agent settings are validation errors.
+The only current schema `version` is `1`. Names and node ids accept letters, digits, `_`, and `-`. Unknown keys, missing dependencies, cycles, unresolved substitutions, and explicitly unsupported agent settings are validation errors.
 
 ## Validate before running
 
@@ -223,4 +223,4 @@ Do not rely only on a `completed` label in the Fleet panel. Confirm that:
 - External actions after a human gate stayed within the approved scope and produced a verifiable URL or id.
 - The final report summarizes changes, verification, and remaining constraints.
 
-See the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for every field and option, [Orchestration](https://agi-labo.com/en/tools/cockpit/docs/orchestration) for single delegation and parent-child tasks, and [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools) for reviewing diffs and files.
+See the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for every field and option, [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for single delegation and parent-child tasks, and [Master Agent](https://agi-labo.com/en/tools/cockpit/docs/master-agent) when the decomposition itself requires judgment.

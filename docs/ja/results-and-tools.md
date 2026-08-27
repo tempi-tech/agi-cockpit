@@ -46,7 +46,7 @@ CLIからサイドパネルとターミナルを扱う場合は[`cockpit side-pa
 
 ## 文脈依存のパネルを使う
 
-子タスクパネルは親タスクに属する子タスクの状態と報告を確認します。Talk Roomパネルは参加者同士の会話を表示します。これらは結果を自動的に親へ送る仕組みではありません。親子タスク、report、Talk Roomsの使い分けは[オーケストレーション](https://agi-labo.com/tools/cockpit/docs/orchestration)を参照してください。
+子タスクパネルは親タスクに属する子タスクの状態と報告を確認します。親子関係とreportの扱いは[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)を参照してください。Talk Roomパネルは参加者同士の共有会話を表示します。参加、通知、メンションは[Talk Rooms](https://agi-labo.com/tools/cockpit/docs/talk-rooms)を参照してください。
 
 スキル詳細は、選択したスキルの説明と利用条件を確認する面です。スキルの指示がタスクの権限を拡張するわけではありません。公開、削除、外部送信などは通常の承認境界に従います。
 
