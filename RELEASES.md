@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.62.0 — 2026-08-28
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Fixed Antigravity Visual so conversations recover and turns continue after tool errors.
 - Improved Antigravity Visual so turns finish after starting background commands and show the process state.
