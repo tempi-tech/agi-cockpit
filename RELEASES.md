@@ -4,6 +4,55 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.62.0 — 2026-08-28
+
+**Type:** minor · **Platforms:** macOS
+
+- Fixed Antigravity Visual so conversations recover and turns continue after tool errors.
+- Improved Antigravity Visual so turns finish after starting background commands and show the process state.
+- Added a Command/Ctrl+K task palette for searching and navigating across projects by task name or instruction text.
+- Fixed the in-app browser covering settings and dialogs when they are open.
+- Prevented unintended reloads from reload shortcuts in the production app.
+- Fixed app crashes caused by task-status monitoring scanning large temporary directories.
+- Fixed the file-preview toolbar so it no longer covers document content and remains usable in narrow side panels.
+- Improved Cockpit CLI so it automatically switches to file IPC in restricted environments and diagnoses the active connection path.
+- Improved Codex Visual so /goal commands are retained as user messages in conversation history.
+- Improved PWA task creation so it recovers when the desktop screen is unresponsive and avoids duplicate tasks on retry.
+- Improved desktop and PWA task lists so they can collapse to the initial count after using Show more once.
+- Fixed unnecessary authentication, device, and version checks being repeated when switching languages.
+- Fixed AGI Cockpit itself being terminated when stopping tasks or ending Fleet gates.
+- Improved Cockpit Ask so users can navigate to the task that raised a question.
+- Improved Cockpit Ask so files can be attached to answers by drag and drop.
+- Improved the in-app browser to explain when no passkey matches Touch ID and show alternative sign-in methods.
+- Added a setting to choose whether Follow-ups wait in the queue or steer the current response.
+- Improved queued messages so they can be edited before sending.
+- Added an option for new-task Autoruns to complete the task they created after the run finishes.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Antigravity Visualでツールエラー後も会話を復旧してターンを継続できるように修正
+- Antigravity Visualでバックグラウンドコマンド開始後にターンを完了し、プロセスの状態を表示するように改善
+- Command/Ctrl+Kでプロジェクトを横断してタスク名や指示文から検索・移動できるタスクパレットを追加
+- 設定やダイアログを開いたときにアプリ内ブラウザーが画面を覆う問題を修正
+- 本番アプリで再読み込みショートカットによる意図しないリロードを防止
+- タスク状態の監視が大きな一時ディレクトリを走査してアプリがクラッシュする問題を修正
+- ファイルプレビューのツールバーが文書本文を覆わず、狭いサイドパネルでも操作できるように修正
+- 制限された実行環境でもCockpit CLIがファイルIPCへ自動切り替えし、接続経路を診断できるように改善
+- Codex Visualで設定した /goal を会話履歴にユーザーメッセージとして残すように改善
+- デスクトップ画面が応答しない場合でもPWAからのタスク作成を復旧し、再試行時の重複作成を防止
+- デスクトップとPWAのタスク一覧を「もっと見る」の途中から初期件数へ折りたためるように改善
+- 言語切り替え時に不要な認証・端末・バージョン確認が再実行される問題を修正
+- タスク停止やFleetゲート終了時にAGI Cockpit自身のプロセスが終了する問題を修正
+- Cockpit Askから質問元のタスクへ移動できるように改善
+- Cockpit Askへファイルをドラッグ＆ドロップして回答に添付できるように改善
+- アプリ内ブラウザーでTouch IDに一致するパスキーがない場合に理由と代替手段を表示するように改善
+- 回答中のFollow-upをキュー待機または現在の回答への割り込みから選べる設定を追加
+- 送信待ちのキューメッセージを編集できるように改善
+- 新規タスクを作るAutorunで、実行終了後に作成したタスクを自動的に完了できるオプションを追加
+
+</details>
+
 ## v4.61.0 — 2026-08-27
 
 **Type:** minor · **Platforms:** macOS, Linux
