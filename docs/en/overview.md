@@ -33,7 +33,8 @@ Every local feature is free and unlimited, with no account required. An AGI Labo
 
 ## Where to start
 
-- Prepare the app and an agent: [Install and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+- Prepare the app: [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+- Prepare an agent and the Cockpit integration: [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 - Carry the first request through completion: [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 - Keep multiple pieces of work distinct: [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 - Send follow-ups to selected work: [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details)
@@ -60,4 +61,4 @@ A lock on a feature means that feature requires an active AGI Labo membership. A
 
 ## Next step
 
-[Install AGI Cockpit and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started), then continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+Continue through [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started), [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup), and [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).

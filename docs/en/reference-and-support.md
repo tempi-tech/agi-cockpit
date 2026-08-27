@@ -2,7 +2,7 @@
 
 # Reference and support
 
-Troubleshoot task state, settings, shortcuts, storage, updates, agent authentication, Remote Access, Browser Identities, and App Surface.
+Troubleshoot task state, settings, shortcuts, storage, agent authentication, Remote Access, Browser Identities, and App Surface.
 
 > Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
@@ -44,15 +44,9 @@ After changing a setting, inspect the returned saved value. Numeric settings can
 
 ## The app does not update
 
-1. Run `cockpit update status` and inspect `capability` plus the persistent updater-log summary.
-2. On macOS, use `cockpit update check --wait-download` to wait for update discovery and download.
-3. On Linux, check for an update and manually replace the AppImage or `.deb` from the displayed download page.
-4. For the Windows Store build, inspect Microsoft Store update state.
-5. If automatic installation becomes unresponsive, Cockpit records diagnostics and retries once. If it still fails, reinstall the current build from the download page.
+Start with [Update AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/updates) to check the method for the current OS and distribution, the last install result, and diagnostic logs. If the problem remains, include `capability`, `lastError`, and the last install result from `cockpit update status`, plus the relevant time from `~/.agi-tools/data/cockpit/logs/updater.jsonl`, in the report.
 
-Update feeds are architecture-specific. Linux x64 and arm64 use different `latest-linux` feeds, so confirm both OS and architecture. Updater logs are stored at `~/.agi-tools/data/cockpit/logs/updater.jsonl` and rotate at 2 MB with two generations.
-
-See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/update) for exact commands and [Release notes](https://agi-labo.com/en/tools/cockpit/docs/releases) for published changes.
+See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/update) for the exact CLI contract and [Release history](https://agi-labo.com/en/tools/cockpit/docs/releases) for published changes.
 
 ## An agent is missing or does not launch
 

@@ -35,13 +35,22 @@ Claude Code、Codex、Antigravity、Cursor、Qoder、Grok Buildは両方のモ�
 
 service tierはCodexの対応モデルだけで`standard`または`fast`を選べます。システムプロンプトはClaude、Codex、Qoder、CockpitのネイティブUIで利用できます。`append`はCockpit標準の指示を維持し、`replace`は標準指示を置き換えるため、Cockpit CLIの知識はインストール済みskillからだけ利用できる状態になります。
 
+カスタムシステムプロンプトは`cockpit system-prompt add`で登録すると、DesktopとPWAの新しいタスク画面とAutorunの選択肢に表示されます。
+
+```bash
+cockpit system-prompt add reviewer --prompt "変更の正しさと分かりやすさをレビューしてください。"
+cockpit system-prompt list
+```
+
+カスタムプロンプトは利用者所有のMarkdownとしてAGI Toolsのデータ領域に保存されます。内容は選択したエージェントへ送られるため、認証情報や秘密を含めないでください。Cursor、Grok Build、Antigravity、Terminal、ターミナルUIでは選択できません。
+
 ## アカウントとAuto
 
 Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildは、デフォルトアカウントと名前付きプロファイルを利用できます。新しいタスク、Autorun、Fleetの既定はAutoです。Autoはログイン済みアカウントの利用状況を確認して実行先を選び、利用上限またはプラン制限に達した場合は、利用可能な別アカウントへ切り替えて保存済みセッションを再開します。
 
 固定アカウントを選ぶと自動切り替えは行いません。実行中タスクで切り替える場合は現在のランタイムを停止し、保存済み会話を移して選択したプロファイルで再開します。Codexのワークスペースクレジット枯渇も利用上限として扱われます。
 
-Antigravityの名前付きプロファイルは、OAuthトークン、会話、ログ、利用履歴を専用のアプリデータ領域へ分離します。共有キーリングへのフォールバックは行いません。
+Antigravityの名前付きプロファイルはブラウザーでGoogle OAuthを行い、OAuthトークン、会話、ログ、利用履歴を専用のアプリデータ領域へ分離します。共有キーリングへのフォールバックは行いません。開発用シェル資源と認証情報を含まない設定は通常のホームと共有します。macOSではホスト利用者のKeychain検索リストを参照できるため、GitHub CLIやGit認証ヘルパーは既存のKeychain認証情報を利用できますが、Antigravityプロファイル専用データは共有されません。
 
 ## 承認モード
 

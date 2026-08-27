@@ -33,7 +33,8 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 ## 最初に読むページ
 
-- アプリとエージェントを準備する: [インストールと初回セットアップ](https://agi-labo.com/tools/cockpit/docs/getting-started)
+- アプリを準備する: [AGI Cockpitをインストールする](https://agi-labo.com/tools/cockpit/docs/getting-started)
+- エージェントとCockpit連携を準備する: [初回セットアップ](https://agi-labo.com/tools/cockpit/docs/initial-setup)
 - 最初の依頼を完了まで進める: [最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)
 - 複数の仕事を見分ける: [タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)
 - 選んだ仕事へ追加指示を送る: [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
@@ -60,4 +61,4 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 ## 次に進む
 
-[AGI Cockpitをインストールして初回セットアップを完了する](https://agi-labo.com/tools/cockpit/docs/getting-started)と、[最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)を順に進めます。
+[AGI Cockpitをインストールする](https://agi-labo.com/tools/cockpit/docs/getting-started)、[初回セットアップ](https://agi-labo.com/tools/cockpit/docs/initial-setup)、[最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)の順に進めます。

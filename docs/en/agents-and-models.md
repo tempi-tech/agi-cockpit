@@ -35,13 +35,22 @@ Models, reasoning levels, service tiers, and system prompts are displayed only w
 
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
+Register a custom system prompt with `cockpit system-prompt add`; it then appears for new tasks and Autoruns in Desktop and the PWA.
+
+```bash
+cockpit system-prompt add reviewer --prompt "Review changes for correctness and clarity."
+cockpit system-prompt list
+```
+
+Custom prompts are stored as user-owned Markdown in the AGI Tools data area. Their content is sent to the selected agent, so do not include credentials or secrets. Cursor, Grok Build, Antigravity, Terminal, and terminal UI modes do not accept them.
+
 ## Accounts and Auto
 
 Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default account and named profiles. Auto is the default for new tasks, Autoruns, and Fleet nodes. It inspects signed-in account usage, chooses a runtime, and can switch to another available account and resume the saved session after a usage or plan limit.
 
 A fixed account does not switch automatically. Switching an active task stops its current runtime and resumes the saved conversation with the selected profile. Exhausted Codex workspace credits are treated as a usage limit.
 
-Antigravity named profiles keep OAuth tokens, conversations, logs, and usage history in profile-specific storage. They do not fall back to a shared keyring.
+Antigravity named profiles use browser-based Google OAuth and keep OAuth tokens, conversations, logs, and usage history in profile-specific storage. They do not fall back to a shared keyring. Developer shell resources and non-credential settings remain shared with the normal home directory. On macOS, the host user's Keychain search list remains available to GitHub CLI and Git credential helpers without sharing Antigravity's profile-specific data.
 
 ## Approval modes
 

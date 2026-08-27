@@ -2,7 +2,7 @@
 
 # Referenceとサポート
 
-タスク状態、設定、ショートカット、保存場所、更新、エージェント認証、Remote Access、App Surfaceの代表的なトラブル解決手順です。
+タスク状態、設定、ショートカット、保存場所、エージェント認証、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
 > AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
@@ -44,15 +44,9 @@
 
 ## アプリを更新できない
 
-1. `cockpit update status`で`capability`と永続アップデーターログの要約を確認します。
-2. macOSでは`cockpit update check --wait-download`で更新の確認とダウンロードを待ちます。
-3. Linuxでは更新確認後、表示されたダウンロードページからAppImageまたは`.deb`を手動更新します。
-4. Windows Store版はMicrosoft Storeの更新状態を確認します。
-5. 自動インストールが応答しない場合、Cockpitは診断ログへ記録し、一度だけ再試行します。続く場合はダウンロードページから現行版を入れ直します。
+まず[AGI Cockpitを更新する](https://agi-labo.com/tools/cockpit/docs/updates)で、現在のOSと配布形式に合う更新方法、最後のインストール結果、診断ログを確認します。解決しない場合は、`cockpit update status`の`capability`、`lastError`、最後のインストール結果と、`~/.agi-tools/data/cockpit/logs/updater.jsonl`の該当時刻を報告情報へ含めます。
 
-更新フィードはCPUアーキテクチャ別です。Linux x64とarm64で異なる`latest-linux`フィードを使うため、OSだけでなくアーキテクチャも確認してください。更新ログは`~/.agi-tools/data/cockpit/logs/updater.jsonl`に保存され、2MBで2世代ローテーションします。
-
-正確なコマンドは[`cockpit update` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/update)、公開済み変更は[バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)を参照してください。
+正確なCLI契約は[`cockpit update` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/update)、公開済み変更は[バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)を参照してください。
 
 ## エージェントが表示されない、起動しない
 

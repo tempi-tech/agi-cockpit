@@ -45,14 +45,15 @@ All local features are free and unlimited with no account required. An [AGI Labo
 4. Create a task with a clear objective.
 5. Review the result, answer any Ask, and send follow-up instructions from the same task.
 
-See [Install and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started), then follow [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+Continue through [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started), [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup), and [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
 ## Documentation
 
 | Guide | English | 日本語 |
 | --- | --- | --- |
 | Product overview | [What is AGI Cockpit?](./docs/en/overview.md) | [AGI Cockpitとは](./docs/ja/overview.md) |
-| Initial setup | [Install and complete initial setup](./docs/en/getting-started.md) | [インストールと初回セットアップ](./docs/ja/getting-started.md) |
+| Installation | [Install AGI Cockpit](./docs/en/getting-started.md) | [AGI Cockpitをインストールする](./docs/ja/getting-started.md) |
+| Initial setup | [Initial setup](./docs/en/initial-setup.md) | [初回セットアップ](./docs/ja/initial-setup.md) |
 | First task | [Your first task](./docs/en/first-task.md) | [最初のタスク](./docs/ja/first-task.md) |
 | Task list | [Task list](./docs/en/tasks.md) | [タスク一覧](./docs/ja/tasks.md) |
 | Task details | [Task details](./docs/en/task-details.md) | [タスク詳細](./docs/ja/task-details.md) |
@@ -61,6 +62,7 @@ See [Install and complete initial setup](https://agi-labo.com/en/tools/cockpit/d
 | Mobile app control | [App Surface](./docs/en/app-surface.md) | [App Surface](./docs/ja/app-surface.md) |
 | Human approval | [Ask](./docs/en/ask.md) | [Ask](./docs/ja/ask.md) |
 | Scheduled work | [Autorun](./docs/en/autorun.md) | [オートラン](./docs/ja/autorun.md) |
+| Updates | [Update AGI Cockpit](./docs/en/updates.md) | [AGI Cockpitを更新する](./docs/ja/updates.md) |
 | Releases | [Release history](./docs/en/releases.md) | [リリース履歴](./docs/ja/releases.md) |
 
 The canonical, web-rendered documentation is available at [agi-labo.com/en/tools/cockpit/docs](https://agi-labo.com/en/tools/cockpit/docs).

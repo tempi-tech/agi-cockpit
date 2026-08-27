@@ -6,7 +6,7 @@
 
 > AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/first-task)
 
-この手順では、既存ファイルを変更しない短い依頼を実行し、タスクの作成から結果確認、完了までを一度通します。まだ初回セットアップが終わっていない場合は、先に[インストールと初回セットアップ](https://agi-labo.com/tools/cockpit/docs/getting-started)を進めてください。
+この手順では、既存ファイルを変更しない短い依頼を実行し、タスクの作成から結果確認、完了までを一度通します。まだ準備が終わっていない場合は、先に[AGI Cockpitのインストール](https://agi-labo.com/tools/cockpit/docs/getting-started)と[初回セットアップ](https://agi-labo.com/tools/cockpit/docs/initial-setup)を進めてください。
 
 ## 1. 新しいタスクを作る
 

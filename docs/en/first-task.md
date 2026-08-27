@@ -6,7 +6,7 @@ Choose a workspace and agent, safely run your first task, review its result, and
 
 > Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
-This guide runs one short read-only request from task creation through result review and completion. If initial setup is not finished, start with [Install and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started).
+This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
 ## 1. Create a new task
 
