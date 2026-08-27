@@ -73,6 +73,10 @@ cockpit task complete <id> --keep-worktree
 
 `task get` returns `status`, `waitingReason`, `readyForNextPrompt`, and `needsResume`, together with the latest conversation and terminal output.
 
+## Use passkeys in the in-app browser
+
+On macOS, Cockpit's Touch ID authenticator can use only passkeys registered from the in-app browser. Passkeys registered in Safari, Chrome, or iCloud Keychain are not available to Cockpit. If Touch ID does not appear, register a new passkey while using the in-app browser, sign in with a password, or finish signing in with Chrome and run `cockpit browser import-session` to bring the session into Cockpit. Run `cockpit browser diagnostics` to inspect recent WebAuthn attempts; an immediate failure caused by a missing Cockpit passkey is identified by `no-matching-credential`.
+
 ## Related pages
 
 - [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details)

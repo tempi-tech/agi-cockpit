@@ -73,6 +73,10 @@ cockpit task complete <id> --keep-worktree
 
 `task get`は`status`、`waitingReason`、`readyForNextPrompt`、`needsResume`と、最新の会話・ターミナル出力を返します。
 
+## アプリ内ブラウザーでパスキーを使う
+
+macOSでは、CockpitのTouch ID認証器で使えるのは、アプリ内ブラウザーから登録したパスキーだけです。Safari、Chrome、iCloudキーチェーンで登録済みのパスキーはCockpitから利用できません。Touch IDが表示されない場合は、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードでサインインするか、Chromeでサインインを完了してから `cockpit browser import-session` でセッションをCockpitに取り込んでください。最近のWebAuthn要求は `cockpit browser diagnostics` で確認でき、Cockpitに一致するパスキーがないため即時に失敗した場合は `no-matching-credential` と表示されます。
+
 ## 関連ページ
 
 - [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
