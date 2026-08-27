@@ -46,7 +46,7 @@ Fleetは、複数タスクをノードとする依存関係付きのRunをYAML�
 
 Runにはタイトルを付けられ、Fleetグループには各ノードの進捗が表示されます。ノード単位の通知は抑えられ、Runの終了時にまとめて通知されます。command gateの一時的な失敗は設定された範囲で再試行されます。手動でPull Requestをマージした場合も、保存済みRunから復旧できます。
 
-FleetのYAML、gate、操作、復旧は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
+定義の作り方、ライブグラフ、Worktree、gate、失敗からの復旧は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を参照してください。全フィールドとコマンドはそこから[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)へ進めます。
 
 ## Talk Roomsで会話する
 

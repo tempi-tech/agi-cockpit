@@ -38,6 +38,7 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 - 差分、ファイル、ブラウザー、アプリ画面を確認する: [成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 - エージェントから人へ判断を渡す: [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - 複数タスクへ分担し、結果を集める: [オーケストレーション](https://agi-labo.com/tools/cockpit/docs/orchestration)
+- 依存関係付きの複数エージェント処理を再利用する: [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)
 - 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
 - エージェントごとの対応差を調べる: [エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 - スマートフォンや別のコンピューターから監督する: [リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)

@@ -38,6 +38,7 @@ Every local feature is free and unlimited, with no account required. An AGI Labo
 - Review diffs, files, browser pages, and app screens: [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - Delegate across tasks and collect their results: [Orchestration](https://agi-labo.com/en/tools/cockpit/docs/orchestration)
+- Reuse dependency-aware multi-agent workflows: [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 - Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 - Compare support across agents: [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 - Supervise work from a phone or another computer: [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)

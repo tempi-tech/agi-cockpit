@@ -46,7 +46,7 @@ Fleet defines a dependency-aware Run of multiple task nodes in YAML and manages 
 
 A Run can have a title, and a Fleet group shows progress for each node. Per-node notifications are suppressed and summarized at the end of the Run. Transient command-gate failures retry within configured limits. A saved Run can also recover after a Pull Request was merged manually.
 
-See the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for YAML, gates, operations, and recovery.
+See [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for authoring, the live graph, Worktrees, gates, and failure recovery. It links to the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for every field and command.
 
 ## Converse in Talk Rooms
 
