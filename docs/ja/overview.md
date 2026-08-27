@@ -4,7 +4,7 @@
 
 AGI CockpitがどこでAIエージェントを動かし、タスク一覧とタスク詳細を通じて人の判断と成果確認をつなぐのかを説明します。
 
-> AGI Cockpit 4.51.0で2026-08-15に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs)
+> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs)
 
 AGI Cockpitは、複数のAIエージェントへ仕事を渡し、進捗、判断要求、成果を一つの場所で監督するデスクトップアプリです。タスクを作るところから、結果を確認し、追加指示を送り、完了にするところまでを同じ作業単位で扱います。
 
@@ -35,9 +35,13 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 - 初回セットアップから結果確認まで進める: [インストールと最初のタスク](https://agi-labo.com/tools/cockpit/docs/getting-started)
 - 複数の仕事を見分ける: [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
-- スマートフォンや別のコンピューターから監督する: [リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)
+- 差分、ファイル、ブラウザー、アプリ画面を確認する: [成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 - エージェントから人へ判断を渡す: [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
+- 複数タスクへ分担し、結果を集める: [オーケストレーション](https://agi-labo.com/tools/cockpit/docs/orchestration)
 - 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- エージェントごとの対応差を調べる: [エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+- スマートフォンや別のコンピューターから監督する: [リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)
+- AIエージェントやスクリプトからCockpitを操作する: [cockpit CLI](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 ## 無料利用とAGIラボ会員
 

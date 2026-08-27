@@ -1,0 +1,73 @@
+<!-- Generated from tempi-tech/AGICockpit — do not edit directly. -->
+
+# Security and data
+
+Understand local execution, external transmission, approvals, credentials, task history, attachments, Browser Identities, and Remote Access storage boundaries.
+
+> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+
+AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
+
+## What stays local
+
+Core Cockpit data, including task state, conversation history, Autoruns, Fleets, templates, CLI runtime information, and logs, is stored under `~/.agi-tools/data/cockpit`. Some data, such as attachments and Electron browser profiles, is stored in the operating system's application-data area. Working files live in the selected project, temporary directory, or Git Worktree.
+
+The agent process reads and writes its workspace. Depending on the approval mode and agent permissions, it may access files not currently displayed in Cockpit. Select only the directories needed for the task.
+
+## What is sent externally
+
+The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, or LM Studio endpoint. Whether LM Studio is local or remote depends on its configured URL.
+
+Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, and Autorun information between the connected device and Cockpit.
+
+## Anonymous data in guest use
+
+Packaged guest use sends a random installation ID, app version, a daily session check, and onboarding events for steps reached, abandonment, guest selection, and sign-in to AGI Backend. Task instructions, conversations, file content, and project names are not included in these anonymous events.
+
+An onboarding abandonment event that could not be sent is kept temporarily in the OS application-data area for retry. Anonymous events are sent only for guest use of a packaged app. Signed-in use sends the app version during authentication session checks.
+
+## Distinguish approvals from Ask
+
+`supervised`, `accept-edits`, and `full-access` define the boundary of agent tool operations. When one-time approval, always allow, or deny is offered, inspect the operation, path, command, and external destination. “Always allow” affects later operations of the same kind, so prefer one-time approval when the scope is unclear.
+
+Ask returns a human policy decision; it is not a tool approval. Choosing “publish” in an Ask does not automatically grant permissions required by the operating system, an external service, or another tool.
+
+## Store credentials
+
+AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
+
+Named agent profiles isolate authentication. Antigravity stores OAuth tokens, conversations, logs, and usage history in its profile-specific area and does not fall back to a shared keyring. Browser Identities are separate from agent account profiles.
+
+## Isolate Browser Identities
+
+Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task and Autorun can each be assigned one Identity; the Default Identity is used when none is selected.
+
+On macOS, `import-session` imports cookies belonging to the visible site's registrable domain and localStorage for the exact origin from Chrome into the selected Identity. It does not import sessionStorage, IndexedDB, extension state, device-bound authentication, or passkeys themselves.
+
+Clearing an Identity closes its sessions. Removing it also deletes persistent data. An Identity referenced by a running task or Autorun cannot be removed without a replacement, and the Default Identity cannot be removed.
+
+## Handle attachments and Ask media
+
+Attachments use randomized stored names in a Cockpit-managed area and are validated by extension, MIME type, actual size, and content. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Archives and executable formats are rejected.
+
+File names and content are not trusted instructions. Chat opens only safe formats within the managed area and does not directly launch executables, unmanaged paths, remote `file` URLs, or data URLs that could contain executable content. Remove personal information, local paths, tokens, and session data before external sharing.
+
+## Protect Remote Access
+
+The recommended configuration is Tailscale-only access over HTTPS. Cockpit authenticates devices with Tailscale device information and a six-digit pairing code, with expiration and failure limits. It does not silently downgrade to HTTP when an HTTPS certificate cannot be obtained.
+
+Local Wi-Fi mode is unencrypted and activates only after explicit confirmation. Do not use it on public or untrusted networks. Stopping Remote Access ends connected sessions and saves standalone state.
+
+See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup details.
+
+## Protect App Surface
+
+App Surface attaches one target exclusively to one task. The first attachment to an Android physical device requires Ask approval, and `fill` refuses secure fields. The last frame may remain after disconnection, but the stale Surface disables interaction.
+
+Cockpit does not start, stop, or install the target app. Completing or deleting a task detaches the target without closing its app.
+
+## Confirm completion and deletion
+
+Completing a temporary-directory task deletes its workspace. Completing a Git Worktree task in Desktop preserves its Worktree, while CLI `task complete` removes it by default. Deleting tasks, bulk-deleting a Fleet Run and its tasks, or removing an Identity can destroy history and local data.
+
+Before deletion, confirm the target ID, path, Git state, required artifacts, and recovery method. Obtain user approval immediately before publication, external transmission, purchase, or permission changes.

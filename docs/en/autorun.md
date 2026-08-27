@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.58.0 on 2026-08-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -41,9 +41,9 @@ A new-task Autorun also keeps its Browser Identity assignment and passes it to e
 
 For a new task, Desktop and the PWA show only settings supported by the selected agent and UI mode. The CLI and API use the same capability data and reject unsupported combinations with an explicit error before saving.
 
-Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor's available model, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Cursor does not expose reasoning-effort, service-tier, or system-prompt settings.
+Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor's available model, model-specific reasoning effort, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Cursor does not expose service-tier or system-prompt settings.
 
-Qoder Autoruns can also use **Native UI** or **Terminal**. Native UI exposes Qoder's available model, system prompt, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Qoder does not expose reasoning-effort or service-tier settings.
+Qoder Autoruns can also use **Native UI** or **Terminal**. Native UI exposes Qoder's available model, model-specific reasoning effort, system prompt, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Qoder does not expose service-tier settings.
 
 Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder Autoruns store either **Auto** or a pinned account. Auto is the default for new Autoruns. It is stored as a selection method rather than as one concrete profile, so every execution chooses again from the usage state of signed-in accounts. If the created task reaches a usage limit or returns a plan-restriction response, Cockpit also switches to another available account and continues processing. Use `--account <name|id|default>` to pin an account from the CLI and `--account auto` to select Auto.
 

@@ -4,7 +4,7 @@
 
 Review what AGI Cockpit added, improved, and fixed in each published version, together with its release date and distribution status.
 
-> Verified with AGI Cockpit 4.39.0 on 2026-07-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/releases)
+> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/releases)
 
 Published AGI Cockpit releases appear here in reverse chronological order. Use this page to inspect the changes in a specific version or compare it with the version you currently run.
 

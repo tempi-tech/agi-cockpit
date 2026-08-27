@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.51.0 on 2026-08-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -35,9 +35,13 @@ Every local feature is free and unlimited, with no account required. An AGI Labo
 
 - Go from installation to reviewing a result: [Install and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 - Keep multiple pieces of work distinct: [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
-- Supervise work from a phone or another computer: [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+- Review diffs, files, browser pages, and app screens: [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
+- Delegate across tasks and collect their results: [Orchestration](https://agi-labo.com/en/tools/cockpit/docs/orchestration)
 - Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+- Compare support across agents: [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+- Supervise work from a phone or another computer: [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+- Operate Cockpit from an AI agent or script: [Cockpit CLI](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 ## Free access and AGI Labo membership
 

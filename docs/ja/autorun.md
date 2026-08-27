@@ -4,7 +4,7 @@
 
 Autorunが一度、一定間隔、cronのスケジュールに基づいて新しいタスクを起動するか、既存タスクへ指示を送る仕組みを説明します。
 
-> AGI Cockpit 4.58.0で2026-08-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
+> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 Autorunは、指定した時刻、一定間隔、cron式に基づいて、新しいタスクを起動するか、既存タスクへ指示を送る仕組みです。複数エージェントを連携させる機能ではなく、同じ仕事を必要なタイミングで開始または継続するための独立した機能です。
 
@@ -41,9 +41,9 @@ cronの曜日は`0`が日曜日です。例として、平日の午前9時は`0 
 
 新規タスクを作成する場合、DesktopとPWAでは選択したエージェントとUIモードで利用できる設定だけが表示されます。CLIとAPIも同じ対応情報を使い、非対応の組み合わせを保存前に明示的なエラーで拒否します。
 
-CursorのAutorunは「ネイティブUI」と「ターミナル」を利用できます。ネイティブUIでは、Desktop、PWA、CLIからの作成時にCursorで利用可能なモデル、承認モード、アカウントプロファイルを選べます。Cursorでは、推論レベル、service tier、system promptは利用できません。
+CursorのAutorunは「ネイティブUI」と「ターミナル」を利用できます。ネイティブUIでは、Desktop、PWA、CLIからの作成時にCursorで利用可能なモデル、モデルが対応する推論レベル、承認モード、アカウントプロファイルを選べます。Cursorではservice tierとsystem promptは利用できません。
 
-QoderのAutorunも「ネイティブUI」と「ターミナル」を利用できます。ネイティブUIでは、Desktop、PWA、CLIからの作成時にQoderで利用可能なモデル、system prompt、承認モード、アカウントプロファイルを選べます。Qoderでは、推論レベルとservice tierは利用できません。
+QoderのAutorunも「ネイティブUI」と「ターミナル」を利用できます。ネイティブUIでは、Desktop、PWA、CLIからの作成時にQoderで利用可能なモデル、モデルが対応する推論レベル、system prompt、承認モード、アカウントプロファイルを選べます。Qoderではservice tierを利用できません。
 
 Claude、Codex、Grok Build、Antigravity、Cursor、Qoderでは、「Auto」または固定アカウントをAutorunへ保存します。新しいAutorunの既定はAutoです。Autoは具体的なプロファイルではなく選択方法として保存され、発火するたびにログイン済みアカウントの利用状況から実行先を選び直します。作成されたタスクで利用上限に達した場合やプラン制限の応答を返した場合も、利用可能な別アカウントへ切り替えて処理を続けます。固定する場合、CLIでは`--account <name|id|default>`を使い、Autoへ戻す場合は`--account auto`を使います。
 

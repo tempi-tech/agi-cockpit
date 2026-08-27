@@ -28,6 +28,14 @@ The **...** menu on a project heading can complete all incomplete tasks in that 
 
 While the pointer is over the task list, or while a menu, rename field, or delete confirmation is open, automatic sorting does not move the visible task rows. If a task completes while the list is frozen, its row stays in place and shows **Completed** until the freeze ends, then the list applies the current order. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
 
+## Choose a task entry point and workspace
+
+A regular new task can use a project, persistent directory, temporary directory, or Git Worktree. Choose the target project when modifying existing code. Choose a branch and Worktree when the task must be isolated from the original checkout. Persistent directories are stored under `~/.agi-tools/workspaces`; temporary directories are deleted when the task completes.
+
+Quick Task opens a compact creation window from a global shortcut, letting you submit work without leaving the current application. The created task is supervised in the normal task list and task details. Change the shortcut from **Shortcuts** in the application menu. Cockpit rejects combinations that the operating system cannot register or that conflict with another action.
+
+A Git Worktree isolates changes in a separate checkout, but Git cannot check out the same branch in multiple Worktrees at once. Confirm the branch, base directory, and existing Worktrees before creation. Desktop and CLI use different completion defaults, so also read [Complete and delete](#complete-and-delete).
+
 ## Task states
 
 | State | Meaning | What to check next |
@@ -80,6 +88,8 @@ Qoder usage shows an **Organization** bucket separately from personal-plan and a
 ## Message input and the send key
 
 On Desktop, choose **Send key** under **Shortcuts** in Settings to send chat messages with Enter or Cmd/Ctrl+Enter. Enter is the default. With Cmd/Ctrl+Enter selected, use Cmd+Enter on macOS or Ctrl+Enter on Windows and Linux to send; Enter inserts a line break. Shift+Enter inserts a line break with either setting.
+
+On supported Desktop systems, start local voice input from the microphone in the composer or its configured shortcut. Audio is transcribed on the device and inserted into the composer after recording stops. Recording stops after 90 seconds, and another window cannot start a second recording while one is active. Review the inserted text before sending it.
 
 The setting is shared by Desktop chat composers, including new tasks, task details, Native UI, and Talk Rooms. In the PWA, use the on-screen send button.
 
