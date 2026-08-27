@@ -4,7 +4,7 @@
 
 Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
 
-> Verified with AGI Cockpit 4.59.0 on 2026-08-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
 By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
 
@@ -31,6 +31,8 @@ Remote access defaults to Tailscale-only mode. When Tailscale HTTPS is enabled b
 The setup flow checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, and Qoder CLI. It shows whether each CLI is installed and, for Claude Code, Codex CLI, and Grok Build, whether sign-in is ready. If Cockpit cannot find an agent, select **Install**.
 
 The new-task screen shows only available agents. An agent that needs its own CLI appears only when Cockpit can detect that CLI. Cockpit Agent and Terminal do not require CLI detection. To add a missing agent, open Settings from **Manage agents**, then install its CLI or verify its launch command. Return to the new-task screen after installation; the agent is ready when it becomes selectable.
+
+After the first CLI check finishes, Cockpit saves the result. On later visits, you can use the saved agent choices immediately while Cockpit rechecks their current state in the background. A **Verifying agents** or **Could not verify agents** icon beside the choices means the screen is showing the saved result. Only a first visit with no saved result keeps the choices in a loading state until the check finishes.
 
 The integration step automatically installs or refreshes the `cockpit` skill for detected Claude Code, Codex CLI, Antigravity CLI, Cursor CLI, Qoder CLI, and Grok Build installations. It also installs the `cockpit` command and adds its directory to your shell configuration on macOS and Linux or to your user `PATH` on Windows. This writes the generated skill into each detected agent's user-level skill directory and updates the applicable user-level path configuration. HTML Mode is optional and remains a separate installation. Cockpit refreshes the core skill and command on later app starts; open **Skills** from the lower-left app menu to review their status after adding another agent.
 
@@ -59,6 +61,8 @@ The default `append` mode adds the content after Cockpit's standard system promp
 6. If a system-prompt choice is available, keep its built-in default for this first check.
 7. Choose **Supervised** approval mode and enter a short request with a clear completion condition.
 8. Create the task.
+
+Project selection lists projects from the current task list first, in the same priority order, followed by recently used projects. The search field filters the displayed project name and path without regard to letter case. If the directory is not listed, enter its path directly or use the folder picker.
 
 The settings shown depend on the agent and UI mode. Desktop, PWA, CLI, and Autorun use the same capability data. An unsupported combination of model, reasoning effort, service tier, system prompt, account, or approval mode is hidden or rejected with an explicit error before creation.
 
@@ -91,6 +95,8 @@ Check for a new version from the update notice in the lower-left corner or open 
 When Cockpit requires a newer version before continuing, the screen shows release notes and a download destination in the app's current language. Review the Japanese guidance in the Japanese UI or the English guidance in the English UI before updating.
 
 If an update check fails because of a temporary network or server problem, Cockpit retries it once automatically. If the check still fails, the Updates panel shows guidance for the failure and offers **Try again** and **Update manually**. If Cockpit cannot validate the update data, it does not continue with automatic installation; follow the manual-update guidance instead.
+
+On packaged macOS builds, if the app has not quit within five minutes after an install request, Cockpit records the stalled handoff and asks the installer to try once more. Diagnostic events for update checks, downloads, verification, install requests, and restarts are saved in `~/.agi-tools/data/cockpit/logs/updater.jsonl`; their summary is also available from `cockpit update status` and the diagnostic export. If the current version still starts after the retry, inspect the last install result and open the distribution page through **Update manually**.
 
 ## 6. If the task does not start
 

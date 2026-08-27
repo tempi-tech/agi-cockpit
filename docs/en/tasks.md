@@ -24,6 +24,8 @@ Task search uses partial matches against the task name and project name shown in
 
 In both sidebar task rows and the child-task list, the **...** action menu provides the same way to rename, pin or unpin, complete, copy the task ID, and delete a task. Child tasks also offer **Detach from parent**. Renaming happens in the row: press Enter to save or Escape to cancel. An empty name is not saved, and names are limited to 50 characters.
 
+The **...** menu on a project heading can complete all incomplete tasks in that project or delete all of its completed tasks. The confirmation shows the target count. Running tasks and awaiting-confirmation Fleet tasks are excluded from bulk completion by default; select their checkboxes only when you intend to include them. Bulk deletion targets completed ordinary tasks only. Use the Run-specific delete action for a Fleet Run and its saved history.
+
 While the pointer is over the task list, or while a menu, rename field, or delete confirmation is open, automatic sorting does not move the visible task rows. If a task completes while the list is frozen, its row stays in place and shows **Completed** until the freeze ends, then the list applies the current order. Unrelated scrolling does not dismiss the menu; it closes when scrolling moves the task row that anchors it.
 
 ## Task states
@@ -69,6 +71,8 @@ New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to t
 
 For a task running with Auto, Desktop and the PWA show **Auto · account name** beside the composer so you can identify the account currently selected for execution. If Auto switches accounts, this label reflects the new selection. Select **Auto** in the account menu to return to automatic selection; select **Default account** or a named profile to pin the task to that account.
 
+Cockpit also treats Codex's **workspace is out of credits** response as a usage limit. Auto excludes that account, switches to another available Codex account, and continues the same task from its saved session. If no usable account remains, use the regular `usage_limit` guidance to add an account or switch manually.
+
 A stop caused by a usage or plan restriction is not a task failure. Cockpit represents it as `waiting_confirmation` with `usage_limit`. If Auto cannot recover through another account, the usage-limit notice identifies whether no usable account is available, usage could not be checked, or switching, restarting, resuming, or continuing failed. Follow the notice, switch to another signed-in account beside the composer or with `cockpit task account <id> <name|id|default>`, then send a follow-up to continue. Use the same steps when the task is pinned to an account. A manual switch stops the current execution, moves the saved conversation, and resumes the same task under the selected profile. If Cockpit shows a usage-limit reset time, you can also retry the same account after that time.
 
 Qoder usage shows an **Organization** bucket separately from personal-plan and add-on credits. When organization credits have no fixed total, Cockpit shows only the remaining credits and treats a positive balance as available capacity during Auto account selection.
@@ -78,6 +82,8 @@ Qoder usage shows an **Organization** bucket separately from personal-plan and a
 On Desktop, choose **Send key** under **Shortcuts** in Settings to send chat messages with Enter or Cmd/Ctrl+Enter. Enter is the default. With Cmd/Ctrl+Enter selected, use Cmd+Enter on macOS or Ctrl+Enter on Windows and Linux to send; Enter inserts a line break. Shift+Enter inserts a line break with either setting.
 
 The setting is shared by Desktop chat composers, including new tasks, task details, Native UI, and Talk Rooms. In the PWA, use the on-screen send button.
+
+When you send from the PWA while a task is running, Cockpit queues the message without stopping the current turn and sends it automatically after the current response. You can remove it from the queue before delivery. In Claude, Codex, and Grok Build Native UI, sending only `/compact` from the PWA compacts the conversation context instead of sending that text as a normal message. A normal message sent during compaction is queued; a second `/compact` reports that compaction is already in progress. In an unsupported Native UI, `/compact` reports that it is unavailable instead of sending the text as a normal message.
 
 Press Escape to stop a running turn. When several task panes are open, Escape stops only the task in the pane with keyboard focus. If no field or control has focus, the pane used most recently owns the shortcut.
 
@@ -96,6 +102,8 @@ In the PWA, a down-arrow button appears above the composer after you scroll away
 The copy button on a chat message copies the displayed message text together with its error details. When a Qoder Native UI task reports `BAD_REQUEST`, those details can include available diagnostics and a command for resuming the same Qoder session from a terminal.
 
 Diagnostics can include local manifest and session-log paths and a failure record. Before sharing copied text outside your device, check it for project names, file paths, and account or session information.
+
+When several tool calls are grouped together and only some fail, the heading shows the failed count out of the total and failed items use a distinct error color. Expand the group to review successful and failed calls separately. When every call fails, the whole group continues to show **Tool calls failed**.
 
 ## Review and edit files
 
