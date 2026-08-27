@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.61.0 — 2026-08-27
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added passkey authentication with Touch ID on macOS and Windows Hello in the in-app browser, with clear reasons and alternatives when unavailable.
 - Added support in cockpit browser for elements inside Shadow DOM and locators based on accessible names and roles.
