@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -112,7 +112,11 @@ cockpit browser tab recreate <tabId> --json
 
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for cookie and localStorage isolation, task and Autorun assignment, Chrome session import, clearing, and removal.
 
-Passkeys can use Touch ID in signed macOS builds and Windows Hello on Windows. Linux has no platform authenticator, so use a roaming security key or password. If no prompt appears, inspect the reason with `cockpit browser diagnostics`.
+Passkeys can use Touch ID in signed macOS builds and Windows Hello on Windows. On macOS, Cockpit can use only passkeys registered from the in-app browser; it cannot directly use passkeys previously registered in Safari, Chrome, or iCloud Keychain.
+
+When no passkey matches Touch ID, the browser panel explains why and offers registration of a new passkey, password sign-in, and `cockpit browser import-session` as alternatives. `cockpit browser diagnostics` records the recent attempt as `no-matching-credential`. `import-session` transfers eligible Chrome sign-in state on macOS; it does not import the passkey itself.
+
+Linux has no platform authenticator, so use a roaming security key or password. If no prompt appears, use `cockpit browser diagnostics` to inspect platform-authenticator state and the most recent WebAuthn attempt.
 
 Only HTTP and HTTPS links can normally leave the in-app browser. A `mailto` link opens only after the person's own interaction and explicit confirmation; other schemes are rejected. Agent automation does not count as that person interaction.
 

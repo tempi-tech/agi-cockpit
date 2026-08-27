@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 

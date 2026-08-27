@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -112,7 +112,11 @@ cockpit browser tab recreate <tabId> --json
 
 CookieやlocalStorageなどの分離、task・Autorunへの割り当て、Chrome session取込、消去と削除は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
 
-パスキーは署名済みmacOS版でTouch ID、WindowsでWindows Helloを利用できます。Linuxにはplatform authenticatorがないため、roaming security keyまたはpasswordを使います。promptが出ない場合は`cockpit browser diagnostics`で理由を確認します。
+パスキーは署名済みmacOS版でTouch ID、WindowsでWindows Helloを利用できます。macOSのCockpitで使えるのは、アプリ内ブラウザーから登録したパスキーです。Safari、Chrome、iCloudキーチェーンで登録済みのパスキーを直接利用することはできません。
+
+Touch IDに一致するパスキーがない場合、ブラウザーパネルは理由と、新しいパスキーの登録、パスワード、`cockpit browser import-session`という代替手段を表示します。`cockpit browser diagnostics`では直近の試行を`no-matching-credential`として確認できます。`import-session`はmacOSのChromeからログイン状態を取り込む機能で、パスキー自体は取り込みません。
+
+Linuxにはplatform authenticatorがないため、roaming security keyまたはpasswordを使います。promptが出ない場合は`cockpit browser diagnostics`でplatform authenticatorと直近のWebAuthn試行を確認します。
 
 アプリ内ブラウザーからOSへ渡せる外部linkはHTTPとHTTPSです。`mailto`は利用者自身の操作と明示確認が揃った場合だけ開き、ほかのschemeは拒否します。エージェントの自動操作は利用者自身の操作として扱われません。
 

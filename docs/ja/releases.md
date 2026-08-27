@@ -4,7 +4,7 @@
 
 AGI Cockpitの各バージョンで追加・改善・修正された内容を、公開日と配布状況を含めて確認できます。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/releases)
+> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/releases)
 
 AGI Cockpitの公開済みリリースを、新しい順に掲載します。特定バージョンの変更点を確認するときや、利用中のバージョンとの差分を調べるときに参照してください。
 

@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、設定を、同じ状態と権限境界で扱います。
 
@@ -19,6 +19,10 @@ cockpit help
 ```
 
 Cockpitから起動したタスクには、正しいローカルインスタンスと呼び出し元タスクの接続情報が渡されます。別インスタンスへ誤送信しそうな場合は`instance_mismatch`で停止し、接続不能時に別のローカルインスタンスへ自動で切り替えません。
+
+ローカルCLIは認証付きloopbackへ先に接続し、sandboxがloopbackまたはプロセス確認を制限している場合は、同じCockpitが渡したディレクトリのfile IPCへ自動で切り替えます。file IPCは一つのrequest IDを一度だけ書き、同じ応答を待つため、`task create`や`task send`を再送して重複実行しません。権限拡張は不要です。
+
+`cockpit doctor`は`pidVisibility`、`transports.loopback`、`transports.fileIpc`、`effectiveTransport`を返します。終了コード7は、利用可能な両方の経路で認証できなかったことを示します。権限エラーと推測して再実行せず、失敗理由と対象instanceを確認してください。
 
 ## JSON結果を確認する
 

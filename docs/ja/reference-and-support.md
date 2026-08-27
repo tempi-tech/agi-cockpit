@@ -4,7 +4,7 @@
 
 タスク状態、設定、ショートカット、保存場所、エージェント認証、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -40,7 +40,7 @@
 | Electronの認証、添付、ブラウザープロファイル | OSのAGI Cockpitアプリデータ領域 |
 | 認証tokenとAPIキー | OSのKeychainまたはkeyring |
 
-`cockpit doctor`は現在接続するインスタンスとCLIランタイムを表示します。診断ログにはローカルパス、エージェント名、セッション状態が含まれる場合があるため、外部共有前に確認してください。
+`cockpit doctor`は現在接続するインスタンス、CLIランタイム、`pidVisibility`、loopbackとfile IPCの認証結果、実際に選ばれた`effectiveTransport`を表示します。診断ログにはローカルパス、エージェント名、セッション状態が含まれる場合があるため、外部共有前に確認してください。
 
 ## アプリを更新できない
 
@@ -62,7 +62,7 @@
 
 `needsResume`と`waitingReason`を確認し、`cockpit task resume <id>`で保存済みセッションを再開します。Terminalタスクでは新しいシェルが同じディレクトリで起動するため、以前のforeground processは戻りません。
 
-別インスタンスへのCLI接続は自動転送されません。`cockpit doctor`の`instance`、runtime path、各portのlistenerと認証結果を確認し、正しいCockpitから同じコマンドを実行します。`instance_mismatch`では接続先を推測して再送しないでください。
+別インスタンスへのCLI接続は自動転送されません。`cockpit doctor`の`instance`、runtime path、`transports.loopback`、`transports.fileIpc`、`effectiveTransport`を確認し、正しいCockpitから同じコマンドを実行します。file IPCへ切り替わる場合も、同じinstanceが提供した接続先だけを使います。`instance_mismatch`では接続先を推測して再送しないでください。
 
 ## Remote Accessへ接続できない
 
@@ -79,7 +79,7 @@
 
 タスクに割り当てられたIdentity名と色を確認します。別Identityでログインしても現在のタスクへ状態は移りません。macOSではChromeの対象タブを開き、`cockpit browser import-session`で選択したIdentityへCookieとlocalStorageを取り込めます。
 
-パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。Linuxではセキュリティキーまたはパスワードを使います。
+パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。macOSで`no-matching-credential`の場合は、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードまたは`cockpit browser import-session`を使います。Linuxではセキュリティキーまたはパスワードを使います。
 
 詳しくは[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)と[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)を参照してください。
 

@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, shortcuts, storage, agent authentication, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -40,7 +40,7 @@ After changing a setting, inspect the returned saved value. Numeric settings can
 | Electron authentication, attachments, and browser profiles | OS AGI Cockpit application-data area |
 | Authentication tokens and API keys | OS Keychain or keyring |
 
-`cockpit doctor` reports the connected instance and CLI runtime. Diagnostic logs can contain local paths, agent names, and session state, so inspect them before external sharing.
+`cockpit doctor` reports the connected instance, CLI runtime, `pidVisibility`, loopback and file-IPC authentication results, and the selected `effectiveTransport`. Diagnostic logs can contain local paths, agent names, and session state, so inspect them before external sharing.
 
 ## The app does not update
 
@@ -62,7 +62,7 @@ A usage limit puts the task in `waiting_confirmation` with `usage_limit`. If Aut
 
 Inspect `needsResume` and `waitingReason`, then use `cockpit task resume <id>` to restore a saved session. A Terminal task starts a new shell in the same directory, so its previous foreground process is not restored.
 
-CLI connections are not forwarded automatically to another instance. Inspect `instance`, the runtime path, port listeners, and authentication results from `cockpit doctor`, then run the command against the correct Cockpit. Do not guess another destination and resend after `instance_mismatch`.
+CLI connections are not forwarded automatically to another instance. Inspect `instance`, the runtime path, `transports.loopback`, `transports.fileIpc`, and `effectiveTransport` from `cockpit doctor`, then run the command against the correct Cockpit. File IPC remains limited to the connection supplied by that same instance. Do not guess another destination and resend after `instance_mismatch`.
 
 ## Remote Access does not connect
 
@@ -79,7 +79,7 @@ Do not switch casually to local Wi-Fi mode. Restore the certificate or Tailscale
 
 Confirm the Identity name and color assigned to the task. Signing in through another Identity does not transfer state to the current task. On macOS, open the target site in Chrome and use `cockpit browser import-session` to copy eligible cookies and localStorage into the selected Identity.
 
-If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. On Linux, use a security key or password.
+If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. For `no-matching-credential` on macOS, register a new passkey in the in-app browser, use a password, or use `cockpit browser import-session`. On Linux, use a security key or password.
 
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) and [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for details.
 

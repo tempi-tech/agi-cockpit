@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -18,7 +18,7 @@ Check the panel type and target path before acting. Closing the panel does not s
 
 The diff surface shows changes recognized by Git. Review additions, modifications, and deletions by file, and compare the actual scope with the agent's explanation before accepting completion. Untracked temporary files and files outside the project may not appear in the diff.
 
-File preview supports text, images, audio, video, PDFs, and other recognized formats. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
+File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
 
 The project explorer navigates the working directory hierarchy. It preserves the selected file across refreshes and opens files in preview. Inspect both content and path before sharing any file that could contain secrets.
 
@@ -40,7 +40,7 @@ App Surface attaches a running Android target or iOS Simulator to one task. See 
 
 A side terminal is a shell session separate from the task's agent process. Before running a command, confirm the session name, current working directory, and target host. Closing a terminal ends that shell but does not complete the task.
 
-Background logs show output from long-running processes started by an agent. Visible output alone is not completion. Check the exit code, generated artifact, listening port, test result, or another success condition appropriate to the request.
+Background logs show output from long-running processes started by an agent. In Antigravity Native UI, a command moved to the background remains visible after the turn completes with a Running, Completed, Failed, or Stopped state. Visible output alone is not completion. Check the exit code, generated artifact, listening port, test result, or another success condition appropriate to the request.
 
 See the [`cockpit side-panel` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/side-panel) when controlling panels and terminals from the CLI.
 

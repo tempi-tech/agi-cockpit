@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -46,6 +46,8 @@ Free-form input is available by default even when choices are provided. Write th
 
 Desktop opens a clicked Ask URL in the system browser without navigating the Ask window. The PWA opens it in a new browser tab. Desktop accepts only `http` and `https` links from the Ask surface; other URL schemes are not opened.
 
+Desktop and PWA Ask surfaces include a button that opens the task that created the question. Navigating there does not answer or close the Ask. The button is unavailable after the source task has been deleted.
+
 ## What happens before and after an answer
 
 1. The agent creates an Ask.
@@ -55,6 +57,8 @@ Desktop opens a clicked Ask URL in the system browser without navigating the Ask
 5. The agent receives the answer and continues the same work.
 
 Dismissing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
+
+Answer attachments can be added with the paperclip or by dragging files onto the answer surface. With multiple questions, a drop attaches to the question under the pointer; a drop elsewhere attaches to the first question. Dropping files never submits the answer.
 
 ## Constraints
 

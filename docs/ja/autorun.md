@@ -4,7 +4,7 @@
 
 Autorunが一度、一定間隔、cronのスケジュールに基づいて新しいタスクを起動するか、既存タスクへ指示を送る仕組みを説明します。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
+> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 Autorunは、指定した時刻、一定間隔、cron式に基づいて、新しいタスクを起動するか、既存タスクへ指示を送る仕組みです。複数エージェントを連携させる機能ではなく、同じ仕事を必要なタイミングで開始または継続するための独立した機能です。
 

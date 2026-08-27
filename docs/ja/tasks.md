@@ -4,7 +4,7 @@
 
 タスク一覧、オーバービュー、検索、並べ替え、作業場所、状態、完了、削除の違いを説明します。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は、複数の仕事から「次にどれを見るか」を選ぶ場所です。個々の会話や追加入力は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)で扱います。
 
@@ -22,13 +22,17 @@ Desktopのタスク画面は、タスク一覧、選択したタスクの作業�
 
 ## 検索、並べ替え、メニュー
 
-検索は表示中のタスク名とプロジェクト名へ部分一致します。タスクIDは4文字以上を入力した場合だけ部分一致の対象になります。指示本文、作業ディレクトリ、内部メタデータは検索対象ではありません。
+タスク一覧内の検索は、表示中のタスク名とプロジェクト名へ部分一致します。タスクIDは4文字以上を入力した場合だけ部分一致の対象になります。この検索では、指示本文、作業ディレクトリ、内部メタデータは対象になりません。
+
+DesktopでCommand/Ctrl+Kを押すと、プロジェクトを横断するタスクパレットが開きます。タスク名、指示の先頭行、プロジェクト名を検索でき、完了済みを含む候補から↑↓で選び、Enterで移動、Escapeで閉じます。既定のキーは設定の「ショートカット」で変更できます。
 
 タスク行と子タスク一覧の「…」メニューでは、名前変更、ピン留めまたは解除、完了、タスクIDのコピー、削除を行えます。子タスクでは親からの切り離しも選べます。名前はEnterで確定、Escapeで取り消し、空の名前は保存されません。上限は50文字です。
 
 プロジェクト見出しのメニューでは、そのプロジェクトに属する未完了タスクをまとめて完了にするか、完了済みタスクをまとめて削除できます。一括完了では実行中のタスクと確認待ちのFleetタスクが既定で対象外になり、必要な場合だけ明示的に含めます。一括削除は完了済みの通常タスクだけが対象です。
 
 タスク一覧へマウスを重ねている間や、メニュー、名前変更、削除確認の操作中は、自動並べ替えで行が移動しません。操作を終えると現在の状態に基づく順序が反映されます。
+
+件数の多いグループは初期件数だけを表示し、「もっと見る」で段階的に追加します。一度以上展開すると「折りたたむ」が表示され、DesktopとPWAのどちらでも初期件数へ戻せます。
 
 ## タスクの入口と作業場所
 
@@ -73,13 +77,10 @@ cockpit task complete <id> --keep-worktree
 
 `task get`は`status`、`waitingReason`、`readyForNextPrompt`、`needsResume`と、最新の会話・ターミナル出力を返します。
 
-## アプリ内ブラウザーでパスキーを使う
-
-macOSでは、CockpitのTouch ID認証器で使えるのは、アプリ内ブラウザーから登録したパスキーだけです。Safari、Chrome、iCloudキーチェーンで登録済みのパスキーはCockpitから利用できません。Touch IDが表示されない場合は、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードでサインインするか、Chromeでサインインを完了してから `cockpit browser import-session` でセッションをCockpitに取り込んでください。最近のWebAuthn要求は `cockpit browser diagnostics` で確認でき、Cockpitに一致するパスキーがないため即時に失敗した場合は `no-matching-credential` と表示されます。
-
 ## 関連ページ
 
 - [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
 - [成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 - [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)
+- [cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)
 - [セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)
