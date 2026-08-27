@@ -4,9 +4,58 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
-## v4.60.0 — 2026-08-26
+## v4.61.0 — 2026-08-27
 
 **Type:** minor · **Platforms:** macOS
+
+- Added passkey authentication with Touch ID on macOS and Windows Hello in the in-app browser, with clear reasons and alternatives when unavailable.
+- Added support in cockpit browser for elements inside Shadow DOM and locators based on accessible names and roles.
+- Added project-menu actions to complete all incomplete tasks and delete all completed tasks in a project.
+- Improved new-task project selection with current task-list priority and search.
+- Improved the new-task screen so it can be used without waiting for agent CLI verification to finish.
+- Improved the PWA so the next message can be queued while a task is running.
+- Fixed /compact in the PWA so it compacts the conversation context.
+- Added the ability to rename Fleet Run titles from the UI and CLI.
+- Improved Fleet groups by showing progress for each node.
+- Improved Fleet Run recovery after a pull request is merged manually.
+- Improved Fleet notifications by suppressing per-node alerts and notifying once when the Run ends.
+- Improved Fleet command gates by automatically retrying temporary failures.
+- Improved parallel tool-call groups by showing the number of failed calls when only some calls fail.
+- Improved updater diagnostics by saving logs and detecting and retrying an unresponsive installation.
+- Fixed Autorun management failures caused by a session-refresh race even while signed in.
+- Improved Auto account recovery by detecting exhausted Codex workspace credits.
+- Fixed Antigravity usage and account details so they come from matching credentials and current observations.
+- Fixed context usage reporting for Cursor Visual.
+- Fixed unbounded memory growth during high-volume streaming output from Qoder, Cursor, and other ACP agents.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- アプリ内ブラウザーのパスキー認証でmacOSのTouch IDとWindows Helloに対応し、利用できない場合は理由と代替手段を表示
+- cockpit browserでShadow DOM内の要素とアクセシブルな名前・roleによる要素指定に対応
+- プロジェクトメニューから未完了タスクの一括完了と完了済みタスクの一括削除に対応
+- 新規タスクのプロジェクト選択を現在のタスクリスト優先・検索対応に改善
+- 新規タスク作成画面をエージェントCLIの確認完了を待たずに操作できるように改善
+- PWAで実行中のタスクへ次のメッセージをキュー送信できるように改善
+- PWAから /compact で会話コンテキストを圧縮できるように修正
+- Fleet RunのタイトルをUIとCLIから変更できるように改善
+- Fleetグループに各ノードの進捗を表示するように改善
+- 手動でPRをマージした後にFleet Runを復旧できるように改善
+- Fleetのノードごとの通知を抑え、Run終了時に一度だけ通知するように改善
+- Fleetのコマンドゲートが一時的な失敗を自動再試行するように改善
+- 並列ツール実行の一部が失敗した場合に失敗件数を表示するように改善
+- アップデーターの診断ログを保存し、インストールが応答しない場合を検知して再試行するように改善
+- ログイン済みでもセッション更新の競合でAutorun管理が失敗する問題を修正
+- Codexのワークスペースクレジット枯渇を検出し、Autoアカウントで復旧できるように改善
+- Antigravityの利用枠とアカウント情報を正しい認証情報と最新の観測結果から表示するように修正
+- Cursor Visualのコンテキスト使用量を正しく表示するように修正
+- QoderやCursorなどの大量ストリーミング出力でメモリ使用量が増え続ける問題を修正
+
+</details>
+
+## v4.60.0 — 2026-08-26
+
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Changed supported agents to use a unified /goal entry point and goal-status display across desktop and PWA.
 - Added paste support and input support for contenteditable editors in the in-app browser.
