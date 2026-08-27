@@ -45,15 +45,20 @@ All local features are free and unlimited with no account required. An [AGI Labo
 4. Create a task with a clear objective.
 5. Review the result, answer any Ask, and send follow-up instructions from the same task.
 
-See [Install and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started) for the complete walkthrough.
+See [Install and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started), then follow [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
 ## Documentation
 
 | Guide | English | 日本語 |
 | --- | --- | --- |
 | Product overview | [What is AGI Cockpit?](./docs/en/overview.md) | [AGI Cockpitとは](./docs/ja/overview.md) |
-| First task | [Install and run your first task](./docs/en/getting-started.md) | [インストールして最初のタスクを実行する](./docs/ja/getting-started.md) |
-| Task management | [Task list and task details](./docs/en/tasks.md) | [タスク一覧とタスク詳細](./docs/ja/tasks.md) |
+| Initial setup | [Install and complete initial setup](./docs/en/getting-started.md) | [インストールと初回セットアップ](./docs/ja/getting-started.md) |
+| First task | [Your first task](./docs/en/first-task.md) | [最初のタスク](./docs/ja/first-task.md) |
+| Task list | [Task list](./docs/en/tasks.md) | [タスク一覧](./docs/ja/tasks.md) |
+| Task details | [Task details](./docs/en/task-details.md) | [タスク詳細](./docs/ja/task-details.md) |
+| Browser | [cockpit browser](./docs/en/browser.md) | [cockpit browser](./docs/ja/browser.md) |
+| Browser profiles | [Browser Identity](./docs/en/browser-identities.md) | [Browser Identity](./docs/ja/browser-identities.md) |
+| Mobile app control | [App Surface](./docs/en/app-surface.md) | [App Surface](./docs/ja/app-surface.md) |
 | Human approval | [Ask](./docs/en/ask.md) | [Ask](./docs/ja/ask.md) |
 | Scheduled work | [Autorun](./docs/en/autorun.md) | [オートラン](./docs/ja/autorun.md) |
 | Releases | [Release history](./docs/en/releases.md) | [リリース履歴](./docs/ja/releases.md) |

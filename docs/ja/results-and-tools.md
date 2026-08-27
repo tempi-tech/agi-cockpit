@@ -2,11 +2,11 @@
 
 # 成果とツール
 
-タスクの差分、ファイル、HTML Surface、ブラウザー、App Surface、ターミナル、ログを安全に確認・操作する方法を説明します。
+タスクの差分、ファイル、HTML Surface、ターミナル、ログを安全に確認し、専門ページへ進む方法を説明します。
 
 > AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 
-タスクの会話だけでなく、変更されたコード、ファイル、Webページ、接続したアプリ画面、実行中のプロセスを同じタスクから確認できます。このページでは、成果を確認する面と、実際に操作するツールの違いを整理します。
+タスクの会話だけでなく、変更されたコード、ファイル、レポート、実行中のプロセスを同じタスクから確認できます。このページでは成果確認に共通する面を整理します。Webページの操作は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、接続したモバイル画面は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)で扱います。
 
 ## 右サイドパネルを使う
 
@@ -30,21 +30,11 @@ HTML Surfaceは一般のWebブラウザーではありません。エージェ�
 
 CLIからは`cockpit html show --stdin`でHTMLを保存し、`cockpit side-panel html`で表示できます。正確な契約は[`cockpit html` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/html)を参照してください。
 
-## アプリ内ブラウザーを操作する
+## 専門の操作面へ進む
 
-アプリ内ブラウザーは、タスク単位のセッションとBrowser Identityを使って実際のWebページを開く面です。IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証が分離されます。タスクを切り替えたりパネルを隠したりしても、タブのメモリ上の状態と保存済みセッションは維持されます。
+アプリ内ブラウザーは、実際のWebページを人とエージェントが同じタブで扱う面です。ページ状態、意味のある要素名、操作後の事後条件まで含む手順は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、ログイン状態の分離は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
 
-エージェントがクリック、入力、選択、アップロード、貼り付け、キー操作、スクロールを行った場合、CLIはイベントの配送と観測可能な変化を返します。`changed: false`は成功の証明ではありません。URL、表示テキスト、要素状態、通信結果など、意図した事後条件を指定して確認してください。失敗後の再クリックは二重送信になる可能性があるため、まず現在のページ状態を読み取ります。
-
-パスキー認証は、署名済みmacOS版ではTouch ID、WindowsではWindows Helloを利用できます。Linuxにはプラットフォーム認証器がないため、セキュリティキーまたはパスワードを使います。詳細は[`cockpit browser` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/browser)を参照してください。
-
-## App Surfaceでアプリ画面を扱う
-
-App Surfaceは、すでに起動しているAndroidエミュレーター、Android実機、または起動済みiOS Simulatorを一つのタスクへ接続します。Cockpitは対象やアプリを起動・終了・インストールせず、同じ対象を複数タスクへ同時接続しません。
-
-操作前に`cockpit app doctor`と`cockpit app targets`で準備状態を確認します。接続後はアクセシビリティsnapshotを優先し、ラベル、role、直前のsnapshotから得た参照、座標の順に対象を指定します。入力操作が配送されてもアプリが反応した証明にはならないため、`--expect-text`などの事後条件か新しいsnapshotで確認します。Android実機への初回接続はAskによる承認が必要です。
-
-切断または古い状態になったSurfaceは最後の画面を残しますが、操作できません。再接続して健康状態を確認します。詳しい準備、エラーコード、座標系は[`cockpit app` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/app)を参照してください。
+App Surfaceは、起動済みAndroidまたはiOS Simulatorを一つのタスクへ接続する面です。準備、接続、アクセシビリティ操作、座標、復旧、安全境界は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 
 ## サイドターミナルとバックグラウンドログを使う
 
@@ -70,4 +60,4 @@ CLIからサイドパネルとターミナルを扱う場合は[`cockpit side-pa
 4. 秘密情報、破壊的変更、外部公開の有無を確認する
 5. 必要な成果を保存または共有してからタスクを完了する
 
-タスクの状態、再開、完了、削除は[タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)、データ境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を参照してください。
+タスクの状態、完了、削除は[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)、追加指示と再開は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)、データ境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を参照してください。

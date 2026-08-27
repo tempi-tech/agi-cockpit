@@ -33,15 +33,20 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 ## 最初に読むページ
 
-- 初回セットアップから結果確認まで進める: [インストールと最初のタスク](https://agi-labo.com/tools/cockpit/docs/getting-started)
-- 複数の仕事を見分ける: [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
-- 差分、ファイル、ブラウザー、アプリ画面を確認する: [成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
+- アプリとエージェントを準備する: [インストールと初回セットアップ](https://agi-labo.com/tools/cockpit/docs/getting-started)
+- 最初の依頼を完了まで進める: [最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)
+- 複数の仕事を見分ける: [タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)
+- 選んだ仕事へ追加指示を送る: [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
+- 差分、ファイル、レポートを確認する: [成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
+- 起動済みのモバイル画面を扱う: [App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)
 - エージェントから人へ判断を渡す: [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - 複数タスクへ分担し、結果を集める: [オーケストレーション](https://agi-labo.com/tools/cockpit/docs/orchestration)
 - 依存関係付きの複数エージェント処理を再利用する: [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)
 - 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
 - エージェントごとの対応差を調べる: [エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 - スマートフォンや別のコンピューターから監督する: [リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)
+- 実際のWebページを人とエージェントで操作する: [cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)
+- Webサイトのログイン状態を分離する: [Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)
 - AIエージェントやスクリプトからCockpitを操作する: [cockpit CLI](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 ## 無料利用とAGIラボ会員
@@ -55,4 +60,4 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 ## 次に進む
 
-[AGI Cockpitをインストールして最初のタスクを実行する](https://agi-labo.com/tools/cockpit/docs/getting-started)と、タスクが一覧へ現れ、詳細から結果を確認できるところまで進めます。
+[AGI Cockpitをインストールして初回セットアップを完了する](https://agi-labo.com/tools/cockpit/docs/getting-started)と、[最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)を順に進めます。

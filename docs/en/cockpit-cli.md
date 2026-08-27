@@ -38,6 +38,8 @@ Use `cockpit browser` for web pages and `cockpit app` for an already-running And
 
 External links, uploads, physical devices, and secret input have additional safety boundaries. Do not resend an already delivered action without checking state because it can create a duplicate operation.
 
+See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities), and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for practical workflows.
+
 ## Use Autorun and Fleet
 
 `cockpit autorun` starts a new task or sends instructions to an existing task once, on an interval, or from cron. Membership is checked both when the Autorun is created and when it runs. If a saved runtime setting becomes unavailable, Cockpit disables the Autorun instead of silently choosing another runtime.

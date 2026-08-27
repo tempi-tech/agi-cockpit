@@ -46,6 +46,8 @@ Chromeからの`import-session`は、表示中サイトのregistrable domainに�
 
 Identityのデータ消去はそのIdentityのセッションを閉じます。削除は永続データも削除します。実行中タスクやAutorunから参照されるIdentityは、置換先を指定しない限り削除できません。Default Identityは削除できません。
 
+割り当てと削除の手順は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
+
 ## 添付とAskメディアを扱う
 
 添付はCockpit管理領域へランダムな保存名で置かれ、拡張子、MIME、実サイズ、内容を検証します。1メッセージは最大8ファイル、1ファイル512MB、合計1GBで、JSONは25MBまでです。アーカイブと実行形式は受け付けません。
@@ -65,6 +67,8 @@ Identityのデータ消去はそのIdentityのセッションを閉じます。�
 App Surfaceは一つの対象を一つのタスクへ排他的に接続します。Android実機への初回接続はAsk承認を要求し、secure fieldへの`fill`は拒否します。切断後も最後の画面が表示される場合がありますが、古い状態として操作を無効にします。
 
 Cockpitは対象のアプリを起動、終了、インストールしません。タスクを完了または削除すると接続だけを解除し、対象アプリは終了しません。
+
+接続と操作の手順は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 
 ## 完了と削除を確認する
 

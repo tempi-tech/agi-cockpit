@@ -87,6 +87,8 @@ Confirm the Identity name and color assigned to the task. Signing in through ano
 
 If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. On Linux, use a security key or password.
 
+See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) and [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for details.
+
 ## App Surface does not attach
 
 1. Run `cockpit app doctor` to inspect ADB, Xcode, the control runtime, and current attachments.
@@ -96,6 +98,8 @@ If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authent
 5. After attachment, run `cockpit app status` and inspect mirror, accessibility, input, and keyboard health.
 
 An `offline` or `stale` Surface keeps only the last frame and cannot accept input. Prepare the target with platform tools and reattach; Cockpit does not start or stop the target or its app.
+
+See [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for details.
 
 ## Report a problem
 

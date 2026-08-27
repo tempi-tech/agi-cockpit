@@ -67,4 +67,4 @@ Cockpit skillとHTML Modeは外部エージェントCLIへインストールさ�
 
 以下の表は、Desktop、PWA、CLIが共用する型付き能力レジストリから生成されます。モデルや推論レベルは、対応するネイティブUIで利用可能な候補を取得できる場合に選択できます。表が本文の説明と異なる場合は、生成元の能力レジストリと現在の作成画面を優先してください。
 
-タスクの作成手順は[インストールと最初のタスク](https://agi-labo.com/tools/cockpit/docs/getting-started)、設定と復旧は[Referenceとサポート](https://agi-labo.com/tools/cockpit/docs/reference-and-support)、データ境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を参照してください。
+タスクの作成手順は[最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)、設定と復旧は[Referenceとサポート](https://agi-labo.com/tools/cockpit/docs/reference-and-support)、データ境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を参照してください。

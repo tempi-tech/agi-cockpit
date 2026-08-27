@@ -146,6 +146,7 @@ Tailscale itself can be connected while Cockpit is unable to read the Tailscale 
 ## Related pages
 
 - [What is AGI Cockpit?](https://agi-labo.com/en/tools/cockpit/docs)
-- [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+- [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+- [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 - [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)

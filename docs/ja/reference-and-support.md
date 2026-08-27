@@ -87,6 +87,8 @@
 
 パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。Linuxではセキュリティキーまたはパスワードを使います。
 
+詳しくは[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)と[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)を参照してください。
+
 ## App Surfaceへ接続できない
 
 1. `cockpit app doctor`でADB、Xcode、制御runtime、現在の接続を確認します。
@@ -96,6 +98,8 @@
 5. 接続後に`cockpit app status`でmirror、accessibility、input、keyboardのhealthを確認します。
 
 `offline`または`stale`では最後の画面だけが残り、操作できません。対象やアプリをCockpitから起動・終了せず、プラットフォームのツールで準備してから再接続します。
+
+詳しくは[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 
 ## 問題を報告する
 

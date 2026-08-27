@@ -115,5 +115,6 @@ cockpit autorun create \
 
 ## 関連ページ
 
-- [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
+- [タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)
+- [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
 - [Ask](https://agi-labo.com/tools/cockpit/docs/ask)

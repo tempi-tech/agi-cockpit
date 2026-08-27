@@ -33,15 +33,20 @@ Every local feature is free and unlimited, with no account required. An AGI Labo
 
 ## Where to start
 
-- Go from installation to reviewing a result: [Install and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
-- Keep multiple pieces of work distinct: [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
-- Review diffs, files, browser pages, and app screens: [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+- Prepare the app and an agent: [Install and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
+- Carry the first request through completion: [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+- Keep multiple pieces of work distinct: [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+- Send follow-ups to selected work: [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+- Review diffs, files, and reports: [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+- Operate a running mobile screen: [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface)
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - Delegate across tasks and collect their results: [Orchestration](https://agi-labo.com/en/tools/cockpit/docs/orchestration)
 - Reuse dependency-aware multi-agent workflows: [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 - Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 - Compare support across agents: [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 - Supervise work from a phone or another computer: [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+- Operate real web pages with a person and agent: [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser)
+- Separate website sign-in state: [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
 - Operate Cockpit from an AI agent or script: [Cockpit CLI](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 ## Free access and AGI Labo membership
@@ -55,4 +60,4 @@ A lock on a feature means that feature requires an active AGI Labo membership. A
 
 ## Next step
 
-[Install AGI Cockpit and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started) to reach the point where the task appears in the list and its result is available in task details.
+[Install AGI Cockpit and complete initial setup](https://agi-labo.com/en/tools/cockpit/docs/getting-started), then continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).

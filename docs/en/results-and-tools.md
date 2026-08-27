@@ -2,11 +2,11 @@
 
 # Results and tools
 
-Learn how to safely review and operate task diffs, files, HTML Surfaces, the browser, App Surfaces, terminals, and logs.
+Safely review task diffs, files, HTML Surfaces, terminals, and logs, then continue to each dedicated operating surface.
 
 > Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
-From the same task, you can inspect more than its conversation: changed code, files, web pages, connected app screens, and running processes. This page distinguishes the surfaces used to review results from the tools that can take action.
+From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
 ## Use the right side panel
 
@@ -30,21 +30,11 @@ HTML Surface is not a general-purpose web browser. Use it for agent-created repo
 
 From the CLI, `cockpit html show --stdin` stores HTML and `cockpit side-panel html` displays it. See the [`cockpit html` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/html) for the exact contract.
 
-## Operate the in-app browser
+## Continue to a dedicated operating surface
 
-The in-app browser opens real web pages using a task session and a Browser Identity. Cookies, cache, localStorage, permissions, and proxy authentication are isolated by Identity. In-memory tab state and saved sessions remain available when you switch tasks or hide the panel.
+The in-app browser lets a person and agent operate the same real web page. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for page state, meaningful element targeting, and postconditions, and [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for sign-in isolation.
 
-When an agent clicks, types, selects, uploads, pastes, presses a key, or scrolls, the CLI reports event delivery and observable changes. `changed: false` is not proof of failure or success. Verify the intended postcondition through the URL, visible text, element state, or network result. Read the current page before retrying after a failure because a second click can submit twice.
-
-Passkeys can use Touch ID in a signed macOS build and Windows Hello on Windows. Linux has no platform authenticator integration, so use a security key or password. See the [`cockpit browser` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/browser).
-
-## Work with app screens through App Surface
-
-App Surface attaches an already-running Android emulator, Android physical device, or booted iOS Simulator to one task. Cockpit does not boot, start, stop, or install the target or its app, and one target cannot be attached to multiple tasks at the same time.
-
-Run `cockpit app doctor` and `cockpit app targets` before attaching. After attachment, prefer accessibility snapshots and target by label, role, a reference from the latest snapshot, then coordinates. Input delivery does not prove that the app reacted, so verify with a postcondition such as `--expect-text` or a fresh snapshot. The first attachment to an Android physical device requires approval through Ask.
-
-An offline or stale Surface keeps its last frame but rejects interaction. Reattach and confirm health. See the [`cockpit app` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/app) for setup, error codes, and coordinate rules.
+App Surface attaches a running Android target or iOS Simulator to one task. See [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for readiness, attachment, accessibility actions, coordinates, recovery, and safety boundaries.
 
 ## Use side terminals and background logs
 
@@ -70,4 +60,4 @@ Use this sequence to avoid treating a displayed result as a completed outcome:
 4. Check for secrets, destructive changes, and external publication.
 5. Save or share the required result before completing the task.
 
-See [Tasks and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks) for task state, resume, completion, and deletion, and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for data boundaries.
+See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) for state, completion, and deletion, [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for follow-up and resume, and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for data boundaries.

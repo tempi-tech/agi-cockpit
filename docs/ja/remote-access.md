@@ -146,6 +146,7 @@ Tailscale本体は動作していても、CockpitがTailscale CLIの状態を取
 ## 関連ページ
 
 - [AGI Cockpitとは](https://agi-labo.com/tools/cockpit/docs)
-- [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
+- [タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)
+- [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
 - [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)

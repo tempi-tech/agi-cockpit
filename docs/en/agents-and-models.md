@@ -67,4 +67,4 @@ The Cockpit skill and HTML Mode are installed into supported external agent CLIs
 
 The tables below are generated from the same typed capability registry used by task creation and runtime validation. They therefore show current support without maintaining a separate handwritten matrix.
 
-See [Install and run your first task](https://agi-labo.com/en/tools/cockpit/docs/getting-started) for task creation, [Reference and support](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support) for configuration and recovery, and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for data boundaries.
+See [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task) for task creation, [Reference and support](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support) for configuration and recovery, and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for data boundaries.

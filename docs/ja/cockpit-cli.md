@@ -52,6 +52,8 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 外部リンク、ファイルアップロード、物理端末、秘密入力には追加の安全境界があります。配送済みの入力を確認せず再送すると二重操作になる可能性があります。
 
+実践手順は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)、[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
+
 ## AutorunとFleetを使う
 
 `cockpit autorun`は一度、間隔、cronで新規タスクを起動するか、既存タスクへ指示を送ります。会員確認は作成時だけでなく実行時にも行われます。保存済みのランタイム設定を利用できなくなった場合、別設定へ無言で切り替えずAutorunを無効にします。

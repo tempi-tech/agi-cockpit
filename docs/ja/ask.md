@@ -102,5 +102,5 @@ cockpit ask close <ask-id>
 
 ## 関連ページ
 
-- [タスク一覧とタスク詳細](https://agi-labo.com/tools/cockpit/docs/tasks)
+- [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
 - [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)

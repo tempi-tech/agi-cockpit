@@ -1,12 +1,12 @@
 <!-- Generated from tempi-tech/AGICockpit — do not edit directly. -->
 
-# Install and run your first task
+# Install and complete initial setup
 
-Install AGI Cockpit, choose a working directory and agent, review the result of your first task, and mark the task complete.
+Install AGI Cockpit, prepare an agent and Cockpit integration, and reach the point where you can create your first task.
 
 > Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 
-By the end of this guide, you will be able to open AGI Cockpit, run your first task, review its result, and complete the task.
+By the end of this guide, you will be able to open AGI Cockpit, prepare an agent and Cockpit integration, and create your first task.
 
 ## 1. Install AGI Cockpit
 
@@ -51,44 +51,7 @@ cockpit system-prompt list
 
 The default `append` mode adds the content after Cockpit's standard system prompt and preserves its built-in Cockpit CLI knowledge. `--mode replace` replaces the standard prompt, leaving that knowledge available only through the installed Cockpit skill. Custom prompts are stored as user-owned Markdown in the AGI Tools data area and are not overwritten when Master Agent files are redeployed. Their content is sent to the selected agent, so do not include credentials or secrets. Cursor, Grok Build, Antigravity, Terminal, and terminal UI modes do not accept custom prompts.
 
-## 3. Create your first task
-
-1. Open **New task** at the top of the window.
-2. Choose **Project workspace** or **Temporary folder**. For an existing project, select only the directory you intend the agent to inspect.
-3. Select an AI agent.
-4. For supported agents, choose **Native UI** or **Terminal** as the UI mode.
-5. For an agent with account selection, keep **Auto** or pin the default account or a specific profile.
-6. If a system-prompt choice is available, keep its built-in default for this first check.
-7. Choose **Supervised** approval mode and enter a short request with a clear completion condition.
-8. Create the task.
-
-Project selection lists projects from the current task list first, in the same priority order, followed by recently used projects. The search field filters the displayed project name and path without regard to letter case. If the directory is not listed, enter its path directly or use the folder picker.
-
-The settings shown depend on the agent and UI mode. Desktop, PWA, CLI, and Autorun use the same capability data. An unsupported combination of model, reasoning effort, service tier, system prompt, account, or approval mode is hidden or rejected with an explicit error before creation.
-
-Cursor CLI supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Cursor's available models, model-specific reasoning efforts, approval mode, and account profiles. Models without a reasoning effort do not show that control, and Cursor does not support service tiers. For Grok 4.6, choose `low`, `medium`, `high`, or `xhigh`; Cockpit runs the model with the selected effort.
-
-Qoder CLI also supports both **Native UI** and **Terminal**. In Native UI, Cockpit can show Qoder's available models, reasoning effort for supported models, system prompt, approval mode, and account profiles. Models without a reasoning effort do not show that control, and Qoder does not support service tiers.
-
-In Grok Build Native UI, reasoning effort is available only for models that advertise support for it. New Grok visual tasks default to Grok 4.6 with `xhigh` reasoning effort.
-
-A read-only request is a safe first check.
-
-```text
-Inspect this folder and describe its main files and their roles in no more than five points. Do not change any files.
-```
-
-A temporary folder is deleted automatically when the task is completed. Before starting in an existing project, make sure you understand that the agent can operate on files in that directory.
-
-## 4. Confirm the successful state
-
-When you create a task, Cockpit immediately selects the new entry in the task list, and it normally starts as **Running**. In Terminal UI, if the view opens first, it connects to the same terminal after the runtime is ready. The task details view shows the instruction you sent and the agent's progress or response.
-
-After one response finishes, the task moves to **Awaiting confirmation**. This does not mean the entire task is complete. It means the task can accept another instruction or decision. If the result is incomplete, send a follow-up instruction from the composer in task details.
-
-When the work is finished, select **Complete** in task details. Completed tasks move out of the active list and do not accept regular follow-up instructions.
-
-## 5. Update AGI Cockpit
+## 3. Update AGI Cockpit
 
 Check for a new version from the update notice in the lower-left corner or open **Updates** from the app menu in the same location. On platforms where Cockpit downloads the update, use the on-screen action to restart and install it when ready. On Linux, the notice opens the download page that matches the current display language.
 
@@ -98,37 +61,18 @@ If an update check fails because of a temporary network or server problem, Cockp
 
 On packaged macOS builds, if the app has not quit within five minutes after an install request, Cockpit records the stalled handoff and asks the installer to try once more. Diagnostic events for update checks, downloads, verification, install requests, and restarts are saved in `~/.agi-tools/data/cockpit/logs/updater.jsonl`; their summary is also available from `cockpit update status` and the diagnostic export. If the current version still starts after the retry, inspect the last install result and open the distribution page through **Update manually**.
 
-## 6. If the task does not start
+## 4. If setup does not complete
 
 | Message or state | What to check |
 | --- | --- |
 | The agent you want is missing from the list | Select **Manage agents** to install its CLI or verify the launch command in Settings |
 | Native UI requires sign-in | Complete the guidance in task details and wait for Cockpit to retry the same instruction |
 | Terminal UI or Terminal requires sign-in | Complete that CLI's sign-in flow in the terminal, then resume or recreate the task |
-| The task shows **Error** | Read the startup error at the top of task details, then check the directory, command, and authentication |
-| The composer says **Resume the task to continue** | Select **Resume** to reconnect to the saved session |
-| You need a result from a temporary folder | Save the result to a persistent location before completing the task |
-
-## Create a task from an AI agent
-
-After the Cockpit integration is configured, a supported AI agent can use the `cockpit` command to create the same kind of task:
-
-```bash
-cockpit task create \
-  --instruction "Inspect this folder and describe its structure in no more than five points. Do not change any files." \
-  --directory /path/to/project
-
-cat instruction.md | cockpit task create --stdin --directory /path/to/project
-cockpit task create --instruction-file instruction.md --directory /path/to/project
-```
-
-Pass a multiline instruction, or one containing backticks, quotes, `$`, or a code fence, with `--stdin` or `--instruction-file`. These inputs avoid shell substitution and quoting rules and deliver the standard-input or file contents unchanged.
-
-If the command omits the directory, Cockpit starts the task in an operating-system temporary folder.
 
 ## Related pages
 
-- [Task list and task details](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+- [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+- [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 - [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 - [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)

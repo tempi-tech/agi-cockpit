@@ -46,6 +46,8 @@ On macOS, `import-session` imports cookies belonging to the visible site's regis
 
 Clearing an Identity closes its sessions. Removing it also deletes persistent data. An Identity referenced by a running task or Autorun cannot be removed without a replacement, and the Default Identity cannot be removed.
 
+See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for assignment and removal procedures.
+
 ## Handle attachments and Ask media
 
 Attachments use randomized stored names in a Cockpit-managed area and are validated by extension, MIME type, actual size, and content. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Archives and executable formats are rejected.
@@ -65,6 +67,8 @@ See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) fo
 App Surface attaches one target exclusively to one task. The first attachment to an Android physical device requires Ask approval, and `fill` refuses secure fields. The last frame may remain after disconnection, but the stale Surface disables interaction.
 
 Cockpit does not start, stop, or install the target app. Completing or deleting a task detaches the target without closing its app.
+
+See [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for attachment and operation procedures.
 
 ## Confirm completion and deletion
 
