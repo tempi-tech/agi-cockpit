@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.63.0 — 2026-08-29
+
+**Type:** minor · **Platforms:** macOS
+
+- Fixed account selection so the account chosen when creating a task is used consistently in the display, saved state, and runtime.
+- Improved Auto account selection so it detects exhausted Claude usage credits and switches to another account.
+- Fixed task shutdown so descendant processes are cleaned up reliably instead of leaving background work running.
+- Fixed Fleet groups so they continue to show the correct running state while gate nodes are being evaluated.
+- Improved Fleet gate timeout reports so running, failed, and slow tests can be identified.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスク作成時に選んだアカウントが表示・保存・実行で一貫して使用されるように修正
+- AutoアカウントがClaudeの利用クレジット枯渇を検出し、別のアカウントへ切り替えるように改善
+- タスク停止時に子孫プロセスを確実に回収し、バックグラウンド処理が残る問題を修正
+- Fleetゲートの評価中もグループの実行状態を正しく表示するように修正
+- Fleetゲートのタイムアウト時に実行中・失敗・低速なテストを確認できるように改善
+
+</details>
+
 ## v4.62.0 — 2026-08-28
 
 **Type:** minor · **Platforms:** macOS, Linux
