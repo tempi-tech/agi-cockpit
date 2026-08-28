@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.63.0 — 2026-08-29
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Fixed account selection so the account chosen when creating a task is used consistently in the display, saved state, and runtime.
 - Improved Auto account selection so it detects exhausted Claude usage credits and switches to another account.
