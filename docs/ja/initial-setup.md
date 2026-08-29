@@ -42,12 +42,14 @@ Claude Code、Codex、Grok BuildのネイティブUIは、未認証でタスク�
 | ネイティブUIでログインが必要 | タスク詳細のログイン案内を完了し、同じ指示の再試行を待つ |
 | ターミナルUIまたはTerminalでログインが必要 | ターミナル内で対象CLIのログインを完了し、タスクを再開または作り直す |
 
-アカウントプロファイル、Auto、モデル、カスタムシステムプロンプトなど、初回セットアップ後の設定は[エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)を参照してください。
+初回セットアップ後は、[エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)、[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts)、[システムプロンプト](https://agi-labo.com/tools/cockpit/docs/system-prompts)で実行環境を調整できます。
 
 ## 関連ページ
 
 - [AGI Cockpitをインストールする](https://agi-labo.com/tools/cockpit/docs/getting-started)
 - [最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)
 - [エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+- [アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts)
+- [システムプロンプト](https://agi-labo.com/tools/cockpit/docs/system-prompts)
 - [`cockpit setup` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/setup)
 - [セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)

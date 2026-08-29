@@ -42,12 +42,14 @@ Setup is complete when the **New task** screen opens and the agent you want is s
 | Native UI requires sign-in | Complete the guidance in task details and wait for the same instruction to retry |
 | Terminal UI or Terminal requires sign-in | Complete that CLI's sign-in flow in the terminal, then resume or recreate the task |
 
-For account profiles, Auto, models, and custom system prompts after initial setup, see [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models).
+After initial setup, use [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models), [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts), and [System prompts](https://agi-labo.com/en/tools/cockpit/docs/system-prompts) to tune the runtime environment.
 
 ## Related pages
 
 - [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started)
 - [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 - [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+- [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+- [System prompts](https://agi-labo.com/en/tools/cockpit/docs/system-prompts)
 - [`cockpit setup` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/setup)
 - [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
