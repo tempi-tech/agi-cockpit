@@ -4,7 +4,7 @@
 
 タスク一覧、オーバービュー、検索、並べ替え、作業場所、状態、完了、削除の違いを説明します。
 
-> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.63.0で2026-08-29に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は、複数の仕事から「次にどれを見るか」を選ぶ場所です。個々の会話や追加入力は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)で扱います。
 
@@ -58,6 +58,8 @@ Git Worktreeは変更を別checkoutへ分離しますが、同じブランチを
 ## Fleet Runを見分ける
 
 タイトル付きFleet Runは、タスク一覧のFleetグループとFleet詳細にタイトルを表示します。各ノードタスクの名前は「Runタイトル / ノード名」になり、通常のタスク名と同じ方法で検索できます。
+
+Fleetグループの実行表示とステータス順はRun全体の状態に従います。エージェントタスクが一時的に0件でも、command gateまたはhuman gateを評価中のRunはDesktopとPWAで実行中のまま表示されます。
 
 Runの「Runを削除」は保存済みRun履歴だけを削除し、関連タスクを残します。「Runとすべてのタスクを削除」は確認画面に表示された関連タスクも削除します。後者は元に戻せないため、必要な成果を保存してから実行してください。
 

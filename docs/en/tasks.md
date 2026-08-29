@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -58,6 +58,8 @@ Awaiting confirmation distinguishes `turn_complete`, `permission`, `question`, `
 ## Distinguish Fleet Runs
 
 A titled Fleet Run shows its title in the task-list Fleet group and Fleet details. Each node task is named **Run title / node name**, so the Run title is searchable like an ordinary task name.
+
+The Fleet group's running indicator and status sort follow the state of the Run as a whole. Even when no agent task is temporarily running, a Run evaluating a command or human gate remains shown as running in Desktop and the PWA.
 
 **Delete Run** removes saved Run history but leaves related tasks. **Delete Run and all tasks** also removes every related task shown in the confirmation. The latter cannot be undone, so preserve required output first.
 

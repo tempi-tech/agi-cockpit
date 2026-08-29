@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -19,6 +19,8 @@ A Terminal task cannot restore its previous shell process, so resume starts a ne
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus.
 
+Stopping a turn, completing or removing a task, or quitting the app also stops descendant processes launched by that task. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
+
 The **Follow-up behavior** setting under Appearance chooses whether an ordinary follow-up sent during a reply waits in the **Queue** or **Steers** the current reply. Queue is the default. When it does not conflict with the configured send or steer shortcut, Cmd/Ctrl+Enter uses the opposite behavior for that one message.
 
 Before delivery, a queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
@@ -27,7 +29,7 @@ Before delivery, a queued message can be edited, sent now, or removed. **Edit** 
 
 New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to **Auto**. Auto chooses among signed-in accounts by usage and, after detecting a usage or plan limit, can switch to another available account and continue the saved session.
 
-Desktop and PWA show **Auto · account name** near the composer. The account menu can select Auto, the default account, or a named profile. A manual switch stops current execution, moves the saved conversation to the chosen profile, and resumes it.
+The selection made when the task is created is saved with that task and remains the selection used for display, resume, and execution. Desktop and PWA show **Auto · account name** near the composer. The account menu can select Auto, the default account, or a named profile. A manual switch stops current execution, moves the saved conversation to the chosen profile, and resumes it.
 
 If no account is available, usage cannot be checked, or switching or resume fails, the task stops with `waiting_confirmation` and `usage_limit`. Choose another account as directed or retry after a displayed reset time.
 

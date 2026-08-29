@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -186,6 +186,8 @@ When using `enabled`, run `validate` with the same arguments first and inspect w
 | human | The user approves a Cockpit Ask | Immediately before pushing, publishing, deleting, sending, spending, or another externally visible or irreversible action |
 
 A command gate times out after 30 minutes and serializes against command gates from other Runs using Worktrees of the same Git repository. `retries` accepts 0 through 3, but automatic retries are limited to load-dependent flakes where one or two failed tests are named in Vitest format. Type errors, build failures, timeouts, and the same test failing twice fail immediately.
+
+When a Vitest command gate times out, its gate output and failed-test list record the tests that failed before the timeout, test files that started streaming output but did not finish, and up to five of the slowest completed tests that took at least 30 seconds. Inspect the Fleet panel's Report or `cockpit fleet logs <runId> --node <nodeId>` for evidence of where the suite stopped.
 
 Write a human gate's Ask so it stands alone: state what finished, what evidence was checked, and what external action approval will cause. Rejection skips downstream work. Dismissing the Ask interrupts the gate and pauses the Run instead of rejecting it.
 

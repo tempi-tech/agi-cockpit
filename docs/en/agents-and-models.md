@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -50,7 +50,7 @@ Custom prompts are stored as user-owned Markdown in the AGI Tools data area. The
 
 Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default account and named profiles. Auto is the default for new tasks, Autoruns, and Fleet nodes. It inspects signed-in account usage, chooses a runtime, and can switch to another available account and resume the saved session after a usage or plan limit.
 
-A fixed account does not switch automatically. Switching an active task stops its current runtime and resumes the saved conversation with the selected profile. Exhausted Codex workspace credits are treated as a usage limit.
+When you choose Auto or a fixed account at task creation, Cockpit saves that selection and the current runtime account with the task, then uses the same state for its display and next runtime. A fixed account does not switch automatically. Switching an active task stops its current runtime and resumes the saved conversation with the selected profile. Exhausted Claude usage credits and Codex workspace credits are treated as usage limits.
 
 Antigravity named profiles use browser-based Google OAuth and keep OAuth tokens, conversations, logs, and usage history in profile-specific storage. They do not fall back to a shared keyring. Developer shell resources and non-credential settings remain shared with the normal home directory. On macOS, the host user's Keychain search list remains available to GitHub CLI and Git credential helpers without sharing Antigravity's profile-specific data.
 

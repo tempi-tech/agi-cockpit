@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.63.0で2026-08-29に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -186,6 +186,8 @@ Global Fleetで`workspace: isolated`を使う場合は、そのノードへリ�
 | human | Cockpit Askで利用者が承認する | push、公開、削除、送信、課金など外部に見える、または不可逆な操作の直前 |
 
 command gateは30分でタイムアウトし、同じGitリポジトリのWorktreeを使う別Runのcommand gateとは直列化されます。`retries`は0〜3ですが、自動再試行はVitest形式で1〜2件の失敗テストを特定できる負荷依存flakeだけが対象です。型エラー、ビルド失敗、タイムアウト、同じテストの連続失敗はすぐに失敗として扱います。
+
+Vitestのcommand gateがタイムアウトした場合、gateの出力と失敗テストには、タイムアウト前に失敗したテスト、出力を開始したまま完了しなかったテストファイル、30秒以上かかった完了済みテストのうち遅い順に最大5件が記録されます。FleetパネルのReportまたは`cockpit fleet logs <runId> --node <nodeId>`で、停止箇所の手掛かりを確認します。
 
 human gateのAskは、グラフを見なくても判断できるよう、完了したこと、確認した証拠、承認後に起きる外部操作を本文だけで説明します。却下は下流をskipし、Askを閉じただけの場合はノードが中断されてRunが一時停止します。
 
