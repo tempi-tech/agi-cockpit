@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.64.0 — 2026-08-30
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Cockpit Hooks for automatically running commands from task, Ask, Autorun, Fleet, app, and hotkey events.
 - Added controls in Settings to enable or disable Cockpit Hooks, inspect recent runs, and delete hooks.
