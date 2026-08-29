@@ -2,9 +2,9 @@
 
 # cockpit CLI
 
-AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、設定を安全に操作する方法を説明します。
+AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、設定を、同じ状態と権限境界で扱います。
 
@@ -63,6 +63,10 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 `cockpit autorun`は一度、間隔、cronで新規タスクを起動するか、既存タスクへ指示を送ります。会員確認は作成時だけでなく実行時にも行われます。保存済みのランタイム設定を利用できなくなった場合、別設定へ無言で切り替えずAutorunを無効にします。
 
 `cockpit fleet`は依存関係付きの複数タスクをRunとして実行します。YAMLの検証、gate、再試行、再開、Runタイトル、各ノードの進捗を扱います。単純な定期起動にはAutorun、依存する複数処理にはFleetを使います。実践手順は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)、全構文は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
+
+## Hooksでイベントに反応する
+
+`cockpit hooks`は、タスク、Ask、Autorun、Fleet Run、アプリのライフサイクル、ホットキーのイベントに対して、ローカルでシェルアクションを実行する宣言を登録します。フィルターでイベントのpayloadを絞り、`hooks runs`で失敗を確認し、依存する前にアクションを明示的にテストしてください。Hookの登録は任意のローカルコード実行にあたるため、このコマンド群は`--host`を拒否します。イベントpayload、安全策、正確なコマンド結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)を参照してください。
 
 ## ローカルとリモートを区別する
 

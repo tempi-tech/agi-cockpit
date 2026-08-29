@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.63.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
