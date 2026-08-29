@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.64.0 — 2026-08-30
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Cockpit Hooks for automatically running commands from task, Ask, Autorun, Fleet, app, and hotkey events.
+- Added controls in Settings to enable or disable Cockpit Hooks, inspect recent runs, and delete hooks.
+- Improved Fleet runs with a progress bar and gate details that show exit codes and approval results.
+- Improved Fleet definition load errors with the cause, target path, Open file action, and Reload action.
+- Fixed delayed Visual Runtime errors and composer content so they remain attached to the originating task after switching tasks.
+- Fixed empty sessions so they show models for the correct agent and late model-list responses do not revert the current selection.
+- Improved PWA Autorun creation and editing so failures keep the dialog open and show the reason and relevant guidance.
+- Fixed PWA Ask image panning so it does not switch Remote tabs unintentionally.
+- Improved Cockpit CLI errors so they follow the app's selected language.
+- Fixed Cockpit CLI internal communication in projects that use type: module.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Cockpit Hooksでタスク、Ask、Autorun、Fleet、アプリ、ホットキーのイベントからコマンドを自動実行できるように対応
+- 設定画面からCockpit Hooksの有効化、無効化、実行履歴の確認、削除を行えるように対応
+- Fleetの実行状況を進捗バーで確認し、ゲートの終了コードや承認結果を詳細画面で確認できるように改善
+- Fleet定義の読み込みエラーに原因、対象パス、ファイルを開く操作、再読み込み操作を表示するように改善
+- 別のタスクへ切り替えた後に届いたVisual Runtimeのエラーや入力内容が、元のタスクへ正しく保持されるように修正
+- 空のセッションでも各エージェントに対応するモデル一覧を表示し、遅れて届いた一覧で選択中のモデルが戻らないように修正
+- PWAのAutorun作成・更新が失敗したとき、ダイアログを閉じずに理由と必要な案内を表示するように改善
+- PWAのAsk画像を横に動かしたときにRemoteタブが意図せず切り替わる問題を修正
+- アプリの表示言語に合わせてCockpit CLIのエラーメッセージを表示するように改善
+- type: moduleを使用するプロジェクトでもCockpit CLIの内部通信を正しく起動できるように修正
+
+</details>
+
 ## v4.63.0 — 2026-08-29
 
 **Type:** minor · **Platforms:** macOS, Linux
