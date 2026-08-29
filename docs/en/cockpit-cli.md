@@ -2,9 +2,9 @@
 
 # Cockpit CLI
 
-Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, and Fleet surfaces.
+Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.63.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -49,6 +49,10 @@ See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Brow
 `cockpit autorun` starts a new task or sends instructions to an existing task once, on an interval, or from cron. Membership is checked both when the Autorun is created and when it runs. If a saved runtime setting becomes unavailable, Cockpit disables the Autorun instead of silently choosing another runtime.
 
 `cockpit fleet` executes dependency-aware tasks as a Run. It covers YAML validation, gates, retries, resume, Run titles, and node progress. Use Autorun for simple scheduled starts and Fleet for dependent multi-step work. See [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for the practical workflow and the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for exact syntax.
+
+## Automate reactions with Hooks
+
+`cockpit hooks` registers local event-to-shell-action declarations for task, Ask, Autorun, Fleet Run, app lifecycle, and hotkey events. Use filters to narrow an event payload, inspect failures through `hooks runs`, and test an action explicitly before relying on it. Hook registration is arbitrary local code execution, so this command family rejects `--host`. See the [`cockpit hooks` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/hooks) for event payloads, safeguards, and exact command results.
 
 ## Distinguish local and remote targets
 
