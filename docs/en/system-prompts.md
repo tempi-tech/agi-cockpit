@@ -2,7 +2,7 @@
 
 # System prompts
 
-Understand standard and custom prompt composition, append and replace modes, registration, selection, storage, and safe operation.
+Understand the built-in Cockpit, Claude Code, Cowork, and Codex presets, plus custom prompt append and replace modes, selection, and safe operation.
 
 > Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/system-prompts)
 
@@ -14,6 +14,33 @@ Put the concrete outcome for one job in the task instruction. Put roles and qual
 
 A system prompt does not grant permissions. File edits, commands, external transfers, and publishing remain governed by the selected agent, approval mode, and normal safety boundaries.
 
+## Understand the built-in presets
+
+AGI Cockpit includes system-prompt presets that are available immediately for each supported agent. **Cockpit** is the default for every supported agent. Built-in presets are complete alternatives and cannot be stacked. `cockpit system-prompt list` reports them with `source: default` and `mode: replace`; they cannot be edited or removed.
+
+| Agent | Preset | Instructions and intended use |
+| --- | --- | --- |
+| Claude, Codex, Qoder, Cockpit | **Cockpit** (default) | Uses Cockpit's standard prompt covering the task environment, CLI, Ask, supervision, verification, approval boundaries, and short, concrete reporting |
+| Claude | **Claude Code** | Uses the Claude Agent SDK's built-in `claude_code` preset and appends a short Cockpit environment and CLI brief. Choose it when Claude Code's working conventions should take priority |
+| Claude | **Cowork** | Uses Cockpit's bundled Cowork prompt for general knowledge work, interaction, safety, writing tone, task tracking, and citations, followed by a short Cockpit brief |
+| Codex | **Codex (Friendly)** | Selects the Codex runtime's `friendly` personality with a short Cockpit environment and CLI brief. It keeps Codex's standard behavior while requesting a warmer response style |
+| Codex | **Codex (Pragmatic)** | Selects the Codex runtime's `pragmatic` personality with a short Cockpit environment and CLI brief. It keeps Codex's standard behavior while requesting a practical, direct response style |
+| Qoder | **Qoder** | Does not supply Cockpit's custom system prompt and uses Qoder's standard prompt |
+
+Use **Cockpit** as the baseline when the agent should consistently work as a task delegated and supervised from Cockpit and understand Ask, side panels, and child tasks. Claude's **Claude Code** and **Cowork** presets and the two Codex presets prioritize the provider's working style while retaining enough context to operate inside Cockpit. Exact Codex personality wording can change with the Codex runtime or model.
+
+Selecting **Claude Code** still runs the task in Cockpit's native UI through the Claude Agent SDK; it does not switch to Claude Code's terminal UI. Conversely, Claude and Codex terminal UI tasks do not use this selector. Their CLI's own system prompt and configuration apply instead.
+
+Change the per-agent default under Agents in Settings. These CLI settings become the default for tasks created afterward:
+
+```bash
+cockpit settings set agents.systemPromptPreset.claude claude-code
+cockpit settings set agents.systemPromptPreset.codex codex-friendly
+cockpit settings reset agents.systemPromptPreset.claude
+```
+
+`reset` returns the agent to the default **Cockpit** preset. A settings change does not rewrite existing tasks or a saved Autorun runtime snapshot. To override one task only, pass `--system-prompt claude-code` or `--system-prompt codex-pragmatic` when creating it.
+
 ## Choose append or replace
 
 | Mode | Composition | Appropriate use |
@@ -21,7 +48,9 @@ A system prompt does not grant permissions. File edits, commands, external trans
 | `append` | Adds the custom instructions after Cockpit's standard prompt | Add review criteria, writing tone, or a specialist role |
 | `replace` | Sends only the custom instructions and omits Cockpit's standard prompt | Advanced cases where you maintain the entire instruction structure |
 
-The default is `append`. With `replace`, Cockpit CLI knowledge is no longer supplied by the standard prompt and is available only through the installed Cockpit skill. Use `append` unless full replacement is intentional.
+`append` and `replace` control how a user-created custom prompt is composed. The default is `append`. An appended custom prompt always follows the **Cockpit standard prompt**; it is not appended after another built-in preset such as Claude Code, Cowork, Codex (Friendly), or Codex (Pragmatic).
+
+With `replace`, Cockpit CLI knowledge is no longer supplied by the standard prompt and is available only through the installed Cockpit skill. Use `append` unless full replacement is intentional.
 
 ## Register a custom prompt
 
