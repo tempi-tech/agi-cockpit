@@ -6,7 +6,7 @@ AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウ�
 
 > AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
-`cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、設定を、同じ状態と権限境界で扱います。
+`cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
 ## セットアップと接続
 
@@ -27,6 +27,8 @@ Cockpitから起動したタスクには、正しいローカルインスタン�
 ## JSON結果を確認する
 
 すべてのコマンドはJSONを返します。成功は`ok: true`、失敗は`ok: false`と`error`を持ち、安定したエラーでは`code`も返ります。終了コードだけでなく、`ok`、`code`、対象ID、状態、検証フィールドを確認します。
+
+Cockpitから起動したタスクでは、CLIのエラーメッセージがアプリの表示言語に従います。表示言語を変更した場合は、その後に起動するタスクから新しい言語が使われます。自動処理では翻訳された`error`本文ではなく、利用できる場合は安定した`code`で分岐してください。
 
 `--json`はすべてのコマンドで一貫して受け付けます。長い指示、Markdown、引用、バッククォート、`$`を含む内容はシェル引数へ埋め込まず、`--stdin`または`--instruction-file`、`--text-file`を使います。
 
@@ -67,6 +69,8 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 ## Hooksでイベントに反応する
 
 `cockpit hooks`は、タスク、Ask、Autorun、Fleet Run、アプリのライフサイクル、ホットキーのイベントに対して、ローカルでシェルアクションを実行する宣言を登録します。フィルターでイベントのpayloadを絞り、`hooks runs`で失敗を確認し、依存する前にアクションを明示的にテストしてください。Hookの登録は任意のローカルコード実行にあたるため、このコマンド群は`--host`を拒否します。イベントpayload、安全策、正確なコマンド結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)を参照してください。
+
+Hookの追加、変更、テストはCLIから行います。画面左下のアプリメニューから「設定」→「Hooks」を開くと、登録済みHookの有効化と無効化、直近の実行日時・イベント・終了コード・標準出力・標準エラーの確認、Hookの削除ができます。削除前には画面内で確認が必要です。Hookを削除しても既存の実行履歴は残るため、履歴も含めた保存境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を確認してください。
 
 ## ローカルとリモートを区別する
 

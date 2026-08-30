@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -113,6 +113,10 @@ Use the Fleet panel to inspect:
 - The real task, workspace, branch, and attempt count for each agent node.
 - Node reports, structured output, command-gate results, and Run events.
 
+The progress bar in the Run header groups every node by completed, running, failed, interrupted, stopped, skipped, or pending state and shows completed nodes over total nodes. It is a current status breakdown, not elapsed time or an estimated completion time.
+
+Select a gate node to see the actual exit code for a command gate, or the approved or rejected result and answer text for a human gate. Exit code 0 passes; any other code fails. Inspect the gate details and output instead of inferring the result only from the overall Run status.
+
 Use these commands for deeper inspection.
 
 | Need | Command |
@@ -124,6 +128,8 @@ Use these commands for deeper inspection.
 | The node's real task | `cockpit task get <taskId>` |
 
 Sending Steer directly to a live node task, canceling its turn, completing it, or removing it interrupts the node and pauses the Run. Unless you intend to intervene, supervise through the Fleet panel and `fleet` commands rather than operating node tasks by hand.
+
+When a Fleet definition cannot be loaded, the panel distinguishes a missing file, invalid YAML, schema validation, and another load failure. It shows the target path and validation issues. When the path is available, use **Open file** to correct it and **Reload** to read the same definition again. If the file is missing, confirm the displayed path, create the file, then reload.
 
 ## Assign roles to nodes
 

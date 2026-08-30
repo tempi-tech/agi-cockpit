@@ -2,15 +2,15 @@
 
 # Security and data
 
-Understand local execution, external transmission, approvals, credentials, task history, attachments, Browser Identities, and Remote Access storage boundaries.
+Understand local execution, external transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
 ## What stays local
 
-Core Cockpit data, including task state, conversation history, Autoruns, Fleets, templates, CLI runtime information, and logs, is stored under `~/.agi-tools/data/cockpit`. Some data, such as attachments and Electron browser profiles, is stored in the operating system's application-data area. Working files live in the selected project, temporary directory, or Git Worktree.
+Core Cockpit data, including task state, conversation history, Autoruns, Fleets, Cockpit Hook definitions and run history, templates, CLI runtime information, and logs, is stored under `~/.agi-tools/data/cockpit`. Some data, such as attachments and Electron browser profiles, is stored in the operating system's application-data area. Working files live in the selected project, temporary directory, or Git Worktree.
 
 The agent process reads and writes its workspace. Depending on the approval mode and agent permissions, it may access files not currently displayed in Cockpit. Select only the directories needed for the task.
 
@@ -31,6 +31,14 @@ An onboarding abandonment event that could not be sent is kept temporarily in th
 `supervised`, `accept-edits`, and `full-access` define the boundary of agent tool operations. When one-time approval, always allow, or deny is offered, inspect the operation, path, command, and external destination. “Always allow” affects later operations of the same kind, so prefer one-time approval when the scope is unclear.
 
 Ask returns a human policy decision; it is not a tool approval. Choosing “publish” in an Ask does not automatically grant permissions required by the operating system, an external service, or another tool.
+
+## Run Cockpit Hooks safely
+
+Cockpit Hooks automatically run a registered shell action with the user's local permissions. They are separate from an agent's approval mode and do not sandbox the hook action. Register only scripts that you understand and control, then test them explicitly with `cockpit hooks test` before enabling them. To prevent arbitrary code from being registered remotely, `cockpit hooks` rejects `--host`.
+
+The complete event JSON is delivered on standard input. Some values, including task names, working directories, Ask summaries, and selected text, are also available through environment variables. A hook that invokes an external command or network service can transmit those values. Select only the events and filters you need, and do not write tokens, personal data, or local paths to standard output or standard error. Their final 4 KB is stored in run history and can be inspected from Settings or the CLI.
+
+Settings can disable or remove a hook, but removing it leaves existing run history in place. History rotates at 2,000 lines or 2 MB and keeps the latest 1,000 lines. Capturing selected text from a global hotkey on macOS requires Accessibility permission. Without it, the hook still runs with an empty selection value. Concurrency limits, timeouts, depth limits, and the circuit breaker reduce runaway execution; they do not make a registered command safe.
 
 ## Store credentials
 

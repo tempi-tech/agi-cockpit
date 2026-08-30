@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -34,6 +34,8 @@ In the cron weekday field, `0` means Sunday. For example, `0 9 * * 1-5` runs at 
 6. For an existing task, choose **Target task**. Cockpit creates no new runtime; it uses the target's existing agent, conversation, working directory, and runtime settings.
 7. Choose **Once**, **Interval**, or **Cron** and configure the timing.
 8. Save the Autorun and confirm that the list shows its next run time.
+
+When creating or updating an Autorun in the PWA, the dialog stays open and disables its controls until a save result arrives. A failed save preserves the entered values, keeps the dialog open, and displays the reason returned by the server. A membership failure links to plan selection, while a disconnected result says that nothing was saved. A timeout means the result is unknown: close the dialog and inspect the list before retrying so you do not create a duplicate.
 
 An Autorun that creates a new task keeps its runtime settings from the time it is saved as a snapshot. Changing global settings later does not silently change its model, reasoning effort, service tier, system prompt, approval mode, account-selection method, or UI mode. If a pinned model or account becomes unavailable, Cockpit does not substitute another setting. It disables that Autorun and marks it as needing attention.
 

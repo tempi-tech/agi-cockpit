@@ -4,7 +4,7 @@
 
 選択したタスクの会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.63.0で2026-08-29に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -36,6 +36,8 @@ Claude、Codex、Grok Build、Antigravity、Cursor、Qoderの新しいタスク�
 ## メッセージを入力する
 
 Desktopの「送信キー」設定では、EnterまたはCmd/Ctrl+Enterを送信に割り当てられます。Shift+Enterはどちらの設定でも改行です。利用可能なDesktop環境では、入力欄のマイクから90秒までのローカル音声入力を使えます。端末内で文字起こしされた内容を確認してから送信してください。
+
+入力途中の本文と添付はタスクごとに保持されます。送信または割り込みの結果を待たずに別のタスクへ移動しても、失敗した入力は送信元タスクの入力欄へ戻り、遅れて届いたVisual Runtimeのエラーもそのタスクに表示されます。戻した本文は、その間に同じタスクへ入力した新しい下書きの前へ追加されます。
 
 PWAもDesktopと同じFollow-up設定とキューを使います。Claude、Codex、Grok BuildのネイティブUIでは、PWAから`/compact`だけを送ると会話コンテキストを圧縮します。
 
