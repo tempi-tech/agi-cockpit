@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.65.0 — 2026-08-31
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Discord Ask relay so users can receive and answer Asks from Discord.
+- Added Slack Ask relay so users can receive and answer Asks from Slack.
+- Added a dedicated Ask notifications settings screen for managing Discord and Slack connections and channels.
+- Improved cockpit ask so AskUserQuestion JSON renders as a structured Ask with questions and choices.
+- Added local file attachments to answers sent with cockpit ask answer.
+- Fixed PWA task deep links so they open correctly at startup and after reconnecting.
+- Added detection for Visual Runtime sessions that repeat the same error and an option to resume in a fresh session.
+- Fixed /goal in Codex Visual so it starts an actual turn instead of only saving the objective.
+- Fixed Antigravity Visual scheduled continuations so they sync back to the original turn after a restart.
+- Fixed task status notifications so clicking one brings the target task to the foreground.
+- Improved task cleanup so descendant processes detached from their parent are reclaimed after the task stops.
+- Improved Visual Runtime history restoration to report omitted conversation turns accurately and explain omitted output in the PWA.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- AskをDiscordへ転送し、Discordから回答できるように対応
+- AskをSlackへ転送し、Slackから回答できるように対応
+- 設定にAsk通知専用画面を追加し、DiscordとSlackの接続先やチャンネルを管理できるように対応
+- cockpit askへAskUserQuestionのJSONを渡したとき、質問と選択肢を構造化されたAskとして表示するように改善
+- cockpit ask answerから回答へローカルファイルを添付できるように対応
+- PWAのタスクへのディープリンクを起動時や再接続後も正しく開けるように修正
+- Visual Runtimeの同じエラーが繰り返されるセッションを検出し、新しいセッションで再開できるように対応
+- Codex Visualで/goalを送信したとき、目標を保存するだけでなく実際のターンを開始するように修正
+- Antigravity Visualのスケジュールされた継続処理を再起動後も元のターンへ同期するように修正
+- タスク完了などの通知をクリックしたとき、対象タスクを前面で開くように修正
+- タスク停止後に親プロセスから切り離された子孫プロセスも回収するように改善
+- Visual Runtimeの履歴復元表示を会話ターン単位で正確に表示し、PWAでも省略された出力を案内するように改善
+
+</details>
+
 ## v4.64.0 — 2026-08-30
 
 **Type:** minor · **Platforms:** macOS, Linux
