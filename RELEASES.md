@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.66.0 — 2026-09-01
+
+**Type:** minor · **Platforms:** macOS
+
+- Added an option to prevent idle sleep while Remote Access is running.
+- Fixed hidden browser tabs on macOS covering other apps or appearing as black windows.
+- Fixed the app becoming unresponsive when Git diff requests surge on Windows.
+- Fixed extra windows opening when AGI Cockpit is launched while already running.
+- Improved Cursor Visual context usage and limit display when the runtime does not report token usage.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- リモートアクセス中のアイドルスリープを防ぐオプションを追加
+- macOSで非表示のブラウザタブが他のアプリを覆ったり黒いウィンドウとして表示されたりする問題を修正
+- WindowsでGit差分取得が集中したときにアプリが応答しなくなる問題を修正
+- 既存のAGI Cockpitを再度起動したときに不要なウィンドウが増える問題を修正
+- Cursor Visualがトークン使用量を返さない場合もコンテキスト使用量と上限を適切に表示するように改善
+
+</details>
+
 ## v4.65.0 — 2026-08-31
 
 **Type:** minor · **Platforms:** macOS, Linux
