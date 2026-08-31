@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.66.0で2026-09-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 

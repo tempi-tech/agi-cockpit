@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.66.0 on 2026-09-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 

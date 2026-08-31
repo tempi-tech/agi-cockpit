@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、スマートフォンや別のコンピューターからAGI Cockpitのタスク、Ask、Autorunを安全に監督する手順です。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.66.0で2026-09-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 

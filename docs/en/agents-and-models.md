@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.66.0 on 2026-09-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -64,7 +64,9 @@ Antigravity native UI cannot ask an approval question while it runs, so `supervi
 
 Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, and Grok Build also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress. When an Antigravity Native UI continuation scheduled by a timer or similar condition survives a restart, Cockpit synchronizes it from the saved transcript into its original turn instead of displaying a duplicate new turn.
 
-Usage and limits appear only for agents whose runtime reports current values. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
+Provider quota usage and limits appear only when the runtime reports current values. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
+
+Context usage follows a separate display contract. If Cursor Native UI does not report token usage, Cockpit estimates the current context from the locally retained conversation and prefixes the value with `~`. The maximum comes from the runtime when available, then from maintained metadata for the selected Cursor model. When neither source has a context length, the maximum is shown as unavailable and no percentage is calculated. If the retained history exceeds the model window, Cockpit caps the displayed active-context estimate at that window and leaves the meter neutral because runtime compaction or history truncation may have reduced the actual active context. These estimates are not provider quota or billing values.
 
 Supported agents use `/goal` to set an objective. Codex can apply a token budget, Qoder can apply a turn limit, and Claude, Codex, Qoder, and Grok Build expose persisted goal state. In Codex Native UI, `/goal` updates the goal state, remains in history as a user message, and starts an actual turn that works toward the objective. Antigravity and Cursor provide a runtime goal-setting operation without a persisted-state display contract.
 

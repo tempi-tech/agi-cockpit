@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit tasks, Asks, and Autoruns safely from a phone or another computer.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.66.0 on 2026-09-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
