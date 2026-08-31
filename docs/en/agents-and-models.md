@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -62,11 +62,11 @@ Antigravity native UI cannot ask an approval question while it runs, so `supervi
 
 ## Resume, usage, and Goals
 
-Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, and Grok Build also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress.
+Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, and Grok Build also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress. When an Antigravity Native UI continuation scheduled by a timer or similar condition survives a restart, Cockpit synchronizes it from the saved transcript into its original turn instead of displaying a duplicate new turn.
 
 Usage and limits appear only for agents whose runtime reports current values. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
 
-Supported agents use `/goal` to set an objective. Codex can apply a token budget, Qoder can apply a turn limit, and Claude, Codex, Qoder, and Grok Build expose persisted goal state. A `/goal` sent in Codex Native UI remains in conversation history as a user message in addition to updating goal state. Antigravity and Cursor provide a runtime goal-setting operation without a persisted-state display contract.
+Supported agents use `/goal` to set an objective. Codex can apply a token budget, Qoder can apply a turn limit, and Claude, Codex, Qoder, and Grok Build expose persisted goal state. In Codex Native UI, `/goal` updates the goal state, remains in history as a user message, and starts an actual turn that works toward the objective. Antigravity and Cursor provide a runtime goal-setting operation without a persisted-state display contract.
 
 ## Attachments, skills, and external sessions
 

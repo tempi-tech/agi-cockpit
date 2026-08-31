@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -16,6 +16,8 @@ Task details is where you understand a piece of work selected from the [Task lis
 - **Resume** reconnects an unfinished task to its saved session after its process stopped, such as after an app restart.
 
 A Terminal task cannot restore its previous shell process, so resume starts a new shell in the same directory. Native UI for Cursor, Qoder, and Grok Build reconnects to its supported saved conversation.
+
+After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus.
 
@@ -49,6 +51,12 @@ A message from another Cockpit task displays its source task name or shortened I
 
 On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output.
 
+Saved Native UI history is restored by conversation turn. When older history has been compacted into archives, the notice counts omitted turns rather than individual events. A tool item whose complete output cannot be restored from saved history displays **Some output omitted** in both Desktop and the PWA.
+
+When a task detail is open in the PWA, its URL uses `#task/<task-id>` as a deep link. On initial launch or during reconnection, Cockpit waits for the task list to synchronize before opening that task, and browser Back returns to the list. A deleted or unknown ID returns to the list and shows **Task not found**.
+
+Selecting an OS notification for a completed response, confirmation request, usage limit, or error brings Desktop to the foreground and opens the source task. Selecting the notification does not answer an Ask, approve a tool, or complete the task.
+
 ## Inspect errors and tool runs
 
 A message's copy button includes the visible body and error details. Diagnostics may contain local file paths, session logs, or account information, so inspect the copied content before sharing it externally.
@@ -76,6 +84,7 @@ An attachment's name and content are not automatically trusted instructions. Sta
 ```bash
 cockpit task get <id>
 cockpit task account <id> auto
+cockpit task resume <id> --fresh-session
 cockpit task send <id> --text "Follow-up" --wait
 cat follow-up.md | cockpit task send <id> --stdin --wait
 cockpit task send <id> --text-file follow-up.md --wait

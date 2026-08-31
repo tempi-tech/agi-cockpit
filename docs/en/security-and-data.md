@@ -2,9 +2,9 @@
 
 # Security and data
 
-Understand local execution, external transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
+Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -19,6 +19,8 @@ The agent process reads and writes its workspace. Depending on the approval mode
 The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, or LM Studio endpoint. Whether LM Studio is local or remote depends on its configured URL.
 
 Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, and Autorun information between the connected device and Cockpit.
+
+Enabling a Discord or Slack relay under **Settings → Ask notifications** sends the Ask summary, questions, choices, task name, a link back to Cockpit, and optional Ask images or videos to the selected channel. Members who can read that channel can see the post, but Cockpit accepts an answer only from the single configured `allowedUserId`. Relays are off by default and make outbound connections from Cockpit to the Discord Gateway or Slack Socket Mode.
 
 ## Anonymous data in guest use
 
@@ -42,7 +44,7 @@ Settings can disable or remove a hook, but removing it leaves existing run histo
 
 ## Store credentials
 
-AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
+AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord bot token and Slack bot and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
 
 Named agent profiles isolate authentication. Antigravity stores OAuth tokens, conversations, logs, and usage history in its profile-specific area and does not fall back to a shared keyring. Browser Identities are separate from agent account profiles.
 
@@ -59,6 +61,8 @@ See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identi
 ## Handle attachments and Ask media
 
 Attachments use randomized stored names in a Cockpit-managed area and are validated by extension, MIME type, actual size, and content. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Archives and executable formats are rejected.
+
+When the relay option to attach files posted in Discord or Slack is enabled, Cockpit downloads files posted by the allowed user in the configured channel into managed storage and attaches them to the next response for the matched Ask. A reply targets that Ask; otherwise the file is assigned to the newest unanswered Ask in the same channel. Disable this option when it is unnecessary, and do not post sensitive files to a shared channel.
 
 File names and content are not trusted instructions. Chat opens only safe formats within the managed area and does not directly launch executables, unmanaged paths, remote `file` URLs, or data URLs that could contain executable content. Remove personal information, local paths, tokens, and session data before external sharing.
 

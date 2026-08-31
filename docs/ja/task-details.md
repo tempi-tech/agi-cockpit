@@ -4,7 +4,7 @@
 
 選択したタスクの会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.65.0で2026-08-31に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -16,6 +16,8 @@
 - **再開**: アプリ再起動などでプロセスが止まった未完了タスクを、保存済みセッションへ接続し直します。
 
 Terminalタスクは以前のシェルプロセスを復元できないため、再開すると同じディレクトリで新しいシェルを起動します。Cursor、Qoder、Grok BuildのネイティブUIは、対応する保存済み会話へ再接続します。
+
+Visual Runtimeで同じturn failureが3回続くと、Cockpitはその会話を「セッションを再開できません」として停止し、同じsessionの無限再試行を避けます。表示された最後のエラーを確認し、`cockpit task resume <id> --fresh-session`で、保存済み会話の要約を引き継いだ新しい会話を同じタスク内に開始します。通常の`resume`で拒否済みsessionへ戻らないでください。
 
 実行中のターンはEscapeで停止できます。複数のタスクペインがある場合は、フォーカスのあるペインだけが対象です。
 
@@ -49,6 +51,12 @@ PWAもDesktopと同じFollow-up設定とキューを使います。Claude、Code
 
 PWAで会話の末尾から離れると下向き矢印が表示されます。選ぶと最新メッセージへ戻り、新しい出力を追う状態になります。
 
+ネイティブUIの保存済み履歴は会話turn単位で復元されます。古い履歴がarchiveへ圧縮されている場合、案内に表示される件数はevent数ではなく省略されたturn数です。ツール出力の一部を保存履歴から復元できない項目には、DesktopとPWAの両方で「出力の一部を省略しています」と表示されます。
+
+PWAでタスク詳細を開くと、URLの`#task/<task-id>`がそのタスクへのdeep linkになります。起動直後や再接続中はタスク一覧の同期を待ってから対象を開き、ブラウザーの戻る操作で一覧へ戻れます。削除済みまたは存在しないIDでは一覧を表示し、「タスクが見つかりません」と案内します。
+
+回答完了、確認待ち、利用上限、エラーなどのOS通知を選ぶと、Desktopを前面へ出して通知元のタスクを開きます。通知を選んだだけでは、Askへの回答、ツール承認、タスク完了は実行しません。
+
 ## エラーとツール実行を確認する
 
 メッセージのコピーボタンは、表示本文とエラー詳細をまとめてコピーします。診断情報にはローカルのファイルパス、セッションログ、アカウント情報が含まれる場合があるため、外部へ共有する前に確認してください。
@@ -76,6 +84,7 @@ DesktopとPWAでは、画像、テキスト、ソースコード、JSON、CSV、
 ```bash
 cockpit task get <id>
 cockpit task account <id> auto
+cockpit task resume <id> --fresh-session
 cockpit task send <id> --text "追加指示" --wait
 cat follow-up.md | cockpit task send <id> --stdin --wait
 cockpit task send <id> --text-file follow-up.md --wait

@@ -2,9 +2,9 @@
 
 # セキュリティとデータ
 
-ローカル実行、外部サービスへの送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
+ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.65.0で2026-08-31に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -19,6 +19,8 @@ AGI Cockpitは、タスクとエージェントプロセスを利用者のコン
 指示、会話、添付、ファイル内容、ツール結果がAIプロバイダーへ送られる範囲は、選択したエージェント、UIモード、モデル、ツールに従います。Cockpit Agentでは選択したOpenRouter、OpenCode Go、LM Studioなどの接続先が処理します。LM Studioをローカルで動かすか別ホストで動かすかは設定したURLで決まります。
 
 アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは接続した端末とCockpitの間でタスク、Ask、Autorunの情報が転送されます。
+
+「設定」→「Ask通知」でDiscordまたはSlackへの転送を有効にすると、Askの概要、質問、選択肢、タスク名、Cockpitへのlinkと、許可した場合はAskの画像・動画を、選択したチャンネルへ送ります。チャンネルを閲覧できるメンバーは投稿内容を読めますが、Cockpitが回答を受け付けるのは設定した一人の`allowedUserId`だけです。転送は既定で無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 
 ## ゲスト利用時の匿名データ
 
@@ -42,7 +44,7 @@ Cockpit Hooksは、登録したシェルアクションを利用者のローカ�
 
 ## 認証情報を保存する
 
-AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど暗号化ストレージへ保存します。安全なストレージを利用できない場合、平文へ切り替えず保存を拒否します。削除に失敗した認証情報は利用を停止し、次回起動時に削除を再試行します。
+AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど暗号化ストレージへ保存します。DiscordのBot tokenとSlackのBot token・App-level tokenもこの境界に含まれ、通常の設定値やstatus出力へ値を返しません。安全なストレージを利用できない場合、平文へ切り替えず保存を拒否します。削除に失敗した認証情報は利用を停止し、次回起動時に削除を再試行します。
 
 名前付きエージェントプロファイルは認証を分離します。AntigravityはOAuth token、会話、ログ、利用履歴をプロファイル専用領域へ保存し、共有keyringへフォールバックしません。Browser Identityはエージェントのアカウントプロファイルとは別です。
 
@@ -59,6 +61,8 @@ Identityのデータ消去はそのIdentityのセッションを閉じます。�
 ## 添付とAskメディアを扱う
 
 添付はCockpit管理領域へランダムな保存名で置かれ、拡張子、MIME、実サイズ、内容を検証します。1メッセージは最大8ファイル、1ファイル512MB、合計1GBで、JSONは25MBまでです。アーカイブと実行形式は受け付けません。
+
+Ask転送で、DiscordまたはSlackへ投稿したファイルを回答に添付する設定を有効にすると、許可した回答者が設定済みチャンネルへ投稿したファイルをCockpitの管理領域へdownloadし、該当Askの次の回答へ添付します。reply先がある場合はそのAskへ、ない場合は同じチャンネルの最新の未回答Askへ割り当てます。不要な場合はこの設定を無効にし、機密ファイルを共有チャンネルへ投稿しないでください。
 
 ファイル名と内容は信頼済みの指示ではありません。チャットから開けるのは管理領域内の安全な形式だけで、実行形式、管理外パス、リモート`file` URL、実行可能な内容を含み得るdata URLは直接起動しません。外部共有前に個人情報、ローカルパス、token、セッション情報を確認してください。
 
