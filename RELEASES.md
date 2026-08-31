@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.65.0 — 2026-08-31
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Discord Ask relay so users can receive and answer Asks from Discord.
 - Added Slack Ask relay so users can receive and answer Asks from Slack.
