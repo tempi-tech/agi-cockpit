@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.66.0 — 2026-09-01
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added an option to prevent idle sleep while Remote Access is running.
 - Fixed hidden browser tabs on macOS covering other apps or appearing as black windows.
