@@ -92,6 +92,16 @@ Tailscaleを使えず、信頼できる同一LAN内だけで一時的に接続�
 
 ローカルWi-Fi接続はHTTPSを利用できません。同じWi-Fi上の第三者がtokenやタスク内容を読み取れる可能性があります。公共Wi-Fi、共有オフィス、来訪者が接続できるネットワークでは使用しないでください。ルーターのポート転送でインターネットへ公開する用途にも使わないでください。
 
+## 画面オフでも接続を保つ
+
+ノートPCの画面を消灯すると、本体を起こしておく要因がなくなり、しばらく操作がないまま本体がスリープして、リモートアクセスへ到達できなくなります。Tailscale上でも`offline`と表示されます。
+
+Desktopのリモートアクセス画面で「このコンピューターをスリープさせない」をオンにすると、リモートアクセス実行中は、操作がなくても本体がスリープしなくなります。ディスプレイのスリープは妨げないため、画面は通常どおり消灯します。既定はオフで、オンにした設定はすぐに保存されます。サーバーの再起動は不要です。
+
+抑止できるのは、操作がないことによるスリープだけです。ふたを閉じる、Appleメニューから「スリープ」を選ぶなど、明示的なスリープは抑止できず、リモートアクセスも切断されます。この設定に頼る間は、ふたを開けたままにしてください。
+
+抑止が働くのはリモートアクセス実行中だけです。リモートアクセスをオフにする、このトグルをオフにする、AGI Cockpitを終了する、のいずれでも解除されます。バッテリー駆動中は本体が起きたままになり、電池が減り続けます。外出先では電源に接続するか、使い終わったらリモートアクセスをオフにしてください。
+
 ## 接続を停止する
 
 Desktopのリモートアクセス画面で「オフ」を選ぶと、接続中のセッションが切断され、接続先はローカル利用だけに戻ります。再び有効にした後、自動認証されない端末は新しいペアリングコードで認証します。
@@ -112,9 +122,11 @@ cockpit remote-access certificate status
 
 ```bash
 cockpit remote-access certificate generate
-cockpit remote-access configure --scope tailscale --https true
+cockpit remote-access configure --scope tailscale --https true --keep-awake true
 cockpit remote-access enable
 ```
+
+`--keep-awake true|false`はスリープ抑止トグルに対応します。`cockpit remote-access status`では、保存された設定が`configured.keepAwake`、実際に抑止中かどうかが`runtime.keepingAwake`に表示されます。
 
 実行中は構成を変更できません。変更が必要な場合は、接続中のセッションが終了することを確認してから`cockpit remote-access disable --confirm`を実行します。ローカルネットワークをCLIから有効にする操作には、構成時と開始時の両方で`--confirm-local-network`が必要です。
 

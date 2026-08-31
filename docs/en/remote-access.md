@@ -92,6 +92,16 @@ When Tailscale is unavailable and you need a temporary connection on a trusted L
 
 Local Wi-Fi mode cannot use HTTPS. A third party on the same Wi-Fi network may be able to read the token and task content. Do not use this mode on public Wi-Fi, a shared office network, or a network available to visitors. Do not expose it to the internet with router port forwarding.
 
+## Stay reachable after the display turns off
+
+Turning a laptop's display off leaves nothing keeping the computer awake, so it sleeps after a short idle period and remote access becomes unreachable. Tailscale then reports the computer as `offline`.
+
+Turn on **Keep this computer awake** in the Desktop Remote access panel to stop the computer from sleeping while idle during remote access. Display sleep is never blocked, so the screen still turns off as usual. The toggle is off by default, and a change is saved immediately without restarting the server.
+
+Only idle sleep is prevented. Closing the lid, choosing **Sleep** from the Apple menu, or any other explicit sleep still puts the computer to sleep and ends remote access. Keep the lid open when you rely on this.
+
+The computer is only kept awake while remote access is running. Turning remote access off, turning this toggle off, or quitting AGI Cockpit all release it. On battery the computer stays awake and keeps draining. Connect it to power while you rely on this, or turn remote access off when you finish.
+
 ## Stop remote access
 
 Select **Off** in the Desktop Remote access panel. Cockpit disconnects active sessions and returns the target to local-only use. After you enable it again, a device that is not authenticated automatically must use the new pairing code.
@@ -112,9 +122,11 @@ To configure a stopped Cockpit for Tailscale and HTTPS, get the certificate, sav
 
 ```bash
 cockpit remote-access certificate generate
-cockpit remote-access configure --scope tailscale --https true
+cockpit remote-access configure --scope tailscale --https true --keep-awake true
 cockpit remote-access enable
 ```
+
+`--keep-awake true|false` matches the Desktop toggle. `cockpit remote-access status` reports the stored value as `configured.keepAwake` and the live assertion as `runtime.keepingAwake`.
 
 Configuration cannot change while the server is running. If you need to change it, confirm that active sessions may end, then run `cockpit remote-access disable --confirm`. CLI configuration and enablement for local-network access both require `--confirm-local-network`.
 
