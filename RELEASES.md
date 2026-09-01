@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.67.0 — 2026-09-02
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Improved Ask windows with resizable layouts and adjustable text sizing.
 - Improved startup performance by loading persisted browser tabs only when they are needed.
