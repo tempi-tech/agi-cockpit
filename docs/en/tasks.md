@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -24,7 +24,7 @@ Overview searches across tasks, projects, and agents, including completed work. 
 
 Search inside the task list partially matches displayed task and project names. A task ID becomes searchable after at least four characters. This search does not inspect instructions, working directories, or internal metadata.
 
-On Desktop, Command/Ctrl+K opens a task palette across projects. It searches task names, the first line of instructions, and project names, including completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. The default key can be changed in Shortcut settings.
+On Desktop, Command/Ctrl+K opens a search palette across projects. In addition to task names, first instruction lines, and project names, it searches app destinations such as **New task**, **Settings**, **Agent settings**, **Ask notifications**, **Hooks**, **Display**, **Remote access**, **Autorun tasks**, **History**, **Fleet list**, **Official documentation**, and **Updates**. Results include completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. With an empty query, the palette shows recent tasks and primary destinations. The default key can be changed in Shortcut settings.
 
 The **…** menu on a task row or child-task entry supports rename, pin or unpin, complete, copy task ID, and delete. A child can also be detached from its parent. Enter confirms an inline rename, Escape cancels it, an empty name is not saved, and the limit is 50 characters.
 

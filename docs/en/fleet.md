@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -103,6 +103,16 @@ cockpit fleet wait <runId> --since <latestSeq>
 ```
 
 A timeout does not mean the Run failed. Use `wait` for continued monitoring and `status` for a one-time checkpoint. Do not build a short-interval `status` polling loop.
+
+`wait` does not resume the task that started the Run. To notify that task on completion, register a `fleet.run.*` Hook from it and use `--caller-task self` to match only Runs started by that task.
+
+```bash
+cockpit hooks add --event fleet.run.completed \
+  --caller-task self \
+  --run 'cockpit task send "${COCKPIT_FLEET_CALLER_TASK_ID}" --text "Fleet ${COCKPIT_FLEET_NAME} finished: ${COCKPIT_FLEET_RUN_STATUS}"'
+```
+
+`--caller-task self` resolves to the calling task id when the Hook is added or updated and fails when no calling task is available. It also matches a Run rerun from the same task through the CLI. **Run this Fleet again** in the UI has no calling task, so that Run does not match.
 
 ## Read the live graph
 

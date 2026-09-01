@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.66.0で2026-09-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -15,6 +15,8 @@
 各タブには正本となるページインスタンスが一つあり、利用者がサイドパネルで見るページとエージェントが操作するページは同じです。タスク、タブ、右サイドパネルを切り替えるとページはウィンドウから外れますが、再読み込みされません。未送信フォーム、スクロール位置、SPA状態、popupやOAuthの文脈を維持します。
 
 ブラウザーsessionとnavigation履歴は、タスクの完了・再開とアプリ再起動を越えて保存されます。再起動後のフォーム値とスクロール位置はbest effortで復元され、OSの資格情報ストアを利用できる場合は保存データを暗号化します。
+
+アプリ再起動後、まだ使っていない保存済みタブはrendererを作らず、必要になるまで読み込みません。`tabs`で`loaded: false`かつ`rendererResponsive: false`と表示されるのは停止ではなく、未読み込みの状態です。そのタブを選択する、サイドパネルへ表示する、またはtab IDを指定してコマンドを実行すると読み込みます。
 
 パネルを隠したparked tabも表示せずに操作できます。macOSのSpaceを切り替えたり、黒い独立ウィンドウを表示したりせず、同じページへ入力します。
 
@@ -48,6 +50,18 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 
 locatorはopen shadow rootをたどります。通常のCSS selectorに加え、`host >>> inner`でshadow境界を明示できます。closed shadow rootはページ外から参照できないため、必要ならscreenshot座標で操作します。
 
+## main frameのJavaScriptを実行する
+
+DOMに表示されないframework state、`localStorage`、要素のpropertyなどを確認するときは`evaluate`を使います。
+
+```bash
+cockpit browser evaluate <tabId> --expression "document.title"
+cockpit browser evaluate <tabId> --expression "JSON.parse(localStorage.getItem('draft')).body" --json
+cat inspect.js | cockpit browser evaluate <tabId> --stdin
+```
+
+JavaScriptはタブのmain frameだけで実行され、iframeには入りません。top-levelの`await`を利用でき、Promiseは完了まで待機します。結果はJSONへ直列化できる値である必要があり、DOM node、function、symbol、循環参照は返せません。実行にuser gestureは付かないため、利用者操作を必要とするWeb APIの代わりにはなりません。長いscriptは`--expression-file`または`--stdin`で渡します。
+
 ## 意味のある名前で操作する
 
 ```bash
@@ -60,6 +74,8 @@ cockpit browser scroll-into-view <tabId> --role button --name "Continue" --json
 可能なら`--role`と`--name`を使い、次に安定したCSS selector、最後にviewport座標を使います。accessible nameは`aria-labelledby`、`aria-label`、label、alt、value、本文、titleから計算されます。既定は大文字・小文字を区別しない完全一致で、`--name-match prefix|contains`を明示できます。
 
 候補がない、複数ある、すべて非表示の場合は、それぞれ`browser_target_not_found`、`browser_target_ambiguous`、`browser_target_not_visible`として候補情報を返します。曖昧なまま最初の候補を操作しません。
+
+操作前にCockpitは、windowとscroll可能な祖先を横方向・縦方向の両方へ動かして対象を表示します。大きなcard linkの本文など、指定した子要素の中央がlink本体に当たらない場合は、最も近いclick可能な祖先を保ったまま複数の安全な点を試します。modalやbannerなど無関係な要素に覆われている場合はクリックせず、`browser_click_target_unreachable`と候補点の診断を返します。
 
 ## 操作結果を事後条件で検証する
 

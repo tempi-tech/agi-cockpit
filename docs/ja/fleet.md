@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -103,6 +103,16 @@ cockpit fleet wait <runId> --since <latestSeq>
 ```
 
 タイムアウトはRunの失敗ではありません。継続監視には`wait`、一回だけ現在値を読む場合は`status`を使い、短い間隔で`status`を繰り返さないでください。
+
+`wait`はRunを開始したタスクを自動再開しません。開始元へ完了を返したい場合は、そのタスクから`fleet.run.*` Hookを登録し、`--caller-task self`でそのタスクが開始したRunだけに絞ります。
+
+```bash
+cockpit hooks add --event fleet.run.completed \
+  --caller-task self \
+  --run 'cockpit task send "${COCKPIT_FLEET_CALLER_TASK_ID}" --text "Fleet ${COCKPIT_FLEET_NAME} finished: ${COCKPIT_FLEET_RUN_STATUS}"'
+```
+
+`--caller-task self`はHookの追加または更新時に呼び出し元のtask IDへ解決され、呼び出し元タスクがない環境では失敗します。同じタスクからCLIで`rerun`したRunも一致しますが、UIの「Run this Fleet again」には呼び出し元タスクがないため一致しません。
 
 ## ライブグラフを読む
 

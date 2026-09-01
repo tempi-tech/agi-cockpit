@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit tasks, Asks, and Autoruns safely from a phone or another computer.
 
-> Verified with AGI Cockpit 4.66.0 on 2026-09-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -64,7 +64,7 @@ Enabling Tailscale HTTPS records the device name and tailnet DNS name from the c
 
 A Tailscale device owned by the same user in the same tailnet may be authenticated automatically from its Tailscale identity. A connection that Cockpit cannot authenticate automatically requires the pairing code. The code refreshes after five minutes; select **Regenerate** to replace it immediately.
 
-The connection is ready when the PWA header shows the target and **Connected**, and you can open **Confirm**, **Tasks**, and **Autorun**.
+The connection is ready when the PWA header shows the target machine name and **Connected**, and you can open **Confirm**, **Tasks**, and **Autorun**. The browser tab title also starts with the target as `<machine name> - AGI Cockpit`, making several connections distinguishable even in narrow tabs. While disconnected or before a machine name is available, it falls back to `AGI Cockpit`.
 
 ## Supervise work in the PWA
 

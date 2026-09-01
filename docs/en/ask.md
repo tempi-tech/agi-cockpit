@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -47,6 +47,12 @@ Free-form input is available by default even when choices are provided. Write th
 Desktop opens a clicked Ask URL in the system browser without navigating the Ask window. The PWA opens it in a new browser tab. Desktop accepts only `http` and `https` links from the Ask surface; other URL schemes are not opened.
 
 Desktop and PWA Ask surfaces include a button that opens the task that created the question. Navigating there does not answer or close the Ask. The button is unavailable after the source task has been deleted.
+
+## Adjust the Desktop view
+
+Drag the handle in the lower-right corner of a Desktop Ask window to change its width and height. Cockpit saves that size for the next Ask window and constrains it to the screen's working area.
+
+Use **A−** and **A+** in the header to change the text size of questions, choices, descriptions, and input fields. This is the same chat text-size setting exposed under **Settings → Display**, so a change also applies to other Ask windows and the main conversation view.
 
 ## What happens before and after an answer
 

@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.66.0 on 2026-09-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -15,6 +15,8 @@ Open web pages in a task's in-app browser so people and agents can safely inspec
 Each tab has one canonical page instance shared by the person viewing the side panel and the agent operating it. Switching tasks, tabs, or panels detaches the page from the window without reloading it, preserving unsent forms, scroll position, SPA state, and popup or OAuth context.
 
 Browser sessions and navigation history survive task completion, resume, and app restart. Form values and scroll position are restored after restart on a best-effort basis, and saved state is encrypted when the operating-system credential store is available.
+
+After an app restart, a saved tab that has not been used stays unloaded without a renderer until it is needed. `loaded: false` together with `rendererResponsive: false` in `tabs` means unloaded, not stuck. Selecting that tab, showing it in the side panel, or targeting its tab ID with a command loads it.
 
 A parked tab can receive input while hidden without showing a separate window or switching macOS Spaces. The same page is visible when the panel is shown again.
 
@@ -48,6 +50,18 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 
 Locators traverse open shadow roots. A normal CSS selector works across them, and `host >>> inner` pins an explicit shadow boundary. Closed shadow roots are inaccessible from the page; use screenshot coordinates when necessary.
 
+## Evaluate JavaScript in the main frame
+
+Use `evaluate` to inspect framework state, `localStorage`, element properties, and other values that are not rendered in the DOM.
+
+```bash
+cockpit browser evaluate <tabId> --expression "document.title"
+cockpit browser evaluate <tabId> --expression "JSON.parse(localStorage.getItem('draft')).body" --json
+cat inspect.js | cockpit browser evaluate <tabId> --stdin
+```
+
+JavaScript runs only in the tab's main frame and never enters an iframe. Top-level `await` is supported, and a returned Promise is awaited. The result must be JSON-serializable; DOM nodes, functions, symbols, and cyclic objects cannot be returned. Evaluation carries no user gesture, so it cannot stand in for a person when a Web API requires one. Pass a longer script through `--expression-file` or `--stdin`.
+
 ## Operate by meaningful name
 
 ```bash
@@ -60,6 +74,8 @@ cockpit browser scroll-into-view <tabId> --role button --name "Continue" --json
 Prefer `--role` and `--name`, then a stable CSS selector, then viewport coordinates. Accessible names are computed from `aria-labelledby`, `aria-label`, labels, alt text, values, content, and titles. Matching is case-insensitive and exact by default; use `--name-match prefix|contains` explicitly when needed.
 
 No match, several matches, and all-hidden matches fail with `browser_target_not_found`, `browser_target_ambiguous`, and `browser_target_not_visible`, respectively, and return candidate details. Cockpit never silently operates the first ambiguous candidate.
+
+Before input, Cockpit scrolls the window and every scrollable ancestor on both axes to reveal the target. If the center of a requested child, such as text inside a large card link, does not land on the link, Cockpit keeps the nearest clickable ancestor and tries several safe hit points. It still refuses to click through an unrelated modal, banner, or other covering element and returns `browser_click_target_unreachable` with diagnostics for the candidate points.
 
 ## Verify operations with postconditions
 

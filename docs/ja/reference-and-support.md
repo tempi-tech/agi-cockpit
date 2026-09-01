@@ -4,7 +4,7 @@
 
 タスク状態、設定、ショートカット、保存場所、エージェント認証、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.62.0で2026-08-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -24,6 +24,8 @@
 ## 設定とショートカット
 
 画面左下のアプリメニューから、外観、通知、ショートカット、エージェント、セットアップ、スキル、Browser Identity、履歴、Remote Access、Autorunを開けます。CLIでは`cockpit settings list`と`cockpit settings describe`で公開設定と値の制約を確認できます。
+
+Desktopのアプリケーションメニューで「View」→「ウィンドウを再読み込み」を選ぶと、エージェントやメインプロセスを止めずに表示だけを読み直せます。選択中のタスク、タスクごとの未送信入力、選択中タスクで開いていた右サイドパネルは復元されます。誤操作を避けるためCmd/Ctrl+Rには割り当てられていないので、メニューから実行します。
 
 主要なショートカットにはQuick Task、タスク検索、送信キーがあります。送信キーはEnterまたはCmd/Ctrl+Enterを選択でき、Shift+Enterは改行です。ショートカットの競合やOS登録失敗は保存前に拒否されます。
 

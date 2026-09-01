@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, shortcuts, storage, agent authentication, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -24,6 +24,8 @@ Common `waitingReason` values include `turn_complete`, `permission`, `question`,
 ## Settings and shortcuts
 
 The application menu at bottom left opens appearance, notifications, shortcuts, agents, setup, skills, Browser Identities, history, Remote Access, and Autorun. The CLI exposes supported settings and constraints through `cockpit settings list` and `cockpit settings describe`.
+
+Choose **View → Reload Window** from the Desktop application menu to reload only the renderer without stopping agents or the main process. Cockpit restores the selected task, unsent composer drafts for each task, and the right-side panel that was open for the selected task. Cmd/Ctrl+R is intentionally unassigned, so run this operation from the menu.
 
 Primary shortcuts include Quick Task, task search, and the send key. The send key can be Enter or Cmd/Ctrl+Enter; Shift+Enter inserts a line break. Shortcut conflicts and OS registration failures are rejected before saving.
 
