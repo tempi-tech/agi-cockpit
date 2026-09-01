@@ -8,16 +8,16 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Made Ask windows resizable and added adjustable text sizing.
-- Reduced startup overhead by loading persisted browser tabs only when they are needed.
+- Improved Ask windows with resizable layouts and adjustable text sizing.
+- Improved startup performance by loading persisted browser tabs only when they are needed.
 - Added a Reload Window menu action that preserves the selected task, draft text, and side panel.
-- Ordered Codex model choices by capability to make the right model easier to select.
+- Changed Codex model choices to sort by capability for easier selection.
 - Fixed browser actions failing to click controls on wide pages and large card links.
 - Added navigation from the Command-K palette to app screens such as Settings and History.
-- Placed the connected machine name first in Remote Access and PWA tab titles to distinguish multiple connections.
+- Changed Remote Access and PWA tab titles to show the connected machine name first.
 - Added originating-task data and filtering to Fleet run hooks.
 - Added cockpit browser evaluate for running JavaScript in a browser tab's main frame.
-- Standardized the special AGI Labo skill name on wings and now treats legacy names as regular skills.
+- Changed the special AGI Labo skill name to wings and now treats legacy names as regular skills.
 - Fixed the app icon appearing as a black square with the macOS dark icon style.
 
 <details>
