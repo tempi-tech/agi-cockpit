@@ -4,6 +4,39 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.67.0 — 2026-09-02
+
+**Type:** minor · **Platforms:** macOS
+
+- Made Ask windows resizable and added adjustable text sizing.
+- Reduced startup overhead by loading persisted browser tabs only when they are needed.
+- Added a Reload Window menu action that preserves the selected task, draft text, and side panel.
+- Ordered Codex model choices by capability to make the right model easier to select.
+- Fixed browser actions failing to click controls on wide pages and large card links.
+- Added navigation from the Command-K palette to app screens such as Settings and History.
+- Placed the connected machine name first in Remote Access and PWA tab titles to distinguish multiple connections.
+- Added originating-task data and filtering to Fleet run hooks.
+- Added cockpit browser evaluate for running JavaScript in a browser tab's main frame.
+- Standardized the special AGI Labo skill name on wings and now treats legacy names as regular skills.
+- Fixed the app icon appearing as a black square with the macOS dark icon style.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Askウィンドウをリサイズ可能にし、文字サイズを調整できるように改善
+- 保存済みのブラウザタブを必要になるまで読み込まないようにし、起動時の負荷を軽減
+- 表示中のタスクや入力途中の文章、サイドパネルを保ったままウィンドウを再読み込みできるメニューを追加
+- Codexのモデル選択肢を性能順に並べ、目的に合うモデルを選びやすく改善
+- 横に広いページや大きなカード型リンクをブラウザ操作で正しくクリックできない問題を修正
+- ⌘Kの検索パレットから設定や履歴などのアプリ画面へ移動できるように改善
+- Remote AccessとPWAのタブ名に接続先のマシン名を先頭表示し、複数接続を識別しやすく改善
+- Fleet実行フックで起点のタスクを参照し、そのタスクから開始した実行だけを絞り込めるように改善
+- cockpit browser evaluateでブラウザのメインフレーム上のJavaScriptを実行できるように対応
+- AGI Laboの特別なスキル名をwingsに統一し、旧名称を通常のスキルとして扱うように修正
+- macOSのダークアイコン設定でアプリアイコンが黒い四角として表示される問題を修正
+
+</details>
+
 ## v4.66.0 — 2026-09-01
 
 **Type:** minor · **Platforms:** macOS, Linux
