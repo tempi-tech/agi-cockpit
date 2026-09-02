@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.68.0 — 2026-09-03
+
+**Type:** minor · **Platforms:** macOS
+
+- Improved Antigravity image attachments by staging them safely inside the workspace so they work in Supervised mode.
+- Improved Auto account selection to prioritize the longest usage window and make better use of long-term quota that expires sooner.
+- Added Claude Fable 5.1 to the built-in Claude Visual model options.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Antigravityで画像添付をワークスペース内に安全に準備し、Supervisedモードでも画像を読み込めるように改善
+- Autoアカウント選択で最長の利用枠を基準にし、期限の近い長期クォータをより有効に使えるように改善
+- Claude Visualの組み込みモデル候補にClaude Fable 5.1を追加
+
+</details>
+
 ## v4.67.0 — 2026-09-02
 
 **Type:** minor · **Platforms:** macOS, Linux
