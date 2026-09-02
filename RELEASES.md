@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.68.0 — 2026-09-03
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Improved Antigravity image attachments by staging them safely inside the workspace so they work in Supervised mode.
 - Improved Auto account selection to prioritize the longest usage window and make better use of long-term quota that expires sooner.
