@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -35,6 +35,8 @@ In Antigravity Native UI, a failed tool item remains marked as failed, but the t
 
 Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. Even before a Native UI conversation has any messages, the model selector shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. The CLI and API reject an unverified setting instead of silently substituting another value.
 
+Claude Native UI supplements runtime discovery with built-in candidates that the runtime did not return. The built-in candidates include **Claude Fable 5.1**, with `low`, `medium`, `high`, `xhigh`, and `max` reasoning levels and `high` as its default. Adding a candidate does not change the selected model of an existing task.
+
 Codex model choices, whether built in or discovered at runtime, put newer GPT generations and versions first, then place the standard model before purpose-specific variants of the same version. This makes capability and intended use easier to compare from the top of the list instead of treating model ids alphabetically. Sorting alone never changes the currently selected valid model.
 
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
@@ -50,7 +52,7 @@ Custom prompts are stored as user-owned Markdown in the AGI Tools data area. The
 
 ## Accounts and Auto
 
-Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default account and named profiles. Auto is the default for new tasks, Autoruns, and Fleet nodes. It inspects signed-in account usage, chooses a runtime, and can switch to another available account and resume the saved session after a usage or plan limit.
+Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default account and named profiles. Auto is the default for new tasks, Autoruns, and Fleet nodes. It uses shorter usage windows as availability gates, then ranks available accounts from the remaining capacity and reset time of the longest window. It can switch to another available account and resume the saved session after a usage or plan limit.
 
 When you choose Auto or a fixed account at task creation, Cockpit saves that selection and the current runtime account with the task, then uses the same state for its display and next runtime. A fixed account does not switch automatically. Switching an active task stops its current runtime and resumes the saved conversation with the selected profile. Exhausted Claude usage credits and Codex workspace credits are treated as usage limits.
 
@@ -75,6 +77,8 @@ Supported agents use `/goal` to set an objective. Codex can apply a token budget
 ## Attachments, skills, and external sessions
 
 Every agent has an attachment entry point when created from Desktop, the PWA, or CLI. Whether an image, PDF, Office document, or another file is interpreted natively or passed as a local path depends on the agent, UI mode, and model.
+
+Antigravity Native UI accepts images natively from Desktop and the PWA. When an image is outside the task workspace, Cockpit copies it into a temporary, Git-ignored directory inside that workspace and gives Antigravity the staged path. This makes the image readable in `supervised` mode, but the turn fails with a reason before it starts if the workspace cannot hold the temporary file. Non-image formats such as PDFs and Antigravity Terminal UI are outside this native image-input path.
 
 The Cockpit skill and HTML Mode are installed into supported external agent CLIs. Terminal and Cockpit Agent do not use that skill contract. Claude Code and Codex are the only agents whose external sessions can be imported from Cockpit's history.
 

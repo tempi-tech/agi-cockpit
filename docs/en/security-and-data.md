@@ -4,13 +4,13 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
 ## What stays local
 
-Core Cockpit data, including task state, conversation history, Autoruns, Fleets, Cockpit Hook definitions and run history, templates, CLI runtime information, and logs, is stored under `~/.agi-tools/data/cockpit`. Some data, such as attachments and Electron browser profiles, is stored in the operating system's application-data area. Working files live in the selected project, temporary directory, or Git Worktree.
+Core Cockpit data, including task state, conversation history, Autoruns, Fleets, Cockpit Hook definitions and run history, templates, CLI runtime information, and logs, is stored under `~/.agi-tools/data/cockpit`. Some data, such as attachments and Electron browser profiles, is stored in the operating system's application-data area. Working files live in the selected project, temporary directory, or Git Worktree. An image from outside the workspace that is sent to Antigravity Native UI also has a temporary readable copy inside that workspace.
 
 The agent process reads and writes its workspace. Depending on the approval mode and agent permissions, it may access files not currently displayed in Cockpit. Select only the directories needed for the task.
 
@@ -61,6 +61,10 @@ See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identi
 ## Handle attachments and Ask media
 
 Attachments use randomized stored names in a Cockpit-managed area and are validated by extension, MIME type, actual size, and content. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Archives and executable formats are rejected.
+
+Antigravity Native UI handles image attachments from Desktop and the PWA directly. When an image is outside the workspace, Cockpit copies it under `.agi-cockpit-attachments` in the canonical workspace, using a random per-session directory whose contents are excluded by `.gitignore`. An image already inside the workspace is not copied. Cockpit refuses to follow a symlink or another non-directory staging root, removes that session's copies when the session, CLI, or app stops, and removes unowned directories older than 24 hours when another session starts in the same workspace.
+
+This staging does not expand Antigravity's `supervised` boundary to read arbitrary files outside the workspace. It explicitly prepares an image inside the workspace before Antigravity reads it. A sensitive image therefore exists temporarily inside the working project, and the turn fails if Cockpit cannot write the staging copy there.
 
 When the relay option to attach files posted in Discord or Slack is enabled, Cockpit downloads files posted by the allowed user in the configured channel into managed storage and attaches them to the next response for the matched Ask. A reply targets that Ask; otherwise the file is assigned to the newest unanswered Ask in the same channel. Disable this option when it is unnecessary, and do not post sensitive files to a shared channel.
 

@@ -4,7 +4,7 @@
 
 タスク状態、設定、ショートカット、保存場所、エージェント認証、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.68.0で2026-09-03に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -40,6 +40,7 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 | 永続ワークスペース | `~/.agi-tools/workspaces` |
 | 作業プロジェクトとGit Worktree | タスク作成時に選んだ場所 |
 | Electronの認証、添付、ブラウザープロファイル | OSのAGI Cockpitアプリデータ領域 |
+| AntigravityネイティブUI向けの作業場所外画像の一時コピー | 作業場所の`.agi-cockpit-attachments`。セッション単位でGitから除外し、停止時に削除 |
 | 認証tokenとAPIキー | OSのKeychainまたはkeyring |
 
 `cockpit doctor`は現在接続するインスタンス、CLIランタイム、`pidVisibility`、loopbackとfile IPCの認証結果、実際に選ばれた`effectiveTransport`を表示します。診断ログにはローカルパス、エージェント名、セッション状態が含まれる場合があるため、外部共有前に確認してください。
@@ -59,6 +60,8 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 5. Terminal UIではネイティブUIのログイン案内を利用できないため、ターミナル内で対象CLIの認証を完了します。
 
 利用上限ではタスクは`waiting_confirmation`と`usage_limit`になります。Autoで復旧できない場合は、利用可能な別プロファイルを追加または選択してから、新しい指示を送ります。
+
+AntigravityのネイティブUIで画像添付だけが開始前に失敗する場合は、タスクの作業場所へ書き込めるか、`.agi-cockpit-attachments`が通常のディレクトリかを確認します。Cockpitは作業場所外の画像をこのディレクトリへ一時配置するため、読み取り専用の作業場所や同名のファイル・シンボリックリンクでは安全のため送信を拒否します。
 
 ## タスクが再開しない
 

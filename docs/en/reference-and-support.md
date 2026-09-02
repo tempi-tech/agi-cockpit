@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, shortcuts, storage, agent authentication, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -40,6 +40,7 @@ After changing a setting, inspect the returned saved value. Numeric settings can
 | Persistent workspaces | `~/.agi-tools/workspaces` |
 | Project files and Git Worktrees | Location selected when creating the task |
 | Electron authentication, attachments, and browser profiles | OS AGI Cockpit application-data area |
+| Temporary copies of external images for Antigravity Native UI | Workspace `.agi-cockpit-attachments`; Git-ignored per session and removed when it stops |
 | Authentication tokens and API keys | OS Keychain or keyring |
 
 `cockpit doctor` reports the connected instance, CLI runtime, `pidVisibility`, loopback and file-IPC authentication results, and the selected `effectiveTransport`. Diagnostic logs can contain local paths, agent names, and session state, so inspect them before external sharing.
@@ -59,6 +60,8 @@ See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/
 5. Terminal UI cannot use native UI sign-in guidance, so complete authentication inside that CLI's terminal flow.
 
 A usage limit puts the task in `waiting_confirmation` with `usage_limit`. If Auto cannot recover, add or choose another available profile, then send a new instruction.
+
+If only image attachments fail before an Antigravity Native UI turn starts, confirm that the task workspace is writable and that `.agi-cockpit-attachments` is a normal directory. Cockpit stages an image from outside the workspace there temporarily, so it safely rejects a read-only workspace, a file with that name, or a symbolic link.
 
 ## A task does not resume
 

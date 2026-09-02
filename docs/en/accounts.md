@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -32,6 +32,8 @@ Named Antigravity profiles use browser-based Google OAuth. OAuth tokens, convers
 ## Use Auto
 
 When account selection is available, new tasks, Autoruns, and Fleet nodes default to **Auto**. Auto is a selection method, not one named profile. At runtime it compares available usage across signed-in accounts and chooses an execution account.
+
+Auto first requires remaining capacity in every applicable window, including shorter limits. It then compares accounts by the window with the latest reset and favors the account with the most remaining percentage per minute until that reset. This helps consume an underused weekly or other long-term quota that expires sooner. Shorter windows remain an immediate availability gate; they do not override the long-term ranking.
 
 If an Auto task reaches a supported usage or plan limit, Cockpit selects another available account, transfers the saved session, and continues. Exhausted Claude usage credits and Codex workspace credits are included in this recovery. When no alternative is available, usage cannot be confirmed, or switching or resuming fails, the task reports the reason and waits for a person.
 

@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.65.0 on 2026-08-31. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -29,7 +29,7 @@ Before delivery, a queued message can be edited, sent now, or removed. **Edit** 
 
 ## Confirm the execution account
 
-New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to **Auto**. Auto chooses among signed-in accounts by usage and, after detecting a usage or plan limit, can switch to another available account and continue the saved session.
+New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to **Auto**. Auto uses shorter usage windows to confirm current availability, then chooses among available accounts from the remaining capacity and reset time of the longest window. After detecting a usage or plan limit, it can switch to another available account and continue the saved session.
 
 The selection made when the task is created is saved with that task and remains the selection used for display, resume, and execution. Desktop and PWA show **Auto · account name** near the composer. The account menu can select Auto, the default account, or a named profile. A manual switch stops current execution, moves the saved conversation to the chosen profile, and resumes it.
 
@@ -72,6 +72,8 @@ See [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-t
 ## Attach files
 
 Desktop and PWA can attach images, text, source code, JSON, CSV, PDFs, audio, video, and Office documents. When a selected agent cannot receive the format directly, Cockpit provides its local path and metadata for name, MIME type, and size.
+
+For an image sent to Antigravity Native UI, Cockpit uses an image already inside the workspace in place. It temporarily copies an external image into a per-session, Git-ignored directory under `.agi-cockpit-attachments` in the workspace. This makes it readable in `supervised` mode. Cockpit removes the temporary copy when the session, CLI, or app stops, and sweeps old leftover directories when another session starts in that workspace. If the workspace is not writable or the staging location is not a real directory, Cockpit reports an error without sending the image.
 
 One message accepts up to eight files, each up to 512 MB and 1 GB in total. JSON files are limited to 25 MB, and archives and executable formats are unsupported. Cockpit validates extension, MIME type, actual size, and content, then stores the upload under a randomized name.
 
