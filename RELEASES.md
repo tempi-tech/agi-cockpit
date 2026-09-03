@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.69.0 — 2026-09-04
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Improved Antigravity by isolating authentication and quota state per Cockpit profile and adding accounts logout with a safe target preview.
 - Improved Antigravity turns to stay active while background commands are pending and track them through the final result.
