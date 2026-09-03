@@ -29,7 +29,7 @@ The in-app browser stores sign-in state and site data in the local persistent ar
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
 | `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, App Surface, and other Cockpit surfaces | AI agents and people |
 
-Every local feature is free and unlimited, with no account required. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds exactly two Cockpit features: Autorun and remote access through the PWA.
+Every local feature is free and unlimited, with no account required. Claude Code, Codex, and other agents require their own plans. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds exactly two Cockpit features: Autorun and remote access through the PWA.
 
 ## Where to start
 
