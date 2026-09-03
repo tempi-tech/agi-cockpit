@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -89,6 +89,8 @@ cockpit fleet run check-and-fix \
   --max-parallel 1
 ```
 
+`run`と`rerun`はRunを作る前に、固定指定、`--set`、Autoを含む全エージェントノードのアカウントを`authState`で確認します。一つでも期限切れ、サインアウト済み、または利用可能なAuto候補がない場合は、ノードとアカウントを列挙してRunを作成しません。対象へ再ログインしてから再実行します。先行ノードの実行中にログインする設計など、意図的に確認を省く場合だけ`--skip-account-check`を使います。
+
 `run`は処理完了を待たず、すぐに`runId`を返します。`run`へ`--wait`を付けず、続けてFleetパネルを開き、必要なときだけ待機します。
 
 ```bash
@@ -135,6 +137,7 @@ CLIで詳しく確認する場合は次を使います。
 | 全ノード、解決済みランタイム、branch、task ID | `cockpit fleet show <runId>` |
 | Runの判断経緯 | `cockpit fleet logs <runId>` |
 | 一つのノードのレポートと失敗理由 | `cockpit fleet logs <runId> --node <nodeId>` |
+| command gateの全量ログ | `cockpit fleet output <runId> --node <gateId> [--attempt <n>]` |
 | ノードの実タスク | `cockpit task get <taskId>` |
 
 実行中ノードのタスクへ直接Steerを送る、turnをキャンセルする、タスクを完了・削除する操作は、そのノードを中断してRunを一時停止させます。意図的に割り込む場合を除き、ノードタスクではなくFleetパネルと`fleet`コマンドから監督します。
@@ -203,7 +206,9 @@ Global Fleetで`workspace: isolated`を使う場合は、そのノードへリ�
 
 command gateは30分でタイムアウトし、同じGitリポジトリのWorktreeを使う別Runのcommand gateとは直列化されます。`retries`は0〜3ですが、自動再試行はVitest形式で1〜2件の失敗テストを特定できる負荷依存flakeだけが対象です。型エラー、ビルド失敗、タイムアウト、同じテストの連続失敗はすぐに失敗として扱います。
 
-Vitestのcommand gateがタイムアウトした場合、gateの出力と失敗テストには、タイムアウト前に失敗したテスト、出力を開始したまま完了しなかったテストファイル、30秒以上かかった完了済みテストのうち遅い順に最大5件が記録されます。FleetパネルのReportまたは`cockpit fleet logs <runId> --node <nodeId>`で、停止箇所の手掛かりを確認します。
+各command gateのstdout / stderr全量は、Runの`fleet-runs/<runId>/gates/`へ試行ごとの`.log`として保存されます。自動再試行や`fleet retry`でも以前のfileを上書きしません。20 MBを超えるlogは先頭と末尾を残し、省略したbyte数を中央に記録します。`status --json`と`show`は最新試行の`outputs.logPath`を返し、Vitest形式の`FAIL`行がある場合は全streamから抽出した重複なしの`outputs.failedFiles`も返します。Fleetパネルでは失敗fileを確認し、**全量ログを開く**でサイドパネルへ表示できます。CLIでは`cockpit fleet output <runId> --node <gateId> --attempt <n>`を使います。loopの`until`ではattempt番号がそのloopの`until`実行回数です。
+
+Vitestのcommand gateがタイムアウトした場合、gateの出力と失敗テストには、タイムアウト前に失敗したテスト、出力を開始したまま完了しなかったテストファイル、30秒以上かかった完了済みテストのうち遅い順に最大5件が記録されます。要約だけで原因を判断せず、保存済みの全量logも確認します。
 
 human gateのAskは、グラフを見なくても判断できるよう、完了したこと、確認した証拠、承認後に起きる外部操作を本文だけで説明します。却下は下流をskipし、Askを閉じただけの場合はノードが中断されてRunが一時停止します。
 
@@ -222,7 +227,7 @@ human gateのAskは、グラフを見なくても判断できるよう、完了�
 
 アプリ再起動後は、生きているタスクへ再接続し、それ以外の実行中ノードを`interrupted`として保存します。`resume`すると通常のエージェントノードは同じ作業場所の新しいタスクで続くため、各promptは現在のファイルを再確認してから作業できる内容にします。
 
-アカウントの利用上限で中断した場合は、別のサインイン済みprofileへ切り替えて再開できます。
+Autoアカウントの切り替えが進行中の間、Fleetはノードを`running`のまま維持し、切り替え後の同じタスクのreportを待ちます。利用可能な別アカウントがなく復旧できなかった場合にだけノードを`interrupted`にします。その場合は、別のサインイン済みprofileへ切り替えて再開できます。
 
 ```bash
 cockpit fleet resume <runId> --set '*.account=<profile>'

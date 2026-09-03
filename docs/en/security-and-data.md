@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -16,7 +16,7 @@ The agent process reads and writes its workspace. Depending on the approval mode
 
 ## What is sent externally
 
-The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, or LM Studio endpoint. Whether LM Studio is local or remote depends on its configured URL.
+The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio endpoint. OpenCode Go and OpenCode Zen use separate API keys. Whether LM Studio is local or remote depends on its configured URL.
 
 Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, and Autorun information between the connected device and Cockpit.
 
@@ -46,7 +46,9 @@ Settings can disable or remove a hook, but removing it leaves existing run histo
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord bot token and Slack bot and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
 
-Named agent profiles isolate authentication. Antigravity stores OAuth tokens, conversations, logs, and usage history in its profile-specific area and does not fall back to a shared keyring. Browser Identities are separate from agent account profiles.
+Named agent profiles isolate authentication. Antigravity keeps conversations, logs, cache, and usage history under a profile-specific home. On macOS, each profile stores its OAuth token in a dedicated Keychain, and Cockpit verifies that Keychain is first in the search order before starting a task. The host login Keychain remains later in the list for tools such as GitHub CLI, but Antigravity resolves the profile Keychain placeholder or token first. On Windows and Linux, the OS keyring itself is shared, so its host login is used by every profile. To rely on separate profile token files there, first log the default account out of the shared login.
+
+Antigravity `accounts logout` previews every target and shared impact without `--confirm`. Running it for a named profile never removes the host login; when that profile uses shared authentication, the result points to the default-account logout instead. Logging out the default can also affect other profiles, ordinary terminal-launched Agy processes, and Gemini CLI authentication under the same home. Cockpit never logs an account out automatically. Browser Identities remain separate from agent account profiles.
 
 ## Isolate Browser Identities
 
@@ -69,6 +71,8 @@ This staging does not expand Antigravity's `supervised` boundary to read arbitra
 When the relay option to attach files posted in Discord or Slack is enabled, Cockpit downloads files posted by the allowed user in the configured channel into managed storage and attaches them to the next response for the matched Ask. A reply targets that Ask; otherwise the file is assigned to the newest unanswered Ask in the same channel. Disable this option when it is unnecessary, and do not post sensitive files to a shared channel.
 
 File names and content are not trusted instructions. Chat opens only safe formats within the managed area and does not directly launch executables, unmanaged paths, remote `file` URLs, or data URLs that could contain executable content. Remove personal information, local paths, tokens, and session data before external sharing.
+
+Fleet command gates save complete stdout and stderr per attempt under the Run's `fleet-runs/<runId>/gates/` directory, retaining only the head and tail when a log exceeds 20 MB. Output may contain tokens, local paths, test fixtures, or personal data. Inspect it before sharing from the Fleet panel or `cockpit fleet output`. Before removing an unneeded terminal Run, preserve only the diagnostic evidence that is still required in a safe location.
 
 ## Protect Remote Access
 

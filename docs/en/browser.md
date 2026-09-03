@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -47,6 +47,8 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 ```
 
 `snapshot` returns rendered text, links, buttons, inputs, roles, accessible names, and selectors. Use it to identify controls and verify machine-readable state. Use `screenshot` for visual layout, imagery, canvas content, or a result a person needs to see.
+
+`screenshot --full-page` captures a long window-scrolling document in clips of at most 4096 CSS px and stitches them together. When the document itself cannot scroll but an inner overflow region can, Cockpit scrolls and stitches the single largest container, then restores its scroll position. Check `documentHeight`, `capturedHeight`, and `scrolledElement` in the result. A `warning` reports incomplete coverage caused by the 20,000 px cap, a repeated frame, or layouts with several or nested scrollers.
 
 Locators traverse open shadow roots. A normal CSS selector works across them, and `host >>> inner` pins an explicit shadow boundary. Closed shadow roots are inaccessible from the page; use screenshot coordinates when necessary.
 
@@ -100,11 +102,15 @@ Network verification returns only method, status, and a URL with query values an
 ```bash
 cockpit browser paste <tabId> --selector "[contenteditable]" --text "Long content" --json
 cockpit browser upload <tabId> --role button --name "Attach a file" --path ./build.zip --json
+cockpit browser upload <tabId> --click-role button --click-name "Add image" --path ./cover.png --json
+cockpit browser upload <tabId> --await-chooser --path ./cover.png --json
 cockpit browser press <tabId> --selector "#search" --key Enter --json
 cockpit browser dismiss-dialog <tabId> --button-text "OK" --json
 ```
 
-`type` replaces the target value and verifies the final value. `paste` sends a real clipboard paste event, verifies that the requested text appeared, and restores the previous clipboard representations. `upload` sets a file input or a file input inside a dropzone without opening the operating-system picker.
+`type` replaces the target value and verifies the final value. `paste` sends a real clipboard paste event, verifies that the requested text appeared, and restores the previous clipboard representations. If the clipboard has an image but no text representation, Cockpit supplies that image as a PNG in the paste event's `files` and `items`, then reports whether the page received it and rendered an image element. If rendering is not observed within two seconds, the result is `verified: false` with a warning; inspect the page before pasting again.
+
+`upload` sets a file input or a file input inside a dropzone without opening the operating-system picker. For a page that creates a transient file input inside a click handler, use a `--click-*` locator for the control that opens the chooser, or use `--await-chooser` for the chooser remembered by the preceding `click`. A chooser is remembered for up to 60 seconds and discarded by navigation or the next click that opens no chooser. A chooser such as `showOpenFilePicker` with no backing input is unsupported. Inspect `target` and `chooser` in the result to confirm which input received the files.
 
 `dismiss-dialog` handles a pending JavaScript dialog first, then a visible HTML dialog. Use `--reject` for the negative action. Postconditions do not expand authority: submitting, purchasing, publishing, deleting, and other external state changes remain subject to user approval.
 

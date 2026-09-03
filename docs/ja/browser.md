@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -47,6 +47,8 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 ```
 
 `snapshot`は表示テキスト、link、button、input、role、accessible name、selectorを返します。操作対象を特定し、状態を機械的に確認するときに使います。`screenshot`は見た目、配置、画像、canvasなどの視覚確認に使います。
+
+`screenshot --full-page`は、windowをスクロールする長いページを最大4096 CSS pxの区画に分けて結合します。document自体がスクロールせず内部の`overflow`領域がスクロールするページでは、最も長い一つのscroll containerを動かして結合し、終了後にscroll位置を戻します。結果の`documentHeight`、`capturedHeight`、`scrolledElement`で範囲を確認し、20,000 px上限、同じframeの反復、複数または入れ子のscroll領域などで全体を取得できない場合は`warning`を確認します。
 
 locatorはopen shadow rootをたどります。通常のCSS selectorに加え、`host >>> inner`でshadow境界を明示できます。closed shadow rootはページ外から参照できないため、必要ならscreenshot座標で操作します。
 
@@ -100,11 +102,15 @@ cockpit browser click <tabId> --selector "#checkout" \
 ```bash
 cockpit browser paste <tabId> --selector "[contenteditable]" --text "長い本文" --json
 cockpit browser upload <tabId> --role button --name "Attach a file" --path ./build.zip --json
+cockpit browser upload <tabId> --click-role button --click-name "画像を追加" --path ./cover.png --json
+cockpit browser upload <tabId> --await-chooser --path ./cover.png --json
 cockpit browser press <tabId> --selector "#search" --key Enter --json
 cockpit browser dismiss-dialog <tabId> --button-text "OK" --json
 ```
 
-`type`は対象の値を置き換えて最終値を検証します。`paste`は実際のclipboard paste eventを送り、指定テキストが反映されたかを検証して、元のclipboard表現を復元します。`upload`はOSのfile pickerを開かず、file inputまたはそれを含むdropzoneへファイルを設定します。
+`type`は対象の値を置き換えて最終値を検証します。`paste`は実際のclipboard paste eventを送り、指定テキストが反映されたかを検証して、元のclipboard表現を復元します。clipboardにテキストがなく画像だけがある場合は、その画像をPNGとしてpaste eventの`files`と`items`へ渡し、ページが画像を受け取ったかと画像要素が表示されたかを報告します。受信後2秒以内に表示を確認できなければ`verified: false`とwarningを返すため、再貼り付けする前にページを確認します。
+
+`upload`はOSのfile pickerを開かず、file inputまたはそれを含むdropzoneへファイルを設定します。click handler内で一時的なfile inputを作るページでは、`--click-*`でchooserを開くcontrolを指定するか、直前の`click`が記憶したchooserを`--await-chooser`で受け取ります。chooserは最大60秒だけ記憶され、navigationまたはchooserを開かない次のclickで破棄されます。`showOpenFilePicker`のようにinput要素を持たないchooserには対応しません。結果の`target`と`chooser`で実際にファイルを渡した対象を確認します。
 
 `dismiss-dialog`はJavaScript dialogを先に扱い、なければ表示中のHTML dialogを操作します。`--reject`で否定側を選べます。送信、購入、公開、削除など外部状態を変える操作は、postconditionが設定できても利用者の承認境界を越えません。
 

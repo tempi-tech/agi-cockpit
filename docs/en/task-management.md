@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -32,6 +32,8 @@ cockpit task run --instruction-file instruction.md \
   --directory /path/to/repo \
   --agent-type codex
 ```
+
+After `create` succeeds, it returns the new `taskId` and the account Cockpit actually selected. If `run` creates the task but times out or encounters a wait error before receiving the first report, it still returns `ok: true` with `data.taskId`. The task already exists in that case, so do not submit the same instruction again; continue with `task get` or `task wait` for the returned id. `ok: false` means task creation itself failed.
 
 ## Set the workspace and runtime
 

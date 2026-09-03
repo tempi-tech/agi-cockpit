@@ -4,13 +4,13 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
 ## 1. Check an agent
 
-Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, and Qoder CLI. It shows whether each CLI is installed and, for some agents, whether sign-in is ready. One available agent is enough to continue.
+Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, and Qoder CLI. It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One available agent is enough to continue.
 
 If Cockpit cannot find the agent you want, select **Install**. Cockpit Agent and Terminal do not require an external CLI.
 
@@ -22,7 +22,7 @@ This updates each agent's user-level skill directory and the applicable user-lev
 
 ## 3. Sign in to the agent
 
-An AI agent's subscription and authentication are separate from AGI Labo sign-in. Make Claude Code, Codex, or another selected agent available through its own account.
+An AI agent's plan and authentication are separate from AGI Cockpit's local features and AGI Labo sign-in. Obtain an eligible plan from the provider and sign in to that provider account for Claude Code, Codex, or another selected agent.
 
 If a Claude Code, Codex, or Grok Build Native UI task starts before authentication, task details shows sign-in guidance and retries the first instruction after authentication. Terminal UI and Terminal do not provide this retry flow; complete the CLI sign-in inside the terminal, then resume or recreate the task.
 

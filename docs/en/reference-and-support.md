@@ -2,9 +2,9 @@
 
 # Reference and support
 
-Troubleshoot task state, settings, shortcuts, storage, agent authentication, Remote Access, Browser Identities, and App Surface.
+Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -59,13 +59,23 @@ See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/
 4. If native option discovery failed, restore the connection and authentication before selecting a fixed model or reasoning value.
 5. Terminal UI cannot use native UI sign-in guidance, so complete authentication inside that CLI's terminal flow.
 
-A usage limit puts the task in `waiting_confirmation` with `usage_limit`. If Auto cannot recover, add or choose another available profile, then send a new instruction.
+An invalid credential appears as **Session expired** or `authState: expired`, with `loggedIn: false`. Sign in again with `cockpit accounts login <account> --agent-type <type>`, then confirm `authState: ok` in `cockpit accounts list`. `cockpit doctor` also lists affected accounts under `accounts.expired`.
+
+A usage limit puts the task in `waiting_confirmation` with `usage_limit`. If Auto cannot recover, add or choose another available profile, then send a new instruction. After a known reset time, Cockpit re-evaluates usage and resumes the task when capacity has recovered. If it remains stopped, check whether the guidance says the account is still exhausted, usage could not be checked, or the account must sign in again, then wait, retry, or sign in again as directed.
+
+If Antigravity quota appears to belong to the wrong profile, inspect credential and quota source, home, and scope in Usage or `cockpit accounts list --agent-type antigravity`. `quotaScope: host_login` identifies shared authentication. Preview the targets with `cockpit accounts logout <account> --agent-type antigravity`, inspect its shared impact, and only then add `--confirm`.
 
 If only image attachments fail before an Antigravity Native UI turn starts, confirm that the task workspace is writable and that `.agi-cockpit-attachments` is a normal directory. Cockpit stages an image from outside the workspace there temporarily, so it safely rejects a read-only workspace, a file with that name, or a symbolic link.
 
+## A Fleet cannot start or a gate failure is unclear
+
+For `Fleet run accounts are unusable`, sign in to every node and account named in `issues`, verify `authState: ok` with `cockpit accounts list`, then create the Run again. Use `--skip-account-check` only when the Run intentionally contains an unusable account, such as a workflow that signs in while earlier nodes execute.
+
+For a failed command gate, inspect the failed files and choose **Open full log** in the Fleet panel, or run `cockpit fleet output <runId> --node <gateId> --attempt <n>`. Each attempt has a separate file under `fleet-runs/<runId>/gates/`; a log over 20 MB keeps its head and tail and omits the middle. Use that full saved output to find errors omitted from the `logs --node` summary.
+
 ## A task does not resume
 
-Inspect `needsResume` and `waitingReason`, then use `cockpit task resume <id>` to restore a saved session. A Terminal task starts a new shell in the same directory, so its previous foreground process is not restored.
+Inspect `needsResume` and `waitingReason`, then use `cockpit task resume <id>` to restore a saved session. A Terminal task starts a new shell in the same directory, so its previous foreground process is not restored. When Antigravity is waiting for a background command, it tracks the completion notice and final answer in the same turn; do not treat the interim answer as turn completion.
 
 CLI connections are not forwarded automatically to another instance. Inspect `instance`, the runtime path, `transports.loopback`, `transports.fileIpc`, and `effectiveTransport` from `cockpit doctor`, then run the command against the correct Cockpit. File IPC remains limited to the connection supplied by that same instance. Do not guess another destination and resend after `instance_mismatch`.
 

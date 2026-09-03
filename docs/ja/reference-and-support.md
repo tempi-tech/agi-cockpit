@@ -2,9 +2,9 @@
 
 # Referenceとサポート
 
-タスク状態、設定、ショートカット、保存場所、エージェント認証、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
+タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.68.0で2026-09-03に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -59,13 +59,23 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 4. ネイティブUIの候補取得が失敗している場合、モデルや推論設定を固定せず、接続と認証を復旧して再取得します。
 5. Terminal UIではネイティブUIのログイン案内を利用できないため、ターミナル内で対象CLIの認証を完了します。
 
-利用上限ではタスクは`waiting_confirmation`と`usage_limit`になります。Autoで復旧できない場合は、利用可能な別プロファイルを追加または選択してから、新しい指示を送ります。
+期限切れの認証情報は「セッション期限切れ」または`authState: expired`と表示され、`loggedIn`は`false`になります。`cockpit accounts login <account> --agent-type <type>`で再ログインし、`cockpit accounts list`で`authState: ok`を確認します。`cockpit doctor`の`accounts.expired`でも対象を確認できます。
+
+利用上限ではタスクは`waiting_confirmation`と`usage_limit`になります。Autoで復旧できない場合は、利用可能な別プロファイルを追加または選択してから、新しい指示を送ります。リセット時刻を過ぎるとCockpitは利用状況を再評価し、回復済みならタスクを再開します。再開しない場合は、画面の案内が「まだ利用上限」「利用状況を確認できない」「再ログインが必要」のどれを示しているか確認し、待機、再試行、再ログインを使い分けます。
+
+Antigravityのクォータが想定したprofileと一致しない場合は、Usageまたは`cockpit accounts list --agent-type antigravity`でcredentialとquotaのsource、home、scopeを確認します。`quotaScope: host_login`は共有認証のクォータです。`cockpit accounts logout <account> --agent-type antigravity`で対象をpreviewし、共有先への影響を確認してから`--confirm`を付けます。
 
 AntigravityのネイティブUIで画像添付だけが開始前に失敗する場合は、タスクの作業場所へ書き込めるか、`.agi-cockpit-attachments`が通常のディレクトリかを確認します。Cockpitは作業場所外の画像をこのディレクトリへ一時配置するため、読み取り専用の作業場所や同名のファイル・シンボリックリンクでは安全のため送信を拒否します。
 
+## Fleetを開始できない、gateの原因が分からない
+
+`Fleet run accounts are unusable`では、issuesに表示されたノードとアカウントを再ログインし、`cockpit accounts list`で`authState: ok`を確認してからRunを作り直します。`--skip-account-check`は、先行ノードの間にログインする設計など、無効なアカウントを含むRunを意図的に作る場合だけ使います。
+
+command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ログを開く**、または`cockpit fleet output <runId> --node <gateId> --attempt <n>`を使います。各試行は`fleet-runs/<runId>/gates/`へ別fileで保存され、20 MBを超えると中央を省略して先頭と末尾を残します。`logs --node`の要約だけでは見えない最初のエラーを全量logから確認してください。
+
 ## タスクが再開しない
 
-`needsResume`と`waitingReason`を確認し、`cockpit task resume <id>`で保存済みセッションを再開します。Terminalタスクでは新しいシェルが同じディレクトリで起動するため、以前のforeground processは戻りません。
+`needsResume`と`waitingReason`を確認し、`cockpit task resume <id>`で保存済みセッションを再開します。Terminalタスクでは新しいシェルが同じディレクトリで起動するため、以前のforeground processは戻りません。Antigravityが待っているbackground commandは、完了通知と最終回答まで同じturnで追跡されるため、中間回答だけをturn完了と判断しないでください。
 
 別インスタンスへのCLI接続は自動転送されません。`cockpit doctor`の`instance`、runtime path、`transports.loopback`、`transports.fileIpc`、`effectiveTransport`を確認し、正しいCockpitから同じコマンドを実行します。file IPCへ切り替わる場合も、同じinstanceが提供した接続先だけを使います。`instance_mismatch`では接続先を推測して再送しないでください。
 

@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -32,6 +32,8 @@ cockpit task run --instruction-file instruction.md \
   --directory /path/to/repo \
   --agent-type codex
 ```
+
+`create`が成功すると、作成した`taskId`と実際に選ばれたアカウントが返ります。`run`も、タスク作成後に最初のレポート取得がタイムアウトまたは待機エラーになった場合は、`ok: true`と`data.taskId`を保持して返します。この場合、タスクはすでに存在するため同じ指示を再実行せず、返されたIDで`task get`または`task wait`を使ってください。`ok: false`はタスク作成自体の失敗を示します。
 
 ## 作業場所と実行設定を決める
 

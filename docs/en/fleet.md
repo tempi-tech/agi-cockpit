@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -89,6 +89,8 @@ cockpit fleet run check-and-fix \
   --max-parallel 1
 ```
 
+Before creating a Run, `run` and `rerun` check the `authState` of every agent node, including fixed accounts, `--set` overrides, and Auto. If any account is expired, signed out, or has no usable Auto candidate, Cockpit names each node and account and creates no Run. Sign in again, then rerun the command. Use `--skip-account-check` only when bypassing this protection is intentional, such as a graph that signs in while earlier nodes run.
+
 `run` returns a `runId` immediately instead of waiting for completion. Do not add `--wait` to `run`. Open the Fleet panel next, then wait only when needed.
 
 ```bash
@@ -135,6 +137,7 @@ Use these commands for deeper inspection.
 | All nodes, resolved runtimes, branches, and task ids | `cockpit fleet show <runId>` |
 | Why the Run made a decision | `cockpit fleet logs <runId>` |
 | One node's report and failure reason | `cockpit fleet logs <runId> --node <nodeId>` |
+| Full command-gate log | `cockpit fleet output <runId> --node <gateId> [--attempt <n>]` |
 | The node's real task | `cockpit task get <taskId>` |
 
 Sending Steer directly to a live node task, canceling its turn, completing it, or removing it interrupts the node and pauses the Run. Unless you intend to intervene, supervise through the Fleet panel and `fleet` commands rather than operating node tasks by hand.
@@ -203,7 +206,9 @@ When using `enabled`, run `validate` with the same arguments first and inspect w
 
 A command gate times out after 30 minutes and serializes against command gates from other Runs using Worktrees of the same Git repository. `retries` accepts 0 through 3, but automatic retries are limited to load-dependent flakes where one or two failed tests are named in Vitest format. Type errors, build failures, timeouts, and the same test failing twice fail immediately.
 
-When a Vitest command gate times out, its gate output and failed-test list record the tests that failed before the timeout, test files that started streaming output but did not finish, and up to five of the slowest completed tests that took at least 30 seconds. Inspect the Fleet panel's Report or `cockpit fleet logs <runId> --node <nodeId>` for evidence of where the suite stopped.
+Complete stdout and stderr for every command-gate execution are saved as per-attempt `.log` files under the Run's `fleet-runs/<runId>/gates/` directory. Automatic retries and `fleet retry` do not overwrite earlier files. A log over 20 MB keeps its head and tail with the omitted byte count in the middle. `status --json` and `show` return the latest `outputs.logPath`; for Vitest-style `FAIL` lines they also return deduplicated `outputs.failedFiles` extracted from the full stream. In the Fleet panel, inspect the failed files and choose **Open full log** to show it in the side panel. From the CLI, use `cockpit fleet output <runId> --node <gateId> --attempt <n>`. For a loop `until`, the attempt is its count of `until` executions.
+
+When a Vitest command gate times out, its gate output and failed-test list record the tests that failed before the timeout, test files that started streaming output but did not finish, and up to five of the slowest completed tests that took at least 30 seconds. Check the saved full log instead of relying on the summary alone.
 
 Write a human gate's Ask so it stands alone: state what finished, what evidence was checked, and what external action approval will cause. Rejection skips downstream work. Dismissing the Ask interrupts the gate and pauses the Run instead of rejecting it.
 
@@ -222,7 +227,7 @@ Downstream nodes are skipped after a failure, while independent branches continu
 
 After an app restart, Cockpit reattaches tasks that are still alive and records other active nodes as `interrupted`. On `resume`, an ordinary agent node continues in a new task using the same workspace. Write prompts that re-check the current files instead of assuming a clean checkout or retained conversation memory.
 
-When an account usage limit interrupts work, select another signed-in profile while recovering.
+While an Auto account switch is in progress, Fleet keeps the node `running` and waits for the same task's report after the switch. It marks the node `interrupted` only when no usable alternative can recover it. In that case, select another signed-in profile while recovering.
 
 ```bash
 cockpit fleet resume <runId> --set '*.account=<profile>'

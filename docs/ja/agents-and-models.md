@@ -4,7 +4,7 @@
 
 8種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.68.0で2026-09-03に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から8種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -19,7 +19,7 @@ AGI Cockpitでは、同じタスク作成面から8種類のエージェント�
 | Qoder | Qoderのネイティブ会話とターミナル、システムプロンプト、turn数付きGoalを使う |
 | Grok Build | Grok Buildのネイティブ会話とターミナル、進行中ワークフローを再開する |
 | Terminal | 任意のシェルコマンドをターミナルとして実行する |
-| Cockpit | OpenRouter、OpenCode Go、LM Studioの対応モデルをCockpit内のネイティブUIで使う |
+| Cockpit | OpenRouter、OpenCode Go、OpenCode Zen、LM Studioの対応モデルをCockpit内のネイティブUIで使う |
 
 エージェントCLIを必要とする種類は、CockpitがCLIを検出できる場合だけ作成画面へ表示されます。CockpitとTerminalは外部エージェントCLIの検出を必要としません。
 
@@ -29,7 +29,7 @@ AGI Cockpitでは、同じタスク作成面から8種類のエージェント�
 
 Claude Code、Codex、Antigravity、Cursor、Qoder、Grok Buildは両方のモードに対応します。Terminalはターミナルだけ、CockpitはネイティブUIだけです。設定変更後に作成済みタスクのモードが自動で変わることはありません。
 
-AntigravityのネイティブUIでは、失敗したツール項目を失敗として残しながら、その後にエージェントが応答を続けたターンは完了できます。コマンドがバックグラウンドへ移った場合も、そのプロセスだけを実行中として追跡し、ほかのフォアグラウンド処理が残っていなければターンを完了します。
+AntigravityのネイティブUIでは、失敗したツール項目を失敗として残しながら、その後にエージェントが応答を続けたターンは完了できます。エージェントがバックグラウンドコマンドの完了を待つ中間回答を返した場合は、CLIの成功通知だけでターンを閉じず、完了通知、その後のツール実行、最終回答まで同じターンとして追跡します。常駐サーバーなどを途中で確認した後にエージェントが最終回答を返した場合は、プロセスを残したままターンを完了できます。
 
 ## モデルと推論設定
 
@@ -40,6 +40,8 @@ ClaudeのネイティブUIは、実行時の候補取得で返されないモデ
 Codexのモデル選択肢は、組み込み候補と実行時に取得した候補のどちらも、新しいGPT世代とバージョンを先にし、同じバージョンでは標準モデルから用途別variantの順に並びます。モデル名をアルファベット順に探すのではなく、上から性能と用途を比較できます。現在選択中の有効なモデルを、並べ替えだけで変更することはありません。
 
 service tierはCodexの対応モデルだけで`standard`または`fast`を選べます。システムプロンプトはClaude、Codex、Qoder、CockpitのネイティブUIで利用できます。`append`はCockpit標準の指示を維持し、`replace`は標準指示を置き換えるため、Cockpit CLIの知識はインストール済みskillからだけ利用できる状態になります。
+
+Cockpit AgentのモデルIDは、OpenRouterが`openrouter/<id>`、OpenCode Goが`opencode-go/<id>`、OpenCode Zenが`opencode/<id>`、LM Studioが`lmstudio/<id>`です。OpenCode GoとOpenCode Zenは別のプロバイダーで、設定の**OpenCode Go API Key**と**OpenCode Zen API Key**も共有しません。選択したプロバイダーのkeyがない場合、そのモデル一覧とタスクは利用できません。
 
 カスタムシステムプロンプトは`cockpit system-prompt add`で登録すると、DesktopとPWAの新しいタスク画面とAutorunの選択肢に表示されます。
 
@@ -56,7 +58,9 @@ Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildは、デフォルト�
 
 タスク作成時にAutoまたは固定アカウントを選ぶと、その選択と現在の実行先がタスクへ保存され、画面表示と次のランタイムに同じ状態が使われます。固定アカウントは自動切り替えを行いません。実行中タスクで切り替える場合は現在のランタイムを停止し、保存済み会話を移して選択したプロファイルで再開します。Claudeの利用クレジット枯渇とCodexのワークスペースクレジット枯渇も利用上限として扱われます。
 
-Antigravityの名前付きプロファイルはブラウザーでGoogle OAuthを行い、OAuthトークン、会話、ログ、利用履歴を専用のアプリデータ領域へ分離します。共有キーリングへのフォールバックは行いません。開発用シェル資源と認証情報を含まない設定は通常のホームと共有します。macOSではホスト利用者のKeychain検索リストを参照できるため、GitHub CLIやGit認証ヘルパーは既存のKeychain認証情報を利用できますが、Antigravityプロファイル専用データは共有されません。
+期限切れの認証情報は「セッション期限切れ」と表示され、`authState: expired`としてAutoとFleet開始前の確認から除外されます。再ログインすると認証判定と利用状況が再確認されます。
+
+Antigravityの名前付きプロファイルはブラウザーでGoogle OAuthを行い、会話、ログ、キャッシュ、利用履歴を専用homeへ分離します。macOSではプロファイル専用Keychainを認証とクォータの境界に使い、検索順を確認できなければタスクを開始しません。WindowsとLinuxのkeyringはOS全体で共有されるため、host loginが残っている場合はprofile tokenより優先されます。開発用シェル資源と認証情報を含まない設定は通常のhomeと共有します。取得元の確認と安全なlogout手順は[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts)を参照してください。
 
 ## 承認モード
 

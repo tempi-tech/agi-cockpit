@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.68.0 on 2026-09-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -19,7 +19,7 @@ AGI Cockpit lets you choose from eight agents on the same task creation surface.
 | Qoder | Qoder native conversation and terminal mode, system prompts, and turn-limited Goals |
 | Grok Build | Grok Build native conversation and terminal mode with resume of active workflows |
 | Terminal | An arbitrary shell command in a terminal |
-| Cockpit | Supported OpenRouter, OpenCode Go, and LM Studio models in Cockpit's native UI |
+| Cockpit | Supported OpenRouter, OpenCode Go, OpenCode Zen, and LM Studio models in Cockpit's native UI |
 
 Agent types that depend on an external CLI appear on the creation screen only when Cockpit can detect that CLI. Cockpit and Terminal do not require external agent CLI detection.
 
@@ -29,7 +29,7 @@ Native UI lets Cockpit display conversation, tool execution, usage, model, and a
 
 Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build support both modes. Terminal supports terminal mode only, and Cockpit supports native UI only. Changing defaults does not migrate the mode of an existing task.
 
-In Antigravity Native UI, a failed tool item remains marked as failed, but the turn can still complete when the agent recovers and continues its response. When a command moves to the background, Cockpit tracks that process as running and completes the turn once no foreground work remains.
+In Antigravity Native UI, a failed tool item remains marked as failed, but the turn can still complete when the agent recovers and continues its response. When the agent returns an interim answer while waiting for a background command, Cockpit does not close the turn on the CLI success signal alone. It follows the completion notice, later tool calls, and final answer in that same turn. If the agent checks a persistent server and then gives a final answer, the turn can still finish while that server remains running.
 
 ## Models and reasoning settings
 
@@ -40,6 +40,8 @@ Claude Native UI supplements runtime discovery with built-in candidates that the
 Codex model choices, whether built in or discovered at runtime, put newer GPT generations and versions first, then place the standard model before purpose-specific variants of the same version. This makes capability and intended use easier to compare from the top of the list instead of treating model ids alphabetically. Sorting alone never changes the currently selected valid model.
 
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
+
+Cockpit Agent model IDs use `openrouter/<id>` for OpenRouter, `opencode-go/<id>` for OpenCode Go, `opencode/<id>` for OpenCode Zen, and `lmstudio/<id>` for LM Studio. OpenCode Go and OpenCode Zen are separate providers, and their **OpenCode Go API Key** and **OpenCode Zen API Key** settings are not interchangeable. Models and tasks for a provider remain unavailable until its key is configured.
 
 Register a custom system prompt with `cockpit system-prompt add`; it then appears for new tasks and Autoruns in Desktop and the PWA.
 
@@ -56,7 +58,9 @@ Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default acco
 
 When you choose Auto or a fixed account at task creation, Cockpit saves that selection and the current runtime account with the task, then uses the same state for its display and next runtime. A fixed account does not switch automatically. Switching an active task stops its current runtime and resumes the saved conversation with the selected profile. Exhausted Claude usage credits and Codex workspace credits are treated as usage limits.
 
-Antigravity named profiles use browser-based Google OAuth and keep OAuth tokens, conversations, logs, and usage history in profile-specific storage. They do not fall back to a shared keyring. Developer shell resources and non-credential settings remain shared with the normal home directory. On macOS, the host user's Keychain search list remains available to GitHub CLI and Git credential helpers without sharing Antigravity's profile-specific data.
+An invalid credential appears as **Session expired** and `authState: expired`; Auto and the Fleet pre-run check exclude it. Signing in again clears the cached verdict and refreshes authentication and usage state.
+
+Antigravity named profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a dedicated home. On macOS, a profile-specific Keychain forms the authentication and quota boundary, and the task does not start if Cockpit cannot verify it first in the search order. The OS keyring is shared on Windows and Linux, so a remaining host login takes precedence over profile token files. Developer shell resources and non-credential settings remain shared with the normal home directory. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) for provenance and safe logout procedures.
 
 ## Approval modes
 
