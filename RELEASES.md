@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.69.0 — 2026-09-04
+
+**Type:** minor · **Platforms:** macOS
+
+- Isolated Antigravity authentication and quota state per Cockpit profile and added accounts logout with a safe target preview.
+- Improved Antigravity turns to stay active while background commands are pending and track them through the final result.
+- Improved Fleets so running nodes remain active during Auto account switches.
+- Preserved new-task composer drafts when navigating between screens.
+- Saved Fleet command-gate output per attempt and exposed failed files and complete logs through the CLI and panel.
+- Improved full-page browser screenshots for tall pages and pages with inner scrolling containers.
+- Added the OpenCode Zen provider and its dedicated API key setting to Cockpit Agent.
+- Added clear expired-account states and validation of every Fleet node account before a Run starts.
+- Added browser uploads through file choosers created after a click and support for pasting image-only clipboards.
+- Prevented false usage-limit detection during Claude Auto account switches and re-evaluated tasks after quota recovery.
+- Improved task creation acknowledgments when starting tasks through the CLI.
+- Clarified in onboarding and the landing page that each agent requires its own plan and sign-in.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Antigravityの認証とクォータ状態をCockpitプロファイルごとに分離し、対象を確認して安全にログアウトできるaccounts logoutを追加
+- Antigravityがバックグラウンドコマンドの完了を待っている間はターンを継続し、最終結果まで追跡できるように改善
+- Autoアカウント切り替え中もFleetノードの実行を維持するように改善
+- 画面を移動しても新規タスク作成中の下書きを保持するように改善
+- Fleetのコマンドゲート出力を試行ごとに保存し、失敗ファイルと完全なログをCLIおよびパネルから確認できるように改善
+- 長いページや内部スクロール領域を含むページのフルページブラウザスクリーンショットを正しく撮影できるように改善
+- Cockpit AgentにOpenCode Zenプロバイダーと専用APIキー設定を追加
+- 期限切れのエージェントアカウントを明示し、Fleet開始前に各ノードのアカウント状態を検証するように改善
+- ブラウザアップロードでクリック後に表示されるファイル選択に対応し、画像のみのクリップボード貼り付けを追加
+- ClaudeのAutoアカウント切り替え時に誤った利用上限判定を防ぎ、利用枠の回復後にタスクを再評価するように改善
+- CLIからタスクを開始した際の作成確認をより確実に受け取れるように改善
+- オンボーディングとランディングページで、各エージェントの利用に別途プランとサインインが必要なことを明確化
+
+</details>
+
 ## v4.68.0 — 2026-09-03
 
 **Type:** minor · **Platforms:** macOS, Linux
