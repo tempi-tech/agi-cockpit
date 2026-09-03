@@ -8,18 +8,18 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Isolated Antigravity authentication and quota state per Cockpit profile and added accounts logout with a safe target preview.
+- Improved Antigravity by isolating authentication and quota state per Cockpit profile and adding accounts logout with a safe target preview.
 - Improved Antigravity turns to stay active while background commands are pending and track them through the final result.
 - Improved Fleets so running nodes remain active during Auto account switches.
-- Preserved new-task composer drafts when navigating between screens.
-- Saved Fleet command-gate output per attempt and exposed failed files and complete logs through the CLI and panel.
+- Improved new-task composition by preserving drafts when navigating between screens.
+- Added per-attempt Fleet command-gate logs with failed files and complete output available through the CLI and panel.
 - Improved full-page browser screenshots for tall pages and pages with inner scrolling containers.
 - Added the OpenCode Zen provider and its dedicated API key setting to Cockpit Agent.
 - Added clear expired-account states and validation of every Fleet node account before a Run starts.
 - Added browser uploads through file choosers created after a click and support for pasting image-only clipboards.
-- Prevented false usage-limit detection during Claude Auto account switches and re-evaluated tasks after quota recovery.
+- Fixed false usage-limit detection during Claude Auto account switches and added task re-evaluation after quota recovery.
 - Improved task creation acknowledgments when starting tasks through the CLI.
-- Clarified in onboarding and the landing page that each agent requires its own plan and sign-in.
+- Improved onboarding and landing-page guidance to clarify that each agent requires its own plan and sign-in.
 
 <details>
 <summary>日本語のリリースノート</summary>
