@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.70.0 — 2026-09-05
+
+**Type:** minor · **Platforms:** macOS
+
+- Improved project deletion so you can delete all tasks in a project, including running tasks, after confirming the impact.
+- Added links to each agent's provider status page when a service outage is detected.
+- Improved the in-app Browser so covering overlays show a page snapshot instead of a blank white surface.
+- Fixed Antigravity Visual so High reasoning effort is kept after a turn completes instead of snapping back to Low.
+- Improved Cockpit Ask so JSON summaries with choices are converted into structured Asks instead of showing raw JSON.
+- Fixed Codex usage and rate-limit retrieval for Codex CLI 0.153.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- プロジェクトの「タスクをすべて削除」で、完了済みだけでなく実行中のタスクも含めて削除できるように改善
+- プロバイダーのサービス障害時に、各エージェントの稼働状況ページへ直接確認できるリンクを追加
+- ダイアログなどのオーバーレイ表示中もアプリ内ブラウザを空白にせず、ページのスナップショットを表示するように改善
+- Antigravity Visualの推論レベルがターン完了後にHighからLowへ戻らないように修正
+- cockpit askにJSONの質問文を渡したとき、選択肢つきのAskとして表示するように改善
+- Codex CLI 0.153でも利用状況とレート制限を取得できるように修正
+
+</details>
+
 ## v4.69.0 — 2026-09-04
 
 **Type:** minor · **Platforms:** macOS, Linux

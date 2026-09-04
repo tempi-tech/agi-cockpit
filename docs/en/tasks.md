@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -28,7 +28,7 @@ On Desktop, Command/Ctrl+K opens a search palette across projects. In addition t
 
 The **…** menu on a task row or child-task entry supports rename, pin or unpin, complete, copy task ID, and delete. A child can also be detached from its parent. Enter confirms an inline rename, Escape cancels it, an empty name is not saved, and the limit is 50 characters.
 
-The project-heading menu can complete that project's unfinished tasks or delete its completed tasks in one operation. Running tasks and Fleet tasks awaiting confirmation are excluded from bulk completion by default and must be explicitly included. Bulk deletion applies only to completed ordinary tasks.
+The project-heading menu can complete that project's unfinished tasks or delete all of its tasks in one operation. Running tasks and Fleet tasks awaiting confirmation are excluded from bulk completion by default and must be explicitly included. Bulk deletion removes every task in the project, including running tasks, not only completed ones. The confirmation names how many running tasks will be stopped and how many associated Fleet runs will be stopped if they are active. This cannot be undone.
 
 Automatic sorting does not move rows while the pointer is over the list or while a menu, rename, or deletion confirmation is active. The current order is applied after the interaction ends.
 
