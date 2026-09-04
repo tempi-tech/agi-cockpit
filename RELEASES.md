@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.70.0 — 2026-09-05
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Improved project deletion so you can delete all tasks in a project, including running tasks, after confirming the impact.
 - Added links to each agent's provider status page when a service outage is detected.
