@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.71.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -34,6 +34,21 @@ cockpit task run --instruction-file instruction.md \
 ```
 
 `create`が成功すると、作成した`taskId`と実際に選ばれたアカウントが返ります。`run`も、タスク作成後に最初のレポート取得がタイムアウトまたは待機エラーになった場合は、`ok: true`と`data.taskId`を保持して返します。この場合、タスクはすでに存在するため同じ指示を再実行せず、返されたIDで`task get`または`task wait`を使ってください。`ok: false`はタスク作成自体の失敗を示します。
+
+## 作成応答が失われた場合
+
+`task create`と`task run`は作成ごとに一意の作成キーを送り、送信後に接続が切れた場合は、同じキーですでに作成されたタスクを先に照合します。見つかったタスクは`data.replayed: true`と同じ`taskId`で返るため、応答だけが失われても重複作成しません。未作成とCockpitが確認できた場合だけ同じキーで作成を再試行します。
+
+`task_create_interrupted`はタスクが作成されていないことを確認済みで、同じコマンドを再実行できます。`task_create_outcome_unknown`は結果を確認できず、タスクが存在する可能性を示します。この場合は新しく作成する前に`cockpit task list`を確認してください。作成キーの記録は実行中のCockpitが10分間保持するため、アプリの再起動後は同じキーでも既存タスクを照合できません。
+
+通常はCLIがUUIDを生成します。外部処理と対応づける場合だけ、英数字と`.`、`_`、`:`、`-`からなる1〜128文字を`--create-key`へ指定できます。同じ呼び出し元から同じキーを再送すると同じタスクを返します。
+
+```bash
+cockpit task create \
+  --instruction "公開状態を確認してください" \
+  --directory /path/to/repo \
+  --create-key deploy-2026-09-05-1
+```
 
 ## 作業場所と実行設定を決める
 

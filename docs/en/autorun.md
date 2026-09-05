@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.71.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -42,6 +42,8 @@ An Autorun that creates a new task keeps its runtime settings from the time it i
 A new-task Autorun also keeps its Browser Identity assignment and passes it to every task the schedule creates. An Autorun without an explicit assignment uses the Default Identity. In v4.43.0, assign or change an Autorun's Identity from the CLI. Create, rename, recolor, clear, or remove the Identity itself from **Browser Identity** in the lower-left app menu or from the CLI. An existing-task Autorun does not change the Browser Identity already assigned to its target.
 
 For a new task, Desktop and the PWA show only settings supported by the selected agent and UI mode. The CLI and API use the same capability data and reject unsupported combinations with an explicit error before saving.
+
+For Codex Native UI, selecting a pinned account loads the latest model catalog available to that account and lets the Autorun store its supported reasoning level and service tier. While editing, Auto uses the default account's catalog; at execution, Cockpit revalidates the stored values against the catalog of the account that Auto selects. Saving waits while discovery is in progress, and a failed discovery falls back to the built-in candidates. Cockpit Agent likewise reflects models from the connected OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio provider and exposes only the reasoning levels advertised for the selected model.
 
 Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor's available model, model-specific reasoning effort, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Cursor does not expose service-tier or system-prompt settings.
 

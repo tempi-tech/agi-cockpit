@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.71.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -41,9 +41,13 @@ Claude Native UI supplements runtime discovery with built-in candidates that the
 
 Codex model choices, whether built in or discovered at runtime, put newer GPT generations and versions first, then place the standard model before purpose-specific variants of the same version. This makes capability and intended use easier to compare from the top of the list instead of treating model ids alphabetically. Sorting alone never changes the currently selected valid model.
 
+Codex Native UI uses the model catalog discovered from the selected account across the default settings under **Agents**, new tasks, and Autoruns. Changing a pinned account loads that account's catalog again, and a late result from the previous account cannot overwrite it. Model-dependent creation and saving wait while discovery is in progress. If discovery fails, Cockpit shows its built-in candidates and tries discovery again when the surface is reopened or authentication changes. Newly available models can therefore be selected together with the reasoning levels and `fast` support advertised by the discovered catalog.
+
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
 Cockpit Agent model IDs use `openrouter/<id>` for OpenRouter, `opencode-go/<id>` for OpenCode Go, `opencode/<id>` for OpenCode Zen, and `lmstudio/<id>` for LM Studio. OpenCode Go and OpenCode Zen are separate providers, and their **OpenCode Go API Key** and **OpenCode Zen API Key** settings are not interchangeable. Models and tasks for a provider remain unavailable until its key is configured.
+
+Cockpit Agent applies each model's capabilities from the connected provider to new tasks in Desktop and the PWA, the task creation API, and Autoruns. A new task waits for its first model catalog before creation becomes available; if discovery does not settle, known candidates become usable after five seconds. Reasoning uses the model's advertised list first and keeps a saved value while it remains valid. Otherwise Cockpit chooses `medium`, then the first supported value, and leaves reasoning unset for a model that does not support it. The built-in model-id rules are used only when live capability metadata is unavailable.
 
 Register a custom system prompt with `cockpit system-prompt add`; it then appears for new tasks and Autoruns in Desktop and the PWA.
 

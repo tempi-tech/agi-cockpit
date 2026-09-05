@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.71.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -34,6 +34,21 @@ cockpit task run --instruction-file instruction.md \
 ```
 
 After `create` succeeds, it returns the new `taskId` and the account Cockpit actually selected. If `run` creates the task but times out or encounters a wait error before receiving the first report, it still returns `ok: true` with `data.taskId`. The task already exists in that case, so do not submit the same instruction again; continue with `task get` or `task wait` for the returned id. `ok: false` means task creation itself failed.
+
+## When the creation response is lost
+
+`task create` and `task run` send a unique create key with every creation. If the connection drops after sending the request, the CLI first looks up a task already created with that key. A match returns the same `taskId` with `data.replayed: true`, preventing a lost acknowledgement from creating a duplicate. The CLI retries creation with the same key only after Cockpit confirms that no task was created.
+
+`task_create_interrupted` means Cockpit confirmed that no task exists, so the same command can be run again. `task_create_outcome_unknown` means the outcome could not be confirmed and the task may exist. Inspect `cockpit task list` before creating another task in that case. The running Cockpit retains create-key records for ten minutes; after the app restarts, the same key can no longer reconcile a surviving task.
+
+The CLI normally generates a UUID. Use `--create-key` only when an external workflow needs a stable correlation value. It accepts 1–128 letters, digits, `.`, `_`, `:`, and `-`. Reusing the key from the same caller returns the same task.
+
+```bash
+cockpit task create \
+  --instruction "Verify the publication state" \
+  --directory /path/to/repo \
+  --create-key deploy-2026-09-05-1
+```
 
 ## Set the workspace and runtime
 

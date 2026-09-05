@@ -4,7 +4,7 @@
 
 Autorunが一度、一定間隔、cronのスケジュールに基づいて新しいタスクを起動するか、既存タスクへ指示を送る仕組みを説明します。
 
-> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
+> AGI Cockpit 4.71.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 Autorunは、指定した時刻、一定間隔、cron式に基づいて、新しいタスクを起動するか、既存タスクへ指示を送る仕組みです。複数エージェントを連携させる機能ではなく、同じ仕事を必要なタイミングで開始または継続するための独立した機能です。
 
@@ -42,6 +42,8 @@ PWAで作成または更新すると、保存結果が返るまでダイアロ�
 新規タスク用のBrowser Identity割り当てもAutorunごとに保存され、発火時に作成されるタスクへ引き継がれます。Identityを指定しないAutorunはDefault Identityを使います。v4.43.0では、Autorunへの割り当てと変更はCLIから行います。Identityそのものの作成、名前と色の変更、データ消去、削除は、画面左下のアプリメニューにある「Browser Identity」またはCLIから行えます。既存タスクへ送信するAutorunは、そのタスクにすでに割り当てられたBrowser Identityを変更しません。
 
 新規タスクを作成する場合、DesktopとPWAでは選択したエージェントとUIモードで利用できる設定だけが表示されます。CLIとAPIも同じ対応情報を使い、非対応の組み合わせを保存前に明示的なエラーで拒否します。
+
+CodexのネイティブUIでは、固定アカウントを選ぶとそのアカウントから取得した最新のモデル一覧を読み込み、対応する推論レベルとservice tierをAutorunへ保存できます。Autoでは編集中にデフォルトアカウントの候補を使い、実行時にAutoが選んだアカウントの候補で保存値を再検証します。候補の取得中は保存できず、取得に失敗した場合は組み込み候補へフォールバックします。Cockpit Agentも、接続中のOpenRouter、OpenCode Go、OpenCode Zen、またはLM Studioから取得したモデルと、そのモデルが示す推論レベルだけを選択肢へ反映します。
 
 CursorのAutorunは「ネイティブUI」と「ターミナル」を利用できます。ネイティブUIでは、Desktop、PWA、CLIからの作成時にCursorで利用可能なモデル、モデルが対応する推論レベル、承認モード、アカウントプロファイルを選べます。Cursorではservice tierとsystem promptは利用できません。
 
