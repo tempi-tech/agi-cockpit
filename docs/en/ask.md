@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -112,7 +112,7 @@ cockpit ask --summary-file summary.md --questions-file questions.json
 
 Pass a multiline summary or text that the shell could interpret with `--stdin` or `--summary-file`. A multi-question JSON array can also come from `--questions-stdin` or `--questions-file`. Only one value can consume standard input, so use a file for one part when both the summary and questions need external input. Do not combine command-line, standard-input, and file sources for the same value.
 
-When Claude Code `AskUserQuestion` JSON is passed through `--summary`, `--summary-file`, or `--stdin`, Cockpit parses the questions, single- or multi-select mode, choices, and descriptions and displays the equivalent structured Ask instead of raw JSON. It accepts a fenced object or the bare `questions` array.
+When JSON is passed through `--summary`, `--summary-file`, or `--stdin`, Cockpit recovers a structured Ask only from a strict supported shape. It accepts a Cockpit Ask object with `summary` and `choices`, or a Claude Code `AskUserQuestion` object or bare `questions` array, including fenced JSON. JSON whose types or structure cannot recover choices, descriptions, and single- or multi-select mode remains visible as the summary instead of being converted. Prefer explicit `--choice` or `--questions-stdin` input for ordinary use.
 
 When the command succeeds, it returns an Ask ID. The agent ends its turn at that point and does not poll for the answer.
 

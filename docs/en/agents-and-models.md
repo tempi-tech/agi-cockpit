@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -34,6 +34,8 @@ In Antigravity Native UI, a failed tool item remains marked as failed, but the t
 ## Models and reasoning settings
 
 Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. Even before a Native UI conversation has any messages, the model selector shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. The CLI and API reject an unverified setting instead of silently substituting another value.
+
+Antigravity Native UI keeps the reasoning level selected for that task after a turn completes and after switching tasks. For example, the next follow-up after a `high` turn remains `high` even when the refreshed candidate list defaults to `low`. Cockpit moves to the current supported default only when the refreshed candidates no longer offer the saved level.
 
 Claude Native UI supplements runtime discovery with built-in candidates that the runtime did not return. The built-in candidates include **Claude Fable 5.1**, with `low`, `medium`, `high`, `xhigh`, and `max` reasoning levels and `high` as its default. Adding a candidate does not change the selected model of an existing task.
 

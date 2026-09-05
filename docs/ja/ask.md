@@ -4,7 +4,7 @@
 
 AskがAIエージェントから人へ確認と判断を安全に受け渡し、回答後に同じタスクを再開する仕組みを説明します。
 
-> AGI Cockpit 4.67.0で2026-09-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
+> AGI Cockpit 4.70.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
 
 Askは、AIエージェントが作業をいったん止め、人に確認と判断を委ねるための仕組みです。回答は元のタスクへ構造化されたイベントとして返り、その同じタスクが続きから再開します。
 
@@ -112,7 +112,7 @@ cockpit ask --summary-file summary.md --questions-file questions.json
 
 複数行やシェルで解釈される文字を含む説明は、`--stdin`または`--summary-file`で渡します。複数質問のJSON配列は`--questions-stdin`または`--questions-file`からも読み込めます。標準入力は一つだけなので、説明と質問の両方を外部入力にする場合は、片方をファイルから渡します。同じ値に対してコマンド引数、標準入力、ファイル入力を同時には指定できません。
 
-Claude Codeの`AskUserQuestion` JSONを`--summary`、`--summary-file`、または`--stdin`へ渡すと、`questions`内の質問、単一・複数選択、選択肢、説明を解析し、生のJSONではなく対応する構造化Askとして表示します。コードフェンスで囲まれたobject、または`questions`配列だけでも利用できます。
+`--summary`、`--summary-file`、または`--stdin`へJSONを渡した場合、Cockpitは厳密な形式に一致する内容を構造化Askへ復元します。Cockpit Ask形式では`summary`と`choices`を含むobject、Claude Code形式では`AskUserQuestion`のobjectまたは`questions`配列を利用でき、コードフェンスで囲まれていても解析します。選択肢、説明、単一・複数選択を復元できないJSONや型が正しくないJSONは変換せず、そのまま説明として表示します。通常は`--choice`または`--questions-stdin`を明示してください。
 
 コマンドが成功するとAsk IDが返ります。エージェントはその時点でターンを終え、回答をポーリングしません。
 

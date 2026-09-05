@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.69.0で2026-09-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.70.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -58,6 +58,8 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 3. 設定の「エージェント」で起動コマンド、UIモード、アカウントの認証状態を確認します。
 4. ネイティブUIの候補取得が失敗している場合、モデルや推論設定を固定せず、接続と認証を復旧して再取得します。
 5. Terminal UIではネイティブUIのログイン案内を利用できないため、ターミナル内で対象CLIの認証を完了します。
+
+Claude、Codex、Antigravity、Cursor、Grok Buildで404、5xx、gateway timeoutなどの一時的なサービス障害が疑われる場合は、エラー表示の「稼働状況を確認」から各プロバイダーのstatus pageを確認します。このリンクは認証、利用上限、クォータ、レート制限、請求のエラーには表示されません。
 
 期限切れの認証情報は「セッション期限切れ」または`authState: expired`と表示され、`loggedIn`は`false`になります。`cockpit accounts login <account> --agent-type <type>`で再ログインし、`cockpit accounts list`で`authState: ok`を確認します。`cockpit doctor`の`accounts.expired`でも対象を確認できます。
 

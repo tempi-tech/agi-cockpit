@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -58,6 +58,8 @@ See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/
 3. In Agent settings, check the launch command, UI mode, and account authentication state.
 4. If native option discovery failed, restore the connection and authentication before selecting a fixed model or reasoning value.
 5. Terminal UI cannot use native UI sign-in guidance, so complete authentication inside that CLI's terminal flow.
+
+For a possible temporary service incident from Claude, Codex, Antigravity, Cursor, or Grok Build, such as a 404, 5xx response, or gateway timeout, follow **Check provider status** from the error surface to the provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors.
 
 An invalid credential appears as **Session expired** or `authState: expired`, with `loggedIn: false`. Sign in again with `cockpit accounts login <account> --agent-type <type>`, then confirm `authState: ok` in `cockpit accounts list`. `cockpit doctor` also lists affected accounts under `accounts.expired`.
 

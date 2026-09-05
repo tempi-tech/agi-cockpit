@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -19,6 +19,8 @@ Browser sessions and navigation history survive task completion, resume, and app
 After an app restart, a saved tab that has not been used stays unloaded without a renderer until it is needed. `loaded: false` together with `rendererResponsive: false` in `tabs` means unloaded, not stuck. Selecting that tab, showing it in the side panel, or targeting its tab ID with a command loads it.
 
 A parked tab can receive input while hidden without showing a separate window or switching macOS Spaces. The same page is visible when the panel is shown again.
+
+While a Cockpit overlay such as a dialog intersects the browser area, Cockpit temporarily parks the canonical page and displays its latest static snapshot instead of a blank surface. The snapshot is not interactive and does not reflect later page updates. Closing the overlay restores the same live page with its form and page state intact. Only when a snapshot cannot be captured promptly does Cockpit show a temporarily-hidden message instead.
 
 ## Open a page
 
