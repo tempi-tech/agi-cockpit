@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.71.0 — 2026-09-05
+
+**Type:** minor · **Platforms:** macOS
+
+- Improved Cockpit Agent so new tasks and autoruns use the models and reasoning levels supported by the connected provider.
+- Improved Codex so the latest models available to the selected account can be chosen in New Task, task settings, and autoruns.
+- Improved cockpit task create and task run so they reconcile an already-created task after a lost response and avoid creating duplicates.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Cockpit Agentで、接続中のプロバイダーが対応するモデルと推論レベルを新規タスクやオートランへ正しく反映するように改善
+- Codexで、選択中のアカウントが利用できる最新のモデルを新規タスク、タスク設定、オートランから選べるように改善
+- cockpit task createとtask runで応答が失われても作成済みタスクを照合し、重複作成を防ぐように改善
+
+</details>
+
 ## v4.70.0 — 2026-09-05
 
 **Type:** minor · **Platforms:** macOS, Linux
