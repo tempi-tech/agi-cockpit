@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.72.0 — 2026-09-07
+
+**Type:** minor · **Platforms:** macOS
+
+- Check, download, and install updates for the connected Cockpit host from the mobile PWA, with confirmation before restarting the host.
+- Added /compact conversation context compaction for Antigravity, Cursor, and Qoder.
+- See where model lists came from and their retrieval status, and reload the list.
+- Added guidance for agent CLI updates needed for new models, with CLI updates available from Desktop.
+- Autorun now checks that the selected model and reasoning effort are available before saving.
+- Fixed viewport height and composer positioning after pairing or reconnecting in the PWA.
+- Improved selected-text capture on macOS by waiting for held hotkey modifiers to be released before copying.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- スマートフォンのPWAから、接続先のCockpitの更新確認・ダウンロード・再起動を伴うインストールができるようになりました
+- Antigravity、Cursor、Qoderで、/compactによる会話コンテキストの圧縮に対応しました
+- モデル一覧の取得元や取得状況を確認し、一覧を再読み込みできるようになりました
+- 新しいモデルの利用に必要なエージェントCLIの更新を案内し、デスクトップから更新できるようになりました
+- オートランの保存時に、選択したモデルと推論レベルが利用可能かを確認するようになりました
+- PWAのペアリングや再接続後に、画面の高さや入力欄の位置が崩れる問題を修正しました
+- macOSのホットキーで選択テキストを取得する際、修飾キーを離してからコピーするように改善しました
+
+</details>
+
 ## v4.71.0 — 2026-09-05
 
 **Type:** minor · **Platforms:** macOS, Linux

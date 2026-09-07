@@ -82,6 +82,16 @@ Before adding AGI Cockpit to the home screen, turn on **HTTPS** in Desktop and o
 
 ## Switch between Cockpit computers
 
+### Update the connected host
+
+From version 4.72.0, **Host updates** in the PWA lets an authenticated device check for and download updates to the connected Cockpit computer. This updates the host application, not just the PWA.
+
+Installing requires a separate confirmation. **Installation restarts the host and terminates every running task.** Finish or safely pause important work before confirming. The PWA tracks the restart and attempts to reconnect automatically; if reconnection fails, check that the host application and remote access are running.
+
+Automatic installation is available only on hosts that support it and after the update has downloaded. Microsoft Store installations must update through Microsoft Store; hosts requiring manual updates show the download page instead. Development builds do not support automatic installation. Only authenticated connections can request host updates.
+
+### Choose another computer
+
 If several computers have remote access enabled, select the connection target in the PWA header to see other Cockpit computers discovered through Tailscale. Select **Open** to move to another target or **Scan again** to refresh the list.
 
 Each Cockpit remains independent. Switching targets does not merge or move tasks, Autoruns, settings, or working files between computers.
