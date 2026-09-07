@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.72.0 — 2026-09-07
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added mobile PWA controls to check, download, and install host updates, with confirmation before restarting the host.
 - Added /compact conversation context compaction for Antigravity, Cursor, and Qoder.
