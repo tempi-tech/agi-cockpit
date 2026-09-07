@@ -4,7 +4,7 @@
 
 Check and apply AGI Cockpit updates on Windows, macOS, or Linux, then inspect update state and diagnostic logs if an update fails.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
+> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
 
 The update method depends on how AGI Cockpit is distributed. This guide identifies the method for your environment and verifies the result after updating.
 
@@ -35,6 +35,12 @@ cockpit update install --confirm
 A successful `cockpit update install --confirm` restarts AGI Cockpit and terminates every running task.
 
 On Linux, open the language-matched download page from **Update manually** or the update notice, then replace the AppImage or `.deb` with the package for the current CPU architecture. On Windows, update AGI Cockpit from the Microsoft Store library.
+
+### Update from a phone
+
+With an active AGI Labo membership and an authenticated PWA connection, open the connection target in the header and select **Host updates**. You can check the host version, release notes, and download progress. Automatic installation is available for packaged macOS hosts after the download completes. **Update now** requires a separate confirmation because it restarts the host and terminates every running task.
+
+The PWA attempts to reconnect automatically after restart. Linux hosts require manual installation on the host, and Windows Store hosts update through Microsoft Store. See [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for the full procedure and connection requirements.
 
 ## 3. Verify the update
 

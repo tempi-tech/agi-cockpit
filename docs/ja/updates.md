@@ -4,7 +4,7 @@
 
 Windows、macOS、LinuxでAGI Cockpitの更新を確認・適用し、失敗した場合に更新状態と診断ログを確認する手順です。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/updates)
+> AGI Cockpit 4.72.0で2026-09-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/updates)
 
 AGI Cockpitの更新方法は配布形式によって異なります。この手順では、現在の環境に合う更新方法を確認し、更新後の状態を確かめます。
 
@@ -35,6 +35,12 @@ cockpit update install --confirm
 `cockpit update install --confirm`が成功するとAGI Cockpitが再起動し、実行中のすべてのタスクが終了します。
 
 Linuxでは「手動で更新」または更新通知から表示言語に合うダウンロードページを開き、現在のCPUアーキテクチャに合うAppImageまたは`.deb`へ更新します。WindowsではMicrosoft StoreのライブラリからAGI Cockpitを更新します。
+
+### スマートフォンから更新する
+
+有効なAGI Laboメンバーシップでリモートアクセスを利用し、認証済みPWAの上部にある接続先から「ホストのアップデート」を開きます。ホストのバージョン、変更内容、ダウンロード状況を確認できます。macOSパッケージ版のホストはダウンロード完了後に自動インストールできます。「今すぐアップデート」はホストの再起動と実行中の全タスクの終了を伴うため、別途確認が必要です。
+
+再起動後はPWAが自動再接続を試みます。Linuxのホストはホスト上で手動インストールし、Windows Store版のホストはMicrosoft Storeから更新します。詳しい手順と接続条件は[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)を参照してください。
 
 ## 3. 更新結果を確認する
 

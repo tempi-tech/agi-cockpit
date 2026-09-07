@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit tasks, Asks, and Autoruns safely from a phone or another computer.
 
-> Verified with AGI Cockpit 4.67.0 on 2026-09-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -76,7 +76,7 @@ The connection is ready when the PWA header shows the target machine name and **
 
 The PWA is an operating surface for checking progress and decisions from another location. Enable remote access and configure its transport and HTTPS certificate in Desktop. Not every Desktop setting or result view is available in the PWA.
 
-A message sent while a task is running enters the queue without stopping the current turn and is delivered automatically after the response. In Claude, Codex, and Grok Build Native UI, sending only `/compact` compacts the conversation context. A normal message sent during compaction is also queued. In an unsupported Native UI, `/compact` reports that it is unavailable instead of sending the text as a normal message.
+A message sent while a task is running enters the queue without stopping the current turn and is delivered automatically after the response. In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI, sending only `/compact` compacts the conversation context. A normal message sent during compaction is also queued. In an unsupported Native UI, `/compact` reports that it is unavailable instead of sending the text as a normal message.
 
 Before adding AGI Cockpit to the home screen, turn on **HTTPS** in Desktop and open the `https://...` URL shown in **Connection info**. An HTTP URL is not a supported configuration for using AGI Cockpit as a PWA. After opening the HTTPS page, select **Add to Home Screen** from Safari's Share menu on iPhone or iPad. In Chrome on Android, open the browser menu and select **Install app** or **Add to Home screen**.
 
@@ -89,6 +89,8 @@ From version 4.72.0, **Host updates** in the PWA lets an authenticated device ch
 Installing requires a separate confirmation. **Installation restarts the host and terminates every running task.** Finish or safely pause important work before confirming. The PWA tracks the restart and attempts to reconnect automatically; if reconnection fails, check that the host application and remote access are running.
 
 Automatic installation is available only on hosts that support it and after the update has downloaded. Microsoft Store installations must update through Microsoft Store; hosts requiring manual updates show the download page instead. Development builds do not support automatic installation. Only authenticated connections can request host updates.
+
+Select the connection target in the PWA header, then **Host updates**. Review the running and available versions and release notes, select **Check for updates**, and use **Download** when offered. Once **Ready to install** appears, select **Update now** and review the separate restart confirmation. After reconnection, verify the running version. If the host returns without the requested version or reports an error, inspect **Updater log summary** before retrying.
 
 ### Choose another computer
 

@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -41,7 +41,13 @@ Desktop's **Send key** setting assigns sending to Enter or Cmd/Ctrl+Enter. Shift
 
 Each task keeps its own draft text and attachments. If you switch tasks before a send or interrupt result arrives, failed input returns to the originating task's composer, and a delayed Visual Runtime error appears on that task. Restored text is prepended to any newer draft entered for the same task in the meantime.
 
-PWA uses the same Follow-up behavior setting and queue as Desktop. In Claude, Codex, and Grok Build Native UI, sending only `/compact` from PWA compacts the conversation context.
+PWA uses the same Follow-up behavior setting and queue as Desktop. In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI, sending only `/compact` from PWA compacts the conversation context.
+
+## Compact the conversation context
+
+In Desktop and the PWA, send only `/compact` in a supported Native UI task after the current reply finishes. Wait for compaction to finish before continuing.
+
+For Antigravity, Cursor, and Qoder, Cockpit asks the agent for a hand-off summary and seeds a new session with it. The conversation shows that Cockpit performed the compaction. If the agent returns no summary, the session stays unchanged. If the new session cannot accept the summary immediately, Cockpit keeps it in the compaction entry and sends it with your next message.
 
 ## Read and quote the conversation
 

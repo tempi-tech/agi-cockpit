@@ -4,7 +4,7 @@
 
 選択したタスクの会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.70.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.72.0で2026-09-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -41,7 +41,13 @@ Desktopの「送信キー」設定では、EnterまたはCmd/Ctrl+Enterを送信
 
 入力途中の本文と添付はタスクごとに保持されます。送信または割り込みの結果を待たずに別のタスクへ移動しても、失敗した入力は送信元タスクの入力欄へ戻り、遅れて届いたVisual Runtimeのエラーもそのタスクに表示されます。戻した本文は、その間に同じタスクへ入力した新しい下書きの前へ追加されます。
 
-PWAもDesktopと同じFollow-up設定とキューを使います。Claude、Codex、Grok BuildのネイティブUIでは、PWAから`/compact`だけを送ると会話コンテキストを圧縮します。
+PWAもDesktopと同じFollow-up設定とキューを使います。Claude、Codex、Antigravity、Cursor、Qoder、Grok BuildのネイティブUIでは、PWAから`/compact`だけを送ると会話コンテキストを圧縮します。
+
+## 会話コンテキストを圧縮する
+
+DesktopとPWAでは、対応するネイティブUIのタスクで現在の返答が終わってから`/compact`だけを送ります。圧縮が完了してから次の指示を送ってください。
+
+Antigravity、Cursor、Qoderでは、Cockpitがエージェントに引き継ぎ用の要約を作らせ、その要約を新しいセッションへ渡します。会話にはCockpitによる圧縮として表示されます。要約が返らなければセッションは変更しません。新しいセッションがすぐに要約を受け取れない場合は、圧縮の記録に要約を保持し、次のメッセージと一緒に送ります。
 
 ## 会話を読み、引用する
 
