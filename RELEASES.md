@@ -8,11 +8,11 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Check, download, and install updates for the connected Cockpit host from the mobile PWA, with confirmation before restarting the host.
+- Added mobile PWA controls to check, download, and install host updates, with confirmation before restarting the host.
 - Added /compact conversation context compaction for Antigravity, Cursor, and Qoder.
-- See where model lists came from and their retrieval status, and reload the list.
+- Added model list sources, retrieval status, and a reload action.
 - Added guidance for agent CLI updates needed for new models, with CLI updates available from Desktop.
-- Autorun now checks that the selected model and reasoning effort are available before saving.
+- Improved Autorun validation to check that the selected model and reasoning effort are available before saving.
 - Fixed viewport height and composer positioning after pairing or reconnecting in the PWA.
 - Improved selected-text capture on macOS by waiting for held hotkey modifiers to be released before copying.
 
