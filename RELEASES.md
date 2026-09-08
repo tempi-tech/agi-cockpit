@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.73.0 — 2026-09-08
+
+**Type:** minor · **Platforms:** macOS
+
+- The PWA now preserves task search queries so you can continue searching after reopening the screen.
+- Added recent task searches in the PWA.
+- Improved the PWA to show each question from the top when switching between questions.
+- Added all reasoning effort choices for Codex models missing from a custom model catalog.
+- Added visibility into custom model catalog usage in the Codex model list.
+- Reduced repeated loading when opening screens by reusing previously retrieved model lists.
+- Simplified mode selection and the layout of options on the new task screen.
+- Fixed ordinary conversations and errors from other agents being incorrectly treated as account usage limits.
+- Fixed exhausted usage allowances disappearing from the usage display.
+- Fixed usage details extending beyond the screen on smartphones.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- PWAでタスクの検索条件を保存し、画面を開き直しても検索を続けられるようになりました
+- PWAで最近の検索履歴からタスクを検索できるようになりました
+- PWAで質問を切り替えたとき、質問の先頭から表示するように改善しました
+- カスタムモデル一覧にないCodexモデルでも、推論レベルの全候補を選べるようになりました
+- Codexのモデル一覧で、カスタムモデル一覧の使用状況を確認できるようになりました
+- 取得済みのモデル一覧を再利用し、画面を開くたびの読み込み待ちを減らしました
+- タスク作成画面のモード選択と設定項目の配置を整理しました
+- 通常の会話や別のエージェントのエラーを、アカウントの利用上限として誤判定する問題を修正しました
+- 利用枠を使い切った状態が使用量表示から消える問題を修正しました
+- スマートフォンで使用量の詳細表示が画面からはみ出す問題を修正しました
+
+</details>
+
 ## v4.72.0 — 2026-09-07
 
 **Type:** minor · **Platforms:** macOS, Linux
