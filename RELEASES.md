@@ -8,13 +8,13 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- The PWA now preserves task search queries so you can continue searching after reopening the screen.
+- Added persistent task search queries in the PWA so searches can continue after reopening the screen.
 - Added recent task searches in the PWA.
 - Improved the PWA to show each question from the top when switching between questions.
 - Added all reasoning effort choices for Codex models missing from a custom model catalog.
 - Added visibility into custom model catalog usage in the Codex model list.
-- Reduced repeated loading when opening screens by reusing previously retrieved model lists.
-- Simplified mode selection and the layout of options on the new task screen.
+- Improved screen loading by reusing previously retrieved model lists.
+- Improved mode selection and the layout of options on the new task screen.
 - Fixed ordinary conversations and errors from other agents being incorrectly treated as account usage limits.
 - Fixed exhausted usage allowances disappearing from the usage display.
 - Fixed usage details extending beyond the screen on smartphones.
