@@ -4,16 +4,16 @@
 
 Choose a workspace and agent, safely run your first task, review its result, and mark the task complete.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
 ## 1. Create a new task
 
 1. Open **New task** at the top of the window.
-2. Choose **Project workspace** or **Temporary folder**. In an existing project, select only the directory the agent may inspect.
+2. Under **Workspace**, choose **Project workspace** or **Temporary folder**. In an existing project, select only the directory the agent may inspect.
 3. Select an AI agent.
-4. For supported agents, choose **Native UI** or **Terminal**.
+4. For supported agents, use **Mode** to choose **Native UI** or **Terminal**.
 5. If account selection is available, keep **Auto**. Keep the built-in system prompt.
 6. Choose **Supervised** approval mode, enter the following request, and create the task.
 

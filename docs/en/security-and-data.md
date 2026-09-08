@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -13,6 +13,8 @@ AGI Cockpit runs tasks and agent processes on your computer. Features still comm
 Core Cockpit data, including task state, conversation history, Autoruns, Fleets, Cockpit Hook definitions and run history, templates, CLI runtime information, and logs, is stored under `~/.agi-tools/data/cockpit`. Some data, such as attachments and Electron browser profiles, is stored in the operating system's application-data area. Working files live in the selected project, temporary directory, or Git Worktree. An image from outside the workspace that is sent to Antigravity Native UI also has a temporary readable copy inside that workspace.
 
 The agent process reads and writes its workspace. Depending on the approval mode and agent permissions, it may access files not currently displayed in Cockpit. Select only the directories needed for the task.
+
+PWA task search queries and recent searches are stored in the current browser’s localStorage separately for each connected host. They do not sync to other devices. **Clear search** and **Clear history** are separate actions; use both to remove both the current query and history.
 
 ## What is sent externally
 

@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -34,6 +34,8 @@ New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to *
 The selection made when the task is created is saved with that task and remains the selection used for display, resume, and execution. Desktop and PWA show **Auto · account name** near the composer. The account menu can select Auto, the default account, or a named profile. A manual switch stops current execution, moves the saved conversation to the chosen profile, and resumes it.
 
 If no account is available, usage cannot be checked, or switching or resume fails, the task stops with `waiting_confirmation` and `usage_limit`. When a reset time is known, Cockpit re-evaluates usage after that time and resumes the task if capacity has recovered. If the account remains exhausted, usage cannot be confirmed, or authentication has expired, the task shows the reason and recovery action. Switch accounts or sign in again before retrying.
+
+Usage indicators keep an exhausted allowance visible as 0% remaining. An unavailable value is not treated as 0% remaining. In the PWA, tap a usage ring to open details. The details stay within the screen, and long content can scroll. Tap the ring again or tap outside the details to close them. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) to identify the account affected by a limit.
 
 ## Enter a message
 

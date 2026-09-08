@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -43,9 +43,11 @@ A new-task Autorun also keeps its Browser Identity assignment and passes it to e
 
 For a new task, Desktop and the PWA show only settings supported by the selected agent and UI mode. The CLI and API use the same capability data and reject unsupported combinations with an explicit error before saving.
 
-Before saving a new-task Autorun, Cockpit checks the selected model and reasoning effort against the available catalog. If either is unavailable, saving is blocked and the affected setting is shown; select a supported value or reload the list after updating the agent CLI. A failed lookup can show built-in fallback candidates, so inspect the list’s source and retrieval status. These checks do not change the runtime of an existing-task Autorun.
+Before saving a new-task Autorun, Cockpit checks the selected model and reasoning effort against the available catalog. If a value is unavailable, saving is blocked and the affected setting is shown; select a supported value or reload the list after updating the agent CLI. A failed lookup can show built-in fallback candidates, so inspect the list’s source and retrieval status. Unlisted Codex models follow the exception described below; reasoning values are still validated. These checks do not change the runtime of an existing-task Autorun.
 
 For Codex Native UI, selecting a pinned account loads the latest model catalog available to that account and lets the Autorun store its supported reasoning level and service tier. While editing, Auto uses the default account's catalog; at execution, Cockpit revalidates the stored values against the catalog of the account that Auto selects. Saving waits while discovery is in progress, and a failed discovery falls back to the built-in candidates. Cockpit Agent likewise reflects models from the connected OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio provider and exposes only the reasoning levels advertised for the selected model.
+
+Codex can retain a saved model as **not in list** when it is absent from the retrieved catalog. If capabilities are unknown, the picker offers `low`, `medium`, `high`, `xhigh`, `max`, and `ultra`. Absence alone does not block saving; Codex decides actual availability at runtime. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models) to check a custom catalog.
 
 Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor's available model, model-specific reasoning effort, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Cursor does not expose service-tier or system-prompt settings.
 

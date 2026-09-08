@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -40,6 +40,12 @@ Auto first requires remaining capacity in every applicable window, including sho
 If an Auto task reaches a supported usage or plan limit, Cockpit selects another available account, transfers the saved session, and continues. Exhausted Claude usage credits and Codex workspace credits are included in this recovery. When no alternative is available, usage cannot be confirmed, or switching or resuming fails, the task reports the reason and waits for a person. After a recorded reset time passes, Cockpit re-evaluates that usage limit and resumes the same task when capacity has recovered. An expired credential cannot recover through a quota reset and must sign in again.
 
 An Autorun resolves Auto again on every execution. Fleet can spread parallel nodes across available accounts instead of concentrating all work on one profile. Actual concurrency still depends on provider plans, usage limits, and machine resources.
+
+### Identify the account and limit
+
+Mentioning a usage limit in ordinary conversation does not mark the execution account as exhausted. Tool output from another agent is also distinguished from the task's own account limit. For example, a Claude Code limit from a process started by a Codex task appears as a Claude notice and does not trigger a Codex account switch.
+
+A Codex limit notice identifies the account, usage window, and reset time when known. If the provider did not name the window, the notice says so. `usageLimitAttribution` in `cockpit task get <id>` also identifies the restriction; explicit provider errors take precedence over cached usage data.
 
 ## Pin one account
 
