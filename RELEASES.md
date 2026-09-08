@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.73.0 — 2026-09-08
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added persistent task search queries in the PWA so searches can continue after reopening the screen.
 - Added recent task searches in the PWA.
