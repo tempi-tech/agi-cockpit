@@ -8,8 +8,6 @@ Run actions in response to task completion, Asks, and hotkeys, and learn how to 
 
 Hooks automatically run a registered action when something happens in Cockpit, such as a task completing or an Ask being created. Each Hook saves a rule: when this event happens, run this action. A hotkey can also trigger a Hook.
 
-Hooks are free to use with no account required. Actions run on the computer running Cockpit.
-
 ## Choose between Hooks and Autorun
 
 | Goal | Feature | Example |
