@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -34,6 +34,10 @@ In the cron weekday field, `0` means Sunday. For example, `0 9 * * 1-5` runs at 
 6. For an existing task, choose **Target task**. Cockpit creates no new runtime; it uses the target's existing agent, conversation, working directory, and runtime settings.
 7. Choose **Once**, **Interval**, or **Cron** and configure the timing.
 8. Save the Autorun and confirm that the list shows its next run time.
+
+In Desktop and the PWA, open **Target task** and search by task name, project, instruction text, or task ID. Review the name, status, project, and shortened ID in the results, then select the target. A unique ID prefix resolves to the full task ID; when several tasks match, select the intended result. Arrow keys move through the results, Enter selects, and Escape closes the picker.
+
+Wait for the task list to finish loading before checking an unknown ID. If Cockpit offers **Use the ID … anyway**, review the warning before selecting it. Saving an unknown ID is allowed, but the Autorun is disabled if the task is missing when execution starts.
 
 When creating or updating an Autorun in the PWA, the dialog stays open and disables its controls until a save result arrives. A failed save preserves the entered values, keeps the dialog open, and displays the reason returned by the server. A membership failure links to plan selection, while a disconnected result says that nothing was saved. A timeout means the result is unknown: close the dialog and inspect the list before retrying so you do not create a duplicate.
 

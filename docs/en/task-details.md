@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -24,6 +24,8 @@ Escape stops a running turn. With multiple task panes, it applies only to the pa
 Stopping a turn, completing or removing a task, or quitting the app also stops descendant processes launched by that task. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
 
 The **Follow-up behavior** setting under Appearance chooses whether an ordinary follow-up sent during a reply waits in the **Queue** or **Steers** the current reply. Queue is the default. When it does not conflict with the configured send or steer shortcut, Cmd/Ctrl+Enter uses the opposite behavior for that one message.
+
+In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
 
 Before delivery, a queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
 

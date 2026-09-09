@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -30,6 +30,12 @@ The list reports the provider, profile ID, name, email when available, `authStat
 For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server in a read-only sandbox without approval prompts. This retrieval path supports Codex CLI 0.153.
 
 Named Antigravity profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a profile-specific home. On macOS, Cockpit puts a profile-specific Keychain first in the search list and verifies that order before a task starts, preventing fallback to the host Antigravity login and its quota. The OS keyring is shared on Windows and Linux, so a host login stored there still takes precedence for every profile.
+
+## Check remaining quotas
+
+Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows a ring and its remaining percentage. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again.
+
+An exhausted quota remains visible at 0%. An unknown value appears as unavailable, and a missing reset time has no countdown. Check the reported authentication or retrieval status before deciding that an account is exhausted. These provider allowances are separate from conversation context usage.
 
 ## Use Auto
 

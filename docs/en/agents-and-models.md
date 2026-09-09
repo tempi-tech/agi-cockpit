@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -63,6 +63,8 @@ Custom prompts are stored as user-owned Markdown in the AGI Tools data area. The
 Model controls in agent settings, new tasks, and Autoruns show where the list came from, retrieval status, and when it was fetched. A failed or timed-out CLI lookup is identified as a built-in fallback; use **Show reason** when available, then **Reload models** to try again. A built-in candidate does not guarantee that your installed CLI or account can use it.
 
 If a model is missing or the CLI is outdated, review the installed and available CLI versions in the notice. Desktop offers **Update CLI**, which opens a terminal for that agent’s update command. After a successful update, reload the models. In the PWA, copy the displayed command and run it on the computer hosting Cockpit; the PWA does not run the CLI update. Except for unlisted Codex models, if the CLI is already current, choose another available model. If its latest version is unknown, check whether a newer CLI release adds the model.
+
+When switching agents, the model-list status uses previously retrieved information for the selected agent and account when available. In the PWA task creation dialog, look below the agent and model controls for the model-list source, retrieval status, and related notices.
 
 Previously retrieved model lists are reused, avoiding a fresh initial wait whenever a screen opens. Select **Reload models** when the list is outdated. If a custom catalog is active, check the catalog configuration below as well as the CLI version.
 
