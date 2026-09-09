@@ -46,6 +46,7 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 - 依存関係付きの複数エージェント処理を再利用する: [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)
 - 複数のエージェントと人が同じ会話で議論する: [Talk Rooms](https://agi-labo.com/tools/cockpit/docs/talk-rooms)
 - 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- タスク完了やホットキーをきっかけに処理を実行する: [Hooks](https://agi-labo.com/tools/cockpit/docs/hooks)
 - エージェントごとの対応差を調べる: [エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 - 複数のエージェントアカウントを使い分ける: [アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts)
 - 再利用する役割や品質基準を設定する: [システムプロンプト](https://agi-labo.com/tools/cockpit/docs/system-prompts)

@@ -8,6 +8,8 @@ Learn how Autorun starts a new task or sends an instruction to an existing task 
 
 Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
+Use [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) to react to events such as task completion or an Ask, rather than a time or interval.
+
 ## Requirements
 
 Autorun requires an AGI Labo membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Labo in Desktop.

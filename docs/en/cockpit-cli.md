@@ -54,9 +54,7 @@ See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Brow
 
 ## Automate reactions with Hooks
 
-`cockpit hooks` registers local event-to-shell-action declarations for task, Ask, Autorun, Fleet Run, app lifecycle, and hotkey events. Use filters to narrow an event payload, inspect failures through `hooks runs`, and test an action explicitly before relying on it. Hook registration is arbitrary local code execution, so this command family rejects `--host`. See the [`cockpit hooks` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/hooks) for event payloads, safeguards, and exact command results.
-
-Add, update, and test hooks from the CLI. Open **Settings → Hooks** from the app menu in the lower-left corner to enable or disable registered hooks, inspect recent run times, events, exit codes, standard output, and standard error, or remove a hook. Removal requires an inline confirmation. Existing run history remains after the hook is removed; see [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for the storage boundary that includes that history.
+`cockpit hooks` runs local actions in response to task completion, Asks, Autoruns, Fleet Runs, app startup and shutdown, or hotkeys. See [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) for registration, testing, filters, and management in Settings. The [`cockpit hooks` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/hooks) covers all events, options, and command results.
 
 ## Distinguish local and remote targets
 

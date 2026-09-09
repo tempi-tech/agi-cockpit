@@ -68,9 +68,7 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 ## Hooksでイベントに反応する
 
-`cockpit hooks`は、タスク、Ask、Autorun、Fleet Run、アプリのライフサイクル、ホットキーのイベントに対して、ローカルでシェルアクションを実行する宣言を登録します。フィルターでイベントのpayloadを絞り、`hooks runs`で失敗を確認し、依存する前にアクションを明示的にテストしてください。Hookの登録は任意のローカルコード実行にあたるため、このコマンド群は`--host`を拒否します。イベントpayload、安全策、正確なコマンド結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)を参照してください。
-
-Hookの追加、変更、テストはCLIから行います。画面左下のアプリメニューから「設定」→「Hooks」を開くと、登録済みHookの有効化と無効化、直近の実行日時・イベント・終了コード・標準出力・標準エラーの確認、Hookの削除ができます。削除前には画面内で確認が必要です。Hookを削除しても既存の実行履歴は残るため、履歴も含めた保存境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を確認してください。
+`cockpit hooks`は、タスク完了、Ask、Autorun、Fleet、アプリの起動・終了、ホットキーをきっかけにローカルの処理を実行します。登録・テスト・対象の絞り込みと、設定画面での管理は[Hooks](https://agi-labo.com/tools/cockpit/docs/hooks)を参照してください。全イベント、オプション、実行結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)にあります。
 
 ## ローカルとリモートを区別する
 

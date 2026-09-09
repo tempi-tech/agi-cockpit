@@ -46,6 +46,7 @@ Every local feature is free and unlimited, with no account required. Claude Code
 - Reuse dependency-aware multi-agent workflows: [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 - Discuss in one shared conversation with agents and people: [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 - Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+- Run actions on task completion or a hotkey: [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks)
 - Compare support across agents: [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 - Use multiple agent accounts: [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 - Set reusable roles and quality standards: [System prompts](https://agi-labo.com/en/tools/cockpit/docs/system-prompts)
