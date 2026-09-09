@@ -6,7 +6,9 @@ Learn how to give a Master Agent a broad objective and supervise its task decomp
 
 > Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
 
-The Master Agent is a dedicated task that divides a broad objective into units of work, starts and supervises Cockpit tasks, and combines their results into one decision. It normally delegates implementation to suitable agent tasks and focuses on assignment, waiting, review, and integration.
+The Master Agent is an agent launched in a Master directory containing a dedicated `AGENTS.md` with instructions for starting and supervising Cockpit tasks. Like a skill, this `AGENTS.md` gives the agent its role and operating procedures.
+
+It divides a broad objective into multiple tasks, tracks their progress, and brings their results together. It delegates implementation to suitable agent tasks and focuses on assignment, review, and integration.
 
 ## Distinguish a normal task, Master Agent, and Fleet
 
