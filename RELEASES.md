@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.74.0 — 2026-09-09
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added search by name or task ID when choosing an Autorun target task.
 - Added rings showing the remaining allowance for each quota in the usage overview.
