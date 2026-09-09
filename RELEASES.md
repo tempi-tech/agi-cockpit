@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.74.0 — 2026-09-09
+
+**Type:** minor · **Platforms:** macOS
+
+- Added search by name or task ID when choosing an Autorun target task.
+- Added rings showing the remaining allowance for each quota in the usage overview.
+- Added countdowns to quota resets in the usage overview.
+- Improved visual-mode queued messages to start separate turns after the previous response completes.
+- Fixed cached model information display when switching agents.
+- Improved model information placement on the PWA task creation screen.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Autorunの実行先タスクを名前やタスクIDで検索できるようになりました
+- 使用量一覧で各利用枠の残量をリング表示で確認できるようになりました
+- 使用量一覧に利用枠のリセットまでの残り時間を表示するようになりました
+- ビジュアルモードのキューメッセージを、直前の応答完了後に独立したターンとして送信するように改善しました
+- エージェントを切り替えたとき、取得済みのモデル情報を正しく表示するように修正しました
+- PWAのタスク作成画面でモデル情報の表示位置を整理しました
+
+</details>
+
 ## v4.73.0 — 2026-09-08
 
 **Type:** minor · **Platforms:** macOS, Linux
