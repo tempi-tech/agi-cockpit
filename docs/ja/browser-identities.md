@@ -57,7 +57,7 @@ cockpit task browser-identity <taskId> work
 cockpit task browser-identity <taskId>
 ```
 
-タスク内でtask IDを省略すると、現在のタスクを変更します。切り替え後に開くsessionは新しいIdentityの領域を使います。既存sessionは元のIdentityに残り、元へ戻すと再び利用できます。
+タスク内でtask IDを省略すると、現在のタスクを変更します。切り替え後に開くsessionは新しいIdentityの領域を使います。既存sessionは元のIdentityに残ります。デスクトップの「ブラウザータブ」設定からは、そのタスクが所有する既存タブを表示・操作できます。エージェントやCLIから操作する場合は、タスクの割り当てを元のIdentityへ戻す必要があります。
 
 `cockpit browser open ... --browser-identity work`の指定は、現在の割り当てがworkであることを検証するだけで、割り当て自体を変更しません。別Identityのsessionまたはtab IDを指定すると拒否され、割り当て変更コマンドが案内されます。
 

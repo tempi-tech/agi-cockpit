@@ -4,6 +4,49 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.75.0 — 2026-09-10
+
+**Type:** minor · **Platforms:** macOS
+
+- Added pinned answers for Cockpit agent tasks, with quick navigation on Desktop and the PWA.
+- Added text search in Desktop chat and side panels.
+- Added an overview of open browser tabs in Settings.
+- Added per-tab browser audio muting.
+- Added project-specific icons to project lists on Desktop and the PWA.
+- Added CLI controls for changing project icons.
+- Added per-recipient delivery status for Talk Room messages.
+- Added sign-in actions for accounts requiring authentication on the Usage screen.
+- Improved usage cards to make account usage easier to review.
+- Improved shared agent settings organization and default-agent selection.
+- Added a CLI setting for sending follow-ups as queued messages or steering the current turn.
+- Fixed scrolling in the Skills settings screen.
+- Improved app responsiveness during startup and shutdown on macOS.
+- Improved responsiveness in long conversations.
+- Fixed detection of Codex credit exhaustion as an account restriction.
+- Fixed wrapping and overflow in the Autorun execution target selector.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Cockpitエージェントの回答をピン留めし、デスクトップやPWAからすぐに戻れるようになりました
+- デスクトップのチャットやサイドパネル内のテキストを検索できるようになりました
+- 設定で開いているブラウザータブを一覧表示できるようになりました
+- ブラウザータブごとに音声をミュートできるようになりました
+- デスクトップとPWAのプロジェクト一覧にプロジェクト固有のアイコンを表示するようになりました
+- CLIからプロジェクトのアイコンを変更できるようになりました
+- Talk Roomのメッセージが各参加タスクに届いたか確認できるようになりました
+- 使用量画面からログインが必要なアカウントにサインインできるようになりました
+- 使用量カードの表示を見直し、利用状況を確認しやすくしました
+- エージェント共通設定を整理し、既定のエージェントを選びやすくしました
+- CLIから実行中の追加メッセージの送信方法を設定できるようになりました
+- スキル設定画面でスクロールできない問題を修正しました
+- macOSで起動時や終了時にアプリが応答しにくくなる問題を改善しました
+- 長いチャットを開いているときの操作の遅延を改善しました
+- Codexのクレジット残高不足をアカウントの利用制限として正しく認識するように修正しました
+- Autorunの実行先選択でラベルが折り返されてはみ出す問題を修正しました
+
+</details>
+
 ## v4.74.0 — 2026-09-09
 
 **Type:** minor · **Platforms:** macOS, Linux

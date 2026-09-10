@@ -57,7 +57,7 @@ cockpit task browser-identity <taskId> work
 cockpit task browser-identity <taskId>
 ```
 
-Inside a task, omit the task ID to change the calling task. New sessions use the newly assigned Identity. Existing sessions remain under the original Identity and become available again after switching back.
+Inside a task, omit the task ID to change the calling task. New sessions use the newly assigned Identity. Existing sessions remain under the original Identity. From Desktop Settings > Browser Tabs, you can reveal and operate existing tabs owned by that task. Agent and CLI access requires switching the task assignment back to the original Identity.
 
 `cockpit browser open ... --browser-identity work` only asserts that the assignment is work; it does not change it. A session or tab from another Identity is rejected with guidance to use the assignment command.
 
