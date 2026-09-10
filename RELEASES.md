@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.75.0 — 2026-09-10
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added pinned answers for Cockpit agent tasks, with quick navigation on Desktop and the PWA.
 - Added text search in Desktop chat and side panels.
