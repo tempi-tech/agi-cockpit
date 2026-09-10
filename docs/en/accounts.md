@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -36,6 +36,12 @@ Named Antigravity profiles use browser-based Google OAuth and keep conversations
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows a ring and its remaining percentage. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again.
 
 An exhausted quota remains visible at 0%. An unknown value appears as unavailable, and a missing reset time has no countdown. Check the reported authentication or retrieval status before deciding that an account is exhausted. These provider allowances are separate from conversation context usage.
+
+### Sign in from Usage
+
+When an account requires authentication, its Usage card offers **Sign in** or **Sign in again** for that specific account. Follow the provider's login flow; while it runs, the action shows **Signing in...** and cannot be started again. After successful authentication, Cockpit refreshes the account's authentication and usage information. A usage-fetch error alone is not proof that login is required or that the allowance is zero.
+
+Cards keep account and allowance information together. Open quota details to inspect the source and reset time rather than interpreting an unavailable measurement as an exhausted quota.
 
 ## Use Auto
 

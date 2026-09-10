@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -41,6 +41,12 @@ PWA task search saves the current query in the device's browser separately for e
 Select the search field to open **Recent searches**, with up to five entries you can reuse. While typing, history is filtered by prefix. Confirming with Enter or the keyboard's search key, or opening a task from the results, adds that query to history.
 
 **Clear search** removes only the current query. Use **Remove from history** for one entry or **Clear history** for all entries; neither changes the current query. Storage is local to that browser and does not sync to other devices. If browser storage is unavailable, search still works within the screen, but cannot be restored after reopening.
+
+## Identify projects by icon
+
+Desktop's sidebar and overview board, and the PWA project list, show a project-specific icon when one is available. Cockpit detects local project icons such as favicons; otherwise it uses the default folder appearance.
+
+Use `cockpit project icon get --directory <path>` to inspect the effective icon, `cockpit project icon set <image-path> --directory <path>` to choose a local image, and `cockpit project icon reset --directory <path>` to return to automatic detection. Changes persist and synchronize to connected PWA clients. The directory identifies the project, so a worktree and its main checkout have separate icons. No image is downloaded from the network. See [project reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for formats and size limits.
 
 ## Task entry points and workspaces
 

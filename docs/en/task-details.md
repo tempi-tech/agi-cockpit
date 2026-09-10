@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -28,6 +28,11 @@ The **Follow-up behavior** setting under Appearance chooses whether an ordinary 
 In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
 
 Before delivery, a queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
+
+### Configure follow-up behavior from the CLI
+
+Use `cockpit settings get shortcuts.followUpBehavior` to read the current default, and `cockpit settings set shortcuts.followUpBehavior queue` or `cockpit settings set shortcuts.followUpBehavior steer` to change it. `queue` waits for the current turn to finish; `steer` sends to the current turn. The default is `queue`. This does not change the separate `shortcuts.steerTurn` key binding or add steering support to an unsupported agent mode.
+
 
 ## Confirm the execution account
 
@@ -66,6 +71,18 @@ Saved Native UI history is restored by conversation turn. When older history has
 When a task detail is open in the PWA, its URL uses `#task/<task-id>` as a deep link. On initial launch or during reconnection, Cockpit waits for the task list to synchronize before opening that task, and browser Back returns to the list. A deleted or unknown ID returns to the list and shows **Task not found**.
 
 Selecting an OS notification for a completed response, confirmation request, usage limit, or error brings Desktop to the foreground and opens the source task. Selecting the notification does not answer an Ask, approve a tool, or complete the task.
+
+## Pin an answer and return to it
+
+In a **Cockpit** agent task, hover over an assistant answer and choose **Pin answer**. Open **Pinned answers** above the conversation to jump back to a saved answer or unpin it. Desktop and the PWA show the same task's pins; the PWA pinned-answers bar lets you return to marked answers. Pins survive reopening the task and restarting Cockpit.
+
+This is available only for Cockpit agent tasks, not Claude Code, Codex, or other agent types. User messages and tool calls cannot be pinned. If history is reset or compacted and an answer is no longer available, its pin is not a jump target; remove the stale pin instead. Deleting the task also deletes its pins.
+
+Use `cockpit pinned-answers list <task-id> --all` to obtain answer IDs, then `pin <task-id> <message-id>` or `unpin <task-id> <message-id>`. See the [pinned-answers reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/pinned-answers).
+
+## Find text in Desktop chat
+
+Select **Find in content**, or press Cmd+F on macOS / Ctrl+F on Windows and Linux while the chat is active. Enter literal text to highlight matches and show the match count. Enter moves forward, Shift+Enter moves backward, and Esc closes search. This searches the task's available conversation content, not all tasks or unavailable archived output. This in-content search is a Desktop feature, distinct from PWA task-list search.
 
 ## Inspect errors and tool runs
 

@@ -4,7 +4,7 @@
 
 Learn how agents and people share one conversation while controlling notification scope, mentions, waiting, leaving, and rejoining.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 
 A Talk Room is a shared conversation where multiple agents and people read the same history and exchange short messages. Unlike one-way `task send` instructions or dependency-driven Fleet execution, the Room history is the source of truth for the discussion.
 
@@ -93,6 +93,18 @@ cockpit talk wait <room-id> --since <latest-seq>
 `talk get` reads the current Room, while `talk wait` blocks for messages after the supplied `seq`. A timeout is not a Room failure. Continue waiting from the same `--since`.
 
 Send long text, Markdown, quotes, backticks, or `$` through `--stdin` or `--text-file`. Do not embed long content directly in a shell argument.
+
+## Check delivery to each participant
+
+A message's delivery summary shows per-recipient status in the room. CLI `talk get`, `log`, and `wait` expose `receipts` for participants present when the message was posted, excluding the author. Later membership or name changes do not rewrite those recipients.
+
+- `sending`: delivery to the task runtime is pending.
+- `received`: the runtime accepted the message, or the recipient fetched it through a task-context `get` or `wait`.
+- `unconfirmed`: delivery is not confirmed, for example while the task is busy or after an interrupted delivery.
+- `not_notified`: notification mode or mention rules excluded the recipient.
+- `undeliverable`: delivery failed, for example because the task is unavailable or usage-limited.
+
+**Received is not proof that the agent understood, acted on, or completed the request.** Reading the room as a person does not mark messages received by an agent. Older messages without receipts have unknown status, not failed delivery. See the [Talk reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/talk) for reason codes.
 
 ## Close, leave, and reopen
 

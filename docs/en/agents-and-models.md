@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -22,6 +22,10 @@ AGI Cockpit lets you choose from eight agents on the same task creation surface.
 | Cockpit | Supported OpenRouter, OpenCode Go, OpenCode Zen, and LM Studio models in Cockpit's native UI |
 
 Agent types that depend on an external CLI appear on the creation screen only when Cockpit can detect that CLI. Cockpit and Terminal do not require external agent CLI detection.
+
+## Choose the default agent
+
+Open **Settings → Agents → Common** and choose **Default agent** from the dropdown. This is the agent initially selected when creating a new task; it does not change an existing task's agent. Shared agent settings are grouped under Common, while provider-specific model and account settings remain under each agent.
 
 ## Native UI and terminal UI
 

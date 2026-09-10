@@ -4,7 +4,7 @@
 
 選択したタスクの会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.74.0で2026-09-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.75.0で2026-09-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -28,6 +28,11 @@ Visual Runtimeで同じturn failureが3回続くと、Cockpitはその会話を�
 DesktopとPWAのClaude、Codex、Antigravity、Cursor、Qoder、Grok BuildのネイティブUIでは、キューの各メッセージは直前の応答が完了してから独立したターンとして送信されます。そのターンの完了後に次のキューメッセージが送信されます。現在の応答へすぐに指示を反映したい場合は、割り込み操作を選んでください。
 
 送信待ちのキューメッセージは、送信前に編集、今すぐ送信、削除できます。「編集」は本文と添付を入力欄へ戻し、そのメッセージをキューから取り除きます。必要な修正を行ってから改めて送信してください。
+
+### CLIで追加指示の送信方法を設定する
+
+`cockpit settings get shortcuts.followUpBehavior`で現在の既定値を確認し、`cockpit settings set shortcuts.followUpBehavior queue`または`cockpit settings set shortcuts.followUpBehavior steer`で変更できます。`queue`は現在のターン終了まで待ち、`steer`は現在のターンへ送ります。既定値は`queue`です。別の設定である`shortcuts.steerTurn`のキー割り当ては変更せず、未対応のエージェントモードに割り込み機能を追加するものでもありません。
+
 
 ## 実行アカウントを確認する
 
@@ -66,6 +71,18 @@ PWAで会話の末尾から離れると下向き矢印が表示されます。�
 PWAでタスク詳細を開くと、URLの`#task/<task-id>`がそのタスクへのdeep linkになります。起動直後や再接続中はタスク一覧の同期を待ってから対象を開き、ブラウザーの戻る操作で一覧へ戻れます。削除済みまたは存在しないIDでは一覧を表示し、「タスクが見つかりません」と案内します。
 
 回答完了、確認待ち、利用上限、エラーなどのOS通知を選ぶと、Desktopを前面へ出して通知元のタスクを開きます。通知を選んだだけでは、Askへの回答、ツール承認、タスク完了は実行しません。
+
+## 回答をピン留めして戻る
+
+**Cockpit**エージェントのタスクで、エージェントの回答にポインターを重ねて**回答をピン留め**を選びます。会話上部の**ピン留めした回答**から、保存した回答への移動やピン留めの解除ができます。DesktopとPWAには同じタスクのピン留めが表示され、PWAでもピン留めバーから回答に戻れます。タスクを開き直したりCockpitを再起動したりしても保持されます。
+
+対象はCockpitエージェントのタスクのみで、Claude Code、Codexなどのタスクには対応しません。ユーザーのメッセージやツール呼び出しはピン留めできません。履歴のリセットや圧縮で回答がなくなると、そのピンからは移動できないため、不要なピンを解除してください。タスクの削除時にはピンも削除されます。
+
+CLIでは`cockpit pinned-answers list <task-id> --all`で回答IDを取得し、`pin <task-id> <message-id>`または`unpin <task-id> <message-id>`を使います。詳細は[pinned-answersリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/pinned-answers)を参照してください。
+
+## Desktopのチャット内を検索する
+
+チャットを操作している状態で**内容を検索**を選ぶか、macOSではCmd+F、WindowsとLinuxではCtrl+Fを押します。入力した文字列に一致する箇所を強調表示し、件数を表示します。Enterで次、Shift+Enterで前の一致箇所へ移動し、Escで検索を閉じます。対象はそのタスクで利用できる会話内容であり、全タスクや復元できない過去の出力を横断検索するものではありません。このコンテンツ内検索はDesktopの機能で、PWAのタスク一覧検索とは別です。
 
 ## エラーとツール実行を確認する
 

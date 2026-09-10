@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -53,6 +53,12 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 `screenshot --full-page` captures a long window-scrolling document in clips of at most 4096 CSS px and stitches them together. When the document itself cannot scroll but an inner overflow region can, Cockpit scrolls and stitches the single largest container, then restores its scroll position. Check `documentHeight`, `capturedHeight`, and `scrolledElement` in the result. A `warning` reports incomplete coverage caused by the 20,000 px cap, a repeated frame, or layouts with several or nested scrollers.
 
 Locators traverse open shadow roots. A normal CSS selector works across them, and `host >>> inner` pins an explicit shadow boundary. Closed shadow roots are inaccessible from the page; use screenshot coordinates when necessary.
+
+## Find open tabs and control audio
+
+**Settings → Browser Tabs** lists open tabs from all tasks and Browser Identities, including tabs not currently visible. Each row shows its task, identity, favicon, title, URL, and audio state. Select the task name to open the owning task and reveal the tab. Mute, unmute, and close controls act on one tab at a time.
+
+From the CLI, `cockpit browser tabs` reports `audible` and `muted`. Use `cockpit browser mute <tabId>` or `cockpit browser unmute <tabId>` without bringing the tab into view. Muting is saved per tab across app restarts and renderer recreation; closing the tab discards that setting. Muting does not close the page or stop its other activity. Browser Identity access boundaries still apply to agent operations; the Desktop list does not grant an agent access to other identities.
 
 ## Evaluate JavaScript in the main frame
 

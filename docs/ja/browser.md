@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.70.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.75.0で2026-09-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -53,6 +53,12 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 `screenshot --full-page`は、windowをスクロールする長いページを最大4096 CSS pxの区画に分けて結合します。document自体がスクロールせず内部の`overflow`領域がスクロールするページでは、最も長い一つのscroll containerを動かして結合し、終了後にscroll位置を戻します。結果の`documentHeight`、`capturedHeight`、`scrolledElement`で範囲を確認し、20,000 px上限、同じframeの反復、複数または入れ子のscroll領域などで全体を取得できない場合は`warning`を確認します。
 
 locatorはopen shadow rootをたどります。通常のCSS selectorに加え、`host >>> inner`でshadow境界を明示できます。closed shadow rootはページ外から参照できないため、必要ならscreenshot座標で操作します。
+
+## 開いているタブと音声を管理する
+
+**設定 → Browser Tabs**には、すべてのタスクとBrowser Identityで開いているタブが、現在表示していないものも含めて並びます。各行でタスク、Identity、favicon、タイトル、URL、音声状態を確認できます。タスク名を選ぶと、そのタスクに移動してタブを表示します。ミュート、ミュート解除、閉じる操作はタブごとに適用します。
+
+CLIの`cockpit browser tabs`では`audible`と`muted`を確認できます。`cockpit browser mute <tabId>`または`cockpit browser unmute <tabId>`は、タブを表示せずに操作できます。ミュート設定はタブ単位で保存され、アプリの再起動やレンダラーの再作成後も維持されます。タブを閉じると設定は破棄されます。ミュートしてもページは閉じず、音声以外の動作は停止しません。エージェントの操作には引き続きBrowser Identityのアクセス境界が適用され、Desktopの一覧表示によって別のIdentityへのアクセスが許可されることはありません。
 
 ## main frameのJavaScriptを実行する
 

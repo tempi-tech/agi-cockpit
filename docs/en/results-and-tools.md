@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.62.0 on 2026-08-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -21,6 +21,10 @@ The diff surface shows changes recognized by Git. Review additions, modification
 File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
 
 The project explorer navigates the working directory hierarchy. It preserves the selected file across refreshes and opens files in preview. Inspect both content and path before sharing any file that could contain secrets.
+
+## Find text in a Desktop side panel
+
+Use **Find in content** or Cmd+F / Ctrl+F in the active file preview, editable text, diff, or HTML Surface. Enter and Shift+Enter move between matches; Esc closes the search. Search applies to that surface's text, not the whole project. Images, video, and text unavailable to the surface are not OCR-searched. Use the browser's own page search for an in-app browser tab.
 
 ## Distinguish HTML Mode from HTML Surface
 
