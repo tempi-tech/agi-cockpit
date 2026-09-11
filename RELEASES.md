@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.76.0 — 2026-09-11
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added creating child tasks from the child-tasks panel, either starting fresh or branching from the parent.
 - Added a CLI command to change the model of a running task.
