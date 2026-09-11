@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.71.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.76.0 on 2026-09-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -66,7 +66,16 @@ cockpit task create \
 
 ## Create parent and child tasks
 
-A task created from another task is a child of the caller by default. Use `--parent-task-id` to name another parent. The hierarchy groups work in the task list and child tasks panel, but it is not a report-delivery contract.
+A task created from another task is a child of the caller by default. Use `--parent-task-id` to name another parent, or `--top-level` to create an independent task without a parent. Both `task create` and `task run` support `--top-level`; omitting it keeps the caller-as-parent default.
+
+```bash
+cockpit task create --top-level --instruction "Maintain the project backlog"
+cockpit task run --top-level --instruction "Review the project independently"
+```
+
+Do not combine `--top-level` with `--parent-task-id`. Empty or whitespace-only parent IDs are rejected; use `--top-level` to request no parent. Creator attribution (`createdByTaskId`) is retained independently of the parent link (`parentMasterId`). Hooks also treat these independent tasks as top-level: `--no-child` matches them and `--child` does not. Use the existing `task pin <task-id>` command to pin one after creation; creation does not pin it automatically.
+
+The hierarchy groups work in the task list and child tasks panel, but it is not a report-delivery contract.
 
 When a child reaches a stopping point, the parent does not necessarily receive every artifact automatically. The parent must read the return from `task run`, call `task wait` or `task get`, and verify requested evidence such as diffs, tests, or URLs.
 

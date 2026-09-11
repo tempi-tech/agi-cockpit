@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.71.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.76.0で2026-09-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -66,7 +66,16 @@ cockpit task create \
 
 ## 親子タスクを作る
 
-タスク内から作成したタスクは、既定で呼び出し元の子タスクになります。別の親を明示する場合は`--parent-task-id`を使います。親子関係はタスク一覧と子タスクパネルの階層を作りますが、結果配送の契約ではありません。
+タスク内から作成したタスクは、既定で呼び出し元の子タスクになります。別の親を明示する場合は`--parent-task-id`、親なしの独立したタスクを作る場合は`--top-level`を使います。`task create`と`task run`の両方で指定でき、省略した場合は従来どおり呼び出し元が親になります。
+
+```bash
+cockpit task create --top-level --instruction "プロジェクトのバックログを管理してください"
+cockpit task run --top-level --instruction "プロジェクトを独立してレビューしてください"
+```
+
+`--top-level`と`--parent-task-id`は同時に指定できません。空文字や空白のみの親IDは拒否されます。親なしで作る場合は`--top-level`を使ってください。作成元の監査情報（`createdByTaskId`）は親子関係（`parentMasterId`）とは独立して保持されます。Hooksでもトップレベルとして扱われ、`--no-child`に一致し、`--child`には一致しません。ピン留めする場合は作成後に既存の`task pin <task-id>`を使います。作成時の自動ピン留めは行いません。
+
+親子関係はタスク一覧と子タスクパネルの階層を作りますが、結果配送の契約ではありません。
 
 子タスクが停止点へ達しても、親が自動的に全成果を受け取るとは限りません。親側は`task run`の返り値、`task wait`、または`task get`から必要なレポートを読み、差分、テスト、URLなど依頼した証拠を確認します。
 
