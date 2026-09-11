@@ -15,9 +15,9 @@ English is the primary language for these generated release notes. Download the 
 - Added editing of a Fleet node's agent, model, and reasoning effort from the node detail panel.
 - Added answering a multi-question Ask with one free-form reply.
 - Added a remote PWA text size setting.
-- Moved project pinning into the project menus.
+- Changed project pinning so it is available from the project menus.
 - Fixed the workspace picker overflowing the viewport on short windows.
-- Aligned Fleet row controls to the right edge of the task list row.
+- Fixed Fleet row controls so they sit on the right edge of the task list row.
 
 <details>
 <summary>日本語のリリースノート</summary>
