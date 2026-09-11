@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.76.0 — 2026-09-11
+
+**Type:** minor · **Platforms:** macOS
+
+- Added creating child tasks from the child-tasks panel, either starting fresh or branching from the parent.
+- Added a CLI command to change the model of a running task.
+- Added a Manual sort order for the sidebar task list, with drag and keyboard reordering.
+- Added quoting a preview or HTML surface location into the task instruction.
+- Added editing of a Fleet node's agent, model, and reasoning effort from the node detail panel.
+- Added answering a multi-question Ask with one free-form reply.
+- Added a remote PWA text size setting.
+- Moved project pinning into the project menus.
+- Fixed the workspace picker overflowing the viewport on short windows.
+- Aligned Fleet row controls to the right edge of the task list row.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 子タスクパネルから、新規作成または親タスクからの分岐で子タスクを作成できるようになりました
+- CLIから実行中タスクのモデルを変更できるようになりました
+- サイドバーのタスク一覧を手動で並べ替えできるようになりました
+- プレビューやHTML画面の箇所をタスクの入力欄に引用できるようになりました
+- Fleetノードのエージェント、モデル、推論レベルを詳細パネルから変更できるようになりました
+- 複数の質問があるAskに、まとめて自由記述で返信できるようになりました
+- リモート（PWA）の文字サイズを設定できるようになりました
+- プロジェクトのピン留め操作をプロジェクトメニューにまとめました
+- ウィンドウが低いときにワークスペース選択が画面外にはみ出す問題を修正しました
+- Fleet行の操作ボタンをタスク行の右端に揃えるようにしました
+
+</details>
+
 ## v4.75.0 — 2026-09-10
 
 **Type:** minor · **Platforms:** macOS, Linux
