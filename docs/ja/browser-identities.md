@@ -36,7 +36,7 @@ cockpit browser open https://example.com --browser-identity logged-out-check --j
 
 ## Identityを作成・確認する
 
-画面左下のアプリメニューから「Browser Identity」を開くと、Identityの作成、名前と色の変更、データ消去、削除を行えます。CLIでは次を使います。
+画面左下のアプリメニューから「Browser」を開きます。左側の「Identity を追加」で作成し、Identityを選ぶとタブ一覧の上で名前と色を編集できます。変更は「保存」で反映します。データ消去と削除には確認が必要で、Defaultは削除できません。CLIでは次を使います。
 
 ```bash
 cockpit browser identity list --in-use --json

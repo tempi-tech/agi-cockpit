@@ -56,9 +56,13 @@ Locators traverse open shadow roots. A normal CSS selector works across them, an
 
 ## Find open tabs and control audio
 
-**Settings → Browser Tabs** lists open tabs from all tasks and Browser Identities, including tabs not currently visible. Each row shows its task, identity, favicon, title, URL, and audio state. Select the task name to open the owning task and reveal the tab. Mute, unmute, and close controls act on one tab at a time.
+**Settings → Browser** combines tabs and Identity management. Select **All** or an Identity in the left sidebar to filter the tab list, including tabs not currently visible. Selecting an Identity also shows its name, color, data clearing, and deletion controls above the tabs. Each tab row shows its task, identity, favicon, title, URL, and audio state. Select the task name to open the owning task and reveal the tab. Mute, unmute, and close controls act on one tab at a time.
 
 From the CLI, `cockpit browser tabs` reports `audible` and `muted`. Use `cockpit browser mute <tabId>` or `cockpit browser unmute <tabId>` without bringing the tab into view. Muting is saved per tab across app restarts and renderer recreation; closing the tab discards that setting. Muting does not close the page or stop its other activity. Browser Identity access boundaries still apply to agent operations; the Desktop list does not grant an agent access to other identities.
+
+**All** and each Identity have a **Close all tabs** button. Review the scope and tab count in the confirmation dialog before proceeding; cancelling closes nothing. Identities, cookies, and login data are preserved, but unsaved input is lost. Tabs opened after confirmation are not included.
+
+From the CLI, use `cockpit browser tab close-all --confirm`, adding `--browser-identity <name-or-id>` to limit the scope. Inside a task, the command is restricted to that task’s sessions and assigned Identity. Outside a task, omitting the Identity filter targets tabs across all Identities.
 
 ## Evaluate JavaScript in the main frame
 

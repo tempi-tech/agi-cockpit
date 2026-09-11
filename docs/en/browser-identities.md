@@ -36,7 +36,7 @@ cockpit browser open https://example.com --browser-identity logged-out-check --j
 
 ## Create and inspect Identities
 
-Open **Browser Identity** from the lower-left app menu to create, rename, recolor, clear, or remove an Identity. The equivalent CLI commands are:
+Open **Browser** from the lower-left app menu. Choose **Add Identity** in the left sidebar to create one, or select an Identity to edit its name and color above its tab list. Choose **Save** to apply edits. Data clearing and deletion require confirmation; Default cannot be deleted. The equivalent CLI commands are:
 
 ```bash
 cockpit browser identity list --in-use --json

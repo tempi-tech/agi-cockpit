@@ -56,9 +56,13 @@ locatorはopen shadow rootをたどります。通常のCSS selectorに加え、
 
 ## 開いているタブと音声を管理する
 
-**設定 → Browser Tabs**には、すべてのタスクとBrowser Identityで開いているタブが、現在表示していないものも含めて並びます。各行でタスク、Identity、favicon、タイトル、URL、音声状態を確認できます。タスク名を選ぶと、そのタスクに移動してタブを表示します。ミュート、ミュート解除、閉じる操作はタブごとに適用します。
+**設定 → Browser**でタブとIdentityをまとめて管理します。左側の「すべて」またはIdentityを選ぶと、現在表示していないものも含めてタブ一覧を絞り込めます。Identityを選ぶと、タブ一覧の上に名前・色の編集、データ消去、削除の操作も表示されます。各タブの行でタスク、Identity、favicon、タイトル、URL、音声状態を確認できます。タスク名を選ぶと、そのタスクに移動してタブを表示します。ミュート、ミュート解除、閉じる操作はタブごとに適用します。
 
 CLIの`cockpit browser tabs`では`audible`と`muted`を確認できます。`cockpit browser mute <tabId>`または`cockpit browser unmute <tabId>`は、タブを表示せずに操作できます。ミュート設定はタブ単位で保存され、アプリの再起動やレンダラーの再作成後も維持されます。タブを閉じると設定は破棄されます。ミュートしてもページは閉じず、音声以外の動作は停止しません。エージェントの操作には引き続きBrowser Identityのアクセス境界が適用され、Desktopの一覧表示によって別のIdentityへのアクセスが許可されることはありません。
+
+「すべて」と各Identityのタブ一覧には「全てのタブを閉じる」ボタンがあります。確認ダイアログで対象とタブ数を確認して実行します。キャンセルした場合は何も閉じません。IdentityやCookie・ログイン情報は残りますが、未保存の入力内容は失われます。確認後に新しく開いたタブは対象外です。
+
+CLIでは`cockpit browser tab close-all --confirm`を使い、特定のIdentityだけを対象にするには`--browser-identity <名前またはID>`を追加します。タスク内で実行した場合は、そのタスクのセッションと割り当て済みIdentityの範囲に制限されます。タスク外では、Identityを指定しない場合にすべてのIdentityのタブを対象にします。
 
 ## main frameのJavaScriptを実行する
 
