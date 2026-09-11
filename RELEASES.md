@@ -10,7 +10,6 @@ English is the primary language for these generated release notes. Download the 
 
 - Added creating child tasks from the child-tasks panel, either starting fresh or branching from the parent.
 - Added a CLI command to change the model of a running task.
-- Added a Manual sort order for the sidebar task list, with drag and keyboard reordering.
 - Added quoting a preview or HTML surface location into the task instruction.
 - Added editing of a Fleet node's agent, model, and reasoning effort from the node detail panel.
 - Added answering a multi-question Ask with one free-form reply.
@@ -24,7 +23,6 @@ English is the primary language for these generated release notes. Download the 
 
 - 子タスクパネルから、新規作成または親タスクからの分岐で子タスクを作成できるようになりました
 - CLIから実行中タスクのモデルを変更できるようになりました
-- サイドバーのタスク一覧を手動で並べ替えできるようになりました
 - プレビューやHTML画面の箇所をタスクの入力欄に引用できるようになりました
 - Fleetノードのエージェント、モデル、推論レベルを詳細パネルから変更できるようになりました
 - 複数の質問があるAskに、まとめて自由記述で返信できるようになりました
