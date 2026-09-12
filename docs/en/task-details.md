@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -39,6 +39,8 @@ Use `cockpit settings get shortcuts.followUpBehavior` to read the current defaul
 New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to **Auto**. Auto uses shorter usage windows to confirm current availability, then chooses among available accounts from the remaining capacity and reset time of the longest window. After detecting a usage or plan limit, it can switch to another available account and continue the saved session.
 
 The selection made when the task is created is saved with that task and remains the selection used for display, resume, and execution. Desktop and PWA show **Auto · account name** near the composer. The account menu can select Auto, the default account, or a named profile. A manual switch stops current execution, moves the saved conversation to the chosen profile, and resumes it.
+
+Account switching preserves the active conversation for Codex, Grok Build, Cursor, and Qoder as well as Claude and Antigravity. If the source conversation is missing, busy, unreadable, or ambiguous, Cockpit stops the switch without replacing the target history. Different target history is archived before the active conversation is carried forward, and a notice reports when the target already contains the same or newer conversation.
 
 If no account is available, usage cannot be checked, or switching or resume fails, the task stops with `waiting_confirmation` and `usage_limit`. When a reset time is known, Cockpit re-evaluates usage after that time and resumes the task if capacity has recovered. If the account remains exhausted, usage cannot be confirmed, or authentication has expired, the task shows the reason and recovery action. Switch accounts or sign in again before retrying.
 
@@ -85,6 +87,8 @@ Use `cockpit pinned-answers list <task-id> --all` to obtain answer IDs, then `pi
 Select **Find in content**, or press Cmd+F on macOS / Ctrl+F on Windows and Linux while the chat is active. Enter literal text to highlight matches and show the match count. Enter moves forward, Shift+Enter moves backward, and Esc closes search. This searches the task's available conversation content, not all tasks or unavailable archived output. This in-content search is a Desktop feature, distinct from PWA task-list search.
 
 ## Inspect errors and tool runs
+
+If a new task cannot start, Desktop and the PWA keep the task in `error` instead of discarding its instruction. The error card shows the cause, lets you edit the saved prompt or Terminal command, and provides **Run again**. Correct the cause or input before retrying; the failed start has not run the instruction.
 
 When Claude, Codex, Antigravity, Cursor, or Grok Build reports an error that may indicate a service incident, such as a 404, 5xx response, or gateway timeout, the error surface links directly to that provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors; follow the on-screen sign-in, account-switching, or wait guidance instead.
 

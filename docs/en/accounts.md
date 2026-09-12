@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -25,7 +25,7 @@ cockpit accounts login work --agent-type codex
 cockpit accounts list --agent-type codex
 ```
 
-The list reports the provider, profile ID, name, email when available, `authState`, provider-specific usage, and the time that usage was fetched. `authState` distinguishes usable `ok`, invalid `expired`, and credential-free `signed_out` accounts. The compatibility field `loggedIn` is true only for `ok`. `auth_required` means the profile must sign in again, while `error` means usage could not be fetched. Expired and signed-out accounts are unavailable to Auto and the Fleet pre-run check.
+The list reports the provider, profile ID, name, email when available, `authState`, provider-specific usage, and the time that usage was fetched. `authState` distinguishes usable `ok`, invalid `expired`, and credential-free `signed_out` accounts. The compatibility field `loggedIn` is true only for `ok`. `auth_required` means the profile must sign in again. A usage state of `unknown` or `error` means Cockpit could not read the allowance; it is not an authentication verdict, and a credential with `authState: "ok"` remains selectable below accounts with known capacity. Expired and signed-out accounts are unavailable to Auto and the Fleet pre-run check.
 
 For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server in a read-only sandbox without approval prompts. This retrieval path supports Codex CLI 0.153.
 
@@ -42,6 +42,16 @@ An exhausted quota remains visible at 0%. An unknown value appears as unavailabl
 When an account requires authentication, its Usage card offers **Sign in** or **Sign in again** for that specific account. Follow the provider's login flow; while it runs, the action shows **Signing in...** and cannot be started again. After successful authentication, Cockpit refreshes the account's authentication and usage information. A usage-fetch error alone is not proof that login is required or that the allowance is zero.
 
 Cards keep account and allowance information together. Open quota details to inspect the source and reset time rather than interpreting an unavailable measurement as an exhausted quota.
+
+### Spend a Codex reset credit
+
+`cockpit usage` is read-only and reports Codex reset credits with their expiration dates. To clear the current rate-limit window for one Codex account, spend one credit explicitly:
+
+```bash
+cockpit usage reset --agent-type codex --account work --confirm
+```
+
+Reset credits are earned, finite, and expiring. Spending one cannot be undone or refunded, so `--confirm` is required. Omit `--account` to target the default account. The result distinguishes `reset`, `nothingToReset`, `alreadyRedeemed`, and `noCredit`; only `reset` consumes a credit. Read the [`cockpit usage` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/usage) before automating recovery.
 
 ## Use Auto
 
@@ -79,6 +89,8 @@ cockpit task account <task-id> default
 ```
 
 Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks can switch accounts while active. Cockpit stops the current runtime, transfers the saved conversation to the selected profile, and resumes the same task. A task may reject switching while it is generating a reply or immediately after startup, so wait until it can accept input.
+
+The transfer fails safely if the source conversation is missing, busy, unreadable, or ambiguous. When the target profile already contains different history, Cockpit preserves that history as an archive before carrying the active conversation forward. A notice identifies cases where the target already had the same or newer conversation instead of silently replacing it.
 
 After switching a task that stopped at a usage limit, send a follow-up to continue. While Auto is still switching an account, a Fleet node remains running and becomes `interrupted` only if recovery cannot complete. Switching does not merge provider-side billing or unrelated conversation histories.
 

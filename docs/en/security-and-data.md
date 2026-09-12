@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -20,7 +20,7 @@ PWA task search queries and recent searches are stored in the current browser’
 
 The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio endpoint. OpenCode Go and OpenCode Zen use separate API keys. Whether LM Studio is local or remote depends on its configured URL.
 
-Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, and Autorun information between the connected device and Cockpit.
+Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, Autorun, Fleet, Hook, and account information needed by the connected PWA or supported remote CLI command. A remote Hook command can register and execute shell code on the target computer.
 
 Enabling a Discord or Slack relay under **Settings → Ask notifications** sends the Ask summary, questions, choices, task name, a link back to Cockpit, and optional Ask images or videos to the selected channel. Members who can read that channel can see the post, but Cockpit accepts an answer only from the single configured `allowedUserId`. Relays are off by default and make outbound connections from Cockpit to the Discord Gateway or Slack Socket Mode.
 
@@ -52,6 +52,8 @@ Named agent profiles isolate authentication. Antigravity keeps conversations, lo
 
 Antigravity `accounts logout` previews every target and shared impact without `--confirm`. Running it for a named profile never removes the host login; when that profile uses shared authentication, the result points to the default-account logout instead. Logging out the default can also affect other profiles, ordinary terminal-launched Agy processes, and Gemini CLI authentication under the same home. Cockpit never logs an account out automatically. Browser Identities remain separate from agent account profiles.
 
+Switching an active Claude, Codex, Grok Build, Antigravity, Cursor, or Qoder task copies its saved conversation into the selected account profile. When different target history would be replaced, Cockpit archives it first. Use separate tasks instead when policy requires conversation content never to cross profile boundaries.
+
 ## Isolate Browser Identities
 
 Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task and Autorun can each be assigned one Identity; the Default Identity is used when none is selected.
@@ -81,6 +83,8 @@ Fleet command gates save complete stdout and stderr per attempt under the Run's 
 ## Protect Remote Access
 
 The recommended configuration is Tailscale-only access over HTTPS. Cockpit authenticates devices with Tailscale device information and a six-digit pairing code, with expiration and failure limits. It does not silently downgrade to HTTP when an HTTPS certificate cannot be obtained.
+
+Remote CLI control also requires the paired bearer token. In Tailscale-only mode, the target additionally verifies the Tailscale peer or loopback connection; peer trust alone does not authorize a command. Protect the token as control of the target Cockpit. Remote file paths refer to the target computer, and the transport does not fall back to local file IPC.
 
 Local Wi-Fi mode is unencrypted and activates only after explicit confirmation. Do not use it on public or untrusted networks. Stopping Remote Access ends connected sessions and saves standalone state.
 

@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.76.0 on 2026-09-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 

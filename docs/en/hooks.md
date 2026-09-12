@@ -4,7 +4,7 @@
 
 Run actions in response to task completion, Asks, and hotkeys, and learn how to configure Hooks and inspect their run history.
 
-> Verified with AGI Cockpit 4.74.0 on 2026-09-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/hooks)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/hooks)
 
 Hooks automatically run a registered action when something happens in Cockpit, such as a task completing or an Ask being created. Each Hook saves a rule: when this event happens, run this action. A hotkey can also trigger a Hook.
 
@@ -57,7 +57,7 @@ cockpit hooks test <hookId> --task <taskId>
 cockpit hooks enable <hookId>
 ```
 
-Check that the test returns `exitCode: 0` and displays the intended message before enabling the Hook. `test` executes the action even when the Hook is disabled. It does not validate event or filter matching and does not write to normal run history, so also check a real event and its history after enabling the Hook.
+Check that the test returns `exitCode: 0` and displays the intended message before enabling the Hook. `test` executes the action even when the Hook is disabled and records the execution in the same run history as event-triggered actions. It bypasses normal event matching, debounce, queueing, depth checks, and circuit-breaker accounting, so also check a real matching event after enabling the Hook.
 
 ## Narrow the target and choose an action
 
@@ -77,9 +77,12 @@ Use `--run` for a short command and `--run-file` for a maintained script. When s
 ## Settings and run history
 
 1. Open **Settings → Hooks** from the app menu in the lower-left corner.
-2. Find the registered Hook and enable or disable it as needed.
-3. Expand its run history to inspect run times, events, exit codes, standard output, and standard error.
-4. Remove a Hook when you no longer need it. Existing run history remains after removal.
+2. Create a Hook or select **Edit** to change its name, event, filters, action, timeout, debounce, hotkey, and enabled state in place.
+3. Use **Test run** to execute the action immediately. Expand the definition when you need to inspect the exact stored values.
+4. Expand run history to inspect run times, events, exit codes, standard output, and standard error.
+5. Remove a Hook when you no longer need it. Existing run history remains after removal.
+
+The Settings editor uses the same event and filter catalog and the same control path as the CLI. Saving validates required values and numeric limits before replacing the definition.
 
 You can also inspect status and history from the CLI.
 
@@ -93,7 +96,7 @@ If a Hook does not run, check that it is enabled and that the event and filters 
 
 ## Execution considerations
 
-Registered actions run with your local permissions, independently of the agent's approval mode. Register commands and scripts whose behavior you have checked. All Hooks commands support `--host <host-or-alias>`. Remote registration and testing execute shell code on the target computer. A paired bearer token is required; Tailscale-only access additionally requires a verified peer or loopback connection. Peer trust alone does not authorize commands. The token grants control of the target instance, including Hook registration and execution. Script paths and directory filters refer to the target computer.
+Registered actions run with your local permissions, independently of the agent's approval mode. Register commands and scripts whose behavior you have checked. All Hooks commands support `--host <host-or-alias>`. The target must have member-only Remote Access enabled. Remote registration and testing execute shell code on the target computer. A paired bearer token is required; Tailscale-only access additionally requires a verified peer or loopback connection. Peer trust alone does not authorize commands. The token grants control of the target instance, including Hook registration and execution. Script paths and directory filters refer to the target computer.
 
 Cockpit waits at most five seconds for `app.quit` actions. Do not use them for long work that must finish before exit. Event chains have execution limits; when a Hook starts another task, narrow its filters to avoid repeatedly triggering itself.
 

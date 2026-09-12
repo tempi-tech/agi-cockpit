@@ -2,9 +2,9 @@
 
 # Remote access
 
-Use Tailscale and HTTPS to supervise AGI Cockpit tasks, Asks, and Autoruns safely from a phone or another computer.
+Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -142,6 +142,12 @@ cockpit remote-access enable
 
 Configuration cannot change while the server is running. If you need to change it, confirm that active sessions may end, then run `cockpit remote-access disable --confirm`. CLI configuration and enablement for local-network access both require `--confirm-local-network`.
 
+## Operate another Cockpit from the CLI
+
+Register the other computer with `cockpit devices`, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
+
+Remote CLI requests use the paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit also requires a verified Tailscale peer or loopback connection; peer trust by itself is not authorization. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC.
+
 ## Troubleshooting
 
 | Message or state | What to check |
@@ -174,3 +180,4 @@ Tailscale itself can be connected while Cockpit is unable to read the Tailscale 
 - [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 - [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+- [Cockpit CLI](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)

@@ -2,9 +2,9 @@
 
 # リモートアクセス
 
-TailscaleとHTTPSを使って、スマートフォンや別のコンピューターからAGI Cockpitのタスク、Ask、Autorunを安全に監督する手順です。
+TailscaleとHTTPSを使って、PWAからAGI Cockpitを監督し、別のコンピューターから対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.72.0で2026-09-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -142,6 +142,12 @@ cockpit remote-access enable
 
 実行中は構成を変更できません。変更が必要な場合は、接続中のセッションが終了することを確認してから`cockpit remote-access disable --confirm`を実行します。ローカルネットワークをCLIから有効にする操作には、構成時と開始時の両方で`--confirm-local-network`が必要です。
 
+## CLIから別のCockpitを操作する
+
+別のコンピューターを`cockpit devices`へ登録すると、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加できます。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
+
+リモートCLI要求は、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenを使います。Tailscale限定モードでは、検証済みTailscale peerまたはloopback接続も必要です。peerの信頼だけでは認証になりません。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。
+
 ## 接続できない場合
 
 | 表示または状態 | 確認すること |
@@ -174,3 +180,4 @@ Tailscale本体は動作していても、CockpitがTailscale CLIの状態を取
 - [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
 - [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- [cockpit CLI](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)

@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.75.0で2026-09-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -25,7 +25,7 @@ cockpit accounts login work --agent-type codex
 cockpit accounts list --agent-type codex
 ```
 
-一覧にはプロバイダー、プロファイルID、名前、取得できる場合はメールアドレス、`authState`、利用状況、その取得時刻が表示されます。`authState`は、利用できる`ok`、認証情報が無効になった`expired`、認証情報がない`signed_out`を区別します。互換性のための`loggedIn`は`ok`のときだけ`true`です。`auth_required`は再ログインが必要、`error`は利用状況を取得できない状態です。期限切れまたはサインアウト済みのアカウントは、AutoとFleet開始前の確認で利用できません。
+一覧にはプロバイダー、プロファイルID、名前、取得できる場合はメールアドレス、`authState`、利用状況、その取得時刻が表示されます。`authState`は、利用できる`ok`、認証情報が無効になった`expired`、認証情報がない`signed_out`を区別します。互換性のための`loggedIn`は`ok`のときだけ`true`です。`auth_required`は再ログインが必要な状態です。利用状況の`unknown`または`error`は残量を取得できなかったことを示し、認証結果ではありません。認証情報が`authState: "ok"`なら、残量が判明しているアカウントより優先度を下げたうえで選択対象に残ります。期限切れまたはサインアウト済みのアカウントは、AutoとFleet開始前の確認で利用できません。
 
 Codexの利用状況とレート制限は、承認を要求しないread-only sandboxでCodex CLIのapp serverから取得します。この取得経路はCodex CLI 0.153に対応しています。
 
@@ -42,6 +42,16 @@ Desktopで「使用量」を開くと、取得できたプロバイダー・ア�
 認証が必要なアカウントには、使用量カードにそのアカウントの**ログイン**または**再ログイン**操作が表示されます。プロバイダーのログイン手順に従ってください。処理中は「ログイン中...」と表示され、重複して開始できません。認証に成功すると、認証状態と使用量情報が更新されます。使用量の取得エラーだけでは、ログインが必要とも残量がゼロとも判断できません。
 
 カードではアカウントと利用枠をまとめて確認できます。測定できない値を利用枠の枯渇と解釈せず、利用枠の詳細を開いて取得元やリセット時刻を確認してください。
+
+### Codexのリセットクレジットを使う
+
+`cockpit usage`は読み取り専用で、Codexのリセットクレジットと有効期限を表示します。一つのCodexアカウントで現在のレート制限枠を解除する場合は、クレジットを明示的に使います。
+
+```bash
+cockpit usage reset --agent-type codex --account work --confirm
+```
+
+リセットクレジットは獲得数が有限で、有効期限があります。使用は取り消しも返金もできないため、`--confirm`が必須です。`--account`を省略するとdefaultアカウントを対象にします。結果は`reset`、`nothingToReset`、`alreadyRedeemed`、`noCredit`を区別し、クレジットを消費するのは`reset`だけです。自動復旧へ組み込む前に[`cockpit usage` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/usage)を確認してください。
 
 ## Autoを使う
 
@@ -79,6 +89,8 @@ cockpit task account <task-id> default
 ```
 
 Claude、Codex、Grok Build、Antigravity、Cursor、Qoderでは、実行中タスクのアカウントを切り替えられます。Cockpitは現在のセッションを停止し、保存済み会話を対象プロファイルへ移して同じタスクを再開します。回答の生成中やタスク開始直後は切り替えられない場合があるため、タスクが入力を受け取れる状態になってから実行します。
+
+移行元の会話がない、処理中、読み取れない、または曖昧な場合は安全側で失敗します。切り替え先プロファイルに異なる履歴がある場合は、その履歴をアーカイブとして残してから進行中の会話を引き継ぎます。切り替え先に同じ会話またはより新しい会話がある場合も、無言で上書きせず通知します。
 
 利用上限で停止したタスクは、切り替え後に追加指示を送って続行します。Autoが切り替えを処理している途中は、Fleetノードも実行中のまま待ち、復旧できなかった場合だけ`interrupted`になります。切り替えは過去のプロバイダー側会話や請求を統合する操作ではありません。
 

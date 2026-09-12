@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -125,6 +125,10 @@ Use the Fleet panel to inspect:
 - The real task, workspace, branch, and attempt count for each agent node.
 - Node reports, structured output, command-gate results, and Run events.
 
+Flow lines point from each dependency toward the downstream node, and active lines animate in that direction. Cockpit stops this motion when the operating system's reduced-motion preference is enabled. The Fleet list uses the same node and Run status presentation as the graph, so a status has the same meaning before and after opening a Run.
+
+Select a node's **Events** view to read its event timeline. Events are grouped by attempt, show their timestamps, and label the elapsed gap between events; an active attempt continues updating its current elapsed time. Use the timeline to locate where a node waited, then inspect its report, task, or gate output for the cause.
+
 The progress bar in the Run header groups every node by completed, running, failed, interrupted, stopped, skipped, or pending state and shows completed nodes over total nodes. It is a current status breakdown, not elapsed time or an estimated completion time.
 
 Select a gate node to see the actual exit code for a command gate, or the approved or rejected result and answer text for a human gate. Exit code 0 passes; any other code fails. Inspect the gate details and output instead of inferring the result only from the overall Run status.
@@ -143,6 +147,18 @@ Use these commands for deeper inspection.
 Sending Steer directly to a live node task, canceling its turn, completing it, or removing it interrupts the node and pauses the Run. Unless you intend to intervene, supervise through the Fleet panel and `fleet` commands rather than operating node tasks by hand.
 
 When a Fleet definition cannot be loaded, the panel distinguishes a missing file, invalid YAML, schema validation, and another load failure. It shows the target path and validation issues. When the path is available, use **Open file** to correct it and **Reload** to read the same definition again. If the file is missing, confirm the displayed path, create the file, then reload.
+
+### Operate a Fleet on another computer
+
+Every `cockpit fleet` command accepts `--host <host-or-alias>` for a registered Cockpit computer. The target must have member-only Remote Access enabled. Remote Fleet control requires the paired bearer token and, in Tailscale-only mode, a verified peer or loopback connection.
+
+```bash
+cockpit fleet list --runs --host build-host
+cockpit fleet status <run-id> --host build-host
+cockpit fleet retry <run-id> --node <node-id> --host build-host
+```
+
+Fleet definitions, file selectors, and `--directory` are paths on the target computer; Cockpit does not upload a local YAML file. Named Fleets resolve from the target's global definitions unless you pass the target project's directory. Remote responses identify the target device.
 
 ## Assign roles to nodes
 

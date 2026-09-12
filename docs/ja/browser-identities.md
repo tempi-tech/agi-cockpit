@@ -4,7 +4,7 @@
 
 ブラウザーのログイン状態をIdentityごとに分離し、タスクとAutorunへ割り当て、取込・消去・削除する方法です。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
 
 Browser Identityは、アプリ内ブラウザーのログイン状態とサイトデータを分けるローカルの永続領域です。仕事、顧客、検証条件ごとにIdentityを分けると、同じサイトへ異なるアカウントで安全に接続できます。
 
@@ -67,15 +67,18 @@ cockpit task browser-identity <taskId>
 
 Fleetでは各task nodeへBrowser Identityを割り当てられます。異なるログイン状態が必要なnodeは、同じIdentityを共有させず、用途別のIdentityを明示します。
 
-## macOSでChromeのsessionを取り込む
+## macOSでブラウザーのsessionを取り込む
 
-macOSでは、Chromeでログインを完了した後、選択中タブのregistrable domainに属するCookieと、その正確なoriginのlocalStorageを同じBrowser Identityへ取り込めます。
+macOSでは、Chrome、Brave、Edge、Arc、Vivaldi、Opera、Firefoxでログインを完了した後、選択中のアプリ内タブに対応する状態をそのBrowser Identityへ取り込めます。取込元を正確に指定する場合は、先に検出済みブラウザーとprofileを確認します。
 
 ```bash
-cockpit browser import-session --browser-identity work --profile "Profile 2" --json
+cockpit browser import-sources --json
+cockpit browser import-session --browser-identity work --browser brave --profile-id "Profile 2" --json
 ```
 
-`--browser-identity`はAGI Cockpit側の取込先、`--profile`はChrome側のprofileです。初回はmacOS Keychainが「Chrome Safe Storage」への許可を求める場合があります。
+`--browser-identity`はAGI Cockpit側の取込先です。`--browser`は取込元ブラウザー、`--profile-id`は検出済みprofileを一意に指定します。代わりに`--profile`でprofile directoryまたはFirefoxのprofile名を照合できます。取込元を省略すると、検出済みブラウザーの優先profileから最も最近使われたものを選びます。
+
+Chromium系では選択中タブのregistrable domainに属するCookieと、その正確なoriginのlocalStorageを取り込みます。ブラウザーごとに別の「Safe Storage」Keychain項目を使うため、そのブラウザーから初めて対象データを取り込むときはmacOSの許可が表示される場合があります。FirefoxはCookieだけを取り込み、Keychainへアクセスしません。localStorageが非対応であることは結果に表示されます。
 
 sessionStorage、IndexedDB、extension状態、device-bound認証、passkey自体は取り込みません。siteがログイン状態にならない場合は、そのIdentityのアプリ内ブラウザーで一度ログインしてください。`import-cookies`は互換性用でCookieだけを取り込むため、通常は`import-session`を使います。この取込はmacOSだけに対応します。
 

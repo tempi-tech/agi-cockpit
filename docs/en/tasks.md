@@ -2,9 +2,9 @@
 
 # Task list
 
-Understand the task list, Overview, search, sorting, workspaces, states, completion, and deletion.
+Understand the task list, Overview, search, project names, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -42,11 +42,15 @@ Select the search field to open **Recent searches**, with up to five entries you
 
 **Clear search** removes only the current query. Use **Remove from history** for one entry or **Clear history** for all entries; neither changes the current query. Storage is local to that browser and does not sync to other devices. If browser storage is unavailable, search still works within the screen, but cannot be restored after reopening.
 
-## Identify projects by icon
+## Name and identify projects
+
+Use **Rename project** from a project menu in Desktop or the PWA to give its directory a clearer display name. Names are limited to 50 characters. The custom name synchronizes between Desktop and connected PWA clients; resetting it returns to the directory-based name without renaming or moving the folder itself.
+
+Display names and icons are stored by project directory. A Git Worktree and its main checkout are therefore separate projects and can use different names and icons.
 
 Desktop's sidebar and overview board, and the PWA project list, show a project-specific icon when one is available. Cockpit detects local project icons such as favicons; otherwise it uses the default folder appearance.
 
-Use `cockpit project icon get --directory <path>` to inspect the effective icon, `cockpit project icon set <image-path> --directory <path>` to choose a local image, and `cockpit project icon reset --directory <path>` to return to automatic detection. Changes persist and synchronize to connected PWA clients. The directory identifies the project, so a worktree and its main checkout have separate icons. No image is downloaded from the network. See [project reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for formats and size limits.
+Use `cockpit project icon get --directory <path>` to inspect the effective icon, `cockpit project icon set <image-path> --directory <path>` to choose a local image, and `cockpit project icon reset --directory <path>` to return to automatic detection. Icon changes also synchronize to connected PWA clients. No image is downloaded from the network. See [project reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for formats and size limits.
 
 ## Task entry points and workspaces
 

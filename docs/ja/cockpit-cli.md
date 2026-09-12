@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.64.0で2026-08-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -70,9 +70,15 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 `cockpit hooks`は、タスク完了、Ask、Autorun、Fleet、アプリの起動・終了、ホットキーをきっかけにローカルの処理を実行します。登録・テスト・対象の絞り込みと、設定画面での管理は[Hooks](https://agi-labo.com/tools/cockpit/docs/hooks)を参照してください。全イベント、オプション、実行結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)にあります。
 
+## 使用量を確認し、Codexの利用枠をリセットする
+
+`cockpit usage`は対応プロバイダーとアカウントの使用量を読み取ります。Codexのリセットクレジットと有効期限も表示しますが、読み取りだけでは消費しません。`cockpit usage reset --agent-type codex [--account <name>] --confirm`は、有限のクレジットを一つ消費して、そのアカウントの現在のレート制限枠を解除します。取り消しも返金もできないため、`--confirm`を付ける前に対象アカウントと残数を確認してください。結果と終了コードは[`cockpit usage` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/usage)を参照してください。
+
 ## ローカルとリモートを区別する
 
-`task`と`autorun`の対応コマンドは、登録済みの端末aliasまたはホストを`--host`で指定できます。ホスト指定がない設定、ブラウザー、表示などのコマンドはローカルのCockpitだけを操作します。
+対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドは、`--host`で登録済みdeviceのaliasまたはhostを指定できます。`ask list`、`ask answer`、`ask close`もリモートに対応しますが、Askの作成とrelay設定はローカル専用です。browser、App Surface、display、settings、usage、updateなど、host指定に対応しない操作はローカルのCockpitだけを対象にします。
+
+リモート制御はペアリング済みBearer tokenを使い、接続先がTailscale限定の場合は検証済みpeerまたはloopback接続も必要です。ファイルパスとディレクトリは接続先コンピューターで解決されます。リモート応答にはdevice identityが含まれ、ローカルfile IPCへfallbackしません。
 
 Remote Accessの停止、Identityデータの消去、アカウント削除、CLIアンインストールなどは明示的な確認フラグを要求します。フラグがあることを実行許可の代わりにせず、利用者の指示と正確な対象を確認してください。
 

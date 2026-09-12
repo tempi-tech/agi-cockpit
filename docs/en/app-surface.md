@@ -4,7 +4,7 @@
 
 Attach an already-running Android target or iOS Simulator to a task, then safely observe, operate, recover, and detach it.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/app-surface)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/app-surface)
 
 App Surface attaches an already-running Android emulator, Android physical device, or booted iOS Simulator to one task so a person and agent can inspect and operate the same screen.
 
@@ -46,7 +46,7 @@ cockpit app wait --label "Continue" --role button
 
 `snapshot` returns the accessibility tree and temporary references such as `@e1`. Any tap, fill, swipe, or key action invalidates those references, so take a new snapshot before the next reference-based action.
 
-`screenshot` returns a PNG and reports `coordinateSpace` and `screenshotScale` in its viewport. `wait` can combine text, elements, attachment status, Android package, and keyboard state. A normal timeout returns `timedOut: true`; `--require` turns it into `condition_not_met`.
+`screenshot` returns a PNG and reports `coordinateSpace` and `screenshotScale` in its viewport. On an Android device with multiple displays, Cockpit captures the display currently presenting the attached app; it fails instead of accepting an ambiguous capture. `wait` can combine text, elements, attachment status, Android package, and keyboard state. A normal timeout returns `timedOut: true`; `--require` turns it into `condition_not_met`.
 
 ## Prefer labels when operating
 

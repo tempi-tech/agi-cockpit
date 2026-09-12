@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -129,6 +129,8 @@ cockpit ask answer <ask-id> --choice "Publish"
 cockpit ask answer <ask-id> --input "Review the image" --attachment ./screenshot.png
 cockpit ask close <ask-id>
 ```
+
+Add `--host <host-or-alias>` to `list`, `answer`, or `close` to operate an Ask on another registered Cockpit computer. The target must have member-only Remote Access enabled. Remote control requires the paired bearer token and, in Tailscale-only mode, a verified peer or loopback connection. Ask creation and relay settings remain local-only. Paths passed to `--attachment` refer to files on the target computer.
 
 `list` inspects the question, choices, and attached-media metadata. `answer` acts on the user's behalf and resumes the task that created the Ask. `--attachment` imports a local file into the originating task's managed uploads and delivers it in the same format as a UI answer attachment. In a multi-question answer, place the attachment after its target `--question`.
 

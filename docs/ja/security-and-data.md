@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.73.0で2026-09-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -20,7 +20,7 @@ PWAのタスク検索語と最近の検索履歴は、接続先ごとに利用�
 
 指示、会話、添付、ファイル内容、ツール結果がAIプロバイダーへ送られる範囲は、選択したエージェント、UIモード、モデル、ツールに従います。Cockpit Agentでは選択したOpenRouter、OpenCode Go、OpenCode Zen、LM Studioなどの接続先が処理します。OpenCode GoとOpenCode Zenは別のAPI keyを使います。LM Studioをローカルで動かすか別ホストで動かすかは設定したURLで決まります。
 
-アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは接続した端末とCockpitの間でタスク、Ask、Autorunの情報が転送されます。
+アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは、接続中のPWAまたは対応するリモートCLIコマンドに必要なタスク、Ask、Autorun、Fleet、Hook、アカウントの情報が転送されます。リモートのHooksコマンドは、接続先コンピューターへshell codeを登録・実行できます。
 
 「設定」→「Ask通知」でDiscordまたはSlackへの転送を有効にすると、Askの概要、質問、選択肢、タスク名、Cockpitへのlinkと、許可した場合はAskの画像・動画を、選択したチャンネルへ送ります。チャンネルを閲覧できるメンバーは投稿内容を読めますが、Cockpitが回答を受け付けるのは設定した一人の`allowedUserId`だけです。転送は既定で無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 
@@ -52,6 +52,8 @@ AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど�
 
 Antigravityの`accounts logout`は、`--confirm`なしで消去対象と共有範囲をpreviewします。名前付きprofileから実行してもhost loginは消さず、共有認証を使っている場合はdefaultアカウント側のlogoutを案内します。defaultのlogoutは、そのhost認証に依存するほかのprofile、通常のterminalで起動したAgy、同じhomeのGemini CLI認証にも影響し得ます。Cockpitが自動でlogoutすることはありません。Browser Identityはエージェントのアカウントプロファイルとは別です。
 
+実行中のClaude、Codex、Grok Build、Antigravity、Cursor、Qoderタスクでアカウントを切り替えると、保存済み会話が選択先のアカウントプロファイルへコピーされます。切り替え先の異なる履歴を置き換える場合は先にアーカイブします。ポリシー上、会話内容をプロファイル間で移してはならない場合は、アカウント切り替えではなく別タスクを使ってください。
+
 ## Browser Identityを分離する
 
 Browser IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証、ブラウザーセッションが永続領域へ保存されます。タスクとAutorunは一つのIdentityを割り当てられ、指定しない場合はDefault Identityを使います。
@@ -81,6 +83,8 @@ Fleetのcommand gateはstdout / stderr全量をRunの`fleet-runs/<runId>/gates/`
 ## Remote Accessを保護する
 
 推奨構成はTailscale限定とHTTPSです。Tailscale端末情報と6桁ペアリングコードで端末を認証し、失敗回数と有効期限を制限します。HTTPS証明書を取得できない場合にHTTPへ自動降格しません。
+
+リモートCLI制御にはペアリング済みBearer tokenも必要です。Tailscale限定モードでは接続先がTailscale peerまたはloopback接続も検証し、peerの信頼だけではコマンドを許可しません。tokenは接続先Cockpitの操作権限として保護してください。リモートのfile pathは接続先コンピューター上の値で、transportはローカルfile IPCへfallbackしません。
 
 ローカルWi-Fiモードは通信が暗号化されず、明示確認後にだけ有効になります。公共または信頼できないネットワークでは使わないでください。Remote Accessを停止すると接続中セッションは終了し、standalone状態が保存されます。
 

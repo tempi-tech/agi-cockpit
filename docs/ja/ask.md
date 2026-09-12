@@ -4,7 +4,7 @@
 
 AskがAIエージェントから人へ確認と判断を安全に受け渡し、回答後に同じタスクを再開する仕組みを説明します。
 
-> AGI Cockpit 4.73.0で2026-09-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
 
 Askは、AIエージェントが作業をいったん止め、人に確認と判断を委ねるための仕組みです。回答は元のタスクへ構造化されたイベントとして返り、その同じタスクが続きから再開します。
 
@@ -129,6 +129,8 @@ cockpit ask answer <ask-id> --choice "公開する"
 cockpit ask answer <ask-id> --input "画像を確認してください" --attachment ./screenshot.png
 cockpit ask close <ask-id>
 ```
+
+`list`、`answer`、`close`へ`--host <host-or-alias>`を追加すると、登録済みの別のCockpitコンピューターにあるAskを操作できます。接続先では会員向けRemote Accessを有効にしておく必要があります。リモート操作にはペアリング済みBearer tokenが必要で、Tailscale限定モードでは検証済みpeerまたはloopback接続も必要です。Askの作成とrelay設定は引き続きローカル専用です。`--attachment`のパスは接続先コンピューター上のファイルを指します。
 
 `list`は質問、選択肢、添付メディアの情報を確認する操作です。`answer`は利用者の代理として回答し、作成元のタスクを再開します。`--attachment`はローカルファイルを作成元タスクの管理領域へ取り込み、UIからの回答添付と同じ形式で渡します。複数質問では、対象の`--question`の後へ添付を指定します。
 

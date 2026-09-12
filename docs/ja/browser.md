@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.75.0で2026-09-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -57,6 +57,8 @@ locatorはopen shadow rootをたどります。通常のCSS selectorに加え、
 ## 開いているタブと音声を管理する
 
 **設定 → Browser**でタブとIdentityをまとめて管理します。左側の「すべて」またはIdentityを選ぶと、現在表示していないものも含めてタブ一覧を絞り込めます。Identityを選ぶと、タブ一覧の上に名前・色の編集、データ消去、削除の操作も表示されます。各タブの行でタスク、Identity、favicon、タイトル、URL、音声状態を確認できます。タスク名を選ぶと、そのタスクに移動してタブを表示します。ミュート、ミュート解除、閉じる操作はタブごとに適用します。
+
+表示中のブラウザーパネルでも、音声を再生している現在のタブをミュートまたは解除できます。パネル、設定、CLIの操作は同じタブ単位の状態を更新します。
 
 CLIの`cockpit browser tabs`では`audible`と`muted`を確認できます。`cockpit browser mute <tabId>`または`cockpit browser unmute <tabId>`は、タブを表示せずに操作できます。ミュート設定はタブ単位で保存され、アプリの再起動やレンダラーの再作成後も維持されます。タブを閉じると設定は破棄されます。ミュートしてもページは閉じず、音声以外の動作は停止しません。エージェントの操作には引き続きBrowser Identityのアクセス境界が適用され、Desktopの一覧表示によって別のIdentityへのアクセスが許可されることはありません。
 
@@ -144,11 +146,11 @@ cockpit browser tab recreate <tabId> --json
 
 ## ログインと安全境界
 
-CookieやlocalStorageなどの分離、task・Autorunへの割り当て、Chrome session取込、消去と削除は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
+CookieやlocalStorageなどの分離、task・Autorunへの割り当て、system browserからのsession取込、消去と削除は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
 
 パスキーは署名済みmacOS版でTouch ID、WindowsでWindows Helloを利用できます。macOSのCockpitで使えるのは、アプリ内ブラウザーから登録したパスキーです。Safari、Chrome、iCloudキーチェーンで登録済みのパスキーを直接利用することはできません。
 
-Touch IDに一致するパスキーがない場合、ブラウザーパネルは理由と、新しいパスキーの登録、パスワード、`cockpit browser import-session`という代替手段を表示します。`cockpit browser diagnostics`では直近の試行を`no-matching-credential`として確認できます。`import-session`はmacOSのChromeからログイン状態を取り込む機能で、パスキー自体は取り込みません。
+Touch IDに一致するパスキーがない場合、ブラウザーパネルは理由と、新しいパスキーの登録、パスワード、`cockpit browser import-session`という代替手段を表示します。`cockpit browser diagnostics`では直近の試行を`no-matching-credential`として確認できます。macOSの`import-session`はChrome、Brave、Edge、Arc、Vivaldi、Opera、Firefoxから対応するログイン状態を取り込む機能で、パスキー自体は取り込みません。
 
 Linuxにはplatform authenticatorがないため、roaming security keyまたはpasswordを使います。promptが出ない場合は`cockpit browser diagnostics`でplatform authenticatorと直近のWebAuthn試行を確認します。
 

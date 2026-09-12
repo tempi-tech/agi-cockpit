@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.64.0 on 2026-08-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -56,9 +56,15 @@ See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Brow
 
 `cockpit hooks` runs local actions in response to task completion, Asks, Autoruns, Fleet Runs, app startup and shutdown, or hotkeys. See [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) for registration, testing, filters, and management in Settings. The [`cockpit hooks` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/hooks) covers all events, options, and command results.
 
+## Read usage and reset Codex capacity
+
+`cockpit usage` reads usage for supported providers and accounts. It also reports available Codex reset credits and their expiration dates without spending them. `cockpit usage reset --agent-type codex [--account <name>] --confirm` consumes one finite credit to clear that account's current rate-limit window. This cannot be undone or refunded; inspect the account and available credits before using `--confirm`. See the [`cockpit usage` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/usage) for outcomes and exit codes.
+
 ## Distinguish local and remote targets
 
-Supported `task` and `autorun` commands can target a registered device alias or host through `--host`. Commands without host support, including browser and display operations, affect only the local Cockpit instance.
+Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can target a registered device alias or host through `--host`. `ask list`, `ask answer`, and `ask close` also support remote targets, while Ask creation and relay configuration remain local. Commands without host support, including browser, App Surface, display, settings, usage, and update operations, affect only the local Cockpit instance.
+
+Remote control uses the paired bearer token and, when the target is Tailscale-only, also requires a verified peer or loopback connection. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC.
 
 Stopping Remote Access, clearing Identity data, deleting an account, and uninstalling the CLI require explicit confirmation flags. A confirmation flag is not a substitute for user authorization; verify the requested action and exact target first.
 

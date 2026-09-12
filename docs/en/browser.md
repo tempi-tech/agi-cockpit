@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -57,6 +57,8 @@ Locators traverse open shadow roots. A normal CSS selector works across them, an
 ## Find open tabs and control audio
 
 **Settings → Browser** combines tabs and Identity management. Select **All** or an Identity in the left sidebar to filter the tab list, including tabs not currently visible. Selecting an Identity also shows its name, color, data clearing, and deletion controls above the tabs. Each tab row shows its task, identity, favicon, title, URL, and audio state. Select the task name to open the owning task and reveal the tab. Mute, unmute, and close controls act on one tab at a time.
+
+The visible browser panel also provides mute or unmute on the current tab when it is playing audio. Muting there and muting from Settings or the CLI update the same per-tab state.
 
 From the CLI, `cockpit browser tabs` reports `audible` and `muted`. Use `cockpit browser mute <tabId>` or `cockpit browser unmute <tabId>` without bringing the tab into view. Muting is saved per tab across app restarts and renderer recreation; closing the tab discards that setting. Muting does not close the page or stop its other activity. Browser Identity access boundaries still apply to agent operations; the Desktop list does not grant an agent access to other identities.
 
@@ -144,11 +146,11 @@ cockpit browser tab recreate <tabId> --json
 
 ## Sign-in and safety boundaries
 
-See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for cookie and localStorage isolation, task and Autorun assignment, Chrome session import, clearing, and removal.
+See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for cookie and localStorage isolation, task and Autorun assignment, system-browser session import, clearing, and removal.
 
 Passkeys can use Touch ID in signed macOS builds and Windows Hello on Windows. On macOS, Cockpit can use only passkeys registered from the in-app browser; it cannot directly use passkeys previously registered in Safari, Chrome, or iCloud Keychain.
 
-When no passkey matches Touch ID, the browser panel explains why and offers registration of a new passkey, password sign-in, and `cockpit browser import-session` as alternatives. `cockpit browser diagnostics` records the recent attempt as `no-matching-credential`. `import-session` transfers eligible Chrome sign-in state on macOS; it does not import the passkey itself.
+When no passkey matches Touch ID, the browser panel explains why and offers registration of a new passkey, password sign-in, and `cockpit browser import-session` as alternatives. `cockpit browser diagnostics` records the recent attempt as `no-matching-credential`. On macOS, `import-session` transfers eligible sign-in state from Chrome, Brave, Edge, Arc, Vivaldi, Opera, or Firefox; it does not import the passkey itself.
 
 Linux has no platform authenticator, so use a roaming security key or password. If no prompt appears, use `cockpit browser diagnostics` to inspect platform-authenticator state and the most recent WebAuthn attempt.
 

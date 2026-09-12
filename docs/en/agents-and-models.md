@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -82,7 +82,7 @@ For a Codex model missing from the retrieved list whose capabilities are unknown
 
 Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default account and named profiles. Auto is the default for new tasks, Autoruns, and Fleet nodes. It uses shorter usage windows as availability gates, then ranks available accounts from the remaining capacity and reset time of the longest window. It can switch to another available account and resume the saved session after a usage or plan limit.
 
-When you choose Auto or a fixed account at task creation, Cockpit saves that selection and the current runtime account with the task, then uses the same state for its display and next runtime. A fixed account does not switch automatically. Switching an active task stops its current runtime and resumes the saved conversation with the selected profile. Exhausted Claude usage credits and Codex workspace credits are treated as usage limits.
+When you choose Auto or a fixed account at task creation, Cockpit saves that selection and the current runtime account with the task, then uses the same state for its display and next runtime. A fixed account does not switch automatically. Switching an active Claude, Codex, Antigravity, Cursor, Qoder, or Grok Build task stops its current runtime and carries the saved conversation into the selected profile before resuming. A missing, busy, unreadable, or ambiguous source fails safely; different target history is archived before replacement. Exhausted Claude usage credits and Codex workspace credits are treated as usage limits.
 
 An invalid credential appears as **Session expired** and `authState: expired`; Auto and the Fleet pre-run check exclude it. Signing in again clears the cached verdict and refreshes authentication and usage state.
 

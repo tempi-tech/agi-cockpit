@@ -4,7 +4,7 @@
 
 Isolate browser sign-ins by Identity, assign them to tasks and Autoruns, and safely import, clear, or remove their data.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
+> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
 
 A Browser Identity is a local persistent area that separates sign-in state and site data for the in-app browser. Use different Identities for different jobs, clients, or verification conditions when the same site needs separate accounts.
 
@@ -67,15 +67,18 @@ A new-task Autorun stores its Browser Identity assignment and passes it to every
 
 Fleet can assign a Browser Identity to each task node. Give nodes explicit, purpose-specific Identities when they require different signed-in states instead of sharing one Identity.
 
-## Import a Chrome session on macOS
+## Import a browser session on macOS
 
-On macOS, finish sign-in in Chrome, then import cookies for the selected tab's registrable domain and localStorage for its exact origin into the same Browser Identity.
+On macOS, finish sign-in in Chrome, Brave, Edge, Arc, Vivaldi, Opera, or Firefox, then import the supported state for the selected in-app tab into its Browser Identity. Inspect detected browsers and profiles first when you need an exact source.
 
 ```bash
-cockpit browser import-session --browser-identity work --profile "Profile 2" --json
+cockpit browser import-sources --json
+cockpit browser import-session --browser-identity work --browser brave --profile-id "Profile 2" --json
 ```
 
-`--browser-identity` selects the AGI Cockpit destination; `--profile` selects the Chrome source profile. The first import may show a macOS Keychain prompt for **Chrome Safe Storage**.
+`--browser-identity` selects the AGI Cockpit destination. `--browser` selects the source browser, while `--profile-id` selects the discovered profile unambiguously; `--profile` can instead match a profile directory or Firefox profile name. With no source option, Cockpit chooses the most recently used preferred profile across the detected browsers.
+
+Chromium sources import cookies for the tab's registrable domain and localStorage for its exact origin. Each browser has a separate **Safe Storage** Keychain item, so its first applicable import may show a macOS permission prompt. Firefox imports cookies only and does not access Keychain; the result reports that localStorage was unsupported.
 
 The import does not transfer sessionStorage, IndexedDB, extension state, device-bound authentication, or the passkey itself. If the site remains signed out, sign in once inside that Identity's in-app browser. `import-cookies` is retained for compatibility but moves cookies only, so prefer `import-session`. Import is supported only on macOS.
 

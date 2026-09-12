@@ -2,9 +2,9 @@
 
 # タスク一覧
 
-タスク一覧、オーバービュー、検索、並べ替え、作業場所、状態、完了、削除の違いを説明します。
+タスク一覧、オーバービュー、検索、プロジェクト名、並べ替え、作業場所、状態、完了、削除の違いを説明します。
 
-> AGI Cockpit 4.75.0で2026-09-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は、複数の仕事から「次にどれを見るか」を選ぶ場所です。個々の会話や追加入力は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)で扱います。
 
@@ -42,11 +42,15 @@ PWAのタスク検索では、入力中の検索語を接続先ごとに端末�
 
 「検索をクリア」は現在の検索語だけを消します。履歴は1件ずつ「履歴から削除」、または「履歴を消去」でまとめて削除できます。履歴の削除だけでは現在の検索語は変わりません。保存はそのブラウザー内だけで、別端末へ同期されません。ブラウザーの保存が利用できない場合は、画面内の検索は使えますが、開き直した後の復元はできません。
 
-## アイコンでプロジェクトを見分ける
+## プロジェクトに名前とアイコンを付ける
+
+DesktopまたはPWAのプロジェクトメニューで「プロジェクト名を変更」を選ぶと、ディレクトリに分かりやすい表示名を付けられます。上限は50文字です。表示名はDesktopと接続中のPWAで同期され、「リセット」でディレクトリ由来の名前へ戻ります。実際のフォルダー名や場所は変更しません。
+
+表示名とアイコンはプロジェクトのディレクトリごとに保存されます。そのため、Git Worktreeと元のチェックアウトは別プロジェクトとして、それぞれ異なる名前とアイコンを設定できます。
 
 Desktopのサイドバーとオーバービュー、PWAのプロジェクト一覧には、利用できる場合にプロジェクト固有のアイコンを表示します。プロジェクト内のfaviconなどを自動検出し、見つからない場合は既定のフォルダー表示を使います。
 
-`cockpit project icon get --directory <path>`で現在のアイコンを確認し、`cockpit project icon set <image-path> --directory <path>`でローカル画像を指定できます。`cockpit project icon reset --directory <path>`で自動検出に戻します。変更は保存され、接続中のPWAにも同期されます。プロジェクトはディレクトリ単位のため、worktreeと元のチェックアウトは別のアイコンを持ちます。ネットワークから画像を取得することはありません。形式とサイズ制限は[projectリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/project)を参照してください。
+`cockpit project icon get --directory <path>`で現在のアイコンを確認し、`cockpit project icon set <image-path> --directory <path>`でローカル画像を指定できます。`cockpit project icon reset --directory <path>`で自動検出に戻します。アイコンの変更も接続中のPWAへ同期されます。ネットワークから画像を取得することはありません。形式とサイズ制限は[projectリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/project)を参照してください。
 
 ## タスクの入口と作業場所
 
