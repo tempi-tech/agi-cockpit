@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.77.0 — 2026-09-13
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added continuity of the current conversation when switching Codex, Grok, Cursor, or Qoder accounts.
 - Added importing browser sign-ins from Brave, Edge, Arc, Vivaldi, Opera, and Firefox on macOS.
