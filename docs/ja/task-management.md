@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.78.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -56,6 +56,8 @@ cockpit task create \
 
 エージェント、モデル、推論レベル、アカウント、承認モード、Browser Identityはタスクごとの実行条件です。対応しない組み合わせはエラーになり、無言で別設定へ切り替わりません。特に外部サイトを扱うタスクでは、必要なログイン状態を持つBrowser Identityを明示します。
 
+`--approval-mode`には`supervised`、`accept-edits`、`full-access`を指定できます。Cockpit AgentとネイティブUIのエージェントで、そのタスクだけの既定値を上書きします。ターミナルUIとTerminalタスクは対応しません。
+
 ```bash
 cockpit task create \
   --instruction "管理画面の公開状態を確認してください" \
@@ -101,6 +103,31 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `waitingReason`が`permission`または`question`なら、エージェント内の確認が続いています。`readyForNextPrompt`がfalseの間に別の指示を重ねません。`usage_limit`なら利用できるアカウントとリセット時刻を確認します。
 
+## 保留中の承認と質問に応答する
+
+`task get`の`turnRequests`には、実行環境が現在保持しているツール承認と構造化質問だけが表示されます。判断前に`requestId`、`kind`、`requestType`、操作内容を示す`detail`を確認します。質問にはID、選択肢、複数選択と自由入力の可否も含まれます。
+
+```bash
+cockpit task get <task-id>
+cockpit task approve <task-id>
+cockpit task approve <task-id> --scope always
+cockpit task deny <task-id>
+cockpit task answer <task-id> --text "選択肢A"
+```
+
+`approve`の既定は今回だけの許可です。`--scope always`は同種の判断を記憶するため、範囲を理解した場合だけ使います。複数のリクエストがある場合は`--request <request-id>`で対象を固定できます。`deny`は範囲や理由を受け取らないため、拒否理由も伝える場合は拒否後に`task send`で説明します。
+
+複数質問には質問順に`--text`を一つずつ渡します。質問IDを固定する場合や複数選択には、質問ごとに`--question <question-id>`と一つ以上の`--choice`を使います。回答数、質問ID、単一・複数選択、選択肢は送信前に検証されます。
+
+```bash
+cockpit task answer <task-id> --text "はい" --text "ステージング"
+cockpit task answer <task-id> \
+  --question checks --choice lint --choice tests \
+  --question deploy --choice staging
+```
+
+`task answer`は実行中エージェント自身の質問へ回答します。人へ判断を委ねる[Cockpit Ask](https://agi-labo.com/tools/cockpit/docs/ask)へ代理回答する`cockpit ask answer`とは別の操作です。
+
 ## レポートを順番に受け取る
 
 `task run`と`task wait`が返す`report.seq`はタスクごとに増加します。処理済みの番号を`--since`へ渡すと、同じレポートを重複処理せず次のレポートを待てます。
@@ -120,6 +147,30 @@ cockpit task send <task-id> --text "失敗したテストだけ修正し、再�
 ```
 
 複数行の指示は`--stdin`または`--text-file`で渡します。確認画面に対してEnterを送るだけなら、本文を付けず`cockpit task send <task-id>`を実行します。送信前に`waitingReason`を読み、質問への回答なのか、ツール許可なのか、通常の追加指示なのかを区別してください。
+
+## ターンと会話をCLIから管理する
+
+```bash
+cockpit task cancel <task-id>
+cockpit task compact <task-id>
+cockpit task clear <task-id> --confirm
+cockpit task approval-mode <task-id>
+cockpit task approval-mode <task-id> accept-edits
+```
+
+`cancel`は実行中のターンだけを停止し、タスクと会話を残します。`compact`は会話を圧縮します。`clear`は会話と最初の指示を破棄して新しい会話を始めるため、`--confirm`が必須です。リセットは、そのタスクを開いているすべてのDesktopとPWAへ反映されます。実行元以外の画面では、入力途中の本文、添付、キューを保持します。
+
+`compact`と`clear`は、実行中、ツール承認待ち、質問への回答待ちのターンでは`task_turn_in_flight`として拒否されます。ターンを完了するか、保留中の確認へ応答するか、先に`cancel`を実行してください。`approval-mode`はモードを省略すると現在値を読み、指定するとそのタスクだけを変更します。Cockpit Agentの実行中セッションを作成時より厳しいモードへ変えた場合は、完全な適用に新しい会話または新しいタスクが必要で、CLIの結果に`warning`が返ります。
+
+対応範囲はエージェントとUIモードで異なります。
+
+- Claude Code、Codex、Grok BuildのネイティブUI: すべてのターン管理コマンド
+- Cursor、QoderのネイティブUI: `answer`以外
+- AntigravityのネイティブUI: `cancel`、`compact`、`clear`、`approval-mode`
+- Cockpit Agent: `approve`、`deny`、`answer`、`cancel`、`approval-mode`
+- すべてのターミナルUIとTerminalタスク: 対応なし
+
+対応しない組み合わせは終了コード1、現在の状態に合わない操作は終了コード3、Cockpitへ到達できない場合は終了コード7です。自動処理では、終了コードに加えてJSONの`code`と現在状態を確認してください。
 
 ## アカウントとBrowser Identityを切り替える
 

@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.78.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -43,6 +43,8 @@ cockpit task send <task-id> --text "Continue" --wait
 ```
 
 `readyForNextPrompt`がfalseの確認待ちタスクへ新しい指示を重ねず、`waitingReason`を確認します。`permission`や`question`は進行中の確認、`usage_limit`はアカウント復旧、`needsResume`はプロセス再開が必要な状態です。
+
+`task get`の`turnRequests`で保留中のツール承認や質問を確認し、`task approve`、`deny`、`answer`で対象へ応答できます。`task cancel`はタスクを残して現在のターンだけを中断し、`compact`は会話を圧縮します。`task clear --confirm`は会話を破棄するため、対象タスクと必要な履歴を確認してから実行します。`task approval-mode`は、そのタスクの承認モードを読み取りまたは変更します。対応範囲と手順は[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)を参照してください。
 
 タスクの完了と削除は異なります。CLIの`task complete`は既定でGit Worktreeを削除し、維持する場合は`--keep-worktree`が必要です。削除や一括操作の前に対象IDと保存すべき成果を確認してください。
 

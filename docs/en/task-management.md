@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.78.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -56,6 +56,8 @@ Specify `--directory` for an existing project. Without it, a task starts in an o
 
 The agent, model, reasoning effort, account, approval mode, and Browser Identity are task runtime settings. Unsupported combinations fail instead of silently selecting a different setting. For work on an external site, explicitly assign the Browser Identity that holds the required sign-in state.
 
+`--approval-mode` accepts `supervised`, `accept-edits`, or `full-access`. It overrides the per-task default for Cockpit Agent and agents in Native UI. Terminal UI and Terminal tasks reject it.
+
 ```bash
 cockpit task create \
   --instruction "Verify the publication state in the admin console" \
@@ -101,6 +103,31 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 If `waitingReason` is `permission` or `question`, an agent-side confirmation is still active. Do not layer another instruction while `readyForNextPrompt` is false. For `usage_limit`, inspect available accounts and the reset time.
 
+## Respond to pending approvals and questions
+
+`turnRequests` in `task get` contains only the tool approvals and structured questions that the runtime still holds. Before deciding, inspect the `requestId`, `kind`, `requestType`, and the operation in `detail`. Questions also include their IDs, choices, and whether they accept multiple selections or custom input.
+
+```bash
+cockpit task get <task-id>
+cockpit task approve <task-id>
+cockpit task approve <task-id> --scope always
+cockpit task deny <task-id>
+cockpit task answer <task-id> --text "Option A"
+```
+
+`approve` allows only this request by default. `--scope always` remembers the decision for later requests of the same kind, so use it only when you understand that scope. If several requests are pending, target one with `--request <request-id>`. `deny` accepts neither a scope nor a reason; if the task also needs an explanation, send one with `task send` after denying.
+
+For several questions, pass one `--text` in question order. To name each question or answer a multi-select question, use `--question <question-id>` with one or more `--choice` values. Cockpit validates the answer count, question IDs, single- or multi-select contract, and offered choices before sending anything.
+
+```bash
+cockpit task answer <task-id> --text "Yes" --text "Staging"
+cockpit task answer <task-id> \
+  --question checks --choice lint --choice tests \
+  --question deploy --choice staging
+```
+
+`task answer` responds to the running agent's own question. It is separate from `cockpit ask answer`, which answers a [Cockpit Ask](https://agi-labo.com/en/tools/cockpit/docs/ask) on a person's behalf.
+
 ## Receive reports in order
 
 `report.seq` increases per task in results from `task run` and `task wait`. Pass the last processed sequence through `--since` to wait for the next report without processing the same one twice.
@@ -120,6 +147,30 @@ cockpit task send <task-id> --text "Fix only the failing test and run it again" 
 ```
 
 Use `--stdin` or `--text-file` for multiline content. To send only Enter to an agent confirmation, run `cockpit task send <task-id>` with no text. Read `waitingReason` first so you know whether you are answering a question, approving a tool, or sending an ordinary follow-up.
+
+## Manage the turn and conversation from the CLI
+
+```bash
+cockpit task cancel <task-id>
+cockpit task compact <task-id>
+cockpit task clear <task-id> --confirm
+cockpit task approval-mode <task-id>
+cockpit task approval-mode <task-id> accept-edits
+```
+
+`cancel` stops only the running turn and keeps the task and conversation. `compact` compacts the conversation. Because `clear` discards the conversation and original instruction before starting a new conversation, it requires `--confirm`. The reset updates every Desktop and PWA view with that task open. Other views preserve their draft text, attachments, and queue.
+
+`compact` and `clear` return `task_turn_in_flight` while a turn is running or waiting for a tool approval or question. Finish the turn, answer the pending request, or run `cancel` first. Without a mode, `approval-mode` reads the current value; with one, it changes only that task. If an active Cockpit Agent session is changed to a stricter mode than it started with, full enforcement requires a new conversation or task, and the CLI result includes a `warning`.
+
+Support depends on the agent and UI mode:
+
+- Claude Code, Codex, and Grok Build Native UI: every turn-lifecycle command
+- Cursor and Qoder Native UI: every command except `answer`
+- Antigravity Native UI: `cancel`, `compact`, `clear`, and `approval-mode`
+- Cockpit Agent: `approve`, `deny`, `answer`, `cancel`, and `approval-mode`
+- every Terminal UI and Terminal task: unsupported
+
+An unsupported combination exits 1, an action that does not match the current state exits 3, and an unreachable Cockpit exits 7. Automation should inspect the JSON `code` and current state as well as the exit code.
 
 ## Switch the account or Browser Identity
 
