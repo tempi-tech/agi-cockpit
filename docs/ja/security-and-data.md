@@ -38,7 +38,7 @@ Askは人の方針判断を返す仕組みであり、ツール承認ではあ�
 
 ## Cockpit Hooksを安全に実行する
 
-Cockpit Hooksは、登録したシェルアクションを利用者のローカル権限で自動実行します。エージェントの承認モードとは別の仕組みであり、Hookのアクションをsandboxへ制限しません。内容を理解し管理しているスクリプトだけを登録し、`cockpit hooks test`で明示的に試してから有効にしてください。任意コードをリモートへ登録できないよう、`cockpit hooks`は`--host`を受け付けません。
+Cockpit Hooksは、登録したシェルアクションを利用者のローカル権限で自動実行します。エージェントの承認モードとは別の仕組みであり、Hookのアクションをsandboxへ制限しません。内容を理解し管理しているスクリプトだけを登録し、`cockpit hooks test`で明示的に試してから有効にしてください。`cockpit hooks`は`--host`によるリモートでの登録・実行に対応します。ペアリング済みのBearer tokenが必須で、Tailscale限定モードでは検証済みpeerまたはloopback接続も必要です。peerの信頼だけでは操作できません。このtokenは接続先インスタンスを操作し、その利用者の権限で任意のシェルコードを登録・実行できるため、厳重に管理してください。スクリプトのパスは接続先のパスです。
 
 イベントの完全なJSONは標準入力へ渡されます。タスク名、作業場所、Askの概要、選択テキストなど一部の値は環境変数にも入ります。Hookが外部コマンドやネットワークサービスを呼ぶ場合、それらの値を外部へ送信できます。必要なイベントとフィルターだけに絞り、token、個人情報、ローカルパスを標準出力と標準エラーへ書かないでください。末尾4 KBは実行履歴へ保存され、設定画面とCLIから確認できます。
 
@@ -57,6 +57,8 @@ Antigravityの`accounts logout`は、`--confirm`なしで消去対象と共有�
 Browser IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証、ブラウザーセッションが永続領域へ保存されます。タスクとAutorunは一つのIdentityを割り当てられ、指定しない場合はDefault Identityを使います。
 
 Chromeからの`import-session`は、表示中サイトのregistrable domainに属するCookieと、正確なoriginのlocalStorageを選択したIdentityへ取り込みます。sessionStorage、IndexedDB、拡張機能状態、device-bound認証、パスキー自体は取り込みません。
+
+macOSではBrave、Edge、Arc、Vivaldi、Opera、Firefoxも取込元に選べます。`cockpit browser import-sources`で候補を確認し、`--browser`と`--profile-id`で明示的に指定できます。取込元を省略すると、検出した各ブラウザーの優先profileのうち、最も最近使われたものを選びます。Chromium系ではCookieと正確なoriginのlocalStorage、FirefoxではCookieのみを取り込み、制限を結果に表示します。Chromium系はブラウザーごとに別のSafe Storage Keychain項目を使い、FirefoxのCookie取込はKeychainへアクセスしません。
 
 Identityのデータ消去はそのIdentityのセッションを閉じます。削除は永続データも削除します。実行中タスクやAutorunから参照されるIdentityは、置換先を指定しない限り削除できません。Default Identityは削除できません。
 

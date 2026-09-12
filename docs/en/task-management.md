@@ -79,6 +79,10 @@ The hierarchy groups work in the task list and child tasks panel, but it is not 
 
 When a child reaches a stopping point, the parent does not necessarily receive every artifact automatically. The parent must read the return from `task run`, call `task wait` or `task get`, and verify requested evidence such as diffs, tests, or URLs.
 
+## Delete child tasks from the task menu
+
+On Desktop and the PWA, a task with children has a **Delete all child tasks** action in its menu. Confirming removes every descendant, including nested children, while keeping the parent task. Cancel to leave them unchanged. Review the entire child hierarchy before confirming.
+
 ## Read state and waiting reasons
 
 ```bash

@@ -93,7 +93,7 @@ If a Hook does not run, check that it is enabled and that the event and filters 
 
 ## Execution considerations
 
-Registered actions run with your local permissions, independently of the agent's approval mode. Register commands and scripts whose behavior you have checked. The Hooks CLI is local-only and does not support `--host`.
+Registered actions run with your local permissions, independently of the agent's approval mode. Register commands and scripts whose behavior you have checked. All Hooks commands support `--host <host-or-alias>`. Remote registration and testing execute shell code on the target computer. A paired bearer token is required; Tailscale-only access additionally requires a verified peer or loopback connection. Peer trust alone does not authorize commands. The token grants control of the target instance, including Hook registration and execution. Script paths and directory filters refer to the target computer.
 
 Cockpit waits at most five seconds for `app.quit` actions. Do not use them for long work that must finish before exit. Event chains have execution limits; when a Hook starts another task, narrow its filters to avoid repeatedly triggering itself.
 

@@ -38,7 +38,7 @@ Ask returns a human policy decision; it is not a tool approval. Choosing “publ
 
 ## Run Cockpit Hooks safely
 
-Cockpit Hooks automatically run a registered shell action with the user's local permissions. They are separate from an agent's approval mode and do not sandbox the hook action. Register only scripts that you understand and control, then test them explicitly with `cockpit hooks test` before enabling them. To prevent arbitrary code from being registered remotely, `cockpit hooks` rejects `--host`.
+Cockpit Hooks automatically run a registered shell action with the user's local permissions. They are separate from an agent's approval mode and do not sandbox the hook action. Register only scripts that you understand and control, then test them explicitly with `cockpit hooks test` before enabling them. `cockpit hooks` accepts `--host` for remote registration and execution. A paired bearer token is required, with a verified Tailscale peer or loopback connection additionally required in Tailscale-only mode. Peer trust alone is insufficient. Protect this token as control of the target instance: it authorizes registering and running arbitrary shell code with that computer’s user permissions. Script paths refer to the target computer.
 
 The complete event JSON is delivered on standard input. Some values, including task names, working directories, Ask summaries, and selected text, are also available through environment variables. A hook that invokes an external command or network service can transmit those values. Select only the events and filters you need, and do not write tokens, personal data, or local paths to standard output or standard error. Their final 4 KB is stored in run history and can be inspected from Settings or the CLI.
 
@@ -57,6 +57,8 @@ Antigravity `accounts logout` previews every target and shared impact without `-
 Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task and Autorun can each be assigned one Identity; the Default Identity is used when none is selected.
 
 On macOS, `import-session` imports cookies belonging to the visible site's registrable domain and localStorage for the exact origin from Chrome into the selected Identity. It does not import sessionStorage, IndexedDB, extension state, device-bound authentication, or passkeys themselves.
+
+On macOS, source selection also supports Brave, Edge, Arc, Vivaldi, Opera, and Firefox. Use `cockpit browser import-sources` to inspect sources and `--browser` with `--profile-id` to select one explicitly. Without a source selection, Cockpit uses the most recently used preferred profile among detected browsers. Chromium sources can import cookies and exact-origin localStorage; Firefox imports cookies only and reports that limitation. Each Chromium browser uses its own Safe Storage Keychain item, while Firefox cookie import does not access Keychain.
 
 Clearing an Identity closes its sessions. Removing it also deletes persistent data. An Identity referenced by a running task or Autorun cannot be removed without a replacement, and the Default Identity cannot be removed.
 

@@ -4,6 +4,63 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.77.0 — 2026-09-13
+
+**Type:** minor · **Platforms:** macOS
+
+- Added continuity of the current conversation when switching Codex, Grok, Cursor, or Qoder accounts.
+- Added importing browser sign-ins from Brave, Edge, Arc, Vivaldi, Opera, and Firefox on macOS.
+- Changed Browser settings to manage tabs and Identities together.
+- Added closing all browser tabs within a selected scope.
+- Added audio muting directly from in-app browser tabs.
+- Added remote Fleet control through the CLI.
+- Added remote Hook registration and control through the CLI.
+- Added viewing and answering remote Asks through the CLI.
+- Added explicit creation of independent top-level tasks through the CLI.
+- Added deleting all child tasks from the task menu.
+- Added shared project display names across Desktop and the remote PWA.
+- Added in-place editing of Hook settings.
+- Added a timeline of Fleet node events.
+- Changed Fleet flow edges to make execution direction easier to follow.
+- Fixed Fleet list status indicators to match the flow view.
+- Added a CLI command to reset Codex usage.
+- Fixed task start failures discarding the entered prompt.
+- Fixed recent Codex conversation turns disappearing during history loading.
+- Fixed Markdown file links opening incorrect destinations.
+- Fixed selecting PWA search history after scrolling.
+- Fixed App Surface screenshots to capture the active Android display.
+- Fixed running indicators to stop spinning when reduced motion is enabled.
+- Fixed empty-chat colors in light mode.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Codex・Grok・Cursor・Qoderのアカウントを切り替えても、進行中の会話を引き継げるようになりました
+- macOSでBrave・Edge・Arc・Vivaldi・Opera・Firefoxからアプリ内ブラウザーへログイン状態を取り込めるようになりました
+- Browser設定でタブとIdentityをまとめて管理できるようになりました
+- ブラウザーのタブを、指定した範囲でまとめて閉じられるようになりました
+- アプリ内ブラウザーのタブから音声をミュートできるようになりました
+- CLIから別のコンピューターのFleetを操作できるようになりました
+- CLIから別のコンピューターのHooksを登録・操作できるようになりました
+- CLIから別のコンピューターのAskを確認・回答できるようになりました
+- CLIから親を持たない独立したタスクを明示的に作成できるようになりました
+- タスクのメニューから子タスクをまとめて削除できるようになりました
+- プロジェクトの表示名をデスクトップとリモート（PWA）で共有できるようになりました
+- Hooksの設定をその場で編集できるようになりました
+- Fleetノードのイベントをタイムラインで確認できるようになりました
+- Fleetのフロー図で処理の進む方向を確認しやすくしました
+- Fleetの一覧でもフロー図と同じ実行状態を表示するようにしました
+- Codexの使用量リセットをCLIから実行できるようになりました
+- タスクを開始できなかった場合に、入力した指示が失われる問題を修正しました
+- Codexの会話履歴の読み込み時に、最新のやり取りが消えることがある問題を修正しました
+- チャット内のMarkdownファイルリンクが正しいファイルを開くよう修正しました
+- リモート（PWA）でスクロール後に検索履歴を選択できない問題を修正しました
+- AndroidのApp Surfaceで、現在表示中のディスプレイを撮影するよう修正しました
+- 動きを減らす設定が有効なとき、実行中表示の回転を止めるようにしました
+- ライトモードでチャットの空状態が見やすくなるよう色を修正しました
+
+</details>
+
 ## v4.76.0 — 2026-09-11
 
 **Type:** minor · **Platforms:** macOS, Linux
