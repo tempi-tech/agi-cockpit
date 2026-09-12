@@ -36,6 +36,12 @@ An onboarding abandonment event that could not be sent is kept temporarily in th
 
 Ask returns a human policy decision; it is not a tool approval. Choosing “publish” in an Ask does not automatically grant permissions required by the operating system, an external service, or another tool.
 
+The CLI can also decide pending tool approvals. Inspect `turnRequests` with `cockpit task get <id>` before using `task approve` or `task deny`; `approve` defaults to one-time permission, while `--scope always` remembers the decision. A decision made by another agent task is attributed to that agent, not to the human operator. `task answer` answers a runtime question; `cockpit ask answer` answers an Ask.
+
+`task create --approval-mode <mode>` and `task approval-mode <id> <mode>` set permission boundaries for that task alone. Without a mode, the latter only reads the current setting. Supported modes are `supervised`, `accept-edits`, and `full-access`. Terminal UI tasks reject these operations. Protect CLI access as authority to change task permissions; a confirmation flag is not evidence of human authorization. See the [task CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task) for the supported agents and commands.
+
+`cockpit task clear <id> --confirm` discards the conversation and hides its original instruction in all open desktop and mobile views. Drafts in other views are preserved. Clearing and compacting refuse a turn that is running or waiting for an approval or question. `task cancel` stops the current turn while keeping the task. Verify the exact task and preserve needed history before clearing it.
+
 ## Run Cockpit Hooks safely
 
 Cockpit Hooks automatically run a registered shell action with the user's local permissions. They are separate from an agent's approval mode and do not sandbox the hook action. Register only scripts that you understand and control, then test them explicitly with `cockpit hooks test` before enabling them. `cockpit hooks` accepts `--host` for remote registration and execution. A paired bearer token is required, with a verified Tailscale peer or loopback connection additionally required in Tailscale-only mode. Peer trust alone is insufficient. Protect this token as control of the target instance: it authorizes registering and running arbitrary shell code with that computer’s user permissions. Script paths refer to the target computer.

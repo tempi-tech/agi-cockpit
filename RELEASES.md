@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.78.0 — 2026-09-13
+
+**Type:** minor · **Platforms:** macOS
+
+- Added viewing and approving or denying pending tool requests through the CLI.
+- Added answering task questions through the CLI.
+- Added cancelling a running turn through the CLI while keeping the task.
+- Added compacting task conversations through the CLI.
+- Added resetting task conversations through the CLI with an explicit confirmation flag.
+- Added setting, reading, and changing per-task approval modes through the CLI.
+- Changed conversation resets to update all open desktop and mobile views while preserving drafts in other views.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CLIからタスクが待っているツール承認の内容を確認し、許可・拒否できるようになりました
+- CLIからタスクの質問に回答できるようになりました
+- CLIからタスクを残したまま実行中の処理を中断できるようになりました
+- CLIからタスクの会話を圧縮できるようになりました
+- CLIから確認フラグを付けてタスクの会話をリセットできるようになりました
+- CLIからタスクごとの承認モードを指定・確認・変更できるようになりました
+- 会話のリセットが開いているデスクトップとモバイル画面に反映され、ほかの画面の下書きは保持されるようになりました
+
+</details>
+
 ## v4.77.0 — 2026-09-13
 
 **Type:** minor · **Platforms:** macOS, Linux
