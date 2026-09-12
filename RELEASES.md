@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.78.0 — 2026-09-13
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added viewing and approving or denying pending tool requests through the CLI.
 - Added answering task questions through the CLI.
