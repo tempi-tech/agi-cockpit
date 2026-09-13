@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.78.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -54,7 +54,7 @@ cockpit task create \
 
 Specify `--directory` for an existing project. Without it, a task starts in an operating-system temporary directory that may be removed on completion. Use `--worktree` when the task needs an isolated Git Worktree.
 
-The agent, model, reasoning effort, account, approval mode, and Browser Identity are task runtime settings. Unsupported combinations fail instead of silently selecting a different setting. For work on an external site, explicitly assign the Browser Identity that holds the required sign-in state.
+The agent, UI mode, model, reasoning effort, account, approval mode, and Browser Identity are task runtime settings. For Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build, choose the creation-time display with `--ui-mode visual` or `--ui-mode terminal`. Cockpit Agent and Terminal do not switch UI modes. Unsupported combinations fail instead of silently selecting a different setting. For work on an external site, explicitly assign the Browser Identity that holds the required sign-in state.
 
 `--approval-mode` accepts `supervised`, `accept-edits`, or `full-access`. It overrides the per-task default for Cockpit Agent and agents in Native UI. Terminal UI and Terminal tasks reject it.
 
@@ -63,8 +63,12 @@ cockpit task create \
   --instruction "Verify the publication state in the admin console" \
   --directory /path/to/repo \
   --agent-type codex \
+  --ui-mode visual \
+  --media ./expected-screen.png \
   --browser-identity work
 ```
+
+`--media` copies local files into Cockpit-managed storage and attaches them to the first instruction. The limit is eight files, 512 MB per file, 25 MB for JSON, and 1 GB in total. Remote URLs and file types the selected agent cannot receive directly are rejected. Source files are neither moved nor deleted.
 
 ## Create parent and child tasks
 
@@ -99,9 +103,21 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 | `waiting_confirmation` | Input is required. Read `waitingReason` and `readyForNextPrompt` |
 | `completed` | The process ended. This does not prove that the requested result was verified |
 | `error` | Startup or execution failed. Read `errorMessage` and recent conversation |
+| `startFailed: true` | Agent startup failed. The same task can be retried |
 | `needsResume: true` | The process stopped and the same task can be resumed |
 
 If `waitingReason` is `permission` or `question`, an agent-side confirmation is still active. Do not layer another instruction while `readyForNextPrompt` is false. For `usage_limit`, inspect available accounts and the reset time.
+
+## Retry a task that failed to start
+
+For a task with `startFailed: true`, use `retry-start` instead of creating another task. By default it reuses the saved initial instruction or Terminal command. Supply new text only when replacing that input.
+
+```bash
+cockpit task retry-start <task-id>
+cockpit task retry-start <task-id> --instruction-file retry.md
+```
+
+`retry-start` is only for startup failures. Use `resume` for a stopped task and `reconnect` to reconnect an existing visual session. Completed, running, and other non-startup-failure states cannot be retried.
 
 ## Respond to pending approvals and questions
 
@@ -143,10 +159,12 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 Use `task send` after the task can accept another instruction. Add `--wait` when the next report is required in the same control flow.
 
 ```bash
-cockpit task send <task-id> --text "Fix only the failing test and run it again" --wait
+cockpit task send <task-id> --text "Fix only the failing test and run it again" \
+  --media ./failure.png \
+  --wait
 ```
 
-Use `--stdin` or `--text-file` for multiline content. To send only Enter to an agent confirmation, run `cockpit task send <task-id>` with no text. Read `waitingReason` first so you know whether you are answering a question, approving a tool, or sending an ordinary follow-up.
+Use `--stdin` or `--text-file` for multiline content. `--media` on `task send` follows the same count, size, local-file, and agent-support limits as creation. To send only Enter to an agent confirmation, run `cockpit task send <task-id>` with no text. Read `waitingReason` first so you know whether you are answering a question, approving a tool, or sending an ordinary follow-up.
 
 ## Manage the turn and conversation from the CLI
 
@@ -172,6 +190,17 @@ Support depends on the agent and UI mode:
 
 An unsupported combination exits 1, an action that does not match the current state exits 3, and an unreachable Cockpit exits 7. Automation should inspect the JSON `code` and current state as well as the exit code.
 
+## Start an agent Goal
+
+When a visual runtime reports `goalCommandAvailable: true`, the CLI can start a new Goal. Cockpit sends it to the running agent as a real turn. It is unavailable for Cockpit Agent, Terminal UI, Terminal tasks, and runtimes without Goal support.
+
+```bash
+cockpit task goal start <task-id> --objective "Complete the release verification"
+cockpit task goal start <task-id> --objective-file goal.md
+```
+
+The CLI does not stop or clear Goals. After starting one, supervise it through `task get`, `task wait`, and the usual turn controls.
+
 ## Switch the account or Browser Identity
 
 Supported agents can switch a running task to another signed-in account after a usage limit. Send the appropriate continuation after the switch.
@@ -190,6 +219,7 @@ cockpit task browser-identity <task-id> work
 
 | Action | Result |
 | --- | --- |
+| `task retry-start` | Retries a startup failure with the saved instruction or command |
 | `task resume` | Restarts a stopped task with the same history |
 | `task complete` | Stops the process and moves it to completed. The CLI removes its Worktree by default |
 | `task complete --keep-worktree` | Moves it to completed while retaining the Worktree |

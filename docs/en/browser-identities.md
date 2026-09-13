@@ -4,7 +4,7 @@
 
 Isolate browser sign-ins by Identity, assign them to tasks and Autoruns, and safely import, clear, or remove their data.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
 
 A Browser Identity is a local persistent area that separates sign-in state and site data for the in-app browser. Use different Identities for different jobs, clients, or verification conditions when the same site needs separate accounts.
 
@@ -81,6 +81,8 @@ cockpit browser import-session --browser-identity work --browser brave --profile
 Chromium sources import cookies for the tab's registrable domain and localStorage for its exact origin. Each browser has a separate **Safe Storage** Keychain item, so its first applicable import may show a macOS permission prompt. Firefox imports cookies only and does not access Keychain; the result reports that localStorage was unsupported.
 
 The import does not transfer sessionStorage, IndexedDB, extension state, device-bound authentication, or the passkey itself. If the site remains signed out, sign in once inside that Identity's in-app browser. `import-cookies` is retained for compatibility but moves cookies only, so prefer `import-session`. Import is supported only on macOS.
+
+An import copies the session already present in the source browser; it does not sign in to another account. Check the source account first. Signing out in the source browser afterward may invalidate Cockpit's copied session when the site revokes that session server-side.
 
 ## Clear data or remove an Identity
 

@@ -4,7 +4,7 @@
 
 8種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から8種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -41,7 +41,7 @@ AntigravityのネイティブUIでは、失敗したツール項目を失敗と�
 
 AntigravityのネイティブUIでは、ターン完了後やタスクを切り替えた後も、そのタスクで選んだ推論レベルを維持します。たとえば`high`で完了したターンの次の指示は、候補一覧の既定が`low`でも`high`のまま送ります。保存済みのレベルが更新後の候補で利用できなくなった場合だけ、現在対応している既定値へ移します。
 
-ClaudeのネイティブUIは、実行時の候補取得で返されないモデルも組み込み候補で補完します。組み込み候補には**Claude Fable 5.1**が含まれ、推論レベルは`low`、`medium`、`high`、`xhigh`、`max`、既定は`high`です。候補への追加だけで、作成済みタスクの選択モデルは変更しません。
+ClaudeのネイティブUIは、実行時の候補取得で返されないモデルも組み込み候補で補完します。組み込み候補には**Claude Fable 5.1**が含まれ、推論レベルは`low`、`medium`、`high`、`xhigh`、`max`、既定は`high`です。モデル一覧には、解決先を併記した「デフォルト」と、その解決先モデルを直接選ぶ行を別々に残します。前者はClaudeの既定変更へ追従し、後者は選んだモデルへ固定します。候補への追加だけで、作成済みタスクの選択モデルは変更しません。
 
 Codexのモデル選択肢は、組み込み候補と実行時に取得した候補のどちらも、新しいGPT世代とバージョンを先にし、同じバージョンでは標準モデルから用途別variantの順に並びます。モデル名をアルファベット順に探すのではなく、上から性能と用途を比較できます。現在選択中の有効なモデルを、並べ替えだけで変更することはありません。
 
@@ -50,6 +50,8 @@ CodexのネイティブUIでは、選択中のアカウントから取得した�
 service tierはCodexの対応モデルだけで`standard`または`fast`を選べます。システムプロンプトはClaude、Codex、Qoder、CockpitのネイティブUIで利用できます。`append`はCockpit標準の指示を維持し、`replace`は標準指示を置き換えるため、Cockpit CLIの知識はインストール済みskillからだけ利用できる状態になります。
 
 Cockpit AgentのモデルIDは、OpenRouterが`openrouter/<id>`、OpenCode Goが`opencode-go/<id>`、OpenCode Zenが`opencode/<id>`、LM Studioが`lmstudio/<id>`です。OpenCode GoとOpenCode Zenは別のプロバイダーで、設定の**OpenCode Go API Key**と**OpenCode Zen API Key**も共有しません。選択したプロバイダーのkeyがない場合、そのモデル一覧とタスクは利用できません。
+
+CLIでは`cockpit settings set agents.provider.cockpit <provider>`でCockpit Agentのプロバイダーを`openrouter`、`opencode-go`、`opencode`、`lmstudio`から選べます。APIキーは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`で暗号化ストレージへ保存し、`settings reset agents.credential.<name>`で削除します。キーを必要とするプロバイダーは、対応する認証情報がある場合だけ選択できます。
 
 Cockpit Agentは、接続中のプロバイダーから取得した各モデルの対応情報を、DesktopとPWAの新しいタスク、タスク作成API、Autorunへ反映します。新しいタスクは最初のモデル一覧を待ってから作成できるようになり、取得が完了しない場合は5秒後に既知の候補で操作を続けられます。推論レベルはモデルが返した対応一覧を優先し、保存済みの値が有効なら維持します。有効でなければ`medium`、それもなければ先頭の対応値を使い、推論設定に対応しないモデルでは値を設定しません。実行時の対応情報を取得できない場合だけ、既知のモデルIDに対する組み込み候補へフォールバックします。
 
@@ -102,7 +104,7 @@ AntigravityのネイティブUIは実行中に承認を質問できないため�
 
 コンテキスト使用量は別の表示契約です。CursorのネイティブUIでランタイムがトークン使用量を返さない場合、Cockpitはローカルに保持した会話から現在のコンテキストを推定し、値の先頭に`~`を付けます。上限はランタイムの値を優先し、取得できない場合は選択中のCursorモデルについて保守しているメタデータを使います。どちらにもコンテキスト長がない場合は上限を「利用不可」と表示し、割合を計算しません。保持履歴の推定量がモデルの上限を超える場合は、表示する有効コンテキストの推定値を上限までに抑え、メーターを中立表示にします。ランタイム側の圧縮や履歴切り捨てにより、実際の有効コンテキストが減っている可能性があるためです。これらの推定値はプロバイダーの利用枠や請求値ではありません。
 
-対応エージェントでは`/goal`から目的を設定します。Codexはtoken予算、Qoderはturn数を設定でき、Claude、Codex、Qoder、Grok Buildでは保存済み状態を表示できます。CodexのネイティブUIで送った`/goal`は、Goal状態と利用者メッセージを保存するだけでなく、その目的を進める実際のturnを開始します。AntigravityとCursorは実行時に設定操作を利用できますが、永続状態表示の契約はありません。
+対応エージェントでは`/goal`から目的を設定します。Codexはtoken予算、Qoderはturn数を設定でき、Claude、Codex、Qoder、Grok Buildでは保存済み状態を表示できます。実行環境が`goalCommandAvailable: true`を返すビジュアルタスクでは、`cockpit task goal start <id> --objective "..."`または`--objective-file`から同じGoalを開始できます。CodexのネイティブUIで開始したGoalは、Goal状態と利用者メッセージを保存するだけでなく、その目的を進める実際のturnを開始します。AntigravityとCursorは実行時に設定操作を利用できますが、永続状態表示の契約はありません。CLIはGoalの停止や消去には対応しません。
 
 ## 添付、skill、外部セッション
 

@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, project names, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -18,11 +18,13 @@ Desktop places the task list, the selected task's work area, and a contextual pa
 | Work area | Shows the selected task's conversation, progress, confirmation requests, and composer |
 | Contextual panel | Shows files, diffs, the browser, App Surface, terminals, and other supporting surfaces |
 
-Overview searches across tasks, projects, and agents, including completed work. In the task list, filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each continues independently.
+Overview searches across tasks, projects, and agents, including completed work. The header's Back and Forward buttons remain available while Overview is open. Navigating to a task from that history closes Overview and opens the task. In the task list, filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each continues independently.
 
 ## Search, sort, and use menus
 
 Search inside the task list partially matches displayed task and project names. A task ID becomes searchable after at least four characters. This search does not inspect instructions, working directories, or internal metadata.
+
+The **Pinned** heading on Desktop and the PWA shows the total number of unfinished pinned tasks. When search or the agent filter narrows the list, it shows **visible / total**; without filtering, it shows the total. The total remains visible when the group is collapsed or no pinned task matches the filter.
 
 On Desktop, Command/Ctrl+K opens a search palette across projects. In addition to task names, first instruction lines, and project names, it searches app destinations such as **New task**, **Settings**, **Agent settings**, **Ask notifications**, **Hooks**, **Display**, **Remote access**, **Autorun tasks**, **History**, **Fleet list**, **Official documentation**, and **Updates**. Results include completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. With an empty query, the palette shows recent tasks and primary destinations. The default key can be changed in Shortcut settings.
 

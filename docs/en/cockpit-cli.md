@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.78.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -28,7 +28,7 @@ Exit code 7 or `Cannot reach AGI Cockpit` means the app is not reachable through
 
 ## Start and supervise tasks
 
-Use `cockpit task create` or `cockpit task run` to start work, `task get` and `task list` to inspect it, `task send` for follow-up instructions, and `task wait --since <seq>` for incremental reports. Use stdin or a file for multiline instructions rather than embedding them in a shell argument. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the full parent-child, reporting, follow-up, and completion flow.
+Use `cockpit task create` or `cockpit task run` to start work, `task get` and `task list` to inspect it, `task send` for follow-up instructions, and `task wait --since <seq>` for incremental reports. Supported agents accept `--ui-mode visual|terminal` at creation. Local `create` and `send` accept repeatable `--media` attachments. Use `retry-start` after startup failure, `resume` after a process stops, and `reconnect` for an existing visual session. Only a visual task that currently supports Goals accepts `task goal start`. Use stdin or a file for multiline instructions rather than embedding them in a shell argument. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the full parent-child, reporting, follow-up, and completion flow.
 
 Inspect pending tool approvals and questions in `task get` under `turnRequests`, then respond with `task approve`, `deny`, or `answer`. `task cancel` stops only the current turn and keeps the task; `compact` compacts its conversation. Because `task clear --confirm` discards the conversation, verify the task and preserve needed history first. `task approval-mode` reads or changes that task's approval mode. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the support matrix and procedures.
 
@@ -52,7 +52,19 @@ See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Brow
 
 `cockpit autorun` starts a new task or sends instructions to an existing task once, on an interval, or from cron. Membership is checked both when the Autorun is created and when it runs. If a saved runtime setting becomes unavailable, Cockpit disables the Autorun instead of silently choosing another runtime.
 
-`cockpit fleet` executes dependency-aware tasks as a Run. It covers YAML validation, gates, retries, resume, Run titles, and node progress. Use Autorun for simple scheduled starts and Fleet for dependent multi-step work. See [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for the practical workflow and the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for exact syntax.
+`cockpit fleet` executes dependency-aware tasks as a Run. It covers YAML validation, gates, retries, resume, Run titles, and node progress. For a completed, failed, stopped, or paused Run, use `complete-tasks --dry-run` to inspect targets before completing its remaining tasks in bulk. Use Autorun for simple scheduled starts and Fleet for dependent multi-step work. See [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for the practical workflow and the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for exact syntax.
+
+## Configure credentials and the Cockpit provider
+
+`cockpit settings` can save or remove OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys in encrypted storage. Never put a key in a command argument; use only `--stdin` or `--key-file`. Reads report presence without returning the value.
+
+```bash
+cockpit settings set agents.credential.openrouter --stdin
+cockpit settings reset agents.credential.openrouter
+cockpit settings set agents.provider.cockpit openrouter
+```
+
+Choose the Cockpit Agent provider from `openrouter`, `opencode-go`, `opencode`, or `lmstudio`. A provider that requires a key can be selected or restored as the default only after its corresponding credential is stored. These settings operate only on the local Cockpit.
 
 ## Automate reactions with Hooks
 

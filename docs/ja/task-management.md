@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.78.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -54,7 +54,7 @@ cockpit task create \
 
 既存プロジェクトを扱う場合は`--directory`を指定します。省略するとOSの一時フォルダーで始まり、完了時に作業場所が削除されることがあります。Git Worktreeを分離する場合は`--worktree`を使います。
 
-エージェント、モデル、推論レベル、アカウント、承認モード、Browser Identityはタスクごとの実行条件です。対応しない組み合わせはエラーになり、無言で別設定へ切り替わりません。特に外部サイトを扱うタスクでは、必要なログイン状態を持つBrowser Identityを明示します。
+エージェント、UIモード、モデル、推論レベル、アカウント、承認モード、Browser Identityはタスクごとの実行条件です。Claude Code、Codex、Antigravity、Cursor、Qoder、Grok Buildでは、`--ui-mode visual`または`--ui-mode terminal`で作成時の表示モードを指定できます。Cockpit AgentとTerminalはUIモードを切り替えられません。対応しない組み合わせはエラーになり、無言で別設定へ切り替わりません。特に外部サイトを扱うタスクでは、必要なログイン状態を持つBrowser Identityを明示します。
 
 `--approval-mode`には`supervised`、`accept-edits`、`full-access`を指定できます。Cockpit AgentとネイティブUIのエージェントで、そのタスクだけの既定値を上書きします。ターミナルUIとTerminalタスクは対応しません。
 
@@ -63,8 +63,12 @@ cockpit task create \
   --instruction "管理画面の公開状態を確認してください" \
   --directory /path/to/repo \
   --agent-type codex \
+  --ui-mode visual \
+  --media ./expected-screen.png \
   --browser-identity work
 ```
+
+`--media`はローカルファイルをCockpitの管理領域へコピーして最初の指示へ添付します。最大8件、1件512MB、JSONは25MB、合計1GBまでです。リモートURLと、選んだエージェントが直接受け取れないファイル種別は拒否されます。元ファイルは移動も削除もされません。
 
 ## 親子タスクを作る
 
@@ -99,9 +103,21 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 | `waiting_confirmation` | 入力待ち。`waitingReason`と`readyForNextPrompt`を確認する |
 | `completed` | プロセスが終了した状態。成果確認が終わった意味ではない |
 | `error` | 起動または実行に失敗。`errorMessage`と直近の会話を読む |
+| `startFailed: true` | エージェントの起動に失敗。同じタスクで再試行できる |
 | `needsResume: true` | プロセスが止まっているため、同じタスクを再開できる |
 
 `waitingReason`が`permission`または`question`なら、エージェント内の確認が続いています。`readyForNextPrompt`がfalseの間に別の指示を重ねません。`usage_limit`なら利用できるアカウントとリセット時刻を確認します。
+
+## 起動に失敗したタスクを再試行する
+
+`startFailed: true`のタスクは、新しいタスクを作らず`retry-start`で起動をやり直せます。既定では保存された最初の指示またはTerminalコマンドを再利用します。入力を置き換える場合だけ、新しい本文を渡します。
+
+```bash
+cockpit task retry-start <task-id>
+cockpit task retry-start <task-id> --instruction-file retry.md
+```
+
+`retry-start`は起動失敗専用です。停止済みのタスクには`resume`、既存のビジュアルセッションへ再接続する場合は`reconnect`を使います。完了済み、実行中、または起動失敗以外のタスクは再試行できません。
 
 ## 保留中の承認と質問に応答する
 
@@ -143,10 +159,12 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 タスクが次の指示を受け取れる状態なら`task send`を使います。そのターンのレポートまで必要な場合は`--wait`を付けます。
 
 ```bash
-cockpit task send <task-id> --text "失敗したテストだけ修正し、再実行してください" --wait
+cockpit task send <task-id> --text "失敗したテストだけ修正し、再実行してください" \
+  --media ./failure.png \
+  --wait
 ```
 
-複数行の指示は`--stdin`または`--text-file`で渡します。確認画面に対してEnterを送るだけなら、本文を付けず`cockpit task send <task-id>`を実行します。送信前に`waitingReason`を読み、質問への回答なのか、ツール許可なのか、通常の追加指示なのかを区別してください。
+複数行の指示は`--stdin`または`--text-file`で渡します。`task send`の`--media`にも作成時と同じ件数、サイズ、ローカルファイル、エージェント対応範囲が適用されます。確認画面に対してEnterを送るだけなら、本文を付けず`cockpit task send <task-id>`を実行します。送信前に`waitingReason`を読み、質問への回答なのか、ツール許可なのか、通常の追加指示なのかを区別してください。
 
 ## ターンと会話をCLIから管理する
 
@@ -172,6 +190,17 @@ cockpit task approval-mode <task-id> accept-edits
 
 対応しない組み合わせは終了コード1、現在の状態に合わない操作は終了コード3、Cockpitへ到達できない場合は終了コード7です。自動処理では、終了コードに加えてJSONの`code`と現在状態を確認してください。
 
+## エージェントのGoalを開始する
+
+ビジュアル実行環境が`goalCommandAvailable: true`を返すタスクでは、CLIから新しいGoalを開始できます。これは実行エージェントへ実際のターンとして送信されます。Cockpit Agent、Terminal UI、Terminalタスク、およびGoal未対応の実行環境では使えません。
+
+```bash
+cockpit task goal start <task-id> --objective "リリース確認を完了する"
+cockpit task goal start <task-id> --objective-file goal.md
+```
+
+CLIはGoalの停止や消去には対応しません。開始後は`task get`、`task wait`、通常のターン操作で状態を監督します。
+
 ## アカウントとBrowser Identityを切り替える
 
 利用上限などで続行できない場合、対応するエージェントではタスクのアカウントを切り替えられます。切り替え後、停止理由に応じて続行指示を送ります。
@@ -190,6 +219,7 @@ cockpit task browser-identity <task-id> work
 
 | 操作 | 結果 |
 | --- | --- |
+| `task retry-start` | 起動に失敗したタスクを、保存された指示またはコマンドで再試行する |
 | `task resume` | 停止したタスクを同じ履歴で再開する |
 | `task complete` | プロセスを止めて完了へ移す。CLIではWorktreeを既定で削除する |
 | `task complete --keep-worktree` | Worktreeを残して完了へ移す |

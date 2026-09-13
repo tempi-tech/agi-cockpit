@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -140,9 +140,12 @@ Use these commands for deeper inspection.
 | Current state | `cockpit fleet status <runId>` |
 | All nodes, resolved runtimes, branches, and task ids | `cockpit fleet show <runId>` |
 | Why the Run made a decision | `cockpit fleet logs <runId>` |
-| One node's report and failure reason | `cockpit fleet logs <runId> --node <nodeId>` |
+| One node's decision history | `cockpit fleet logs <runId> --node <nodeId>` |
+| Current report, status, and error for an agent or message node | `cockpit fleet output <runId> --node <nodeId>` |
 | Full command-gate log | `cockpit fleet output <runId> --node <gateId> [--attempt <n>]` |
 | The node's real task | `cockpit task get <taskId>` |
+
+When an agent node's visual execution fails, the current attempt's report, `status`, and `error` remain on the Run and are available in the Fleet panel and through `fleet output`. This command does not retain earlier agent or message attempts, and `--attempt` must match the current attempt number. Use `fleet logs` for the saved decision history.
 
 Sending Steer directly to a live node task, canceling its turn, completing it, or removing it interrupts the node and pauses the Run. Unless you intend to intervene, supervise through the Fleet panel and `fleet` commands rather than operating node tasks by hand.
 
@@ -251,6 +254,17 @@ cockpit fleet retry <runId> --node <nodeId> --set '<nodeId>.account=<profile>'
 ```
 
 Cockpit retains the 200 most recent terminal Runs. `remove` permanently deletes the event history. Save needed reports, diffs, and publication URLs first, and stop a running or paused Run before removing it.
+
+## Complete tasks left by a Run
+
+For a completed, failed, stopped, or paused Run, use the Run menu in the Fleet panel or the CLI to complete tasks that the Run created and left open. A running Run is ineligible.
+
+```bash
+cockpit fleet complete-tasks <runId> --dry-run
+cockpit fleet complete-tasks <runId>
+```
+
+Run `--dry-run` first to distinguish tasks that would complete, tasks already completed, active tasks that will be skipped, continue-session tasks reserved for an unfinished loop, and missing tasks. A shared task is processed only once. The external target of a message node is not owned by the Fleet and is not included. The operation keeps Run and task history and preserves Git Worktrees. Only a temporary-directory task loses its workspace when completed, so save needed files first.
 
 ## Determine completion
 

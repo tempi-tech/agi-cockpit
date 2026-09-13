@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -75,6 +75,8 @@ The connection is ready when the PWA header shows the target machine name and **
 | Autorun | Create, edit, enable, run now, delete, and review Autoruns |
 
 The PWA is an operating surface for checking progress and decisions from another location. Enable remote access and configure its transport and HTTPS certificate in Desktop. Not every Desktop setting or result view is available in the PWA.
+
+The PWA's light or dark appearance follows the connected Desktop's mode under **Appearance**. It stores the last synchronized mode on the device and uses it at the next launch until the connection returns. This is not a separate choice based on the device operating system theme.
 
 A message sent while a task is running enters the queue without stopping the current turn and is delivered automatically after the response. In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI, sending only `/compact` compacts the conversation context. A normal message sent during compaction is also queued. In an unsupported Native UI, `/compact` reports that it is unavailable instead of sending the text as a normal message.
 

@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.78.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -39,8 +39,12 @@ Cockpitから起動したタスクでは、CLIのエラーメッセージがア�
 ```bash
 cockpit task run --instruction "Review the change" --directory /path/to/repo
 cockpit task wait <task-id> --since <report-seq>
-cockpit task send <task-id> --text "Continue" --wait
+cockpit task send <task-id> --text "Continue" --media ./evidence.png --wait
+cockpit task retry-start <task-id>
+cockpit task goal start <task-id> --objective-file goal.md
 ```
+
+作成時の表示モードは対応エージェントで`--ui-mode visual|terminal`、作成時と追加指示のローカル添付は繰り返し指定できる`--media`で設定します。`retry-start`は起動失敗、`resume`は停止済みプロセス、`reconnect`は既存ビジュアルセッションへの再接続に使い分けます。Goal対応中のビジュアルタスクだけが`goal start`を受け付けます。
 
 `readyForNextPrompt`がfalseの確認待ちタスクへ新しい指示を重ねず、`waitingReason`を確認します。`permission`や`question`は進行中の確認、`usage_limit`はアカウント復旧、`needsResume`はプロセス再開が必要な状態です。
 
@@ -66,7 +70,19 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 `cockpit autorun`は一度、間隔、cronで新規タスクを起動するか、既存タスクへ指示を送ります。会員確認は作成時だけでなく実行時にも行われます。保存済みのランタイム設定を利用できなくなった場合、別設定へ無言で切り替えずAutorunを無効にします。
 
-`cockpit fleet`は依存関係付きの複数タスクをRunとして実行します。YAMLの検証、gate、再試行、再開、Runタイトル、各ノードの進捗を扱います。単純な定期起動にはAutorun、依存する複数処理にはFleetを使います。実践手順は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)、全構文は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
+`cockpit fleet`は依存関係付きの複数タスクをRunとして実行します。YAMLの検証、gate、再試行、再開、Runタイトル、各ノードの進捗を扱います。完了・失敗・停止・一時停止したRunでは、`complete-tasks --dry-run`で対象を確認してから残るタスクをまとめて完了できます。単純な定期起動にはAutorun、依存する複数処理にはFleetを使います。実践手順は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)、全構文は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
+
+## 認証情報とCockpitプロバイダーを設定する
+
+`cockpit settings`はOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを暗号化ストレージへ保存・削除できます。キーはコマンド引数へ書かず、`--stdin`または`--key-file`だけで渡します。取得結果は設定の有無だけを返し、値は返しません。
+
+```bash
+cockpit settings set agents.credential.openrouter --stdin
+cockpit settings reset agents.credential.openrouter
+cockpit settings set agents.provider.cockpit openrouter
+```
+
+Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`、`lmstudio`から選べます。キーを必要とするプロバイダーは、対応する認証情報が保存済みの場合だけ選択または既定値へリセットできます。これらの設定はローカルCockpitだけを対象にします。
 
 ## Hooksでイベントに反応する
 

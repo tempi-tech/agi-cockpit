@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -41,7 +41,7 @@ Models, reasoning levels, service tiers, and system prompts are displayed within
 
 Antigravity Native UI keeps the reasoning level selected for that task after a turn completes and after switching tasks. For example, the next follow-up after a `high` turn remains `high` even when the refreshed candidate list defaults to `low`. Cockpit moves to the current supported default only when the refreshed candidates no longer offer the saved level.
 
-Claude Native UI supplements runtime discovery with built-in candidates that the runtime did not return. The built-in candidates include **Claude Fable 5.1**, with `low`, `medium`, `high`, `xhigh`, and `max` reasoning levels and `high` as its default. Adding a candidate does not change the selected model of an existing task.
+Claude Native UI supplements runtime discovery with built-in candidates that the runtime did not return. The built-in candidates include **Claude Fable 5.1**, with `low`, `medium`, `high`, `xhigh`, and `max` reasoning levels and `high` as its default. The picker keeps **Default** with its resolved model label and a separate row for selecting that resolved model directly. Default follows later changes to Claude's default, while the direct row fixes the choice to that model. Adding a candidate does not change the selected model of an existing task.
 
 Codex model choices, whether built in or discovered at runtime, put newer GPT generations and versions first, then place the standard model before purpose-specific variants of the same version. This makes capability and intended use easier to compare from the top of the list instead of treating model ids alphabetically. Sorting alone never changes the currently selected valid model.
 
@@ -50,6 +50,8 @@ Codex Native UI uses the model catalog discovered from the selected account acro
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
 Cockpit Agent model IDs use `openrouter/<id>` for OpenRouter, `opencode-go/<id>` for OpenCode Go, `opencode/<id>` for OpenCode Zen, and `lmstudio/<id>` for LM Studio. OpenCode Go and OpenCode Zen are separate providers, and their **OpenCode Go API Key** and **OpenCode Zen API Key** settings are not interchangeable. Models and tasks for a provider remain unavailable until its key is configured.
+
+From the CLI, choose the Cockpit Agent provider with `cockpit settings set agents.provider.cockpit <provider>`, using `openrouter`, `opencode-go`, `opencode`, or `lmstudio`. Save an API key to encrypted storage with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`, and remove it with `settings reset agents.credential.<name>`. A provider that requires a key cannot be selected until its corresponding credential is present.
 
 Cockpit Agent applies each model's capabilities from the connected provider to new tasks in Desktop and the PWA, the task creation API, and Autoruns. A new task waits for its first model catalog before creation becomes available; if discovery does not settle, known candidates become usable after five seconds. Reasoning uses the model's advertised list first and keeps a saved value while it remains valid. Otherwise Cockpit chooses `medium`, then the first supported value, and leaves reasoning unset for a model that does not support it. The built-in model-id rules are used only when live capability metadata is unavailable.
 
@@ -102,7 +104,7 @@ Provider quota usage and limits appear only when the runtime reports current val
 
 Context usage follows a separate display contract. If Cursor Native UI does not report token usage, Cockpit estimates the current context from the locally retained conversation and prefixes the value with `~`. The maximum comes from the runtime when available, then from maintained metadata for the selected Cursor model. When neither source has a context length, the maximum is shown as unavailable and no percentage is calculated. If the retained history exceeds the model window, Cockpit caps the displayed active-context estimate at that window and leaves the meter neutral because runtime compaction or history truncation may have reduced the actual active context. These estimates are not provider quota or billing values.
 
-Supported agents use `/goal` to set an objective. Codex can apply a token budget, Qoder can apply a turn limit, and Claude, Codex, Qoder, and Grok Build expose persisted goal state. In Codex Native UI, `/goal` updates the goal state, remains in history as a user message, and starts an actual turn that works toward the objective. Antigravity and Cursor provide a runtime goal-setting operation without a persisted-state display contract.
+Supported agents use `/goal` to set an objective. Codex can apply a token budget, Qoder can apply a turn limit, and Claude, Codex, Qoder, and Grok Build expose persisted goal state. When a visual task reports `goalCommandAvailable: true`, `cockpit task goal start <id> --objective "..."` or `--objective-file` starts the same Goal. In Codex Native UI, starting a Goal updates the goal state, remains in history as a user message, and starts an actual turn that works toward the objective. Antigravity and Cursor provide a runtime goal-setting operation without a persisted-state display contract. The CLI cannot stop or clear a Goal.
 
 ## Attachments, skills, and external sessions
 

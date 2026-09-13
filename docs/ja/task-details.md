@@ -4,7 +4,7 @@
 
 選択したタスクの会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.78.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -19,7 +19,7 @@ Terminalタスクは以前のシェルプロセスを復元できないため、
 
 Visual Runtimeで同じturn failureが3回続くと、Cockpitはその会話を「セッションを再開できません」として停止し、同じsessionの無限再試行を避けます。表示された最後のエラーを確認し、`cockpit task resume <id> --fresh-session`で、保存済み会話の要約を引き継いだ新しい会話を同じタスク内に開始します。通常の`resume`で拒否済みsessionへ戻らないでください。
 
-実行中のターンはEscapeで停止できます。複数のタスクペインがある場合は、フォーカスのあるペインだけが対象です。
+実行中のターンはEscapeで停止できます。複数のタスクペインがある場合は、フォーカスのあるペインだけが対象です。中断処理が終わるとタスクは次の指示を受け取れる状態へ戻り、入力欄から続行できます。
 
 ターンの停止、タスクの完了・削除、アプリの終了では、そのタスクが起動した子孫プロセスも停止対象になります。タスクのライフサイクルから明示的に外して起動したプロセスはCockpitの回収対象にならないため、残す意図がある場合だけ分離してください。
 
@@ -94,11 +94,15 @@ CLIでは`cockpit pinned-answers list <task-id> --all`で回答IDを取得し、
 
 新しいタスクを開始できなかった場合、DesktopとPWAは入力した指示を破棄せず、タスクを`error`として残します。エラーカードで原因を確認し、保存済みの指示またはTerminalコマンドを編集して「もう一度実行」を選べます。原因や入力を直してから再試行してください。起動に失敗した指示はまだ実行されていません。
 
+CLIでは`cockpit task retry-start <id>`で保存済みの指示またはTerminalコマンドを再利用します。入力を変える場合は`--instruction`、`--instruction-file`、`--stdin`で置き換えます。このコマンドは起動失敗専用で、停止済みタスクの`resume`や既存ビジュアルセッションの`reconnect`とは別です。
+
 Claude、Codex、Antigravity、Cursor、Grok Buildで、404、5xx、gateway timeoutなどサービス障害の可能性があるエラーを検出すると、エラー表示から各プロバイダーの稼働状況ページを直接開けます。認証、利用上限、クォータ、レート制限、請求に関するエラーではこのリンクを表示しないため、画面の再ログイン、アカウント切り替え、待機などの案内に従います。
 
 メッセージのコピーボタンは、表示本文とエラー詳細をまとめてコピーします。診断情報にはローカルのファイルパス、セッションログ、アカウント情報が含まれる場合があるため、外部へ共有する前に確認してください。
 
 複数のツール実行が一つのグループにまとまっている場合、一部だけが失敗すると見出しに失敗件数が表示されます。成功した項目があっても、失敗した操作とその影響を確認します。
+
+CodexのビジュアルタスクでMCPサーバーがツール確認を求めると、DesktopとPWAはサーバー、ツール、対象を示し、一回だけ許可するか拒否できます。MCPの入力要求が対応するschemaなら、テキスト、数値、単一選択、複数選択のフォームを表示します。未対応schemaは安全側で辞退します。CLIでは`task get`の`turnRequests`を確認し、承認は`task approve`または`task deny`、フォームは`task answer`で処理します。MCPの許可は`--scope always`を指定しても一回限りです。
 
 ## ファイルを確認・編集する
 
@@ -109,6 +113,8 @@ Claude、Codex、Antigravity、Cursor、Grok Buildで、404、5xx、gateway time
 ## ファイルを添付する
 
 DesktopとPWAでは、画像、テキスト、ソースコード、JSON、CSV、PDF、音声、動画、Office文書を添付できます。対応形式をエージェントへ直接渡せない場合は、ローカルパスと名前、MIME、サイズのmetadataを渡します。
+
+CLIでは`task create`と`task send`へ`--media <path>`を繰り返し指定できます。ローカルファイルをGUIと同じ管理領域へコピーし、元ファイルは移動も削除もしません。`--host`によるリモート添付には対応しません。
 
 AntigravityのネイティブUIへ画像を送る場合、作業場所内の画像はそのまま使い、作業場所外の画像は`.agi-cockpit-attachments`配下のGitから除外されたセッション別ディレクトリへ一時コピーします。これにより`supervised`でも画像を読み取れます。一時コピーはセッション停止、CLI終了、アプリ終了時に削除され、残った古いディレクトリも同じ作業場所で次のセッションを始めるときに整理されます。作業場所へ書き込めない場合や、この一時ディレクトリが実ディレクトリでない場合は、画像を送らずエラーを表示します。
 
@@ -123,8 +129,9 @@ AntigravityのネイティブUIへ画像を送る場合、作業場所内の画�
 ```bash
 cockpit task get <id>
 cockpit task account <id> auto
+cockpit task retry-start <id>
 cockpit task resume <id> --fresh-session
-cockpit task send <id> --text "追加指示" --wait
+cockpit task send <id> --text "追加指示" --media ./evidence.png --wait
 cat follow-up.md | cockpit task send <id> --stdin --wait
 cockpit task send <id> --text-file follow-up.md --wait
 cockpit task wait <id> --since <seq>

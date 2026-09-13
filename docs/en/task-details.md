@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.78.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -19,7 +19,7 @@ A Terminal task cannot restore its previous shell process, so resume starts a ne
 
 After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
 
-Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus.
+Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus. After interruption settles, the task returns to a state that can accept the next instruction and the composer can continue.
 
 Stopping a turn, completing or removing a task, or quitting the app also stops descendant processes launched by that task. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
 
@@ -94,11 +94,15 @@ Select **Find in content**, or press Cmd+F on macOS / Ctrl+F on Windows and Linu
 
 If a new task cannot start, Desktop and the PWA keep the task in `error` instead of discarding its instruction. The error card shows the cause, lets you edit the saved prompt or Terminal command, and provides **Run again**. Correct the cause or input before retrying; the failed start has not run the instruction.
 
+From the CLI, `cockpit task retry-start <id>` reuses the saved instruction or Terminal command. To replace the input, pass `--instruction`, `--instruction-file`, or `--stdin`. This command is only for startup failure; it is distinct from `resume` for a stopped task and `reconnect` for an existing visual session.
+
 When Claude, Codex, Antigravity, Cursor, or Grok Build reports an error that may indicate a service incident, such as a 404, 5xx response, or gateway timeout, the error surface links directly to that provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors; follow the on-screen sign-in, account-switching, or wait guidance instead.
 
 A message's copy button includes the visible body and error details. Diagnostics may contain local file paths, session logs, or account information, so inspect the copied content before sharing it externally.
 
 When several tool runs are grouped and only some fail, the heading shows the failed count. Do not treat the successful entries as proof that the whole group succeeded; inspect each failed operation and its effect.
+
+When an MCP server asks for tool confirmation in a Codex visual task, Desktop and the PWA identify the server, tool, and target and offer one-time allow or deny. A supported MCP input schema becomes a text, number, single-choice, or multi-choice form. Cockpit declines unsupported schemas. From the CLI, inspect `turnRequests` in `task get`, use `task approve` or `task deny` for approval, and use `task answer` for a form. MCP approval remains one-time even when `--scope always` is supplied.
 
 ## Review and edit files
 
@@ -109,6 +113,8 @@ See [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-t
 ## Attach files
 
 Desktop and PWA can attach images, text, source code, JSON, CSV, PDFs, audio, video, and Office documents. When a selected agent cannot receive the format directly, Cockpit provides its local path and metadata for name, MIME type, and size.
+
+From the CLI, pass repeatable `--media <path>` options to `task create` and `task send`. Cockpit copies local files into the same managed area used by the GUI and neither moves nor deletes the source. Remote attachment delivery through `--host` is unsupported.
 
 For an image sent to Antigravity Native UI, Cockpit uses an image already inside the workspace in place. It temporarily copies an external image into a per-session, Git-ignored directory under `.agi-cockpit-attachments` in the workspace. This makes it readable in `supervised` mode. Cockpit removes the temporary copy when the session, CLI, or app stops, and sweeps old leftover directories when another session starts in that workspace. If the workspace is not writable or the staging location is not a real directory, Cockpit reports an error without sending the image.
 
@@ -123,8 +129,9 @@ An attachment's name and content are not automatically trusted instructions. Sta
 ```bash
 cockpit task get <id>
 cockpit task account <id> auto
+cockpit task retry-start <id>
 cockpit task resume <id> --fresh-session
-cockpit task send <id> --text "Follow-up" --wait
+cockpit task send <id> --text "Follow-up" --media ./evidence.png --wait
 cat follow-up.md | cockpit task send <id> --stdin --wait
 cockpit task send <id> --text-file follow-up.md --wait
 cockpit task wait <id> --since <seq>

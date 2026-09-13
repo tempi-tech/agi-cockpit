@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -140,9 +140,12 @@ CLIで詳しく確認する場合は次を使います。
 | 現在状態 | `cockpit fleet status <runId>` |
 | 全ノード、解決済みランタイム、branch、task ID | `cockpit fleet show <runId>` |
 | Runの判断経緯 | `cockpit fleet logs <runId>` |
-| 一つのノードのレポートと失敗理由 | `cockpit fleet logs <runId> --node <nodeId>` |
+| 一つのノードの判断経緯 | `cockpit fleet logs <runId> --node <nodeId>` |
+| agent / messageノードの現在のレポート、状態、失敗理由 | `cockpit fleet output <runId> --node <nodeId>` |
 | command gateの全量ログ | `cockpit fleet output <runId> --node <gateId> [--attempt <n>]` |
 | ノードの実タスク | `cockpit task get <taskId>` |
+
+agentノードのビジュアル実行が失敗した場合も、現在の試行のレポート、`status`、`error`はRunへ残り、Fleetパネルと`fleet output`から確認できます。agent / messageノードの以前の試行はこのコマンドに保持されず、`--attempt`は現在の試行番号だけを受け付けます。履歴上の判断経緯は`fleet logs`で確認します。
 
 実行中ノードのタスクへ直接Steerを送る、turnをキャンセルする、タスクを完了・削除する操作は、そのノードを中断してRunを一時停止させます。意図的に割り込む場合を除き、ノードタスクではなくFleetパネルと`fleet`コマンドから監督します。
 
@@ -251,6 +254,17 @@ cockpit fleet retry <runId> --node <nodeId> --set '<nodeId>.account=<profile>'
 ```
 
 Cockpitは直近200件の終端Runを保持します。`remove`はイベント履歴を恒久的に削除するため、必要なレポート、差分、公開URLを保存し、実行中または一時停止中なら先に`stop`してから行います。
+
+## Runに残るタスクをまとめて完了する
+
+完了、失敗、停止、一時停止したRunでは、FleetパネルのRunメニューまたはCLIから、Runが作成して未完了のまま残したタスクをまとめて完了できます。実行中のRunは対象外です。
+
+```bash
+cockpit fleet complete-tasks <runId> --dry-run
+cockpit fleet complete-tasks <runId>
+```
+
+最初に`--dry-run`で、完了対象、完了済み、処理中のためスキップ、未完了loopが再利用するためスキップ、見つからないタスクを確認します。共有される同じタスクは一度だけ処理され、messageノードの外部タスクはFleetの所有物ではないため対象になりません。実行後もRunとタスクの履歴、およびGit Worktreeは保持されます。一時フォルダのタスクだけは完了時に作業場所が削除されるため、必要なファイルを先に保存してください。
 
 ## 完了を判定する
 

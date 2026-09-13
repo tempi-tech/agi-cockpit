@@ -4,7 +4,7 @@
 
 ブラウザーのログイン状態をIdentityごとに分離し、タスクとAutorunへ割り当て、取込・消去・削除する方法です。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
+> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
 
 Browser Identityは、アプリ内ブラウザーのログイン状態とサイトデータを分けるローカルの永続領域です。仕事、顧客、検証条件ごとにIdentityを分けると、同じサイトへ異なるアカウントで安全に接続できます。
 
@@ -81,6 +81,8 @@ cockpit browser import-session --browser-identity work --browser brave --profile
 Chromium系では選択中タブのregistrable domainに属するCookieと、その正確なoriginのlocalStorageを取り込みます。ブラウザーごとに別の「Safe Storage」Keychain項目を使うため、そのブラウザーから初めて対象データを取り込むときはmacOSの許可が表示される場合があります。FirefoxはCookieだけを取り込み、Keychainへアクセスしません。localStorageが非対応であることは結果に表示されます。
 
 sessionStorage、IndexedDB、extension状態、device-bound認証、passkey自体は取り込みません。siteがログイン状態にならない場合は、そのIdentityのアプリ内ブラウザーで一度ログインしてください。`import-cookies`は互換性用でCookieだけを取り込むため、通常は`import-session`を使います。この取込はmacOSだけに対応します。
+
+取り込みは取込元ブラウザーにあるセッションのコピーであり、別アカウントへ新しくサインインする操作ではありません。取込元のアカウントを先に確認してください。取込後に取込元ブラウザーでログアウトすると、サイト側のセッション無効化によりCockpit側のコピーも使えなくなる場合があります。
 
 ## データを消去・Identityを削除する
 
