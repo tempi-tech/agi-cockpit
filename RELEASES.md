@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.79.0 — 2026-09-14
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added completing a Fleet Run’s remaining tasks together from its menu and the CLI.
 - Added selecting a task’s UI mode through the CLI.
