@@ -42,6 +42,8 @@ The CLI can also decide pending tool approvals. Inspect `turnRequests` with `coc
 
 `cockpit task clear <id> --confirm` discards the conversation and hides its original instruction in all open desktop and mobile views. Drafts in other views are preserved. Clearing and compacting refuse a turn that is running or waiting for an approval or question. `task cancel` stops the current turn while keeping the task. Verify the exact task and preserve needed history before clearing it.
 
+MCP tool confirmations in visual tasks always grant one-time approval, including when the CLI receives `--scope always`. MCP forms are runtime questions: answer them with `task answer`, or decline them in the desktop or PWA question card. `task deny` only selects approvals.
+
 ## Run Cockpit Hooks safely
 
 Cockpit Hooks automatically run a registered shell action with the user's local permissions. They are separate from an agent's approval mode and do not sandbox the hook action. Register only scripts that you understand and control, then test them explicitly with `cockpit hooks test` before enabling them. `cockpit hooks` accepts `--host` for remote registration and execution. A paired bearer token is required, with a verified Tailscale peer or loopback connection additionally required in Tailscale-only mode. Peer trust alone is insufficient. Protect this token as control of the target instance: it authorizes registering and running arbitrary shell code with that computer’s user permissions. Script paths refer to the target computer.
@@ -60,6 +62,8 @@ Antigravity `accounts logout` previews every target and shared impact without `-
 
 Switching an active Claude, Codex, Grok Build, Antigravity, Cursor, or Qoder task copies its saved conversation into the selected account profile. When different target history would be replaced, Cockpit archives it first. Use separate tasks instead when policy requires conversation content never to cross profile boundaries.
 
+The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files.
+
 ## Isolate Browser Identities
 
 Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task and Autorun can each be assigned one Identity; the Default Identity is used when none is selected.
@@ -71,6 +75,8 @@ On macOS, source selection also supports Brave, Edge, Arc, Vivaldi, Opera, and F
 Clearing an Identity closes its sessions. Removing it also deletes persistent data. An Identity referenced by a running task or Autorun cannot be removed without a replacement, and the Default Identity cannot be removed.
 
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for assignment and removal procedures.
+
+Importing a browser sign-in copies the source browser’s session; it does not sign in with a different account. Check the source account before importing it into an Identity.
 
 ## Handle attachments and Ask media
 
@@ -85,6 +91,8 @@ When the relay option to attach files posted in Discord or Slack is enabled, Coc
 File names and content are not trusted instructions. Chat opens only safe formats within the managed area and does not directly launch executables, unmanaged paths, remote `file` URLs, or data URLs that could contain executable content. Remove personal information, local paths, tokens, and session data before external sharing.
 
 Fleet command gates save complete stdout and stderr per attempt under the Run's `fleet-runs/<runId>/gates/` directory, retaining only the head and tail when a log exceeds 20 MB. Output may contain tokens, local paths, test fixtures, or personal data. Inspect it before sharing from the Fleet panel or `cockpit fleet output`. Before removing an unneeded terminal Run, preserve only the diagnostic evidence that is still required in a safe location.
+
+Local `task create` and `task send` can attach files through repeatable `--media` arguments, using the same managed upload store and limits as the GUI. The source files are copied, never moved or deleted; the attachments can be sent to the selected agent provider. Remote `--host` delivery is not supported.
 
 ## Protect Remote Access
 
@@ -109,3 +117,5 @@ See [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for at
 Completing a temporary-directory task deletes its workspace. Completing a Git Worktree task in Desktop preserves its Worktree, while CLI `task complete` removes it by default. Deleting tasks, bulk-deleting a Fleet Run and its tasks, or removing an Identity can destroy history and local data.
 
 Before deletion, confirm the target ID, path, Git state, required artifacts, and recovery method. Obtain user approval immediately before publication, external transmission, purchase, or permission changes.
+
+The Fleet Run menu and `cockpit fleet complete-tasks <runId>` complete remaining tasks in a completed, failed, stopped, or paused Run. Running Runs are refused; active tasks and sessions an unfinished loop will reuse are skipped. Use `--dry-run` to preview the targets. This keeps the Run and task history, and preserves Git Worktrees, but completing temporary-directory tasks deletes their workspaces. Preserve needed files first.

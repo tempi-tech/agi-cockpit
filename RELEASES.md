@@ -4,6 +4,49 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.79.0 — 2026-09-14
+
+**Type:** minor · **Platforms:** macOS
+
+- Added completing a Fleet Run’s remaining tasks together from its menu and the CLI.
+- Added selecting a task’s UI mode through the CLI.
+- Added file attachments when creating tasks or sending follow-up messages through the CLI.
+- Added retrying tasks that failed to start through the CLI.
+- Added starting agent goals through the CLI.
+- Added securely saving and removing API keys through the CLI.
+- Added switching the Cockpit agent’s provider through the CLI.
+- Added MCP tool confirmations and input forms in visual tasks.
+- Changed the mobile interface to follow the desktop’s light or dark appearance setting.
+- Added task counts and filter status to the Pinned heading.
+- Fixed header navigation buttons while the Overview is open.
+- Fixed selecting the model used by Claude’s default from the model list.
+- Improved responsiveness while completing or deleting tasks.
+- Fixed preserving failed visual turns in Fleet task reports.
+- Fixed interrupted tasks failing to become ready for the next instruction.
+- Improved the browser sign-in import explanation to state that it copies the source browser’s session.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Fleet Runに残るタスクをメニューとCLIからまとめて完了できるようになりました
+- CLIからタスクの表示モードを指定できるようになりました
+- CLIからタスクの作成時や追加メッセージにファイルを添付できるようになりました
+- CLIから起動に失敗したタスクを再試行できるようになりました
+- CLIからエージェントのゴールを開始できるようになりました
+- CLIからAPIキーを安全に保存・削除できるようになりました
+- CLIからCockpitエージェントのプロバイダーを切り替えられるようになりました
+- ビジュアルタスクでMCPのツール確認と入力フォームに対応しました
+- モバイル画面がデスクトップのライト・ダーク設定に追従するようになりました
+- ピン留め欄にタスク数とフィルター適用状況を表示するようになりました
+- 概要画面を開いているときもヘッダーの移動ボタンを操作できるように修正しました
+- Claudeの既定モデルとして使われるモデルも一覧から選べるように修正しました
+- タスクの完了・削除時に画面が応答しにくくなる問題を改善しました
+- Fleetのタスク報告にビジュアル実行の失敗内容が残るように修正しました
+- 処理を中断したタスクが次の指示を受け付けられる状態に戻らない問題を修正しました
+- ブラウザーのサインイン取り込みが取込元のセッションのコピーであることを明示しました
+
+</details>
+
 ## v4.78.0 — 2026-09-13
 
 **Type:** minor · **Platforms:** macOS, Linux

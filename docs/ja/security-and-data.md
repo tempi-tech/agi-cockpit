@@ -42,6 +42,8 @@ CLIからも保留中のツール承認を操作できます。`task approve`や
 
 `cockpit task clear <id> --confirm`は会話を破棄し、開いているすべてのデスクトップ・モバイル画面で最初の指示を非表示にします。ほかの画面で入力中の下書きは保持します。実行中、承認待ち、質問への回答待ちのターンは、会話のリセットも圧縮も拒否します。`task cancel`はタスクを残して現在のターンを中断します。リセット前に対象タスクを確認し、必要な履歴を保存してください。
 
+ビジュアルタスクのMCPツール確認は一回限りの承認です。CLIで`--scope always`を指定しても一回限りになります。MCPフォームは実行環境の質問として`task answer`で回答するか、デスクトップ・PWAの質問カードで辞退します。`task deny`の対象は承認だけです。
+
 ## Cockpit Hooksを安全に実行する
 
 Cockpit Hooksは、登録したシェルアクションを利用者のローカル権限で自動実行します。エージェントの承認モードとは別の仕組みであり、Hookのアクションをsandboxへ制限しません。内容を理解し管理しているスクリプトだけを登録し、`cockpit hooks test`で明示的に試してから有効にしてください。`cockpit hooks`は`--host`によるリモートでの登録・実行に対応します。ペアリング済みのBearer tokenが必須で、Tailscale限定モードでは検証済みpeerまたはloopback接続も必要です。peerの信頼だけでは操作できません。このtokenは接続先インスタンスを操作し、その利用者の権限で任意のシェルコードを登録・実行できるため、厳重に管理してください。スクリプトのパスは接続先のパスです。
@@ -60,6 +62,8 @@ Antigravityの`accounts logout`は、`--confirm`なしで消去対象と共有�
 
 実行中のClaude、Codex、Grok Build、Antigravity、Cursor、Qoderタスクでアカウントを切り替えると、保存済み会話が選択先のアカウントプロファイルへコピーされます。切り替え先の異なる履歴を置き換える場合は先にアーカイブします。ポリシー上、会話内容をプロファイル間で移してはならない場合は、アカウント切り替えではなく別タスクを使ってください。
 
+CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`でOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを保存できます。キーをコマンド引数やタスクのメッセージへ直接書かないでください。読み取り結果は設定の有無だけです。`settings reset agents.credential.<name>`は設定画面と共通の暗号化ストレージから対象キーを削除します。これらはローカル操作です。CLIへのアクセスはプロバイダーの認証情報を置換・削除できる権限として管理してください。CLIのリクエスト本文は一時ファイルを作らずに渡します。
+
 ## Browser Identityを分離する
 
 Browser IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証、ブラウザーセッションが永続領域へ保存されます。タスクとAutorunは一つのIdentityを割り当てられ、指定しない場合はDefault Identityを使います。
@@ -71,6 +75,8 @@ macOSではBrave、Edge、Arc、Vivaldi、Opera、Firefoxも取込元に選べ�
 Identityのデータ消去はそのIdentityのセッションを閉じます。削除は永続データも削除します。実行中タスクやAutorunから参照されるIdentityは、置換先を指定しない限り削除できません。Default Identityは削除できません。
 
 割り当てと削除の手順は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
+
+ブラウザーのサインインの取り込みは、取込元ブラウザーのセッションのコピーです。別アカウントへのサインインではありません。Identityへ取り込む前に取込元のアカウントを確認してください。
 
 ## 添付とAskメディアを扱う
 
@@ -85,6 +91,8 @@ Ask転送で、DiscordまたはSlackへ投稿したファイルを回答に添�
 ファイル名と内容は信頼済みの指示ではありません。チャットから開けるのは管理領域内の安全な形式だけで、実行形式、管理外パス、リモート`file` URL、実行可能な内容を含み得るdata URLは直接起動しません。外部共有前に個人情報、ローカルパス、token、セッション情報を確認してください。
 
 Fleetのcommand gateはstdout / stderr全量をRunの`fleet-runs/<runId>/gates/`へ試行ごとに保存し、20 MBを超える場合は先頭と末尾だけを残します。出力にはtoken、local path、テストfixture、個人情報が含まれ得ます。Fleetパネルまたは`cockpit fleet output`で外部共有する前に確認し、不要な終端Runを削除する前には必要な診断証拠だけを安全な場所へ保存してください。
+
+ローカルの`task create`と`task send`は、繰り返し指定できる`--media`でファイルを添付できます。GUIと同じ管理領域と容量制限を使い、元ファイルはコピーするだけで移動・削除しません。添付は選択したエージェントのプロバイダーへ送られる場合があります。`--host`によるリモート送信には対応しません。
 
 ## Remote Accessを保護する
 
@@ -109,3 +117,5 @@ Cockpitは対象のアプリを起動、終了、インストールしません�
 一時フォルダのタスクは完了時に作業場所が削除されます。DesktopでGit Worktreeのタスクを完了するとWorktreeを維持しますが、CLIの`task complete`は既定で削除します。タスク削除、Fleet Runと関連タスクの一括削除、Identity削除は、履歴とローカルデータを失う可能性があります。
 
 削除前に、対象ID、パス、Git状態、必要な成果、復旧方法を確認します。公開、外部送信、購入、権限変更などは、実行直前に利用者の承認を得てください。
+
+Fleet Runのメニューと`cockpit fleet complete-tasks <runId>`で、完了・失敗・停止・一時停止中のRunに残るタスクを一括完了できます。実行中のRunは拒否し、処理中のタスクや未完了のループが再利用するセッションは対象外です。`--dry-run`で対象を事前確認できます。Runとタスクの履歴は保持しますが、Git Worktreeは保持します。一時フォルダのタスクは完了時に作業場所が削除されます。必要なファイルを先に保存してください。
