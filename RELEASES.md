@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.80.0 — 2026-09-15
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added readable Ask answer cards showing questions and selected answers.
 - Added copying the prompt after a task fails to start.
