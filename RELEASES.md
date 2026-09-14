@@ -11,7 +11,7 @@ English is the primary language for these generated release notes. Download the 
 - Added readable Ask answer cards showing questions and selected answers.
 - Added copying the prompt after a task fails to start.
 - Changed the Usage screen and CLI to list agents set up on this machine.
-- Simplified OpenRouter credit information to show the remaining balance.
+- Changed OpenRouter credit information to show only the remaining balance.
 - Fixed chats remaining in the running state after a visual task turn ends.
 - Fixed task notices covering the conversation.
 - Fixed skill chip backgrounds in mobile light mode.
