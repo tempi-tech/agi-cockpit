@@ -4,6 +4,33 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.80.0 — 2026-09-15
+
+**Type:** minor · **Platforms:** macOS
+
+- Added readable Ask answer cards showing questions and selected answers.
+- Added copying the prompt after a task fails to start.
+- Changed the Usage screen and CLI to list agents set up on this machine.
+- Simplified OpenRouter credit information to show the remaining balance.
+- Fixed chats remaining in the running state after a visual task turn ends.
+- Fixed task notices covering the conversation.
+- Fixed skill chip backgrounds in mobile light mode.
+- Fixed the new task heading to reflect the selected workspace location.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Askへの回答を、質問や選択内容がわかるカードで表示するようになりました
+- タスクの起動に失敗したとき、入力したプロンプトをコピーできるようになりました
+- 使用量画面とCLIで、この端末にセットアップ済みのエージェントを表示するようになりました
+- OpenRouterのクレジット表示を残高に統一しました
+- ビジュアルタスクの終了後もチャットが実行中の表示になる問題を修正しました
+- タスクの通知が会話に重なる問題を修正しました
+- モバイルのライトモードでスキル表示の背景が正しく表示されない問題を修正しました
+- 新規タスク画面の見出しに、選択した作業場所が正しく反映されるように修正しました
+
+</details>
+
 ## v4.79.0 — 2026-09-14
 
 **Type:** minor · **Platforms:** macOS, Linux
