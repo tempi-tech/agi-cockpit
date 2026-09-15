@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.81.0 — 2026-09-16
+
+**Type:** minor · **Platforms:** macOS
+
+- View usage for the selected agent and account before creating a task.
+- Schedule a downloaded update to install after running tasks finish.
+- Rename tasks from the mobile task list.
+- Remote Access now automatically renews HTTPS certificates as expiration approaches.
+- Search Google from the in-app browser address bar.
+- Check the status of a parent task and its children together through the CLI.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 新規タスク画面で、選択したエージェントとアカウントの使用量を確認できるようになりました
+- タスクの実行が終わってから、ダウンロード済みの更新をインストールする予約ができるようになりました
+- モバイルのタスク一覧からタスク名を変更できるようになりました
+- Remote AccessのHTTPS証明書を期限が近づくと自動更新するようになりました
+- アプリ内ブラウザのアドレスバーからGoogle検索できるようになりました
+- CLIで親タスクと子タスクの状態をまとめて確認できるようになりました
+
+</details>
+
 ## v4.80.0 — 2026-09-15
 
 **Type:** minor · **Platforms:** macOS, Linux
