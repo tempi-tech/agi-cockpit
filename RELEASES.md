@@ -8,12 +8,12 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- View usage for the selected agent and account before creating a task.
-- Schedule a downloaded update to install after running tasks finish.
-- Rename tasks from the mobile task list.
-- Remote Access now automatically renews HTTPS certificates as expiration approaches.
-- Search Google from the in-app browser address bar.
-- Check the status of a parent task and its children together through the CLI.
+- Added usage information for the selected agent and account on new-task screens.
+- Added scheduling for downloaded updates to install after running tasks finish.
+- Added task renaming from the mobile task list.
+- Added automatic renewal of Remote Access HTTPS certificates as expiration approaches.
+- Added Google search from the in-app browser address bar.
+- Added combined status queries for parent and child tasks through the CLI.
 
 <details>
 <summary>日本語のリリースノート</summary>
