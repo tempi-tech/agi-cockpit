@@ -4,7 +4,7 @@
 
 Windows、macOS、LinuxでAGI Cockpitの更新を確認・適用し、失敗した場合に更新状態と診断ログを確認する手順です。
 
-> AGI Cockpit 4.72.0で2026-09-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/updates)
+> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/updates)
 
 AGI Cockpitの更新方法は配布形式によって異なります。この手順では、現在の環境に合う更新方法を確認し、更新後の状態を確かめます。
 
@@ -33,6 +33,15 @@ cockpit update install --confirm
 ```
 
 `cockpit update install --confirm`が成功するとAGI Cockpitが再起動し、実行中のすべてのタスクが終了します。
+
+macOSパッケージ版では、ダウンロード済みの更新に「停止後に更新」を選ぶと、実行中のタスクとFleet Runがなくなった時点でインストールを開始できます。CLIでは次を使います。
+
+```bash
+cockpit update install-when-idle
+cockpit update cancel-install-when-idle
+```
+
+予約は現在のアプリセッションだけに保持され、AGI Cockpitを再起動すると解除されます。タスクまたはFleet Runがすでに実行中でなければ、予約後すぐにインストールへ進む場合があります。確認待ち、Ask待ち、または一時停止中のFleet Runは開始を妨げません。インストールが始まると、待機中を含むすべてのタスクが終了します。実行中件数と予約状態は`cockpit update status`の`scheduledInstall`で確認し、開始前なら画面または`cancel-install-when-idle`で取り消せます。この予約は自動インストールに対応するmacOSパッケージ版だけで利用できます。
 
 Linuxでは「手動で更新」または更新通知から表示言語に合うダウンロードページを開き、現在のCPUアーキテクチャに合うAppImageまたは`.deb`へ更新します。WindowsではMicrosoft StoreのライブラリからAGI Cockpitを更新します。
 

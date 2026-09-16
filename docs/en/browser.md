@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -23,6 +23,8 @@ A parked tab can receive input while hidden without showing a separate window or
 While a Cockpit overlay such as a dialog intersects the browser area, Cockpit temporarily parks the canonical page and displays its latest static snapshot instead of a blank surface. The snapshot is not interactive and does not reflect later page updates. Closing the overlay restores the same live page with its form and page state intact. Only when a snapshot cannot be captured promptly does Cockpit show a temporarily-hidden message instead.
 
 ## Open a page
+
+In the Desktop in-app browser, enter keywords in **Search or enter URL** to open a Google search. Domain names and IP addresses open as URLs; Cockpit supplies HTTP for `localhost`, `127.x.x.x`, and `[::1]`, and HTTPS for other hosts. An explicit scheme such as `https:`, `file:`, or `about:` is preserved. Ordinary text containing whitespace is treated as a search query even when it starts with a scheme-like prefix. This address-bar resolution applies only to the on-screen field; pass a URL to CLI `open` and `goto`.
 
 ```bash
 cockpit browser open https://example.com --json

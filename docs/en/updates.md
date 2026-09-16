@@ -4,7 +4,7 @@
 
 Check and apply AGI Cockpit updates on Windows, macOS, or Linux, then inspect update state and diagnostic logs if an update fails.
 
-> Verified with AGI Cockpit 4.72.0 on 2026-09-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
 
 The update method depends on how AGI Cockpit is distributed. This guide identifies the method for your environment and verifies the result after updating.
 
@@ -33,6 +33,15 @@ cockpit update install --confirm
 ```
 
 A successful `cockpit update install --confirm` restarts AGI Cockpit and terminates every running task.
+
+On a packaged macOS build with a downloaded update, select **Install when idle** to start installation after no task or Fleet Run is running. The CLI equivalents are:
+
+```bash
+cockpit update install-when-idle
+cockpit update cancel-install-when-idle
+```
+
+The schedule exists only for the current app session and is cleared by an AGI Cockpit restart. If no task or Fleet Run is already running, installation can begin immediately after arming. A task awaiting input or an Ask, and a paused Fleet Run, do not block it. When installation begins, every task ends, including waiting tasks. Inspect the count and armed state under `scheduledInstall` in `cockpit update status`; cancel it on screen or with `cancel-install-when-idle` before installation starts. This schedule is available only on packaged macOS builds that support automatic installation.
 
 On Linux, open the language-matched download page from **Update manually** or the update notice, then replace the AppImage or `.deb` with the package for the current CPU architecture. On Windows, update AGI Cockpit from the Microsoft Store library.
 

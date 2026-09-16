@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, project names, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -28,7 +28,7 @@ The **Pinned** heading on Desktop and the PWA shows the total number of unfinish
 
 On Desktop, Command/Ctrl+K opens a search palette across projects. In addition to task names, first instruction lines, and project names, it searches app destinations such as **New task**, **Settings**, **Agent settings**, **Ask notifications**, **Hooks**, **Display**, **Remote access**, **Autorun tasks**, **History**, **Fleet list**, **Official documentation**, and **Updates**. Results include completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. With an empty query, the palette shows recent tasks and primary destinations. The default key can be changed in Shortcut settings.
 
-The **…** menu on a task row or child-task entry supports rename, pin or unpin, complete, copy task ID, and delete. A child can also be detached from its parent. Enter confirms an inline rename, Escape cancels it, an empty name is not saved, and the limit is 50 characters.
+The **…** menu on Desktop task rows and child-task entries, and on PWA task rows, supports rename, pin or unpin, complete, copy task ID, and delete. A long press on a PWA task row opens the same menu. A child can also be detached from its parent. Confirm a name with Enter or **Save**, and cancel with Escape or **Cancel**. An empty name is not saved, and the limit is 50 characters. While the PWA list refreshes, an open rename dialog keeps its draft.
 
 The project-heading menu can complete that project's unfinished tasks or delete all of its tasks in one operation. Running tasks and Fleet tasks awaiting confirmation are excluded from bulk completion by default and must be explicitly included. Bulk deletion removes every task in the project, including running tasks, not only completed ones. The confirmation names how many running tasks will be stopped and how many associated Fleet runs will be stopped if they are active. This cannot be undone.
 

@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -97,6 +97,8 @@ Local `task create` and `task send` can attach files through repeatable `--media
 ## Protect Remote Access
 
 The recommended configuration is Tailscale-only access over HTTPS. Cockpit authenticates devices with Tailscale device information and a six-digit pairing code, with expiration and failure limits. It does not silently downgrade to HTTP when an HTTPS certificate cannot be obtained.
+
+Only while HTTPS Remote Access is running, Cockpit checks the certificate at startup and every 24 hours and renews it through Tailscale when 30 days or less remain. Existing connections stay open, and the renewed certificate applies to new connections. Failure retries after six hours and produces a reason-specific warning when expiry is within 14 days or has passed. Renewal history does not store certificate contents, private keys, command output, or personal account details.
 
 Remote CLI control also requires the paired bearer token. In Tailscale-only mode, the target additionally verifies the Tailscale peer or loopback connection; peer trust alone does not authorize a command. Protect the token as control of the target Cockpit. Remote file paths refer to the target computer, and the transport does not fall back to local file IPC.
 

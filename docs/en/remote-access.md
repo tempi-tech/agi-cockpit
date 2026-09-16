@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -54,6 +54,12 @@ Tailscale-only mode rejects connections that do not come through Tailscale. Tail
 You can also open the [Tailscale DNS settings](https://login.tailscale.com/admin/dns) directly. If you cannot change them, ask an Owner, Admin, or Network admin of the target tailnet.
 
 Enabling Tailscale HTTPS records the device name and tailnet DNS name from the certificate in the public Certificate Transparency log. Rename a device before requesting its certificate if its name contains sensitive information. See [Tailscale's HTTPS documentation](https://tailscale.com/docs/how-to/set-up-https-certificates) for details.
+
+### Automatic certificate renewal
+
+Starting HTTPS Remote Access checks the certificate, and a running server checks again every 24 hours. Waking from sleep runs an overdue check. Cockpit automatically renews a certificate with 30 days or less remaining, including an expired certificate, through Tailscale and applies it to the live TLS server. Existing connections remain open; new connections use the renewed certificate. Cockpit does not override Tailscale's reissuance timing.
+
+A failed automatic renewal retries after six hours. When failure occurs with 14 days or less remaining, including after expiry, Cockpit shows an actionable warning with the reason and a **Renew** action at most once per 24 hours. Successful automatic renewals are silent. Stopping Remote Access also stops scheduled checks.
 
 ### 3. Turn on HTTPS and open the PWA
 
@@ -141,6 +147,8 @@ cockpit remote-access enable
 ```
 
 `--keep-awake true|false` matches the Desktop toggle. `cockpit remote-access status` reports the stored value as `configured.keepAwake` and the live assertion as `runtime.keepingAwake`.
+
+`cockpit remote-access certificate status` reports `expired`, signed `daysRemaining`, and `renewal`. `renewal.lastAttempt` describes the latest automatic attempt, `nextCheck` the next check, and `failed` an actionable failure. Renewal history stores only non-secret reason codes. While HTTPS is running, expiry reflects the certificate successfully loaded by the TLS server rather than a newer file that failed to reload.
 
 Configuration cannot change while the server is running. If you need to change it, confirm that active sessions may end, then run `cockpit remote-access disable --confirm`. CLI configuration and enablement for local-network access both require `--confirm-local-network`.
 

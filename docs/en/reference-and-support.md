@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.70.0 on 2026-09-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -85,10 +85,10 @@ CLI connections are not forwarded automatically to another instance. Inspect `in
 
 1. Confirm Remote Access is running in Desktop.
 2. In Tailscale-only mode, confirm both devices are authenticated in the same tailnet.
-3. For HTTPS, enable MagicDNS and HTTPS Certificates, then obtain the certificate again.
+3. For HTTPS, enable MagicDNS and HTTPS Certificates. Run `cockpit remote-access certificate status` and inspect `expired`, `daysRemaining`, `renewal.failed`, and `renewal.lastAttempt.error`. If automatic renewal failed, follow the displayed reason and select **Renew**.
 4. Confirm the QR code or connection URL uses HTTPS.
 5. Check for an expired pairing code or the 30-second lock after three failures.
-6. Run `cockpit remote-access status --verbose` to isolate mode, scope, certificate, and membership state.
+6. Run `cockpit remote-access status --verbose` to isolate mode, scope, certificate, and membership state. Automatic renewal retries after six hours, but resolve authentication, membership, Tailscale, or TLS reload failures first.
 
 Do not switch casually to local Wi-Fi mode. Restore the certificate or Tailscale setup. See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access).
 

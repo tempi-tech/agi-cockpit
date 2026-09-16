@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -94,8 +94,15 @@ On Desktop and the PWA, a task with children has a **Delete all child tasks** ac
 ```bash
 cockpit task list
 cockpit task list --status waiting_confirmation
+cockpit task list --parent <task-id>
+cockpit task list --parent <task-id> --recursive --all
+cockpit task list --summary
 cockpit task get <task-id> --turns 3 --max-lines 500
 ```
+
+`--parent` returns the named parent and its direct children; add `--recursive` for every descendant. Completed tasks are excluded by default. Add `--all` to include them, or `--status completed` to select only completed tasks. `--directory` and `--name` further filter the result. Recursive traversal still passes through a parent hidden by a filter. An unknown parent returns `task_not_found`, and `--recursive` without `--parent` is invalid.
+
+A parent query always uses the lightweight summary form. Add `--summary` to an ordinary list for the same fields: `id`, `name`, `status`, `hasPendingAsk`, `parentMasterId`, `directory`, `agentType`, and creation and update times. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
 
 | Field | Decision |
 | --- | --- |

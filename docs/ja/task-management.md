@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -94,8 +94,15 @@ DesktopとPWAでは、子タスクを持つタスクのメニューから子タ�
 ```bash
 cockpit task list
 cockpit task list --status waiting_confirmation
+cockpit task list --parent <task-id>
+cockpit task list --parent <task-id> --recursive --all
+cockpit task list --summary
 cockpit task get <task-id> --turns 3 --max-lines 500
 ```
+
+`--parent`は指定した親自身と直接の子を、`--recursive`を加えるとすべての子孫を返します。完了済みは既定で除外されるため、含める場合は`--all`、完了済みだけなら`--status completed`を指定します。`--directory`と`--name`でさらに絞り込めます。絞り込みで親が非表示でも、再帰探索はその階層を通過します。存在しない親は`task_not_found`、`--parent`のない`--recursive`は入力エラーです。
+
+親指定の一覧は常に軽量summaryです。通常の一覧も`--summary`で同じ形式になり、`id`、`name`、`status`、`hasPendingAsk`、`parentMasterId`、`directory`、`agentType`、作成・更新時刻だけを返します。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
 
 | フィールド | 判断 |
 | --- | --- |

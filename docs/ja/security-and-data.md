@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -97,6 +97,8 @@ Fleetのcommand gateはstdout / stderr全量をRunの`fleet-runs/<runId>/gates/`
 ## Remote Accessを保護する
 
 推奨構成はTailscale限定とHTTPSです。Tailscale端末情報と6桁ペアリングコードで端末を認証し、失敗回数と有効期限を制限します。HTTPS証明書を取得できない場合にHTTPへ自動降格しません。
+
+HTTPSのRemote Accessが実行中の場合だけ、Cockpitは証明書を開始時と24時間ごとに確認し、残り30日以下ならTailscaleから更新します。既存接続を切断せず、更新後の証明書は新しい接続へ適用します。失敗時は6時間後に再試行し、期限が14日以内または期限切れなら理由を含む警告を表示します。更新履歴には証明書、秘密鍵、コマンド出力、個人アカウント情報を保存しません。
 
 リモートCLI制御にはペアリング済みBearer tokenも必要です。Tailscale限定モードでは接続先がTailscale peerまたはloopback接続も検証し、peerの信頼だけではコマンドを許可しません。tokenは接続先Cockpitの操作権限として保護してください。リモートのfile pathは接続先コンピューター上の値で、transportはローカルfile IPCへfallbackしません。
 

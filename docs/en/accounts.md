@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -34,6 +34,8 @@ Named Antigravity profiles use browser-based Google OAuth and keep conversations
 ## Check remaining quotas
 
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows a ring and its remaining percentage. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again.
+
+The Desktop and PWA new-task screens show the same allowances for the selected agent and account before creation. A fixed account shows that profile. Auto does not substitute the default account's quota; it previews the account chosen by the same selection method used at runtime and labels it **Auto · account name**.
 
 An exhausted quota remains visible at 0%. An unknown value appears as unavailable, and a missing reset time has no countdown. Check the reported authentication or retrieval status before deciding that an account is exhausted. These provider allowances are separate from conversation context usage.
 

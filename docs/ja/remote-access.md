@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAからAGI Cockpitを監督し、別のコンピューターから対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -54,6 +54,12 @@ Tailscale限定は、Tailscaleに属さない接続を受け付けません。HT
 [TailscaleのDNS設定](https://login.tailscale.com/admin/dns)はブラウザーから直接開けます。設定を変更できない場合は、対象tailnetのOwner、Admin、またはNetwork adminへ依頼してください。
 
 TailscaleのHTTPSを有効にすると、証明書に含まれる端末名とtailnetのDNS名が公開のCertificate Transparencyログへ記録されます。機密情報を含む端末名は、証明書を取得する前に変更してください。詳しくは[TailscaleのHTTPS設定](https://tailscale.com/docs/how-to/set-up-https-certificates)を参照してください。
+
+### 証明書の自動更新
+
+HTTPSのRemote Accessを開始すると証明書を確認し、実行中は24時間ごとに再確認します。スリープから復帰した時点で確認期限を過ぎていれば、その場で確認します。残り30日以下または期限切れの証明書はTailscaleから自動更新し、実行中のTLSサーバーへ反映します。既存の接続は維持され、新しい接続から更新後の証明書を使います。Tailscale側の再発行時期はCockpitから強制しません。
+
+自動更新に失敗した場合は6時間後に再試行します。残り14日以下または期限切れで失敗すると、24時間に1回を上限として、理由と「更新」操作を含む警告を表示します。成功時は通知しません。Remote Accessを停止すると定期確認も止まります。
 
 ### 3. HTTPSを有効にしてPWAを開く
 
@@ -141,6 +147,8 @@ cockpit remote-access enable
 ```
 
 `--keep-awake true|false`はスリープ抑止トグルに対応します。`cockpit remote-access status`では、保存された設定が`configured.keepAwake`、実際に抑止中かどうかが`runtime.keepingAwake`に表示されます。
+
+`cockpit remote-access certificate status`では、`expired`、符号付きの`daysRemaining`と`renewal`を確認できます。`renewal.lastAttempt`は直近の自動更新、`nextCheck`は次回確認、`failed`は要対応状態を示します。警告履歴は秘密情報を含まない理由コードだけを保存します。実行中は、ディスク上の新しい証明書ではなく、TLSサーバーへ正常に読み込まれた証明書の期限を表示します。
 
 実行中は構成を変更できません。変更が必要な場合は、接続中のセッションが終了することを確認してから`cockpit remote-access disable --confirm`を実行します。ローカルネットワークをCLIから有効にする操作には、構成時と開始時の両方で`--confirm-local-network`が必要です。
 

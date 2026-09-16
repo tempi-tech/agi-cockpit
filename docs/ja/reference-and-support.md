@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.70.0で2026-09-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -85,10 +85,10 @@ command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ロ
 
 1. DesktopでRemote Accessが実行中か確認します。
 2. Tailscale限定では両端末が同じtailnetで認証済みか確認します。
-3. HTTPSではMagicDNSとHTTPS Certificatesを有効にし、証明書を再取得します。
+3. HTTPSではMagicDNSとHTTPS Certificatesを有効にし、`cockpit remote-access certificate status`で`expired`、`daysRemaining`、`renewal.failed`、`renewal.lastAttempt.error`を確認します。自動更新に失敗している場合は画面の理由に従い、「更新」を実行します。
 4. QRコードまたは接続URLがHTTPSであることを確認します。
 5. ペアリングコードの期限切れ、3回失敗後の30秒ロックを確認します。
-6. `cockpit remote-access status --verbose`でmode、scope、証明書、会員確認を切り分けます。
+6. `cockpit remote-access status --verbose`でmode、scope、証明書、会員確認を切り分けます。自動更新の失敗は6時間後にも再試行されますが、認証、会員資格、Tailscale、TLSへの反映エラーは先に解消します。
 
 ローカルWi-Fiモードへ安易に切り替えず、証明書またはTailscale設定を復旧します。詳しくは[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)を参照してください。
 

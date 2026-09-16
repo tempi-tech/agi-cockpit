@@ -4,7 +4,7 @@
 
 Choose a workspace and agent, safely run your first task, review its result, and mark the task complete.
 
-> Verified with AGI Cockpit 4.73.0 on 2026-09-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
@@ -22,6 +22,8 @@ Inspect this folder and describe its main files and their roles in no more than 
 ```
 
 Project selection shows projects from the current task list first, followed by recently used projects. Search filters the display name and path. Enter a path directly or use the folder picker when a location is not listed.
+
+For an agent that reports usage, the area near the composer shows the allowances for the selected agent and account. A fixed account shows that profile. Auto previews the account chosen by the same selection method used when the task is created and labels it **Auto · account name**. Do not interpret an unavailable value as 0% remaining; open the details to inspect authentication state, source, and reset time when needed.
 
 Draft instructions and attachments remain available until the task is created or the creation screen is explicitly closed. You can inspect Settings or another screen and return to **New task** without re-entering them. This draft does not persist after the app quits.
 

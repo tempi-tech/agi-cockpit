@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -23,6 +23,8 @@
 ダイアログなどのCockpitのオーバーレイがブラウザー領域と重なる間は、正本のページを一時的にparkし、空白の代わりに直前の静止snapshotを表示します。snapshotは操作できず、表示後のページ更新も反映しません。オーバーレイを閉じると同じlive pageへ戻り、フォームやページ状態を維持します。短時間でsnapshotを取得できなかった場合だけ、一時的に非表示であることを示す案内を表示します。
 
 ## ページを開く
+
+Desktopのアプリ内ブラウザーにある「検索または URL を入力」へキーワードを入力すると、Google検索を開きます。ドメイン名やIPアドレスはURLとして開き、`localhost`、`127.x.x.x`、`[::1]`はHTTP、それ以外のhostはHTTPSを補います。`https:`、`file:`、`about:`など明示したschemeはそのまま使います。空白を含む通常の文字列は、schemeのような接頭辞を含んでいても検索語として扱います。この検索判定は画面のアドレスバーだけに適用され、CLIの`open`と`goto`にはURLを渡します。
 
 ```bash
 cockpit browser open https://example.com --json

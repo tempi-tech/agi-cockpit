@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -29,6 +29,8 @@ Exit code 7 or `Cannot reach AGI Cockpit` means the app is not reachable through
 ## Start and supervise tasks
 
 Use `cockpit task create` or `cockpit task run` to start work, `task get` and `task list` to inspect it, `task send` for follow-up instructions, and `task wait --since <seq>` for incremental reports. Supported agents accept `--ui-mode visual|terminal` at creation. Local `create` and `send` accept repeatable `--media` attachments. Use `retry-start` after startup failure, `resume` after a process stops, and `reconnect` for an existing visual session. Only a visual task that currently supports Goals accepts `task goal start`. Use stdin or a file for multiline instructions rather than embedding them in a shell argument. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the full parent-child, reporting, follow-up, and completion flow.
+
+Use `cockpit task list --parent <id>` for a lightweight status view of a parent and its children. Add `--recursive` for every descendant and `--all` to include completed tasks. Parent queries and ordinary `--summary` lists omit conversation and model settings and include a response-level `generatedAt` snapshot time.
 
 Inspect pending tool approvals and questions in `task get` under `turnRequests`, then respond with `task approve`, `deny`, or `answer`. `task cancel` stops only the current turn and keeps the task; `compact` compacts its conversation. Because `task clear --confirm` discards the conversation, verify the task and preserve needed history first. `task approval-mode` reads or changes that task's approval mode. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the support matrix and procedures.
 
