@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.82.0 — 2026-09-17
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a tabbed mobile task panel for HTML, diffs, terminals, and other views.
+- Added mobile previews and scrolling for host in-app browser tabs.
+- Added loading of older chat history on mobile.
+- Added indicators for tasks waiting for Ask responses in the mobile task list.
+- Added account profile renaming in Settings and the CLI.
+- Added the default account email address to the account switcher and agent settings.
+- Added remaining usage percentages below usage rings.
+- Added controls to reload the LM Studio model list in Settings.
+- Added opening HTML file previews in the in-app browser.
+- Fixed mobile usage popovers being hidden behind the composer.
+- Improved in-app browser guidance on passkey failures and supported authentication methods.
+- OpenCode servers started by Cockpit now stop when the app exits.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- モバイルのタスクパネルで、HTML・差分・ターミナルなどをタブで切り替えられるようになりました
+- モバイルからホストのアプリ内ブラウザーの画面を確認し、スクロールできるようになりました
+- モバイルのチャットで、過去の履歴を追加で読み込めるようになりました
+- モバイルのタスク一覧で、Askへの回答待ちを確認できるようになりました
+- 設定とCLIからアカウントプロファイルの名前を変更できるようになりました
+- アカウント切り替えとエージェント設定に、デフォルトアカウントのメールアドレスを表示するようになりました
+- 使用量のリングの下に、残りの使用量をパーセントで表示するようになりました
+- 設定からLM Studioのモデル一覧を再読み込みできるようになりました
+- HTMLファイルのプレビューからアプリ内ブラウザーで開けるようになりました
+- モバイルの使用量ポップアップが入力欄に隠れる問題を修正しました
+- アプリ内ブラウザーでパスキー認証に失敗した理由と利用できる認証方法を、より正確に案内するようになりました
+- アプリ終了時に、Cockpitが起動したOpenCodeサーバーも終了するようになりました
+
+</details>
+
 ## v4.81.0 — 2026-09-16
 
 **Type:** minor · **Platforms:** macOS, Linux
