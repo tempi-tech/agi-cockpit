@@ -152,9 +152,13 @@ See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identi
 
 Passkeys can use Touch ID in signed macOS builds and Windows Hello on Windows. On macOS, Cockpit can use only passkeys registered from the in-app browser; it cannot directly use passkeys previously registered in Safari, Chrome, or iCloud Keychain.
 
+On macOS and Linux, a USB security key is only partly usable. A request that does not ask for a PIN — typically second-factor sign-in where the site sends `allowCredentials` — completes by touching the key. Signing in with a saved passkey always fails, because the browser raises user verification to required for that request. Registering a new passkey on a key that has a PIN fails the same way, and a phone or tablet cannot be used. Windows handles every transport through the operating system's own WebAuthn dialog, so security keys and phone passkeys are expected to work there, but that is not verified yet.
+
 When no passkey matches Touch ID, the browser panel explains why and offers registration of a new passkey, password sign-in, and `cockpit browser import-session` as alternatives. `cockpit browser diagnostics` records the recent attempt as `no-matching-credential`. On macOS, `import-session` transfers eligible sign-in state from Chrome, Brave, Edge, Arc, Vivaldi, Opera, or Firefox; it does not import the passkey itself.
 
-Linux has no platform authenticator, so use a roaming security key or password. If no prompt appears, use `cockpit browser diagnostics` to inspect platform-authenticator state and the most recent WebAuthn attempt.
+Linux has no platform authenticator, so use a security key within the limits above, or a password. If no prompt appears or the attempt fails, use `cockpit browser diagnostics` to inspect platform-authenticator state and the most recent WebAuthn attempt. `NotAllowedError` is recorded by cause: `discoverable-credential-unavailable` for saved-passkey sign-in that is not supported yet, `user-verification-unavailable` for a PIN or other user verification Cockpit cannot collect, and `not-allowed` for a cancelled request, a timeout, or no authenticator that could answer.
+
+You can also finish the sign-in in an external browser and bring it back with `cockpit browser import-session`. That is a workaround rather than passkey support: it transfers only cookies and localStorage, so some sites remain signed out.
 
 Only HTTP and HTTPS links can normally leave the in-app browser. A `mailto` link opens only after the person's own interaction and explicit confirmation; other schemes are rejected. Agent automation does not count as that person interaction.
 

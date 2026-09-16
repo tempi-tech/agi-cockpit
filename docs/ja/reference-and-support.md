@@ -96,7 +96,7 @@ command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ロ
 
 タスクに割り当てられたIdentity名と色を確認します。別Identityでログインしても現在のタスクへ状態は移りません。macOSではChromeの対象タブを開き、`cockpit browser import-session`で選択したIdentityへCookieとlocalStorageを取り込めます。
 
-パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。macOSで`no-matching-credential`の場合は、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードまたは`cockpit browser import-session`を使います。Linuxではセキュリティキーまたはパスワードを使います。
+パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。macOSで`no-matching-credential`の場合は、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードまたは`cockpit browser import-session`を使います。Linuxではセキュリティキーまたはパスワードを使いますが、セキュリティキーで完了できるのはPINの入力を求めない要求だけで、保存済みパスキーでのログインには対応していません。
 
 詳しくは[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)と[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)を参照してください。
 

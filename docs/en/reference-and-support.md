@@ -96,7 +96,7 @@ Do not switch casually to local Wi-Fi mode. Restore the certificate or Tailscale
 
 Confirm the Identity name and color assigned to the task. Signing in through another Identity does not transfer state to the current task. On macOS, open the target site in Chrome and use `cockpit browser import-session` to copy eligible cookies and localStorage into the selected Identity.
 
-If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. For `no-matching-credential` on macOS, register a new passkey in the in-app browser, use a password, or use `cockpit browser import-session`. On Linux, use a security key or password.
+If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. For `no-matching-credential` on macOS, register a new passkey in the in-app browser, use a password, or use `cockpit browser import-session`. On Linux, use a security key or a password; a security key completes only a request that does not ask for a PIN, and signing in with a saved passkey is not supported yet.
 
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) and [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for details.
 
