@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.82.0 — 2026-09-17
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a tabbed mobile task panel for HTML, diffs, terminals, and other views.
 - Added mobile previews and scrolling for host in-app browser tabs.
