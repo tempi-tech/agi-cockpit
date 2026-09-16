@@ -19,7 +19,7 @@ English is the primary language for these generated release notes. Download the 
 - Added opening HTML file previews in the in-app browser.
 - Fixed mobile usage popovers being hidden behind the composer.
 - Improved in-app browser guidance on passkey failures and supported authentication methods.
-- OpenCode servers started by Cockpit now stop when the app exits.
+- Fixed OpenCode servers started by Cockpit remaining active after the app exits.
 
 <details>
 <summary>日本語のリリースノート</summary>
