@@ -20,6 +20,20 @@ The computer running Cockpit becomes the connection target. The PWA in your brow
 
 The AGI Cockpit process and remote access must remain running on the target computer. If you run Cockpit on several computers, each one remains a separate target with its own tasks and settings.
 
+## What Tailscale is
+
+Tailscale is a service that securely connects your own devices to each other. When you sign in to the same Tailscale account on your computers and phones, those devices form a private network of their own (a tailnet), and traffic between them is encrypted.
+
+AGI Cockpit uses it so that you can reach the computer running Cockpit safely from elsewhere, such as from your phone while you are out. Cockpit is not exposed to the public internet: only your own devices in the same tailnet can connect to it.
+
+Install Tailscale on both the target computer and the device you connect from.
+
+- [Computers (Windows, macOS, Linux)](https://tailscale.com/download)
+- [iPhone and iPad (App Store)](https://apps.apple.com/us/app/tailscale/id1470499037)
+- [Android (Google Play)](https://play.google.com/store/apps/details?id=com.tailscale.ipn)
+
+To open the PWA from a phone, that phone also needs Tailscale installed and signed in to the same tailnet as the target computer.
+
 ## Before you begin
 
 | Requirement | What to confirm |
@@ -29,7 +43,7 @@ The AGI Cockpit process and remote access must remain running on the target comp
 | Tailscale administration | An Owner, Admin, or Network admin is available when HTTPS must be enabled for the first time |
 | Browser | The remote device uses a current version of Safari, Chrome, Edge, or another modern browser |
 
-If you do not use Tailscale yet, [install Tailscale](https://tailscale.com/download) and sign in to the same tailnet on both devices.
+If you do not use Tailscale yet, install it on both the target computer and the remote device from the links above, and sign in to the same tailnet on each one.
 
 ## Connect with Tailscale and HTTPS
 

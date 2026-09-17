@@ -20,6 +20,20 @@ Cockpitを実行しているコンピューターが接続先になり、ブラ�
 
 リモートアクセス中は、接続先のAGI Cockpitプロセスとリモートアクセスを動かしておく必要があります。複数のCockpitがある場合も、タスクと設定は接続先ごとに分かれたままです。
 
+## Tailscaleとは
+
+Tailscaleは、自分の端末どうしを安全につなぐためのサービスです。パソコンやスマートフォンで同じTailscaleアカウントへサインインすると、それらの端末だけが参加する専用のネットワーク（tailnet）ができ、端末間の通信は暗号化されます。
+
+AGI Cockpitでは、外出先のスマートフォンなどから、Cockpitを実行しているコンピューターへ安全に接続するために使います。Cockpitを公開インターネットに公開するわけではなく、同じtailnetに参加している自分の端末からだけ接続できます。
+
+接続先のコンピューターと、接続元の端末の両方にインストールします。
+
+- [パソコン向け（Windows、macOS、Linux）](https://tailscale.com/download)
+- [iPhone・iPad向け（App Store）](https://apps.apple.com/us/app/tailscale/id1470499037)
+- [Android向け（Google Play）](https://play.google.com/store/apps/details?id=com.tailscale.ipn)
+
+スマートフォンのブラウザーでPWAを開く場合も、そのスマートフォンにTailscaleをインストールし、接続先のコンピューターと同じtailnetへサインインしておく必要があります。
+
 ## 始める前に
 
 | 必要なもの | 確認すること |
@@ -29,7 +43,7 @@ Cockpitを実行しているコンピューターが接続先になり、ブラ�
 | Tailscaleの管理権限 | HTTPSを初めて有効にする場合、Owner、Admin、またはNetwork adminが設定する |
 | ブラウザー | 接続元で最新のSafari、Chrome、Edgeなどを利用する |
 
-Tailscaleをまだ利用していない場合は、[Tailscaleをインストール](https://tailscale.com/download)し、接続する両方の端末で同じtailnetへサインインします。
+Tailscaleをまだ利用していない場合は、上のリンクから接続先と接続元の両方にTailscaleをインストールし、同じtailnetへサインインします。
 
 ## TailscaleとHTTPSで接続する
 
