@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -25,7 +25,21 @@ cockpit accounts login work --agent-type codex
 cockpit accounts list --agent-type codex
 ```
 
+### Rename a profile
+
+Under Settings → Agents, use the pencil button on a named profile to change its display name. From the CLI, provide the current name or profile ID and the new name:
+
+```bash
+cockpit accounts rename work "Work (EU)" --agent-type codex
+```
+
+Only the display label changes. The profile ID, isolated home, stored credentials, and task and Autorun assignments remain intact, and the account does not need to sign in again. A profile can be renamed while a running task or Autorun uses it. The new name must be at most 40 characters and cannot be blank, contain control characters, duplicate another profile for the same agent, equal `default`, `auto`, or an existing profile ID, or start with `profile-`. The default account has no Cockpit-owned profile name and cannot be renamed.
+
+Fleet YAML is the exception because `account: <name>` is resolved by name when a run starts. Update any Fleet file that uses the old name, or its next run will fail the pre-run account check.
+
 The list reports the provider, profile ID, name, email when available, `authState`, provider-specific usage, and the time that usage was fetched. `authState` distinguishes usable `ok`, invalid `expired`, and credential-free `signed_out` accounts. The compatibility field `loggedIn` is true only for `ok`. `auth_required` means the profile must sign in again. A usage state of `unknown` or `error` means Cockpit could not read the allowance; it is not an authentication verdict, and a credential with `authState: "ok"` remains selectable below accounts with known capacity. Expired and signed-out accounts are unavailable to Auto and the Fleet pre-run check.
+
+For agents that expose the default account's email address, Cockpit shows it on the default row in the account switcher and in that agent's authentication settings. It never borrows a named profile's address for the default row. An address that was not reported, a signed-out account, and a failed lookup remain distinct states so the display can also help diagnose authentication.
 
 For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server in a read-only sandbox without approval prompts. This retrieval path supports Codex CLI 0.153.
 
@@ -33,7 +47,7 @@ Named Antigravity profiles use browser-based Google OAuth and keep conversations
 
 ## Check remaining quotas
 
-Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows a ring and its remaining percentage. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again.
+Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows its remaining percentage directly below the ring. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again. Cockpit does not invent a percentage for an unknown quota, authentication error, observation-only status row, or the Cockpit Agent balance display.
 
 The Desktop and PWA new-task screens show the same allowances for the selected agent and account before creation. A fixed account shows that profile. Auto does not substitute the default account's quota; it previews the account chosen by the same selection method used at runtime and labels it **Auto · account name**.
 

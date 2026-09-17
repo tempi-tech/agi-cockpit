@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -59,6 +59,8 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 4. ネイティブUIの候補取得が失敗している場合、モデルや推論設定を固定せず、接続と認証を復旧して再取得します。
 5. Terminal UIではネイティブUIのログイン案内を利用できないため、ターミナル内で対象CLIの認証を完了します。
 
+LM Studioのモデルだけが古い、または表示されない場合は、SettingsのCockpit AgentにあるデフォルトモデルまたはLM Studio URLの横で「モデルを再読み込み」を選びます。URLを編集中なら保存前の値で確認できます。CLIでは保存済みURLを使う`cockpit settings refresh-models lmstudio`を実行します。取得に成功して選択中モデルが消えた場合は設定の保存を止めるため、利用可能なモデルを選び直します。接続失敗時は選択を保持するため、URLとLM Studioの稼働を確認して再試行します。この操作はモデル自体を起動、停止、再読み込みしません。
+
 Claude、Codex、Antigravity、Cursor、Grok Buildで404、5xx、gateway timeoutなどの一時的なサービス障害が疑われる場合は、エラー表示の「稼働状況を確認」から各プロバイダーのstatus pageを確認します。このリンクは認証、利用上限、クォータ、レート制限、請求のエラーには表示されません。
 
 期限切れの認証情報は「セッション期限切れ」または`authState: expired`と表示され、`loggedIn`は`false`になります。`cockpit accounts login <account> --agent-type <type>`で再ログインし、`cockpit accounts list`で`authState: ok`を確認します。`cockpit doctor`の`accounts.expired`でも対象を確認できます。
@@ -96,7 +98,7 @@ command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ロ
 
 タスクに割り当てられたIdentity名と色を確認します。別Identityでログインしても現在のタスクへ状態は移りません。macOSではChromeの対象タブを開き、`cockpit browser import-session`で選択したIdentityへCookieとlocalStorageを取り込めます。
 
-パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。macOSで`no-matching-credential`の場合は、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードまたは`cockpit browser import-session`を使います。Linuxではセキュリティキーまたはパスワードを使いますが、セキュリティキーで完了できるのはPINの入力を求めない要求だけで、保存済みパスキーでのログインには対応していません。
+パスキーが使えない場合は`cockpit browser diagnostics`でプラットフォーム認証器の状態と直近のWebAuthn試行を確認します。macOSの`no-matching-credential`では、アプリ内ブラウザーで新しいパスキーを登録するか、パスワードまたは`cockpit browser import-session`を使います。`discoverable-credential-unavailable`は保存済みパスキーでのログインが未対応、`user-verification-unavailable`はセキュリティキーのPINなど必要な利用者確認を収集できない状態です。`not-allowed`はキャンセル、timeout、または応答できる認証器がない場合を含みます。macOSの未署名・開発buildではentitlementまたは実Keychainを利用できずTouch IDを開始できない場合があります。Linuxではセキュリティキーまたはパスワードを使いますが、セキュリティキーで完了できるのはPINを求めない要求だけで、保存済みパスキーでのログインには対応していません。
 
 詳しくは[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)と[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)を参照してください。
 

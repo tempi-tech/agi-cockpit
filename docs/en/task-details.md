@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -70,9 +70,9 @@ Select chat text and choose **Quote selection** to add it to the composer as a M
 
 A message from another Cockpit task displays its source task name or shortened ID. If the source remains in the list, select the name to navigate there. A parent-child relationship alone does not send results or automatically resume the parent.
 
-On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output.
+On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output. When saved turns exist before the loaded view, **Load more** appears at the top of the conversation. Select it or scroll near the top to prepend earlier history while keeping the message you were reading in place. When the view reaches its in-memory limit, loading an older page can remove some newer events from the current display, but it does not delete the saved record.
 
-Saved Native UI history is restored by conversation turn. When older history has been compacted into archives, the notice counts omitted turns rather than individual events. A tool item whose complete output cannot be restored from saved history displays **Some output omitted** in both Desktop and the PWA.
+Saved Native UI history is restored by conversation turn. If the PWA cannot load an earlier page, its notice counts unloaded turns rather than individual events. A tool item whose complete output cannot be restored from saved history displays **Some output omitted** in both Desktop and the PWA.
 
 When a task detail is open in the PWA, its URL uses `#task/<task-id>` as a deep link. On initial launch or during reconnection, Cockpit waits for the task list to synchronize before opening that task, and browser Back returns to the list. A deleted or unknown ID returns to the list and shows **Task not found**.
 

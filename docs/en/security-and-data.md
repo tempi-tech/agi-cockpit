@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -14,6 +14,8 @@ Core Cockpit data, including task state, conversation history, Autoruns, Fleets,
 
 The agent process reads and writes its workspace. Depending on the approval mode and agent permissions, it may access files not currently displayed in Cockpit. Select only the directories needed for the task.
 
+Cockpit owns the local OpenCode servers that it starts for Cockpit Agent connections to OpenCode Go or OpenCode Zen and stops them when Cockpit quits. It does not stop a server that the user started independently outside Cockpit.
+
 PWA task search queries and recent searches are stored in the current browser’s localStorage separately for each connected host. They do not sync to other devices. **Clear search** and **Clear history** are separate actions; use both to remove both the current query and history.
 
 ## What is sent externally
@@ -21,6 +23,8 @@ PWA task search queries and recent searches are stored in the current browser’
 The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio endpoint. OpenCode Go and OpenCode Zen use separate API keys. Whether LM Studio is local or remote depends on its configured URL.
 
 Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, Autorun, Fleet, Hook, and account information needed by the connected PWA or supported remote CLI command. A remote Hook command can register and execute shell code on the target computer.
+
+The PWA Cockpit Browser view sends an authenticated Remote Access client a viewport image and limited metadata for a host tab. Every request verifies the task, assigned Browser Identity, session, and tab; it does not expose general browser RPC, storage, or the complete URL. Frames are JPEG images limited to 1280 pixels and 256 KiB and are not saved to host disk or PWA browser storage. PWA scroll controls change the host page's position but cannot activate links, type, or submit forms.
 
 Enabling a Discord or Slack relay under **Settings → Ask notifications** sends the Ask summary, questions, choices, task name, a link back to Cockpit, and optional Ask images or videos to the selected channel. Members who can read that channel can see the post, but Cockpit accepts an answer only from the single configured `allowedUserId`. Relays are off by default and make outbound connections from Cockpit to the Discord Gateway or Slack Socket Mode.
 

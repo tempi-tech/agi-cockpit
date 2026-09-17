@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -58,6 +58,14 @@ See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Brow
 
 ## Configure credentials and the Cockpit provider
 
+Rename a named agent account profile by its current name or profile ID:
+
+```bash
+cockpit accounts rename work "Work (EU)" --agent-type codex
+```
+
+Only the display name changes; the ID, credentials, and task and Autorun assignments remain intact. The default account cannot be renamed. Fleet YAML resolves `account: <name>` by name when a run starts, so update any Fleet that still refers to the old name. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts#rename-a-profile) for validation rules and the Settings workflow.
+
 `cockpit settings` can save or remove OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys in encrypted storage. Never put a key in a command argument; use only `--stdin` or `--key-file`. Reads report presence without returning the value.
 
 ```bash
@@ -67,6 +75,8 @@ cockpit settings set agents.provider.cockpit openrouter
 ```
 
 Choose the Cockpit Agent provider from `openrouter`, `opencode-go`, `opencode`, or `lmstudio`. A provider that requires a key can be selected or restored as the default only after its corresponding credential is stored. These settings operate only on the local Cockpit.
+
+`cockpit settings refresh-models lmstudio` bypasses the cache and reads a fresh model list from the saved LM Studio URL. It does not start, stop, or reload a model and does not change settings. An unavailable endpoint returns `validation_unavailable`.
 
 ## Automate reactions with Hooks
 

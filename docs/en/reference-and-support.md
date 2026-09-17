@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -59,6 +59,8 @@ See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/
 4. If native option discovery failed, restore the connection and authentication before selecting a fixed model or reasoning value.
 5. Terminal UI cannot use native UI sign-in guidance, so complete authentication inside that CLI's terminal flow.
 
+If only the LM Studio list is stale or missing, select **Reload models** beside the default model or LM Studio URL in Cockpit Agent settings. An edited URL is tested before it is saved. From the CLI, `cockpit settings refresh-models lmstudio` uses the saved URL. After a successful list response that omits the selected model, Settings blocks Save until you choose an available model. A connection failure keeps the selection, so check the URL and that LM Studio is running, then retry. This operation does not start, stop, or reload the model itself.
+
 For a possible temporary service incident from Claude, Codex, Antigravity, Cursor, or Grok Build, such as a 404, 5xx response, or gateway timeout, follow **Check provider status** from the error surface to the provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors.
 
 An invalid credential appears as **Session expired** or `authState: expired`, with `loggedIn: false`. Sign in again with `cockpit accounts login <account> --agent-type <type>`, then confirm `authState: ok` in `cockpit accounts list`. `cockpit doctor` also lists affected accounts under `accounts.expired`.
@@ -96,7 +98,7 @@ Do not switch casually to local Wi-Fi mode. Restore the certificate or Tailscale
 
 Confirm the Identity name and color assigned to the task. Signing in through another Identity does not transfer state to the current task. On macOS, open the target site in Chrome and use `cockpit browser import-session` to copy eligible cookies and localStorage into the selected Identity.
 
-If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. For `no-matching-credential` on macOS, register a new passkey in the in-app browser, use a password, or use `cockpit browser import-session`. On Linux, use a security key or a password; a security key completes only a request that does not ask for a PIN, and signing in with a saved passkey is not supported yet.
+If passkeys fail, run `cockpit browser diagnostics` and inspect platform-authenticator state and the most recent WebAuthn attempt. For `no-matching-credential` on macOS, register a new passkey in the in-app browser, use a password, or use `cockpit browser import-session`. `discoverable-credential-unavailable` means saved-passkey sign-in is unsupported, while `user-verification-unavailable` means Cockpit cannot collect required verification such as a security-key PIN. `not-allowed` covers cancellation, timeout, or no authenticator able to answer. An unsigned or development macOS build can lack the entitlement or real Keychain needed to start Touch ID. On Linux, use a security key or a password; a security key completes only a request that does not ask for a PIN, and signing in with a saved passkey is not supported yet.
 
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) and [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for details.
 

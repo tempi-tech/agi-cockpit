@@ -4,7 +4,7 @@
 
 8種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から8種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -50,6 +50,10 @@ CodexのネイティブUIでは、選択中のアカウントから取得した�
 service tierはCodexの対応モデルだけで`standard`または`fast`を選べます。システムプロンプトはClaude、Codex、Qoder、CockpitのネイティブUIで利用できます。`append`はCockpit標準の指示を維持し、`replace`は標準指示を置き換えるため、Cockpit CLIの知識はインストール済みskillからだけ利用できる状態になります。
 
 Cockpit AgentのモデルIDは、OpenRouterが`openrouter/<id>`、OpenCode Goが`opencode-go/<id>`、OpenCode Zenが`opencode/<id>`、LM Studioが`lmstudio/<id>`です。OpenCode GoとOpenCode Zenは別のプロバイダーで、設定の**OpenCode Go API Key**と**OpenCode Zen API Key**も共有しません。選択したプロバイダーのkeyがない場合、そのモデル一覧とタスクは利用できません。
+
+SettingsのCockpit AgentでLM Studioモデルを選んでいる場合はデフォルトモデルの横から、ほかのプロバイダーを選んでいる場合もLM Studio URLの横から「モデルを再読み込み」を実行できます。Settingsでは保存前を含む現在のURLを使い、CLIの`cockpit settings refresh-models lmstudio`は保存済みURLから新しい一覧を取得します。この操作はモデルの一覧だけを読み取り、モデルの起動、停止、再読み込みや実行中タスクの中断は行いません。選択中のモデルは無言で置き換えず、取得成功後の一覧から消えた場合は警告して保存を止めます。接続失敗時は選択を保持し、再試行の案内を表示します。
+
+OpenCode GoまたはOpenCode ZenのためにCockpitが起動したローカルOpenCode serverはCockpitが所有します。タスクの終了処理に加え、Cockpit自体を終了すると残っている所有serverも停止します。利用者がCockpitの外で起動したOpenCode serverはこの終了処理の対象ではありません。
 
 CLIでは`cockpit settings set agents.provider.cockpit <provider>`でCockpit Agentのプロバイダーを`openrouter`、`opencode-go`、`opencode`、`lmstudio`から選べます。APIキーは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`で暗号化ストレージへ保存し、`settings reset agents.credential.<name>`で削除します。キーを必要とするプロバイダーは、対応する認証情報がある場合だけ選択できます。
 

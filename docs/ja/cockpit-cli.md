@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -76,6 +76,14 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 ## 認証情報とCockpitプロバイダーを設定する
 
+名前付きエージェントアカウントの表示名は、現在の名前またはプロファイルIDを指定して変更できます。
+
+```bash
+cockpit accounts rename work "Work (EU)" --agent-type codex
+```
+
+変更されるのは表示名だけで、ID、認証情報、タスクとAutorunの割り当ては維持されます。defaultアカウントは変更できません。Fleet YAMLは実行時に`account: <name>`を名前で解決するため、変更前の名前を参照するFleetも更新してください。名前の制約と画面からの操作は[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts#プロファイル名を変更する)を参照してください。
+
 `cockpit settings`はOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを暗号化ストレージへ保存・削除できます。キーはコマンド引数へ書かず、`--stdin`または`--key-file`だけで渡します。取得結果は設定の有無だけを返し、値は返しません。
 
 ```bash
@@ -85,6 +93,8 @@ cockpit settings set agents.provider.cockpit openrouter
 ```
 
 Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`、`lmstudio`から選べます。キーを必要とするプロバイダーは、対応する認証情報が保存済みの場合だけ選択または既定値へリセットできます。これらの設定はローカルCockpitだけを対象にします。
+
+`cockpit settings refresh-models lmstudio`は、保存済みのLM Studio URLを使ってキャッシュを迂回し、新しいモデル一覧を読み取ります。モデルを起動、停止、再読み込みせず、設定値も変更しません。接続できない場合は`validation_unavailable`を返します。
 
 ## Hooksでイベントに反応する
 

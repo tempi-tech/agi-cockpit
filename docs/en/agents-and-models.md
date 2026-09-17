@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -50,6 +50,10 @@ Codex Native UI uses the model catalog discovered from the selected account acro
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
 Cockpit Agent model IDs use `openrouter/<id>` for OpenRouter, `opencode-go/<id>` for OpenCode Go, `opencode/<id>` for OpenCode Zen, and `lmstudio/<id>` for LM Studio. OpenCode Go and OpenCode Zen are separate providers, and their **OpenCode Go API Key** and **OpenCode Zen API Key** settings are not interchangeable. Models and tasks for a provider remain unavailable until its key is configured.
+
+In Cockpit Agent settings, **Reload models** appears beside the default model when an LM Studio model is selected and beside the LM Studio URL even when another provider is selected. Settings uses the currently edited URL, including an unsaved value. The CLI command `cockpit settings refresh-models lmstudio` retrieves a fresh list from the saved URL. This operation only lists models: it does not start, stop, or reload a model, and it does not interrupt a running task. Cockpit keeps the current selection instead of silently replacing it. If a successful response no longer includes that model, Settings warns and blocks Save; a connection failure keeps the selection and shows retry guidance.
+
+Cockpit owns the local OpenCode servers that it starts for OpenCode Go or OpenCode Zen. Normal task cleanup stops task-scoped resources, and quitting Cockpit also stops any owned servers that remain. An OpenCode server started independently outside Cockpit is not part of this shutdown.
 
 From the CLI, choose the Cockpit Agent provider with `cockpit settings set agents.provider.cockpit <provider>`, using `openrouter`, `opencode-go`, `opencode`, or `lmstudio`. Save an API key to encrypted storage with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`, and remove it with `settings reset agents.credential.<name>`. A provider that requires a key cannot be selected until its corresponding credential is present.
 

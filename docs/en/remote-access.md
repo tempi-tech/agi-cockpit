@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -77,10 +77,12 @@ The connection is ready when the PWA header shows the target machine name and **
 | Screen | Main actions |
 | --- | --- |
 | Confirm | Review pending Asks and answer with choices, free text, or attachments |
-| Tasks | Create tasks, review the list and details, send follow-ups or queue the next message, answer permissions or questions, complete tasks, and delete tasks |
+| Tasks | Create tasks, review the list and details, send follow-ups or queue the next message, answer permissions or questions, inspect results in the task panel, complete tasks, and delete tasks |
 | Autorun | Create, edit, enable, run now, delete, and review Autoruns |
 
 The PWA is an operating surface for checking progress and decisions from another location. Enable remote access and configure its transport and HTTPS certificate in Desktop. Not every Desktop setting or result view is available in the PWA.
+
+The task panel in task details provides tabs for HTML Surface, diff, Cockpit Browser, terminal, Creative Studio artifacts, and Talk Room. Cockpit Browser shows a still image of a host tab inside the task's assigned Browser Identity, refreshes it every ten seconds while visible, and provides four controls that scroll the host page. Scrolling also changes the host-side position, but the PWA does not activate links, type, or submit forms. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser#inspect-a-host-tab-from-the-pwa) for scope, limits, and storage boundaries.
 
 The PWA's light or dark appearance follows the connected Desktop's mode under **Appearance**. It stores the last synchronized mode on the device and uses it at the next launch until the connection returns. This is not a separate choice based on the device operating system theme.
 

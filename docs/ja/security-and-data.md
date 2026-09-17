@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -14,6 +14,8 @@ AGI Cockpitは、タスクとエージェントプロセスを利用者のコン
 
 エージェントプロセスはその作業場所を読み書きします。Cockpit内に表示されていないファイルでも、選択した承認モードとエージェントの権限でアクセスできる場合があります。タスクへ必要なディレクトリだけを指定してください。
 
+Cockpit AgentのOpenCode GoまたはOpenCode Zen接続のためにCockpitが起動したローカルOpenCode serverはCockpitが所有し、Cockpit終了時に停止します。Cockpitの外で利用者が起動したserverは停止しません。
+
 PWAのタスク検索語と最近の検索履歴は、接続先ごとに利用中のブラウザーのlocalStorageへ保存します。別端末へ同期しません。検索欄の「検索をクリア」と「履歴を消去」は別の操作です。両方を消す場合はそれぞれ実行してください。
 
 ## 外部へ送られるもの
@@ -21,6 +23,8 @@ PWAのタスク検索語と最近の検索履歴は、接続先ごとに利用�
 指示、会話、添付、ファイル内容、ツール結果がAIプロバイダーへ送られる範囲は、選択したエージェント、UIモード、モデル、ツールに従います。Cockpit Agentでは選択したOpenRouter、OpenCode Go、OpenCode Zen、LM Studioなどの接続先が処理します。OpenCode GoとOpenCode Zenは別のAPI keyを使います。LM Studioをローカルで動かすか別ホストで動かすかは設定したURLで決まります。
 
 アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは、接続中のPWAまたは対応するリモートCLIコマンドに必要なタスク、Ask、Autorun、Fleet、Hook、アカウントの情報が転送されます。リモートのHooksコマンドは、接続先コンピューターへshell codeを登録・実行できます。
+
+PWAのCockpit Browser表示では、認証済みRemote Access接続へホストtabのviewport画像と限定したmetadataを送ります。task、割り当て済みBrowser Identity、session、tabの所属を要求ごとに検証し、一般browser RPC、storage、完全なURLは公開しません。画像は最大1280px・256KiBのJPEGへ制限し、ホストのディスクにもPWAのbrowser storageにも保存しません。PWAからのスクロールはホストページの位置を変更しますが、link、入力、送信は操作しません。
 
 「設定」→「Ask通知」でDiscordまたはSlackへの転送を有効にすると、Askの概要、質問、選択肢、タスク名、Cockpitへのlinkと、許可した場合はAskの画像・動画を、選択したチャンネルへ送ります。チャンネルを閲覧できるメンバーは投稿内容を読めますが、Cockpitが回答を受け付けるのは設定した一人の`allowedUserId`だけです。転送は既定で無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 

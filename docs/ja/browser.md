@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -21,6 +21,16 @@
 パネルを隠したparked tabも表示せずに操作できます。macOSのSpaceを切り替えたり、黒い独立ウィンドウを表示したりせず、同じページへ入力します。
 
 ダイアログなどのCockpitのオーバーレイがブラウザー領域と重なる間は、正本のページを一時的にparkし、空白の代わりに直前の静止snapshotを表示します。snapshotは操作できず、表示後のページ更新も反映しません。オーバーレイを閉じると同じlive pageへ戻り、フォームやページ状態を維持します。短時間でsnapshotを取得できなかった場合だけ、一時的に非表示であることを示す案内を表示します。
+
+### PWAからホストのタブを確認する
+
+PWAのタスクパネルで**Cockpit Browser**を選ぶと、そのタスクに割り当てられたBrowser Identity内のsessionとtabを選び、ホスト上の現在のviewportを静止画像として確認できます。選べるIdentityはタスクへ割り当てられた一件だけです。PWA側でパネルやタブを切り替えても、Desktopの選択中パネル、ホストページのnavigation、tabは変更しません。
+
+表示中かつ接続中でPWAがforegroundにある間は、前回の取得完了から10秒後に更新します。「更新」はその場のviewportを取り直します。未読み込みの保存済みtabはPWAから起動せず、ホストで開くよう案内します。画像には取得時刻があり、切断中、取得失敗、20秒以上更新できない場合は古い状態として表示します。
+
+「ホストのタブをスクロール」の上下左右は、ホストページ自体をviewportのおよそ80%ずつ動かしてから新しい画像を取得します。この操作はDesktop側のスクロール位置にも影響しますが、linkの選択、フォーム入力、送信は行いません。「拡大」は受信画像を原寸で表示し、PWA内だけでパンできます。これは10秒ごとの静止previewであり、動画配信や完全なremote browser操作ではありません。画像内の文字はscreen readerへテキストとして公開されません。
+
+PWAへ渡す画像はJPEGで、最大1280px、base64化前256KiBまでに制限し、ディスクやPWAのbrowser storageへ保存しません。各要求はtask、割り当て済みIdentity、session、tabの所属を取得前後に検証します。metadataはtitleとoriginに限定し、URLのcredential、path、query、fragment、data URLのpayloadや、一般browser RPC、storage export、ローカルscreenshot pathは公開しません。
 
 ## ページを開く
 

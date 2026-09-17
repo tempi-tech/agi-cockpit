@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -21,6 +21,16 @@ After an app restart, a saved tab that has not been used stays unloaded without 
 A parked tab can receive input while hidden without showing a separate window or switching macOS Spaces. The same page is visible when the panel is shown again.
 
 While a Cockpit overlay such as a dialog intersects the browser area, Cockpit temporarily parks the canonical page and displays its latest static snapshot instead of a blank surface. The snapshot is not interactive and does not reflect later page updates. Closing the overlay restores the same live page with its form and page state intact. Only when a snapshot cannot be captured promptly does Cockpit show a temporarily-hidden message instead.
+
+### Inspect a host tab from the PWA
+
+Select **Cockpit Browser** in the PWA task panel to choose a session and tab inside that task's assigned Browser Identity and inspect the host's current viewport as a still image. The Identity selector contains only the one Identity assigned to the task. Switching PWA panels or tabs does not navigate the host page, change the Desktop panel selection, or select a different host tab.
+
+While the panel is selected, connected, and in the foreground, it refreshes ten seconds after the previous capture finishes. **Refresh** captures the current viewport immediately. The PWA does not wake an unloaded saved tab; it asks you to open that tab on the host. The preview shows its capture time and is marked stale while disconnected, after a failed update, or after 20 seconds without a successful capture.
+
+The four **Scroll the host tab** controls move the real host page by about 80% of its viewport and then capture a new image. This changes the Desktop user's scroll position, but it does not activate links, fill forms, or submit anything. **Enlarge** shows the received image at its original resolution and lets you pan it locally. This is a periodic still preview, not video streaming or complete remote-browser control. Text inside the image is not exposed as text to a screen reader.
+
+Frames are JPEG images limited to 1280 pixels and 256 KiB before base64 encoding. Cockpit does not save them to disk or persist them in PWA browser storage. Every request verifies the task, assigned Identity, session, and tab before and after capture. Metadata is limited to the title and origin; URL credentials, paths, queries, fragments, data URL payloads, general browser RPC, storage export, and local screenshot paths are not exposed.
 
 ## Open a page
 
