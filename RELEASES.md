@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.83.0 — 2026-09-18
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a child task list in the mobile task panel to check progress and open individual tasks.
+- Added links to the setup guide from remote access settings guidance.
+- Fixed Ask links incorrectly including trailing full-width brackets and punctuation.
+- Fixed rounded corners when hovering over update notification buttons.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- モバイルのタスクパネルから子タスクの一覧と進行状況を確認し、各タスクを開けるようになりました
+- リモートアクセスの設定案内から、セットアップガイドを開けるようになりました
+- Ask内のURLに続く全角の括弧や句読点がリンクに含まれる問題を修正しました
+- 更新通知のボタンにカーソルを合わせたときの角丸表示を修正しました
+
+</details>
+
 ## v4.82.0 — 2026-09-17
 
 **Type:** minor · **Platforms:** macOS, Linux
