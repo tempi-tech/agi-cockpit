@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.83.0 — 2026-09-18
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a child task list in the mobile task panel to check progress and open individual tasks.
 - Added links to the setup guide from remote access settings guidance.
