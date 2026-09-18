@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.84.0で2026-09-19に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -18,9 +18,13 @@ Cockpit AgentのOpenCode GoまたはOpenCode Zen接続のためにCockpitが起�
 
 PWAのタスク検索語と最近の検索履歴は、接続先ごとに利用中のブラウザーのlocalStorageへ保存します。別端末へ同期しません。検索欄の「検索をクリア」と「履歴を消去」は別の操作です。両方を消す場合はそれぞれ実行してください。
 
+スマートルーティングのオン・オフと「ルーティング方針」は、サインイン中の利用者IDごとにDesktopのlocalStorageへ保存します。別端末へ同期しません。
+
 ## 外部へ送られるもの
 
 指示、会話、添付、ファイル内容、ツール結果がAIプロバイダーへ送られる範囲は、選択したエージェント、UIモード、モデル、ツールに従います。Cockpit Agentでは選択したOpenRouter、OpenCode Go、OpenCode Zen、LM Studioなどの接続先が処理します。OpenCode GoとOpenCode Zenは別のAPI keyを使います。LM Studioをローカルで動かすか別ホストで動かすかは設定したURLで決まります。
+
+スマートルーティングを実行すると、タスクの指示、ルーティング方針、利用可能なエージェント・モデル・推論レベル、候補ワークスペースの表示名・ローカルパス・種類を、認証済みのAGI Backendへ送って組み合わせを選びます。ファイル内容と添付内容はルーティング要求へ含めません。指示が空で添付だけがある場合は、添付のファイル名を指示の代わりに送ります。ローカルパスを外部へ送信したくない場合は、スマートルーティングをオフにして作業場所と実行条件を手動で選択してください。
 
 アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは、接続中のPWAまたは対応するリモートCLIコマンドに必要なタスク、Ask、Autorun、Fleet、Hook、アカウントの情報が転送されます。リモートのHooksコマンドは、接続先コンピューターへshell codeを登録・実行できます。
 

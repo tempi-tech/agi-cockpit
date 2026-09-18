@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -123,6 +123,12 @@ One message accepts up to eight files, each up to 512 MB and 1 GB in total. JSON
 The limit applies per message, so earlier attachments do not count toward the next eight. When clipboard content has a plain-text representation, Cockpit inserts the text instead of attaching unnecessary image representations.
 
 An attachment's name and content are not automatically trusted instructions. State which file to use, why, and what result you expect in the message. Cockpit opens only safe formats inside app-managed storage; it does not directly launch executables, paths outside that storage, remote `file` URLs, or data URLs that may contain executable HTML or SVG.
+
+### Find task attachments on Desktop
+
+Open the **Attachments** panel from the paperclip in task details to browse attachments from Cockpit Agent and Native UI conversations, grouped by date. Search by file name, preview a supported format in the right side panel, or open it in the associated application. Terminal and Terminal UI conversation history is not indexed in this list.
+
+Select **Go to message** on a row to load older conversation history when needed and jump to the message where the file was attached. If the original file was moved or deleted, Cockpit keeps details such as its saved name, type, size, and attachment time but cannot open it. An attachment that exists only inline in the conversation, such as some pasted content, may remain listed even when it can no longer be previewed.
 
 ## Continue from the CLI
 

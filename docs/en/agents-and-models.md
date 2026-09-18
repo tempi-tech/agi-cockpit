@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -26,6 +26,14 @@ Agent types that depend on an external CLI appear on the creation screen only wh
 ## Choose the default agent
 
 Open **Settings → Agents → Common** and choose **Default agent** from the dropdown. This is the agent initially selected when creating a new task; it does not change an existing task's agent. Shared agent settings are grouped under Common, while provider-specific model and account settings remain under each agent.
+
+## Choose with Smart routing
+
+When signed in to AGI Labo, enable **Smart routing** in Desktop **New task** or Quick Task. Cockpit chooses a valid combination from the instruction, configured agents, discovered models and reasoning levels, recent and active project workspaces, the Master workspace, and temporary or persistent workspaces. External agents are created in Native UI with an Auto account. Terminal and Creative Studio are not routed automatically.
+
+Use **Routing policy** for free-form preferences, such as prioritizing Codex for implementation and Claude for research or writing. The policy and on/off state are stored on Desktop for each signed-in user, save automatically, and apply to later tasks. Manually selecting a workspace fixes only the workspace. Turn off Smart routing when you want to choose the agent or model directly.
+
+Candidates are limited to current CLI detection, model discovery, and configured Cockpit Agent providers. If a requested candidate is unavailable, check the provider and API key or revise the policy. Smart routing does not silently substitute an unconfigured agent or model.
 
 ## Native UI and terminal UI
 
@@ -50,6 +58,8 @@ Codex Native UI uses the model catalog discovered from the selected account acro
 Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
 Cockpit Agent model IDs use `openrouter/<id>` for OpenRouter, `opencode-go/<id>` for OpenCode Go, `opencode/<id>` for OpenCode Zen, and `lmstudio/<id>` for LM Studio. OpenCode Go and OpenCode Zen are separate providers, and their **OpenCode Go API Key** and **OpenCode Zen API Key** settings are not interchangeable. Models and tasks for a provider remain unavailable until its key is configured.
+
+The bundled OpenCode runtime supports free models included in OpenCode Zen's live model catalog. Free models still require an OpenCode Zen API key, and the models, terms, and allowances shown depend on Zen's current offering.
 
 In Cockpit Agent settings, **Reload models** appears beside the default model when an LM Studio model is selected and beside the LM Studio URL even when another provider is selected. Settings uses the currently edited URL, including an unsaved value. The CLI command `cockpit settings refresh-models lmstudio` retrieves a fresh list from the saved URL. This operation only lists models: it does not start, stop, or reload a model, and it does not interrupt a running task. Cockpit keeps the current selection instead of silently replacing it. If a successful response no longer includes that model, Settings warns and blocks Save; a connection failure keeps the selection and shows retry guidance.
 

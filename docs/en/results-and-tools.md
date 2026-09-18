@@ -4,17 +4,17 @@
 
 Safely review task diffs, files, HTML Surfaces, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
 ## Use the right side panel
 
-The right side panel in task details opens supporting information and interactive surfaces without leaving the conversation. It can show diffs, files, the project explorer, HTML Surfaces, the in-app browser, App Surfaces, side terminals, background logs, child tasks, and Talk Rooms when they are relevant.
+The right side panel in task details opens supporting information and interactive surfaces without leaving the conversation. It can show diffs, files, the attachment list, the project explorer, HTML Surfaces, the in-app browser, App Surfaces, side terminals, background logs, child tasks, and Talk Rooms when they are relevant.
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
-In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Creative Studio artifacts, and Talk Room as tabs in one bottom sheet. Use the previous and next controls or the horizontally scrolling tab row, and switch the sheet between approximately half height and full height. The selected tab, target, drafts, and scroll positions are retained per task. Closing the panel unsubscribes the view without terminating its terminal or browser. General files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
+In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Creative Studio artifacts, and Talk Room as tabs in one bottom sheet. Use the previous and next controls or the horizontally scrolling tab row, and switch the sheet between approximately half height and full height. The selected tab, target, drafts, and scroll positions are retained per task. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
 
 ## Review diffs and files
 
