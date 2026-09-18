@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.84.0 — 2026-09-19
+
+**Type:** minor · **Platforms:** macOS
+
+- Added smart routing to automatically choose an AI agent, model, and workspace based on your task.
+- Added routing policies to specify preferred agents, models, and other selection preferences.
+- Added a panel to browse, search, and preview task attachments.
+- Added navigation from the attachment list to the message where each file was attached.
+- Updated OpenCode used by the Cockpit agent to support free Zen models.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスクの内容に応じて、AIエージェント・モデル・ワークスペースを自動で選ぶスマートルーティングを追加しました
+- スマートルーティングで優先するエージェントやモデルなどの方針を設定できるようになりました
+- タスクの添付ファイルを一覧で検索・プレビューできるパネルを追加しました
+- 添付ファイルの一覧から、ファイルを添付したメッセージへ移動できるようになりました
+- Cockpitエージェントで利用するOpenCodeを更新し、Zenの無料モデルに対応しました
+
+</details>
+
 ## v4.83.0 — 2026-09-18
 
 **Type:** minor · **Platforms:** macOS, Linux
