@@ -12,7 +12,7 @@ English is the primary language for these generated release notes. Download the 
 - Added routing policies to specify preferred agents, models, and other selection preferences.
 - Added a panel to browse, search, and preview task attachments.
 - Added navigation from the attachment list to the message where each file was attached.
-- Updated OpenCode used by the Cockpit agent to support free Zen models.
+- Added support for free Zen models by updating OpenCode used by the Cockpit agent.
 
 <details>
 <summary>日本語のリリースノート</summary>
