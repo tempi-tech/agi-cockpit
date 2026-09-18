@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.84.0 — 2026-09-19
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added smart routing to automatically choose an AI agent, model, and workspace based on your task.
 - Added routing policies to specify preferred agents, models, and other selection preferences.
