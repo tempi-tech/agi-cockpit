@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.86.0 — 2026-09-21
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added task sorting by name in ascending or descending order.
 - Added the same task sort options to desktop and the PWA.
