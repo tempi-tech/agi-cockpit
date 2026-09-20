@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.85.0 — 2026-09-20
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Fixed model loading for the Cockpit agent.
 - Fixed unnecessary sign-in pages opening when loading Grok models.
