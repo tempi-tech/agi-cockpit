@@ -66,7 +66,7 @@ Use **A−** and **A+** in the header to change the text size of questions, choi
 4. Cockpit delivers a `cockpit.ask.resolved` event to the original task.
 5. The agent receives the answer and continues the same work.
 
-Dismissing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
+Closing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
 
 Answer attachments can be added with the paperclip or by dragging files onto the answer surface. With multiple questions, a drop attaches to the question under the pointer; a drop elsewhere attaches to the first question. Dropping files never submits the answer.
 

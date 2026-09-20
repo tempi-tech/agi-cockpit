@@ -229,7 +229,7 @@ Complete stdout and stderr for every command-gate execution are saved as per-att
 
 When a Vitest command gate times out, its gate output and failed-test list record the tests that failed before the timeout, test files that started streaming output but did not finish, and up to five of the slowest completed tests that took at least 30 seconds. Check the saved full log instead of relying on the summary alone.
 
-Write a human gate's Ask so it stands alone: state what finished, what evidence was checked, and what external action approval will cause. Rejection skips downstream work. Dismissing the Ask interrupts the gate and pauses the Run instead of rejecting it.
+Write a human gate's Ask so it stands alone: state what finished, what evidence was checked, and what external action approval will cause. Rejection skips downstream work. Closing the Ask interrupts the gate and pauses the Run instead of rejecting it.
 
 ## Recover from pause and failure
 
