@@ -158,6 +158,8 @@ cockpit browser tab recreate <tabId> --json
 
 ## ログインと安全境界
 
+アプリ内ブラウザーは、通知、位置情報、クリップボードの読み取り・書き込みなどのサイト権限を、Cockpitの確認画面を出さずに既定で許可します。OSやWeb API側の制約は引き続き適用されます。カメラ・マイクを含むメディア取得、画面収録、全画面化、自動全画面化、外部アプリを開く権限、キーボードロック、旧式の同期クリップボード読み取りは拒否します。信頼できるサイトだけを開いてください。この方針はすべてのBrowser Identityに共通で、Identityの分離によってサイト権限が制限されるわけではありません。
+
 CookieやlocalStorageなどの分離、task・Autorunへの割り当て、system browserからのsession取込、消去と削除は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
 
 パスキーは署名済みmacOS版でTouch ID、WindowsでWindows Helloを利用できます。macOSのCockpitで使えるのは、アプリ内ブラウザーから登録したパスキーです。Safari、Chrome、iCloudキーチェーンで登録済みのパスキーを直接利用することはできません。

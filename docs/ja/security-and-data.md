@@ -74,6 +74,8 @@ CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-
 
 ## Browser Identityを分離する
 
+アプリ内ブラウザーは、通知、位置情報、クリップボードの読み取り・書き込みなどのサイト権限を、Cockpitの確認画面を出さずに既定で許可します。OSやWeb API側の制約は引き続き適用されます。カメラ・マイクを含むメディア取得、画面収録、全画面化、自動全画面化、外部アプリを開く権限、キーボードロック、旧式の同期クリップボード読み取りは拒否します。信頼できるサイトだけを開いてください。この方針はすべてのBrowser Identityに共通で、Identityの分離によってサイト権限が制限されるわけではありません。
+
 Browser IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証、ブラウザーセッションが永続領域へ保存されます。タスクとAutorunは一つのIdentityを割り当てられ、指定しない場合はDefault Identityを使います。
 
 Chromeからの`import-session`は、表示中サイトのregistrable domainに属するCookieと、正確なoriginのlocalStorageを選択したIdentityへ取り込みます。sessionStorage、IndexedDB、拡張機能状態、device-bound認証、パスキー自体は取り込みません。
@@ -87,6 +89,8 @@ Identityのデータ消去はそのIdentityのセッションを閉じます。�
 ブラウザーのサインインの取り込みは、取込元ブラウザーのセッションのコピーです。別アカウントへのサインインではありません。Identityへ取り込む前に取込元のアカウントを確認してください。
 
 ## 添付とAskメディアを扱う
+
+PWAの会話に表示するローカル画像プレビューは、認証済みRemote Access接続を通じてホストから縮小JPEGとして送ります。対象タスクの保存済みimage_view結果に記録された絶対パスだけを許可し、任意のローカルファイルは取得できません。元画像のサイズと画素数も検査します。
 
 添付はCockpit管理領域へランダムな保存名で置かれ、拡張子、MIME、実サイズ、内容を検証します。1メッセージは最大8ファイル、1ファイル512MB、合計1GBで、JSONは25MBまでです。アーカイブと実行形式は受け付けません。
 

@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.86.0 — 2026-09-21
+
+**Type:** minor · **Platforms:** macOS
+
+- Added task sorting by name in ascending or descending order.
+- Made the same task sort options available on desktop and in the PWA.
+- Added a per-account usage overview to the PWA.
+- Added previews of local images viewed by agents in PWA conversations.
+- Added folder creation to the remote work-folder picker.
+- Added release notes for pending updates before installation.
+- Added arrow-key navigation between enlarged Ask images and videos.
+- Renamed the action for dismissing unanswered Asks to Close.
+- Enabled site permissions such as notifications, geolocation, and clipboard access by default in the in-app browser. Camera, microphone, screen capture, fullscreen, and other restricted permissions remain denied.
+- Fixed Cockpit agent conversations remaining unusable after an attachment was rejected.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスクを名前の昇順・降順で並べ替えられるようにしました
+- PWAでもデスクトップと同じ並べ替え方法を選べるようにしました
+- PWAでアカウントごとの使用量を確認できるようにしました
+- PWAでエージェントが確認したローカル画像のプレビューを表示できるようにしました
+- リモートの作業フォルダー選択画面から新しいフォルダーを作成できるようにしました
+- 更新を適用する前に、新しいバージョンの変更内容を確認できるようにしました
+- Askで拡大した画像・動画を矢印キーで切り替えられるようにしました
+- 未回答のAskを閉じる操作の表記を「閉じる」に統一しました
+- アプリ内ブラウザーで通知・位置情報・クリップボードなどの権限を自動許可するようにしました。カメラ・マイク・画面収録・全画面化などは引き続き拒否します
+- Cockpitエージェントで添付ファイルが拒否された後も、会話を続けられるようにしました
+
+</details>
+
 ## v4.85.0 — 2026-09-20
 
 **Type:** minor · **Platforms:** macOS, Linux

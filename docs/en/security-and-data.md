@@ -74,6 +74,8 @@ The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API key
 
 ## Isolate Browser Identities
 
+The in-app browser grants site permissions such as notifications, geolocation, and clipboard reading and writing by default, without a Cockpit confirmation dialog. OS and Web API restrictions still apply. It denies media capture including camera and microphone, screen capture, fullscreen, automatic fullscreen, permission to open external apps, keyboard lock, and deprecated synchronous clipboard reading. Open only sites you trust. This policy applies to every Browser Identity; separating Identities does not restrict site permissions.
+
 Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task and Autorun can each be assigned one Identity; the Default Identity is used when none is selected.
 
 On macOS, `import-session` imports cookies belonging to the visible site's registrable domain and localStorage for the exact origin from Chrome into the selected Identity. It does not import sessionStorage, IndexedDB, extension state, device-bound authentication, or passkeys themselves.
@@ -87,6 +89,8 @@ See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identi
 Importing a browser sign-in copies the source browser’s session; it does not sign in with a different account. Check the source account before importing it into an Identity.
 
 ## Handle attachments and Ask media
+
+Local image previews in PWA conversations are sent from the host as resized JPEGs over an authenticated Remote Access connection. Only absolute paths recorded in the target task’s persisted image_view results are allowed; this does not provide access to arbitrary local files. Source size and pixel count are checked as well.
 
 Attachments use randomized stored names in a Cockpit-managed area and are validated by extension, MIME type, actual size, and content. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Archives and executable formats are rejected.
 

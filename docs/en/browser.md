@@ -158,6 +158,8 @@ cockpit browser tab recreate <tabId> --json
 
 ## Sign-in and safety boundaries
 
+The in-app browser grants site permissions such as notifications, geolocation, and clipboard reading and writing by default, without a Cockpit confirmation dialog. OS and Web API restrictions still apply. It denies media capture including camera and microphone, screen capture, fullscreen, automatic fullscreen, permission to open external apps, keyboard lock, and deprecated synchronous clipboard reading. Open only sites you trust. This policy applies to every Browser Identity; separating Identities does not restrict site permissions.
+
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for cookie and localStorage isolation, task and Autorun assignment, system-browser session import, clearing, and removal.
 
 Passkeys can use Touch ID in signed macOS builds and Windows Hello on Windows. On macOS, Cockpit can use only passkeys registered from the in-app browser; it cannot directly use passkeys previously registered in Safari, Chrome, or iCloud Keychain.
