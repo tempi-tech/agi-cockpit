@@ -9,14 +9,14 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added task sorting by name in ascending or descending order.
-- Made the same task sort options available on desktop and in the PWA.
+- Added the same task sort options to desktop and the PWA.
 - Added a per-account usage overview to the PWA.
 - Added previews of local images viewed by agents in PWA conversations.
 - Added folder creation to the remote work-folder picker.
 - Added release notes for pending updates before installation.
 - Added arrow-key navigation between enlarged Ask images and videos.
-- Renamed the action for dismissing unanswered Asks to Close.
-- Enabled site permissions such as notifications, geolocation, and clipboard access by default in the in-app browser. Camera, microphone, screen capture, fullscreen, and other restricted permissions remain denied.
+- Changed the action label for dismissing unanswered Asks to Close.
+- Changed in-app browser permissions to allow notifications, geolocation, and clipboard access by default. Camera, microphone, screen capture, fullscreen, and other restricted permissions remain denied.
 - Fixed Cockpit agent conversations remaining unusable after an attachment was rejected.
 
 <details>
