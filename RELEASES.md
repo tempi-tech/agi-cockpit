@@ -9,9 +9,9 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Fixed model loading for the Cockpit agent.
-- Prevented unnecessary sign-in pages from opening when loading Grok models.
+- Fixed unnecessary sign-in pages opening when loading Grok models.
 - Fixed Grok accounts being marked as requiring sign-in when their credentials can be refreshed automatically.
-- Updated device discovery to list devices reachable by Cockpit and report their operating systems.
+- Improved device discovery to list devices reachable by Cockpit and report their operating systems.
 - Added feature details and plan selection and sign-in options when signed-out users select smart routing.
 
 <details>
