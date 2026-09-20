@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.85.0 — 2026-09-20
+
+**Type:** minor · **Platforms:** macOS
+
+- Fixed model loading for the Cockpit agent.
+- Prevented unnecessary sign-in pages from opening when loading Grok models.
+- Fixed Grok accounts being marked as requiring sign-in when their credentials can be refreshed automatically.
+- Updated device discovery to list devices reachable by Cockpit and report their operating systems.
+- Added feature details and plan selection and sign-in options when signed-out users select smart routing.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Cockpitエージェントでモデル一覧を読み込めない問題を修正しました
+- Grokのモデル一覧を取得するときに、不要なログイン画面が開かないようにしました
+- Grokの認証を自動更新できる場合に、再ログインが必要と判定される問題を修正しました
+- 端末一覧にCockpitで接続できる端末とOSを表示するようにしました
+- 未ログインでスマートルーティングを選ぶと、機能説明とプラン選択・ログインの案内を表示するようにしました
+
+</details>
+
 ## v4.84.0 — 2026-09-19
 
 **Type:** minor · **Platforms:** macOS, Linux
