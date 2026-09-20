@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAからAGI Cockpitを監督し、別のコンピューターから対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.85.0で2026-09-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -170,7 +170,9 @@ cockpit remote-access enable
 
 ## CLIから別のCockpitを操作する
 
-別のコンピューターを`cockpit devices`へ登録すると、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加できます。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
+`cockpit devices`、`cockpit devices list`、`cockpit devices all`は、このコンピューターと、同じtailnet上でCockpitのhealth checkに応答した端末を一覧にします。各端末にはTailscaleから取得した`os`も表示され、判別できない場合は`null`になります。Tailscale上でonlineでもCockpitが応答しない端末は`devices`に含まれず、`diagnostics.unreachable`に理由が表示されます。Tailscaleがofflineまたはaddress未取得の端末数は`diagnostics.notProbed`で確認できます。`cockpit devices self`はほかの端末を探索せず、この端末とaliasだけを返します。
+
+aliasは必須ではありません。必要な場合は`cockpit devices alias-set <alias> <host>`で保存し、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加します。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
 
 リモートCLI要求は、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenを使います。Tailscale限定モードでは、検証済みTailscale peerまたはloopback接続も必要です。peerの信頼だけでは認証になりません。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。
 

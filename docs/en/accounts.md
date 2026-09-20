@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -37,7 +37,9 @@ Only the display label changes. The profile ID, isolated home, stored credential
 
 Fleet YAML is the exception because `account: <name>` is resolved by name when a run starts. Update any Fleet file that uses the old name, or its next run will fail the pre-run account check.
 
-The list reports the provider, profile ID, name, email when available, `authState`, provider-specific usage, and the time that usage was fetched. `authState` distinguishes usable `ok`, invalid `expired`, and credential-free `signed_out` accounts. The compatibility field `loggedIn` is true only for `ok`. `auth_required` means the profile must sign in again. A usage state of `unknown` or `error` means Cockpit could not read the allowance; it is not an authentication verdict, and a credential with `authState: "ok"` remains selectable below accounts with known capacity. Expired and signed-out accounts are unavailable to Auto and the Fleet pre-run check.
+The list reports the provider, profile ID, name, email when available, `authState`, provider-specific usage, and the time that usage was fetched. Grok Build also reports the reason for its authentication decision as `authReason`. `authState` distinguishes usable `ok`, invalid `expired`, and credential-free `signed_out` accounts. The compatibility field `loggedIn` is true only for `ok`. `auth_required` means the profile must sign in again. A usage state of `unknown` or `error` means Cockpit could not read the allowance; it is not an authentication verdict, and a credential with `authState: "ok"` remains selectable below accounts with known capacity. Expired and signed-out accounts are unavailable to Auto and the Fleet pre-run check.
+
+Grok Build access tokens last about six hours, but an expired access token remains selectable by Auto and Fleet when a refresh token is stored: the account reports `authReason: expired_refreshable` and `authState: ok`. Merely reading models or usage does not open interactive sign-in or refresh the token, so usage remains `unknown` or stale until renewal. The Grok CLI attempts renewal when the next task starts. A network problem reports `network_failure` without requiring sign-in. `refresh_refused`, `expired_without_refresh`, and `provider_rejected` require manual sign-in.
 
 For agents that expose the default account's email address, Cockpit shows it on the default row in the account switcher and in that agent's authentication settings. It never borrows a named profile's address for the default row. An address that was not reported, a signed-out account, and a failed lookup remain distinct states so the display can also help diagnose authentication.
 

@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -29,7 +29,7 @@ Open **Settings → Agents → Common** and choose **Default agent** from the dr
 
 ## Choose with Smart routing
 
-When signed in to AGI Labo, enable **Smart routing** in Desktop **New task** or Quick Task. Cockpit chooses a valid combination from the instruction, configured agents, discovered models and reasoning levels, recent and active project workspaces, the Master workspace, and temporary or persistent workspaces. External agents are created in Native UI with an Auto account. Terminal and Creative Studio are not routed automatically.
+Smart routing is for AGI Labo members. If you select it from Desktop **New task** or Quick Task while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member and enabling it, Cockpit chooses a valid combination from the instruction, configured agents, discovered models and reasoning levels, recent and active project workspaces, the Master workspace, and temporary or persistent workspaces. External agents are created in Native UI with an Auto account. Terminal and Creative Studio are not routed automatically.
 
 Use **Routing policy** for free-form preferences, such as prioritizing Codex for implementation and Claude for research or writing. The policy and on/off state are stored on Desktop for each signed-in user, save automatically, and apply to later tasks. Manually selecting a workspace fixes only the workspace. Turn off Smart routing when you want to choose the agent or model directly.
 
@@ -82,6 +82,8 @@ Custom prompts are stored as user-owned Markdown in the AGI Tools data area. The
 
 Model controls in agent settings, new tasks, and Autoruns show where the list came from, retrieval status, and when it was fetched. A failed or timed-out CLI lookup is identified as a built-in fallback; use **Show reason** when available, then **Reload models** to try again. A built-in candidate does not guarantee that your installed CLI or account can use it.
 
+When discovering Grok Build models, Cockpit does not start the Grok CLI or open a sign-in page if discovery would require interactive authentication. While signed out, it shows built-in candidates and guidance to sign in from Settings for the current catalog. If an expired access token has a usable refresh token, model discovery also uses known or built-in candidates instead of starting a refresh. The Grok CLI refreshes the token when an actual task starts.
+
 If a model is missing or the CLI is outdated, review the installed and available CLI versions in the notice. Desktop offers **Update CLI**, which opens a terminal for that agent’s update command. After a successful update, reload the models. In the PWA, copy the displayed command and run it on the computer hosting Cockpit; the PWA does not run the CLI update. Except for unlisted Codex models, if the CLI is already current, choose another available model. If its latest version is unknown, check whether a newer CLI release adds the model.
 
 When switching agents, the model-list status uses previously retrieved information for the selected agent and account when available. In the PWA task creation dialog, look below the agent and model controls for the model-list source, retrieval status, and related notices.
@@ -100,7 +102,7 @@ Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build support a default acco
 
 When you choose Auto or a fixed account at task creation, Cockpit saves that selection and the current runtime account with the task, then uses the same state for its display and next runtime. A fixed account does not switch automatically. Switching an active Claude, Codex, Antigravity, Cursor, Qoder, or Grok Build task stops its current runtime and carries the saved conversation into the selected profile before resuming. A missing, busy, unreadable, or ambiguous source fails safely; different target history is archived before replacement. Exhausted Claude usage credits and Codex workspace credits are treated as usage limits.
 
-An invalid credential appears as **Session expired** and `authState: expired`; Auto and the Fleet pre-run check exclude it. Signing in again clears the cached verdict and refreshes authentication and usage state.
+An invalid credential appears as **Session expired** and `authState: expired`; Auto and the Fleet pre-run check exclude it. An expired Grok Build access token with a refresh token remains selectable with `authState: ok` and is renewed when the next task starts. Signing in again clears the cached verdict and refreshes authentication and usage state.
 
 Antigravity named profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a dedicated home. On macOS, a profile-specific Keychain forms the authentication and quota boundary, and the task does not start if Cockpit cannot verify it first in the search order. The OS keyring is shared on Windows and Linux, so a remaining host login takes precedence over profile token files. Developer shell resources and non-credential settings remain shared with the normal home directory. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) for provenance and safe logout procedures.
 

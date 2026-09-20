@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -60,6 +60,10 @@ See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/
 5. Terminal UI cannot use native UI sign-in guidance, so complete authentication inside that CLI's terminal flow.
 
 If only the LM Studio list is stale or missing, select **Reload models** beside the default model or LM Studio URL in Cockpit Agent settings. An edited URL is tested before it is saved. From the CLI, `cockpit settings refresh-models lmstudio` uses the saved URL. After a successful list response that omits the selected model, Settings blocks Save until you choose an available model. A connection failure keeps the selection, so check the URL and that LM Studio is running, then retry. This operation does not start, stop, or reload the model itself.
+
+If Cockpit Agent cannot load OpenCode Go or OpenCode Zen models, confirm that the selected provider matches the saved API key, then reload the models. Go and Zen use separate API keys; neither key substitutes for the other.
+
+Merely checking the Grok Build model list does not launch the Grok CLI or open a sign-in page. When signed out, Cockpit shows built-in candidates and guidance to sign in from Settings. If an expired access token has a refresh token, the account remains `authReason: expired_refreshable` and `authState: ok`; Cockpit shows known or built-in candidates and refreshes when the next task starts. `network_failure` does not require sign-in. Sign in again only for `refresh_refused`, `expired_without_refresh`, or `provider_rejected`.
 
 For a possible temporary service incident from Claude, Codex, Antigravity, Cursor, or Grok Build, such as a 404, 5xx response, or gateway timeout, follow **Check provider status** from the error surface to the provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors.
 

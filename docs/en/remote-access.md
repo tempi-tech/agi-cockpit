@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -170,7 +170,9 @@ Configuration cannot change while the server is running. If you need to change i
 
 ## Operate another Cockpit from the CLI
 
-Register the other computer with `cockpit devices`, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
+`cockpit devices`, `cockpit devices list`, and `cockpit devices all` list this computer and devices on the same tailnet that answer Cockpit's health check. Each device includes the `os` reported by Tailscale, or `null` when Cockpit cannot recognize it. A device that is online in Tailscale but does not answer Cockpit is omitted from `devices` and reported with a reason under `diagnostics.unreachable`. `diagnostics.notProbed` counts devices that Tailscale reports as offline or without an address. `cockpit devices self` does not probe peers; it returns only this computer and aliases.
+
+An alias is optional. Save one with `cockpit devices alias-set <alias> <host>` when useful, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
 
 Remote CLI requests use the paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit also requires a verified Tailscale peer or loopback connection; peer trust by itself is not authorization. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC.
 

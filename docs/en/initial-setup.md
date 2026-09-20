@@ -4,7 +4,7 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
@@ -28,7 +28,7 @@ If a Claude Code, Codex, or Grok Build Native UI task starts before authenticati
 
 ## 4. Choose how to use Cockpit
 
-For local features only, select **Start without signing in** on the final screen. Sign in as an AGI Labo member if you want Autorun or remote access from another device.
+For local features only, select **Start without signing in** on the final screen. Sign in as an AGI Labo member if you want Smart routing, Autorun, or remote access from another device.
 
 Setup is complete when the **New task** screen opens and the agent you want is selectable. Continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 

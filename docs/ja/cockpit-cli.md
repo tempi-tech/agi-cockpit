@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.85.0で2026-09-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -106,7 +106,9 @@ Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`�
 
 ## ローカルとリモートを区別する
 
-対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドは、`--host`で登録済みdeviceのaliasまたはhostを指定できます。`ask list`、`ask answer`、`ask close`もリモートに対応しますが、Askの作成とrelay設定はローカル専用です。browser、App Surface、display、settings、usage、updateなど、host指定に対応しない操作はローカルのCockpitだけを対象にします。
+`cockpit devices`は、この端末と、同じtailnet上でCockpitのhealth checkに応答した端末をOS付きで一覧にします。Tailscale上でonlineでもCockpitが応答しない端末は一覧に含まれず、`diagnostics.unreachable`に理由が表示されます。Tailscaleがofflineまたはaddress未取得の端末は`diagnostics.notProbed`へ集計されるため、空の`devices`だけでほかのCockpitがないと判断しないでください。`cockpit devices self`は探索せず、この端末とaliasだけを返します。
+
+対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドは、`--host`でdeviceのhostまたは保存済みaliasを指定できます。`ask list`、`ask answer`、`ask close`もリモートに対応しますが、Askの作成とrelay設定はローカル専用です。browser、App Surface、display、settings、usage、updateなど、host指定に対応しない操作はローカルのCockpitだけを対象にします。
 
 リモート制御はペアリング済みBearer tokenを使い、接続先がTailscale限定の場合は検証済みpeerまたはloopback接続も必要です。ファイルパスとディレクトリは接続先コンピューターで解決されます。リモート応答にはdevice identityが含まれ、ローカルfile IPCへfallbackしません。
 

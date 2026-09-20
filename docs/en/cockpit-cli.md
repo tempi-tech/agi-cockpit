@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -88,7 +88,9 @@ Choose the Cockpit Agent provider from `openrouter`, `opencode-go`, `opencode`, 
 
 ## Distinguish local and remote targets
 
-Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can target a registered device alias or host through `--host`. `ask list`, `ask answer`, and `ask close` also support remote targets, while Ask creation and relay configuration remain local. Commands without host support, including browser, App Surface, display, settings, usage, and update operations, affect only the local Cockpit instance.
+`cockpit devices` lists this computer and devices on the same tailnet that answer Cockpit's health check, including their operating systems. A device that is online in Tailscale but does not answer Cockpit is omitted from the list and reported with a reason under `diagnostics.unreachable`. Devices that Tailscale reports as offline or without an address are counted under `diagnostics.notProbed`, so do not treat an empty `devices` array as conclusive without checking diagnostics. `cockpit devices self` skips discovery and returns only this computer and aliases.
+
+Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can target a device host or saved alias through `--host`. `ask list`, `ask answer`, and `ask close` also support remote targets, while Ask creation and relay configuration remain local. Commands without host support, including browser, App Surface, display, settings, usage, and update operations, affect only the local Cockpit instance.
 
 Remote control uses the paired bearer token and, when the target is Tailscale-only, also requires a verified peer or loopback connection. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC.
 

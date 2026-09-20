@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.82.0で2026-09-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.85.0で2026-09-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -37,7 +37,9 @@ cockpit accounts rename work "Work (EU)" --agent-type codex
 
 Fleet YAMLの`account: <name>`だけは実行時に名前で解決します。Fleetが変更前の名前を使っている場合はYAMLも更新してください。更新しないと次のRunは開始前のアカウント確認で失敗します。
 
-一覧にはプロバイダー、プロファイルID、名前、取得できる場合はメールアドレス、`authState`、利用状況、その取得時刻が表示されます。`authState`は、利用できる`ok`、認証情報が無効になった`expired`、認証情報がない`signed_out`を区別します。互換性のための`loggedIn`は`ok`のときだけ`true`です。`auth_required`は再ログインが必要な状態です。利用状況の`unknown`または`error`は残量を取得できなかったことを示し、認証結果ではありません。認証情報が`authState: "ok"`なら、残量が判明しているアカウントより優先度を下げたうえで選択対象に残ります。期限切れまたはサインアウト済みのアカウントは、AutoとFleet開始前の確認で利用できません。
+一覧にはプロバイダー、プロファイルID、名前、取得できる場合はメールアドレス、`authState`、利用状況、その取得時刻が表示されます。Grok Buildでは認証判断の理由を`authReason`でも確認できます。`authState`は、利用できる`ok`、認証情報が無効になった`expired`、認証情報がない`signed_out`を区別します。互換性のための`loggedIn`は`ok`のときだけ`true`です。`auth_required`は再ログインが必要な状態です。利用状況の`unknown`または`error`は残量を取得できなかったことを示し、認証結果ではありません。認証情報が`authState: "ok"`なら、残量が判明しているアカウントより優先度を下げたうえで選択対象に残ります。期限切れまたはサインアウト済みのアカウントは、AutoとFleet開始前の確認で利用できません。
+
+Grok Buildのaccess tokenは約6時間で期限切れになりますが、refresh tokenが保存されている場合は`authReason: expired_refreshable`、`authState: ok`となり、AutoとFleetの選択対象に残ります。モデル一覧や使用量の確認だけでは対話ログインやtoken更新を開始せず、使用量は更新まで`unknown`または古い値になります。次のタスク開始時にGrok CLIが更新を試みます。ネットワーク障害は`network_failure`として再ログイン扱いにせず、refresh tokenが拒否された`refresh_refused`、refresh tokenがない`expired_without_refresh`、またはプロバイダーが認証を拒否した`provider_rejected`では再ログインが必要です。
 
 デフォルトアカウントのメールアドレスを取得できるエージェントでは、アカウント切り替えメニューのdefault行とSettingsのエージェント認証欄に表示されます。名前付きプロファイルのアドレスをdefaultへ流用しません。アドレス未提供、未ログイン、取得失敗も別の状態として表示されるため、認証状態の確認に使えます。
 
