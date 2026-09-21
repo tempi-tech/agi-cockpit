@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.87.0 — 2026-09-22
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added the ability to answer an Ask with both a selection and additional text.
 - Added the ability to send individual Ask answers together with a reply to the whole Ask.
