@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -44,6 +44,8 @@ Ask can combine:
 
 Free-form input is available by default even when choices are provided. Write the question so it can stand on its own: identify the subject, the current state, and the result of each choice.
 
+For one question, a person can select an option and add free text as a condition, reason, or supplement before sending. Cockpit keeps the selection and text as separate structured fields in the same answer. For an Ask with two or more questions, a person can answer individual questions and add one reply addressed to the whole Ask in the same submission. A whole-Ask reply can also stand alone; when it is present, questions left blank remain unanswered instead of receiving an invented value. Without a whole-Ask reply, every question still requires an answer.
+
 Desktop opens a clicked Ask URL in the system browser without navigating the Ask window. The PWA opens it in a new browser tab. Desktop accepts only `http` and `https` links from the Ask surface; other URL schemes are not opened.
 
 Desktop and PWA Ask surfaces include a button that opens the task that created the question. Navigating there does not answer or close the Ask. The button is unavailable after the source task has been deleted.
@@ -62,7 +64,7 @@ Use **A−** and **A+** in the header to change the text size of questions, choi
 
 1. The agent creates an Ask.
 2. Cockpit saves the question and displays it in Desktop and the PWA. When an Ask relay is enabled, it also posts to the configured Discord or Slack channel.
-3. A person answers with a choice, text, and optional supported file attachments.
+3. A person answers with a choice, optional supplementary text, an optional whole-Ask reply for a multi-question Ask, and supported file attachments as needed.
 4. Cockpit delivers a `cockpit.ask.resolved` event to the original task.
 5. The agent receives the answer and continues the same work.
 
@@ -128,13 +130,15 @@ Starting with v4.39.0, the CLI can list, answer, or close open Asks in addition 
 cockpit ask list
 cockpit ask list --task <task-id>
 cockpit ask answer <ask-id> --choice "Publish"
+cockpit ask answer <ask-id> --choice "Publish" --input "Ask me again before changing production data"
+cockpit ask answer <ask-id> --question approach --choice "Plan A" --question environment --input "Staging first" --whole-answer "Finish before Friday"
 cockpit ask answer <ask-id> --input "Review the image" --attachment ./screenshot.png
 cockpit ask close <ask-id>
 ```
 
 Add `--host <host-or-alias>` to `list`, `answer`, or `close` to operate an Ask on another registered Cockpit computer. The target must have member-only Remote Access enabled. Remote control requires the paired bearer token and, in Tailscale-only mode, a verified peer or loopback connection. Ask creation and relay settings remain local-only. Paths passed to `--attachment` refer to files on the target computer.
 
-`list` inspects the question, choices, and attached-media metadata. `answer` acts on the user's behalf and resumes the task that created the Ask. `--attachment` imports a local file into the originating task's managed uploads and delivers it in the same format as a UI answer attachment. In a multi-question answer, place the attachment after its target `--question`.
+`list` inspects the question, choices, and attached-media metadata. `answer` acts on the user's behalf and resumes the task that created the Ask. For one question, combine `--choice` or `--choice-index` with `--input` to send a selection and supplementary text together. For several questions, group answers under `--question <id>` and add `--whole-answer` when one reply should apply to the Ask as a whole. `--attachment` imports a local file into the originating task's managed uploads and delivers it in the same format as a UI answer attachment. In a multi-question answer, place the attachment after its target `--question`; an attachment before the first group belongs to the whole-Ask reply.
 
 Use proxy answering only when the answering agent has both the context and the authority to relay the decision, such as a voice agent conveying an explicit answer from the user. Do not answer an Ask with media until the user or proxy has actually inspected that media.
 

@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -132,6 +132,10 @@ Select a node's **Events** view to read its event timeline. Events are grouped b
 The progress bar in the Run header groups every node by completed, running, failed, interrupted, stopped, skipped, or pending state and shows completed nodes over total nodes. It is a current status breakdown, not elapsed time or an estimated completion time.
 
 Select a gate node to see the actual exit code for a command gate, or the approved or rejected result and answer text for a human gate. Exit code 0 passes; any other code fails. Inspect the gate details and output instead of inferring the result only from the overall Run status.
+
+In the PWA, open **Task panel → Fleet** from a task that belongs to a Run. The tab presents Run status and progress as a dependency-ordered list instead of the Desktop graph. Select a node to inspect its dependencies, agent and model, status, attempt, runtime, timestamps, duration, loop or `foreach` context, gate result, and failure details. When the node has a task that the PWA can open, **Open this node's task** navigates to it. The current loop iteration opens by default, and large groups are revealed in bounded steps.
+
+The PWA Fleet tab is a supervision view. Use the Desktop Fleet panel or `cockpit fleet` commands to pause, resume, retry, stop, or answer a gate. The visible tab refreshes as the Run changes.
 
 Use these commands for deeper inspection.
 

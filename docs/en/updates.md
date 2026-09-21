@@ -4,7 +4,7 @@
 
 Check and apply AGI Cockpit updates on Windows, macOS, or Linux, then inspect update state and diagnostic logs if an update fails.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
 
 The update method depends on how AGI Cockpit is distributed. This guide identifies the method for your environment and verifies the result after updating.
 
@@ -48,6 +48,8 @@ On Linux, open the language-matched download page from **Update manually** or th
 ### Update from a phone
 
 With an active AGI Labo membership and an authenticated PWA connection, open the connection target in the header and select **Host updates**. You can check the host version, release notes, and download progress. Automatic installation is available for packaged macOS hosts after the download completes. **Update now** requires a separate confirmation because it restarts the host and terminates every running task.
+
+After the download completes, **Install when idle** arms installation for the point when no task or Fleet Run is running. The PWA shows the current blocking count and lets you cancel the schedule before installation starts. The schedule is session-only; a host restart clears it. Tasks waiting for input or an Ask and paused Fleet Runs do not block installation, and every task ends once installation begins.
 
 The PWA attempts to reconnect automatically after restart. Linux hosts require manual installation on the host, and Windows Store hosts update through Microsoft Store. See [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for the full procedure and connection requirements.
 

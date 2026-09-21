@@ -4,7 +4,7 @@
 
 Understand the task list, Overview, search, project names, sorting, workspaces, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.82.0 on 2026-09-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -25,6 +25,8 @@ Overview searches across tasks, projects, and agents, including completed work. 
 Search inside the task list partially matches displayed task and project names. A task ID becomes searchable after at least four characters. This search does not inspect instructions, working directories, or internal metadata.
 
 The **Pinned** heading on Desktop and the PWA shows the total number of unfinished pinned tasks. When search or the agent filter narrows the list, it shows **visible / total**; without filtering, it shows the total. The total remains visible when the group is collapsed or no pinned task matches the filter.
+
+In the PWA, select a project heading to collapse or expand that project's tasks. A collapsed heading keeps the task count and running or unread indicators visible. The choice is stored in that browser for each project directory and survives a reload, but it does not sync to other devices. Search can hide groups that do not match without changing their saved collapsed state. A new or reintroduced project starts expanded; completed-only sections and the Pinned group keep their existing behavior.
 
 In the PWA task list, a question-bubble marker labelled **Waiting for an Ask answer** appears while that task has an unanswered Ask. It follows the actual open Ask rather than inferring from `waitingReason: question`, so it clears after the Ask is answered or closed. Selecting the row still opens the task; open **Confirm** to answer the Ask. A session-unrecoverable warning or usage-limit warning takes display priority over the Ask marker because it identifies a separate recovery blocker.
 

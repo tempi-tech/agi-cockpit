@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -96,7 +96,9 @@ The connection is ready when the PWA header shows the target machine name and **
 
 The PWA is an operating surface for checking progress and decisions from another location. Enable remote access and configure its transport and HTTPS certificate in Desktop. Not every Desktop setting or result view is available in the PWA.
 
-The task panel in task details provides tabs for HTML Surface, diff, Cockpit Browser, terminal, Creative Studio artifacts, and Talk Room. Cockpit Browser shows a still image of a host tab inside the task's assigned Browser Identity, refreshes it every ten seconds while visible, and provides four controls that scroll the host page. Scrolling also changes the host-side position, but the PWA does not activate links, type, or submit forms. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser#inspect-a-host-tab-from-the-pwa) for scope, limits, and storage boundaries.
+The task panel in task details provides tabs for HTML Surface, diff, Cockpit Browser, terminal, Fleet, Creative Studio artifacts, and Talk Room. Cockpit Browser shows a still image of a host tab inside the task's assigned Browser Identity, refreshes it every ten seconds while visible, and provides four controls that scroll the host page. Scrolling also changes the host-side position, but the PWA does not activate links, type, or submit forms. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser#inspect-a-host-tab-from-the-pwa) for scope, limits, and storage boundaries.
+
+Project headings in the PWA task list can collapse their tasks while leaving task counts and running or unread indicators visible. This state is stored in that browser per project directory and does not sync to other devices. The HTML Surface tab marks unseen results and lets you jump to the latest one without losing older unseen history. For a task in a Fleet Run, the Fleet tab provides read-only progress, dependencies, step details, and navigation to supported node tasks. The terminal key bar has a **Modifier keys** menu for Ctrl+C, Ctrl+X, Ctrl+S, and Shift+Tab. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks), [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools), and [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for the operating details and limits.
 
 The PWA's light or dark appearance follows the connected Desktop's mode under **Appearance**. It stores the last synchronized mode on the device and uses it at the next launch until the connection returns. This is not a separate choice based on the device operating system theme.
 
@@ -115,6 +117,8 @@ Installing requires a separate confirmation. **Installation restarts the host an
 Automatic installation is available only on hosts that support it and after the update has downloaded. Microsoft Store installations must update through Microsoft Store; hosts requiring manual updates show the download page instead. Development builds do not support automatic installation. Only authenticated connections can request host updates.
 
 Select the connection target in the PWA header, then **Host updates**. Review the running and available versions and release notes, select **Check for updates**, and use **Download** when offered. Once **Ready to install** appears, select **Update now** and review the separate restart confirmation. After reconnection, verify the running version. If the host returns without the requested version or reports an error, inspect **Updater log summary** before retrying.
+
+On a supported packaged macOS host, **Install when idle** arms the downloaded update for the point when no task or Fleet Run is running. The screen shows the current blocking count and allows cancellation before installation starts. The schedule lasts only for the current host session. Waiting tasks and paused Fleet Runs do not block it; when installation begins, every task terminates.
 
 ### Choose another computer
 

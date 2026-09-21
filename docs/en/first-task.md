@@ -4,7 +4,7 @@
 
 Choose a workspace and agent, safely run your first task, review its result, and mark the task complete.
 
-> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
@@ -24,6 +24,8 @@ Inspect this folder and describe its main files and their roles in no more than 
 Project selection shows projects from the current task list first, followed by recently used projects. Search filters the display name and path. Enter a path directly or use the folder picker when a location is not listed.
 
 Smart routing is for AGI Labo members. If you select **Smart routing** while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member, turn it on to let Cockpit choose an AI agent, model, reasoning level, and workspace from the currently available candidates based on the instruction. Manually selecting a workspace fixes only the workspace; agent and model routing remains active. Under **Routing policy**, enter preferences such as agents or models to prioritize. The policy saves automatically and applies to future tasks.
+
+When the workspace remains **Auto**, Cockpit offers only directories that still exist and can be used for a new top-level task. Temporary or internal directories and workspaces reserved for child tasks are excluded. A workspace that you select manually remains fixed and is not replaced by this filtering.
 
 Smart routing creates ordinary AI-agent tasks in Native UI and uses Auto for the account. It does not route Terminal or Creative Studio work. If selection fails, check the agent CLI, provider, and API key settings, or turn off Smart routing and select the configuration manually.
 

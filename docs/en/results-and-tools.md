@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -14,7 +14,7 @@ The right side panel in task details opens supporting information and interactiv
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
-In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Creative Studio artifacts, and Talk Room as tabs in one bottom sheet. Use the previous and next controls or the horizontally scrolling tab row, and switch the sheet between approximately half height and full height. The selected tab, target, drafts, and scroll positions are retained per task. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
+In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Fleet, Creative Studio artifacts, and Talk Room as tabs in one bottom sheet. Use the previous and next controls or the horizontally scrolling tab row, and switch the sheet between approximately half height and full height. The selected tab, target, drafts, and scroll positions are retained per task. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
 
 ## Review diffs and files
 
@@ -38,6 +38,12 @@ HTML Surface is not a general-purpose web browser. Use it for agent-created repo
 
 From the CLI, `cockpit html show --stdin` stores HTML and `cockpit side-panel html` displays it. See the [`cockpit html` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/html) for the exact contract.
 
+### Open an unseen HTML Surface
+
+Desktop and the PWA count HTML Surfaces that have arrived but have not yet rendered in that task's visible HTML panel. A badge appears on the panel opener or HTML Surface tab. If you are already following the latest Surface, Cockpit follows the new one. If you are reviewing history or an older Surface, your view stays in place and a notice offers **Open latest**. Opening the unseen shortcut jumps to the newest unseen Surface; older unseen items remain marked in History.
+
+A Surface becomes seen only after its content renders in the visible panel. The seen state persists across an app restart. Dismissing the arrival notice does not mark the Surface seen, and switching to another task does not clear its badge.
+
 ## Continue to a dedicated operating surface
 
 The in-app browser lets a person and agent operate the same real web page. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for page state, meaningful element targeting, and postconditions, and [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for sign-in isolation.
@@ -47,6 +53,8 @@ App Surface attaches a running Android target or iOS Simulator to one task. See 
 ## Use side terminals and background logs
 
 A side terminal is a shell session separate from the task's agent process. Before running a command, confirm the session name, current working directory, and target host. Closing a terminal ends that shell but does not complete the task.
+
+In both PWA terminal views—the task's main Terminal view and a side terminal—the key bar sends Esc, Tab, Enter, and arrow keys directly to the host terminal. Open **Modifier keys** to send Ctrl+C, Ctrl+X, Ctrl+S, or Shift+Tab. These are terminal input sequences, not browser shortcuts, and have the same effect as typing them at the host: for example, Ctrl+C can interrupt the foreground process. The menu is disabled when the terminal is not writable.
 
 Background logs show output from long-running processes started by an agent. In Antigravity Native UI, a command moved to the background remains visible after the turn completes with a Running, Completed, Failed, or Stopped state. Visible output alone is not completion. Check the exit code, generated artifact, listening port, test result, or another success condition appropriate to the request.
 
