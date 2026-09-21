@@ -4,6 +4,35 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.87.0 — 2026-09-22
+
+**Type:** minor · **Platforms:** macOS
+
+- Added the ability to answer an Ask with both a selection and additional text.
+- Added the ability to send individual Ask answers together with a reply to the whole Ask.
+- Added simple daily, weekly, and monthly scheduling for Autorun.
+- Added indicators for unseen HTML Surfaces and a shortcut to open the latest result.
+- Added a Fleet view in the PWA with run progress, dependencies, and step details.
+- Added collapsible project groups to the PWA task list.
+- Added controls in the PWA to schedule or cancel an app update when tasks stop.
+- Added a modifier-key menu to PWA terminals for Ctrl+X, Ctrl+S, Shift+Tab, and other shortcuts.
+- Fixed automatic task routing to exclude missing folders and workspaces used only by child tasks.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Askで選択肢と補足の自由文を一緒に回答できるようにしました
+- Askで各質問への回答と全体への返信を一緒に送れるようにしました
+- Autorunで毎日・毎週・毎月の実行予定を簡単に設定できるようにしました
+- 未確認のHTML Surfaceを表示し、最新の成果をすぐに開けるようにしました
+- PWAでFleetの進捗・依存関係・各ステップの詳細を確認できるようにしました
+- PWAのタスク一覧をプロジェクトごとに折りたためるようにしました
+- PWAからタスク停止後のアプリ更新を予約・取り消しできるようにしました
+- PWAのターミナルにCtrl+X・Ctrl+S・Shift+Tabなどを送れる修飾キーメニューを追加しました
+- タスクの自動振り分け先に、存在しないフォルダーや子タスク専用の作業場所が含まれないよう修正しました
+
+</details>
+
 ## v4.86.0 — 2026-09-21
 
 **Type:** minor · **Platforms:** macOS, Linux
