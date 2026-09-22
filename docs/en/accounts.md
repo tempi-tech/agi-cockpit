@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -86,6 +86,8 @@ An Autorun resolves Auto again on every execution. Fleet can spread parallel nod
 Mentioning a usage limit in ordinary conversation does not mark the execution account as exhausted. Tool output from another agent is also distinguished from the task's own account limit. For example, a Claude Code limit from a process started by a Codex task appears as a Claude notice and does not trigger a Codex account switch.
 
 A Codex limit notice identifies the account, usage window, and reset time when known. If the provider did not name the window, the notice says so. `usageLimitAttribution` in `cockpit task get <id>` also identifies the restriction; explicit provider errors take precedence over cached usage data.
+
+Terminal UI and Terminal do not overlay Cockpit's usage-limit banner on the conversation. Read the limit message from the provider CLI and inspect `waitingReason`, the reset time, and `usageLimitAttribution` in `cockpit task get <id>`. Limit detection, the waiting state, and Auto account recovery still run, but Cockpit's account-handoff explanation and switch-account button are not shown on a terminal surface.
 
 ## Pin one account
 

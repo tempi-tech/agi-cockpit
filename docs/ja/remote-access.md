@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAからAGI Cockpitを監督し、別のコンピューターから対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.87.0で2026-09-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.88.0で2026-09-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -84,19 +84,19 @@ HTTPSのRemote Accessを開始すると証明書を確認し、実行中は24時
 
 同じ利用者とtailnetに属するTailscale端末は、Tailscaleの端末情報で自動的に認証される場合があります。自動認証できない接続ではペアリングコードが必要です。コードは5分で更新され、「再生成」を選ぶとその場で新しくできます。
 
-接続に成功すると、PWA上部に接続先のマシン名と「接続済み」が表示され、「確認」「タスク」「自動タスク」を開けます。ブラウザーのタブ名も`<マシン名> - AGI Cockpit`の順になり、タブ幅が狭い場合でも複数の接続先を先頭で識別できます。未接続またはマシン名を取得できない間は`AGI Cockpit`と表示します。
+接続に成功すると、PWA上部に接続先のマシン名と「接続済み」が表示され、「受信箱」「タスク」「自動タスク」を開けます。ブラウザーのタブ名も`<マシン名> - AGI Cockpit`の順になり、タブ幅が狭い場合でも複数の接続先を先頭で識別できます。未接続またはマシン名を取得できない間は`AGI Cockpit`と表示します。
 
 ## PWAで監督する
 
 | 画面 | 主な操作 |
 | --- | --- |
-| 確認 | 保留中のAskを読み、選択、自由入力、添付を含む回答を返す |
+| 受信箱 | 保留中のAskへ選択、自由入力、添付を含む回答を返し、Display通知を確認・クローズする |
 | タスク | タスクの作成、一覧と詳細の確認、追加指示または次のメッセージのキュー送信、権限や質問への回答、タスクパネルでの成果確認、完了、削除を行う |
 | 自動タスク | Autorunの作成、編集、有効化、今すぐ実行、削除、結果確認を行う |
 
 PWAは、外出先や別の部屋から進行状況と判断待ちを確認するための操作面です。リモートアクセス自体の有効化、通信モード、HTTPS証明書はDesktopで設定します。Desktopにあるすべての設定画面や結果表示がPWAにもあるわけではありません。
 
-タスク詳細のタスクパネルでは、HTML Surface、差分、Cockpit Browser、ターミナル、Fleet、Creative Studioの成果物、Talk Roomをタブで切り替えます。Cockpit Browserは、タスクへ割り当てられたBrowser Identity内のホストtabを10秒間隔の静止画像で確認し、上下左右のボタンでホストページをスクロールできます。スクロールはホスト側の位置も変更しますが、PWAからlink、入力、送信は操作しません。表示範囲、制限、保存境界は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser#pwaからホストのタブを確認する)を参照してください。
+タスク詳細のタスクパネルでは、HTML Surface、差分、Cockpit Browser、ターミナル、Fleet、Creative Studioの成果物、Talk Roomをタブで切り替えます。広い画面ではチャットの右側へ並べて表示し、狭い画面では従来どおりbottom sheetとして開きます。さらに広い画面ではタスクナビゲーターも同時に表示できます。画面幅や向きが変わって表示形式が切り替わっても、開いているタブ、対象、下書き、スクロール位置は保持されます。Cockpit Browserは、タスクへ割り当てられたBrowser Identity内のホストtabを10秒間隔の静止画像で確認し、上下左右のボタンでホストページをスクロールできます。スクロールはホスト側の位置も変更しますが、PWAからlink、入力、送信は操作しません。表示範囲、制限、保存境界は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser#pwaからホストのタブを確認する)を参照してください。
 
 PWAのタスク一覧では、プロジェクト見出しからタスクを折りたため、件数と実行中・未読の表示は見出しに残ります。この状態はプロジェクトのディレクトリごとにそのブラウザーへ保存され、ほかの端末とは同期しません。HTML Surfaceタブは未確認の成果を示し、過去の未確認履歴を残したまま最新の成果へ移動できます。Fleet Runのタスクでは、Fleetタブから進捗、依存関係、ステップ詳細を読み取り、対応するノードのタスクへ移動できます。ターミナルのキーバーには、Ctrl+C、Ctrl+X、Ctrl+S、Shift+Tabを送る「修飾キー」メニューがあります。操作方法と制限は[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)、[成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)、[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を参照してください。
 

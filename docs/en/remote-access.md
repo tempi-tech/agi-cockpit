@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -84,19 +84,19 @@ A failed automatic renewal retries after six hours. When failure occurs with 14 
 
 A Tailscale device owned by the same user in the same tailnet may be authenticated automatically from its Tailscale identity. A connection that Cockpit cannot authenticate automatically requires the pairing code. The code refreshes after five minutes; select **Regenerate** to replace it immediately.
 
-The connection is ready when the PWA header shows the target machine name and **Connected**, and you can open **Confirm**, **Tasks**, and **Autorun**. The browser tab title also starts with the target as `<machine name> - AGI Cockpit`, making several connections distinguishable even in narrow tabs. While disconnected or before a machine name is available, it falls back to `AGI Cockpit`.
+The connection is ready when the PWA header shows the target machine name and **Connected**, and you can open **Inbox**, **Tasks**, and **Autorun**. The browser tab title also starts with the target as `<machine name> - AGI Cockpit`, making several connections distinguishable even in narrow tabs. While disconnected or before a machine name is available, it falls back to `AGI Cockpit`.
 
 ## Supervise work in the PWA
 
 | Screen | Main actions |
 | --- | --- |
-| Confirm | Review pending Asks and answer with choices, free text, or attachments |
+| Inbox | Answer pending Asks with choices, free text, or attachments, and review or close Display notices |
 | Tasks | Create tasks, review the list and details, send follow-ups or queue the next message, answer permissions or questions, inspect results in the task panel, complete tasks, and delete tasks |
 | Autorun | Create, edit, enable, run now, delete, and review Autoruns |
 
 The PWA is an operating surface for checking progress and decisions from another location. Enable remote access and configure its transport and HTTPS certificate in Desktop. Not every Desktop setting or result view is available in the PWA.
 
-The task panel in task details provides tabs for HTML Surface, diff, Cockpit Browser, terminal, Fleet, Creative Studio artifacts, and Talk Room. Cockpit Browser shows a still image of a host tab inside the task's assigned Browser Identity, refreshes it every ten seconds while visible, and provides four controls that scroll the host page. Scrolling also changes the host-side position, but the PWA does not activate links, type, or submit forms. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser#inspect-a-host-tab-from-the-pwa) for scope, limits, and storage boundaries.
+The task panel in task details provides tabs for HTML Surface, diff, Cockpit Browser, terminal, Fleet, Creative Studio artifacts, and Talk Room. On a wide screen it appears beside the chat; on a narrow screen it remains a bottom sheet. A wider three-column layout can keep the task navigator visible too. Changing width or orientation preserves the open tab, target, drafts, and scroll positions while the presentation switches. Cockpit Browser shows a still image of a host tab inside the task's assigned Browser Identity, refreshes it every ten seconds while visible, and provides four controls that scroll the host page. Scrolling also changes the host-side position, but the PWA does not activate links, type, or submit forms. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser#inspect-a-host-tab-from-the-pwa) for scope, limits, and storage boundaries.
 
 Project headings in the PWA task list can collapse their tasks while leaving task counts and running or unread indicators visible. This state is stored in that browser per project directory and does not sync to other devices. The HTML Surface tab marks unseen results and lets you jump to the latest one without losing older unseen history. For a task in a Fleet Run, the Fleet tab provides read-only progress, dependencies, step details, and navigation to supported node tasks. The terminal key bar has a **Modifier keys** menu for Ctrl+C, Ctrl+X, Ctrl+S, and Shift+Tab. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks), [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools), and [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for the operating details and limits.
 

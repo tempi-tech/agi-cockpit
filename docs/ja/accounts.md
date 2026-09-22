@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.85.0で2026-09-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.88.0で2026-09-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -86,6 +86,8 @@ Autorunは実行のたびにAutoを解決し直します。Fleetは並列ノー�
 通常の会話で利用上限に言及しただけでは、実行アカウントの上限として扱いません。別のエージェントを起動したツールの出力も、実行中のタスクのアカウント上限とは区別します。たとえばCodexタスクが起動したClaude Codeの上限はClaudeの通知として表示し、Codexのアカウントを切り替える理由にはしません。
 
 Codexの上限表示では、対象アカウントと利用枠、判明しているリセット時刻を確認できます。プロバイダーが利用枠を指定しなかった場合は、その旨を表示します。`cockpit task get <id>`の`usageLimitAttribution`でも対象を確認でき、明示的なプロバイダーエラーの情報をキャッシュ済み使用量より優先します。
+
+Terminal UIとTerminalでは、Cockpitの利用上限バナーを会話の上へ重ねません。対象CLIが出力した上限メッセージと、`cockpit task get <id>`の`waitingReason`、リセット時刻、`usageLimitAttribution`を確認してください。利用上限の検出、待機状態、Autoによるアカウント復旧は引き続き動作しますが、Cockpit固有のアカウント切替説明と切替ボタンはターミナル面には表示されません。
 
 ## 固定アカウントを選ぶ
 

@@ -2,9 +2,9 @@
 
 # Results and tools
 
-Safely review task diffs, files, HTML Surfaces, terminals, and logs, then continue to each dedicated operating surface.
+Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -14,7 +14,7 @@ The right side panel in task details opens supporting information and interactiv
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
-In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Fleet, Creative Studio artifacts, and Talk Room as tabs in one bottom sheet. Use the previous and next controls or the horizontally scrolling tab row, and switch the sheet between approximately half height and full height. The selected tab, target, drafts, and scroll positions are retained per task. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
+In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Fleet, Creative Studio artifacts, and Talk Room as shared tabs. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
 
 ## Review diffs and files
 
@@ -43,6 +43,22 @@ From the CLI, `cockpit html show --stdin` stores HTML and `cockpit side-panel ht
 Desktop and the PWA count HTML Surfaces that have arrived but have not yet rendered in that task's visible HTML panel. A badge appears on the panel opener or HTML Surface tab. If you are already following the latest Surface, Cockpit follows the new one. If you are reviewing history or an older Surface, your view stays in place and a notice offers **Open latest**. Opening the unseen shortcut jumps to the newest unseen Surface; older unseen items remain marked in History.
 
 A Surface becomes seen only after its content renders in the visible panel. The seen state persists across an app restart. Dismissing the arrival notice does not mark the Surface seen, and switching to another task does not clear its badge.
+
+## Review Display notices
+
+`cockpit display` puts a reminder, progress update, or lightweight status screen in front of the person as a Display notice that does not request a response. Desktop uses a dedicated window; the PWA includes notices with Asks in **Inbox**. When the originating task still exists, either surface can open that task directly.
+
+Closing a Display notice sends no answer to the agent and resumes no task. When the same task repeats a notice with the same kind, title, and body, Cockpit reuses the open notice. A resend within ten seconds after closing is also treated as the same notice, so an agent does not retry merely because the duplicate was suppressed. Identical content from different tasks remains separate.
+
+The CLI can list open notices and close one by ID:
+
+```bash
+cockpit display list
+cockpit display list --task <task-id>
+cockpit display close <display-id>
+```
+
+See the [`cockpit display` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/display) for the exact duplicate key, response fields, and errors.
 
 ## Continue to a dedicated operating surface
 

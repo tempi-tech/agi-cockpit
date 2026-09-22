@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -50,6 +50,12 @@ After changing a setting, inspect the returned saved value. Numeric settings can
 Start with [Update AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/updates) to check the method for the current OS and distribution, the last install result, and diagnostic logs. If the problem remains, include `capability`, `lastError`, and the last install result from `cockpit update status`, plus the relevant time from `~/.agi-tools/data/cockpit/logs/updater.jsonl`, in the report.
 
 See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/update) for the exact CLI contract and [Release history](https://agi-labo.com/en/tools/cockpit/docs/releases) for published changes.
+
+## macOS sign-in reports an unresponsive Keychain
+
+If Cockpit says **The system keychain did not respond. Try again.**, bring any macOS Keychain prompt to the front, unlock the login Keychain if needed, and allow the request. Then run the Cockpit sign-in again.
+
+Cockpit stops waiting for an unresponsive Keychain after about two seconds instead of hanging indefinitely. This timeout does not clear the pending OAuth state or disable encrypted storage, so retry after resolving the prompt. Cockpit does not bypass the Keychain by falling back to plaintext storage.
 
 ## An agent is missing or does not launch
 

@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.85.0で2026-09-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.88.0で2026-09-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -50,6 +50,12 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 まず[AGI Cockpitを更新する](https://agi-labo.com/tools/cockpit/docs/updates)で、現在のOSと配布形式に合う更新方法、最後のインストール結果、診断ログを確認します。解決しない場合は、`cockpit update status`の`capability`、`lastError`、最後のインストール結果と、`~/.agi-tools/data/cockpit/logs/updater.jsonl`の該当時刻を報告情報へ含めます。
 
 正確なCLI契約は[`cockpit update` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/update)、公開済み変更は[バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)を参照してください。
+
+## macOSのサインインでキーチェーンが応答しない
+
+「システムのキーチェーンが応答しませんでした。もう一度やり直してください。」と表示された場合は、背面に残っているmacOSのキーチェーン確認を開き、必要に応じてlogin Keychainのロックを解除してから許可します。その後、Cockpitのサインインをもう一度実行してください。
+
+Cockpitは応答のないキーチェーンを待ち続けず、約2秒でこの案内を表示します。このタイムアウトでは保留中のOAuth状態を消去せず、暗号化ストレージも無効にしないため、キーチェーンの確認を完了した後に再試行できます。キーチェーンを回避して平文保存へ切り替えることはありません。
 
 ## エージェントが表示されない、起動しない
 
