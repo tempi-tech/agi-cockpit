@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.88.0 — 2026-09-23
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added side-by-side chat and panel views on wide PWA screens.
 - Added a shortcut from Display notices to their originating task.
