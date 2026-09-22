@@ -4,6 +4,33 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.88.0 — 2026-09-23
+
+**Type:** minor · **Platforms:** macOS
+
+- Added side-by-side chat and panel views on wide PWA screens.
+- Added a shortcut from Display notices to their originating task.
+- Added a shared inbox for Asks and Display notices in the PWA.
+- Prevented repeated Display notices from opening duplicate windows or inbox entries.
+- Added CLI commands to list and close Display notices.
+- Removed the overlapping usage-limit banner in terminal mode.
+- Added a timeout message when the macOS keychain does not respond during sign-in.
+- Fixed the Cockpit agent model menu to stay within its content pane in narrow windows.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- PWAの広い画面で、チャットとサイドパネルを並べて表示できるようにしました
+- Display通知から送信元のタスクを開けるようにしました
+- PWAでAskとDisplay通知をまとめて確認できるようにしました
+- 同じDisplay通知が重複して表示されないようにしました
+- CLIからDisplay通知の一覧を確認し、通知を閉じられるようにしました
+- ターミナルモードで利用上限のバナーが会話に重ならないようにしました
+- macOSのサインインでキーチェーンの応答待ちが続く場合に、タイムアウトを案内するようにしました
+- 狭いウィンドウでもCockpitエージェントのモデル選択メニューが画面内に収まるようにしました
+
+</details>
+
 ## v4.87.0 — 2026-09-22
 
 **Type:** minor · **Platforms:** macOS, Linux
