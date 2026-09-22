@@ -11,7 +11,7 @@ English is the primary language for these generated release notes. Download the 
 - Added side-by-side chat and panel views on wide PWA screens.
 - Added a shortcut from Display notices to their originating task.
 - Added a shared inbox for Asks and Display notices in the PWA.
-- Prevented repeated Display notices from opening duplicate windows or inbox entries.
+- Fixed duplicate windows and inbox entries caused by repeated Display notices.
 - Added CLI commands to list and close Display notices.
 - Removed the overlapping usage-limit banner in terminal mode.
 - Added a timeout message when the macOS keychain does not respond during sign-in.
