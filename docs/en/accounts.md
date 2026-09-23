@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.89.0 on 2026-09-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -50,6 +50,8 @@ Named Antigravity profiles use browser-based Google OAuth and keep conversations
 ## Check remaining quotas
 
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows its remaining percentage directly below the ring. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again. Cockpit does not invent a percentage for an unknown quota, authentication error, observation-only status row, or the Cockpit Agent balance display.
+
+When Codex reports the purchased credit balance for a ChatGPT account, Usage displays the amount as **Credits** or shows **Unlimited credits**. The CLI exposes the same value as `usage.credits` in `cockpit usage` and `cockpit accounts list --agent-type codex`. The field is omitted both when the account has no purchased credits and when Codex did not report a balance, so absence does not mean a zero balance. Purchased credits are separate from reset credits that clear the current rate-limit window, and `cockpit usage reset` does not spend them.
 
 The Desktop and PWA new-task screens show the same allowances for the selected agent and account before creation. A fixed account shows that profile. Auto does not substitute the default account's quota; it previews the account chosen by the same selection method used at runtime and labels it **Auto · account name**.
 

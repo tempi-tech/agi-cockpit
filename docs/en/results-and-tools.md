@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.89.0 on 2026-09-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -72,7 +72,7 @@ A side terminal is a shell session separate from the task's agent process. Befor
 
 In both PWA terminal views—the task's main Terminal view and a side terminal—the key bar sends Esc, Tab, Enter, and arrow keys directly to the host terminal. Open **Modifier keys** to send Ctrl+C, Ctrl+X, Ctrl+S, or Shift+Tab. These are terminal input sequences, not browser shortcuts, and have the same effect as typing them at the host: for example, Ctrl+C can interrupt the foreground process. The menu is disabled when the terminal is not writable.
 
-Background logs show output from long-running processes started by an agent. In Antigravity Native UI, a command moved to the background remains visible after the turn completes with a Running, Completed, Failed, or Stopped state. Visible output alone is not completion. Check the exit code, generated artifact, listening port, test result, or another success condition appropriate to the request.
+Background logs show output from long-running processes started by an agent. In Antigravity Native UI, when the agent rechecks a background process and returns an interim answer that it is still running and must be awaited, the task remains in progress through the completion notice, later tool calls, and final answer in that same turn. A persistent server that is intentionally left running after the final answer is different: it remains visible after the turn completes with a Running, Completed, Failed, or Stopped state. Visible output alone is not completion. Check the exit code, generated artifact, listening port, test result, or another success condition appropriate to the request.
 
 See the [`cockpit side-panel` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/side-panel) when controlling panels and terminals from the CLI.
 

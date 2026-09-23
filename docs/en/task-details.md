@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.89.0 on 2026-09-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -80,9 +80,9 @@ Selecting an OS notification for a completed response, confirmation request, usa
 
 ## Pin an answer and return to it
 
-In a **Cockpit** agent task, hover over an assistant answer and choose **Pin answer**. Open **Pinned answers** above the conversation to jump back to a saved answer or unpin it. Desktop and the PWA show the same task's pins; the PWA pinned-answers bar lets you return to marked answers. Pins survive reopening the task and restarting Cockpit.
+In Cockpit agent tasks and Native UI tasks for Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build, hover over an assistant answer and choose **Pin answer**. Open **Pinned answers** above the conversation to jump back to a saved answer or unpin it. Desktop and the PWA show the same task's pins; the PWA pinned-answers bar lets you return to marked answers. Pins survive reopening the task and restarting Cockpit.
 
-This is available only for Cockpit agent tasks, not Claude Code, Codex, or other agent types. User messages and tool calls cannot be pinned. If history is reset or compacted and an answer is no longer available, its pin is not a jump target; remove the stale pin instead. Deleting the task also deletes its pins.
+User messages, tool calls, and Terminal UI output cannot be pinned. In Native UI, one turn is treated as one answer, including output that continued after an approval. Selecting an older answer that is not loaded yet loads the required history. If history is reset, cleared, or compacted and an answer is no longer available, its pin is not a jump target; remove the stale pin instead. Deleting the task also deletes its pins.
 
 Use `cockpit pinned-answers list <task-id> --all` to obtain answer IDs, then `pin <task-id> <message-id>` or `unpin <task-id> <message-id>`. See the [pinned-answers reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/pinned-answers).
 
