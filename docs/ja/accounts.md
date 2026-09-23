@@ -37,7 +37,7 @@ cockpit accounts rename work "Work (EU)" --agent-type codex
 
 Fleet YAMLの`account: <name>`だけは実行時に名前で解決します。Fleetが変更前の名前を使っている場合はYAMLも更新してください。更新しないと次のRunは開始前のアカウント確認で失敗します。
 
-一覧にはプロバイダー、プロファイルID、名前、取得できる場合はメールアドレス、`authState`、利用状況、その取得時刻が表示されます。Grok Buildでは認証判断の理由を`authReason`でも確認できます。`authState`は、利用できる`ok`、認証情報が無効になった`expired`、認証情報がない`signed_out`を区別します。互換性のための`loggedIn`は`ok`のときだけ`true`です。`auth_required`は再ログインが必要な状態です。利用状況の`unknown`または`error`は残量を取得できなかったことを示し、認証結果ではありません。認証情報が`authState: "ok"`なら、残量が判明しているアカウントより優先度を下げたうえで選択対象に残ります。期限切れまたはサインアウト済みのアカウントは、AutoとFleet開始前の確認で利用できません。
+一覧にはプロバイダー、プロファイルID、名前、取得できる場合はメールアドレス、`authState`、利用状況、その取得時刻が表示されます。Grok Buildでは認証判断の理由を`authReason`でも確認できます。`authState`は、利用できる`ok`、認証情報が無効になった`expired`、認証情報がない`signed_out`を区別します。互換性のための`loggedIn`は`ok`のときだけ`true`です。`auth_required`は通常、再ログインが必要な状態です。ただしCursorの利用状況APIはCLIとは別に認証されるため、利用状況APIによる拒否だけではCLIのログインを無効と判定しません。CLIの認証情報が有効なら、利用状況を不明としてタスク開始、Auto、Fleetで引き続き利用できます。認証情報がない場合やCLIの認証確認で期限切れと判定された場合は再ログインが必要です。利用状況の`unknown`または`error`は残量を取得できなかったことを示し、認証結果ではありません。認証情報が`authState: "ok"`なら、残量が判明しているアカウントより優先度を下げたうえで選択対象に残ります。期限切れまたはサインアウト済みのアカウントは、AutoとFleet開始前の確認で利用できません。
 
 Grok Buildのaccess tokenは約6時間で期限切れになりますが、refresh tokenが保存されている場合は`authReason: expired_refreshable`、`authState: ok`となり、AutoとFleetの選択対象に残ります。モデル一覧や使用量の確認だけでは対話ログインやtoken更新を開始せず、使用量は更新まで`unknown`または古い値になります。次のタスク開始時にGrok CLIが更新を試みます。ネットワーク障害は`network_failure`として再ログイン扱いにせず、refresh tokenが拒否された`refresh_refused`、refresh tokenがない`expired_without_refresh`、またはプロバイダーが認証を拒否した`provider_rejected`では再ログインが必要です。
 

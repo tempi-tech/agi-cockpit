@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.89.0 — 2026-09-24
+
+**Type:** minor · **Platforms:** macOS
+
+- Added pinned answers to chats with every agent.
+- Added purchased Codex credit balances to usage views and the CLI.
+- Fixed Antigravity tasks completing before background work finished and failing to display the final answer.
+- Fixed Cursor task launches being blocked when usage could not be retrieved despite a valid CLI login.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- すべてのエージェントのチャットで回答をピン留めできるようにしました
+- 利用状況画面とCLIでCodexの購入クレジット残高を確認できるようにしました
+- Antigravityのバックグラウンド処理が続いている間にタスクが完了扱いになり、最終回答が表示されない問題を修正しました
+- Cursorの利用状況を取得できない場合でも、有効なCLIログインでタスクを開始できるようにしました
+
+</details>
+
 ## v4.88.0 — 2026-09-23
 
 **Type:** minor · **Platforms:** macOS, Linux
