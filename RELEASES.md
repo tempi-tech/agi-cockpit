@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.89.0 — 2026-09-24
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added pinned answers to chats with every agent.
 - Added purchased Codex credit balances to usage views and the CLI.
