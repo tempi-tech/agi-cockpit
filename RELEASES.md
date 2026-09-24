@@ -4,6 +4,33 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.90.0 — 2026-09-25
+
+**Type:** minor · **Platforms:** macOS
+
+- Added agent CLI versions, update status, and update actions to Settings.
+- Added an Ask tab in the side panel to view and answer pending questions.
+- Added a per-device setting to choose whether Ask windows open automatically.
+- Added enlarged previews of image attachments before sending.
+- Added message dates and times when focusing messages in task conversations and Talk Room.
+- Added support for closing enlarged image previews by clicking the background beside the image.
+- Fixed completed Codex goals reverting to active when an older response arrived.
+- Fixed database conflicts with OpenCode preventing Cockpit Agent from starting while preserving existing conversations.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 設定画面で各エージェントのCLIバージョンと更新状況を確認し、更新できるようにしました
+- サイドパネルのAskタブで、保留中の質問を確認して回答できるようにしました
+- Askのウィンドウを自動で開くかどうかを端末ごとに設定できるようにしました
+- 送信前の添付画像をクリックして拡大表示できるようにしました
+- タスクの会話とTalk Roomで、メッセージにフォーカスすると送信日時を確認できるようにしました
+- 拡大画像の横の背景をクリックしてプレビューを閉じられるようにしました
+- Codexで完了したゴールが古い応答によって実行中に戻る問題を修正しました
+- OpenCodeとのデータベースの競合でCockpit Agentを開始できない問題を、既存の会話を引き継いで修正しました
+
+</details>
+
 ## v4.89.0 — 2026-09-24
 
 **Type:** minor · **Platforms:** macOS, Linux

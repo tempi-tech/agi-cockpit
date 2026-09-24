@@ -16,6 +16,8 @@ AGI Cockpitは、タスクとエージェントプロセスを利用者のコン
 
 Cockpit AgentのOpenCode GoまたはOpenCode Zen接続のためにCockpitが起動したローカルOpenCode serverはCockpitが所有し、Cockpit終了時に停止します。Cockpitの外で利用者が起動したserverは停止しません。
 
+v4.90.0から、Cockpit Agentの会話データベースはCockpitのデータ領域内の`opencode/v1/opencode.db`に保存されます。初回起動時に従来のOpenCodeデータベースがあれば、その内容をコピーして既存の会話を引き継ぎます。コピー元にはCockpit外で使ったOpenCodeの会話が含まれる場合があります。元のデータベースは変更せず、移行後の会話は相互に同期しません。互換性を確認できない場合はエラーを表示し、Cockpit Agentの起動を停止します。
+
 PWAのタスク検索語と最近の検索履歴は、接続先ごとに利用中のブラウザーのlocalStorageへ保存します。別端末へ同期しません。検索欄の「検索をクリア」と「履歴を消去」は別の操作です。両方を消す場合はそれぞれ実行してください。
 
 スマートルーティングのオン・オフと「ルーティング方針」は、サインイン中の利用者IDごとにDesktopのlocalStorageへ保存します。別端末へ同期しません。
