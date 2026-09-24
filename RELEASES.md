@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.90.0 — 2026-09-25
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added agent CLI versions, update status, and update actions to Settings.
 - Added an Ask tab in the side panel to view and answer pending questions.
