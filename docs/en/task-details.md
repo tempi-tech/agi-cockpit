@@ -4,7 +4,7 @@
 
 Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.89.0 on 2026-09-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -66,6 +66,8 @@ The reset immediately updates every Desktop and PWA view that has the task open.
 
 ## Read and quote the conversation
 
+On Desktop, hover over a task-conversation message or move keyboard focus to it to reveal the date and time it was sent. In the PWA, tap a message to reveal the timestamp and tap elsewhere to hide it. Older items without a saved timestamp do not show one.
+
 Select chat text and choose **Quote selection** to add it to the composer as a Markdown quote. The selection is preserved while progress updates.
 
 A message from another Cockpit task displays its source task name or shortened ID. If the source remains in the list, select the name to navigate there. A parent-child relationship alone does not send results or automatically resume the parent.
@@ -113,6 +115,8 @@ See [Results and tools](https://agi-labo.com/en/tools/cockpit/docs/results-and-t
 ## Attach files
 
 Desktop and PWA can attach images, text, source code, JSON, CSV, PDFs, audio, video, and Office documents. When a selected agent cannot receive the format directly, Cockpit provides its local path and metadata for name, MIME type, and size.
+
+On Desktop, select an image attachment thumbnail before sending to open an enlarged preview. Selecting the image or caption keeps it open; the dark background, including the area beside the image, the close button, or Esc closes it. Esc closes the preview without stopping a running turn, and opening or closing the preview does not send the attachment.
 
 From the CLI, pass repeatable `--media <path>` options to `task create` and `task send`. Cockpit copies local files into the same managed area used by the GUI and neither moves nor deletes the source. Remote attachment delivery through `--host` is unsupported.
 

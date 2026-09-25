@@ -4,13 +4,15 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.89.0 on 2026-09-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
 ## Use the right side panel
 
-The right side panel in task details opens supporting information and interactive surfaces without leaving the conversation. It can show diffs, files, the attachment list, the project explorer, HTML Surfaces, the in-app browser, App Surfaces, side terminals, background logs, child tasks, and Talk Rooms when they are relevant.
+The right side panel in task details opens supporting information and interactive surfaces without leaving the conversation. It can show diffs, files, the attachment list, the project explorer, HTML Surfaces, the in-app browser, App Surfaces, side terminals, background logs, child tasks, Talk Rooms, and Asks when they are relevant.
+
+The Desktop Ask tab lists every Ask waiting for an answer on this device, not only Asks from the selected task. Open it from its count badge to review, answer, or close an Ask with the same content as the dedicated Ask window. The tab remains available when Ask windows are disabled under **Settings → Notifications**. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask) for details.
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 

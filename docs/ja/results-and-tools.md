@@ -4,13 +4,15 @@
 
 タスクの差分、ファイル、HTML Surface、Display通知、ターミナル、ログを安全に確認し、専門ページへ進む方法を説明します。
 
-> AGI Cockpit 4.89.0で2026-09-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
+> AGI Cockpit 4.90.0で2026-09-25に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 
 タスクの会話だけでなく、変更されたコード、ファイル、レポート、実行中のプロセスを同じタスクから確認できます。このページでは成果確認に共通する面を整理します。Webページの操作は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、接続したモバイル画面は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)で扱います。
 
 ## 右サイドパネルを使う
 
-タスク詳細の右サイドパネルは、会話を離れずに補助情報と操作面を開く場所です。差分、ファイル、添付ファイル一覧、プロジェクトエクスプローラー、HTML Surface、アプリ内ブラウザー、App Surface、サイドターミナル、バックグラウンドログ、子タスク、Talk Roomなどが、必要な文脈で表示されます。
+タスク詳細の右サイドパネルは、会話を離れずに補助情報と操作面を開く場所です。差分、ファイル、添付ファイル一覧、プロジェクトエクスプローラー、HTML Surface、アプリ内ブラウザー、App Surface、サイドターミナル、バックグラウンドログ、子タスク、Talk Room、Askなどが、必要な文脈で表示されます。
+
+DesktopのAskタブは、選択中のタスクだけでなく、この端末で回答待ちのAskをすべて一覧します。件数バッジから開き、専用Askウィンドウと同じ内容を確認して回答またはクローズできます。「設定」→「通知」でAskウィンドウを開かない設定にしても、このタブは利用できます。詳しくは[Ask](https://agi-labo.com/tools/cockpit/docs/ask)を参照してください。
 
 パネル上部の種類と対象パスを確認してから操作してください。パネルを閉じてもタスクやブラウザーセッションは終了しません。幅を変更した場合は表示状態として保存され、狭い幅では本文と表が横スクロール可能な表示へ切り替わります。
 

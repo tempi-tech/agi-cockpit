@@ -4,7 +4,7 @@
 
 8種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.89.0で2026-09-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.90.0で2026-09-25に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から8種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -77,6 +77,12 @@ cockpit system-prompt list
 ```
 
 カスタムプロンプトは利用者所有のMarkdownとしてAGI Toolsのデータ領域に保存されます。内容は選択したエージェントへ送られるため、認証情報や秘密を含めないでください。Cursor、Grok Build、Antigravity、Terminal、ターミナルUIでは選択できません。
+
+### エージェントCLIのバージョンと更新状況を確認する
+
+「設定」→「更新」の「エージェント CLI」には、Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildのインストール済み版、確認できた最新版、更新状態が表示されます。「確認」は保存済みの結果ではなく現在の状態を再取得します。更新できる場合は「CLI を更新」から、その端末上で対象CLIの更新コマンドを実行するターミナルを開けます。すでに最新版の場合は更新操作を表示せず、版を取得または比較できない場合は状態を「不明」として扱います。
+
+CLIの`cockpit setup agent status <agent>`でもコマンド、インストール済み版、利用可能な最新版、`updateAvailable`、changelog URLを読み取れます。`updateAvailable`は更新ありで`true`、最新版またはそれより新しければ`false`、版を比較できなければ`null`です。このコマンドは状態を読むだけで、CLIを更新しません。
 
 ### モデル一覧を確認・再読み込みする
 

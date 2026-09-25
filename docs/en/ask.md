@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -15,7 +15,7 @@ Ask lets an AI agent pause its work and hand a confirmation or decision to a per
 - A person needs to inspect an image, listen to audio, or watch a video before deciding.
 - Several related decisions should be reviewed together.
 
-Ask is more than a notification. The question remains available until it is answered, and a person can respond in the dedicated Desktop Ask window, from **Inbox** in the PWA, or through a configured Discord or Slack relay.
+Ask is more than a notification. The question remains available until it is answered, and a person can respond in the dedicated Desktop Ask window or the right-side-panel Ask tab, from **Inbox** in the PWA, or through a configured Discord or Slack relay.
 
 The PWA **Inbox** combines Asks that need an answer with read-only Display notices. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. Both types let you open the originating task while that task is still available.
 
@@ -56,7 +56,13 @@ In the PWA task list, a question bubble labelled **Waiting for an Ask answer** i
 
 When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
 
-## Adjust the Desktop view
+## Review Asks on Desktop
+
+The right-side-panel Ask tab lists every Ask waiting for an answer on this device. Open it from its count badge to answer or close an Ask with the same choices, free-form input, multi-question and whole-Ask replies, attachments, and media as the dedicated window. From the CLI, use `cockpit side-panel ask`.
+
+By default, Cockpit also opens a dedicated window for every new Ask. Turn off **Ask windows on this device** under **Settings → Notifications** to close open Ask windows without closing their Asks or changing relay and answer delivery. Continue answering from the side-panel Ask tab, PWA, CLI, Discord, or Slack. The preference is stored per device. Turning it back on reopens windows for Asks that are still waiting. From the CLI, use `cockpit settings set notifications.askWindow false` or `true`.
+
+## Adjust the Ask window
 
 Drag the handle in the lower-right corner of a Desktop Ask window to change its width and height. Cockpit saves that size for the next Ask window and constrains it to the screen's working area.
 
@@ -65,7 +71,7 @@ Use **A−** and **A+** in the header to change the text size of questions, choi
 ## What happens before and after an answer
 
 1. The agent creates an Ask.
-2. Cockpit saves the question and displays it in Desktop and the PWA. When an Ask relay is enabled, it also posts to the configured Discord or Slack channel.
+2. Cockpit saves the question and displays it in the Desktop Ask tab, in an Ask window when enabled, and in the PWA. When an Ask relay is enabled, it also posts to the configured Discord or Slack channel.
 3. A person answers with a choice, optional supplementary text, an optional whole-Ask reply for a multi-question Ask, and supported file attachments as needed.
 4. Cockpit delivers a `cockpit.ask.resolved` event to the original task.
 5. The agent receives the answer and continues the same work.

@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.88.0 on 2026-09-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -59,8 +59,8 @@ Cockpit stops waiting for an unresponsive Keychain after about two seconds inste
 
 ## An agent is missing or does not launch
 
-1. Open Setup from the application menu and check CLI detection and version.
-2. Run `cockpit setup agent status <agent>` to inspect the command, installed version, and available update.
+1. Under **Settings → Updates**, use **Agent CLIs** to inspect the installed version, latest version, and update status. Select **Check** to refresh the result and **Update CLI** when an update is available.
+2. Run `cockpit setup agent status <agent>` to read the command, installed version, available latest version, and `updateAvailable`. This command is read-only and does not perform an update.
 3. In Agent settings, check the launch command, UI mode, and account authentication state.
 4. If native option discovery failed, restore the connection and authentication before selecting a fixed model or reasoning value.
 5. Terminal UI cannot use native UI sign-in guidance, so complete authentication inside that CLI's terminal flow.

@@ -4,7 +4,7 @@
 
 Learn how agents and people share one conversation while controlling notification scope, mentions, waiting, leaving, and rejoining.
 
-> Verified with AGI Cockpit 4.75.0 on 2026-09-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
+> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 
 A Talk Room is a shared conversation where multiple agents and people read the same history and exchange short messages. Unlike one-way `task send` instructions or dependency-driven Fleet execution, the Room history is the source of truth for the discussion.
 
@@ -29,6 +29,8 @@ cockpit side-panel talk <room-id>
 The creator joins automatically and wakes for every message by default. Use a topic that identifies the subject, not an abstract label such as “discussion.”
 
 The Room can appear in the task's right side panel. A person can write directly into the same conversation and inspect the history shared by participating agents.
+
+Each message normally shows its time. On Desktop, hover over a message or move keyboard focus to it to switch to the full sent date and time. In the PWA, tap a message to show the full timestamp and tap elsewhere to return to the normal display.
 
 ## Call an agent
 
