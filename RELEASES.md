@@ -4,6 +4,59 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.91.0 — 2026-09-26
+
+**Type:** minor · **Platforms:** macOS
+
+- Added agent switching within a task while carrying over conversation history.
+- Added an option to pin tasks when creating them.
+- Extended conversation search to saved earlier messages.
+- Added copying the folder path from the project menu.
+- Added a long-press menu for Fleet run actions in the PWA.
+- Added deleting all completed PWA tasks after confirmation.
+- Project bulk completion now includes running tasks and Fleet tasks awaiting confirmation, with their counts shown before proceeding.
+- Added persistent collapse states for pinned and completed groups in the PWA.
+- The PWA now opens the created task after its first message is sent.
+- Made PWA tab swipes follow finger movements smoothly.
+- Added Ask waiting indicators to desktop task rows.
+- Added quoting directly beside selected chat text.
+- Made message timestamps easier to read with relative dates and times.
+- Made Autorun schedules easier to read in plain language.
+- Hid side-panel tabs that have no content.
+- Removed the Default/Plan interaction-mode picker; planning can be requested in messages.
+- Prevented sending while voice input is recording or transcribing.
+- Fixed task creation to use the account displayed for Auto selection.
+- Fixed notification clicks failing to open the originating task.
+- Fixed incorrect remote-access status after startup.
+- Fixed agent browser input moving the user’s keyboard focus.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 会話履歴を引き継いで、タスクのエージェントを切り替えられるようにしました
+- タスクを作成するときにピン留めできるようにしました
+- 会話検索で保存済みの過去のメッセージも探せるようにしました
+- プロジェクトのメニューからフォルダーのパスをコピーできるようにしました
+- PWAのFleetグループを長押しして実行操作を選べるようにしました
+- PWAの完了済みタスクを確認ダイアログから一括削除できるようにしました
+- プロジェクトの一括完了で実行中と確認待ちのFleetタスクも対象に含め、確認時に件数を表示するようにしました
+- PWAのピン留め・完了済みグループを折りたたみ、状態を保持できるようにしました
+- PWAで最初のメッセージを送信すると、作成したタスクを開くようにしました
+- PWAのタブを指の動きに合わせて滑らかに切り替えられるようにしました
+- Desktopのタスク一覧でAskへの回答待ちを確認できるようにしました
+- チャットで選択した文章の横から引用できるようにしました
+- メッセージの送信日時を「たった今」「昨日」など分かりやすく表示するようにしました
+- Autorunの実行予定を分かりやすい言葉で表示するようにしました
+- 内容がないサイドパネルのタブを非表示にしました
+- Default/Planの操作モード選択を廃止しました。計画はメッセージで依頼できます
+- 音声入力の録音・文字起こし中に送信されないようにしました
+- タスク作成時にAutoで表示されているアカウントが使われるように修正しました
+- 通知をクリックしたときに対象のタスクが開かない問題を修正しました
+- 起動後のリモートアクセス状態が正しく表示されない問題を修正しました
+- エージェントのブラウザー操作で利用者のキーボードフォーカスが移動する問題を修正しました
+
+</details>
+
 ## v4.90.0 — 2026-09-25
 
 **Type:** minor · **Platforms:** macOS, Linux

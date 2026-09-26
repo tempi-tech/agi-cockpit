@@ -26,6 +26,8 @@ Smart routing's on/off state and **Routing policy** are stored in Desktop localS
 
 The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio endpoint. OpenCode Go and OpenCode Zen use separate API keys. Whether LM Studio is local or remote depends on its configured URL.
 
+Switching a task to another agent can send earlier conversation messages, tool inputs and outputs, file changes, images, and compaction summaries to that agent’s provider. Review the transfer preview before sending the message that applies the switch. Thinking and encrypted reasoning are excluded.
+
 When Smart routing runs, Cockpit sends the task instruction, routing policy, available agents, models and reasoning levels, and each candidate workspace's display name, local path, and kind to the authenticated AGI Backend to select a combination. File and attachment content is not part of the routing request. If the instruction is empty and the task contains only attachments, their file names are sent in place of the instruction. Turn off Smart routing and choose the workspace and runtime settings manually when local paths must not be sent externally.
 
 Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, Autorun, Fleet, Hook, and account information needed by the connected PWA or supported remote CLI command. A remote Hook command can register and execute shell code on the target computer.

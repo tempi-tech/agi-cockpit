@@ -34,7 +34,7 @@ On Desktop, Command/Ctrl+K opens a search palette across projects. In addition t
 
 The **…** menu on Desktop task rows and child-task entries, and on PWA task rows, supports rename, pin or unpin, complete, copy task ID, and delete. A long press on a PWA task row opens the same menu. A child can also be detached from its parent. Confirm a name with Enter or **Save**, and cancel with Escape or **Cancel**. An empty name is not saved, and the limit is 50 characters. While the PWA list refreshes, an open rename dialog keeps its draft.
 
-The project-heading menu can complete that project's unfinished tasks or delete all of its tasks in one operation. Running tasks and Fleet tasks awaiting confirmation are excluded from bulk completion by default and must be explicitly included. Bulk deletion removes every task in the project, including running tasks, not only completed ones. The confirmation names how many running tasks will be stopped and how many associated Fleet runs will be stopped if they are active. This cannot be undone.
+The project-heading menu can complete that project's unfinished tasks or delete all of its tasks in one operation. Bulk completion includes running tasks and Fleet tasks awaiting confirmation; the native confirmation lists these counts before you proceed. Bulk deletion removes every task in the project, including running tasks, not only completed ones. The confirmation names how many running tasks will be stopped and how many associated Fleet runs will be stopped if they are active. This cannot be undone.
 
 Automatic sorting does not move rows while the pointer is over the list or while a menu, rename, or deletion confirmation is active. The current order is applied after the interaction ends.
 
@@ -110,3 +110,5 @@ cockpit task complete <id> --keep-worktree
 - [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 - [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser)
 - [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+
+In the PWA, the completed group has a delete-all action with a native confirmation. Deletion cannot be undone. Long-press a Fleet group to access its run actions, including removal; review whether the chosen action removes only the run history or its tasks as well.

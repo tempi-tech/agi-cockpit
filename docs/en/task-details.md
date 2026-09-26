@@ -46,6 +46,14 @@ If no account is available, usage cannot be checked, or switching or resume fail
 
 Usage indicators keep an exhausted allowance visible as 0% remaining. An unavailable value is not treated as 0% remaining. In the PWA, tap a usage ring to open details. The details stay within the screen, and long content can scroll. Tap the ring again or tap outside the details to close them. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) to identify the account affected by a limit.
 
+## Switch agents with conversation history
+
+In a supported Native UI task, choose another agent's model and send the next message to apply the switch. Claude Code, Codex, Grok Build, Cursor, Qoder, Antigravity, and Cockpit Agent are supported. The preview explains how history will be transferred and any omissions. Choosing a model of the current agent cancels a pending switch. Fleet, Autorun, Master Agent, and terminal UI tasks cannot switch; finish any running turn, approval, or question first.
+
+Earlier messages, tool inputs and outputs, file changes, images, and compaction summaries can be sent to the new agent's provider. Thinking and encrypted reasoning are excluded. Some targets receive a single history message, and long histories may have tool output shortened or middle exchanges omitted; review the preview before sending. If a switch fails, the message is not sent, the previous agent stays active, and the pending switch can be retried or canceled.
+
+The Default/Plan interaction-mode picker and the `/plan` and `/default` actions are no longer available. Describe any planning request in your message.
+
 ## Enter a message
 
 Desktop's **Send key** setting assigns sending to Enter or Cmd/Ctrl+Enter. Shift+Enter inserts a newline in either mode. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
