@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.92.0 — 2026-09-27
+
+**Type:** minor · **Platforms:** macOS
+
+- Added branching into a child task with another agent while carrying over conversation history.
+- Added continuing with another available agent after reaching a usage limit.
+- Added Ultracode to the reasoning levels for supported Claude models.
+- Added support for the ultracode keyword in messages to Claude.
+- Added support for obtaining Remote Access HTTPS certificates without Full Disk Access.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 会話履歴を引き継いで、別のエージェントの子タスクへ分岐できるようにしました
+- 利用制限に達したとき、利用可能な別のエージェントへ切り替えて続行できるようにしました
+- Claudeの推論レベルでUltracodeを選べるようにしました
+- Claudeへの入力でultracodeキーワードを使えるようにしました
+- リモートアクセスのHTTPS証明書をフルディスクアクセスなしで取得できるようにしました
+
+</details>
+
 ## v4.91.0 — 2026-09-26
 
 **Type:** minor · **Platforms:** macOS
