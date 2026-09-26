@@ -10,21 +10,21 @@ English is the primary language for these generated release notes. Download the 
 
 - Added agent switching within a task while carrying over conversation history.
 - Added an option to pin tasks when creating them.
-- Extended conversation search to saved earlier messages.
+- Improved conversation search to include saved earlier messages.
 - Added copying the folder path from the project menu.
 - Added a long-press menu for Fleet run actions in the PWA.
 - Added deleting all completed PWA tasks after confirmation.
-- Project bulk completion now includes running tasks and Fleet tasks awaiting confirmation, with their counts shown before proceeding.
+- Changed project bulk completion to include running tasks and Fleet tasks awaiting confirmation, with their counts shown before proceeding.
 - Added persistent collapse states for pinned and completed groups in the PWA.
-- The PWA now opens the created task after its first message is sent.
-- Made PWA tab swipes follow finger movements smoothly.
+- Changed the PWA to open the created task after its first message is sent.
+- Improved PWA tab swipes to follow finger movements smoothly.
 - Added Ask waiting indicators to desktop task rows.
 - Added quoting directly beside selected chat text.
-- Made message timestamps easier to read with relative dates and times.
-- Made Autorun schedules easier to read in plain language.
-- Hid side-panel tabs that have no content.
+- Improved message timestamps with relative dates and times.
+- Improved Autorun schedule descriptions with plain language.
+- Changed side-panel tabs to hide those with no content.
 - Removed the Default/Plan interaction-mode picker; planning can be requested in messages.
-- Prevented sending while voice input is recording or transcribing.
+- Fixed sending being available while voice input is recording or transcribing.
 - Fixed task creation to use the account displayed for Auto selection.
 - Fixed notification clicks failing to open the originating task.
 - Fixed incorrect remote-access status after startup.
