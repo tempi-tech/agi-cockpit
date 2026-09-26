@@ -67,6 +67,8 @@ Tailscale限定は、Tailscaleに属さない接続を受け付けません。HT
 
 [TailscaleのDNS設定](https://login.tailscale.com/admin/dns)はブラウザーから直接開けます。設定を変更できない場合は、対象tailnetのOwner、Admin、またはNetwork adminへ依頼してください。
 
+証明書の取得では、インストールされているTailscaleに証明書と秘密鍵を出力させ、その複製をこのコンピュータ上のCockpitのデータへ保存します。HTTPSの提供と期限の確認にはこの複製を使い、更新のたびに書き直します。HTTPSがすでにオンで複製がまだないときは、リモートアクセスの開始時に、サーバーを待ち受ける前にTailscaleへ取りにいきます。手順はmacOS、Windows、Linuxで同じです。macOSのApp Store版、スタンドアロン版、Homebrew版のTailscaleも同じ手順です。Cockpitは、Tailscaleが他のアプリのフォルダ内に置いた証明書ファイルを読みません。複製がまだないときはその旨を表示し、HTTPSがオンならサーバーが停止していても「証明書を取得」を使えます。フルディスクアクセスは不要です。
+
 TailscaleのHTTPSを有効にすると、証明書に含まれる端末名とtailnetのDNS名が公開のCertificate Transparencyログへ記録されます。機密情報を含む端末名は、証明書を取得する前に変更してください。詳しくは[TailscaleのHTTPS設定](https://tailscale.com/docs/how-to/set-up-https-certificates)を参照してください。
 
 ### 証明書の自動更新
@@ -187,6 +189,7 @@ aliasは必須ではありません。必要な場合は`cockpit devices alias-s
 | リモートアクセスに鍵が表示される | 有効なAGIラボ会員アカウントでDesktopへサインインする |
 | Tailscaleが未導入、停止中、未認証 | 画面の案内からインストール、起動、ログインを行う。接続元も同じtailnetへ接続する |
 | `your Tailscale account does not support getting TLS certs` | [TailscaleのDNS設定](https://login.tailscale.com/admin/dns)でMagicDNSとHTTPS Certificatesを有効にし、Cockpitで証明書をもう一度取得する |
+| CockpitにはまだHTTPS証明書の複製がない | HTTPSのリモートアクセス開始時に、サーバーを待ち受ける前にTailscaleへ複製を取りにいく。まだ無いときはリモートアクセスで証明書を再取得する。HTTPSがオンなら、サーバーが停止していても「証明書を取得」を使える。フルディスクアクセスは不要 |
 | Tailscaleの設定を変更できない | Owner、Admin、またはNetwork adminへ依頼する |
 | 証明書は発行済みだがURLがHTTP | 「HTTPS接続」をオンにし、接続情報がHTTPSへ変わることを確認する |
 | URLまたはQRコードが表示されない | 「Tailscale限定」または「ローカルWi-Fiも許可」が選ばれ、接続先の状態が動作中になっているか確認する |

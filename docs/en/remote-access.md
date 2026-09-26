@@ -67,6 +67,8 @@ Tailscale-only mode rejects connections that do not come through Tailscale. Tail
 
 You can also open the [Tailscale DNS settings](https://login.tailscale.com/admin/dns) directly. If you cannot change them, ask an Owner, Admin, or Network admin of the target tailnet.
 
+Getting a certificate asks the installed Tailscale to print the certificate and private key, then saves that copy in Cockpit's data on this computer. Cockpit uses the copy for HTTPS and for expiry checks, and replaces it whenever the certificate is renewed. If HTTPS is already on and Cockpit does not yet have its own copy, starting Remote Access asks Tailscale for one before the server listens. The same step is used on macOS, Windows, and Linux, whether Tailscale came from the App Store, the standalone installer, or Homebrew. Cockpit does not read certificate files that Tailscale keeps inside another app's folders. If that copy is still missing, Remote Access says so and keeps **Get certificate** available while HTTPS is on, even when the server is stopped. Full Disk Access is not required.
+
 Enabling Tailscale HTTPS records the device name and tailnet DNS name from the certificate in the public Certificate Transparency log. Rename a device before requesting its certificate if its name contains sensitive information. See [Tailscale's HTTPS documentation](https://tailscale.com/docs/how-to/set-up-https-certificates) for details.
 
 ### Automatic certificate renewal
@@ -187,6 +189,7 @@ Remote CLI requests use the paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKE
 | Remote access shows a lock | Sign in to Desktop with an active AGI Labo member account |
 | Tailscale is missing, stopped, or signed out | Install, start, or sign in from the on-screen action. Connect the remote device to the same tailnet too |
 | `your Tailscale account does not support getting TLS certs` | Enable MagicDNS and HTTPS Certificates in [Tailscale DNS settings](https://login.tailscale.com/admin/dns), then get the certificate again in Cockpit |
+| Cockpit does not have its own copy of the HTTPS certificate yet | Starting HTTPS Remote Access asks Tailscale for a copy before the server listens. If it is still missing, get the certificate again in Remote Access. **Get certificate** stays available while HTTPS is on, even when the server is stopped. Full Disk Access is not required |
 | You cannot change the Tailscale settings | Ask a tailnet Owner, Admin, or Network admin |
 | A certificate is issued but the URL is HTTP | Turn on **HTTPS** and confirm that Connection info changes to an HTTPS URL |
 | No URL or QR code appears | Confirm that **Tailscale only** or **Allow local Wi-Fi too** is selected and the target shows as running |
