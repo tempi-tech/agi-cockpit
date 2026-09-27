@@ -50,16 +50,19 @@ cockpit browser identity update work --name client-a --color "#8B5CF6" --json
 
 ## Assign an Identity to a task
 
-Each task has one Browser Identity. Select it while creating a task, or change an existing task from the browser side panel or CLI.
+A task can use several Browser Identities, with one primary Identity used when a command does not specify one. Each session and its tabs belong to exactly one Identity. Select an initial Identity when creating a task, then manage assignments from the browser side panel or CLI.
 
 ```bash
-cockpit task browser-identity <taskId> work
+cockpit task browser-identity <taskId> --add work
+cockpit task browser-identity <taskId> --primary work
+cockpit task browser-identity <taskId> --primary default
+cockpit task browser-identity <taskId> --remove work
 cockpit task browser-identity <taskId>
 ```
 
-Inside a task, omit the task ID to change the calling task. New sessions use the newly assigned Identity. Existing sessions remain under the original Identity. From Desktop Settings > Browser Tabs, you can reveal and operate existing tabs owned by that task. Agent and CLI access requires switching the task assignment back to the original Identity.
+Inside a task, omit the task ID to manage the calling task. A bare Identity argument replaces the whole assignment with that single Identity. Before removing the primary Identity, make another assigned Identity primary. Removing an assignment preserves its sessions, tabs, cookies, and saved data; agent access resumes when the Identity is assigned again. Other tasks are unaffected.
 
-`cockpit browser open ... --browser-identity work` only asserts that the assignment is work; it does not change it. A session or tab from another Identity is rejected with guidance to use the assignment command.
+`cockpit browser open ... --browser-identity work` selects an assigned Identity without changing assignments or navigating another Identity's tabs. Unassigned Identities are rejected. An explicit session or tab that disagrees with `--browser-identity` fails with `browser_identity_mismatch`; a tab outside an explicit `--session` fails with `browser_session_mismatch`. Commands resolve their target once, so later primary-Identity or side-panel changes do not redirect an operation already running.
 
 ## Assign Identities to Autorun and Fleet
 
@@ -96,7 +99,7 @@ cockpit browser identity remove client-a --replace-with default --confirm --json
 
 `clear` closes the Identity's live sessions before clearing exactly one of all data, cookies, or cache. `remove` clears every persistent data type and deletes the Identity itself.
 
-An Identity referenced by an active task or Autorun cannot be removed without `--replace-with`. Cockpit reassigns those references first and rolls them back if removal fails. If only completed tasks reference the Identity, removing it without a replacement returns those references to Default.
+An Identity referenced by an active task or Autorun cannot be removed without `--replace-with`. Cockpit reassigns those references first and rolls them back if removal fails. In tasks with several Identities, only the removed Identity is replaced; its replacement becomes primary if needed. Without a replacement, completed tasks drop the removed assignment and fall back to Default if their primary Identity was removed.
 
 Use `usages` to inspect affected tasks, Autoruns, and sessions before removal.
 

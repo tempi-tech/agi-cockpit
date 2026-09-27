@@ -50,16 +50,19 @@ cockpit browser identity update work --name client-a --color "#8B5CF6" --json
 
 ## タスクへ割り当てる
 
-各タスクは一つのBrowser Identityを持ちます。新規タスクでは作成時に選択でき、既存タスクではブラウザーのサイドパネルまたはCLIから変更できます。
+一つのタスクへ複数のBrowser Identityを割り当て、そのうち一つを指定省略時に使うプライマリIdentityにできます。各sessionとそのtabは必ず一つのIdentityに属します。タスク作成時に最初のIdentityを選び、ブラウザーのサイドパネルまたはCLIから割り当てを管理します。
 
 ```bash
-cockpit task browser-identity <taskId> work
+cockpit task browser-identity <taskId> --add work
+cockpit task browser-identity <taskId> --primary work
+cockpit task browser-identity <taskId> --primary default
+cockpit task browser-identity <taskId> --remove work
 cockpit task browser-identity <taskId>
 ```
 
-タスク内でtask IDを省略すると、現在のタスクを変更します。切り替え後に開くsessionは新しいIdentityの領域を使います。既存sessionは元のIdentityに残ります。デスクトップの「ブラウザータブ」設定からは、そのタスクが所有する既存タブを表示・操作できます。エージェントやCLIから操作する場合は、タスクの割り当てを元のIdentityへ戻す必要があります。
+タスク内でtask IDを省略すると、現在のタスクを管理します。Identity名だけを渡すと、割り当て全体をその一件に置き換えます。プライマリIdentityの割り当てを外す前に、別の割り当て済みIdentityをプライマリにします。割り当てを外してもsession、tab、Cookie、保存データは残り、再度割り当てるとエージェントから操作できます。ほかのタスクには影響しません。
 
-`cockpit browser open ... --browser-identity work`の指定は、現在の割り当てがworkであることを検証するだけで、割り当て自体を変更しません。別Identityのsessionまたはtab IDを指定すると拒否され、割り当て変更コマンドが案内されます。
+`cockpit browser open ... --browser-identity work`は割り当て済みのIdentityを選びます。割り当て自体や別Identityのtabは変更しません。未割り当てのIdentityへの操作は拒否されます。明示したsessionやtabと`--browser-identity`が異なる場合は`browser_identity_mismatch`、tabが明示した`--session`に属さない場合は`browser_session_mismatch`で失敗します。操作対象はコマンド開始時に確定するため、途中でプライマリIdentityやサイドパネルを切り替えても実行中の操作先は変わりません。
 
 ## AutorunとFleetへ割り当てる
 
@@ -96,7 +99,7 @@ cockpit browser identity remove client-a --replace-with default --confirm --json
 
 `clear`は対象Identityのlive sessionを閉じてから、all、cookies、cacheのいずれかを消去します。`remove`はすべての永続データを消去してIdentity自体を削除します。
 
-実行中タスクまたはAutorunが参照するIdentityは、`--replace-with`で移行先を指定しない限り削除できません。移行後の削除に失敗した場合は割り当てを元へ戻します。完了済みタスクだけが参照しているIdentityを移行先なしで削除すると、それらの参照はDefaultへ戻ります。
+実行中タスクまたはAutorunが参照するIdentityは、`--replace-with`で移行先を指定しない限り削除できません。移行後の削除に失敗した場合は割り当てを元へ戻します。複数のIdentityを持つタスクでは削除対象だけを置き換え、対象がプライマリなら置換先をプライマリにします。完了済みタスクだけが参照するIdentityを移行先なしで削除すると、その割り当てを外し、プライマリを削除したタスクはDefaultへ戻ります。
 
 削除前に`usages`で影響するタスク、Autorun、sessionを確認してください。
 

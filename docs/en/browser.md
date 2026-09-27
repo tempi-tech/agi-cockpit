@@ -24,7 +24,7 @@ While a Cockpit overlay such as a dialog intersects the browser area, Cockpit te
 
 ### Inspect a host tab from the PWA
 
-Select **Cockpit Browser** in the PWA task panel to choose a session and tab inside that task's assigned Browser Identity and inspect the host's current viewport as a still image. The Identity selector contains only the one Identity assigned to the task. Switching PWA panels or tabs does not navigate the host page, change the Desktop panel selection, or select a different host tab.
+Select **Cockpit Browser** in the PWA task panel to choose a session and tab inside that task's assigned Browser Identity and inspect the host's current viewport as a still image. The Identity selector contains only the Identities assigned to the task. Switching PWA panels or tabs does not navigate the host page, change the Desktop panel selection, or select a different host tab.
 
 While the panel is selected, connected, and in the foreground, it refreshes ten seconds after the previous capture finishes. **Refresh** captures the current viewport immediately. The PWA does not wake an unloaded saved tab; it asks you to open that tab on the host. The preview shows its capture time and is marked stale while disconnected, after a failed update, or after 20 seconds without a successful capture.
 

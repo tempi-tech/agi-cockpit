@@ -24,7 +24,7 @@
 
 ### PWAからホストのタブを確認する
 
-PWAのタスクパネルで**Cockpit Browser**を選ぶと、そのタスクに割り当てられたBrowser Identity内のsessionとtabを選び、ホスト上の現在のviewportを静止画像として確認できます。選べるIdentityはタスクへ割り当てられた一件だけです。PWA側でパネルやタブを切り替えても、Desktopの選択中パネル、ホストページのnavigation、tabは変更しません。
+PWAのタスクパネルで**Cockpit Browser**を選ぶと、そのタスクに割り当てられたBrowser Identity内のsessionとtabを選び、ホスト上の現在のviewportを静止画像として確認できます。選べるIdentityはタスクへ割り当てられたものに限ります。PWA側でパネルやタブを切り替えても、Desktopの選択中パネル、ホストページのnavigation、tabは変更しません。
 
 表示中かつ接続中でPWAがforegroundにある間は、前回の取得完了から10秒後に更新します。「更新」はその場のviewportを取り直します。未読み込みの保存済みtabはPWAから起動せず、ホストで開くよう案内します。画像には取得時刻があり、切断中、取得失敗、20秒以上更新できない場合は古い状態として表示します。
 

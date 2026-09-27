@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.93.0 — 2026-09-28
+
+**Type:** minor · **Platforms:** macOS
+
+- Added support for using multiple Browser Identities in one task.
+- Added a view of App Surface in the PWA task panel.
+- Added reading skill contents and definitions in the PWA task panel.
+- Added visibility into remaining Claude limit resets and their expiration.
+- Added visibility into monthly Claude extra-usage spending and its limit.
+- Fixed font-size shortcuts causing zoom to continue indefinitely.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 一つのタスクで複数のBrowser Identityを使い分けられるようにしました
+- PWAのタスクパネルでApp Surfaceの画面を確認できるようにしました
+- PWAのタスクパネルでスキルの本文と定義を読めるようにしました
+- Claudeの利用枠リセットの残り回数と有効期限を確認できるようにしました
+- Claudeの今月の追加利用額と上限を確認できるようにしました
+- 文字サイズのショートカットで拡大・縮小が止まらなくなる問題を修正しました
+
+</details>
+
 ## v4.92.0 — 2026-09-27
 
 **Type:** minor · **Platforms:** macOS

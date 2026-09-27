@@ -80,7 +80,7 @@ The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API key
 
 The in-app browser grants site permissions such as notifications, geolocation, and clipboard reading and writing by default, without a Cockpit confirmation dialog. OS and Web API restrictions still apply. It denies media capture including camera and microphone, screen capture, fullscreen, automatic fullscreen, permission to open external apps, keyboard lock, and deprecated synchronous clipboard reading. Open only sites you trust. This policy applies to every Browser Identity; separating Identities does not restrict site permissions.
 
-Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task and Autorun can each be assigned one Identity; the Default Identity is used when none is selected.
+Each Browser Identity persists its own cookies, cache, localStorage, permissions, proxy authentication, and browser sessions. A task can be assigned several Identities, with one primary Identity; each session belongs to exactly one Identity. Agent commands can access only assigned Identities. Autoruns assign an initial Identity to new tasks, and Default is used when none is selected.
 
 On macOS, `import-session` imports cookies belonging to the visible site's registrable domain and localStorage for the exact origin from Chrome into the selected Identity. It does not import sessionStorage, IndexedDB, extension state, device-bound authentication, or passkeys themselves.
 
