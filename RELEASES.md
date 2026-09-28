@@ -13,7 +13,7 @@ English is the primary language for these generated release notes. Download the 
 - Added file contents and previews alongside changes in the PWA diff view.
 - Added background process status and logs in the PWA task panel.
 - Fixed HTML Surface buttons and forms failing to send responses to tasks in the iPhone and iPad PWA.
-- Moved the send button below the last question for multi-question Asks relayed to Discord.
+- Changed multi-question Asks relayed to Discord to show the send button below the last question.
 
 <details>
 <summary>日本語のリリースノート</summary>
