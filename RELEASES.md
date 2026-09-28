@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.93.0 — 2026-09-28
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added support for using multiple Browser Identities in one task.
 - Added a view of App Surface in the PWA task panel.
