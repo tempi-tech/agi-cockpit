@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.89.0で2026-09-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.93.0で2026-09-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -50,6 +50,10 @@ Antigravityの名前付きプロファイルはブラウザーでGoogle OAuthを
 ## 利用枠の残量を確認する
 
 Desktopで「使用量」を開くと、取得できたプロバイダー・アカウントごとの利用枠を比較できます。各利用枠はリングの下に残量をパーセントで表示します。利用枠にポインターを合わせるか選択すると、アカウント、利用枠、リセット時刻を確認できます。時刻が取得できた場合は、リセットまでの残り時間も表示されます。詳細には取得元と最終更新も表示されます。「使用量を更新」で再取得してください。取得値が不明な枠、認証エラー、残量ではなく観測状態を示す行、Cockpit Agentの残高表示では、実在しない割合を作らずパーセントを表示しません。
+
+Claudeが利用枠リセットを返した場合、Desktopの各Claudeアカウントに未使用の合計回数を表示し、詳細を開くとリセットごとの残り回数、名称、失効日を確認できます。CLIでは`cockpit usage`または`cockpit accounts list --agent-type claude`の`limitResetsAvailable`と`limitResets`で同じ情報を読み取れます。停止中または期限切れの付与は数えません。項目がない場合は対象外、未提供、または読み取れない状態であり、残り0回ではありません。0はClaudeが対象アカウントに未使用リセットがないと明示した場合だけ表示されます。Cockpitからこのリセットを使用する操作はありません。
+
+Claudeの追加利用が有効で、今月の利用額を取得できた場合、DesktopとPWAの使用量には**今月の追加利用**として利用額と月間上限を同じ通貨で表示します。上限がない場合は**上限なし**と表示します。CLIでは`extraUsage.usedCredits`、`extraUsage.monthlyLimit`、`extraUsage.currency`を確認できます。項目がないことを利用額0と判断しないでください。この金額は通常の5時間・週・モデル別利用枠、購入済み残高、利用枠リセットとは別です。
 
 CodexがChatGPTアカウントの購入クレジット残高を返した場合、使用量画面は**クレジット残高**として金額または**クレジット無制限**を表示します。CLIでは`cockpit usage`と`cockpit accounts list --agent-type codex`の`usage.credits`で同じ値を確認できます。購入クレジットがない場合とCodexが残高を返さなかった場合はどちらもこの項目を省略するため、項目がないことを残高0とは判断しないでください。購入クレジットは、現在のレート制限を解除するリセットクレジットとは別で、`cockpit usage reset`では消費されません。
 

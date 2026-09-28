@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -16,7 +16,7 @@ The Desktop Ask tab lists every Ask waiting for an answer on this device, not on
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
-In the PWA, **Task panel** in task details combines HTML Surface, diff, Cockpit Browser, side terminal, Fleet, Creative Studio artifacts, and Talk Room as shared tabs. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, the project explorer, App Surface, logs, and child tasks are not tabs in this PWA panel.
+In the PWA, **Task panel** in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, diff, Cockpit Browser, App Surface, side terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, project explorer, and background logs are not tabs in this PWA panel.
 
 ## Review diffs and files
 
@@ -82,7 +82,7 @@ See the [`cockpit side-panel` reference](https://agi-labo.com/en/tools/cockpit/d
 
 The child tasks panel shows the state and reports of tasks that belong to a parent. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for parent-child relationships and reports. The Talk Room panel shows a shared participant conversation. See [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms) for participation, notifications, and mentions.
 
-Skill details show the selected skill's instructions and usage conditions. A skill does not expand task permissions. Publishing, deletion, and external messaging remain subject to the normal approval boundary.
+Skill details show the selected skill's instructions and usage conditions. In the PWA, **Skills** lists the project and global skills that the host discovered for the task and searches their names and descriptions. A detail view shows the description, argument hint, defining `SKILL.md` files, agents that use each definition, and the file body. Definitions can be switched when agents use different files. The PWA shows at most the first 256 KiB and cannot edit, delete, install, or insert a skill. A skill does not expand task permissions. Publishing, deletion, and external messaging remain subject to the normal approval boundary.
 
 ## Complete result review
 

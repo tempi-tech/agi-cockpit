@@ -4,7 +4,7 @@
 
 Isolate browser sign-ins by Identity, assign them to tasks and Autoruns, and safely import, clear, or remove their data.
 
-> Verified with AGI Cockpit 4.79.0 on 2026-09-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
+> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
 
 A Browser Identity is a local persistent area that separates sign-in state and site data for the in-app browser. Use different Identities for different jobs, clients, or verification conditions when the same site needs separate accounts.
 

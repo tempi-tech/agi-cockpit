@@ -4,7 +4,7 @@
 
 起動済みのAndroid端末またはiOS Simulatorをタスクへ接続し、画面を安全に確認・操作・切断する方法です。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/app-surface)
+> AGI Cockpit 4.93.0で2026-09-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/app-surface)
 
 App Surfaceは、起動済みのAndroidエミュレーター、Android実機、または起動済みiOS Simulatorを一つのタスクへ接続し、人とエージェントが同じ画面を確認・操作する面です。
 
@@ -47,6 +47,14 @@ cockpit app wait --label "Continue" --role button
 `snapshot`はアクセシビリティツリーと`@e1`のような一時参照を返します。tap、fill、swipe、key操作を行うと参照は無効になるため、次の操作前に新しいsnapshotを取得します。
 
 `screenshot`はPNGを返し、viewportに`coordinateSpace`と`screenshotScale`を含みます。複数displayを持つAndroid端末では、接続中のアプリを現在表示しているdisplayを撮影し、取得結果が曖昧な場合は成功扱いにしません。`wait`はtext、要素、接続状態、Android package、keyboard状態などを組み合わせられます。通常のtimeoutは`timedOut: true`を返し、`--require`を付けると`condition_not_met`として失敗します。
+
+### PWAから接続中の画面を確認する
+
+PWAのタスクパネルで**App Surface**を選ぶと、ホスト上でそのタスクへ接続済みの対象画面を閲覧できます。対象名、種類、接続方式、接続状態を確認し、画像をパネル全体または幅に合わせて表示できます。接続中かつPWAがforegroundでこのタブを開いている間だけ、前回の応答から2秒後に最新画面を要求します。タブを離れると要求を停止します。
+
+PWAは閲覧専用です。対象のattach、detach、再接続、show、hide、アプリの起動・再起動、tap、fill、swipe、key入力は行いません。これらはホストのDesktop App Surfaceまたは`cockpit app`で操作します。
+
+**接続中**は直近10秒以内に画面を受信した状態です。10秒を超えて画面が届かないか、ホストの取得が失敗してofflineになった場合は**応答なし**となり、最後の画像を古い状態として残して自動再試行します。detach後またはホスト再起動後のstale sessionは**切断**となり、再開にはホストでの再接続が必要です。対象が未接続なら空の状態を表示します。
 
 ## ラベルを優先して操作する
 

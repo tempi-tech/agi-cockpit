@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAからAGI Cockpitを監督し、別のコンピューターから対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.88.0で2026-09-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.93.0で2026-09-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -98,7 +98,9 @@ HTTPSのRemote Accessを開始すると証明書を確認し、実行中は24時
 
 PWAは、外出先や別の部屋から進行状況と判断待ちを確認するための操作面です。リモートアクセス自体の有効化、通信モード、HTTPS証明書はDesktopで設定します。Desktopにあるすべての設定画面や結果表示がPWAにもあるわけではありません。
 
-タスク詳細のタスクパネルでは、HTML Surface、差分、Cockpit Browser、ターミナル、Fleet、Creative Studioの成果物、Talk Roomをタブで切り替えます。広い画面ではチャットの右側へ並べて表示し、狭い画面では従来どおりbottom sheetとして開きます。さらに広い画面ではタスクナビゲーターも同時に表示できます。画面幅や向きが変わって表示形式が切り替わっても、開いているタブ、対象、下書き、スクロール位置は保持されます。Cockpit Browserは、タスクへ割り当てられたBrowser Identity内のホストtabを10秒間隔の静止画像で確認し、上下左右のボタンでホストページをスクロールできます。スクロールはホスト側の位置も変更しますが、PWAからlink、入力、送信は操作しません。表示範囲、制限、保存境界は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser#pwaからホストのタブを確認する)を参照してください。
+タスク詳細のタスクパネルでは、子タスク、HTML Surface、会話から開いた画像、差分、Cockpit Browser、App Surface、ターミナル、スキル、Fleet、Creative Studioの成果物、Talk Roomを、利用できる文脈に応じたタブで切り替えます。広い画面ではチャットの右側へ並べて表示し、狭い画面では従来どおりbottom sheetとして開きます。さらに広い画面ではタスクナビゲーターも同時に表示できます。画面幅や向きが変わって表示形式が切り替わっても、開いているタブ、対象、下書き、スクロール位置は保持されます。Cockpit Browserは、タスクへ割り当てられたBrowser Identity内のホストtabを10秒間隔の静止画像で確認し、上下左右のボタンでホストページをスクロールできます。スクロールはホスト側の位置も変更しますが、PWAからlink、入力、送信は操作しません。表示範囲、制限、保存境界は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser#pwaからホストのタブを確認する)を参照してください。
+
+App Surfaceタブは、ホストでタスクへ接続済みのAndroidまたはiOS Simulator画面を2秒間隔で確認する閲覧専用表示です。接続、切断、再接続、入力、アプリの起動はホストで行います。スキルタブも閲覧専用で、ホストがそのタスク向けに検出したプロジェクト・グローバルスキルを検索し、説明、引数、定義元、本文を読めます。操作方法と制限は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface#pwaから接続中の画面を確認する)と[成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools#文脈依存のパネルを使う)を参照してください。
 
 PWAのタスク一覧では、プロジェクト見出しからタスクを折りたため、件数と実行中・未読の表示は見出しに残ります。この状態はプロジェクトのディレクトリごとにそのブラウザーへ保存され、ほかの端末とは同期しません。HTML Surfaceタブは未確認の成果を示し、過去の未確認履歴を残したまま最新の成果へ移動できます。Fleet Runのタスクでは、Fleetタブから進捗、依存関係、ステップ詳細を読み取り、対応するノードのタスクへ移動できます。ターミナルのキーバーには、Ctrl+C、Ctrl+X、Ctrl+S、Shift+Tabを送る「修飾キー」メニューがあります。操作方法と制限は[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)、[成果とツール](https://agi-labo.com/tools/cockpit/docs/results-and-tools)、[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を参照してください。
 

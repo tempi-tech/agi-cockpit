@@ -4,7 +4,7 @@
 
 ブラウザーのログイン状態をIdentityごとに分離し、タスクとAutorunへ割り当て、取込・消去・削除する方法です。
 
-> AGI Cockpit 4.79.0で2026-09-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
+> AGI Cockpit 4.93.0で2026-09-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
 
 Browser Identityは、アプリ内ブラウザーのログイン状態とサイトデータを分けるローカルの永続領域です。仕事、顧客、検証条件ごとにIdentityを分けると、同じサイトへ異なるアカウントで安全に接続できます。
 

@@ -4,7 +4,7 @@
 
 Attach an already-running Android target or iOS Simulator to a task, then safely observe, operate, recover, and detach it.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/app-surface)
+> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/app-surface)
 
 App Surface attaches an already-running Android emulator, Android physical device, or booted iOS Simulator to one task so a person and agent can inspect and operate the same screen.
 
@@ -47,6 +47,14 @@ cockpit app wait --label "Continue" --role button
 `snapshot` returns the accessibility tree and temporary references such as `@e1`. Any tap, fill, swipe, or key action invalidates those references, so take a new snapshot before the next reference-based action.
 
 `screenshot` returns a PNG and reports `coordinateSpace` and `screenshotScale` in its viewport. On an Android device with multiple displays, Cockpit captures the display currently presenting the attached app; it fails instead of accepting an ambiguous capture. `wait` can combine text, elements, attachment status, Android package, and keyboard state. A normal timeout returns `timedOut: true`; `--require` turns it into `condition_not_met`.
+
+### Inspect the attached screen from the PWA
+
+Select **App Surface** in the PWA task panel to view the target already attached to that task on the host. The panel shows the target name, kind, transport, and connection state, and can fit the image to the whole panel or its width. It requests the latest screen two seconds after each response only while the PWA is connected, in the foreground, and displaying this tab. Leaving the tab stops the requests.
+
+The PWA view is read-only. It cannot attach, detach, reconnect, show, or hide a target; launch or restart its app; or send tap, fill, swipe, or key input. Perform those operations in the host's Desktop App Surface or with `cockpit app`.
+
+**Connected** means a frame arrived within the last ten seconds. If no frame arrives for longer, or the host marks the target offline after capture fails, the state becomes **Not responding**. The last image remains marked as old while the host retries automatically. A detached session or one left stale after a host restart is **Disconnected** and must be reconnected on the host. A task with no attachment shows an empty state.
 
 ## Prefer labels when operating
 

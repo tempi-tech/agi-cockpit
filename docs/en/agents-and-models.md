@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -125,6 +125,8 @@ Antigravity native UI cannot ask an approval question while it runs, so `supervi
 Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, and Grok Build also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress. When an Antigravity Native UI continuation scheduled by a timer or similar condition survives a restart, Cockpit synchronizes it from the saved transcript into its original turn instead of displaying a duplicate new turn.
 
 Provider quota usage and limits appear only when the runtime reports current values. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
+
+For Claude, Desktop and the CLI can show the unused limit-reset count and expiration dates. Desktop, the PWA, and the CLI can show this month's extra-usage spend and monthly limit. Both appear only when Claude reports them and are separate from regular quota windows. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts#check-remaining-quotas) for omission rules and CLI fields.
 
 The Desktop and PWA new-task screens also follow the selected Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, or Cockpit agent when showing supported allowances. A fixed account shows that profile; Auto shows the account selected by the same logic used for task creation. Changing the agent or account changes the preview. Terminal has no provider-usage display.
 

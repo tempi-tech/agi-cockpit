@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.84.0で2026-09-19に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.93.0で2026-09-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -33,6 +33,10 @@ PWAのタスク検索語と最近の検索履歴は、接続先ごとに利用�
 アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは、接続中のPWAまたは対応するリモートCLIコマンドに必要なタスク、Ask、Autorun、Fleet、Hook、アカウントの情報が転送されます。リモートのHooksコマンドは、接続先コンピューターへshell codeを登録・実行できます。
 
 PWAのCockpit Browser表示では、認証済みRemote Access接続へホストtabのviewport画像と限定したmetadataを送ります。task、割り当て済みBrowser Identity、session、tabの所属を要求ごとに検証し、一般browser RPC、storage、完全なURLは公開しません。画像は最大1280px・256KiBのJPEGへ制限し、ホストのディスクにもPWAのbrowser storageにも保存しません。PWAからのスクロールはホストページの位置を変更しますが、link、入力、送信は操作しません。
+
+PWAのApp Surface表示は、認証済みRemote Access接続へ、そのタスクに接続済みの対象情報とホストが保持する最新frameだけを送ります。要求時にタスクとsessionの対応を検証し、対象へのcaptureや入力、Desktop panelの変更を実行しません。frameは最大1280px・256KiBのJPEGへ再変換され、PWAの表示中memoryに一件だけ保持し、host diskやPWA storageへ保存しません。
+
+PWAのスキル表示は、タスクの作業場所からホストが検出したproject skillとglobal skillの一覧、定義metadata、`SKILL.md`本文を認証済み接続へ送ります。requestから任意のdirectoryを指定できず、タスク自体から探索範囲を導出し、そのタスクのskill discoveryで許可された定義だけを読みます。本文は先頭256 KiBまでで、閲覧専用です。秘密情報を含むスキル本文をPWAから読めることを前提に、接続済み端末を保護してください。
 
 「設定」→「Ask通知」でDiscordまたはSlackへの転送を有効にすると、Askの概要、質問、選択肢、タスク名、Cockpitへのlinkと、許可した場合はAskの画像・動画を、選択したチャンネルへ送ります。チャンネルを閲覧できるメンバーは投稿内容を読めますが、Cockpitが回答を受け付けるのは設定した一人の`allowedUserId`だけです。転送は既定で無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 
@@ -124,7 +128,7 @@ HTTPSのRemote Accessが実行中の場合だけ、Cockpitは証明書を開始�
 
 ## App Surfaceを保護する
 
-App Surfaceは一つの対象を一つのタスクへ排他的に接続します。Android実機への初回接続はAsk承認を要求し、secure fieldへの`fill`は拒否します。切断後も最後の画面が表示される場合がありますが、古い状態として操作を無効にします。
+App Surfaceは一つの対象を一つのタスクへ排他的に接続します。Android実機への初回接続はAsk承認を要求し、secure fieldへの`fill`は拒否します。切断後も最後の画面が表示される場合がありますが、古い状態として操作を無効にします。PWAはこの画面を閲覧できますが、attach、detach、再接続、入力はできません。
 
 Cockpitは対象のアプリを起動、終了、インストールしません。タスクを完了または削除すると接続だけを解除し、対象アプリは終了しません。
 

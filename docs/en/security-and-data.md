@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.84.0 on 2026-09-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -33,6 +33,10 @@ When Smart routing runs, Cockpit sends the task instruction, routing policy, ava
 Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, Autorun, Fleet, Hook, and account information needed by the connected PWA or supported remote CLI command. A remote Hook command can register and execute shell code on the target computer.
 
 The PWA Cockpit Browser view sends an authenticated Remote Access client a viewport image and limited metadata for a host tab. Every request verifies the task, assigned Browser Identity, session, and tab; it does not expose general browser RPC, storage, or the complete URL. Frames are JPEG images limited to 1280 pixels and 256 KiB and are not saved to host disk or PWA browser storage. PWA scroll controls change the host page's position but cannot activate links, type, or submit forms.
+
+The PWA App Surface view sends an authenticated Remote Access client only the target metadata and latest host-held frame for the session attached to that task. Each request verifies the task-to-session relationship and does not trigger a capture, input, or Desktop panel change. A frame is re-encoded as a JPEG limited to 1280 pixels and 256 KiB, retained only as the mounted view's current in-memory image, and not written to host disk or PWA storage.
+
+The PWA Skills view sends an authenticated client the project and global skills discovered by the host for that task, their definition metadata, and `SKILL.md` bodies. A request cannot supply an arbitrary directory: the host derives the search roots from the task and reads only definitions admitted by that task's skill discovery. A body is limited to the first 256 KiB and the surface is read-only. Protect paired devices on the assumption that they can read sensitive content stored in an available skill definition.
 
 Enabling a Discord or Slack relay under **Settings → Ask notifications** sends the Ask summary, questions, choices, task name, a link back to Cockpit, and optional Ask images or videos to the selected channel. Members who can read that channel can see the post, but Cockpit accepts an answer only from the single configured `allowedUserId`. Relays are off by default and make outbound connections from Cockpit to the Discord Gateway or Slack Socket Mode.
 
@@ -124,7 +128,7 @@ See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) fo
 
 ## Protect App Surface
 
-App Surface attaches one target exclusively to one task. The first attachment to an Android physical device requires Ask approval, and `fill` refuses secure fields. The last frame may remain after disconnection, but the stale Surface disables interaction.
+App Surface attaches one target exclusively to one task. The first attachment to an Android physical device requires Ask approval, and `fill` refuses secure fields. The last frame may remain after disconnection, but the stale Surface disables interaction. The PWA can view this frame but cannot attach, detach, reconnect, or send input.
 
 Cockpit does not start, stop, or install the target app. Completing or deleting a task detaches the target without closing its app.
 
