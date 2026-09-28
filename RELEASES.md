@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.94.0 — 2026-09-29
+
+**Type:** minor · **Platforms:** macOS
+
+- Added project folder browsing and file search in the PWA task panel.
+- Added previews of text, images, PDFs, audio, and video in the PWA task panel.
+- Added file contents and previews alongside changes in the PWA diff view.
+- Added background process status and logs in the PWA task panel.
+- Fixed HTML Surface buttons and forms failing to send responses to tasks in the iPhone and iPad PWA.
+- Moved the send button below the last question for multi-question Asks relayed to Discord.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- PWAのタスクパネルでプロジェクトのフォルダを参照し、ファイルを検索できるようにしました
+- PWAのタスクパネルでテキストや画像、PDF、音声、動画をプレビューできるようにしました
+- PWAの差分画面で変更ファイルの本文とプレビューを確認できるようにしました
+- PWAのタスクパネルでバックグラウンドプロセスの状態とログを確認できるようにしました
+- iPhone・iPadのPWAでHTML Surfaceのボタンやフォームからタスクへ回答できない問題を修正しました
+- Discordに転送した複数質問のAskで、送信ボタンを最後の質問の下に表示するようにしました
+
+</details>
+
 ## v4.93.0 — 2026-09-28
 
 **Type:** minor · **Platforms:** macOS, Linux

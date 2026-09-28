@@ -141,3 +141,9 @@ Completing a temporary-directory task deletes its workspace. Completing a Git Wo
 Before deletion, confirm the target ID, path, Git state, required artifacts, and recovery method. Obtain user approval immediately before publication, external transmission, purchase, or permission changes.
 
 The Fleet Run menu and `cockpit fleet complete-tasks <runId>` complete remaining tasks in a completed, failed, stopped, or paused Run. Running Runs are refused; active tasks and sessions an unfinished loop will reuse are skipped. Use `--dry-run` to preview the targets. This keeps the Run and task history, and preserves Git Worktrees, but completing temporary-directory tasks deletes their workspaces. Preserve needed files first.
+
+## PWA file access and HTML Surfaces
+
+The paired PWA can browse and preview files below the selected task’s working folder. This is read-only access, including hidden files when requested; keep secrets out of folders shared through Remote Access. Build, dependency, and Git folders are excluded. Symbolic links are not followed, even when they point back inside the task folder. Text previews stop at 1 MB, images at 10 MB, and PDF, audio, and video at 50 MB. Background process views read only log files recorded for that task and cannot stop or restart a process.
+
+HTML Surfaces block scripts, inline event handlers, JavaScript URLs, and embedded frames or objects on Desktop and the PWA. Declared buttons and forms can send their action and field values to the owning task. A read-only preview does not send actions. HTML file previews are different: their sandbox can run scripts but does not grant access to the PWA, its storage, or its parent page.
