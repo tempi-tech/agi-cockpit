@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.94.0 — 2026-09-29
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added project folder browsing and file search in the PWA task panel.
 - Added previews of text, images, PDFs, audio, and video in the PWA task panel.
