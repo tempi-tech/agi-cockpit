@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.95.0 — 2026-09-30
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added project management across desktop, PWA, and CLI, with multiple folders per project.
 - Added task grouping by project and moving tasks between projects.
