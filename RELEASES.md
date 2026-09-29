@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.95.0 — 2026-09-30
+
+**Type:** minor · **Platforms:** macOS
+
+- Added project management across desktop, PWA, and CLI, with multiple folders per project.
+- Added task grouping by project and moving tasks between projects.
+- Enabled supported agents to work across the folders in a project.
+- Added importing recent Claude Code and Codex sessions during onboarding and from an empty task board.
+- Added resizing for the folder pane in the project explorer.
+- Added agent tabs to model selection, opening on the current agent.
+- Added Ultrafast selection for Codex models that support it.
+- Added a panel for checking installed and latest agent CLI versions.
+- Fixed the task list remaining frozen after opening a dialog from it.
+- Enabled starting a Master task from the Master group’s new-task button.
+- Fixed task notifications and state information being sent to unpaired sync connections.
+- Improved PWA pairing to preserve the entered code and retry authentication after a disconnect.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 複数のフォルダをひとつのプロジェクトにまとめ、デスクトップ・PWA・CLIで管理できるようにしました
+- タスクをプロジェクトごとに整理し、別のプロジェクトへ移動できるようにしました
+- 対応するエージェントがプロジェクト内の複数フォルダを利用できるようにしました
+- 初期設定時や空のタスクボードから、最近のClaude Code・Codexセッションをまとめて取り込めるようにしました
+- プロジェクトエクスプローラーのフォルダ欄の幅を変更できるようにしました
+- モデル選択にエージェント別のタブを追加し、使用中のエージェントから開くようにしました
+- 対応するCodexモデルでUltrafastを選べるようにしました
+- エージェントCLIのインストール済みバージョンと最新バージョンを専用パネルで確認できるようにしました
+- タスク一覧からダイアログを開いた際に、一覧の更新が止まる問題を修正しました
+- Masterグループの新規タスクボタンからMasterタスクを開始できるようにしました
+- 未ペアリングの同期接続にタスク通知や状態情報が送信される問題を修正しました
+- PWAのペアリング中に接続が切れても、入力したコードを保持して認証を再試行するようにしました
+
+</details>
+
 ## v4.94.0 — 2026-09-29
 
 **Type:** minor · **Platforms:** macOS, Linux

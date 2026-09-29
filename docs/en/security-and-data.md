@@ -22,6 +22,12 @@ PWA task search queries and recent searches are stored in the current browser’
 
 Smart routing's on/off state and **Routing policy** are stored in Desktop localStorage separately for each signed-in user ID. They do not sync to another device.
 
+## Project folders and agent access
+
+A project can contain multiple folders. When an agent session starts or resumes, Cockpit passes the project’s other folders to the agent according to that agent’s supported access options. Adding a folder can therefore expand the files the agent can read or write; review the folder list before reconnecting a task. Approval mode and agent-specific restrictions still apply. A Git Worktree replaces only its source folder; other project folders are used in place. See the [project CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for agent-specific behavior.
+
+Deleting a project removes its grouping only: tasks and folders remain. A task folder registered in a project is preserved when its task is completed or deleted.
+
 ## Importing existing sessions
 
 **Continue where you left off**, at the end of onboarding and on an empty task board, lists up to 200 Claude Code and Codex sessions from the last 30 days, grouped by workspace. Select sessions individually or by workspace, then import them together, or skip. Workspace suggestions can also be registered using the existing project creation dialog. Imported tasks resume in Terminal UI.
@@ -121,6 +127,8 @@ Fleet command gates save complete stdout and stderr per attempt under the Run's 
 Local `task create` and `task send` can attach files through repeatable `--media` arguments, using the same managed upload store and limits as the GUI. The source files are copied, never moved or deleted; the attachments can be sent to the selected agent provider. Remote `--host` delivery is not supported.
 
 ## Protect Remote Access
+
+Task notifications, full state synchronization, and recent folder lists are sent only to authenticated sync connections. An unpaired connection is closed after two minutes. The PWA keeps the pairing form and entered code while reconnecting, and resends a submitted code if the connection drops before the authentication reply.
 
 The recommended configuration is Tailscale-only access over HTTPS. Cockpit authenticates devices with Tailscale device information and a six-digit pairing code, with expiration and failure limits. It does not silently downgrade to HTTP when an HTTPS certificate cannot be obtained.
 
