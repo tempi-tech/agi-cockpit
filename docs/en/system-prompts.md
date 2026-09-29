@@ -78,6 +78,23 @@ New tasks support system prompts in the native UI for Claude, Codex, Qoder, and 
 
 An Autorun stores the selected prompt name in its runtime snapshot. If that prompt is removed or no longer supports the agent, a resumed task reports that it returned to the standard prompt, and an Autorun may require its settings to be reviewed.
 
+## Use a custom system prompt with Codex
+
+Custom system prompts work with Codex in the native UI (`visual`). Register the prompt once, then select it from the system-prompt selector after choosing Codex on Desktop or the PWA, or pass its name with `--system-prompt`.
+
+```bash
+cockpit system-prompt add codex-reviewer --prompt "Review for correctness, security, and test coverage. Report findings by severity."
+cockpit task create --instruction "Review this change" --directory /path/to/repo --agent-type codex --ui-mode visual --system-prompt codex-reviewer
+```
+
+Cockpit sends the prompt to Codex as developer instructions. Codex's own built-in instructions stay in place, so `replace` replaces only Cockpit's standard prompt, not Codex's. With the default `append`, Codex receives Cockpit's standard prompt followed by your instructions.
+
+A custom prompt takes the place of the Codex presets rather than adding to them. Selecting it does not apply the `friendly` or `pragmatic` personality from **Codex (Friendly)** or **Codex (Pragmatic)**. To shape the response style, write the tone into the custom prompt itself.
+
+The per-agent default under Agents in Settings and `agents.systemPromptPreset.codex` accept only the built-in presets **Cockpit**, **Codex (Friendly)**, and **Codex (Pragmatic)**. Choose a custom prompt for each task or Autorun instead. For an Autorun, pass `--ui-mode visual --system-prompt <name>`.
+
+Codex in the terminal UI does not support Cockpit's system-prompt selection, and the CLI rejects `--system-prompt` for it. That mode uses the Codex CLI's own instructions and configuration.
+
 ## Design prompt content safely
 
 State the purpose, priorities, required success conditions, prohibited actions, and expected report format briefly and clearly. Conflicting instructions and long procedures that do not apply to every task can weaken the task-specific intent.

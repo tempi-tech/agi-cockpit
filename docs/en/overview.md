@@ -29,7 +29,7 @@ The in-app browser stores sign-in state and site data in the local persistent ar
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
 | `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, App Surface, and other Cockpit surfaces | AI agents and people |
 
-Every local feature is free and unlimited, with no account required. Claude Code, Codex, and other agents require their own plans. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds exactly two Cockpit features: Autorun and remote access through the PWA.
+Every local feature is free and unlimited, with no account required. Claude Code, Codex, and other agents require their own plans. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing.
 
 ## Where to start
 
@@ -61,7 +61,7 @@ Every local feature is free and unlimited, with no account required. Claude Code
 | Access | Scope covered by these docs |
 | --- | --- |
 | Free access | Create a task in Desktop, run an agent, and review the result and history dashboard. Every local feature is free and unlimited |
-| AGI Labo membership | Everything in free access, plus Autorun and PWA remote access |
+| AGI Labo membership | Everything in free access, plus Autorun, PWA remote access, and smart routing |
 
 A lock on a feature means that feature requires an active AGI Labo membership. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Labo sign-in.
 

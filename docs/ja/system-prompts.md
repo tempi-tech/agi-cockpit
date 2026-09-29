@@ -78,6 +78,23 @@ cockpit autorun create --name "Daily review" --instruction "最近の変更を�
 
 Autorunは保存時のシステムプロンプト名をランタイム設定として保持します。プロンプトを削除したり対応条件が変わったりした場合、既存タスクの再開では標準プロンプトへ戻したことが表示され、Autorunは設定の再確認が必要になる場合があります。
 
+## Codexでカスタムシステムプロンプトを使う
+
+カスタムシステムプロンプトは、CodexのネイティブUI（`visual`）で使えます。プロンプトを一度登録し、DesktopまたはPWAでCodexを選んだ後にシステムプロンプトの選択欄から選ぶか、CLIで`--system-prompt`に名前を指定します。
+
+```bash
+cockpit system-prompt add codex-reviewer --prompt "正しさ、セキュリティ、テストの網羅性を確認し、指摘を重要度順に報告してください。"
+cockpit task create --instruction "この変更をレビューして" --directory /path/to/repo --agent-type codex --ui-mode visual --system-prompt codex-reviewer
+```
+
+Cockpitは、このプロンプトをCodexへdeveloper instructionsとして渡します。Codex自身の組み込み指示はそのまま残るため、`replace`で置き換わるのはCockpitの標準プロンプトだけです。既定の`append`では、Cockpitの標準プロンプトの後に登録した指示が続きます。
+
+カスタムプロンプトはCodexのプリセットに追加されるのではなく、プリセットの代わりに使われます。選択すると、**Codex (Friendly)**や**Codex (Pragmatic)**の`friendly`・`pragmatic` personalityは適用されません。応答のトーンを指定したい場合は、カスタムプロンプトの本文に書きます。
+
+SettingsのAgentsにあるエージェントごとの既定と`agents.systemPromptPreset.codex`で選べるのは、組み込みの**Cockpit**、**Codex (Friendly)**、**Codex (Pragmatic)**だけです。カスタムプロンプトはタスクやAutorunごとに選びます。Autorunでは`--ui-mode visual --system-prompt <name>`を指定します。
+
+CodexのターミナルUIではCockpitのシステムプロンプト選択を使えず、CLIも`--system-prompt`を拒否します。この場合はCodex CLI自身の指示と設定が適用されます。
+
 ## 内容を安全に設計する
 
 プロンプトには、目的、優先順位、必須の成功条件、禁止事項、期待する報告形式を短く明確に書きます。互いに矛盾する指示や、どの作業にも当てはまらない長い手順を入れると、個別タスクの意図が弱くなります。
