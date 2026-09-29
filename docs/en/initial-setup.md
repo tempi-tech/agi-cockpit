@@ -4,7 +4,7 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.85.0 on 2026-09-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
@@ -30,7 +30,11 @@ If a Claude Code, Codex, or Grok Build Native UI task starts before authenticati
 
 For local features only, select **Start without signing in** on the final screen. Sign in as an AGI Labo member if you want Smart routing, Autorun, or remote access from another device.
 
-Setup is complete when the **New task** screen opens and the agent you want is selectable. Continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+## 5. Continue recent work or skip
+
+The final **Continue where you left off** step lists up to 200 Claude Code and Codex sessions updated in the last 30 days, grouped by workspace. Select individual sessions or an entire workspace, then choose **Import selected**. Imported tasks resume in Terminal UI. You can also create a project for a listed workspace before importing, or choose **Skip for now**.
+
+Importing reads the original session files locally without changing or deleting them, and it does not start an agent. When the **New task** screen opens, setup is complete. Continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
 ## If setup does not complete
 

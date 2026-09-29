@@ -2,9 +2,9 @@
 
 # Task details
 
-Operate the selected task's conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
+Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -32,6 +32,12 @@ Before delivery, a queued message can be edited, sent now, or removed. **Edit** 
 ### Configure follow-up behavior from the CLI
 
 Use `cockpit settings get shortcuts.followUpBehavior` to read the current default, and `cockpit settings set shortcuts.followUpBehavior queue` or `cockpit settings set shortcuts.followUpBehavior steer` to change it. `queue` waits for the current turn to finish; `steer` sends to the current turn. The default is `queue`. This does not change the separate `shortcuts.steerTurn` key binding or add steering support to an unsupported agent mode.
+
+## Check the task's project folders
+
+The Desktop task header shows the task's project. Open its folder control to see the working folder and the other project folders given to the current agent session. A folder added since the session started is marked **Not given to this session yet**; a removed folder can remain available to that session until it restarts. Missing folders are identified separately.
+
+Project-folder changes apply when the agent next starts or resumes a session. For a supported Native UI task, `cockpit task reconnect <id>` restarts the agent in place with the project's current folders while preserving its conversation. Moving a task to another project also moves its child tasks, but the new folders are not applied to the already-running session until that next start.
 
 
 ## Confirm the execution account

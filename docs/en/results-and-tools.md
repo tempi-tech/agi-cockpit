@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -26,7 +26,7 @@ File preview supports text, images, audio, video, PDFs, and other recognized for
 
 When Desktop previews an `.html` or `.htm` file, **Open in the in-app browser** opens that local file in a new browser tab for the same task. If the file is being edited, Cockpit saves the current content first and does not open the browser when that save fails. This does not transfer an HTML Surface; it is a way to verify an HTML file from the working directory in a normal browser renderer.
 
-The project explorer navigates the working directory hierarchy. It preserves the selected file across refreshes and opens files in preview. Inspect both content and path before sharing any file that could contain secrets.
+The Desktop project explorer can switch among the folders in the task's project and marks the task's working folder. Drag the edge of the folder list to resize it, or collapse the list to give the file tree more room. The explorer preserves the selected file across refreshes and opens files in preview. Inspect both the selected project folder and file path before sharing anything that could contain secrets.
 
 ## Find text in a Desktop side panel
 

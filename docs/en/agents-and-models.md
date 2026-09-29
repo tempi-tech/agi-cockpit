@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -43,9 +43,15 @@ Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build support both mode
 
 In Antigravity Native UI, a failed tool item remains marked as failed, but the turn can still complete when the agent recovers and continues its response. When the agent returns an interim answer while waiting for a background command, Cockpit does not close the turn on the CLI success signal alone. It follows the completion notice, later tool calls, and final answer in that same turn. If the agent checks a persistent server and then gives a final answer, the turn can still finish while that server remains running.
 
+## Use folders across a project
+
+Every task starts in one working folder. When the task belongs to a project with more folders, Cockpit passes the current folder list to the agent each time its session starts or resumes. Direct multi-folder access depends on the agent and UI mode: supported Native UI and terminal UI combinations receive access arguments or runtime permissions, while some combinations receive only a note containing the paths. Terminal tasks do not receive project-folder access. Codex terminal UI in full-access mode is not given the other paths.
+
+Adding or removing a project folder does not silently change a session that is already running. Check the task header for the folder set that session received, then reconnect or resume when the new set must apply. See the [project CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project#folders-a-task-can-use) for the current agent-by-agent behavior.
+
 ## Models and reasoning settings
 
-Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. Even before a Native UI conversation has any messages, the model selector shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. The CLI and API reject an unverified setting instead of silently substituting another value.
+Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. The model picker groups candidates under agent tabs and opens on the agent currently used by the task. In task details, choosing a model under another supported agent schedules an agent switch for the next message. Even before a Native UI conversation has any messages, the picker shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. The CLI and API reject an unverified setting instead of silently substituting another value.
 
 Antigravity Native UI keeps the reasoning level selected for that task after a turn completes and after switching tasks. For example, the next follow-up after a `high` turn remains `high` even when the refreshed candidate list defaults to `low`. Cockpit moves to the current supported default only when the refreshed candidates no longer offer the saved level.
 
@@ -57,7 +63,7 @@ Codex model choices, whether built in or discovered at runtime, put newer GPT ge
 
 Codex Native UI uses the model catalog discovered from the selected account across the default settings under **Agents**, new tasks, and Autoruns. Changing a pinned account loads that account's catalog again, and a late result from the previous account cannot overwrite it. Model-dependent creation and saving wait while discovery is in progress. If discovery fails, Cockpit shows its built-in candidates and tries discovery again when the surface is reopened or authentication changes. Newly available models can therefore be selected together with the reasoning levels and `fast` support advertised by the discovered catalog.
 
-Codex supports a `standard` or `fast` service tier for applicable models. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
+Codex supports `standard`, `fast`, and `ultrafast` service tiers. The picker shows `fast` or **Ultrafast** only when the selected model's discovered capabilities advertise that tier; unsupported explicit values are rejected. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
 Cockpit Agent model IDs use `openrouter/<id>` for OpenRouter, `opencode-go/<id>` for OpenCode Go, `opencode/<id>` for OpenCode Zen, and `lmstudio/<id>` for LM Studio. OpenCode Go and OpenCode Zen are separate providers, and their **OpenCode Go API Key** and **OpenCode Zen API Key** settings are not interchangeable. Models and tasks for a provider remain unavailable until its key is configured.
 
@@ -140,7 +146,7 @@ Every agent has an attachment entry point when created from Desktop, the PWA, or
 
 Antigravity Native UI accepts images natively from Desktop and the PWA. When an image is outside the task workspace, Cockpit copies it into a temporary, Git-ignored directory inside that workspace and gives Antigravity the staged path. This makes the image readable in `supervised` mode, but the turn fails with a reason before it starts if the workspace cannot hold the temporary file. Non-image formats such as PDFs and Antigravity Terminal UI are outside this native image-input path.
 
-The Cockpit skill and HTML Mode are installed into supported external agent CLIs. Terminal and Cockpit Agent do not use that skill contract. Claude Code and Codex are the only agents whose external sessions can be imported from Cockpit's history.
+The Cockpit skill and HTML Mode are installed into supported external agent CLIs. Terminal and Cockpit Agent do not use that skill contract. Claude Code and Codex are the only agents whose external sessions can be imported. The import appears at the end of onboarding and as **Continue where you left off** on an empty task board; imported tasks resume in Terminal UI.
 
 ## Current capability comparison
 

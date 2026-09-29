@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -85,6 +85,8 @@ A failed automatic renewal retries after six hours. When failure occurs with 14 
 4. If device pairing appears, enter the six-digit pairing code from the Desktop Remote access panel.
 
 A Tailscale device owned by the same user in the same tailnet may be authenticated automatically from its Tailscale identity. A connection that Cockpit cannot authenticate automatically requires the pairing code. The code refreshes after five minutes; select **Regenerate** to replace it immediately.
+
+Before pairing succeeds, Cockpit does not send task notifications, full task state, or recent folder lists to that connection, and it closes an unpaired connection after two minutes. If the connection drops while the PWA is pairing, the form keeps the entered code and reconnects. A code already submitted before the authentication reply is sent again automatically, so do not regenerate it unless it has expired or Cockpit rejects it.
 
 The connection is ready when the PWA header shows the target machine name and **Connected**, and you can open **Inbox**, **Tasks**, and **Autorun**. The browser tab title also starts with the target as `<machine name> - AGI Cockpit`, making several connections distinguishable even in narrow tabs. While disconnected or before a machine name is available, it falls back to `AGI Cockpit`.
 

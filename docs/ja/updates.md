@@ -4,9 +4,11 @@
 
 Windows、macOS、LinuxでAGI Cockpitの更新を確認・適用し、失敗した場合に更新状態と診断ログを確認する手順です。
 
-> AGI Cockpit 4.87.0で2026-09-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/updates)
+> AGI Cockpit 4.95.0で2026-09-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/updates)
 
 AGI Cockpitの更新方法は配布形式によって異なります。この手順では、現在の環境に合う更新方法を確認し、更新後の状態を確かめます。
+
+AGI Cockpit本体と外部エージェントCLIは別々に更新します。「設定」→「更新」の「エージェント CLI」を開くと、Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildのインストール済み版と最新版を比較できます。「確認」は対象エージェントの状態を再取得します。更新コマンドが分かる場合、「CLI を更新」はホスト上でそのコマンドを実行するターミナルを開きますが、AGI Cockpit本体は更新しません。読み取り専用のCLI操作は`cockpit setup agent status <agent>`です。
 
 ## 1. 更新方法を確認する
 

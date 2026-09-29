@@ -2,9 +2,9 @@
 
 # タスク詳細
 
-選択したタスクの会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
+選択したタスクのプロジェクトフォルダ、会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.90.0で2026-09-25に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.95.0で2026-09-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -32,6 +32,12 @@ DesktopとPWAのClaude、Codex、Antigravity、Cursor、Qoder、Grok Buildのネ
 ### CLIで追加指示の送信方法を設定する
 
 `cockpit settings get shortcuts.followUpBehavior`で現在の既定値を確認し、`cockpit settings set shortcuts.followUpBehavior queue`または`cockpit settings set shortcuts.followUpBehavior steer`で変更できます。`queue`は現在のターン終了まで待ち、`steer`は現在のターンへ送ります。既定値は`queue`です。別の設定である`shortcuts.steerTurn`のキー割り当ては変更せず、未対応のエージェントモードに割り込み機能を追加するものでもありません。
+
+## タスクのプロジェクトフォルダを確認する
+
+Desktopのタスクヘッダーには、そのタスクのプロジェクトが表示されます。フォルダの操作を開くと、作業フォルダと、現在のエージェントセッションへ渡されたほかのプロジェクトフォルダを確認できます。セッション開始後に追加したフォルダは「このセッションには未反映」、削除したフォルダはセッションを再起動するまで利用可能な場合があることを表示し、見つからないフォルダも区別します。
+
+プロジェクトのフォルダ変更は、エージェントが次にセッションを開始または再開するときに反映されます。対応するネイティブUIタスクでは、`cockpit task reconnect <id>`で会話を維持したままエージェントを再接続し、現在のフォルダ構成を渡せます。別のプロジェクトへタスクを移動すると子タスクも移動しますが、すでに実行中のセッションへ新しいフォルダが反映されるのは次回起動時です。
 
 
 ## 実行アカウントを確認する

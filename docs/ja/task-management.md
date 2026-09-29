@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.81.0で2026-09-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.95.0で2026-09-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -50,11 +50,13 @@ cockpit task create \
   --create-key deploy-2026-09-05-1
 ```
 
-## 作業場所と実行設定を決める
+## プロジェクト、作業フォルダ、実行設定を決める
 
-既存プロジェクトを扱う場合は`--directory`を指定します。省略するとOSの一時フォルダーで始まり、完了時に作業場所が削除されることがあります。Git Worktreeを分離する場合は`--worktree`を使います。
+`--project <id|name>`でタスクをプロジェクトへ割り当てます。`--directory`を省略すると、そのプロジェクトのプライマリフォルダから開始します。`--directory`も指定する場合は、そのプロジェクトに登録済みのフォルダでなければなりません。`--project`を省略した場合は、作業フォルダに基づくプロジェクト規則で自動的に割り当てます。両方を省略すると、どのプロジェクトにも属さないOSの一時フォルダで始まります。Git Worktreeを分離する場合は`--worktree`を使います。
 
 エージェント、UIモード、モデル、推論レベル、アカウント、承認モード、Browser Identityはタスクごとの実行条件です。Claude Code、Codex、Antigravity、Cursor、Qoder、Grok Buildでは、`--ui-mode visual`または`--ui-mode terminal`で作成時の表示モードを指定できます。Cockpit AgentとTerminalはUIモードを切り替えられません。対応しない組み合わせはエラーになり、無言で別設定へ切り替わりません。特に外部サイトを扱うタスクでは、必要なログイン状態を持つBrowser Identityを明示します。
+
+CodexのネイティブUIでは`--service-tier standard|fast|ultrafast`を指定できます。`fast`と`ultrafast`は、選択したモデルがそのtierを提示する場合だけ有効です。
 
 `--approval-mode`には`supervised`、`accept-edits`、`full-access`を指定できます。Cockpit AgentとネイティブUIのエージェントで、そのタスクだけの既定値を上書きします。ターミナルUIとTerminalタスクは対応しません。
 
@@ -69,6 +71,19 @@ cockpit task create \
 ```
 
 `--media`はローカルファイルをCockpitの管理領域へコピーして最初の指示へ添付します。最大8件、1件512MB、JSONは25MB、合計1GBまでです。リモートURLと、選んだエージェントが直接受け取れないファイル種別は拒否されます。元ファイルは移動も削除もされません。
+
+## プロジェクトを作成し、タスクを移動する
+
+```bash
+cockpit project create --name "Shop" --folder ~/repos/shop-web --folder ~/repos/shop-api
+cockpit project update Shop --primary-folder ~/repos/shop-api
+cockpit task project <task-id> Shop
+cockpit task project <task-id>
+```
+
+`cockpit project`はDesktopとPWAに表示される同じプロジェクトを管理します。先頭のフォルダがプライマリです。`--folder`なしでプロジェクトを作ると、Cockpitが空の管理フォルダを用意します。更新ではフォルダの追加・削除・置換・並べ替えができ、プロジェクトを削除してもフォルダは残り、タスクは「プロジェクトなし」へ移ります。
+
+`cockpit task project <task-id> <id|name>`は、タスクとすべての子タスクを移動します。新しいプロジェクトのフォルダは、エージェントセッションが次に開始するときに反映されます。Master AgentとCreative Studioのタスクは移動できません。同じ名前のプロジェクトが複数ある場合は、`cockpit project list`で確認したIDを使います。
 
 ## 親子タスクを作る
 
@@ -102,7 +117,7 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `--parent`は指定した親自身と直接の子を、`--recursive`を加えるとすべての子孫を返します。完了済みは既定で除外されるため、含める場合は`--all`、完了済みだけなら`--status completed`を指定します。`--directory`と`--name`でさらに絞り込めます。絞り込みで親が非表示でも、再帰探索はその階層を通過します。存在しない親は`task_not_found`、`--parent`のない`--recursive`は入力エラーです。
 
-親指定の一覧は常に軽量summaryです。通常の一覧も`--summary`で同じ形式になり、`id`、`name`、`status`、`hasPendingAsk`、`parentMasterId`、`directory`、`agentType`、作成・更新時刻だけを返します。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
+親指定の一覧は常に軽量summaryです。通常の一覧も`--summary`で同じ形式になり、`id`、`name`、`status`、`hasPendingAsk`、`parentMasterId`、`directory`、`projectId`、`agentType`、作成・更新時刻だけを返します。どのプロジェクトにも属さない場合、`projectId`は`null`です。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
 
 | フィールド | 判断 |
 | --- | --- |

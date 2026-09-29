@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.81.0 on 2026-09-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -50,11 +50,13 @@ cockpit task create \
   --create-key deploy-2026-09-05-1
 ```
 
-## Set the workspace and runtime
+## Set the project, working folder, and runtime
 
-Specify `--directory` for an existing project. Without it, a task starts in an operating-system temporary directory that may be removed on completion. Use `--worktree` when the task needs an isolated Git Worktree.
+Use `--project <id|name>` to assign the task to a project. Without `--directory`, it starts in that project's primary folder; with `--directory`, the folder must belong to the project. If `--project` is omitted, Cockpit assigns the task from its working folder according to the project rules. If both are omitted, the task starts in an operating-system temporary folder outside every project. Use `--worktree` when the task needs an isolated Git Worktree.
 
 The agent, UI mode, model, reasoning effort, account, approval mode, and Browser Identity are task runtime settings. For Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build, choose the creation-time display with `--ui-mode visual` or `--ui-mode terminal`. Cockpit Agent and Terminal do not switch UI modes. Unsupported combinations fail instead of silently selecting a different setting. For work on an external site, explicitly assign the Browser Identity that holds the required sign-in state.
+
+Codex Native UI accepts `--service-tier standard|fast|ultrafast`. `fast` and `ultrafast` are valid only when the selected model advertises that tier.
 
 `--approval-mode` accepts `supervised`, `accept-edits`, or `full-access`. It overrides the per-task default for Cockpit Agent and agents in Native UI. Terminal UI and Terminal tasks reject it.
 
@@ -69,6 +71,19 @@ cockpit task create \
 ```
 
 `--media` copies local files into Cockpit-managed storage and attaches them to the first instruction. The limit is eight files, 512 MB per file, 25 MB for JSON, and 1 GB in total. Remote URLs and file types the selected agent cannot receive directly are rejected. Source files are neither moved nor deleted.
+
+## Create projects and move tasks
+
+```bash
+cockpit project create --name "Shop" --folder ~/repos/shop-web --folder ~/repos/shop-api
+cockpit project update Shop --primary-folder ~/repos/shop-api
+cockpit task project <task-id> Shop
+cockpit task project <task-id>
+```
+
+`cockpit project` manages the same projects shown in Desktop and the PWA. The first folder is primary. A project created without `--folder` receives an empty Cockpit-managed folder. Updating can add, remove, replace, or reorder folders; deleting a project leaves its folders untouched and moves its tasks to **No project**.
+
+`cockpit task project <task-id> <id|name>` moves the task and all of its child tasks. The new project's folders apply when their agent sessions next start. Master Agent and Creative Studio tasks cannot be moved. If several projects have the same name, use the ID reported by `cockpit project list`.
 
 ## Create parent and child tasks
 
@@ -102,7 +117,7 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `--parent` returns the named parent and its direct children; add `--recursive` for every descendant. Completed tasks are excluded by default. Add `--all` to include them, or `--status completed` to select only completed tasks. `--directory` and `--name` further filter the result. Recursive traversal still passes through a parent hidden by a filter. An unknown parent returns `task_not_found`, and `--recursive` without `--parent` is invalid.
 
-A parent query always uses the lightweight summary form. Add `--summary` to an ordinary list for the same fields: `id`, `name`, `status`, `hasPendingAsk`, `parentMasterId`, `directory`, `agentType`, and creation and update times. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
+A parent query always uses the lightweight summary form. Add `--summary` to an ordinary list for the same fields: `id`, `name`, `status`, `hasPendingAsk`, `parentMasterId`, `directory`, `projectId`, `agentType`, and creation and update times. `projectId` is `null` outside every project. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
 
 | Field | Decision |
 | --- | --- |

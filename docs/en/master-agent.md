@@ -4,7 +4,7 @@
 
 Learn how to give a Master Agent a broad objective and supervise its task decomposition, progress tracking, result integration, and recurring operation.
 
-> Verified with AGI Cockpit 4.61.0 on 2026-08-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
 
 The Master Agent is an agent launched in a Master directory containing a dedicated `AGENTS.md` with instructions for starting and supervising Cockpit tasks. Like a skill, this `AGENTS.md` gives the agent its role and operating procedures.
 
@@ -22,7 +22,7 @@ Choose Fleet when the procedure is stable. Choose the Master Agent when decompos
 
 ## Create a Master Agent
 
-Choose Master Agent in the Desktop or PWA creation screen, then enter its name and initial instruction. It runs in a Cockpit-managed Master directory rather than an ordinary project directory. Multiple Master Agents can run at once, each with its own conversation and child tasks.
+Choose Master Agent in the Desktop or PWA creation screen, then enter its name and initial instruction. On Desktop, the new-task button on the **Master** group opens this Master Agent flow directly. It runs in a Cockpit-managed Master directory rather than an ordinary project and cannot be moved into one. Multiple Master Agents can run at once, each with its own conversation and child tasks.
 
 To start one on a schedule through the CLI, add `--master` to an Autorun.
 

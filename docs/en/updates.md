@@ -4,9 +4,11 @@
 
 Check and apply AGI Cockpit updates on Windows, macOS, or Linux, then inspect update state and diagnostic logs if an update fails.
 
-> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
 
 The update method depends on how AGI Cockpit is distributed. This guide identifies the method for your environment and verifies the result after updating.
+
+AGI Cockpit and the external agent CLIs are updated separately. Under **Settings → Updates**, open **Agent CLIs** to compare installed and latest versions for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build. **Check** refreshes one agent's status. When Cockpit knows an update command, **Update CLI** opens a terminal to run it on the host; it does not update the Cockpit app. The read-only equivalent is `cockpit setup agent status <agent>`.
 
 ## 1. Check the update method
 

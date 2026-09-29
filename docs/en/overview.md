@@ -4,13 +4,15 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.69.0 on 2026-09-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
+A project groups one or more folders under one name. Tasks are organized by project, while each task starts in one selected working folder and supported agents can also use the project's other folders.
+
 ## How work moves through Cockpit
 
-1. Give a task an objective and a working directory.
+1. Choose or create a project, select the task's working folder, and give it an objective.
 2. Start the selected AI agent.
 3. Use the task list to distinguish running, awaiting confirmation, completed, and failed work.
 4. Open task details to review the conversation, confirmation requests, diffs, files, web pages, connected app screens, and other results.

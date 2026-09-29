@@ -2,16 +2,16 @@
 
 # Your first task
 
-Choose a workspace and agent, safely run your first task, review its result, and mark the task complete.
+Choose a project, working folder, and agent, safely run your first task, review its result, and mark the task complete.
 
-> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
 ## 1. Create a new task
 
 1. Open **New task** at the top of the window.
-2. Under **Workspace**, choose **Project workspace** or **Temporary folder**. In an existing project, select only the directory the agent may inspect.
+2. Under **Workspace**, choose an existing project, select **Create project**, or choose **Temporary folder**. If the project contains several folders, select the working folder for this task.
 3. Select an AI agent.
 4. For supported agents, use **Mode** to choose **Native UI** or **Terminal**.
 5. If account selection is available, keep **Auto**. Keep the built-in system prompt.
@@ -21,7 +21,7 @@ This guide runs one short read-only request from task creation through result re
 Inspect this folder and describe its main files and their roles in no more than five points. Do not change any files.
 ```
 
-Project selection shows projects from the current task list first, followed by recently used projects. Search filters the display name and path. Enter a path directly or use the folder picker when a location is not listed.
+The project picker shows current projects, other projects, and recent folders. **Create project** lets you name a project and add one or more existing folders; if you add none, Cockpit creates an empty managed folder for it. The first folder is primary and is selected by default for new tasks. Open **Project details** to review or change the project's folders before creating the task.
 
 Smart routing is for AGI Labo members. If you select **Smart routing** while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member, turn it on to let Cockpit choose an AI agent, model, reasoning level, and workspace from the currently available candidates based on the instruction. Manually selecting a workspace fixes only the workspace; agent and model routing remains active. Under **Routing policy**, enter preferences such as agents or models to prioritize. The policy saves automatically and applies to future tasks.
 
@@ -33,7 +33,7 @@ For an agent that reports usage, the area near the composer shows the allowances
 
 Draft instructions and attachments remain available until the task is created or the creation screen is explicitly closed. You can inspect Settings or another screen and return to **New task** without re-entering them. This draft does not persist after the app quits.
 
-A temporary folder is deleted automatically when the task is completed. In an existing project, begin only after you understand that the agent can operate on files in that directory.
+A temporary folder is deleted automatically when the task is completed. In a project, the task starts in the selected working folder. Supported agents can also use other folders in that project, so include only folders the task is allowed to access.
 
 ## 2. Confirm that it is running
 
@@ -60,13 +60,13 @@ After Cockpit integration is configured, create the same task from a supported A
 ```bash
 cockpit task create \
   --instruction "Inspect this folder in no more than five points. Do not change files." \
-  --directory /path/to/project
+  --project Example
 
-cat instruction.md | cockpit task create --stdin --directory /path/to/project
-cockpit task create --instruction-file instruction.md --directory /path/to/project
+cat instruction.md | cockpit task create --stdin --project Example
+cockpit task create --instruction-file instruction.md --project Example --directory /path/to/project/folder
 ```
 
-Use `--stdin` or `--instruction-file` for multiline content or text containing backticks, quotes, `$`, or code fences. If the directory is omitted, the task starts in an operating-system temporary folder.
+Use `--stdin` or `--instruction-file` for multiline content or text containing backticks, quotes, `$`, or code fences. `--project` accepts an ID or exact name and uses the primary folder unless `--directory` selects another folder in that project. If both are omitted, the task starts in an operating-system temporary folder.
 
 ## Read next
 

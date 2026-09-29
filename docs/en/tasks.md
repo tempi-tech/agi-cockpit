@@ -2,9 +2,9 @@
 
 # Task list
 
-Understand the task list, Overview, search, project names, sorting, workspaces, states, completion, and deletion.
+Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.87.0 on 2026-09-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -26,13 +26,13 @@ Search inside the task list partially matches displayed task and project names. 
 
 The **Pinned** heading on Desktop and the PWA shows the total number of unfinished pinned tasks. When search or the agent filter narrows the list, it shows **visible / total**; without filtering, it shows the total. The total remains visible when the group is collapsed or no pinned task matches the filter.
 
-In the PWA, select a project heading to collapse or expand that project's tasks. A collapsed heading keeps the task count and running or unread indicators visible. The choice is stored in that browser for each project directory and survives a reload, but it does not sync to other devices. Search can hide groups that do not match without changing their saved collapsed state. A new or reintroduced project starts expanded; completed-only sections and the Pinned group keep their existing behavior.
+In the PWA, select a project heading to collapse or expand that project's tasks. A collapsed heading keeps the task count and running or unread indicators visible. The choice is stored in that browser for each project and survives a reload, but it does not sync to other devices. Search can hide groups that do not match without changing their saved collapsed state. A new or reintroduced project starts expanded; completed-only sections and the Pinned group keep their existing behavior.
 
 In the PWA task list, a question-bubble marker labelled **Waiting for an Ask answer** appears while that task has an unanswered Ask. It follows the actual open Ask rather than inferring from `waitingReason: question`, so it clears after the Ask is answered or closed. Selecting the row still opens the task; open **Confirm** to answer the Ask. A session-unrecoverable warning or usage-limit warning takes display priority over the Ask marker because it identifies a separate recovery blocker.
 
 On Desktop, Command/Ctrl+K opens a search palette across projects. In addition to task names, first instruction lines, and project names, it searches app destinations such as **New task**, **Settings**, **Agent settings**, **Ask notifications**, **Hooks**, **Display**, **Remote access**, **Autorun tasks**, **History**, **Fleet list**, **Official documentation**, and **Updates**. Results include completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. With an empty query, the palette shows recent tasks and primary destinations. The default key can be changed in Shortcut settings.
 
-The **…** menu on Desktop task rows and child-task entries, and on PWA task rows, supports rename, pin or unpin, complete, copy task ID, and delete. A long press on a PWA task row opens the same menu. A child can also be detached from its parent. Confirm a name with Enter or **Save**, and cancel with Escape or **Cancel**. An empty name is not saved, and the limit is 50 characters. While the PWA list refreshes, an open rename dialog keeps its draft.
+The **…** menu on Desktop task rows and child-task entries, and on PWA task rows, supports rename, pin or unpin, move to another project, complete, copy task ID, and delete. A long press on a PWA task row opens the same menu. Moving a task also moves its child tasks. Master Agent and Creative Studio tasks cannot be moved into projects. A child can also be detached from its parent. Confirm a name with Enter or **Save**, and cancel with Escape or **Cancel**. An empty name is not saved, and the limit is 50 characters. While the PWA list refreshes, an open dialog keeps its draft.
 
 The project-heading menu can complete that project's unfinished tasks or delete all of its tasks in one operation. Bulk completion includes running tasks and Fleet tasks awaiting confirmation; the native confirmation lists these counts before you proceed. Bulk deletion removes every task in the project, including running tasks, not only completed ones. The confirmation names how many running tasks will be stopped and how many associated Fleet runs will be stopped if they are active. This cannot be undone.
 
@@ -48,19 +48,25 @@ Select the search field to open **Recent searches**, with up to five entries you
 
 **Clear search** removes only the current query. Use **Remove from history** for one entry or **Clear history** for all entries; neither changes the current query. Storage is local to that browser and does not sync to other devices. If browser storage is unavailable, search still works within the screen, but cannot be restored after reopening.
 
-## Name and identify projects
+## Continue recent Claude Code and Codex sessions
 
-Use **Rename project** from a project menu in Desktop or the PWA to give its directory a clearer display name. Names are limited to 50 characters. The custom name synchronizes between Desktop and connected PWA clients; resetting it returns to the directory-based name without renaming or moving the folder itself.
+When the task board is empty, select **Continue where you left off** to scan up to 200 Claude Code and Codex sessions from the last 30 days. Sessions are grouped by workspace and sorted by recent activity. Select sessions individually or by workspace, then import them together. Imported tasks resume in Terminal UI; the original session files are not changed and importing does not start an agent.
 
-Display names and icons are stored by project directory. A Git Worktree and its main checkout are therefore separate projects and can use different names and icons.
+## Create and manage projects
+
+A project has a name and one or more folders. The first folder is primary: new tasks start there unless you select another folder in the project. A folder can belong to more than one project, and projects can share a name. Create and edit projects from **Settings → Projects**, **Project details** in a project menu or New task picker, **Manage projects** in the PWA, or `cockpit project`.
+
+Project details can rename the project, add or remove folders, reorder them, and change the primary folder. Changes save immediately. A running agent receives the current folder set when its next session starts; reconnect a supported Native UI task when it must pick up the change now. Deleting a project removes only the grouping: its folders remain and its tasks move to **No project**.
+
+Projects group their tasks in Desktop, Overview, and the PWA. Tasks created in Cockpit-managed temporary or persistent folders remain grouped by folder until a project is explicitly selected or a persistent folder group is converted with **Make it a project**. Master Agent and Creative Studio tasks keep their own groups and do not belong to projects.
 
 Desktop's sidebar and overview board, and the PWA project list, show a project-specific icon when one is available. Cockpit detects local project icons such as favicons; otherwise it uses the default folder appearance.
 
-Use `cockpit project icon get --directory <path>` to inspect the effective icon, `cockpit project icon set <image-path> --directory <path>` to choose a local image, and `cockpit project icon reset --directory <path>` to return to automatic detection. Icon changes also synchronize to connected PWA clients. No image is downloaded from the network. See [project reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for formats and size limits.
+Use `cockpit project icon get --project <id|name>` to inspect the effective icon, `cockpit project icon set <image-path> --project <id|name>` to choose a local image, and `cockpit project icon reset --project <id|name>` to return to automatic detection. Icon changes also synchronize to connected PWA clients. No image is downloaded from the network. See [project reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for folder rules, formats, and size limits.
 
 ## Task entry points and workspaces
 
-A regular new task can use a project, persistent directory, temporary directory, or Git worktree. Persistent directories live under `~/.agi-tools/workspaces`; temporary directories are deleted when their tasks are completed.
+A regular new task can use a project folder, a Cockpit-managed persistent or temporary folder, or a Git Worktree. Persistent folders live under `~/.agi-tools/workspaces`; temporary folders are deleted when their tasks are completed. A Worktree task remains assigned to the project of its source folder, and only that source folder is replaced by the Worktree.
 
 Quick Task opens a compact creation window from a global shortcut without leaving the current app. After creation, supervise it through the regular task list and task details.
 

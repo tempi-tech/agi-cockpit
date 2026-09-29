@@ -4,7 +4,7 @@
 
 Master Agentへ大きな目的を渡し、複数タスクへの分解、進捗監督、結果統合、Autorunでの継続監督を任せる方法を説明します。
 
-> AGI Cockpit 4.61.0で2026-08-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/master-agent)
+> AGI Cockpit 4.95.0で2026-09-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/master-agent)
 
 Master Agentは、Cockpitのタスクを起動・監督するための専用の`AGENTS.md`が用意された、マスターディレクトリで起動するエージェントです。この`AGENTS.md`は、スキルと同じように、エージェントへ役割や操作手順を伝えるものです。
 
@@ -22,7 +22,7 @@ Master Agentは、Cockpitのタスクを起動・監督するための専用の`
 
 ## Master Agentを作成する
 
-DesktopまたはPWAの新規作成画面で「Master Agent」を選び、名前と最初の指示を入力します。Master Agentは通常のプロジェクトではなく、Cockpitが管理する専用のMasterディレクトリで動きます。複数のMaster Agentを同時に作成でき、それぞれが独立した会話と子タスクを持ちます。
+DesktopまたはPWAの新規作成画面で「Master Agent」を選び、名前と最初の指示を入力します。Desktopでは、「Master」グループの新規タスクボタンからこのMaster Agent作成画面を直接開けます。Master Agentは通常のプロジェクトではなく、Cockpitが管理する専用のMasterディレクトリで動き、プロジェクトへ移動できません。複数のMaster Agentを同時に作成でき、それぞれが独立した会話と子タスクを持ちます。
 
 CLIから定期実行する場合は、Autorunへ`--master`を付けます。
 
