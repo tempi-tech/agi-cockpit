@@ -10,14 +10,14 @@ English is the primary language for these generated release notes. Download the 
 
 - Added project management across desktop, PWA, and CLI, with multiple folders per project.
 - Added task grouping by project and moving tasks between projects.
-- Enabled supported agents to work across the folders in a project.
+- Added support for agents to work across the folders in a project.
 - Added importing recent Claude Code and Codex sessions during onboarding and from an empty task board.
 - Added resizing for the folder pane in the project explorer.
 - Added agent tabs to model selection, opening on the current agent.
 - Added Ultrafast selection for Codex models that support it.
 - Added a panel for checking installed and latest agent CLI versions.
 - Fixed the task list remaining frozen after opening a dialog from it.
-- Enabled starting a Master task from the Master group’s new-task button.
+- Changed the Master group’s new-task button to start a Master task.
 - Fixed task notifications and state information being sent to unpaired sync connections.
 - Improved PWA pairing to preserve the entered code and retry authentication after a disconnect.
 
