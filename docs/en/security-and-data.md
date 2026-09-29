@@ -22,6 +22,12 @@ PWA task search queries and recent searches are stored in the current browser’
 
 Smart routing's on/off state and **Routing policy** are stored in Desktop localStorage separately for each signed-in user ID. They do not sync to another device.
 
+## Importing existing sessions
+
+**Continue where you left off**, at the end of onboarding and on an empty task board, lists up to 200 Claude Code and Codex sessions from the last 30 days, grouped by workspace. Select sessions individually or by workspace, then import them together, or skip. Workspace suggestions can also be registered using the existing project creation dialog. Imported tasks resume in Terminal UI.
+
+Scanning and importing happen locally. Neither conversation content nor workspace paths are sent externally by the import. Original session files are only read: importing never changes or deletes them, and does not start an agent. Anonymous onboarding events contain only the step, import count, or skip action.
+
 ## What is sent externally
 
 The selected agent, UI mode, model, and tools determine which instructions, conversations, attachments, file content, and tool results are sent to an AI provider. Cockpit Agent uses the configured OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio endpoint. OpenCode Go and OpenCode Zen use separate API keys. Whether LM Studio is local or remote depends on its configured URL.
