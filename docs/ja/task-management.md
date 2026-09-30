@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.95.0で2026-09-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.96.0で2026-10-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -137,7 +137,10 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 ```bash
 cockpit task retry-start <task-id>
 cockpit task retry-start <task-id> --instruction-file retry.md
+cockpit task retry-start <task-id> --directory /path/to/folder
 ```
+
+`--directory`は、まだセッションを開始していない単独タスクだけで、再試行前に既存の作業フォルダへ変更します。子タスク、Master Agent、分岐タスク、Worktree、Creative Studio、既存セッションでは利用できません。存在しないフォルダは自動作成せず、変更したタスクは新しいフォルダを含むプロジェクトへ割り当て直します。保存済みの指示と添付は維持します。
 
 `retry-start`は起動失敗専用です。停止済みのタスクには`resume`、既存のビジュアルセッションへ再接続する場合は`reconnect`を使います。完了済み、実行中、または起動失敗以外のタスクは再試行できません。
 

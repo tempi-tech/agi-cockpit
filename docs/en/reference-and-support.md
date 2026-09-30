@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -68,6 +68,8 @@ Cockpit stops waiting for an unresponsive Keychain after about two seconds inste
 If only the LM Studio list is stale or missing, select **Reload models** beside the default model or LM Studio URL in Cockpit Agent settings. An edited URL is tested before it is saved. From the CLI, `cockpit settings refresh-models lmstudio` uses the saved URL. After a successful list response that omits the selected model, Settings blocks Save until you choose an available model. A connection failure keeps the selection, so check the URL and that LM Studio is running, then retry. This operation does not start, stop, or reload the model itself.
 
 If Cockpit Agent cannot load OpenCode Go or OpenCode Zen models, confirm that the selected provider matches the saved API key, then reload the models. Go and Zen use separate API keys; neither key substitutes for the other.
+
+If a Codex model list is empty or differs from another account, confirm the target account and select **Reload models**. Codex does not borrow candidates across accounts; after a failure it retains only a list previously fetched for that same account. If a custom catalog path is shown, inspect `model_catalog_json` in that account's `config.toml` and the referenced file. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models#custom-codex-catalogs-and-unlisted-models) for named-account isolation and migration.
 
 Merely checking the Grok Build model list does not launch the Grok CLI or open a sign-in page. When signed out, Cockpit shows built-in candidates and guidance to sign in from Settings. If an expired access token has a refresh token, the account remains `authReason: expired_refreshable` and `authState: ok`; Cockpit shows known or built-in candidates and refreshes when the next task starts. `network_failure` does not require sign-in. Sign in again only for `refresh_refused`, `expired_without_refresh`, or `provider_rejected`.
 

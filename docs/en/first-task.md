@@ -4,14 +4,14 @@
 
 Choose a project, working folder, and agent, safely run your first task, review its result, and mark the task complete.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
 ## 1. Create a new task
 
 1. Open **New task** at the top of the window.
-2. Under **Workspace**, choose an existing project, select **Create project**, or choose **Temporary folder**. If the project contains several folders, select the working folder for this task.
+2. Under **Workspace**, choose an existing project, select **Create project**, choose an existing temporary folder, or select **New temporary folder**. If the project contains several folders, select the working folder for this task.
 3. Select an AI agent.
 4. For supported agents, use **Mode** to choose **Native UI** or **Terminal**.
 5. If account selection is available, keep **Auto**. Keep the built-in system prompt.
@@ -22,6 +22,10 @@ Inspect this folder and describe its main files and their roles in no more than 
 ```
 
 The project picker shows current projects, other projects, and recent folders. **Create project** lets you name a project and add one or more existing folders; if you add none, Cockpit creates an empty managed folder for it. The first folder is primary and is selected by default for new tasks. Open **Project details** to review or change the project's folders before creating the task.
+
+A temporary folder created for an earlier task appears by folder name. Selecting it reuses the folder without clearing its current contents; select **New temporary folder** to start in a different empty location. When unfinished tasks share a temporary folder, completing one of them does not delete the folder while another unfinished task still uses it.
+
+When you select an existing working folder, Cockpit checks before task creation that the path exists, is a folder, and can be read and accessed. A missing path, a selected file, insufficient permission, or a failed check blocks creation. Recover with **Choose another folder**, **New temporary folder**, or **Check again**.
 
 Smart routing is for AGI Labo members. If you select **Smart routing** while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member, turn it on to let Cockpit choose an AI agent, model, reasoning level, and workspace from the currently available candidates based on the instruction. Manually selecting a workspace fixes only the workspace; agent and model routing remains active. Under **Routing policy**, enter preferences such as agents or models to prioritize. The policy saves automatically and applies to future tasks.
 

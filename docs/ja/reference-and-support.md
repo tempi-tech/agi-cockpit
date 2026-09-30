@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.90.0で2026-09-25に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.96.0で2026-10-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -68,6 +68,8 @@ Cockpitは応答のないキーチェーンを待ち続けず、約2秒でこの
 LM Studioのモデルだけが古い、または表示されない場合は、SettingsのCockpit AgentにあるデフォルトモデルまたはLM Studio URLの横で「モデルを再読み込み」を選びます。URLを編集中なら保存前の値で確認できます。CLIでは保存済みURLを使う`cockpit settings refresh-models lmstudio`を実行します。取得に成功して選択中モデルが消えた場合は設定の保存を止めるため、利用可能なモデルを選び直します。接続失敗時は選択を保持するため、URLとLM Studioの稼働を確認して再試行します。この操作はモデル自体を起動、停止、再読み込みしません。
 
 Cockpit AgentでOpenCode GoまたはOpenCode Zenのモデル一覧が読み込めない場合は、選択したプロバイダーと保存したAPIキーが一致しているか確認してから、モデルを再読み込みします。GoとZenのAPIキーは別々で、一方のキーを他方には使いません。
+
+Codexでモデル一覧が空または別アカウントと異なる場合は、対象アカウントを確認して「モデルを再読み込み」を実行します。Codexはアカウント間で候補を流用せず、同じアカウントで以前に取得した一覧だけを失敗時に保持します。カスタムカタログのパスが表示される場合は、`config.toml`の`model_catalog_json`と対象ファイルを確認してください。名前付きアカウントの設定分離と移行は[エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models#codexのカスタムモデル一覧と一覧外のモデル)を参照してください。
 
 Grok Buildのモデル一覧を確認するだけでは、CockpitはGrok CLIやログイン画面を開きません。未ログインでは組み込み候補とSettingsからサインインする案内を表示します。期限切れのaccess tokenにrefresh tokenがあれば、`authReason: expired_refreshable`、`authState: ok`のまま既知または組み込みの候補を表示し、次のタスク開始時に更新します。`network_failure`は再ログイン不要です。`refresh_refused`、`expired_without_refresh`、`provider_rejected`の場合だけ再ログインしてください。
 

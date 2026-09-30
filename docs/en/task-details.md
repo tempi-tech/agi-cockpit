@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -86,7 +86,7 @@ Select chat text and choose **Quote selection** to add it to the composer as a M
 
 A message from another Cockpit task displays its source task name or shortened ID. If the source remains in the list, select the name to navigate there. A parent-child relationship alone does not send results or automatically resume the parent.
 
-On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output. When saved turns exist before the loaded view, **Load more** appears at the top of the conversation. Select it or scroll near the top to prepend earlier history while keeping the message you were reading in place. When the view reaches its in-memory limit, loading an older page can remove some newer events from the current display, but it does not delete the saved record.
+On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output. In Desktop and the PWA, when saved turns exist before the loaded view, **Load more** appears at the top of the conversation. Select it or scroll near the top to prepend earlier history while keeping the message you were reading in place. When the view reaches its in-memory limit, loading an older page can remove some newer events from the current display, but it does not delete the saved record.
 
 Saved Native UI history is restored by conversation turn. If the PWA cannot load an earlier page, its notice counts unloaded turns rather than individual events. A tool item whose complete output cannot be restored from saved history displays **Some output omitted** in both Desktop and the PWA.
 
@@ -104,13 +104,13 @@ Use `cockpit pinned-answers list <task-id> --all` to obtain answer IDs, then `pi
 
 ## Find text in Desktop chat
 
-Select **Find in content**, or press Cmd+F on macOS / Ctrl+F on Windows and Linux while the chat is active. Enter literal text to highlight matches and show the match count. Enter moves forward, Shift+Enter moves backward, and Esc closes search. This searches the task's available conversation content, not all tasks or unavailable archived output. This in-content search is a Desktop feature, distinct from PWA task-list search.
+Select **Find in content**, or press Cmd+F on macOS / Ctrl+F on Windows and Linux while the chat is active. Enter literal text to highlight matches and show the match count. Enter moves forward, Shift+Enter moves backward, and Esc closes search. For a long conversation, Cockpit also searches saved history page by page and loads the required range when you move to a match. If it could not read the complete conversation, use the displayed retry action. Search covers conversation content available to that task, not every task or unavailable archived output. This in-content search is a Desktop feature, distinct from PWA task-list search.
 
 ## Inspect errors and tool runs
 
-If a new task cannot start, Desktop and the PWA keep the task in `error` instead of discarding its instruction. The error card shows the cause, lets you edit the saved prompt or Terminal command, and provides **Run again**. Correct the cause or input before retrying; the failed start has not run the instruction.
+If a new task cannot start, Desktop and the PWA keep the task in `error` instead of discarding its instruction. The error card shows the cause, lets you edit the saved prompt or Terminal command, and provides **Run again**. For an unstarted standalone task, you can also choose another working folder before retrying the same task. Existing sessions, child tasks, Master Agent tasks, branches, worktrees, and Creative Studio tasks cannot change folders this way. Correct the cause, input, or folder before retrying. The failed-start instruction and attachments are retained and have not run yet.
 
-From the CLI, `cockpit task retry-start <id>` reuses the saved instruction or Terminal command. To replace the input, pass `--instruction`, `--instruction-file`, or `--stdin`. This command is only for startup failure; it is distinct from `resume` for a stopped task and `reconnect` for an existing visual session.
+From the CLI, `cockpit task retry-start <id>` reuses the saved instruction or Terminal command. To replace the input, pass `--instruction`, `--instruction-file`, or `--stdin`. For an eligible unstarted standalone task, `--directory /path/to/folder` selects another existing folder. Cockpit does not create a missing folder and reassigns the task to the project containing the new folder, if any. This command is only for startup failure; it is distinct from `resume` for a stopped task and `reconnect` for an existing visual session.
 
 When Claude, Codex, Antigravity, Cursor, or Grok Build reports an error that may indicate a service incident, such as a 404, 5xx response, or gateway timeout, the error surface links directly to that provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors; follow the on-screen sign-in, account-switching, or wait guidance instead.
 
@@ -154,6 +154,7 @@ Select **Go to message** on a row to load older conversation history when needed
 cockpit task get <id>
 cockpit task account <id> auto
 cockpit task retry-start <id>
+cockpit task retry-start <id> --directory /path/to/folder
 cockpit task resume <id> --fresh-session
 cockpit task send <id> --text "Follow-up" --media ./evidence.png --wait
 cat follow-up.md | cockpit task send <id> --stdin --wait

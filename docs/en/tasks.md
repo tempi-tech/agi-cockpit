@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -40,6 +40,8 @@ Automatic sorting does not move rows while the pointer is over the list or while
 
 Groups with many tasks initially show a limited count. **Show more** reveals additional entries in steps; after the first expansion, **Collapse** returns to the initial count on both Desktop and PWA.
 
+In the Desktop sidebar, after you select a parent task that has children, selecting that same parent again reveals all of its children; selecting it once more returns to the initial count. When another task is open, the first selection only navigates to the parent.
+
 ### Continue a search in the PWA
 
 PWA task search saves the current query in the device's browser separately for each connected host. Returning from task details or reopening the screen restores the query and its filtering.
@@ -66,7 +68,7 @@ Use `cockpit project icon get --project <id|name>` to inspect the effective icon
 
 ## Task entry points and workspaces
 
-A regular new task can use a project folder, a Cockpit-managed persistent or temporary folder, or a Git Worktree. Persistent folders live under `~/.agi-tools/workspaces`; temporary folders are deleted when their tasks are completed. A Worktree task remains assigned to the project of its source folder, and only that source folder is replaced by the Worktree.
+A regular new task can use a project folder, a Cockpit-managed persistent or temporary folder, or a Git Worktree. For temporary work, choose whether to reuse an existing folder and its contents or create a new empty folder. Persistent folders live under `~/.agi-tools/workspaces`; a temporary folder is deleted on completion after no unfinished task still uses that location. A Worktree task remains assigned to the project of its source folder, and only that source folder is replaced by the Worktree.
 
 Quick Task opens a compact creation window from a global shortcut without leaving the current app. After creation, supervise it through the regular task list and task details.
 

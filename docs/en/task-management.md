@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -137,7 +137,10 @@ For a task with `startFailed: true`, use `retry-start` instead of creating anoth
 ```bash
 cockpit task retry-start <task-id>
 cockpit task retry-start <task-id> --instruction-file retry.md
+cockpit task retry-start <task-id> --directory /path/to/folder
 ```
+
+`--directory` changes an unstarted standalone task to another existing working folder before retry. It is unavailable for child tasks, Master Agent tasks, branches, worktrees, Creative Studio tasks, and tasks with an existing session. Cockpit does not create a missing folder, reassigns the task to the project containing the new folder, and preserves the saved instruction and attachments.
 
 `retry-start` is only for startup failures. Use `resume` for a stopped task and `reconnect` to reconnect an existing visual session. Completed, running, and other non-startup-failure states cannot be retried.
 

@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -22,7 +22,7 @@ In the PWA, **Task panel** in task details provides context-dependent tabs for c
 
 The diff surface shows changes recognized by Git. Review additions, modifications, and deletions by file, and compare the actual scope with the agent's explanation before accepting completion. Untracked temporary files and files outside the project may not appear in the diff.
 
-File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
+File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. Selecting text shows a quote action without shifting the preview or losing the selection; use it to add the file path and line range to the task composer. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
 
 When Desktop previews an `.html` or `.htm` file, **Open in the in-app browser** opens that local file in a new browser tab for the same task. If the file is being edited, Cockpit saves the current content first and does not open the browser when that save fails. This does not transfer an HTML Surface; it is a way to verify an HTML file from the working directory in a normal browser renderer.
 
