@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.96.0 — 2026-10-01
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added attachment support for files including archives and unknown extensions.
 - Added a choice to reuse an existing temporary folder or create a new one for a task.
