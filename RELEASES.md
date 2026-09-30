@@ -4,6 +4,35 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.96.0 — 2026-10-01
+
+**Type:** minor · **Platforms:** macOS
+
+- Added attachment support for files including archives and unknown extensions.
+- Added a choice to reuse an existing temporary folder or create a new one for a task.
+- Added working-folder checks before task creation, with an option to choose another folder when unavailable.
+- Added changing the working folder before retrying an unstarted standalone task that failed to launch.
+- Added toggling child tasks by selecting the current parent task again in the sidebar.
+- Fixed Codex model discovery and display of account-specific model lists.
+- Fixed preview layout shifting when selecting text.
+- Reduced memory use when working with long conversations and many tasks.
+- Fixed unnecessary servers starting and remaining active when reading Cockpit Agent history.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- アーカイブや未知の拡張子を含むファイルを添付できるようにしました
+- 新しいタスクで既存の一時フォルダを再利用するか、新しい一時フォルダを作るか選べるようにしました
+- タスク作成前に作業フォルダを確認し、利用できない場合に別のフォルダを選べるようにしました
+- 起動に失敗した未開始の単独タスクで、作業フォルダを変更して再試行できるようにしました
+- サイドバーで選択中の親タスクを再選択すると、子タスクを折りたためるようにしました
+- Codexでアカウントごとのモデル一覧が正しく表示されない問題を修正しました
+- プレビュー内の文字を選択するとレイアウトがずれる問題を修正しました
+- 長い会話や多数のタスクを扱う際のメモリ使用量を抑えました
+- Cockpit Agentの履歴を読む際に不要なサーバーが起動し、残り続ける問題を修正しました
+
+</details>
+
 ## v4.95.0 — 2026-09-30
 
 **Type:** minor · **Platforms:** macOS, Linux

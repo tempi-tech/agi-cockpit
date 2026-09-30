@@ -112,7 +112,7 @@ Importing a browser sign-in copies the source browser’s session; it does not s
 
 Local image previews in PWA conversations are sent from the host as resized JPEGs over an authenticated Remote Access connection. Only absolute paths recorded in the target task’s persisted image_view results are allowed; this does not provide access to arbitrary local files. Source size and pixel count are checked as well.
 
-Attachments use randomized stored names in a Cockpit-managed area and are validated by extension, MIME type, actual size, and content. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Archives and executable formats are rejected.
+Attachments are stored unchanged under randomized names in a Cockpit-managed area. Archives, executables, and unknown extensions are accepted; Cockpit does not reject extensions or verify that content matches the declared MIME type or file format. Actual size and file-count limits are enforced. One message accepts up to eight files, 512 MB each and 1 GB total; JSON is limited to 25 MB. Acceptance does not establish that a file is safe.
 
 Antigravity Native UI handles image attachments from Desktop and the PWA directly. When an image is outside the workspace, Cockpit copies it under `.agi-cockpit-attachments` in the canonical workspace, using a random per-session directory whose contents are excluded by `.gitignore`. An image already inside the workspace is not copied. Cockpit refuses to follow a symlink or another non-directory staging root, removes that session's copies when the session, CLI, or app stops, and removes unowned directories older than 24 hours when another session starts in the same workspace.
 

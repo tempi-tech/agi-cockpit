@@ -136,7 +136,7 @@ From the CLI, pass repeatable `--media <path>` options to `task create` and `tas
 
 For an image sent to Antigravity Native UI, Cockpit uses an image already inside the workspace in place. It temporarily copies an external image into a per-session, Git-ignored directory under `.agi-cockpit-attachments` in the workspace. This makes it readable in `supervised` mode. Cockpit removes the temporary copy when the session, CLI, or app stops, and sweeps old leftover directories when another session starts in that workspace. If the workspace is not writable or the staging location is not a real directory, Cockpit reports an error without sending the image.
 
-One message accepts up to eight files, each up to 512 MB and 1 GB in total. JSON files are limited to 25 MB, and archives and executable formats are unsupported. Cockpit validates extension, MIME type, actual size, and content, then stores the upload under a randomized name.
+One message accepts up to eight files, each up to 512 MB and 1 GB in total. JSON files are limited to 25 MB. All file types are accepted, including archives, executables, and unknown extensions. Cockpit enforces actual size and file-count limits and stores files unchanged under randomized names. It does not reject extensions or verify that content matches the declared MIME type or file format.
 
 The limit applies per message, so earlier attachments do not count toward the next eight. When clipboard content has a plain-text representation, Cockpit inserts the text instead of attaching unnecessary image representations.
 
