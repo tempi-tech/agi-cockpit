@@ -15,7 +15,7 @@ English is the primary language for these generated release notes. Download the 
 - Added toggling child tasks by selecting the current parent task again in the sidebar.
 - Fixed Codex model discovery and display of account-specific model lists.
 - Fixed preview layout shifting when selecting text.
-- Reduced memory use when working with long conversations and many tasks.
+- Improved memory efficiency when working with long conversations and many tasks.
 - Fixed unnecessary servers starting and remaining active when reading Cockpit Agent history.
 
 <details>
