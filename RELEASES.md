@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.97.0 — 2026-10-02
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added zoom controls for images in the side panel.
 - Added side-panel playback for MOV videos encoded with H.264 or HEVC.
