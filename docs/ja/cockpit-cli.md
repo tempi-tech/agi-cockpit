@@ -110,7 +110,7 @@ Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`�
 
 対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドは、`--host`でdeviceのhostまたは保存済みaliasを指定できます。`ask list`、`ask answer`、`ask close`もリモートに対応しますが、Askの作成とrelay設定はローカル専用です。browser、App Surface、display、settings、usage、updateなど、host指定に対応しない操作はローカルのCockpitだけを対象にします。
 
-リモート制御はペアリング済みBearer tokenを使い、接続先がTailscale限定の場合は検証済みpeerまたはloopback接続も必要です。ファイルパスとディレクトリは接続先コンピューターで解決されます。リモート応答にはdevice identityが含まれ、ローカルfile IPCへfallbackしません。
+リモート制御は、同じtailnetで、Tailscaleの所有者が同じコンピューターからならtokenなしで使えます。それ以外の接続はペアリング済みBearer tokenを使います。接続先がTailscale限定の場合、Tailscale peerでもloopbackでもない接続は拒否されます。ファイルパスとディレクトリは接続先コンピューターで解決されます。リモート応答にはdevice identityが含まれ、ローカルfile IPCへfallbackしません。
 
 Remote Accessの停止、Identityデータの消去、アカウント削除、CLIアンインストールなどは明示的な確認フラグを要求します。フラグがあることを実行許可の代わりにせず、利用者の指示と正確な対象を確認してください。
 

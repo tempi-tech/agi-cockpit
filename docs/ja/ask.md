@@ -144,7 +144,7 @@ cockpit ask answer <ask-id> --input "画像を確認してください" --attach
 cockpit ask close <ask-id>
 ```
 
-`list`、`answer`、`close`へ`--host <host-or-alias>`を追加すると、登録済みの別のCockpitコンピューターにあるAskを操作できます。接続先では会員向けRemote Accessを有効にしておく必要があります。リモート操作にはペアリング済みBearer tokenが必要で、Tailscale限定モードでは検証済みpeerまたはloopback接続も必要です。Askの作成とrelay設定は引き続きローカル専用です。`--attachment`のパスは接続先コンピューター上のファイルを指します。
+`list`、`answer`、`close`へ`--host <host-or-alias>`を追加すると、登録済みの別のCockpitコンピューターにあるAskを操作できます。接続先では会員向けRemote Accessを有効にしておく必要があります。リモート操作はリモートのタスクと同じ方法で認証します。同じtailnetで、Tailscaleの所有者が同じコンピューターにはtokenは不要で、それ以外の接続にはペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続を拒否します。Askの作成とrelay設定は引き続きローカル専用です。`--attachment`のパスは接続先コンピューター上のファイルを指します。
 
 `list`は質問、選択肢、添付メディアの情報を確認する操作です。`answer`は利用者の代理として回答し、作成元のタスクを再開します。一つの質問では、`--choice`または`--choice-index`と`--input`を組み合わせ、選択と補足文を一緒に送ります。複数質問では、`--question <id>`ごとに回答をまとめ、Ask全体へ適用する返信がある場合は`--whole-answer`を加えます。`--attachment`はローカルファイルを作成元タスクの管理領域へ取り込み、UIからの回答添付と同じ形式で渡します。複数質問では対象の`--question`の後へ添付を指定し、最初のグループより前の添付はAsk全体への返信に属します。
 

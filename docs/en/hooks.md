@@ -96,7 +96,7 @@ If a Hook does not run, check that it is enabled and that the event and filters 
 
 ## Execution considerations
 
-Registered actions run with your local permissions, independently of the agent's approval mode. Register commands and scripts whose behavior you have checked. All Hooks commands support `--host <host-or-alias>`. The target must have member-only Remote Access enabled. Remote registration and testing execute shell code on the target computer. A paired bearer token is required; Tailscale-only access additionally requires a verified peer or loopback connection. Peer trust alone does not authorize commands. The token grants control of the target instance, including Hook registration and execution. Script paths and directory filters refer to the target computer.
+Registered actions run with your local permissions, independently of the agent's approval mode. Register commands and scripts whose behavior you have checked. All Hooks commands support `--host <host-or-alias>`. The target must have member-only Remote Access enabled. Remote registration and testing execute shell code on the target computer. Remote Hooks authenticate like remote tasks: a computer on the same tailnet with the same Tailscale owner needs no token, and other connections need a paired bearer token. In Tailscale-only mode, connections that are neither a Tailscale peer nor loopback are refused. Script paths and directory filters refer to the target computer.
 
 Cockpit waits at most five seconds for `app.quit` actions. Do not use them for long work that must finish before exit. Event chains have execution limits; when a Hook starts another task, narrow its filters to avoid repeatedly triggering itself.
 

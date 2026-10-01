@@ -92,7 +92,7 @@ Choose the Cockpit Agent provider from `openrouter`, `opencode-go`, `opencode`, 
 
 Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can target a device host or saved alias through `--host`. `ask list`, `ask answer`, and `ask close` also support remote targets, while Ask creation and relay configuration remain local. Commands without host support, including browser, App Surface, display, settings, usage, and update operations, affect only the local Cockpit instance.
 
-Remote control uses the paired bearer token and, when the target is Tailscale-only, also requires a verified peer or loopback connection. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC.
+Remote control needs no token from a computer on the same tailnet with the same Tailscale owner; other connections use the paired bearer token. When the target is Tailscale-only, connections that are neither a Tailscale peer nor loopback are refused. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC.
 
 Stopping Remote Access, clearing Identity data, deleting an account, and uninstalling the CLI require explicit confirmation flags. A confirmation flag is not a substitute for user authorization; verify the requested action and exact target first.
 

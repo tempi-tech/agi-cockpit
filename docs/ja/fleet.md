@@ -157,7 +157,7 @@ Fleet定義を読み込めない場合、パネルにはファイルが見つか
 
 ### 別のコンピューターのFleetを操作する
 
-すべての`cockpit fleet`コマンドは、登録済みCockpitコンピューターを`--host <host-or-alias>`で指定できます。接続先では会員向けRemote Accessを有効にしておく必要があります。リモートFleet操作にはペアリング済みBearer tokenが必要で、Tailscale限定モードでは検証済みpeerまたはloopback接続も必要です。
+すべての`cockpit fleet`コマンドは、登録済みCockpitコンピューターを`--host <host-or-alias>`で指定できます。接続先では会員向けRemote Accessを有効にしておく必要があります。リモートFleet操作はリモートのタスクと同じ方法で認証します。同じtailnetで、Tailscaleの所有者が同じコンピューターにはtokenは不要で、それ以外の接続にはペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続を拒否します。
 
 ```bash
 cockpit fleet list --runs --host build-host

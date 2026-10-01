@@ -157,7 +157,7 @@ When a Fleet definition cannot be loaded, the panel distinguishes a missing file
 
 ### Operate a Fleet on another computer
 
-Every `cockpit fleet` command accepts `--host <host-or-alias>` for a registered Cockpit computer. The target must have member-only Remote Access enabled. Remote Fleet control requires the paired bearer token and, in Tailscale-only mode, a verified peer or loopback connection.
+Every `cockpit fleet` command accepts `--host <host-or-alias>` for a registered Cockpit computer. The target must have member-only Remote Access enabled. Remote Fleet control authenticates like remote tasks: a computer on the same tailnet with the same Tailscale owner needs no token, and other connections need the paired bearer token. In Tailscale-only mode, connections that are neither a Tailscale peer nor loopback are refused.
 
 ```bash
 cockpit fleet list --runs --host build-host

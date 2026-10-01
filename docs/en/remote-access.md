@@ -184,7 +184,7 @@ Configuration cannot change while the server is running. If you need to change i
 
 An alias is optional. Save one with `cockpit devices alias-set <alias> <host>` when useful, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
 
-Remote CLI requests use the paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit also requires a verified Tailscale peer or loopback connection; peer trust by itself is not authorization. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC.
+Remote CLI requests from a computer on the same tailnet with the same Tailscale owner need no token. Other connections need a paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit refuses connections that are neither a Tailscale peer nor loopback, even with a token. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC.
 
 ## Troubleshooting
 

@@ -184,7 +184,7 @@ cockpit remote-access enable
 
 aliasは必須ではありません。必要な場合は`cockpit devices alias-set <alias> <host>`で保存し、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加します。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
 
-リモートCLI要求は、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenを使います。Tailscale限定モードでは、検証済みTailscale peerまたはloopback接続も必要です。peerの信頼だけでは認証になりません。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。
+同じtailnetで、Tailscaleの所有者が同じコンピューターからのリモートCLI要求には、tokenは不要です。それ以外の接続には、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続は、tokenがあっても拒否します。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。
 
 ## 接続できない場合
 
