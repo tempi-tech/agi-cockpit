@@ -4,6 +4,43 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.97.0 — 2026-10-02
+
+**Type:** minor · **Platforms:** macOS
+
+- Added zoom controls for images in the side panel.
+- Added side-panel playback for MOV videos encoded with H.264 or HEVC.
+- Improved video preview loading.
+- Added explanations when a video cannot be played.
+- Fixed Ask text fields sometimes not accepting input after a click.
+- Fixed links in Ask opening in popup windows.
+- Fixed stale in-app browser views remaining after hiding or reloading.
+- Fixed inconsistent browser identification across in-app browser frames.
+- Fixed dismissed mobile notices reappearing after a disconnection.
+- Fixed remote Ask, Fleet, and Hooks control from Tailscale devices with the same owner.
+- Fixed diff line counts becoming misaligned with long file names.
+- Fixed project icon alignment when the project name is collapsed.
+- Fixed the task-list button overlapping the header.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- サイドパネルの画像をその場で拡大・縮小できるようにしました
+- サイドパネルでH.264・HEVC形式のMOV動画を再生できるようにしました
+- 動画プレビューの読み込みを改善しました
+- 動画を再生できない場合に原因を表示するようにしました
+- Askの入力欄をクリックしても入力できない問題を修正しました
+- Ask内のリンクがポップアップウィンドウで開く問題を修正しました
+- アプリ内ブラウザを非表示にした後や再読み込みした後に古い表示が残る問題を修正しました
+- アプリ内ブラウザのフレーム間でブラウザ情報が一致しない問題を修正しました
+- モバイル版で接続が切れている間に閉じた通知が再表示される問題を修正しました
+- 同じ所有者のTailscale端末からAsk・Fleet・Hooksをリモート操作できない問題を修正しました
+- 長いファイル名で差分の行数表示が崩れる問題を修正しました
+- プロジェクト名を省略した際のアイコン位置を修正しました
+- タスク一覧を開くボタンがヘッダーと重なる問題を修正しました
+
+</details>
+
 ## v4.96.0 — 2026-10-01
 
 **Type:** minor · **Platforms:** macOS, Linux
