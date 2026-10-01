@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -23,6 +23,10 @@ In the PWA, **Task panel** in task details provides context-dependent tabs for c
 The diff surface shows changes recognized by Git. Review additions, modifications, and deletions by file, and compare the actual scope with the agent's explanation before accepting completion. Untracked temporary files and files outside the project may not appear in the diff.
 
 File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. Selecting text shows a quote action without shifting the preview or losing the selection; use it to add the file path and line range to the task composer. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
+
+Desktop initially fits an image preview to the panel. Select the image to zoom to 2× around that point, and select it again to return to the fitted view. You can also use **Zoom in**, **Zoom out**, and **Fit to panel**, or press `+` / `=`, `-`, and `0` / Esc while the image is focused. A zoomed image scrolls inside the panel.
+
+Desktop video preview reads the needed ranges from the local file instead of copying the whole file into the renderer, so you can seek in large videos. It plays MP4 and WebM as well as MOV files encoded with H.264 or HEVC. An unsupported format or codec, a moved or deleted file, or a file that is still being written produces a reason and a **Show in Finder** action. If playback does not advance because the audio output device is unresponsive, Cockpit asks you to check the system sound output.
 
 When Desktop previews an `.html` or `.htm` file, **Open in the in-app browser** opens that local file in a new browser tab for the same task. If the file is being edited, Cockpit saves the current content first and does not open the browser when that save fails. This does not transfer an HTML Surface; it is a way to verify an HTML file from the working directory in a normal browser renderer.
 
@@ -51,6 +55,8 @@ A Surface becomes seen only after its content renders in the visible panel. The 
 `cockpit display` puts a reminder, progress update, or lightweight status screen in front of the person as a Display notice that does not request a response. Desktop uses a dedicated window; the PWA includes notices with Asks in **Inbox**. When the originating task still exists, either surface can open that task directly.
 
 Closing a Display notice sends no answer to the agent and resumes no task. When the same task repeats a notice with the same kind, title, and body, Cockpit reuses the open notice. A resend within ten seconds after closing is also treated as the same notice, so an agent does not retry merely because the duplicate was suppressed. Identical content from different tasks remains separate.
+
+The PWA closes a Display notice immediately even while disconnected and sends that dismissal to the host after reconnecting. If the same notice arrives during resynchronization, it does not return to the Inbox.
 
 The CLI can list open notices and close one by ID:
 

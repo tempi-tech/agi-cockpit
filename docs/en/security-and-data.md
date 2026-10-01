@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -121,6 +121,8 @@ This staging does not expand Antigravity's `supervised` boundary to read arbitra
 When the relay option to attach files posted in Discord or Slack is enabled, Cockpit downloads files posted by the allowed user in the configured channel into managed storage and attaches them to the next response for the matched Ask. A reply targets that Ask; otherwise the file is assigned to the newest unanswered Ask in the same channel. Disable this option when it is unnecessary, and do not post sensitive files to a shared channel.
 
 File names and content are not trusted instructions. Chat opens only safe formats within the managed area and does not directly launch executables, unmanaged paths, remote `file` URLs, or data URLs that could contain executable content. Remove personal information, local paths, tokens, and session data before external sharing.
+
+Desktop video preview omits the file path from its URL and reads only the needed ranges through an unguessable temporary URL that belongs to the renderer showing the preview. Closing the preview, navigating its main page, or destroying the renderer revokes that access. Each read verifies that the target is still the same regular file, so reusing the URL cannot switch it to another file or a symbolic link.
 
 Fleet command gates save complete stdout and stderr per attempt under the Run's `fleet-runs/<runId>/gates/` directory, retaining only the head and tail when a log exceeds 20 MB. Output may contain tokens, local paths, test fixtures, or personal data. Inspect it before sharing from the Fleet panel or `cockpit fleet output`. Before removing an unneeded terminal Run, preserve only the diagnostic evidence that is still required in a safe location.
 

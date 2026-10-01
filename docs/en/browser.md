@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -13,6 +13,8 @@ Open web pages in a task's in-app browser so people and agents can safely inspec
 ## Share one page between person and agent
 
 Each tab has one canonical page instance shared by the person viewing the side panel and the agent operating it. Switching tasks, tabs, or panels detaches the page from the window without reloading it, preserving unsent forms, scroll position, SPA state, and popup or OAuth context.
+
+The User-Agent sent to sites omits Electron's product token and uses one consistent value in every frame, including cross-origin iframes running in a separate process. Authentication and bot checks that compare browser information across frames therefore see one browser.
 
 Browser sessions and navigation history survive task completion, resume, and app restart. Form values and scroll position are restored after restart on a best-effort basis, and saved state is encrypted when the operating-system credential store is available.
 

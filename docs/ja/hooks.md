@@ -4,7 +4,7 @@
 
 タスクの完了、Ask、ホットキーなどをきっかけに処理を実行するHooksの使い方と、設定・実行履歴の確認方法を説明します。
 
-> AGI Cockpit 4.77.0で2026-09-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/hooks)
+> AGI Cockpit 4.97.0で2026-10-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/hooks)
 
 Hooksは、タスクの完了やAskの作成など、Cockpitで起きたイベントをきっかけに、登録した処理を自動実行する機能です。「この出来事が起きたら、この処理をする」というルールをHookとして保存できます。ホットキーをきっかけにすることもできます。
 

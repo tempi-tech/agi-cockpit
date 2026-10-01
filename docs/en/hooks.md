@@ -4,7 +4,7 @@
 
 Run actions in response to task completion, Asks, and hotkeys, and learn how to configure Hooks and inspect their run history.
 
-> Verified with AGI Cockpit 4.77.0 on 2026-09-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/hooks)
+> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/hooks)
 
 Hooks automatically run a registered action when something happens in Cockpit, such as a task completing or an Ask being created. Each Hook saves a rule: when this event happens, run this action. A hotkey can also trigger a Hook.
 

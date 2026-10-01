@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.96.0で2026-10-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.97.0で2026-10-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -121,6 +121,8 @@ AntigravityのネイティブUIはDesktopとPWAの画像添付を直接扱いま
 Ask転送で、DiscordまたはSlackへ投稿したファイルを回答に添付する設定を有効にすると、許可した回答者が設定済みチャンネルへ投稿したファイルをCockpitの管理領域へdownloadし、該当Askの次の回答へ添付します。reply先がある場合はそのAskへ、ない場合は同じチャンネルの最新の未回答Askへ割り当てます。不要な場合はこの設定を無効にし、機密ファイルを共有チャンネルへ投稿しないでください。
 
 ファイル名と内容は信頼済みの指示ではありません。チャットから開けるのは管理領域内の安全な形式だけで、実行形式、管理外パス、リモート`file` URL、実行可能な内容を含み得るdata URLは直接起動しません。外部共有前に個人情報、ローカルパス、token、セッション情報を確認してください。
+
+Desktopの動画プレビューは、ファイルパスをURLへ含めず、表示中のrendererだけが使える推測困難な一時URLからローカルファイルの必要な範囲を読み込みます。プレビューを閉じる、別のmain pageへ移動する、またはrendererを終了すると権限を破棄します。読み込みのたびに同じ通常ファイルであることを確認するため、URLの再利用で別のファイルやsymbolic linkへ切り替えることはできません。
 
 Fleetのcommand gateはstdout / stderr全量をRunの`fleet-runs/<runId>/gates/`へ試行ごとに保存し、20 MBを超える場合は先頭と末尾だけを残します。出力にはtoken、local path、テストfixture、個人情報が含まれ得ます。Fleetパネルまたは`cockpit fleet output`で外部共有する前に確認し、不要な終端Runを削除する前には必要な診断証拠だけを安全な場所へ保存してください。
 
