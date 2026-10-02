@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.98.0 — 2026-10-03
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added status-badge sorting in Overview to bring matching tasks to the top.
 - Added controls to temporarily hide Ask windows and reopen them from the side panel.
