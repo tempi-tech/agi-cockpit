@@ -8,9 +8,9 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Click a status badge in Overview to bring tasks with that status to the top.
-- Temporarily hide an Ask window and reopen it from the side panel.
-- Answer drafts now stay in sync between Ask windows and the side panel.
+- Added status-badge sorting in Overview to bring matching tasks to the top.
+- Added controls to temporarily hide Ask windows and reopen them from the side panel.
+- Added shared answer drafts between Ask windows and the side panel.
 
 <details>
 <summary>日本語のリリースノート</summary>
