@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.98.0 — 2026-10-03
+
+**Type:** minor · **Platforms:** macOS
+
+- Click a status badge in Overview to bring tasks with that status to the top.
+- Temporarily hide an Ask window and reopen it from the side panel.
+- Answer drafts now stay in sync between Ask windows and the side panel.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Overviewの状態バッジをクリックして、その状態のタスクを先頭に表示できるようにしました
+- Askウィンドウを一時的に隠して、サイドパネルから再表示できるようにしました
+- Askウィンドウとサイドパネルで回答の下書きを共有できるようにしました
+
+</details>
+
 ## v4.97.0 — 2026-10-02
 
 **Type:** minor · **Platforms:** macOS, Linux
