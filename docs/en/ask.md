@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.98.0 on 2026-10-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -61,6 +61,10 @@ When switching to another Ask in the PWA, the question starts at the top and the
 The right-side-panel Ask tab lists every Ask waiting for an answer on this device. Open it from its count badge to answer or close an Ask with the same choices, free-form input, multi-question and whole-Ask replies, attachments, and media as the dedicated window. From the CLI, use `cockpit side-panel ask`.
 
 By default, Cockpit also opens a dedicated window for every new Ask. Turn off **Ask windows on this device** under **Settings → Notifications** to close open Ask windows without closing their Asks or changing relay and answer delivery. Continue answering from the side-panel Ask tab, PWA, CLI, Discord, or Slack. The preference is stored per device. Turning it back on reopens windows for Asks that are still waiting. From the CLI, use `cockpit settings set notifications.askWindow false` or `true`.
+
+**Hide for now** in the dedicated window hides only that window for the current app session. It does not close the Ask or resume its task. While the Ask-window setting is on, use **Open in a separate window** in the side panel to show it again. **Close** is a separate operation that removes the Ask itself.
+
+Selections, free-form input, a whole-Ask reply, and attachments are shared between the dedicated window and the side panel before submission. Editing either view updates the latest draft for that Ask in the other. This sharing is limited to an unanswered Ask inside the same Desktop app; it does not synchronize an unsent draft to the PWA, CLI, Discord, Slack, or another device. Answering or closing the Ask discards the draft, and it does not persist after the app exits.
 
 ## Adjust the Ask window
 
