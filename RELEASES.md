@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.99.0 — 2026-10-04
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Ask priority badges and ordering to help you answer urgent questions first.
+- Kept the question or notice window you are using in front when new Asks arrive.
+- Fixed received Ask answers from Discord not being applied when acknowledgement fails.
+- Improved reconnection after a Discord connection is interrupted.
+- Kept existing task model selections available when loading the model list fails.
+- Fixed CLI setup altering existing shell configuration and line breaks.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Askに優先度を表示し、優先度の高い質問から確認できるようにしました
+- 新しいAskが届いても、操作中の質問や通知ウィンドウを手前に保つようにしました
+- Discordで回答の受信確認に失敗しても、届いたAskの回答を反映するようにしました
+- Discordの接続が途切れた際の再接続を改善しました
+- モデル一覧の取得に失敗しても、既存タスクのモデル選択を維持できるようにしました
+- CLIの設定時に、既存のシェル設定や改行が書き換わる問題を修正しました
+
+</details>
+
 ## v4.98.0 — 2026-10-03
 
 **Type:** minor · **Platforms:** macOS, Linux
