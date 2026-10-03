@@ -9,10 +9,10 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added Ask priority badges and ordering to help you answer urgent questions first.
-- Kept the question or notice window you are using in front when new Asks arrive.
+- Improved Ask window stacking to keep the question or notice you are using in front.
 - Fixed received Ask answers from Discord not being applied when acknowledgement fails.
 - Improved reconnection after a Discord connection is interrupted.
-- Kept existing task model selections available when loading the model list fails.
+- Fixed existing task model selections becoming unavailable when loading the model list fails.
 - Fixed CLI setup altering existing shell configuration and line breaks.
 
 <details>
