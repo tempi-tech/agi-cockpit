@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.99.0 — 2026-10-04
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Ask priority badges and ordering to help you answer urgent questions first.
 - Improved Ask window stacking to keep the question or notice you are using in front.
