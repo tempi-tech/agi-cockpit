@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.98.0 on 2026-10-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -56,6 +56,21 @@ In the PWA task list, a question bubble labelled **Waiting for an Ask answer** i
 
 When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
 
+## Review the answer order by priority
+
+Each Ask has a priority that describes how urgently its answer is needed, not how important the task itself is. Omitting it uses `medium`.
+
+| Value | Label | Use when |
+| --- | --- | --- |
+| `low` | Low | A suggestion, optional check, or question that can wait or be worked around |
+| `medium` | Normal | An ordinary decision. This is the default |
+| `high` | High | A late answer misses a deadline or holds up several tasks or people |
+| `xhigh` | Urgent | A late answer lets an outage, data loss, or financial loss grow |
+
+The Desktop Ask tab and dedicated windows, the PWA **Inbox**, Discord, and Slack show the priority label. Waiting lists put Urgent, High, Normal, then Low first, with older Asks first within one level. Low never skips or auto-answers an Ask and does not change how the task resumes.
+
+Do not use High or Urgent merely because the agent's own task is waiting. For either level, begin the question with a short reason such as the deadline or the impact of delay.
+
 ## Review Asks on Desktop
 
 The right-side-panel Ask tab lists every Ask waiting for an answer on this device. Open it from its count badge to answer or close an Ask with the same choices, free-form input, multi-question and whole-Ask replies, attachments, and media as the dedicated window. From the CLI, use `cockpit side-panel ask`.
@@ -65,6 +80,8 @@ By default, Cockpit also opens a dedicated window for every new Ask. Turn off **
 **Hide for now** in the dedicated window hides only that window for the current app session. It does not close the Ask or resume its task. While the Ask-window setting is on, use **Open in a separate window** in the side panel to show it again. **Close** is a separate operation that removes the Ask itself.
 
 Selections, free-form input, a whole-Ask reply, and attachments are shared between the dedicated window and the side panel before submission. Editing either view updates the latest draft for that Ask in the other. This sharing is limited to an unanswered Ask inside the same Desktop app; it does not synchronize an unsent draft to the PWA, CLI, Discord, Slack, or another device. Answering or closing the Ask discards the draft, and it does not persist after the app exits.
+
+When several dedicated windows are open, higher-priority Asks start in front. An Ask or Display notice that the user clicked or operated with the keyboard, or an Ask opened from the side panel, stays in front when a new Ask arrives. Restacking the windows does not move keyboard focus.
 
 ## Adjust the Ask window
 
@@ -95,6 +112,8 @@ In Desktop, **Settings → Ask notifications** configures Discord and Slack inde
 
 Buttons, select menus, and free-input modals can answer an Ask. A multi-question Ask is submitted only after every question has an answer. Answering or closing from Desktop, the PWA, CLI, Discord, or Slack updates the other relayed messages to **Answered** or **Closed**. Discord displays the first 25 choices and Slack the first 100; use a Cockpit surface when the needed choice is beyond that service's limit.
 
+After a temporary Discord disconnect, Cockpit resumes the same Gateway session when possible and receives events delivered during the gap. Cockpit still applies an Ask answer when Discord cannot acknowledge the button interaction, including when Discord's three-second response window has expired. Discord may show that the interaction failed; use the Ask message's answered state and Cockpit's state as the result.
+
 The CLI can inspect connection state and run the same round-trip test:
 
 ```bash
@@ -119,6 +138,7 @@ cockpit ask relay test slack
 ```bash
 cockpit ask \
   --summary "The production release is ready. All tests passed and only documentation changed. Publish it?" \
+  --priority high \
   --choice "Publish" \
   --choice-description "Commit, push, and deploy to production" \
   --choice "Revise" \
@@ -133,6 +153,8 @@ Pass a multiline summary or text that the shell could interpret with `--stdin` o
 When JSON is passed through `--summary`, `--summary-file`, or `--stdin`, Cockpit recovers a structured Ask only from a strict supported shape. It accepts a Cockpit Ask object with `summary` and `choices`, or a Claude Code `AskUserQuestion` object or bare `questions` array, including fenced JSON. JSON whose types or structure cannot recover choices, descriptions, and single- or multi-select mode remains visible as the summary instead of being converted. Prefer explicit `--choice` or `--questions-stdin` input for ordinary use.
 
 When the command succeeds, it returns an Ask ID. The agent ends its turn at that point and does not poll for the answer.
+
+Use `--priority low|medium|high|xhigh` to set the priority. `cockpit ask list` returns `priority` for each Ask. An unsupported value prevents creation.
 
 ## Operate open Asks from the CLI
 

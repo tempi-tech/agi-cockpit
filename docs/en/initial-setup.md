@@ -4,7 +4,7 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
@@ -17,6 +17,8 @@ If Cockpit cannot find the agent you want, select **Install**. Cockpit Agent and
 ## 2. Configure the Cockpit integration
 
 The integration step installs or refreshes the Cockpit skill for detected external agents and makes the `cockpit` command available. It adds the command directory to shell configuration on macOS and Linux or to the user `PATH` on Windows.
+
+On macOS and Linux, Cockpit adds or removes only its managed block. It preserves other shell settings, existing `PATH` lines, blank lines, and line endings. When the command directory is already present in a user-managed `PATH` entry, Cockpit does not rewrite the shell file.
 
 This updates each agent's user-level skill directory and the applicable user-level path configuration. HTML Mode is optional and can be installed separately. If you add an agent later, open **Skills** from the app menu to review its status.
 

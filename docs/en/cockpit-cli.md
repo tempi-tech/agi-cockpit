@@ -4,13 +4,15 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
 ## Setup and connection
 
 The packaged app installs a common launcher under `~/.agi-tools/bin`. A task started by Cockpit receives connection context automatically, so ordinary commands target the instance that owns the task. Run `cockpit doctor` to inspect the selected instance, runtime files, ports, listeners, and authentication results.
+
+On macOS and Linux, CLI installation and uninstallation change only Cockpit's managed shell block. Other shell settings, existing `PATH` entries, blank lines, and line endings are preserved. If `~/.agi-tools/bin` is already present in a user-managed `PATH` entry, Cockpit does not rewrite the shell file.
 
 The CLI does not silently fall back to another Cockpit instance when the selected one is unavailable. Treat `instance_mismatch` as a target error and inspect the connection instead of resending the command elsewhere.
 

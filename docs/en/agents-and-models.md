@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -61,7 +61,9 @@ Claude's **Ultracode** reasoning level runs Claude Code's ultracode mode: `xhigh
 
 Codex model choices, whether built in or discovered at runtime, put newer GPT generations and versions first, then place the standard model before purpose-specific variants of the same version. This makes capability and intended use easier to compare from the top of the list instead of treating model ids alphabetically. Sorting alone never changes the currently selected valid model.
 
-Codex Native UI uses the model catalog discovered from the selected account across the default settings under **Agents**, new tasks, Autoruns, and running tasks. Changing a pinned account clears the previous account's list before loading the new account, and a late result from the previous account cannot overwrite it. Model-dependent creation and saving wait while discovery is in progress. Cockpit retains a list already fetched for the same account across reopening and a failed reload, but it does not substitute another account's list or built-in candidates when that account has never returned a catalog. Newly available models can therefore be selected together with the reasoning levels and `fast` support advertised by the discovered catalog.
+Codex Native UI uses the model catalog discovered from the selected account across the default settings under **Agents**, new tasks, Autoruns, and running tasks. Changing a pinned account clears the previous account's authoritative list before loading the new account, and a late result from the previous account cannot overwrite it. Model-dependent creation and saving wait while discovery is in progress. Cockpit retains a list already fetched for the same account across reopening and a failed reload. Until an authoritative catalog is available, a screen may show built-in candidates or a fetched default-account list as an unconfirmed fallback. It does not treat that fallback as the selected account's result or promise that the account can run it. Newly available models can be selected with the reasoning levels and `fast` support advertised after discovery succeeds.
+
+For an existing Codex task, if discovery fails or reaches its 20-second deadline, Cockpit also adds the model saved with that task to the fallback candidates and preserves the saved reasoning level and service tier. The picker marks availability as unconfirmed, so these candidates are not a promise that the account can run them. **Reload models** retries with that task's account. A result that arrives after the deadline still replaces the unconfirmed candidates with the discovered catalog and capabilities.
 
 Codex supports `standard`, `fast`, and `ultrafast` service tiers. The picker shows `fast` or **Ultrafast** only when the selected model's discovered capabilities advertise that tier; unsupported explicit values are rejected. System prompts are available in native UI for Claude, Codex, Qoder, and Cockpit. `append` preserves Cockpit's standard instructions. `replace` replaces them, leaving Cockpit CLI knowledge available only through an installed skill.
 
@@ -94,7 +96,7 @@ From the CLI, `cockpit setup agent status <agent>` reads the command, installed 
 
 ### Check and reload the model list
 
-Model controls in agent settings, new tasks, and Autoruns show where the list came from, retrieval status, and when it was fetched. After a failed or timed-out CLI lookup, use **Show reason** when available, then **Reload models** to try again. Agents other than Codex may fall back to built-in candidates; a built-in candidate does not guarantee that your installed CLI or account can use it. To avoid mixing account catalogs, Codex keeps only a previously fetched list for the same account and otherwise shows an empty list.
+Model controls in agent settings, new tasks, and Autoruns show where the list came from, retrieval status, and when it was fetched. After a failed or timed-out CLI lookup, use **Show reason** when available, then **Reload models** to try again. Built-in candidates or another fetched list may appear as an unconfirmed fallback, but that does not guarantee that your installed CLI or selected account can use them. Codex keeps authoritative catalogs separated by account and never treats fallback candidates as fetched for the selected account. An existing task also adds its saved selection to the fallback.
 
 When discovering Grok Build models, Cockpit does not start the Grok CLI or open a sign-in page if discovery would require interactive authentication. While signed out, it shows built-in candidates and guidance to sign in from Settings for the current catalog. If an expired access token has a usable refresh token, model discovery also uses known or built-in candidates instead of starting a refresh. The Grok CLI refreshes the token when an actual task starts.
 
