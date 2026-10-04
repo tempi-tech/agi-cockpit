@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.99.1 — 2026-10-05
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed Antigravity and Grok failing to launch on Windows when configured paths contain spaces.
+- Fixed local file links in chat opening incorrectly on Windows.
+- Improved conversation history loading speed in the PWA.
+- Added visible history loading errors and recovery through reconnection or retry in the PWA.
+- Fixed loaded history and new messages being lost when refreshing conversation history in the PWA.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Windowsで、空白を含むパスを指定した際にAntigravityやGrokが起動できない問題を修正しました
+- Windowsで、チャット内のローカルファイルリンクを正しく開けるようにしました
+- PWAで会話履歴を開く際の読み込みを高速化しました
+- PWAで会話履歴の読み込み失敗を表示し、再接続や再試行で復旧できるようにしました
+- PWAで会話履歴を再読み込みした際に、取得済みの履歴や新着メッセージが失われる問題を修正しました
+
+</details>
+
 ## v4.99.0 — 2026-10-04
 
 **Type:** minor · **Platforms:** macOS, Linux
