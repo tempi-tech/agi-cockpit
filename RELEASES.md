@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.99.1 — 2026-10-05
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed Antigravity and Grok failing to launch on Windows when configured paths contain spaces.
 - Fixed local file links in chat opening incorrectly on Windows.
