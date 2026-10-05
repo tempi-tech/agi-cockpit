@@ -8,10 +8,10 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- New Asks now play a dedicated chime.
+- Added a dedicated chime for new Asks.
 - Added separate settings and a preview for the Ask notification sound.
-- Ask answers and ordinary messages now send in registration order from a shared queue on Desktop and the PWA.
-- Pending answers and messages now survive closing a view or restarting the app.
+- Changed Ask answers and ordinary messages to send in registration order from a shared queue on Desktop and the PWA.
+- Improved queue persistence so pending answers and messages survive closing a view or restarting the app.
 - Added queue delivery status, retries for failed sends, and an option to mark an item as handled without resending.
 
 <details>
