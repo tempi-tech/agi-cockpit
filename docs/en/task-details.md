@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.99.1 on 2026-10-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -86,7 +86,11 @@ Select chat text and choose **Quote selection** to add it to the composer as a M
 
 A message from another Cockpit task displays its source task name or shortened ID. If the source remains in the list, select the name to navigate there. A parent-child relationship alone does not send results or automatically resume the parent.
 
-On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output. In Desktop and the PWA, when saved turns exist before the loaded view, **Load more** appears at the top of the conversation. Select it or scroll near the top to prepend earlier history while keeping the message you were reading in place. When the view reaches its in-memory limit, loading an older page can remove some newer events from the current display, but it does not delete the saved record.
+On PWA, a down-arrow button appears after you scroll away from the end. Select it to return to the newest message and follow new output. When you open a task, the PWA fetches a small newest-first range so that recent messages appear sooner in a long conversation. If one turn exceeds that range, Cockpit still keeps the turn intact.
+
+In Desktop and the PWA, when saved turns exist before the loaded view, **Load more** appears at the top of the conversation. Select it or scroll near the top to prepend earlier history while keeping the message you were reading in place. When the view reaches its in-memory limit, loading an older page can remove some newer events from the current display, but it does not delete the saved record.
+
+The PWA shows when it is loading the newest or earlier history below the conversation, while the conversation already on screen and the composer remain usable. A timeout, disconnection, or other failure shows a matching explanation and **Retry**. While connected, Cockpit makes a bounded set of automatic retries; reconnecting or selecting Retry starts a fresh recovery cycle. A valid late response is still accepted and clears the failure. Reloading does not discard or duplicate earlier pages that are already loaded or new messages that arrive during the request. **No messages yet** appears only after history loaded successfully and was actually empty.
 
 Saved Native UI history is restored by conversation turn. If the PWA cannot load an earlier page, its notice counts unloaded turns rather than individual events. A tool item whose complete output cannot be restored from saved history displays **Some output omitted** in both Desktop and the PWA.
 

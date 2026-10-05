@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.99.1 on 2026-10-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -40,6 +40,8 @@ Candidates are limited to current CLI detection, model discovery, and configured
 Native UI lets Cockpit display conversation, tool execution, usage, model, and approval state as structured data. Terminal UI operates the selected CLI directly in a PTY. Their internal and CLI values are `visual` and `terminal`.
 
 Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build support both modes. Terminal supports terminal mode only, and Cockpit supports native UI only. Changing defaults does not migrate the mode of an existing task.
+
+On Windows, the Antigravity and Grok Build launch-command fields under **Agents** accept a full executable path that contains spaces. Cockpit accepts the path quoted, prefixed with PowerShell's `&`, or unquoted when that executable exists. Working and additional project folders passed to Antigravity also remain one argument each when their paths contain spaces. Launch behavior on macOS and Linux is unchanged.
 
 In Antigravity Native UI, a failed tool item remains marked as failed, but the turn can still complete when the agent recovers and continues its response. When the agent returns an interim answer while waiting for a background command, Cockpit does not close the turn on the CLI success signal alone. It follows the completion notice, later tool calls, and final answer in that same turn. If the agent checks a persistent server and then gives a final answer, the turn can still finish while that server remains running.
 

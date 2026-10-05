@@ -4,7 +4,7 @@
 
 Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
 
-> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.99.1 on 2026-10-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -23,6 +23,8 @@ In the PWA, **Task panel** in task details provides context-dependent tabs for c
 The diff surface shows changes recognized by Git. Review additions, modifications, and deletions by file, and compare the actual scope with the agent's explanation before accepting completion. Untracked temporary files and files outside the project may not appear in the diff.
 
 File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. Selecting text shows a quote action without shifting the preview or losing the selection; use it to add the file path and line range to the task composer. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
+
+When a Markdown link in a Desktop conversation points to a recognized local file target, selecting it opens the preview in the right-side panel. On Windows this supports `C:\\...` and `C:/...` drive paths, `\\\\server\\share\\...` UNC paths, and the corresponding Windows `file:` URLs. Cockpit checks a drive path before presenting an active link. It does not contact a UNC path merely to render the conversation; the first read occurs only after you select the link, and an unavailable share reports an error in the preview. Unsupported or unsafe destinations render as ordinary text instead of an active link. Previewing never executes the file.
 
 Desktop initially fits an image preview to the panel. Select the image to zoom to 2× around that point, and select it again to return to the fitted view. You can also use **Zoom in**, **Zoom out**, and **Fit to panel**, or press `+` / `=`, `-`, and `0` / Esc while the image is focused. A zoomed image scrolls inside the panel.
 
