@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.100.0 — 2026-10-06
+
+**Type:** minor · **Platforms:** macOS
+
+- New Asks now play a dedicated chime.
+- Added separate settings and a preview for the Ask notification sound.
+- Ask answers and ordinary messages now send in registration order from a shared queue on Desktop and the PWA.
+- Pending answers and messages now survive closing a view or restarting the app.
+- Added queue delivery status, retries for failed sends, and an option to mark an item as handled without resending.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 新しいAskが届いた際に専用のチャイムで知らせるようにしました
+- Askの通知音を通常の通知音とは別に設定・試聴できるようにしました
+- Askへの回答と通常のメッセージを、デスクトップとPWAで共通のキューから登録順に送信するようにしました
+- 送信待ちの回答やメッセージを、画面を閉じたりアプリを再起動したりしても保持するようにしました
+- キューで送信状態を確認し、送信失敗の再試行や再送せずに対応済みにする操作ができるようにしました
+
+</details>
+
 ## v4.99.1 — 2026-10-05
 
 **Type:** patch · **Platforms:** macOS, Linux

@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.99.1 on 2026-10-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.100.0 on 2026-10-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -27,7 +27,9 @@ The **Follow-up behavior** setting under Appearance chooses whether an ordinary 
 
 In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
 
-Before delivery, a queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
+Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
+
+The Queue is shared by Desktop and the PWA, with Ask answers and ordinary messages in registration order. Registered items survive closing a view or restarting Cockpit. Ask answers can be inspected but cannot be edited, removed, or sent as an interrupt. Failed delivery can be retried. If delivery cannot be confirmed, automatic resend stops to prevent duplicates; check the conversation first. Choose **Mark as handled without resending** to move past that item without sending it again. Completing or deleting a task cancels its remaining Queue without delivering those items.
 
 ### Configure follow-up behavior from the CLI
 
@@ -76,7 +78,7 @@ For Antigravity, Cursor, and Qoder, Cockpit asks the agent for a hand-off summar
 
 In a supported Native UI, `/clear` keeps the task but discards its conversation and original instruction, then starts a new conversation. `/compact` and `/clear` are unavailable while a turn is running or waiting for a tool approval or question. Finish, answer, or cancel that turn first.
 
-The reset immediately updates every Desktop and PWA view that has the task open. The view that started the reset also clears its unsent text, attachments, and queue. Other views keep their draft text, attachments, and queued messages while resetting only the conversation and showing **Started a new conversation**.
+The reset immediately updates every Desktop and PWA view that has the task open. The view that started the reset clears its draft text and attachments; other views keep their drafts. Because the Queue is shared, ordinary messages awaiting delivery or marked as failed are removed from every view. Ask answers and items whose dispatch has started or whose delivery is unconfirmed are not removed by this operation. The conversation shows **Started a new conversation**.
 
 ## Read and quote the conversation
 
