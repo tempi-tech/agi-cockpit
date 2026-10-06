@@ -9,7 +9,7 @@ English is the primary language for these generated release notes. Download the 
 **Type:** patch · **Platforms:** macOS
 
 - Fixed sent items remaining in the queue.
-- Made Ask answers easier to read in the queue and conversation history.
+- Improved the readability of Ask answers in the queue and conversation history.
 - Fixed Cockpit CLI command failures on first use and during connection recovery.
 - Fixed incorrect dollar-sign rendering in messages containing emoji.
 - Fixed memory usage growing continuously while an Android screen was connected.
