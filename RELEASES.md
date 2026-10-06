@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.100.1 — 2026-10-07
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed sent items remaining in the queue.
+- Made Ask answers easier to read in the queue and conversation history.
+- Fixed Cockpit CLI command failures on first use and during connection recovery.
+- Fixed incorrect dollar-sign rendering in messages containing emoji.
+- Fixed memory usage growing continuously while an Android screen was connected.
+- Improved video handling when reconnecting an Android screen.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 送信済みの項目がキューに残り続ける問題を修正しました
+- Askの回答内容をキューや会話履歴で確認しやすくしました
+- Cockpit CLIの初回実行や接続復旧時にコマンドが失敗する問題を修正しました
+- 絵文字を含むメッセージでドル記号の表示が崩れる問題を修正しました
+- Android画面の接続中にメモリ使用量が増え続ける問題を修正しました
+- Android画面を再接続した際の映像処理を安定させました
+
+</details>
+
 ## v4.100.0 — 2026-10-06
 
 **Type:** minor · **Platforms:** macOS
