@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.100.1 — 2026-10-07
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed sent items remaining in the queue.
 - Improved the readability of Ask answers in the queue and conversation history.
