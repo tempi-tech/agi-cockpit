@@ -8,8 +8,8 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- HTML Surfaces now support local calculations and display changes using JavaScript in an isolated environment.
-- Reopen files, diffs, HTML Surfaces, and browser tabs presented by an agent from cards in the conversation.
+- Added local calculations and display changes using isolated JavaScript in HTML Surfaces.
+- Added conversation cards to reopen files, diffs, HTML Surfaces, and browser tabs presented by an agent.
 - Fixed interrupting a task inside a Fleet loop canceling other tasks running in parallel.
 - Fixed Claude interruptions being treated as failures.
 - Fixed being unable to continue a conversation after interrupting Claude.
