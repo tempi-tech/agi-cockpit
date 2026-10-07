@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.101.0 — 2026-10-08
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added local calculations and display changes using isolated JavaScript in HTML Surfaces.
 - Added conversation cards to reopen files, diffs, HTML Surfaces, and browser tabs presented by an agent.
