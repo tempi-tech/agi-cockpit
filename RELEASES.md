@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.101.0 — 2026-10-08
+
+**Type:** minor · **Platforms:** macOS
+
+- HTML Surfaces now support local calculations and display changes using JavaScript in an isolated environment.
+- Reopen files, diffs, HTML Surfaces, and browser tabs presented by an agent from cards in the conversation.
+- Fixed interrupting a task inside a Fleet loop canceling other tasks running in parallel.
+- Fixed Claude interruptions being treated as failures.
+- Fixed being unable to continue a conversation after interrupting Claude.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- HTML Surfaceで、分離された環境のJavaScriptによる計算や表示の切り替えができるようになりました
+- エージェントが提示したファイルや差分、HTML、ブラウザーを会話内のカードから開き直せるようになりました
+- Fleetのループ内でタスクに割り込んだ際、並行実行中の他のタスクが中止される問題を修正しました
+- Claudeの実行への割り込みが失敗として扱われる問題を修正しました
+- Claudeの実行に割り込んだ後、会話を続けられなくなる問題を修正しました
+
+</details>
+
 ## v4.100.1 — 2026-10-07
 
 **Type:** patch · **Platforms:** macOS, Linux
