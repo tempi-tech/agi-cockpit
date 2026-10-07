@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.99.0で2026-10-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.100.1で2026-10-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -25,6 +25,8 @@ Cockpitから起動したタスクには、正しいローカルインスタン�
 ローカルCLIは認証付きloopbackへ先に接続し、sandboxがloopbackまたはプロセス確認を制限している場合は、同じCockpitが渡したディレクトリのfile IPCへ自動で切り替えます。file IPCは一つのrequest IDを一度だけ書き、同じ応答を待つため、`task create`や`task send`を再送して重複実行しません。権限拡張は不要です。
 
 `cockpit doctor`は`pidVisibility`、`transports.loopback`、`transports.fileIpc`、`effectiveTransport`を返します。終了コード7は、利用可能な両方の経路で認証できなかったことを示します。権限エラーと推測して再実行せず、失敗理由と対象instanceを確認してください。
+
+タスクlistenerが初回起動中または復旧中の場合、task、talk、HTML、side-panelなどのコマンドは、共有する20秒の認証期限内でlistenerの準備を待ちます。portが変わっても、PID、token、IPC directoryが同じinstanceであると確認できる場合だけ新しいportへ追従し、古いportへ資格情報を送信しません。期限内に復旧しなければ終了コード7で失敗するため、`cockpit doctor`で`listenerState`と経路ごとの理由を確認してから同じコマンドを再実行してください。
 
 ## JSON結果を確認する
 

@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.100.0 on 2026-10-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.100.1 on 2026-10-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -29,7 +29,9 @@ In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI on Deskto
 
 Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
 
-The Queue is shared by Desktop and the PWA, with Ask answers and ordinary messages in registration order. Registered items survive closing a view or restarting Cockpit. Ask answers can be inspected but cannot be edited, removed, or sent as an interrupt. Failed delivery can be retried. If delivery cannot be confirmed, automatic resend stops to prevent duplicates; check the conversation first. Choose **Mark as handled without resending** to move past that item without sending it again. Completing or deleting a task cancels its remaining Queue without delivering those items.
+The Queue is shared by Desktop and the PWA, with Ask answers and ordinary messages in registration order. Entries that still need attention, including waiting, delivering, and failed entries, survive closing a view or restarting Cockpit. Once delivery is confirmed and the entry appears in the conversation, it leaves the Queue instead of remaining as a sent item.
+
+An Ask answer is summarized with its selections, free-form input, and attachments first. Expand it to inspect the full answer together with the question, responder, and raw payload. You cannot edit, remove, or send an Ask answer as an interrupt. Failed delivery can be retried. If delivery cannot be confirmed, automatic resend stops to prevent duplicates; check the conversation first. Choose **Mark as handled without resending** to move past that item without sending it again. Completing or deleting a task cancels its remaining Queue without delivering those items.
 
 ### Configure follow-up behavior from the CLI
 

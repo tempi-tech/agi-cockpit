@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.100.1 on 2026-10-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -19,6 +19,8 @@ The CLI does not silently fall back to another Cockpit instance when the selecte
 For local commands, the CLI first authenticates over loopback. If a sandbox blocks loopback or process visibility, it automatically uses file IPC through a directory supplied by that same Cockpit instance. File IPC writes one request ID once and waits for its matching response, so commands such as `task create` and `task send` are not duplicated. No broader sandbox permission is required.
 
 `cockpit doctor` reports `pidVisibility`, `transports.loopback`, `transports.fileIpc`, and `effectiveTransport`. Exit code 7 means neither available transport authenticated. Inspect the per-transport reason and selected instance instead of retrying with elevated permissions.
+
+When the task listener is starting for the first time or recovering, commands such as task, talk, HTML, and side-panel wait for it within a shared 20-second authentication deadline. If the port changes, the CLI follows the new port only after confirming the same PID, token, and IPC directory, and it does not send credentials to the old port. If recovery does not finish within the deadline, the command exits with code 7; inspect `listenerState` and each transport reason in `cockpit doctor`, then rerun the same command.
 
 ## Inspect JSON results
 

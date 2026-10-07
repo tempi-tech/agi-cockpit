@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.100.1 on 2026-10-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -96,6 +96,8 @@ Use **A−** and **A+** in the header to change the text size of questions, choi
 3. A person answers with a choice, optional supplementary text, an optional whole-Ask reply for a multi-question Ask, and supported file attachments as needed.
 4. Cockpit delivers a `cockpit.ask.resolved` event to the original task.
 5. The agent receives the answer and continues the same work.
+
+Until the answer reaches the task, the queue labels it as an Ask and summarizes its selections, free-form input, and attachments first. After delivery, the conversation history also presents the answer first; expand **Question and details** to inspect the original question, responder, and raw payload.
 
 Closing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
 
