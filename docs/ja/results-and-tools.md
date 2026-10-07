@@ -2,9 +2,9 @@
 
 # 成果とツール
 
-タスクの差分、ファイル、HTML Surface、Display通知、ターミナル、ログを安全に確認し、専門ページへ進む方法を説明します。
+会話内の提示カードから差分、ファイル、HTML Surface、ブラウザーを開き直し、ターミナルやログまで安全に確認する方法を説明します。
 
-> AGI Cockpit 4.99.1で2026-10-05に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
+> AGI Cockpit 4.101.0で2026-10-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 
 タスクの会話だけでなく、変更されたコード、ファイル、レポート、実行中のプロセスを同じタスクから確認できます。このページでは成果確認に共通する面を整理します。Webページの操作は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、接続したモバイル画面は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)で扱います。
 
@@ -17,6 +17,12 @@ DesktopのAskタブは、選択中のタスクだけでなく、この端末で�
 パネル上部の種類と対象パスを確認してから操作してください。パネルを閉じてもタスクやブラウザーセッションは終了しません。幅を変更した場合は表示状態として保存され、狭い幅では本文と表が横スクロール可能な表示へ切り替わります。
 
 PWAではタスク詳細の「タスクパネル」を開くと、子タスク、HTML Surface、会話から開いた画像、差分、Cockpit Browser、App Surface、サイドターミナル、スキル、Fleet、Creative Studioの成果物、Talk Roomを、利用できる文脈に応じたタブで切り替えられます。狭い画面ではbottom sheetとして開き、前後ボタンまたは横スクロールするタブ列を使い、約半分の高さと全高を切り替えられます。広い画面ではチャットの右側にパネルを並べ、さらに広い画面ではタスクナビゲーターも同時に表示します。画面幅や向きが変わって表示形式が切り替わっても、選択中のタブ、対象、下書き、スクロール位置はタスクごとに保持されます。パネルを閉じてもターミナルやブラウザーを終了せず、表示の購読だけを外します。添付ファイル一覧、一般ファイル、プロジェクトエクスプローラー、バックグラウンドログはこのPWAパネルのタブではありません。
+
+## 会話内の提示カードから開き直す
+
+エージェントがファイル、差分、HTML Surface、またはブラウザータブを表示すると、DesktopとPWAの会話に提示カードが残ります。カードの「開く」を選ぶと、Desktopは対応する右サイドパネルを開き、PWAは同じタスクのタスクパネルで対象を開きます。カードが届いただけではPWAで閲覧中の文書やパネルを切り替えません。パネルを閉じてからカードを開き直しても、会話の位置と入力中の下書きは保持されます。
+
+HTML Surfaceのカードは保存済みのSurfaceを開きます。ファイルと差分はカード作成時の複製ではなく現在の内容を読み、ブラウザーカードはURLだけでなく同じホスト上のBrowser Identity、セッション、タブを参照します。対象が削除・終了されている、別ホストのカードである、またはこのタスク・端末から開けない場合は、別の対象へ置き換えずエラーを表示します。
 
 ## 差分とファイルを確認する
 
@@ -43,6 +49,10 @@ Desktopのプロジェクトエクスプローラーでは、タスクが属す�
 HTML Modeは、エージェントが最終結果を対話可能なHTMLとして構成するためのスキルです。HTML Surfaceは、そのHTMLをタスクへ保存し、右サイドパネルで表示する製品面です。
 
 HTML Surfaceは一般のWebブラウザーではありません。エージェントが作ったレポート、比較表、ダッシュボードなどを表示する用途に使い、外部サイトの移動やフォーム操作にはアプリ内ブラウザーを使います。HTML内のHTTPまたはHTTPSリンクは外部ブラウザーへ渡され、それ以外のURLスキームは無視されます。
+
+`<meta name="cockpit-scripts" content="isolated">`を含むSurfaceでは、DesktopとPWAの分離された環境でインラインJavaScriptを実行できます。入力値からの計算、表示の切り替え、グラフの更新など、そのSurface内だけで完結する操作に使います。イベントは`addEventListener`などで登録し、インラインイベント属性や`javascript:` URLは使えません。マーカーがないSurfaceとDisplay通知ではスクリプトを実行しません。
+
+分離されたスクリプトはCockpit、Node、ローカルファイル、認証情報、Cookie、アプリのストレージへアクセスできず、外部通信、外部リソース、埋め込みページ、画面遷移、ダウンロード、ポップアップも利用できません。タスクへ値を送れるのは、所定のアクションまたは検証済みの送信コントロールを人が実際に選んだ場合だけです。スクリプトから生成したクリックやメッセージは送信されず、`--non-interactive`ではローカル操作だけが動きます。Surfaceを更新・切り替え・開き直すとスクリプトの状態は初期化されます。スクリプトが停止した場合はSurfaceを開き直すか、タスクへHTMLの修正を依頼してください。完全な制約は[HTML Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/html)、データ境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を参照してください。
 
 CLIからは`cockpit html show --stdin`でHTMLを保存し、`cockpit side-panel html`で表示できます。正確な契約は[`cockpit html` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/html)を参照してください。
 

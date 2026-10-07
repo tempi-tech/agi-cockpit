@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.101.0 on 2026-10-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -151,7 +151,7 @@ Use these commands for deeper inspection.
 
 When an agent node's visual execution fails, the current attempt's report, `status`, and `error` remain on the Run and are available in the Fleet panel and through `fleet output`. This command does not retain earlier agent or message attempts, and `--attempt` must match the current attempt number. Use `fleet logs` for the saved decision history.
 
-Sending Steer directly to a live node task, canceling its turn, completing it, or removing it interrupts the node and pauses the Run. Unless you intend to intervene, supervise through the Fleet panel and `fleet` commands rather than operating node tasks by hand.
+Sending Steer directly to a live node task, canceling its turn, completing it, or removing it interrupts the node and pauses the Run. Pausing prevents new dispatch while nodes that are already running continue to completion. Interrupting one node in a loop body likewise keeps its siblings running; after they finish, the loop settles as `interrupted`. `resume` reruns only the interrupted node in the same iteration and keeps completed sibling results. A real failure still cancels the remainder of that iteration. Unless you intend to intervene, supervise through the Fleet panel and `fleet` commands rather than operating node tasks by hand.
 
 When a Fleet definition cannot be loaded, the panel distinguishes a missing file, invalid YAML, schema validation, and another load failure. It shows the target path and validation issues. When the path is available, use **Open file** to correct it and **Reload** to read the same definition again. If the file is missing, confirm the displayed path, create the file, then reload.
 

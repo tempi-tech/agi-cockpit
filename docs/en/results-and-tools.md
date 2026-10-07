@@ -2,9 +2,9 @@
 
 # Results and tools
 
-Safely review task diffs, files, HTML Surfaces, Display notices, terminals, and logs, then continue to each dedicated operating surface.
+Reopen presented diffs, files, HTML Surfaces, and browser tabs from conversation cards, then safely review terminals, logs, and other task results.
 
-> Verified with AGI Cockpit 4.99.1 on 2026-10-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.101.0 on 2026-10-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -17,6 +17,12 @@ The Desktop Ask tab lists every Ask waiting for an answer on this device, not on
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
 In the PWA, **Task panel** in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, diff, Cockpit Browser, App Surface, side terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, project explorer, and background logs are not tabs in this PWA panel.
+
+## Reopen content from conversation cards
+
+When an agent presents a file, diff, HTML Surface, or browser tab, a presentation card remains in the task conversation on Desktop and the PWA. Choose **Open** to reopen the matching right-side panel on Desktop or the target in that task's Task panel on the PWA. A newly arrived card does not switch away from the document or panel you are viewing on the PWA. Closing the panel and reopening a card preserves the conversation position and composer draft.
+
+An HTML Surface card opens the saved Surface. File and diff cards read current content rather than a copy made when the card was created. A browser card refers to the same Browser Identity, session, and tab on the same host, not only to its URL. If the target was deleted or closed, belongs to another host, or is unavailable to this task or device, Cockpit reports the error instead of substituting another target.
 
 ## Review diffs and files
 
@@ -43,6 +49,10 @@ Use **Find in content** or Cmd+F / Ctrl+F in the active file preview, editable t
 HTML Mode is a skill an agent uses to compose an interactive HTML final result. HTML Surface is the product surface that stores that HTML for a task and displays it in the right side panel.
 
 HTML Surface is not a general-purpose web browser. Use it for agent-created reports, comparisons, and dashboards; use the in-app browser for navigating external sites or operating forms. HTTP and HTTPS links in an HTML Surface open in the external browser, while other URL schemes are ignored.
+
+A Surface containing `<meta name="cockpit-scripts" content="isolated">` can run inline JavaScript in an isolated environment on Desktop and the PWA. Use it for operations contained within that Surface, such as calculating from inputs, toggling sections, or updating a chart. Register events with `addEventListener` or similar APIs; inline event attributes and `javascript:` URLs remain unavailable. Surfaces without the marker and Display notices never run scripts.
+
+An isolated script cannot access Cockpit, Node, local files, authentication, cookies, or app storage. Network requests, external resources, embedded pages, navigation, downloads, and popups are also blocked. Data reaches the task only when a person genuinely selects a declared action or validated submit control. Script-generated clicks and messages cannot send, and `--non-interactive` permits local behavior without task messages. Updating, switching, or reopening a Surface starts fresh script state. If a script stops, reopen the Surface or ask the task to fix its HTML. See the [HTML reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/html) for the complete limits and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for the data boundary.
 
 From the CLI, `cockpit html show --stdin` stores HTML and `cockpit side-panel html` displays it. See the [`cockpit html` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/html) for the exact contract.
 

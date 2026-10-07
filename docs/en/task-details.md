@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.100.1 on 2026-10-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.101.0 on 2026-10-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -20,6 +20,8 @@ A Terminal task cannot restore its previous shell process, so resume starts a ne
 After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus. After interruption settles, the task returns to a state that can accept the next instruction and the composer can continue.
+
+In Claude Native UI, Claude's completion result after an interrupt is recorded as `interrupted`, not as a failed turn, and the same task can accept the next instruction. If the interrupt request fails or times out, Cockpit closes that runtime session so a late interrupt cannot affect the replacement instruction. Send the message returned to the composer again to reconnect to the saved conversation and continue.
 
 Stopping a turn, completing or removing a task, or quitting the app also stops descendant processes launched by that task. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
 
