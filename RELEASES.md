@@ -11,11 +11,11 @@ English is the primary language for these generated release notes. Download the 
 - Added a device filter to view tasks from other PCs in the desktop task list.
 - Added one-time input into a specified browser password field from Desktop and the PWA.
 - Added HTML explanations such as comparison tables and previews to Asks.
-- Made running task progress and waiting states easier to follow in Fleets.
+- Improved visibility of running task progress and waiting states in Fleets.
 - Improved recovery when an agent stops responding and leaves a task running.
-- New conversations can start without waiting for model discovery.
+- Removed the wait for model discovery when starting new conversations.
 - Fixed task CLI commands failing on Windows with piped input.
-- Kept credentials out of arguments passed to processes launched internally by the CLI.
+- Improved credential protection by excluding secrets from arguments passed to processes launched internally by the CLI.
 
 <details>
 <summary>日本語のリリースノート</summary>
