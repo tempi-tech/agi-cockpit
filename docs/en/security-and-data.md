@@ -92,6 +92,16 @@ Switching an active Claude, Codex, Grok Build, Antigravity, Cursor, or Qoder tas
 
 The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files.
 
+## Enter a password once
+
+When an agent uses `cockpit secret request`, Desktop or an HTTPS-connected PWA can deliver a value once to a specified browser password field. This is separate from an Ask answer. Review the PC, task, purpose, Browser Identity, actual URL, destination, and deadline, then select **Fill this field once**. It does not click a login button or submit the form automatically.
+
+The destination must be a unique, visible, enabled password field in the main frame on HTTPS or loopback HTTP. Changing the page or field after the request causes delivery to fail; Cockpit does not choose another field. Requests expire within ten minutes. PWA submission and cancellation require authenticated HTTPS/WSS and never fall back to an unencrypted connection. The CLI cannot accept or retrieve the value.
+
+Delivery values stay in transient memory and are not saved in Cockpit conversations, Ask answers, CLI results, diagnostic logs, persisted tasks, PWA storage, or Ask forwarding. They are not restored or resent after restart. An unconfirmed delivery is not automatically retried; check its status instead. Cancellation applies only before delivery starts.
+
+The destination site can retain the value, and tools that read its DOM or evaluate scripts may read it after input. This feature does not guarantee that AI cannot read destination data. Discarding the delivery copy does not clear the site's field. Use trusted PCs, PWA devices, and sites. See the [secure input CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for details.
+
 ## Isolate Browser Identities
 
 The in-app browser grants site permissions such as notifications, geolocation, and clipboard reading and writing by default, without a Cockpit confirmation dialog. OS and Web API restrictions still apply. It denies media capture including camera and microphone, screen capture, fullscreen, automatic fullscreen, permission to open external apps, keyboard lock, and deprecated synchronous clipboard reading. Open only sites you trust. This policy applies to every Browser Identity; separating Identities does not restrict site permissions.
@@ -109,6 +119,8 @@ See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identi
 Importing a browser sign-in copies the source browser’s session; it does not sign in with a different account. Check the source account before importing it into an Identity.
 
 ## Handle attachments and Ask media
+
+An HTML explanation attached to an Ask is stored with the unanswered Ask and deleted when it is answered or closed. Desktop and the PWA render it in an isolated, display-only area without scripts, forms, or Cockpit actions. HTTP/HTTPS links open in the system browser. Discord and Slack relays do not include the HTML body, so information needed to decide must also appear in the summary or choices.
 
 Local image previews in PWA conversations are sent from the host as resized JPEGs over an authenticated Remote Access connection. Only absolute paths recorded in the target task’s persisted image_view results are allowed; this does not provide access to arbitrary local files. Source size and pixel count are checked as well.
 
@@ -129,6 +141,8 @@ Fleet command gates save complete stdout and stderr per attempt under the Run's 
 Local `task create` and `task send` can attach files through repeatable `--media` arguments, using the same managed upload store and limits as the GUI. The source files are copied, never moved or deleted; the attachments can be sent to the selected agent provider. Remote `--host` delivery is not supported.
 
 ## Protect Remote Access
+
+When the Desktop device filter displays another PC, it receives task-list metadata from a PC authenticated as the same Tailscale owner, including task names, states, agents, working paths, instruction previews, timestamps, and whether an Ask is pending. This dedicated list connection does not synchronize conversation bodies or attachments and cannot control tasks. Received lists are cleared when the connection drops.
 
 Task notifications, full state synchronization, and recent folder lists are sent only to authenticated sync connections. An unpaired connection is closed after two minutes. The PWA keeps the pairing form and entered code while reconnecting, and resends a submitted code if the connection drops before the authentication reply.
 

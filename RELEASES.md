@@ -4,6 +4,33 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.102.0 — 2026-10-09
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a device filter to view tasks from other PCs in the desktop task list.
+- Added one-time input into a specified browser password field from Desktop and the PWA.
+- Added HTML explanations such as comparison tables and previews to Asks.
+- Made running task progress and waiting states easier to follow in Fleets.
+- Improved recovery when an agent stops responding and leaves a task running.
+- New conversations can start without waiting for model discovery.
+- Fixed task CLI commands failing on Windows with piped input.
+- Kept credentials out of arguments passed to processes launched internally by the CLI.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Desktopのタスク一覧で、デバイスを切り替えて他のPCのタスクを確認できるようになりました
+- DesktopとPWAから、指定したブラウザーのパスワード欄へ一度だけ入力できるようになりました
+- Askに比較表やプレビューなどのHTML説明を表示できるようになりました
+- Fleetで実行中のタスクの進捗や待機状態を確認しやすくなりました
+- 一部のエージェントで応答が止まった際、タスクが実行中のまま残る問題を改善しました
+- モデル一覧の取得を待たずに新しい会話を開始できるようになりました
+- Windowsで、パイプ経由の入力によりタスク用CLIコマンドが失敗する問題を修正しました
+- CLIが内部で起動するプロセスの引数に認証情報が含まれないようにしました
+
+</details>
+
 ## v4.101.0 — 2026-10-08
 
 **Type:** minor · **Platforms:** macOS, Linux
