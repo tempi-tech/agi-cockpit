@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.98.0 on 2026-10-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -22,9 +22,17 @@ Overview searches across tasks, projects, and agents, including completed work. 
 
 The header's Back and Forward buttons remain available while Overview is open. Navigating to a task from that history closes Overview and opens the task. In the task list, filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each continues independently.
 
+### Inspect tasks on another PC
+
+The **Device** filter in the Desktop task list shows only **This device** by default. Choose **All devices** or one device to inspect task summaries from another PC that uses the same Tailscale account and has Remote Access enabled. Cockpit must also be running on the other PC.
+
+Remote rows show the task name, instruction preview, state, pending Ask, agent, working folder, and time, and follow the current search, sort order, and agent filter. They are read-only: this PC cannot open, answer, approve, complete, or delete those tasks. When a device goes offline, Cockpit clears its received list and shows it as offline instead of leaving stale tasks in place. A device that rejects the connection because it runs an older version or has a different Tailscale owner is shown as unavailable.
+
+Switch back to **This device** to stop discovering and connecting to other PCs and show only local tasks. This feature requires an AGI Labo membership and Tailscale. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#protect-remote-access) for the transmitted summary boundary and [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup.
+
 ## Search, sort, and use menus
 
-Search inside the task list partially matches displayed task and project names. A task ID becomes searchable after at least four characters. This search does not inspect instructions, working directories, or internal metadata.
+For tasks on this device, task-list search partially matches displayed task and project names. A task ID becomes searchable after at least four characters. It does not inspect a local task's instruction, working directory, or internal metadata. When another device is visible, search also partially matches the task name, instruction preview, and working folder received from that device, but not its remote task ID.
 
 The **Pinned** heading on Desktop and the PWA shows the total number of unfinished pinned tasks. When search or the agent filter narrows the list, it shows **visible / total**; without filtering, it shows the total. The total remains visible when the group is collapsed or no pinned task matches the filter.
 

@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.101.0 on 2026-10-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -130,6 +130,12 @@ Flow lines point from each dependency toward the downstream node, and active lin
 Select a node's **Events** view to read its event timeline. Events are grouped by attempt, show their timestamps, and label the elapsed gap between events; an active attempt continues updating its current elapsed time. Use the timeline to locate where a node waited, then inspect its report, task, or gate output for the cause.
 
 The progress bar in the Run header groups every node by completed, running, failed, interrupted, stopped, skipped, or pending state and shows completed nodes over total nodes. It is a current status breakdown, not elapsed time or an estimated completion time.
+
+For every node backed by a real task, `progress` in `cockpit fleet status <runId>` reports the last runtime-event time, the current turn's start and elapsed time, and its tool-call count. Judge a long turn by whether `progress.lastRuntimeEventAt` keeps moving, not by `lastActivityAt` or CPU usage. Progress is computed when requested and is not saved in the Run history. `cockpit task get <taskId>` reports the same fields.
+
+Set `idle_timeout` or `timeout` on an agent node to stop and fail it when no runtime event arrives within the idle bound or its total active time exceeds the overall bound. Values such as `20m` and `2h30m` are accepted, with a one-minute minimum. Time waiting on an Ask, approval, or question does not count toward `idle_timeout`. Recover the failed node with `cockpit fleet retry`.
+
+Even without those fields, Cockpit stops a Grok Build, Cursor, or Qoder turn as `stalled` after 18 minutes with no response when it is not waiting on approval, a question, background work, or a tool call. Fleet treats that as a transient runtime error, retries with backoff, and continues from the same conversation. Reaching the 12-hour limit for one turn is not retried automatically.
 
 Select a gate node to see the actual exit code for a command gate, or the approved or rejected result and answer text for a human gate. Exit code 0 passes; any other code fails. Inspect the gate details and output instead of inferring the result only from the overall Run status.
 

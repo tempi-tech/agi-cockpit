@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAからAGI Cockpitを監督し、別のコンピューターから対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.97.0で2026-10-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -19,6 +19,8 @@ Cockpitを実行しているコンピューターが接続先になり、ブラ�
 | ローカルWi-Fiも許可 | 同じLANから | HTTP。暗号化なし |
 
 リモートアクセス中は、接続先のAGI Cockpitプロセスとリモートアクセスを動かしておく必要があります。複数のCockpitがある場合も、タスクと設定は接続先ごとに分かれたままです。
+
+同じTailscaleアカウントの複数のPCでCockpitを実行している場合、Desktopのタスク一覧にある「端末」フィルターから、ほかのPCのタスク概要を参照できます。これはPWAのような操作接続ではなく、会話や添付を同期せず、リモートタスクを開いたり操作したりできません。使い方は[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks#ほかのpcのタスクを確認する)を参照してください。
 
 ## Tailscaleとは
 

@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.97.0で2026-10-02に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -163,6 +163,8 @@ cockpit browser tab recreate <tabId> --json
 アプリ内ブラウザーは、通知、位置情報、クリップボードの読み取り・書き込みなどのサイト権限を、Cockpitの確認画面を出さずに既定で許可します。OSやWeb API側の制約は引き続き適用されます。カメラ・マイクを含むメディア取得、画面収録、全画面化、自動全画面化、外部アプリを開く権限、キーボードロック、旧式の同期クリップボード読み取りは拒否します。信頼できるサイトだけを開いてください。この方針はすべてのBrowser Identityに共通で、Identityの分離によってサイト権限が制限されるわけではありません。
 
 CookieやlocalStorageなどの分離、task・Autorunへの割り当て、system browserからのsession取込、消去と削除は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
+
+エージェントが`cockpit secret request`を使うと、DesktopまたはHTTPS接続のPWAに、表示中のパスワード欄へ一度だけ入力する依頼が届きます。PC、タスク、目的、Identity、実際のURLと入力欄を確認してから、利用者自身が値を入力します。Cockpitは指定された欄だけを埋め、送信ボタンを押しません。値をCLIやタスクへ返すこともありません。利用条件、期限、保存と再試行の境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)を参照してください。
 
 パスキーは署名済みmacOS版でTouch ID、WindowsでWindows Helloを利用できます。macOSのCockpitで使えるのは、アプリ内ブラウザーから登録したパスキーです。Safari、Chrome、iCloudキーチェーンで登録済みのパスキーを直接利用することはできません。
 

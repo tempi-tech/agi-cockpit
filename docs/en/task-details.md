@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.101.0 on 2026-10-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -124,6 +124,8 @@ From the CLI, `cockpit task retry-start <id>` reuses the saved instruction or Te
 
 When Claude, Codex, Antigravity, Cursor, or Grok Build reports an error that may indicate a service incident, such as a 404, 5xx response, or gateway timeout, the error surface links directly to that provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors; follow the on-screen sign-in, account-switching, or wait guidance instead.
 
+When a Grok Build, Cursor, or Qoder Native UI turn sends no response for 18 minutes while it is not waiting on an approval, question, background operation, or tool call, Cockpit stops it and reports `runtime_error` with reason `stalled`. The task no longer remains running indefinitely, and the next message restarts its session. Cockpit also stops a single turn at the 12-hour limit and restarts the session on the next message.
+
 A message's copy button includes the visible body and error details. Diagnostics may contain local file paths, session logs, or account information, so inspect the copied content before sharing it externally.
 
 When several tool runs are grouped and only some fail, the heading shows the failed count. Do not treat the successful entries as proof that the whole group succeeded; inspect each failed operation and its effect.
@@ -173,6 +175,8 @@ cockpit task wait <id> --since <seq>
 ```
 
 Use `--stdin` or `--text-file` for multiline or shell-sensitive content. `task wait` returns a saved report or the next report after the sequence; it never injects instructions into another task.
+
+`progress` in `task get` includes `lastRuntimeEventAt` for the latest runtime event, `turnStartedAt` and `turnElapsedMs` for the current turn, and `turnToolCallCount`. For a long turn, use this runtime progress instead of `lastActivityAt`, which does not move while the task is visible, or CPU usage.
 
 ## Related pages
 

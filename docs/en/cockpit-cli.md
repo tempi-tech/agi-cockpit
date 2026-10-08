@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.100.1 on 2026-10-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -51,6 +51,8 @@ After creating an Ask, end the current turn and wait. Do not poll for the answer
 Use `cockpit browser` for web pages and `cockpit app` for an already-running Android target or iOS Simulator. Confirm the Browser Identity, and verify browser clicks and submissions with postconditions such as URL, text, element state, or network activity. In App Surface, prefer accessibility labels and verify a fresh snapshot or explicit expectation after input.
 
 External links, uploads, physical devices, and secret input have additional safety boundaries. Do not resend an already delivered action without checking state because it can create a duplicate operation.
+
+`cockpit secret request` asks Desktop or an HTTPS-connected PWA to fill one specified browser password field once. The CLI identifies the purpose and destination and can inspect or cancel the request with `status` and `cancel`, but it has no value argument, value stdin, or retrieval command. The person enters the value in a Cockpit surface. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for the conditions and boundaries and the [`cockpit secret` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for exact syntax.
 
 See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities), and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for practical workflows.
 

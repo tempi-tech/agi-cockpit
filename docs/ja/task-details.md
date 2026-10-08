@@ -4,7 +4,7 @@
 
 選択したタスクのプロジェクトフォルダ、会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.101.0で2026-10-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -124,6 +124,8 @@ CLIでは`cockpit task retry-start <id>`で保存済みの指示またはTermina
 
 Claude、Codex、Antigravity、Cursor、Grok Buildで、404、5xx、gateway timeoutなどサービス障害の可能性があるエラーを検出すると、エラー表示から各プロバイダーの稼働状況ページを直接開けます。認証、利用上限、クォータ、レート制限、請求に関するエラーではこのリンクを表示しないため、画面の再ログイン、アカウント切り替え、待機などの案内に従います。
 
+Grok Build、Cursor、QoderのネイティブUIで、承認、質問、background処理、tool callを待っていないターンから18分間まったく応答がない場合、Cockpitは停止させ、`runtime_error`と`stalled`の理由を表示します。タスクを実行中のまま残さず、次のメッセージでsessionを再開します。1ターンが12時間に達した場合も停止し、次のメッセージで再開します。
+
 メッセージのコピーボタンは、表示本文とエラー詳細をまとめてコピーします。診断情報にはローカルのファイルパス、セッションログ、アカウント情報が含まれる場合があるため、外部へ共有する前に確認してください。
 
 複数のツール実行が一つのグループにまとまっている場合、一部だけが失敗すると見出しに失敗件数が表示されます。成功した項目があっても、失敗した操作とその影響を確認します。
@@ -173,6 +175,8 @@ cockpit task wait <id> --since <seq>
 ```
 
 複数行やシェルが解釈し得る内容は`--stdin`または`--text-file`で渡します。`task wait`は保存済みreportまたは指定sequenceより後のreportを返し、別タスクへ指示を注入しません。
+
+`task get`の`progress`には、最後にruntime eventを受け取った`lastRuntimeEventAt`、実行中ターンの`turnStartedAt`と`turnElapsedMs`、tool call数の`turnToolCallCount`が含まれます。長いターンの動作確認では、画面表示中に更新されない`lastActivityAt`やCPU使用率ではなく、このruntime進捗を確認します。
 
 ## 関連ページ
 

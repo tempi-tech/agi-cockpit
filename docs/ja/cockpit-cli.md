@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.100.1で2026-10-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -69,6 +69,8 @@ Askを作成した後は、そのターンを終了して回答を待ちます�
 Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`cockpit app`を使います。ブラウザーではIdentityを確認し、クリックや送信にはURL、テキスト、要素状態、通信などの事後条件を付けます。App Surfaceではアクセシビリティラベルを優先し、操作後に新しいsnapshotまたは期待条件を確認します。
 
 外部リンク、ファイルアップロード、物理端末、秘密入力には追加の安全境界があります。配送済みの入力を確認せず再送すると二重操作になる可能性があります。
+
+`cockpit secret request`は、DesktopまたはHTTPS接続のPWAへ、指定したブラウザーのパスワード欄へ一度だけ入力する依頼を作ります。CLIは目的と入力先を指定し、`status`と`cancel`で状態を扱いますが、値を受け取る引数、標準入力、取得コマンドはありません。値は利用者がCockpitの画面へ入力します。利用条件と境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)、正確な構文は[`cockpit secret`リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/secret)を参照してください。
 
 実践手順は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)、[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 

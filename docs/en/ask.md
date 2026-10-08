@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.100.1 on 2026-10-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -55,6 +55,14 @@ Desktop and PWA Ask surfaces include a button that opens the task that created t
 In the PWA task list, a question bubble labelled **Waiting for an Ask answer** identifies a task with an unanswered Ask. It follows the open Ask itself rather than an ordinary task question state, and disappears after the Ask is answered or closed. The task row still opens task details; answer the Ask from **Inbox** in the PWA.
 
 When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
+
+### Review an HTML explanation
+
+An Ask can include an HTML explanation when a comparison table, design options, or a before-and-after preview makes the choice easier to understand. The dedicated Desktop Ask window, the right-side-panel Ask tab, and the PWA **Inbox** show it in a bounded, independently scrolling area between the summary and choices. If loading fails, the question and answer controls remain available and the explanation can be retried.
+
+The explanation is not an answer surface. Scripts, forms, and `data-cockpit-action` do not run, CSS stays isolated, and only HTTP or HTTPS links open in the system browser. Submit the answer through the existing Ask choices and inputs. Discord, Slack, Hooks, and `cockpit ask list` do not receive the HTML body, so put anything essential to the decision in the summary or choice descriptions too.
+
+From the CLI, supply exactly one of `--html`, `--html-file`, or `--html-stdin`, with a 512 KiB UTF-8 limit. Cockpit copies the content when the Ask is created, keeps it with the open Ask across restarts, and deletes it when the Ask is answered or closed. See the [`cockpit ask` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask) for exact input rules.
 
 ## Review the answer order by priority
 

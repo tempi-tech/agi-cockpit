@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.101.0で2026-10-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -130,6 +130,12 @@ Fleetパネルでは、依存関係と次の状態を同時に確認します。
 ノードの「イベント」を選ぶとevent timelineを確認できます。eventは試行ごとにまとまり、時刻とevent間の経過時間が表示されます。実行中の試行では現在までの経過時間も更新されます。待ち時間の位置をtimelineで見つけ、原因はレポート、タスク、gate出力で確認してください。
 
 Runの見出しにある進捗バーは、全ノードを完了、実行中、失敗、中断、停止、スキップ、待機中の状態別に色分けし、完了数と総数を表示します。処理時間や完了予定時刻ではなく、現在のノード状態の内訳です。
+
+実タスクを持つ各ノードでは、`cockpit fleet status <runId>`の`progress`から、最後にruntime eventを受け取った時刻、実行中ターンの開始時刻と経過時間、そのターンのtool call数を確認できます。長いターンでは`lastActivityAt`やCPU使用率ではなく、`progress.lastRuntimeEventAt`が更新されているかで動作中かを判断します。この値は照会時に計算され、Run履歴には保存されません。同じ値は`cockpit task get <taskId>`でも確認できます。
+
+agent nodeへ`idle_timeout`または`timeout`を設定すると、runtime eventが指定時間届かない場合、またはnodeの総実行時間を超えた場合にタスクを停止し、`idle_timeout`または`timeout`として失敗させられます。値は`20m`、`2h30m`のように指定し、最短は1分です。Ask、承認、質問への回答待ちは`idle_timeout`へ数えません。失敗後は`cockpit fleet retry`で復旧します。
+
+これらを設定していなくても、Grok Build、Cursor、Qoderのターンが、承認、質問、background処理、tool callを待っていない状態で18分間まったく応答しない場合、Cockpitは`stalled`として停止します。Fleetは一時的なruntime errorとしてbackoff付きで再試行し、同じ会話から再開します。1ターンの12時間上限に達した場合は自動再試行しません。
 
 gateノードを選ぶと、command gateでは実際の終了コード、human gateでは承認または却下と回答本文を詳細画面で確認できます。終了コード0は成功、それ以外は失敗です。Run全体の状態だけで判断せず、該当gateの詳細と出力を確認してください。
 

@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.99.1 on 2026-10-05. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -63,7 +63,7 @@ Claude's **Ultracode** reasoning level runs Claude Code's ultracode mode: `xhigh
 
 Codex model choices, whether built in or discovered at runtime, put newer GPT generations and versions first, then place the standard model before purpose-specific variants of the same version. This makes capability and intended use easier to compare from the top of the list instead of treating model ids alphabetically. Sorting alone never changes the currently selected valid model.
 
-Codex Native UI uses the model catalog discovered from the selected account across the default settings under **Agents**, new tasks, Autoruns, and running tasks. Changing a pinned account clears the previous account's authoritative list before loading the new account, and a late result from the previous account cannot overwrite it. Model-dependent creation and saving wait while discovery is in progress. Cockpit retains a list already fetched for the same account across reopening and a failed reload. Until an authoritative catalog is available, a screen may show built-in candidates or a fetched default-account list as an unconfirmed fallback. It does not treat that fallback as the selected account's result or promise that the account can run it. Newly available models can be selected with the reasoning levels and `fast` support advertised after discovery succeeds.
+Codex Native UI uses the model catalog discovered from the selected account across the default settings under **Agents**, new tasks, Autoruns, and running tasks. A new task can start with its current valid selection without waiting for discovery to finish. Cockpit shows the last successful list for that account immediately across app restarts and refreshes it in the background. A failed or empty refresh keeps the previous list. Changing a pinned account discards only that profile's previous list before loading the new account, and a late result from the previous account cannot overwrite it. Token expiration or a cancelled sign-in does not by itself discard the list for the same profile. Before that account has any authoritative list, a screen may show built-in candidates or a fetched default-account list as an unconfirmed fallback. It does not treat that fallback as the selected account's result or promise that the account can run it. Newly available models become selectable after the background update, with the reasoning levels and `fast` support advertised by discovery.
 
 For an existing Codex task, if discovery fails or reaches its 20-second deadline, Cockpit also adds the model saved with that task to the fallback candidates and preserves the saved reasoning level and service tier. The picker marks availability as unconfirmed, so these candidates are not a promise that the account can run them. **Reload models** retries with that task's account. A result that arrives after the deadline still replaces the unconfirmed candidates with the discovered catalog and capabilities.
 
@@ -79,7 +79,7 @@ Cockpit owns the local OpenCode servers that it starts for OpenCode Go or OpenCo
 
 From the CLI, choose the Cockpit Agent provider with `cockpit settings set agents.provider.cockpit <provider>`, using `openrouter`, `opencode-go`, `opencode`, or `lmstudio`. Save an API key to encrypted storage with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`, and remove it with `settings reset agents.credential.<name>`. A provider that requires a key cannot be selected until its corresponding credential is present.
 
-Cockpit Agent applies each model's capabilities from the connected provider to new tasks in Desktop and the PWA, the task creation API, and Autoruns. A new task waits for its first model catalog before creation becomes available; if discovery does not settle, known candidates become usable after five seconds. Reasoning uses the model's advertised list first and keeps a saved value while it remains valid. Otherwise Cockpit chooses `medium`, then the first supported value, and leaves reasoning unset for a model that does not support it. The built-in model-id rules are used only when live capability metadata is unavailable.
+Cockpit Agent applies each model's capabilities from the connected provider to new tasks in Desktop and the PWA, the task creation API, and Autoruns. When a valid model is already resolved, a new task can start while its catalog is still loading. Only a first use with no resolved selection waits for usable candidates; if discovery does not settle, known candidates become usable after five seconds. Reasoning uses the model's advertised list first and keeps a saved value while it remains valid. Otherwise Cockpit chooses `medium`, then the first supported value, and leaves reasoning unset for a model that does not support it. The built-in model-id rules are used only when live capability metadata is unavailable.
 
 Register a custom system prompt with `cockpit system-prompt add`; it then appears for new tasks and Autoruns in Desktop and the PWA.
 
@@ -106,7 +106,7 @@ If a model is missing or the CLI is outdated, review the installed and available
 
 When switching agents, the model-list status uses previously retrieved information for the selected agent and account when available. In the PWA task creation dialog, look below the agent and model controls for the model-list source, retrieval status, and related notices.
 
-Previously retrieved model lists are reused per account, avoiding a fresh initial wait whenever a screen opens. Select **Reload models** when the list is outdated. If a custom catalog is active, check the catalog configuration below as well as the CLI version.
+For CLI agents, Cockpit saves the last successfully retrieved model list per account, shows it immediately when a screen opens or the app restarts, and refreshes it in the background. A failed or empty refresh keeps the previous list, and repeated failures back off before another automatic attempt. Cockpit does not launch an agent process merely to discover models when that CLI is not installed. It discards only the profile whose account actually changed. Select **Reload models** when the list is outdated. If a custom catalog is active, check the catalog configuration below as well as the CLI version.
 
 ### Custom Codex catalogs and unlisted models
 

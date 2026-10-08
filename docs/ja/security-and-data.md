@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.101.0で2026-10-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -90,7 +90,7 @@ Antigravityの`accounts logout`は、`--confirm`なしで消去対象と共有�
 
 実行中のClaude、Codex、Grok Build、Antigravity、Cursor、Qoderタスクでアカウントを切り替えると、保存済み会話が選択先のアカウントプロファイルへコピーされます。切り替え先の異なる履歴を置き換える場合は先にアーカイブします。ポリシー上、会話内容をプロファイル間で移してはならない場合は、アカウント切り替えではなく別タスクを使ってください。
 
-CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`でOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを保存できます。キーをコマンド引数やタスクのメッセージへ直接書かないでください。読み取り結果は設定の有無だけです。`settings reset agents.credential.<name>`は設定画面と共通の暗号化ストレージから対象キーを削除します。これらはローカル操作です。CLIへのアクセスはプロバイダーの認証情報を置換・削除できる権限として管理してください。CLIのリクエスト本文は一時ファイルを作らずに渡します。
+CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`でOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを保存できます。キーをコマンド引数やタスクのメッセージへ直接書かないでください。読み取り結果は設定の有無だけです。`settings reset agents.credential.<name>`は設定画面と共通の暗号化ストレージから対象キーを削除します。これらはローカル操作です。CLIへのアクセスはプロバイダーの認証情報を置換・削除できる権限として管理してください。CLIのリクエスト本文は一時ファイルを作らずに渡します。Cockpitのlocal tokenや認証headerなど、CLI内部の認証情報は子processのコマンドライン引数へ含めず、標準入力または短命な一時ファイルで渡します。後者には値ではなく一時ファイルのpathだけを渡し、受け渡し後に削除します。
 
 ## パスワードを一度だけ入力する
 

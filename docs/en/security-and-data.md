@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.101.0 on 2026-10-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -90,7 +90,7 @@ Antigravity `accounts logout` previews every target and shared impact without `-
 
 Switching an active Claude, Codex, Grok Build, Antigravity, Cursor, or Qoder task copies its saved conversation into the selected account profile. When different target history would be replaced, Cockpit archives it first. Use separate tasks instead when policy requires conversation content never to cross profile boundaries.
 
-The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files.
+The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files. Internal credentials such as Cockpit's local tokens and authentication headers are not placed in child-process command-line arguments; the CLI passes them through standard input or a short-lived temporary file. For the latter, only the temporary path appears in the child arguments, and the file is removed after handoff.
 
 ## Enter a password once
 
