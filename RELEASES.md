@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.102.0 — 2026-10-09
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a device filter to view tasks from other PCs in the desktop task list.
 - Added one-time input into a specified browser password field from Desktop and the PWA.
