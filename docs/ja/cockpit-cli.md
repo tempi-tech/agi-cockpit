@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.103.0で2026-10-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -35,6 +35,18 @@ Cockpitから起動したタスクには、正しいローカルインスタン�
 Cockpitから起動したタスクでは、CLIのエラーメッセージがアプリの表示言語に従います。表示言語を変更した場合は、その後に起動するタスクから新しい言語が使われます。自動処理では翻訳された`error`本文ではなく、利用できる場合は安定した`code`で分岐してください。
 
 `--json`はすべてのコマンドで一貫して受け付けます。長い指示、Markdown、引用、バッククォート、`$`を含む内容はシェル引数へ埋め込まず、`--stdin`または`--instruction-file`、`--text-file`を使います。
+
+## Windowsで実行する
+
+PowerShellの`cockpit`ランチャーは、応答をUTF-8として読み取り、成功・失敗ともJSONを一行だけ出力します。HTTPエラーではサーバーのJSON本文と`code`を維持し、JSONではないHTTPエラーには`http_error`、予期しない失敗には`unexpected_error`を付けます。PowerShellのエラー表示を解析せず、ほかのOSと同じくJSONの`ok`、`code`、`error`を確認できます。
+
+`--stdin`はPowerShellのパイプ入力を受け取ります。PowerShellがファイルを文字列へ変換してからCLIへ渡すため、`Get-Content`では文字コードを明示してください。複数の文字列は改行で結合されます。ファイル本文をそのまま渡す必要がある場合は、対応する`--*-file`オプションを使います。空のパイプ入力は`stdin_no_input`で失敗します。
+
+```powershell
+Get-Content report.html -Raw -Encoding UTF8 | cockpit html show --stdin
+```
+
+Windows版CLIの内部処理にNode.jsを別途インストールする必要はありません。ランチャーはAGI Cockpitの実行ファイルをランタイムとして使い、アプリを閉じている場合もインストール済みのMicrosoft Store版を検出できます。`cockpit doctor`の`nodeRuntime`で、実際に使った`path`と`source`を確認できます。利用可能なランタイムがない場合は`node_runtime_unavailable`、ランタイムがJSONを返さない場合は`node_runtime_failed`になります。
 
 ## タスクを起動して監督する
 

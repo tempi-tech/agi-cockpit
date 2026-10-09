@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -26,6 +26,20 @@ Agent types that depend on an external CLI appear on the creation screen only wh
 ## Choose the default agent
 
 Open **Settings → Agents → Common** and choose **Default agent** from the dropdown. This is the agent initially selected when creating a new task; it does not change an existing task's agent. Shared agent settings are grouped under Common, while provider-specific model and account settings remain under each agent.
+
+## Limit the agents in use
+
+Open **Settings → Agents → Common → Agents in use** to turn each of the eight agents on or off. A turned-off agent is removed from new-chat choices on Desktop, Quick Task, and Remote Access, as well as Smart Routing, chat branching, and the agent-switch menu of an open chat. Cockpit does not start that agent's CLI for model discovery or refresh its saved model list in the background.
+
+Chats that already use the agent continue to run and show it as their current agent. At least one installed agent must stay on. If you turn off the default agent, the first installed agent that is still on becomes the new default.
+
+The same setting is available from the CLI as `agents.enabled.<agent>`. It controls creation choices and model discovery; it does not revoke permission to run that agent. An explicit `cockpit task create --agent <agent>` can still start a turned-off agent.
+
+```bash
+cockpit settings set agents.enabled.qoder false
+cockpit settings get agents.enabled.qoder
+cockpit settings reset agents.enabled.qoder
+```
 
 ## Choose with Smart routing
 

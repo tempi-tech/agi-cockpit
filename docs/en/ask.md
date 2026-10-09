@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -17,7 +17,7 @@ Ask lets an AI agent pause its work and hand a confirmation or decision to a per
 
 Ask is more than a notification. The question remains available until it is answered, and a person can respond in the dedicated Desktop Ask window or the right-side-panel Ask tab, from **Inbox** in the PWA, or through a configured Discord or Slack relay.
 
-The PWA **Inbox** combines Asks that need an answer with read-only Display notices. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. Both types let you open the originating task while that task is still available.
+The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A password input request is not an Ask; it delivers a value once to the specified browser field. All three let you open the originating task while that task is still available.
 
 ## How Ask differs from other confirmations
 
@@ -30,6 +30,12 @@ The PWA **Inbox** combines Asks that need an answer with read-only Display notic
 | `cockpit display` | Puts information in front of the person | Does not wait for a response or resume the task |
 
 An Ask answer is not itself permission to operate on the OS or an external service. An action that needs permission can still trigger a separate tool approval after the person confirms the direction through Ask.
+
+## How password input requests differ
+
+A request from `cockpit secret request` appears in a dedicated Desktop window, the right side panel's Ask tab, and the PWA **Inbox**. Its dedicated window follows the Ask-window setting, and the request uses the Ask notification sound and a Normal priority badge. As soon as input completes, fails, is cancelled, or expires, its input surface disappears everywhere. Check the result through `cockpit secret status` or the notification sent to the requesting task.
+
+Sharing presentation does not make it an Ask. It is absent from `cockpit ask list`, cannot be answered with `cockpit ask answer`, and is never sent to Discord or Slack. It also does not fire an `ask.*` Hook or `cockpit.ask.resolved` event and accepts no attachments. Never put a password or another secret in an Ask answer; use the dedicated input request. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for destination and storage boundaries.
 
 ## Question and answer formats
 

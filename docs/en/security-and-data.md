@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -94,11 +94,11 @@ The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API key
 
 ## Enter a password once
 
-When an agent uses `cockpit secret request`, Desktop or an HTTPS-connected PWA can deliver a value once to a specified browser password field. This is separate from an Ask answer. Review the PC, task, purpose, Browser Identity, actual URL, destination, and deadline, then select **Fill this field once**. It does not click a login button or submit the form automatically.
+When an agent uses `cockpit secret request`, you can deliver a value once to a specified browser password field from the dedicated Desktop window and Ask tab, or from the **Inbox** in an HTTPS-connected PWA. The dedicated window follows the Ask-window setting, but this remains separate from an Ask answer. Review the PC, task, purpose, Browser Identity, actual URL, destination, and deadline, then select **Fill this field once**. It does not click a login button or submit the form automatically.
 
 The destination must be a unique, visible, enabled password field in the main frame on HTTPS or loopback HTTP. Changing the page or field after the request causes delivery to fail; Cockpit does not choose another field. Requests expire within ten minutes. PWA submission and cancellation require authenticated HTTPS/WSS and never fall back to an unencrypted connection. The CLI cannot accept or retrieve the value.
 
-Delivery values stay in transient memory and are not saved in Cockpit conversations, Ask answers, CLI results, diagnostic logs, persisted tasks, PWA storage, or Ask forwarding. They are not restored or resent after restart. An unconfirmed delivery is not automatically retried; check its status instead. Cancellation applies only before delivery starts.
+Delivery values stay in transient memory and are not saved in Cockpit conversations, Ask answers, CLI results, diagnostic logs, persisted tasks, PWA storage, or Ask forwarding. They are not restored or resent after restart. An unconfirmed delivery is not automatically retried; check its status instead. Cancellation applies only before delivery starts. When a request completes, fails, is cancelled, or expires, its input surface disappears immediately everywhere and leaves no result on screen. The requester can inspect the result with `cockpit secret status` or the value-free notification sent to its task.
 
 The destination site can retain the value, and tools that read its DOM or evaluate scripts may read it after input. This feature does not guarantee that AI cannot read destination data. Discarding the delivery copy does not clear the site's field. Use trusted PCs, PWA devices, and sites. See the [secure input CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for details.
 

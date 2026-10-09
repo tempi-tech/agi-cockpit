@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -164,7 +164,7 @@ The in-app browser grants site permissions such as notifications, geolocation, a
 
 See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities) for cookie and localStorage isolation, task and Autorun assignment, system-browser session import, clearing, and removal.
 
-When an agent uses `cockpit secret request`, Desktop or an HTTPS-connected PWA receives a request to fill the password field currently shown in the in-app browser once. Review the PC, task, purpose, Identity, actual URL, and field before entering the value yourself. Cockpit fills only that field and does not press Submit. It also never returns the value to the CLI or task. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for destination rules, expiration, storage, and retry boundaries.
+When an agent uses `cockpit secret request`, the dedicated Desktop window and Ask tab, or the **Inbox** in an HTTPS-connected PWA, receive a request to fill the password field currently shown in the in-app browser once. Review the PC, task, purpose, Identity, actual URL, and field before entering the value yourself. Cockpit fills only that field and does not press Submit. It also never returns the value to the CLI or task. The input surface disappears as soon as the request completes, fails, is cancelled, or expires. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for destination rules, expiration, storage, and retry boundaries.
 
 Passkeys can use Touch ID in signed macOS builds and Windows Hello on Windows. On macOS, Cockpit can use only passkeys registered from the in-app browser; it cannot directly use passkeys previously registered in Safari, Chrome, or iCloud Keychain.
 

@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -29,6 +29,20 @@ Every command returns a JSON object. Check `ok`, identifiers, state fields, and 
 For tasks launched by Cockpit, CLI error messages follow the app's display language. After changing the display language, tasks launched afterward use the new language. Automation should branch on a stable `code` when one is available, not on the translated `error` text.
 
 Exit code 7 or `Cannot reach AGI Cockpit` means the app is not reachable through either available local transport, or the installed CLI is too old for the fallback transport. It is not a filesystem-permission error.
+
+Use `--stdin`, `--instruction-file`, or `--text-file` instead of embedding long instructions, Markdown, quotes, backticks, or `$` in a shell argument.
+
+## Run on Windows
+
+The PowerShell `cockpit` launcher decodes responses as UTF-8 and prints exactly one line of JSON for success or failure. An HTTP error preserves the server's JSON body and `code`; a non-JSON HTTP error uses `http_error`, and an unexpected failure uses `unexpected_error`. Scripts can inspect `ok`, `code`, and `error` just as they do on other operating systems instead of parsing a PowerShell error record.
+
+`--stdin` accepts PowerShell pipeline input. PowerShell converts a file to text before the CLI receives it, so specify the encoding with `Get-Content`. Multiple piped strings are joined with line feeds. Use the corresponding `--*-file` option when the exact file text must be preserved. An empty pipeline fails with `stdin_no_input`.
+
+```powershell
+Get-Content report.html -Raw -Encoding UTF8 | cockpit html show --stdin
+```
+
+The Windows CLI does not require a separate Node.js installation for its internal helpers. The launcher uses the AGI Cockpit executable as its runtime and can find the installed Microsoft Store package even while the app is closed. `cockpit doctor` reports the actual `path` and `source` under `nodeRuntime`. If no runtime is available, commands that need one return `node_runtime_unavailable`; a runtime that returns no JSON produces `node_runtime_failed`.
 
 ## Start and supervise tasks
 
