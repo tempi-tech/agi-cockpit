@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.103.0 — 2026-10-10
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added settings to turn individual agents on or off.
 - Added one-time password input requests to dedicated windows, the Ask tab, and the PWA Inbox.
