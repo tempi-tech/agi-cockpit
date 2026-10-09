@@ -10,12 +10,12 @@ English is the primary language for these generated release notes. Download the 
 
 - Added settings to turn individual agents on or off.
 - Added one-time password input requests to dedicated windows, the Ask tab, and the PWA Inbox.
-- Password input requests now disappear immediately when they finish.
+- Changed password input requests to disappear immediately when they finish.
 - Fixed questions and answer buttons moving out of view when attaching images to an Ask in the PWA.
 - Fixed garbled Japanese and other non-ASCII responses in the Windows CLI.
 - Fixed error response handling in the Windows CLI.
 - Fixed PowerShell pipeline input handling in the Windows CLI.
-- The Windows CLI now runs its internal helpers without requiring a separate Node.js installation.
+- Removed the need for a separate Node.js installation to run Windows CLI helpers.
 
 <details>
 <summary>日本語のリリースノート</summary>
