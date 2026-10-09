@@ -4,6 +4,33 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.103.0 — 2026-10-10
+
+**Type:** minor · **Platforms:** macOS
+
+- Added settings to turn individual agents on or off.
+- Added one-time password input requests to dedicated windows, the Ask tab, and the PWA Inbox.
+- Password input requests now disappear immediately when they finish.
+- Fixed questions and answer buttons moving out of view when attaching images to an Ask in the PWA.
+- Fixed garbled Japanese and other non-ASCII responses in the Windows CLI.
+- Fixed error response handling in the Windows CLI.
+- Fixed PowerShell pipeline input handling in the Windows CLI.
+- The Windows CLI now runs its internal helpers without requiring a separate Node.js installation.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 設定でエージェントを個別に有効・無効にできるようになりました
+- パスワードの一度限りの入力依頼を、専用ウィンドウ・Askタブ・PWAの受信箱で確認できるようになりました
+- パスワード入力依頼が完了した際、入力画面がすぐに閉じるようになりました
+- PWAのAskで画像を添付すると質問や回答ボタンが画面外へ移動する問題を修正しました
+- WindowsのCLIで日本語などの応答が文字化けする問題を修正しました
+- WindowsのCLIでエラー応答を正しく取得できるようになりました
+- WindowsのCLIでPowerShellのパイプ入力を正しく受け取れるようになりました
+- WindowsのCLIで、Node.jsを別途インストールせずに内部処理を実行できるようになりました
+
+</details>
+
 ## v4.102.0 — 2026-10-09
 
 **Type:** minor · **Platforms:** macOS, Linux
