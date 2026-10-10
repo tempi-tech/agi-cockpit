@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -19,6 +19,8 @@ Cockpit owns the local OpenCode servers that it starts for Cockpit Agent connect
 From v4.90.0, Cockpit Agent stores its conversation database at `opencode/v1/opencode.db` inside Cockpit's data directory. On first startup, it copies an existing legacy OpenCode database to preserve conversations. That source can include conversations from OpenCode used outside Cockpit. The original database is left unchanged, and subsequent conversations do not sync between the two databases. If compatibility cannot be verified, Cockpit shows an error and stops Cockpit Agent startup.
 
 PWA task search queries and recent searches are stored in the current browser’s localStorage separately for each connected host. They do not sync to other devices. **Clear search** and **Clear history** are separate actions; use both to remove both the current query and history.
+
+An in-progress PWA message body is stored per task in the same browser tab's `sessionStorage`. It is restored across task switches and reloads, but does not synchronize to another device or persist beyond the tab session. Attachments are not part of this draft storage.
 
 Smart routing's on/off state and **Routing policy** are stored in Desktop localStorage separately for each signed-in user ID. They do not sync to another device.
 
@@ -98,7 +100,7 @@ When an agent uses `cockpit secret request`, you can deliver a value once to a s
 
 The destination must be a unique, visible, enabled password field in the main frame on HTTPS or loopback HTTP. Changing the page or field after the request causes delivery to fail; Cockpit does not choose another field. Requests expire within ten minutes. PWA submission and cancellation require authenticated HTTPS/WSS and never fall back to an unencrypted connection. The CLI cannot accept or retrieve the value.
 
-Delivery values stay in transient memory and are not saved in Cockpit conversations, Ask answers, CLI results, diagnostic logs, persisted tasks, PWA storage, or Ask forwarding. They are not restored or resent after restart. An unconfirmed delivery is not automatically retried; check its status instead. Cancellation applies only before delivery starts. When a request completes, fails, is cancelled, or expires, its input surface disappears immediately everywhere and leaves no result on screen. The requester can inspect the result with `cockpit secret status` or the value-free notification sent to its task.
+Delivery values stay in transient memory and are not saved in Cockpit conversations, Ask answers, CLI results, diagnostic logs, persisted tasks, PWA storage, or Ask forwarding. They are not restored or resent after restart. An unconfirmed delivery is not automatically retried; check its status instead. Cancellation applies only before delivery starts. When a request completes, fails, is cancelled, or expires, its input surface disappears immediately everywhere and leaves no result on screen. The requester can inspect the result with `cockpit secret status` or the value-free notification sent to its task. CLI responses identify the selected `instance`; failures return a stable `code` and `error` without including the input value or page content.
 
 The destination site can retain the value, and tools that read its DOM or evaluate scripts may read it after input. This feature does not guarantee that AI cannot read destination data. Discarding the delivery copy does not clear the site's field. Use trusted PCs, PWA devices, and sites. See the [secure input CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for details.
 
@@ -142,7 +144,9 @@ Local `task create` and `task send` can attach files through repeatable `--media
 
 ## Protect Remote Access
 
-When the Desktop device filter displays another PC, it receives task-list metadata from a PC authenticated as the same Tailscale owner, including task names, states, agents, working paths, instruction previews, timestamps, and whether an Ask is pending. This dedicated list connection does not synchronize conversation bodies or attachments and cannot control tasks. Received lists are cleared when the connection drops.
+When the Desktop device filter displays another PC, it receives task-list metadata from a PC authenticated as the same Tailscale owner, including task names, states, agents, working paths, instruction previews, timestamps, and whether an Ask is pending. This dedicated list connection does not synchronize conversation bodies or attachments and does not control tasks. Received lists are cleared when the connection drops.
+
+Opening a remote task from that list creates a separate PWA connection to the other PC's Remote Access page. This connection uses the same authentication boundary as the PWA. After authentication, it can read the conversation and task detail and send messages, Ask answers, stop, and completion actions to the target PC. Confirm the displayed device name, and protect Tailscale devices and paired connections as authority to operate that Cockpit.
 
 Task notifications, full state synchronization, and recent folder lists are sent only to authenticated sync connections. An unpaired connection is closed after two minutes. The PWA keeps the pairing form and entered code while reconnecting, and resends a submitted code if the connection drops before the authentication reply.
 

@@ -2,9 +2,9 @@
 
 # Remote access
 
-Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or operate supported CLI commands from another computer.
+Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or another Desktop and operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -20,7 +20,7 @@ The computer running Cockpit becomes the connection target. The PWA in your brow
 
 The AGI Cockpit process and remote access must remain running on the target computer. If you run Cockpit on several computers, each one remains a separate target with its own tasks and settings.
 
-When Cockpit runs on several PCs under the same Tailscale account, the **Device** filter in the Desktop task list can show read-only summaries from the other PCs. This is not an operating connection like the PWA: it does not synchronize conversations or attachments and cannot open or control a remote task. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#inspect-tasks-on-another-pc) for the workflow.
+When Cockpit runs on several PCs under the same Tailscale account, the **Device** filter in the Desktop task list can show task summaries from the other PCs. Selecting a row opens that device's PWA inside Desktop, where you can read the conversation, send messages, answer Asks, stop the task, or complete it. The list feed and the interactive task detail use separate connections. The task view identifies the target device; confirm it before acting. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#open-and-operate-tasks-on-another-pc) for the workflow.
 
 ## What Tailscale is
 
@@ -101,6 +101,8 @@ The connection is ready when the PWA header shows the target machine name and **
 | Autorun | Create, edit, enable, run now, delete, and review Autoruns |
 
 The PWA is an operating surface for checking progress and decisions from another location. Enable remote access and configure its transport and HTTPS certificate in Desktop. Not every Desktop setting or result view is available in the PWA.
+
+The PWA stores an in-progress message body per task in `sessionStorage`. Switching tasks or reloading the page or an embedded remote-task view in the same browser tab restores the draft. Drafts do not synchronize to another device and are not persistent storage beyond the browser tab session. Sending or clearing a draft removes it, and drafts for tasks that disappear are pruned after the task list has synchronized.
 
 The task panel in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, diff, Cockpit Browser, App Surface, terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a wide screen it appears beside the chat; on a narrow screen it remains a bottom sheet. A wider three-column layout can keep the task navigator visible too. Changing width or orientation preserves the open tab, target, drafts, and scroll positions while the presentation switches. Cockpit Browser shows a still image of a host tab inside the task's assigned Browser Identity, refreshes it every ten seconds while visible, and provides four controls that scroll the host page. Scrolling also changes the host-side position, but the PWA does not activate links, type, or submit forms. See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser#inspect-a-host-tab-from-the-pwa) for scope, limits, and storage boundaries.
 

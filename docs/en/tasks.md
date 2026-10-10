@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -22,13 +22,15 @@ Overview searches across tasks, projects, and agents, including completed work. 
 
 The header's Back and Forward buttons remain available while Overview is open. Navigating to a task from that history closes Overview and opens the task. In the task list, filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each continues independently.
 
-### Inspect tasks on another PC
+### Open and operate tasks on another PC
 
 The **Device** filter in the Desktop task list shows only **This device** by default. Choose **All devices** or one device to inspect task summaries from another PC that uses the same Tailscale account and has Remote Access enabled. Cockpit must also be running on the other PC.
 
-Remote rows show the task name, instruction preview, state, pending Ask, agent, working folder, and time, and follow the current search, sort order, and agent filter. They are read-only: this PC cannot open, answer, approve, complete, or delete those tasks. When a device goes offline, Cockpit clears its received list and shows it as offline instead of leaving stale tasks in place. A device that rejects the connection because it runs an older version or has a different Tailscale owner is shown as unavailable.
+Remote rows show the task name, instruction preview, state, pending Ask, agent, working folder, and time, and follow the current search, sort order, and agent filter. Select a row to open that device's PWA task detail in the Desktop work area. Confirm the displayed device name before reading the conversation, sending a message, answering an Ask, or stopping or completing the task. The remote row itself has no action menu.
 
-Switch back to **This device** to stop discovering and connecting to other PCs and show only local tasks. This feature requires an AGI Labo membership and Tailscale. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#protect-remote-access) for the transmitted summary boundary and [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup.
+An open remote task follows navigation to another task on the same device and Desktop Back and Forward history. If synchronization drops briefly, Cockpit keeps the loaded view for a short reconnection period before replacing it with the offline state. Separate states and recovery actions identify an offline or missing device, a removed task, and an unresponsive destination. A device that rejects the connection because it runs an older version or has a different Tailscale owner is shown as unavailable.
+
+Switch back to **This device** to close an open remote task, stop discovering and connecting to other PCs, and show only local tasks. This feature requires an AGI Labo membership and Tailscale. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#protect-remote-access) for the difference between the list and task-control connections, and [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup.
 
 ## Search, sort, and use menus
 

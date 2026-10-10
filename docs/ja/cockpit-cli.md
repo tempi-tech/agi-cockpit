@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.103.0で2026-10-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.104.0で2026-10-11に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -82,7 +82,7 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 外部リンク、ファイルアップロード、物理端末、秘密入力には追加の安全境界があります。配送済みの入力を確認せず再送すると二重操作になる可能性があります。
 
-`cockpit secret request`は、DesktopまたはHTTPS接続のPWAへ、指定したブラウザーのパスワード欄へ一度だけ入力する依頼を作ります。CLIは目的と入力先を指定し、`status`と`cancel`で状態を扱いますが、値を受け取る引数、標準入力、取得コマンドはありません。値は利用者がCockpitの画面へ入力します。利用条件と境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)、正確な構文は[`cockpit secret`リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/secret)を参照してください。
+`cockpit secret request`は、DesktopまたはHTTPS接続のPWAへ、指定したブラウザーのパスワード欄へ一度だけ入力する依頼を作ります。CLIは目的と入力先を指定し、`status`と`cancel`で状態を扱いますが、値を受け取る引数、標準入力、取得コマンドはありません。値は利用者がCockpitの画面へ入力します。成功と失敗の応答には接続先の`instance`が含まれ、失敗時は固定の`code`と説明用の`error`を返します。自動処理は翻訳される説明文ではなく`code`で分岐し、再送前に`instance`と失敗理由を確認してください。利用条件と境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)、正確なコードと復旧方法は[`cockpit secret`リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/secret)を参照してください。
 
 実践手順は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)、[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 

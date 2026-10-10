@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -71,6 +71,8 @@ The Default/Plan interaction-mode picker and the `/plan` and `/default` actions 
 Desktop's **Send key** setting assigns sending to Enter or Cmd/Ctrl+Enter. Shift+Enter inserts a newline in either mode. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
 
 Each task keeps its own draft text and attachments. If you switch tasks before a send or interrupt result arrives, failed input returns to the originating task's composer, and a delayed Visual Runtime error appears on that task. Restored text is prepended to any newer draft entered for the same task in the meantime.
+
+The PWA stores each task's in-progress message body in `sessionStorage`. In the same browser tab, it restores the draft after switching tasks, reloading the page, or reloading a remote-task view embedded in Desktop. It does not synchronize drafts to another device or persist them beyond the browser tab session. Attachments and queued messages follow their own storage boundaries.
 
 PWA uses the same Follow-up behavior setting and queue as Desktop. In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI, sending only `/compact` from PWA compacts the conversation context.
 

@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -66,7 +66,7 @@ Use `cockpit browser` for web pages and `cockpit app` for an already-running And
 
 External links, uploads, physical devices, and secret input have additional safety boundaries. Do not resend an already delivered action without checking state because it can create a duplicate operation.
 
-`cockpit secret request` asks Desktop or an HTTPS-connected PWA to fill one specified browser password field once. The CLI identifies the purpose and destination and can inspect or cancel the request with `status` and `cancel`, but it has no value argument, value stdin, or retrieval command. The person enters the value in a Cockpit surface. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for the conditions and boundaries and the [`cockpit secret` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for exact syntax.
+`cockpit secret request` asks Desktop or an HTTPS-connected PWA to fill one specified browser password field once. The CLI identifies the purpose and destination and can inspect or cancel the request with `status` and `cancel`, but it has no value argument, value stdin, or retrieval command. The person enters the value in a Cockpit surface. Success and failure responses include the selected `instance`; a failure also returns a stable `code` and descriptive `error`. Automation should branch on `code`, not translated prose, and check both the instance and reason before retrying. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for the conditions and boundaries and the [`cockpit secret` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for exact codes and recovery.
 
 See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities), and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for practical workflows.
 
