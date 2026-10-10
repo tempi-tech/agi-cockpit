@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.104.0 — 2026-10-11
+
+**Type:** minor · **Platforms:** macOS
+
+- Added the ability to open and operate tasks on other devices from the desktop task list.
+- Changed PWA message drafts to survive task switches and page reloads.
+- Fixed Select All in file viewers also selecting the chat or file list.
+- Added distinct failure reasons and connection instance information to the password input request CLI.
+- Fixed app crashes while copying accounts, sessions, and other data.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- デスクトップのタスク一覧から、別のデバイスのタスクを開いて操作できるようになりました
+- PWAでタスクを切り替えたり再読み込みしたりしても、入力中のメッセージを保持するようになりました
+- ファイル表示内の「すべて選択」で、チャットやファイル一覧まで選択される問題を修正しました
+- パスワード入力依頼のCLIで、失敗の理由と接続先のインスタンスを確認できるようになりました
+- アカウントやセッションなどのコピー中にアプリが異常終了する問題を修正しました
+
+</details>
+
 ## v4.103.0 — 2026-10-10
 
 **Type:** minor · **Platforms:** macOS, Linux
