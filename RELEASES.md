@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.104.0 — 2026-10-11
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added the ability to open and operate tasks on other devices from the desktop task list.
 - Changed PWA message drafts to survive task switches and page reloads.
