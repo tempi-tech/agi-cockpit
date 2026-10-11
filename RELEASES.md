@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.105.0 — 2026-10-12
+
+**Type:** minor · **Platforms:** macOS
+
+- Added the ability to read and change Smart Routing settings from the CLI.
+- Added the ability to start tasks from the CLI with Smart Routing automatically choosing the agent and model.
+- Changed PWA Ask text to follow the chat font size setting.
+- Improved wrapping of long choices in PWA Asks.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CLIからSmart Routingの設定を確認・変更できるようになりました
+- CLIからSmart Routingでエージェントやモデルを自動選択してタスクを開始できるようになりました
+- PWAのAskの文字サイズがチャットの文字サイズ設定に従うようになりました
+- PWAのAskで長い選択肢が折り返されるように改善しました
+
+</details>
+
 ## v4.104.0 — 2026-10-11
 
 **Type:** minor · **Platforms:** macOS, Linux
