@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.105.0 — 2026-10-12
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added the ability to read and change Smart Routing settings from the CLI.
 - Added the ability to start tasks from the CLI with Smart Routing automatically choosing the agent and model.
