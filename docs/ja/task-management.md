@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.96.0で2026-10-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.105.0で2026-10-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -34,6 +34,25 @@ cockpit task run --instruction-file instruction.md \
 ```
 
 `create`が成功すると、作成した`taskId`と実際に選ばれたアカウントが返ります。`run`も、タスク作成後に最初のレポート取得がタイムアウトまたは待機エラーになった場合は、`ok: true`と`data.taskId`を保持して返します。この場合、タスクはすでに存在するため同じ指示を再実行せず、返されたIDで`task get`または`task wait`を使ってください。`ok: false`はタスク作成自体の失敗を示します。
+
+## スマートルーティングで作成する
+
+AGIラボ会員としてCockpitへサインインしている場合は、`create`または`run`へ`--smart-routing`を追加すると、登録済みのルーティング方針と指示からエージェント、モデル、推論レベルを自動選択できます。`--directory`と`--project`をどちらも省略すると、新規タスク画面の「自動」と同じ候補から作業場所も選びます。どちらかを指定すると作業場所だけを固定し、その中で実行条件を選びます。作成された外部エージェントのタスクはネイティブUIとAutoアカウントを使います。
+
+```bash
+cockpit task run \
+  --instruction-file instruction.md \
+  --smart-routing
+
+cockpit task create \
+  --instruction "このリポジトリのテスト失敗を調査してください" \
+  --directory /path/to/repo \
+  --smart-routing
+```
+
+候補は、この端末でインストール済みかつオンになっているエージェントと、取得できたモデルに限られます。TerminalとCreative Studioは選びません。`--smart-routing`はエージェント、モデル、推論レベルを選ぶため、これらを固定するオプションやアカウント、UIモード、system prompt、分岐元などとは併用できません。`--worktree`を使う場合は`--directory`または`--project`で作業場所を固定してください。方針とサインインはこの端末に属するため、`--host`には対応しません。
+
+選択前にモデル取得を最大20秒、ルーティングを最大25秒待つ場合があります。選択に失敗した場合は固定のエラー`code`を返し、タスクを作成しません。成功時は`data.smartRouting`とタスク本体のフィールドで、選ばれたエージェント、モデル、推論レベル、必要な場合は作業場所を確認できます。正確な競合オプションとエラーコードは[`cockpit task`リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task#smart-routing)を参照してください。
 
 ## 作成応答が失われた場合
 

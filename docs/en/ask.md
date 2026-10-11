@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -102,6 +102,8 @@ When several dedicated windows are open, higher-priority Asks start in front. An
 Drag the handle in the lower-right corner of a Desktop Ask window to change its width and height. Cockpit saves that size for the next Ask window and constrains it to the screen's working area.
 
 Use **A−** and **A+** in the header to change the text size of questions, choices, descriptions, and input fields. This is the same chat text-size setting exposed under **Settings → Display**, so a change also applies to other Ask windows and the main conversation view.
+
+In the PWA **Inbox**, the Ask summary, questions, choices, descriptions, and the HTML explanation's base text follow that same chat text size. A font size explicitly authored in the HTML remains unchanged. Text inputs keep a 16 px minimum to prevent mobile browser focus zoom. Long choices and unbroken strings wrap inside their answer cards instead of overflowing horizontally.
 
 ## What happens before and after an answer
 

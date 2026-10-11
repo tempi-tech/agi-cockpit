@@ -4,7 +4,7 @@
 
 Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.103.0 on 2026-10-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -45,7 +45,16 @@ cockpit settings reset agents.enabled.qoder
 
 Smart routing is for AGI Labo members. If you select it from Desktop **New task** or Quick Task while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member and enabling it, Cockpit chooses a valid combination from the instruction, configured agents, discovered models and reasoning levels, recent and active project workspaces, the Master workspace, and temporary or persistent workspaces. External agents are created in Native UI with an Auto account. Terminal and Creative Studio are not routed automatically.
 
-Use **Routing policy** for free-form preferences, such as prioritizing Codex for implementation and Claude for research or writing. The policy and on/off state are stored on Desktop for each signed-in user, save automatically, and apply to later tasks. Manually selecting a workspace fixes only the workspace. Turn off Smart routing when you want to choose the agent or model directly.
+Use **Routing policy** for free-form preferences, such as prioritizing Codex for implementation and Claude for research or writing. The policy and on/off state are stored in Cockpit's local data area for each signed-in AGI account, and the new-task screen and local CLI use the same values. They do not sync to another device. Manually selecting a workspace fixes only the workspace. Turn off Smart routing when you want to choose the agent or model directly.
+
+The CLI can read and write `smartRouting.enabled` and `smartRouting.policy`. Pass a multiline policy through `--stdin` or `--file`; the limit is 8,000 characters. While signed out, reads return the defaults and writes or resets return `sign_in_required`. `smartRouting.enabled` controls only the switch on the new-task screen. `cockpit task create|run --smart-routing` routes with the registered policy regardless of that switch.
+
+```bash
+cockpit settings list --section smartRouting
+cat routing-policy.md | cockpit settings set smartRouting.policy --stdin
+cockpit settings set smartRouting.enabled true
+cockpit task run --instruction-file instruction.md --smart-routing
+```
 
 Candidates are limited to current CLI detection, model discovery, and configured Cockpit Agent providers. If a requested candidate is unavailable, check the provider and API key or revise the policy. Smart routing does not silently substitute an unconfigured agent or model.
 

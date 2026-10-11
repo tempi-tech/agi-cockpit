@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -22,7 +22,7 @@ PWA task search queries and recent searches are stored in the current browser’
 
 An in-progress PWA message body is stored per task in the same browser tab's `sessionStorage`. It is restored across task switches and reloads, but does not synchronize to another device or persist beyond the tab session. Attachments are not part of this draft storage.
 
-Smart routing's on/off state and **Routing policy** are stored in Desktop localStorage separately for each signed-in user ID. They do not sync to another device.
+Smart routing's on/off state and **Routing policy** are stored in Cockpit's local data area separately for each AGI account. The new-task screen and local CLI use the same values, and they do not sync to another device.
 
 ## Project folders and agent access
 
@@ -42,7 +42,7 @@ The selected agent, UI mode, model, and tools determine which instructions, conv
 
 Switching a task to another agent can send earlier conversation messages, tool inputs and outputs, file changes, images, and compaction summaries to that agent’s provider. Review the transfer preview before sending the message that applies the switch. Thinking and encrypted reasoning are excluded.
 
-When Smart routing runs, Cockpit sends the task instruction, routing policy, available agents, models and reasoning levels, and each candidate workspace's display name, local path, and kind to the authenticated AGI Backend to select a combination. File and attachment content is not part of the routing request. If the instruction is empty and the task contains only attachments, their file names are sent in place of the instruction. Turn off Smart routing and choose the workspace and runtime settings manually when local paths must not be sent externally.
+When Smart routing runs from the new-task screen or local CLI, Cockpit sends the task instruction, routing policy, available agents, models and reasoning levels, and each candidate workspace's display name, local path, and kind to the authenticated AGI Backend to select a combination. File and attachment content is not part of the routing request. If the instruction is empty and the task contains only attachments, their file names are sent in place of the instruction. Turn off Smart routing and choose the workspace and runtime settings manually when local paths must not be sent externally.
 
 Sites opened in the in-app browser receive normal browser traffic such as input, uploads, cookies, and WebAuthn. Remote Access transfers task, Ask, Autorun, Fleet, Hook, and account information needed by the connected PWA or supported remote CLI command. A remote Hook command can register and execute shell code on the target computer.
 

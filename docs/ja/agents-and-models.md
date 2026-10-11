@@ -4,7 +4,7 @@
 
 8種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.103.0で2026-10-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.105.0で2026-10-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から8種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -45,7 +45,16 @@ cockpit settings reset agents.enabled.qoder
 
 スマートルーティングはAGIラボ会員向けです。未ログインでDesktopの「新しいタスク」またはQuick Taskから選ぶと、機能説明と「会員プランを見る」「会員アカウントでサインイン」が表示されます。会員としてサインインしてオンにすると、Cockpitは指示文、セットアップ済みエージェント、取得できたモデルと推論レベル、最近または現在使っているプロジェクト、Master workspace、一時・永続ワークスペースから有効な組み合わせを選びます。外部エージェントはネイティブUIとAutoアカウントで作成されます。TerminalとCreative Studioは自動選択しません。
 
-「ルーティング方針」には、たとえば実装ではCodex、調査や文章ではClaudeを優先するなど、選択の希望を自由文で指定できます。方針とオン・オフはサインイン中の利用者ごとにDesktopへ保存され、変更は次のタスクから自動的に反映されます。作業場所を手動で選ぶと作業場所だけが固定されます。エージェントやモデルを直接選びたい場合はスマートルーティングをオフにします。
+「ルーティング方針」には、たとえば実装ではCodex、調査や文章ではClaudeを優先するなど、選択の希望を自由文で指定できます。方針とオン・オフはサインイン中のAGIアカウントごとにCockpitのローカルデータ領域へ保存され、新規タスク画面とローカルCLIが同じ値を使います。別端末へは同期しません。作業場所を手動で選ぶと作業場所だけが固定されます。エージェントやモデルを直接選びたい場合はスマートルーティングをオフにします。
+
+CLIでは`smartRouting.enabled`と`smartRouting.policy`を読み書きできます。複数行の方針は`--stdin`または`--file`で渡し、最大8,000文字です。サインアウト中は読み取りが既定値を返し、変更とresetは`sign_in_required`になります。`smartRouting.enabled`は新規タスク画面のスイッチだけを制御し、`cockpit task create|run --smart-routing`はスイッチの状態にかかわらず、登録済みの方針で自動選択します。
+
+```bash
+cockpit settings list --section smartRouting
+cat routing-policy.md | cockpit settings set smartRouting.policy --stdin
+cockpit settings set smartRouting.enabled true
+cockpit task run --instruction-file instruction.md --smart-routing
+```
 
 候補は現在のCLI検出、モデル一覧、Cockpit Agentのプロバイダー設定に限られます。指定した候補が利用できない場合は、プロバイダーとAPIキーを確認するか、方針を修正してください。スマートルーティングは設定されていないエージェントやモデルへ無言で置き換えません。
 

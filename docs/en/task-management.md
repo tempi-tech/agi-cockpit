@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -34,6 +34,25 @@ cockpit task run --instruction-file instruction.md \
 ```
 
 After `create` succeeds, it returns the new `taskId` and the account Cockpit actually selected. If `run` creates the task but times out or encounters a wait error before receiving the first report, it still returns `ok: true` with `data.taskId`. The task already exists in that case, so do not submit the same instruction again; continue with `task get` or `task wait` for the returned id. `ok: false` means task creation itself failed.
+
+## Create with Smart Routing
+
+When Cockpit is signed in with an AGI Labo membership, add `--smart-routing` to `create` or `run` to choose the agent, model, and reasoning effort from the registered routing policy and instruction. If both `--directory` and `--project` are omitted, it also chooses a workspace from the same candidates as **Auto** on the new-task screen. Supplying either option fixes only the workspace while the runtime is chosen. A routed external-agent task uses Native UI and an Auto account.
+
+```bash
+cockpit task run \
+  --instruction-file instruction.md \
+  --smart-routing
+
+cockpit task create \
+  --instruction "Investigate the test failure in this repository" \
+  --directory /path/to/repo \
+  --smart-routing
+```
+
+Candidates are limited to agents that are installed and enabled on this device and to models Cockpit can discover. Terminal and Creative Studio are not selected. Because `--smart-routing` chooses the agent, model, and reasoning effort, it conflicts with options that fix those values, as well as account, UI mode, system prompt, branch source, and related runtime options. When using `--worktree`, first fix the workspace with `--directory` or `--project`. The routing policy and sign-in belong to this device, so `--host` is not supported.
+
+Selection may wait up to 20 seconds for model discovery and up to 25 seconds for the routing service. On failure, the command returns a stable error `code` and creates no task. On success, inspect `data.smartRouting` and the task fields for the selected agent, model, reasoning effort, and workspace when one was selected. See the [`cockpit task` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task#smart-routing) for the exact conflicts and error codes.
 
 ## When the creation response is lost
 
