@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.105.1 — 2026-10-13
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed an issue that prevented Cursor usage from being retrieved.
+- Fixed imported conversations to preserve their original session names.
+- Fixed PWA chat and Ask text to respect the global text size setting.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Cursorの使用量を取得できない問題を修正しました
+- 会話を取り込む際に元のセッション名が保持されるように修正しました
+- PWAのチャットとAskの文字に全体の文字サイズ設定が反映されるように修正しました
+
+</details>
+
 ## v4.105.0 — 2026-10-12
 
 **Type:** minor · **Platforms:** macOS, Linux
