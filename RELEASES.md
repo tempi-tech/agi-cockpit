@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.105.2 — 2026-10-15
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed usage-limit errors appearing after Antigravity had completed its response.
 - Fixed fetching Antigravity usage from its API.
