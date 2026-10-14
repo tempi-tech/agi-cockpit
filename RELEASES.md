@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.105.2 — 2026-10-15
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed usage-limit errors appearing after Antigravity had completed its response.
+- Restored fetching Antigravity usage from its API.
+- Fixed chat input becoming unresponsive after closing confirmation dialogs on Windows.
+- Talk now identifies participants who were not notified because they were not mentioned and explains how to notify them.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Antigravityで応答が完了しているのに利用上限エラーが表示される問題を修正しました
+- Antigravityの使用量をAPIから取得できるように修正しました
+- Windowsで確認ダイアログを閉じた後にチャットへ入力できなくなる問題を修正しました
+- Talkでメンションがないため通知されなかった参加者と、通知する方法が案内されるようになりました
+
+</details>
+
 ## v4.105.1 — 2026-10-13
 
 **Type:** patch · **Platforms:** macOS
