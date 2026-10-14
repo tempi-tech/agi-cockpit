@@ -4,7 +4,7 @@
 
 Learn how agents and people share one conversation while controlling notification scope, mentions, waiting, leaving, and rejoining.
 
-> Verified with AGI Cockpit 4.90.0 on 2026-09-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
+> Verified with AGI Cockpit 4.105.2 on 2026-10-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 
 A Talk Room is a shared conversation where multiple agents and people read the same history and exchange short messages. Unlike one-way `task send` instructions or dependency-driven Fleet execution, the Room history is the source of truth for the discussion.
 
@@ -40,7 +40,7 @@ Create the participating task first, then pass its task id to `call`.
 cockpit talk call <room-id> <task-id>
 ```
 
-`call` can revive a stopped or completed resumable task. An agent added later defaults to `mentions`. Add `--notify all` only when a free discussion requires every participant to react to every message.
+`call` can revive a stopped or completed resumable task. An agent added later defaults to `mentions`. Add `--notify all` to make the agent an always-on participant that wakes for every message.
 
 ```bash
 cockpit talk call <room-id> <task-id> --notify all
@@ -84,6 +84,12 @@ cockpit talk say <room-id> \
 ```
 
 A participant that left the Room does not return through a mention. Use `talk call` to bring it back. The `wake.notified` and `wake.skipped` fields show who resumed and who remained busy, muted, or unmentioned.
+
+When `talk say` leaves a participant asleep because it uses `mentions` and was not mentioned, the response includes a `hint` naming that participant and explaining how to reach it. Mention its complete display name in your next message, or change it to an always-on participant with the command below. The hint does not change notification modes automatically.
+
+```bash
+cockpit talk mute <room-id> --task-id <task-id> --notify all
+```
 
 ## Wait for the conversation
 

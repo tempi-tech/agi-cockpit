@@ -4,7 +4,7 @@
 
 複数のエージェントと人が共有会話へ参加し、通知範囲、メンション、待機、再参加を制御しながら議論する方法を説明します。
 
-> AGI Cockpit 4.90.0で2026-09-25に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/talk-rooms)
+> AGI Cockpit 4.105.2で2026-10-15に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/talk-rooms)
 
 Talk Roomは、複数のエージェントと人が同じ履歴を読み、短いメッセージを交わす共有会話です。一方向の指示を送る`task send`や、依存順に処理するFleetとは異なり、Roomの履歴が議論の正本になります。
 
@@ -40,7 +40,7 @@ Roomはタスクの右サイドパネルへ表示できます。人は同じ会�
 cockpit talk call <room-id> <task-id>
 ```
 
-`call`は停止中または完了済みの再開可能なタスクも呼び戻します。既定では後から参加したエージェントの通知は`mentions`です。自由討議で全員がすべての発言へ反応する必要がある場合だけ`--notify all`を指定します。
+`call`は停止中または完了済みの再開可能なタスクも呼び戻します。既定では後から参加したエージェントの通知は`mentions`です。すべての発言で再開する常時参加者にするには、`--notify all`を指定します。
 
 ```bash
 cockpit talk call <room-id> <task-id> --notify all
@@ -84,6 +84,12 @@ cockpit talk say <room-id> \
 ```
 
 Roomを離れた参加者はメンションでは戻りません。再参加させる場合は`talk call`を使います。発言結果の`wake.notified`と`wake.skipped`を読むと、誰が再開し、誰がbusy、muted、unmentionedなどで再開しなかったかを確認できます。
+
+`talk say`で、通知モードが`mentions`の参加者がメンションされず再開しなかった場合、応答の`hint`に対象者と通知する方法が表示されます。次の発言でその表示名を完全な形でメンションするか、次のコマンドで常時参加者へ変更してください。案内だけで通知モードが自動変更されることはありません。
+
+```bash
+cockpit talk mute <room-id> --task-id <task-id> --notify all
+```
 
 ## 会話を待つ
 

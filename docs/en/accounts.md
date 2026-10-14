@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.93.0 on 2026-09-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.105.2 on 2026-10-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -48,6 +48,8 @@ For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server
 Named Antigravity profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a profile-specific home. On macOS, Cockpit puts a profile-specific Keychain first in the search list and verifies that order before a task starts, preventing fallback to the host Antigravity login and its quota. The OS keyring is shared on Windows and Linux, so a host login stored there still takes precedence for every profile.
 
 ## Check remaining quotas
+
+Antigravity retrieves Gemini model quota percentages and reset times from its API using the effective account credential, without requiring a running Agy session. If no usable API quota is available, Cockpit falls back to a running local Agy session when available, then that home’s usage history. The CLI reports the source in `usage.account.source` and `isolation.quotaSource` as `api`, `local_session`, `history`, or `none`. Check this source together with the credential source and quota scope; API retrieval does not change account isolation or make a shared host login profile-specific.
 
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows its remaining percentage directly below the ring. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again. Cockpit does not invent a percentage for an unknown quota, authentication error, observation-only status row, or the Cockpit Agent balance display.
 
