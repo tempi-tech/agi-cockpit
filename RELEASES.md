@@ -9,9 +9,9 @@ English is the primary language for these generated release notes. Download the 
 **Type:** patch · **Platforms:** macOS
 
 - Fixed usage-limit errors appearing after Antigravity had completed its response.
-- Restored fetching Antigravity usage from its API.
+- Fixed fetching Antigravity usage from its API.
 - Fixed chat input becoming unresponsive after closing confirmation dialogs on Windows.
-- Talk now identifies participants who were not notified because they were not mentioned and explains how to notify them.
+- Improved Talk guidance to identify participants who were not notified without a mention and explain how to notify them.
 
 <details>
 <summary>日本語のリリースノート</summary>
