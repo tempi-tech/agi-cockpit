@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.106.0 — 2026-10-16
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Auto approval mode for Claude, Codex, and Grok in Native UI, letting each agent review its own actions.
 - Added child task stop reasons to task lists on desktop and mobile.
