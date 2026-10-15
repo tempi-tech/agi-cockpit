@@ -9,8 +9,8 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added Auto approval mode for Claude, Codex, and Grok in Native UI, letting each agent review its own actions.
-- Task lists on desktop and mobile now show why a child task stopped.
-- Parent tasks now receive notifications when child tasks enter or leave approval waiting.
+- Added child task stop reasons to task lists on desktop and mobile.
+- Added parent task notifications when child tasks enter or leave approval waiting.
 
 <details>
 <summary>日本語のリリースノート</summary>
