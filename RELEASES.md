@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.106.0 — 2026-10-16
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Auto approval mode for Claude, Codex, and Grok in Native UI, letting each agent review its own actions.
+- Task lists on desktop and mobile now show why a child task stopped.
+- Parent tasks now receive notifications when child tasks enter or leave approval waiting.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Claude・Codex・GrokのネイティブUIに、エージェント自身が操作を審査する「自動審査」承認モードを追加しました。
+- 子タスクが停止した理由をデスクトップとモバイルのタスク一覧で確認できるようになりました。
+- 子タスクの承認待ちと解除を親タスクへ通知するようになりました。
+
+</details>
+
 ## v4.105.2 — 2026-10-15
 
 **Type:** patch · **Platforms:** macOS, Linux

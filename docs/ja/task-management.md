@@ -77,7 +77,9 @@ cockpit task create \
 
 CodexのネイティブUIでは`--service-tier standard|fast|ultrafast`を指定できます。`fast`と`ultrafast`は、選択したモデルがそのtierを提示する場合だけ有効です。
 
-`--approval-mode`には`supervised`、`accept-edits`、`full-access`を指定できます。Cockpit AgentとネイティブUIのエージェントで、そのタスクだけの既定値を上書きします。ターミナルUIとTerminalタスクは対応しません。
+`--approval-mode`には`supervised`、`accept-edits`、`auto`、`full-access`を指定できます。Cockpit AgentとネイティブUIのエージェントで、そのタスクだけの既定値を上書きします。ターミナルUIとTerminalタスクは対応しません。
+
+`auto`（自動審査）はClaude、Codex、GrokのネイティブUIで利用でき、エージェント自身がコマンドや編集を審査します。通常の操作を許可し、危険な操作を止めるか、人の承認へ回します。質問やAskには回答しません。ほかのエージェントは`auto`を受け付けません。Claudeでは変更が即時に、Codexでは次のターンから適用されます。Grokは待機中のセッションを再起動して会話を保持しますが、処理中や承認・質問待ちの変更は拒否します。ClaudeやCodexでモデル・アカウント・組織の制約により自動審査が使えない場合は、実際のモードを表示してチャットで通知します。Grokの実行モードは読み戻せないため、この確認の対象外です。フルアクセスへ自動的に切り替わることはありません。
 
 ```bash
 cockpit task create \

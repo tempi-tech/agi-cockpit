@@ -153,6 +153,8 @@ Antigravity named profiles use browser-based Google OAuth and keep conversations
 
 `supervised` asks for approval when a tool action requires it, `accept-edits` permits supported editing operations, and `full-access` permits a broader range of actions. Exact support depends on the agent and UI mode.
 
+`auto` (Auto) is available in Native UI for Claude, Codex, and Grok. The agent’s own reviewer evaluates commands and edits, allows routine actions, and blocks risky actions or sends them for human approval. It never answers questions or Asks. Other agents reject `auto`. Changes apply immediately for Claude and from the next turn for Codex. Grok restarts its idle session while preserving the conversation; changes are rejected while work or a pending request remains. If model, account, or organization restrictions prevent Claude or Codex from using Auto, Cockpit displays the effective mode and posts a chat notice. Grok’s runtime mode cannot be read back, so that check does not cover Grok. Cockpit never automatically falls back to full access.
+
 Antigravity native UI cannot ask an approval question while it runs, so `supervised` automatically rejects tools that require approval. Choose `accept-edits` or `full-access` for work that needs editing or commands only after checking the objective and risk. An Ask answer does not change the approval mode.
 
 ## Resume, usage, and Goals
