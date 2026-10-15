@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.106.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -96,6 +96,8 @@ A Git worktree isolates changes in another checkout, but the same branch cannot 
 | Error (`error`) | Startup or execution could not begin | Read the reason in task details |
 
 Awaiting confirmation distinguishes `turn_complete`, `permission`, `question`, `terminal_prompt`, `runtime_error`, `usage_limit`, `idle_timeout`, and `unknown`. `turn_complete` means one response ended; it does not mean the whole task is complete.
+
+Desktop and PWA task lists and child-task panels show why a task stopped: **Waiting for approval**, **Turn ended · task remains open**, **Usage limit reached**, **Waiting for an answer**, **Waiting for terminal input**, **Runtime error**, or **Stop reason unknown**. A session ID alone does not prove that a turn ended. Resolving the last approval request clears the approval label; other pending requests remain. An unanswered Ask is tracked separately from approval waiting.
 
 `needsResume` is not another state. It means an unfinished task lost its runtime process and must reconnect to a saved session.
 

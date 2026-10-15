@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.106.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -138,7 +138,7 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `--parent` returns the named parent and its direct children; add `--recursive` for every descendant. Completed tasks are excluded by default. Add `--all` to include them, or `--status completed` to select only completed tasks. `--directory` and `--name` further filter the result. Recursive traversal still passes through a parent hidden by a filter. An unknown parent returns `task_not_found`, and `--recursive` without `--parent` is invalid.
 
-A parent query always uses the lightweight summary form. Add `--summary` to an ordinary list for the same fields: `id`, `name`, `status`, `hasPendingAsk`, `parentMasterId`, `directory`, `projectId`, `agentType`, and creation and update times. `projectId` is `null` outside every project. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
+A parent query always uses the lightweight summary form. Add `--summary` to an ordinary list for the same fields: `id`, `name`, `status`, `stopReason`, `hasPendingAsk`, `parentMasterId`, `directory`, `projectId`, `agentType`, and creation and update times. `projectId` is `null` outside every project. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
 
 | Field | Decision |
 | --- | --- |
@@ -150,6 +150,8 @@ A parent query always uses the lightweight summary form. Add `--summary` to an o
 | `needsResume: true` | The process stopped and the same task can be resumed |
 
 If `waitingReason` is `permission` or `question`, an agent-side confirmation is still active. Do not layer another instruction while `readyForNextPrompt` is false. For `usage_limit`, inspect available accounts and the reset time.
+
+Full and summary `task list`, `task get`, and the task snapshot in `task wait` return the same `stopReason`: `approval`, `turn_ended`, `usage_limit`, `question`, `terminal_prompt`, `runtime_error`, or `unknown`. It is `null` while running or after completion. `turn_ended` means one turn ended, not that the whole task completed. Without reliable evidence the value is `unknown`; a session ID alone is insufficient. `hasPendingAsk` is independent of approvals.
 
 ## Retry a task that failed to start
 
@@ -199,6 +201,12 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 ```
 
 `timeout: true` does not mean the task failed. Inspect current state when needed, then continue from the same `--since`. Use `task wait` for continued monitoring instead of repeatedly polling `task get` at short intervals.
+
+A child entering or leaving approval waiting also appends a report with `approvalEvent: approval_waiting` or `approval_resolved` and queues a notification for its parent. A busy parent receives it when ready for another turn; completed or missing parents are not resumed. Repeated writes of the same state do not duplicate the notification. Ordinary result reports still need to be collected by the parent.
+
+`approval_resolved` means the wait ended, not that approval was granted or work succeeded. It also covers interruption, errors, usage limits, and completion. Multiple approval requests keep the child waiting until the last one is resolved. Notifications never approve a request or change permissions, model selection, or the parent's pending agent switch.
+
+After an `approvalEvent`, keep waiting for the result with `task wait --since <seq>` using that notice's sequence. An exit notice into error or completion retains the previous nonterminal status; the ordinary result report carries the actual error or completion output. Use `task get` for current state. Fleet automatically skips approval notices and continues waiting for results.
 
 ## Send a follow-up
 

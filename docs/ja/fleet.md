@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.102.0で2026-10-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.106.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -179,7 +179,11 @@ Fleet定義、file selector、`--directory`は接続先コンピューター上�
 
 一つのRunでClaudeに設計、Codexに実装、Grokに調査を割り当てられます。ただし、エージェントが対応しない設定をノードへ直接書くと検証に失敗します。`defaults`または`*`から広く継承された非対応設定だけは、そのノードから除外されます。
 
+`approval`は`supervised`、`accept-edits`、`auto`、`full-access`を指定できます。`auto`（自動審査）はClaude、Codex、GrokのネイティブUIで利用できます。非対応エージェントのノードへ直接指定すると検証エラーになります。`defaults`や`*.approval`から継承した`auto`は、承認モードに対応する他のエージェントでは`supervised`になり、承認モード自体に非対応なら除外されます。[エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)で自動審査の境界も確認してください。
+
 `max_parallel`はグラフの幅ではなく、同時にアクティブにできるノード数です。既定値は4、範囲は1〜32です。マシンの容量と利用できるエージェントアカウント数に合わせます。
+
+子タスクの承認待ちと解除の通知は、ノード完了や成果として扱いません。Fleetは通知の後も通常の成果レポートを待ち続けます。承認要求そのものは、タスク詳細で内容を確認して判断してください。
 
 ## 結果を後続へ渡す
 

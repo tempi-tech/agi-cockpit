@@ -4,7 +4,7 @@
 
 Run actions in response to task completion, Asks, and hotkeys, and learn how to configure Hooks and inspect their run history.
 
-> Verified with AGI Cockpit 4.97.0 on 2026-10-02. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/hooks)
+> Verified with AGI Cockpit 4.106.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/hooks)
 
 Hooks automatically run a registered action when something happens in Cockpit, such as a task completing or an Ask being created. Each Hook saves a rule: when this event happens, run this action. A hotkey can also trigger a Hook.
 
@@ -73,6 +73,8 @@ cockpit hooks add --event task.completed \
 ```
 
 Use `--run` for a short command and `--run-file` for a maintained script. When several filters are present, an event must match all of them. Scripts receive event data as JSON on standard input and through environment variables such as `COCKPIT_TASK_ID`.
+
+The event's `task.stopReason` uses the same values as the task list: `approval`, `turn_ended`, `usage_limit`, `question`, `terminal_prompt`, `runtime_error`, or `unknown`; it is `null` while running or after completion. For example, `--event task.waiting --filter task.stopReason=approval` selects approval waits. The task included in Ask events carries the same field. This filters state; it does not grant approval.
 
 ## Settings and run history
 

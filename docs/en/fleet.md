@@ -4,7 +4,7 @@
 
 Learn how to define dependency-aware multi-agent work in Fleet YAML, supervise its live graph, and recover safely from interruption or failure.
 
-> Verified with AGI Cockpit 4.102.0 on 2026-10-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
+> Verified with AGI Cockpit 4.106.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 
 Fleet defines multiple AI agents, command-based verification, and human approval as a dependency graph in YAML, then executes that graph as one Run. Each agent node is a normal Cockpit task. Cockpit manages execution order, parallelism, waiting, recovery, and history.
 
@@ -179,7 +179,11 @@ Agent nodes can select `agent`, `model`, `effort`, `account`, `browser_identity`
 
 One Run can assign design to Claude, implementation to Codex, and research to Grok. A setting written directly on a node fails validation when that agent does not support it. An unsupported setting inherited broadly from `defaults` or `*` is dropped only for that node.
 
+`approval` accepts `supervised`, `accept-edits`, `auto`, or `full-access`. `auto` uses native automatic review for Claude, Codex, and Grok. Setting it directly on an unsupported agent node fails validation. Inherited `auto` from `defaults` or `*.approval` becomes `supervised` for other agents that support approval modes; it is dropped when approval modes themselves are unsupported. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models) for Auto's boundaries.
+
 `max_parallel` is the number of nodes that may be active at once, not the width of the graph. It defaults to 4 and accepts 1 through 32. Set it according to the machine and the number of usable agent accounts.
+
+Child approval-waiting and approval-resolved notices do not complete a node or count as its result. Fleet continues waiting for the ordinary result report. Inspect and decide on the actual approval request in task details.
 
 ## Pass results downstream
 

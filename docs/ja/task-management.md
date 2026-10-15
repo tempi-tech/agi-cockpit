@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.105.0で2026-10-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.106.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -138,7 +138,7 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `--parent`は指定した親自身と直接の子を、`--recursive`を加えるとすべての子孫を返します。完了済みは既定で除外されるため、含める場合は`--all`、完了済みだけなら`--status completed`を指定します。`--directory`と`--name`でさらに絞り込めます。絞り込みで親が非表示でも、再帰探索はその階層を通過します。存在しない親は`task_not_found`、`--parent`のない`--recursive`は入力エラーです。
 
-親指定の一覧は常に軽量summaryです。通常の一覧も`--summary`で同じ形式になり、`id`、`name`、`status`、`hasPendingAsk`、`parentMasterId`、`directory`、`projectId`、`agentType`、作成・更新時刻だけを返します。どのプロジェクトにも属さない場合、`projectId`は`null`です。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
+親指定の一覧は常に軽量summaryです。通常の一覧も`--summary`で同じ形式になり、`id`、`name`、`status`、`stopReason`、`hasPendingAsk`、`parentMasterId`、`directory`、`projectId`、`agentType`、作成・更新時刻だけを返します。どのプロジェクトにも属さない場合、`projectId`は`null`です。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
 
 | フィールド | 判断 |
 | --- | --- |
@@ -150,6 +150,8 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 | `needsResume: true` | プロセスが止まっているため、同じタスクを再開できる |
 
 `waitingReason`が`permission`または`question`なら、エージェント内の確認が続いています。`readyForNextPrompt`がfalseの間に別の指示を重ねません。`usage_limit`なら利用できるアカウントとリセット時刻を確認します。
+
+通常・summaryの`task list`、`task get`、`task wait`のタスクsnapshotは、共通の`stopReason`を返します。値は`approval`、`turn_ended`、`usage_limit`、`question`、`terminal_prompt`、`runtime_error`、`unknown`です。実行中・完了後は`null`です。`turn_ended`はタスク全体の完了ではなく、1ターンの終了を示します。確かな記録がなければ`unknown`になり、セッションIDだけでは終了と判断しません。`hasPendingAsk`は承認要求とは独立しています。
 
 ## 起動に失敗したタスクを再試行する
 
@@ -199,6 +201,12 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 ```
 
 `timeout: true`はタスク失敗ではありません。現在状態を必要に応じて確認し、同じ`--since`から待機を続けます。短い間隔で`task get`を繰り返す代わりに、継続監視には`task wait`を使います。
+
+子タスクの承認待ち開始と解除も、`approvalEvent: approval_waiting`または`approval_resolved`のレポートを追加し、親タスクの永続キューへ通知します。親が実行中なら次の入力が可能になったときに届け、完了済み・存在しない親は再開しません。同じ状態の再保存では重複通知しません。通常の成果レポートは引き続き親が取得します。
+
+`approval_resolved`は待機の解除を示し、承認された、成功した、という意味ではありません。中断、エラー、利用上限、完了による解除も含みます。複数の承認要求があれば最後の1件が解消するまで承認待ちが続きます。通知は要求を自動承認せず、権限やモデル、親のエージェント切替予約も変更しません。
+
+`approvalEvent`を受け取ったら成果として扱わず、その`seq`を指定した`task wait --since <seq>`で待機を続けます。エラー・完了へ移る際の解除通知は直前の非終端状態を保持し、実際のエラー・完了内容は通常レポートが返します。現在の状態は`task get`で確認します。Fleetは承認通知を自動で読み飛ばして成果を待ち続けます。
 
 ## 追加指示を送る
 
