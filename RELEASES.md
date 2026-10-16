@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.107.0 — 2026-10-16
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Muse Code as an agent for running tasks in Native UI and Terminal UI.
+- Added Muse Code sign-in and Meta API key authentication.
+- Added model selection for Muse Code.
+- Added usage information for Muse Code.
+- Made desktop and mobile task lists more compact.
+- Fixed clipped sidebar tooltips.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Muse Code をエージェントとして選び、ネイティブUIとターミナルUIでタスクを実行できるようになりました。
+- Muse Code のログインと Meta API キー認証に対応しました。
+- Muse Code のモデルを選べるようになりました。
+- Muse Code の使用量を確認できるようになりました。
+- デスクトップとモバイルのタスク一覧をコンパクトにしました。
+- サイドバーのツールチップが見切れる問題を修正しました。
+
+</details>
+
 ## v4.106.0 — 2026-10-16
 
 **Type:** minor · **Platforms:** macOS, Linux
