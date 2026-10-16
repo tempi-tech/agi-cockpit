@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.108.0 — 2026-10-17
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a Muse Code setting to show Contributor models in model menus.
 - Fixed Contributor mode switching to match the selected Muse Code model.
