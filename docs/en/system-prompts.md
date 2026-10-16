@@ -4,7 +4,7 @@
 
 Understand the built-in Cockpit, Claude Code, Cowork, and Codex presets, plus custom prompt append and replace modes, selection, and safe operation.
 
-> Verified with AGI Cockpit 4.63.0 on 2026-08-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/system-prompts)
+> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/system-prompts)
 
 A system prompt gives an agent its role, decision criteria, output policy, and working rules before the task-specific instruction. AGI Cockpit lets you register reusable custom prompts and select them for new tasks and Autoruns alongside Cockpit's standard prompt.
 
@@ -74,7 +74,7 @@ cockpit task create --instruction "Review this change" --directory /path/to/repo
 cockpit autorun create --name "Daily review" --instruction "Review recent changes" --directory /path/to/repo --agent-type codex --ui-mode visual --system-prompt reviewer --type cron --expression "0 9 * * *"
 ```
 
-New tasks support system prompts in the native UI for Claude, Codex, Qoder, and Cockpit. Cursor, Grok Build, Antigravity, Terminal, and terminal UI modes do not support selection. If the control is not shown, that agent and execution surface do not support it.
+New tasks support system prompts in the native UI for Claude, Codex, Qoder, and Cockpit. Cursor, Grok Build, Muse Code, Antigravity, Terminal, and terminal UI modes do not support selection. If the control is not shown, that agent and execution surface do not support it.
 
 An Autorun stores the selected prompt name in its runtime snapshot. If that prompt is removed or no longer supports the agent, a resumed task reports that it returned to the standard prompt, and an Autorun may require its settings to be reviewed.
 

@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -26,7 +26,7 @@ Smart routing's on/off state and **Routing policy** are stored in Cockpit's loca
 
 ## Project folders and agent access
 
-A project can contain multiple folders. When an agent session starts or resumes, Cockpit passes the project’s other folders to the agent according to that agent’s supported access options. Adding a folder can therefore expand the files the agent can read or write; review the folder list before reconnecting a task. Approval mode and agent-specific restrictions still apply. A Git Worktree replaces only its source folder; other project folders are used in place. See the [project CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for agent-specific behavior.
+A project can contain multiple folders. When an agent session starts or resumes, Cockpit passes the project’s other folders to the agent according to that agent’s supported access options. Adding a folder can therefore expand the files the agent can read or write; review the folder list before reconnecting a task. Approval mode and agent-specific restrictions still apply. Muse Code Native UI receives current additional workspace roots on every turn, so project folder changes apply from the next message; its terminal UI receives no extra folders. A Git Worktree replaces only its source folder; other project folders are used in place. See the [project CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project) for agent-specific behavior.
 
 Deleting a project removes its grouping only: tasks and folders remain. A task folder registered in a project is preserved when its task is completed or deleted.
 
@@ -54,6 +54,8 @@ The PWA Skills view sends an authenticated client the project and global skills 
 
 Enabling a Discord or Slack relay under **Settings → Ask notifications** sends the Ask summary, questions, choices, task name, a link back to Cockpit, and optional Ask images or videos to the selected channel. Members who can read that channel can see the post, but Cockpit accepts an answer only from the single configured `allowedUserId`. Relays are off by default and make outbound connections from Cockpit to the Discord Gateway or Slack Socket Mode.
 
+Muse Code contributor models (IDs ending in `-contributor`) may allow Meta to use content for product improvement under Muse Code's terms. With a model catalog, Cockpit chooses a non-contributor default unless you explicitly select a contributor model. When no non-contributor candidate is available, Muse Code's own default applies. A one-line notice appears where a contributor model starts or changes; it scrolls with the conversation and is not repeated while that model remains selected, including on resume. Cockpit does not change Muse Code's contributor settings.
+
 ## Anonymous data in guest use
 
 Packaged guest use sends a random installation ID, app version, a daily session check, and onboarding events for steps reached, abandonment, guest selection, and sign-in to AGI Backend. Task instructions, conversations, file content, and project names are not included in these anonymous events.
@@ -65,6 +67,8 @@ An onboarding abandonment event that could not be sent is kept temporarily in th
 `supervised`, `accept-edits`, `auto`, and `full-access` define the boundary of agent tool operations. When one-time approval, always allow, or deny is offered, inspect the operation, path, command, and external destination. “Always allow” affects later operations of the same kind, so prefer one-time approval when the scope is unclear.
 
 `auto` (Auto) is available in Native UI for Claude, Codex, and Grok. The agent’s own reviewer evaluates commands and edits, allows routine actions, and blocks risky actions or sends them for human approval. It never answers questions or Asks. Other agents reject `auto`. Changes apply immediately for Claude and from the next turn for Codex. Grok restarts its idle session while preserving the conversation; changes are rejected while work or a pending request remains. If model, account, or organization restrictions prevent Claude or Codex from using Auto, Cockpit displays the effective mode and posts a chat notice. Grok’s runtime mode cannot be read back, so that check does not cover Grok. Cockpit never automatically falls back to full access.
+
+Muse Code Native UI supports only `accept-edits` (default) and `full-access`. Workspace edits never ask for approval, so `supervised` and `auto` are unavailable. In `accept-edits`, a person approves commands and actions not already permitted by Muse Code's rules. Denying rejects the call and lets the turn continue. `full-access` also disables Muse Code's shell sandbox and approves remaining prompts. One approval covers every stage of the displayed shell command. **Always allow** uses the narrowest persistent rule Muse Code offers, or a session rule when no persistent rule is offered.
 
 Ask returns a human policy decision; it is not a tool approval. Choosing “publish” in an Ask does not automatically grant permissions required by the operating system, an external service, or another tool.
 
@@ -88,13 +92,15 @@ Settings can disable or remove a hook, but removing it leaves existing run histo
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord bot token and Slack bot and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
 
+Muse Code keeps one shared login per computer (Keychain on macOS); Cockpit does not isolate Muse Code profiles. In **Muse Code login** mode, Cockpit removes an inherited `META_API_KEY` before launching native or terminal UI. Terminal UI still runs inside your login shell, so startup files can export a key again. In **Meta API key** mode, Cockpit passes the encrypted key saved as `agents.credential.meta`; it is not an AGI Labo credential. Use `agents.museAuthMode` (`muse-login` or `api-key`) to select the method. Reads expose only whether the key is set.
+
 Named agent profiles isolate authentication. Antigravity keeps conversations, logs, cache, and usage history under a profile-specific home. On macOS, each profile stores its OAuth token in a dedicated Keychain, and Cockpit verifies that Keychain is first in the search order before starting a task. The host login Keychain remains later in the list for tools such as GitHub CLI, but Antigravity resolves the profile Keychain placeholder or token first. On Windows and Linux, the OS keyring itself is shared, so its host login is used by every profile. To rely on separate profile token files there, first log the default account out of the shared login.
 
 Antigravity `accounts logout` previews every target and shared impact without `--confirm`. Running it for a named profile never removes the host login; when that profile uses shared authentication, the result points to the default-account logout instead. Logging out the default can also affect other profiles, ordinary terminal-launched Agy processes, and Gemini CLI authentication under the same home. Cockpit never logs an account out automatically. Browser Identities remain separate from agent account profiles.
 
 Switching an active Claude, Codex, Grok Build, Antigravity, Cursor, or Qoder task copies its saved conversation into the selected account profile. When different target history would be replaced, Cockpit archives it first. Use separate tasks instead when policy requires conversation content never to cross profile boundaries.
 
-The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, and Anthropic API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files. Internal credentials such as Cockpit's local tokens and authentication headers are not placed in child-process command-line arguments; the CLI passes them through standard input or a short-lived temporary file. For the latter, only the temporary path appears in the child arguments, and the file is removed after handoff.
+The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, Anthropic, and Meta API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files. Internal credentials such as Cockpit's local tokens and authentication headers are not placed in child-process command-line arguments; the CLI passes them through standard input or a short-lived temporary file. For the latter, only the temporary path appears in the child arguments, and the file is removed after handoff.
 
 ## Enter a password once
 

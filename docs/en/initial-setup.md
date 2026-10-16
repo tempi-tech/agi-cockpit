@@ -4,13 +4,13 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.99.0 on 2026-10-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
 ## 1. Check an agent
 
-Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, and Qoder CLI. It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One available agent is enough to continue.
+Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, Qoder CLI, and Muse Code (macOS/Linux). It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One available agent is enough to continue.
 
 If Cockpit cannot find the agent you want, select **Install**. Cockpit Agent and Terminal do not require an external CLI.
 
@@ -27,6 +27,8 @@ This updates each agent's user-level skill directory and the applicable user-lev
 An AI agent's plan and authentication are separate from AGI Cockpit's local features and AGI Labo sign-in. Obtain an eligible plan from the provider and sign in to that provider account for Claude Code, Codex, or another selected agent.
 
 If a Claude Code, Codex, or Grok Build Native UI task starts before authentication, task details shows sign-in guidance and retries the first instruction after authentication. Terminal UI and Terminal do not provide this retry flow; complete the CLI sign-in inside the terminal, then resume or recreate the task.
+
+For Muse Code, open **Settings → Agents → Muse Code → Authentication**. Choose **Muse Code login** and **Sign in to Muse Code** to run `muse login` in a terminal, or choose **Meta API key** and save your key. API-key mode cannot start tasks until a key is saved. After authentication, reload models and choose Native UI or terminal UI. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models) for defaults and permission limits.
 
 ## 4. Choose how to use Cockpit
 

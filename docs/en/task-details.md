@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -15,7 +15,7 @@ Task details is where you understand a piece of work selected from the [Task lis
 - **Interrupt current turn** stops current processing and switches to the instruction you entered.
 - **Resume** reconnects an unfinished task to its saved session after its process stopped, such as after an app restart.
 
-A Terminal task cannot restore its previous shell process, so resume starts a new shell in the same directory. Native UI for Cursor, Qoder, and Grok Build reconnects to its supported saved conversation.
+A Terminal task cannot restore its previous shell process, so resume starts a new shell in the same directory. Native UI for Cursor, Qoder, Grok Build, and Muse Code reconnects to its supported saved conversation.
 
 After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
 
@@ -27,7 +27,7 @@ Stopping a turn, completing or removing a task, or quitting the app also stops d
 
 The **Follow-up behavior** setting under Appearance chooses whether an ordinary follow-up sent during a reply waits in the **Queue** or **Steers** the current reply. Queue is the default. When it does not conflict with the configured send or steer shortcut, Cmd/Ctrl+Enter uses the opposite behavior for that one message.
 
-In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
+In Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
 
 Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
 
@@ -43,7 +43,7 @@ Use `cockpit settings get shortcuts.followUpBehavior` to read the current defaul
 
 The Desktop task header shows the task's project. Open its folder control to see the working folder and the other project folders given to the current agent session. A folder added since the session started is marked **Not given to this session yet**; a removed folder can remain available to that session until it restarts. Missing folders are identified separately.
 
-Project-folder changes apply when the agent next starts or resumes a session. For a supported Native UI task, `cockpit task reconnect <id>` restarts the agent in place with the project's current folders while preserving its conversation. Moving a task to another project also moves its child tasks, but the new folders are not applied to the already-running session until that next start.
+Except for Muse Code Native UI, which updates additional workspace roots every turn, project-folder changes apply when the agent next starts or resumes a session. For a supported Native UI task, `cockpit task reconnect <id>` restarts the agent in place with the project's current folders while preserving its conversation. Moving a task to another project also moves its child tasks, but the new folders are not applied to the already-running session until that next start.
 
 
 ## Confirm the execution account
@@ -57,6 +57,8 @@ Account switching preserves the active conversation for Codex, Grok Build, Curso
 If no account is available, usage cannot be checked, or switching or resume fails, the task stops with `waiting_confirmation` and `usage_limit`. When a reset time is known, Cockpit re-evaluates usage after that time and resumes the task if capacity has recovered. If the account remains exhausted, usage cannot be confirmed, or authentication has expired, the task shows the reason and recovery action. Switch accounts or sign in again before retrying.
 
 Usage indicators keep an exhausted allowance visible as 0% remaining. An unavailable value is not treated as 0% remaining. In the PWA, tap a usage ring to open details. The details stay within the screen, and long content can scroll. Tap the ring again or tap outside the details to close them. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) to identify the account affected by a limit.
+
+Muse Code has no account switching. Its native conversations resume from the saved Muse Code session; terminal tasks reopen their recorded session with `muse resume`. In Native UI, project folder changes apply on the next message because Muse Code receives additional workspace roots each turn. Its terminal UI receives no extra project folders.
 
 ## Switch agents with conversation history
 
@@ -74,7 +76,7 @@ Each task keeps its own draft text and attachments. If you switch tasks before a
 
 The PWA stores each task's in-progress message body in `sessionStorage`. In the same browser tab, it restores the draft after switching tasks, reloading the page, or reloading a remote-task view embedded in Desktop. It does not synchronize drafts to another device or persist them beyond the browser tab session. Attachments and queued messages follow their own storage boundaries.
 
-PWA uses the same Follow-up behavior setting and queue as Desktop. In Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build Native UI, sending only `/compact` from PWA compacts the conversation context.
+PWA uses the same Follow-up behavior setting and queue as Desktop. In Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code Native UI, sending only `/compact` from PWA compacts the conversation context.
 
 ## Compact or reset the conversation context
 
@@ -108,7 +110,7 @@ Selecting an OS notification for a completed response, confirmation request, usa
 
 ## Pin an answer and return to it
 
-In Cockpit agent tasks and Native UI tasks for Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build, hover over an assistant answer and choose **Pin answer**. Open **Pinned answers** above the conversation to jump back to a saved answer or unpin it. Desktop and the PWA show the same task's pins; the PWA pinned-answers bar lets you return to marked answers. Pins survive reopening the task and restarting Cockpit.
+In Cockpit agent tasks and Native UI tasks for Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code, hover over an assistant answer and choose **Pin answer**. Open **Pinned answers** above the conversation to jump back to a saved answer or unpin it. Desktop and the PWA show the same task's pins; the PWA pinned-answers bar lets you return to marked answers. Pins survive reopening the task and restarting Cockpit.
 
 User messages, tool calls, and Terminal UI output cannot be pinned. In Native UI, one turn is treated as one answer, including output that continued after an approval. Selecting an older answer that is not loaded yet loads the required history. If history is reset, cleared, or compacted and an answer is no longer available, its pin is not a jump target; remove the stale pin instead. Deleting the task also deletes its pins.
 

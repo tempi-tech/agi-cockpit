@@ -4,9 +4,12 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.105.2で2026-10-15に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.107.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
+
+
+Muse CodeはPC共通の一つのログイン（macOSではKeychain）、または設定の「エージェント → Muse Code」に保存したMeta APIキーを使います。名前付きプロファイル、Auto、アカウント切り替えには対応せず、設定フォルダを変えてもログインを分離できません。認証方法と使用量の鮮度の制約は[エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)を参照してください。
 
 ## デフォルトと名前付きプロファイルを区別する
 

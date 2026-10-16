@@ -4,9 +4,12 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.105.2 on 2026-10-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
+
+
+Muse Code uses one shared login per computer (Keychain on macOS) or a Meta API key saved under **Settings → Agents → Muse Code**. It has no named profiles, Auto, or account switching. Changing configuration folders does not isolate its logins. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models) for authentication and the freshness limits of its reported usage.
 
 ## Understand default and named profiles
 

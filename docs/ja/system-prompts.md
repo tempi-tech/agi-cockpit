@@ -4,7 +4,7 @@
 
 Cockpit、Claude Code、Cowork、Codexなどの組み込みプリセットと、カスタム指示のappend・replace、登録、選択、安全な運用を説明します。
 
-> AGI Cockpit 4.63.0で2026-08-29に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/system-prompts)
+> AGI Cockpit 4.107.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/system-prompts)
 
 システムプロンプトは、個別タスクの依頼より前に、エージェントの役割、判断基準、出力方針、作業規則を与える指示です。AGI Cockpitの標準プロンプトに加えて、用途別のカスタムプロンプトを登録し、新しいタスクやAutorunで選択できます。
 
@@ -74,7 +74,7 @@ cockpit task create --instruction "この変更をレビューして" --director
 cockpit autorun create --name "Daily review" --instruction "最近の変更をレビューして" --directory /path/to/repo --agent-type codex --ui-mode visual --system-prompt reviewer --type cron --expression "0 9 * * *"
 ```
 
-新規タスクで選べるのはClaude、Codex、Qoder、CockpitのネイティブUIです。Cursor、Grok Build、Antigravity、Terminalと、各エージェントのターミナルUIでは選択できません。画面に選択欄が表示されない場合、そのエージェントと実行面では利用できません。
+新規タスクで選べるのはClaude、Codex、Qoder、CockpitのネイティブUIです。Cursor、Grok Build、Muse Code、Antigravity、Terminalと、各エージェントのターミナルUIでは選択できません。画面に選択欄が表示されない場合、そのエージェントと実行面では利用できません。
 
 Autorunは保存時のシステムプロンプト名をランタイム設定として保持します。プロンプトを削除したり対応条件が変わったりした場合、既存タスクの再開では標準プロンプトへ戻したことが表示され、Autorunは設定の再確認が必要になる場合があります。
 

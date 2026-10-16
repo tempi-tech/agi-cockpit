@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.105.0で2026-10-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.107.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -25,6 +25,8 @@ PWAの入力途中のメッセージ本文はタスクごとに同じブラウ�
 スマートルーティングのオン・オフと「ルーティング方針」は、Cockpitのローカルデータ領域へAGIアカウントごとに保存します。新規タスク画面とローカルCLIは同じ値を使い、別端末へは同期しません。
 
 ## プロジェクトのフォルダとエージェントのアクセス
+
+Muse CodeのネイティブUIは各ターンで追加workspace rootを受け取るため、フォルダ変更は次のメッセージから反映します。ターミナルUIには追加フォルダを渡しません。
 
 プロジェクトには複数のフォルダを登録できます。エージェントのセッションを開始・再開すると、Cockpitは各エージェントが対応する方法でプロジェクト内の追加フォルダを渡します。フォルダの追加により、エージェントが読み書きできるファイルが増える場合があるため、タスクの再接続前にフォルダ一覧を確認してください。承認モードとエージェント固有の制限は引き続き適用されます。Git Worktreeが置き換えるのは元のフォルダだけで、他のプロジェクトフォルダは元の場所で使用します。エージェントごとの動作は[project CLIリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/project)を参照してください。
 
@@ -54,6 +56,8 @@ PWAのスキル表示は、タスクの作業場所からホストが検出し�
 
 「設定」→「Ask通知」でDiscordまたはSlackへの転送を有効にすると、Askの概要、質問、選択肢、タスク名、Cockpitへのlinkと、許可した場合はAskの画像・動画を、選択したチャンネルへ送ります。チャンネルを閲覧できるメンバーは投稿内容を読めますが、Cockpitが回答を受け付けるのは設定した一人の`allowedUserId`だけです。転送は既定で無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 
+Muse Codeのcontributorモデル（ID末尾が`-contributor`）では、Muse Codeの利用条件に基づき、Metaが内容を製品改善に使う場合があります。モデル一覧があるとき、Cockpitはcontributorを明示的に選ばない限り、それ以外の既定モデルを選びます。contributor以外の候補がないときはMuse Code自身の既定設定を使います。contributorモデルの開始・切り替え位置に一行の通知を表示しますが、会話とともにスクロールし、同じモデルの利用中は再開時も繰り返しません。CockpitはMuse Codeのcontributor設定を変更しません。
+
 ## ゲスト利用時の匿名データ
 
 パッケージ版のゲスト利用では、ランダムなinstallation ID、アプリバージョン、1日単位のセッション確認、オンボーディングの到達・離脱・ゲスト選択・サインインのイベントと対象ステップをAGI Backendへ送ります。タスクの指示、会話、ファイル内容、プロジェクト名はこの匿名イベントに含めません。
@@ -65,6 +69,8 @@ PWAのスキル表示は、タスクの作業場所からホストが検出し�
 `supervised`、`accept-edits`、`auto`、`full-access`は、エージェントが利用できるツール操作の境界です。一回許可、常に許可、拒否が表示される場合は、操作内容、対象パス、コマンド、外部送信先を確認します。「常に許可」は同種操作へ継続して影響するため、範囲を理解できない場合は一回許可を選びます。
 
 `auto`（自動審査）はClaude、Codex、GrokのネイティブUIで利用でき、エージェント自身がコマンドや編集を審査します。通常の操作を許可し、危険な操作を止めるか、人の承認へ回します。質問やAskには回答しません。ほかのエージェントは`auto`を受け付けません。Claudeでは変更が即時に、Codexでは次のターンから適用されます。Grokは待機中のセッションを再起動して会話を保持しますが、処理中や承認・質問待ちの変更は拒否します。ClaudeやCodexでモデル・アカウント・組織の制約により自動審査が使えない場合は、実際のモードを表示してチャットで通知します。Grokの実行モードは読み戻せないため、この確認の対象外です。フルアクセスへ自動的に切り替わることはありません。
+
+Muse CodeのネイティブUIは`accept-edits`（既定）と`full-access`だけに対応します。workspace内の編集では承認を求めないため、`supervised`と`auto`は使えません。`accept-edits`ではMuse Codeのルールが許可していないコマンドや操作を人が承認します。拒否するとその呼び出しを拒否してターンを続けます。`full-access`はシェルのサンドボックスも無効にし、残りの確認を承認します。一回の承認は表示されたシェルコマンドの全段階に適用します。「常に許可」はMuse Codeが提供する最も狭い永続ルールを使い、永続ルールがなければセッション内のルールを使います。
 
 Askは人の方針判断を返す仕組みであり、ツール承認ではありません。Askで「公開する」を選んでも、OS、外部サービス、別のツールが要求する権限を自動的に付与しません。
 
@@ -88,13 +94,15 @@ Cockpit Hooksは、登録したシェルアクションを利用者のローカ�
 
 AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど暗号化ストレージへ保存します。DiscordのBot tokenとSlackのBot token・App-level tokenもこの境界に含まれ、通常の設定値やstatus出力へ値を返しません。安全なストレージを利用できない場合、平文へ切り替えず保存を拒否します。削除に失敗した認証情報は利用を停止し、次回起動時に削除を再試行します。
 
+Muse CodeのログインはPC共通の一か所（macOSではKeychain）に保存され、Cockpitのプロファイルでは分離しません。「Muse Code ログイン」方式では、ネイティブUI・ターミナルUIの起動前に継承した`META_API_KEY`を取り除きます。ただしターミナルUIはログインシェル内で動くため、起動ファイルが再びキーをexportする場合があります。「Meta API キー」方式では`agents.credential.meta`に暗号化保存したキーを渡します。これはAGI Laboの認証情報とは別です。CLIの`agents.museAuthMode`（`muse-login`または`api-key`）で方式を選びます。キーの読み取り結果は設定の有無だけです。
+
 名前付きエージェントプロファイルは認証を分離します。Antigravityは会話、ログ、キャッシュ、利用履歴をプロファイル専用homeへ保存します。macOSでは各プロファイルのOAuth tokenを専用Keychainへ保存し、そのKeychainが検索順の先頭であることをタスク開始前に確認します。ホストのlogin KeychainはGitHub CLIなどのため後段に残りますが、Antigravityの項目はprofile Keychainのplaceholderまたはtokenが先に解決します。WindowsとLinuxではOS keyring自体が共有されるため、host loginが全profileで使われます。profileごとのtoken fileへ分離したい場合は、先にdefaultアカウントから共有loginをlogoutします。
 
 Antigravityの`accounts logout`は、`--confirm`なしで消去対象と共有範囲をpreviewします。名前付きprofileから実行してもhost loginは消さず、共有認証を使っている場合はdefaultアカウント側のlogoutを案内します。defaultのlogoutは、そのhost認証に依存するほかのprofile、通常のterminalで起動したAgy、同じhomeのGemini CLI認証にも影響し得ます。Cockpitが自動でlogoutすることはありません。Browser Identityはエージェントのアカウントプロファイルとは別です。
 
 実行中のClaude、Codex、Grok Build、Antigravity、Cursor、Qoderタスクでアカウントを切り替えると、保存済み会話が選択先のアカウントプロファイルへコピーされます。切り替え先の異なる履歴を置き換える場合は先にアーカイブします。ポリシー上、会話内容をプロファイル間で移してはならない場合は、アカウント切り替えではなく別タスクを使ってください。
 
-CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`でOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを保存できます。キーをコマンド引数やタスクのメッセージへ直接書かないでください。読み取り結果は設定の有無だけです。`settings reset agents.credential.<name>`は設定画面と共通の暗号化ストレージから対象キーを削除します。これらはローカル操作です。CLIへのアクセスはプロバイダーの認証情報を置換・削除できる権限として管理してください。CLIのリクエスト本文は一時ファイルを作らずに渡します。Cockpitのlocal tokenや認証headerなど、CLI内部の認証情報は子processのコマンドライン引数へ含めず、標準入力または短命な一時ファイルで渡します。後者には値ではなく一時ファイルのpathだけを渡し、受け渡し後に削除します。
+CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-file`でOpenRouter、OpenCode Go、OpenCode Zen、Anthropic、MetaのAPIキーを保存できます。キーをコマンド引数やタスクのメッセージへ直接書かないでください。読み取り結果は設定の有無だけです。`settings reset agents.credential.<name>`は設定画面と共通の暗号化ストレージから対象キーを削除します。これらはローカル操作です。CLIへのアクセスはプロバイダーの認証情報を置換・削除できる権限として管理してください。CLIのリクエスト本文は一時ファイルを作らずに渡します。Cockpitのlocal tokenや認証headerなど、CLI内部の認証情報は子processのコマンドライン引数へ含めず、標準入力または短命な一時ファイルで渡します。後者には値ではなく一時ファイルのpathだけを渡し、受け渡し後に削除します。
 
 ## パスワードを一度だけ入力する
 

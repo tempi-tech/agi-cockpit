@@ -2,11 +2,11 @@
 
 # Agents and models
 
-Compare eight agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
+Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
-AGI Cockpit lets you choose from eight agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
+AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
 ## Choose an agent
 
@@ -18,6 +18,7 @@ AGI Cockpit lets you choose from eight agents on the same task creation surface.
 | Cursor | Cursor native conversation and terminal mode with dynamically retrieved models |
 | Qoder | Qoder native conversation and terminal mode, system prompts, and turn-limited Goals |
 | Grok Build | Grok Build native conversation and terminal mode with resume of active workflows |
+| Muse Code | Meta's Muse Code native conversation and terminal mode on macOS and Linux, with models and reasoning levels retrieved from Muse Code |
 | Terminal | An arbitrary shell command in a terminal |
 | Cockpit | Supported OpenRouter, OpenCode Go, OpenCode Zen, and LM Studio models in Cockpit's native UI |
 
@@ -29,7 +30,7 @@ Open **Settings → Agents → Common** and choose **Default agent** from the dr
 
 ## Limit the agents in use
 
-Open **Settings → Agents → Common → Agents in use** to turn each of the eight agents on or off. A turned-off agent is removed from new-chat choices on Desktop, Quick Task, and Remote Access, as well as Smart Routing, chat branching, and the agent-switch menu of an open chat. Cockpit does not start that agent's CLI for model discovery or refresh its saved model list in the background.
+Open **Settings → Agents → Common → Agents in use** to turn each of the nine agents on or off. A turned-off agent is removed from new-chat choices on Desktop, Quick Task, and Remote Access, as well as Smart Routing, chat branching, and the agent-switch menu of an open chat. Cockpit does not start that agent's CLI for model discovery or refresh its saved model list in the background.
 
 Chats that already use the agent continue to run and show it as their current agent. At least one installed agent must stay on. If you turn off the default agent, the first installed agent that is still on becomes the new default.
 
@@ -62,7 +63,7 @@ Candidates are limited to current CLI detection, model discovery, and configured
 
 Native UI lets Cockpit display conversation, tool execution, usage, model, and approval state as structured data. Terminal UI operates the selected CLI directly in a PTY. Their internal and CLI values are `visual` and `terminal`.
 
-Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build support both modes. Terminal supports terminal mode only, and Cockpit supports native UI only. Changing defaults does not migrate the mode of an existing task.
+Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code support both modes. Terminal supports terminal mode only, and Cockpit supports native UI only. Changing defaults does not migrate the mode of an existing task.
 
 On Windows, the Antigravity and Grok Build launch-command fields under **Agents** accept a full executable path that contains spaces. Cockpit accepts the path quoted, prefixed with PowerShell's `&`, or unquoted when that executable exists. Working and additional project folders passed to Antigravity also remain one argument each when their paths contain spaces. Launch behavior on macOS and Linux is unchanged.
 
@@ -72,11 +73,11 @@ In Antigravity Native UI, a failed tool item remains marked as failed, but the t
 
 Every task starts in one working folder. When the task belongs to a project with more folders, Cockpit passes the current folder list to the agent each time its session starts or resumes. Direct multi-folder access depends on the agent and UI mode: supported Native UI and terminal UI combinations receive access arguments or runtime permissions, while some combinations receive only a note containing the paths. Terminal tasks do not receive project-folder access. Codex terminal UI in full-access mode is not given the other paths.
 
-Adding or removing a project folder does not silently change a session that is already running. Check the task header for the folder set that session received, then reconnect or resume when the new set must apply. See the [project CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project#folders-a-task-can-use) for the current agent-by-agent behavior.
+Muse Code Native UI receives current additional workspace roots on every turn, so folder changes apply from the next message; its terminal UI receives no extra folders. For other agents, adding or removing a project folder does not silently change a session that is already running. Check the task header for the folder set that session received, then reconnect or resume when the new set must apply. See the [project CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/project#folders-a-task-can-use) for the current agent-by-agent behavior.
 
 ## Models and reasoning settings
 
-Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. The model picker groups candidates under agent tabs and opens on the agent currently used by the task. In task details, choosing a model under another supported agent schedules an agent switch for the next message. Even before a Native UI conversation has any messages, the picker shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. The CLI and API reject an unverified setting instead of silently substituting another value.
+Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. The model picker groups candidates under agent tabs and opens on the agent currently used by the task. In task details, choosing a model under another supported agent schedules an agent switch for the next message. Even before a Native UI conversation has any messages, the picker shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. Validation depends on the agent; Muse Code also accepts unlisted model IDs as described below.
 
 Antigravity Native UI keeps the reasoning level selected for that task after a turn completes and after switching tasks. For example, the next follow-up after a `high` turn remains `high` even when the refreshed candidate list defaults to `low`. Cockpit moves to the current supported default only when the refreshed candidates no longer offer the saved level.
 
@@ -111,11 +112,11 @@ cockpit system-prompt add reviewer --prompt "Review changes for correctness and 
 cockpit system-prompt list
 ```
 
-Custom prompts are stored as user-owned Markdown in the AGI Tools data area. Their content is sent to the selected agent, so do not include credentials or secrets. Cursor, Grok Build, Antigravity, Terminal, and terminal UI modes do not accept them.
+Custom prompts are stored as user-owned Markdown in the AGI Tools data area. Their content is sent to the selected agent, so do not include credentials or secrets. Cursor, Grok Build, Muse Code, Antigravity, Terminal, and terminal UI modes do not accept them.
 
 ### Check agent CLI versions and update status
 
-Under **Settings → Updates**, **Agent CLIs** shows the installed version, latest version Cockpit could check, and update status for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build. **Check** fetches the current status instead of reusing the saved result. When an update can be run, **Update CLI** opens a terminal that runs that CLI's update command on this device. Cockpit omits the update action when the installed CLI is already current and reports the state as unknown when it cannot obtain or compare the versions.
+Under **Settings → Updates**, **Agent CLIs** shows the installed version, latest version Cockpit could check, and update status for Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code. **Check** fetches the current status instead of reusing the saved result. When an update can be run, **Update CLI** opens a terminal that runs that CLI's update command on this device. Cockpit omits the update action when the installed CLI is already current and reports the state as unknown when it cannot obtain or compare the versions.
 
 From the CLI, `cockpit setup agent status <agent>` reads the command, installed version, available latest version, `updateAvailable`, and changelog URL. `updateAvailable` is `true` when an update exists, `false` when the installed version is current or newer, and `null` when the versions cannot be compared. This command is read-only and never updates the agent CLI.
 
@@ -123,9 +124,15 @@ From the CLI, `cockpit setup agent status <agent>` reads the command, installed 
 
 Model controls in agent settings, new tasks, and Autoruns show where the list came from, retrieval status, and when it was fetched. After a failed or timed-out CLI lookup, use **Show reason** when available, then **Reload models** to try again. Built-in candidates or another fetched list may appear as an unconfirmed fallback, but that does not guarantee that your installed CLI or selected account can use them. Codex keeps authoritative catalogs separated by account and never treats fallback candidates as fetched for the selected account. An existing task also adds its saved selection to the fallback.
 
+Cockpit has no built-in Muse Code model list. It retrieves the catalog with `model/list` through a connection that opens no session and disables writes and shell commands. Models and reasoning levels appear after authentication. Muse Code's server reads a cached catalog. After sign-in, when you reload models, or when the catalog is built-in or older than 12 hours, Cockpit briefly starts Muse Code's terminal app hidden in an empty temporary folder to refresh it. No prompt is sent and no model is called. A failed refresh keeps Muse Code's available list and retries after 10 minutes.
+
+Without a chosen model, Native UI uses the catalog's non-contributor default. Only when the list has no non-contributor candidate does Muse Code's own default apply. Selecting a contributor model explicitly shows a one-line data-use notice when it takes effect; Muse Code manages its contributor settings and terms.
+
+`cockpit task create --agent muse --ui-mode visual --model <id>` and `cockpit task model <id> --model <model-id>` accept an unlisted Muse Code model ID. Cockpit passes it through and posts a notice; Muse Code reports an error on the next message if it cannot serve it. Unlisted models use Muse Code's default reasoning level and `task model` rejects an explicit `--effort` for them. For a listed model, an unsupported level falls back to that model's default; a model without levels runs without an effort. Muse Code has no service-tier selector, custom system-prompt selector, Goal, or external-session import.
+
 When discovering Grok Build models, Cockpit does not start the Grok CLI or open a sign-in page if discovery would require interactive authentication. While signed out, it shows built-in candidates and guidance to sign in from Settings for the current catalog. If an expired access token has a usable refresh token, model discovery also uses known or built-in candidates instead of starting a refresh. The Grok CLI refreshes the token when an actual task starts.
 
-If a model is missing or the CLI is outdated, review the installed and available CLI versions in the notice. Desktop offers **Update CLI**, which opens a terminal for that agent’s update command. After a successful update, reload the models. In the PWA, copy the displayed command and run it on the computer hosting Cockpit; the PWA does not run the CLI update. Except for unlisted Codex models, if the CLI is already current, choose another available model. If its latest version is unknown, check whether a newer CLI release adds the model.
+If a model is missing or the CLI is outdated, review the installed and available CLI versions in the notice. Desktop offers **Update CLI**, which opens a terminal for that agent’s update command. After a successful update, reload the models. In the PWA, copy the displayed command and run it on the computer hosting Cockpit; the PWA does not run the CLI update. Except for unlisted Codex and Muse Code models, if the CLI is already current, choose another available model. If its latest version is unknown, check whether a newer CLI release adds the model.
 
 When switching agents, the model-list status uses previously retrieved information for the selected agent and account when available. In the PWA task creation dialog, look below the agent and model controls for the model-list source, retrieval status, and related notices.
 
@@ -147,6 +154,8 @@ When you choose Auto or a fixed account at task creation, Cockpit saves that sel
 
 An invalid credential appears as **Session expired** and `authState: expired`; Auto and the Fleet pre-run check exclude it. An expired Grok Build access token with a refresh token remains selectable with `authState: ok` and is renewed when the next task starts. Signing in again clears the cached verdict and refreshes authentication and usage state.
 
+Muse Code has no named profiles. Muse Code keeps one login per computer — on macOS in a single Keychain item — so separate configuration folders cannot keep two Muse Code logins apart, and Cockpit does not offer Auto or account switching for it. Choose the sign-in method under **Settings → Agents → Muse Code**: **Muse Code login** (the default) uses the account signed in with `muse login`, which the settings page can open in a terminal; **Meta API key** passes a key that Cockpit stores encrypted (`agents.credential.meta`). With Muse Code login, Cockpit does not pass a `META_API_KEY` inherited from its own environment to the native UI. The terminal UI runs inside your login shell, so a `META_API_KEY` exported by shell startup files can still reach Muse Code there.
+
 Antigravity named profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a dedicated home. On macOS, a profile-specific Keychain forms the authentication and quota boundary, and the task does not start if Cockpit cannot verify it first in the search order. The OS keyring is shared on Windows and Linux, so a remaining host login takes precedence over profile token files. Developer shell resources and non-credential settings remain shared with the normal home directory. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) for provenance and safe logout procedures.
 
 ## Approval modes
@@ -155,17 +164,19 @@ Antigravity named profiles use browser-based Google OAuth and keep conversations
 
 `auto` (Auto) is available in Native UI for Claude, Codex, and Grok. The agent’s own reviewer evaluates commands and edits, allows routine actions, and blocks risky actions or sends them for human approval. It never answers questions or Asks. Other agents reject `auto`. Changes apply immediately for Claude and from the next turn for Codex. Grok restarts its idle session while preserving the conversation; changes are rejected while work or a pending request remains. If model, account, or organization restrictions prevent Claude or Codex from using Auto, Cockpit displays the effective mode and posts a chat notice. Grok’s runtime mode cannot be read back, so that check does not cover Grok. Cockpit never automatically falls back to full access.
 
+Muse Code native UI offers only `accept-edits` (the default) and `full-access`. Muse Code never asks before editing files inside the workspace, so Cockpit does not present a `supervised` mode it could not enforce. With `accept-edits`, Muse Code asks you — not an AI reviewer — before commands and other actions its rules do not already allow; **Deny** rejects that call and Muse Code continues the turn. `full-access` additionally turns off Muse Code's shell sandbox and approves its remaining prompts.
+
 Antigravity native UI cannot ask an approval question while it runs, so `supervised` automatically rejects tools that require approval. Choose `accept-edits` or `full-access` for work that needs editing or commands only after checking the objective and risk. An Ask answer does not change the approval mode.
 
 ## Resume, usage, and Goals
 
-Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, and Grok Build also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress. When an Antigravity Native UI continuation scheduled by a timer or similar condition survives a restart, Cockpit synchronizes it from the saved transcript into its original turn instead of displaying a duplicate new turn.
+Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, Grok Build, and Muse Code also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress. Muse Code terminal tasks record the session they start and reopen it with `muse resume`. When an Antigravity Native UI continuation scheduled by a timer or similar condition survives a restart, Cockpit synchronizes it from the saved transcript into its original turn instead of displaying a duplicate new turn.
 
-Provider quota usage and limits appear only when the runtime reports current values. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
+Provider quota usage and limits appear only when the runtime reports current values. Muse Code has no remaining-quota query; it reports its five-hour and weekly usage only while it answers. Cockpit shows the newest report from a Muse Code native-UI conversation with the time it was received, marks it stale after 15 minutes, and does not show a window once its reset time has passed. A report is shown only while Muse Code uses the account or API key it came from. A pay-as-you-go Muse Code account has no such windows, so none appear. Conversations in Muse Code's terminal app or in a terminal-mode task are not counted. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
 
 For Claude, Desktop and the CLI can show the unused limit-reset count and expiration dates. Desktop, the PWA, and the CLI can show this month's extra-usage spend and monthly limit. Both appear only when Claude reports them and are separate from regular quota windows. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts#check-remaining-quotas) for omission rules and CLI fields.
 
-The Desktop and PWA new-task screens also follow the selected Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, or Cockpit agent when showing supported allowances. A fixed account shows that profile; Auto shows the account selected by the same logic used for task creation. Changing the agent or account changes the preview. Terminal has no provider-usage display.
+The Desktop and PWA new-task screens also follow the selected Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, Muse Code, or Cockpit agent when showing supported allowances. A fixed account shows that profile; Auto shows the account selected by the same logic used for task creation. Changing the agent or account changes the preview. Terminal has no provider-usage display.
 
 Context usage follows a separate display contract. If Cursor Native UI does not report token usage, Cockpit estimates the current context from the locally retained conversation and prefixes the value with `~`. The maximum comes from the runtime when available, then from maintained metadata for the selected Cursor model. When neither source has a context length, the maximum is shown as unavailable and no percentage is calculated. If the retained history exceeds the model window, Cockpit caps the displayed active-context estimate at that window and leaves the meter neutral because runtime compaction or history truncation may have reduced the actual active context. These estimates are not provider quota or billing values.
 
