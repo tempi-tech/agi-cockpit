@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.108.0 on 2026-10-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -28,6 +28,8 @@ Stopping a turn, completing or removing a task, or quitting the app also stops d
 The **Follow-up behavior** setting under Appearance chooses whether an ordinary follow-up sent during a reply waits in the **Queue** or **Steers** the current reply. Queue is the default. When it does not conflict with the configured send or steer shortcut, Cmd/Ctrl+Enter uses the opposite behavior for that one message.
 
 In Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
+
+In Muse Code Native UI on Desktop and the PWA, once Muse Code reports that its reply is complete and only background checks remain, the composer returns to Send and hides the processing indicator. You can send the next message while those checks continue. This does not mean all background work has finished; switching between standard and Contributor models, `/compact`, and `/clear` still require the current work to finish.
 
 Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
 

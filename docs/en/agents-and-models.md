@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.108.0 on 2026-10-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -126,7 +126,7 @@ Model controls in agent settings, new tasks, and Autoruns show where the list ca
 
 Cockpit has no built-in Muse Code model list. It retrieves the catalog with `model/list` through a connection that opens no session and disables writes and shell commands. Models and reasoning levels appear after authentication. Muse Code's server reads a cached catalog. After sign-in, when you reload models, or when the catalog is built-in or older than 12 hours, Cockpit briefly starts Muse Code's terminal app hidden in an empty temporary folder to refresh it. No prompt is sent and no model is called. A failed refresh keeps Muse Code's available list and retries after 10 minutes.
 
-Contributor models are hidden from model menus by default. Enable **Settings → Agents → Muse Code → Show Contributor models**, or run `cockpit settings set agents.museContributorModelsEnabled true`, to show them. This setting does not change the selected model. Without a chosen model, Native UI uses the catalog's non-contributor default. Native UI enables Contributor mode for a session only when you explicitly select a Contributor model. Conversations and code may be used for training under Muse Code's terms; a one-line data-use notice appears in the conversation when the model takes effect.
+Contributor models are hidden from model menus by default. Enable **Settings → Agents → Muse Code → Show Contributor models**, or run `cockpit settings set agents.museContributorModelsEnabled true`, to show them. This setting does not change the selected model. Without a chosen model, Native UI uses the catalog's non-contributor default. Native UI enables Contributor mode for a session only when you explicitly select a Contributor model. Wait for Muse Code to finish its current work before switching between standard and Contributor models, including any background checks after a reply. Conversations and code may be used for training under Muse Code's terms; a one-line data-use notice appears in the conversation when the model takes effect.
 
 `cockpit task create --agent muse --ui-mode visual --model <id>` and `cockpit task model <id> --model <model-id>` accept an unlisted Muse Code model ID. Cockpit passes it through and posts a notice; Muse Code reports an error on the next message if it cannot serve it. Unlisted models use Muse Code's default reasoning level and `task model` rejects an explicit `--effort` for them. For a listed model, an unsupported level falls back to that model's default; a model without levels runs without an effort. Muse Code has no service-tier selector, custom system-prompt selector, Goal, or external-session import.
 
