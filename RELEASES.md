@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.108.0 — 2026-10-17
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a Muse Code setting to show Contributor models in model menus.
+- Fixed Contributor mode switching to match the selected Muse Code model.
+- You can now send another message after Muse Code responds while background checks continue.
+- Fixed a processing indicator that could remain after Muse Code compacted a conversation.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Muse Code の設定で、Contributor モデルを一覧に表示するか選べるようになりました。
+- Muse Code で選択したモデルに合わせて Contributor モードが切り替わるよう修正しました。
+- Muse Code の応答後、バックグラウンドの確認中でも次のメッセージを送れるようになりました。
+- Muse Code の会話圧縮後に、処理中の表示が残る問題を修正しました。
+
+</details>
+
 ## v4.107.0 — 2026-10-16
 
 **Type:** minor · **Platforms:** macOS, Linux

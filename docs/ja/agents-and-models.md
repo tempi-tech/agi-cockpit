@@ -126,7 +126,7 @@ CLIの`cockpit setup agent status <agent>`でもコマンド、インストー�
 
 CockpitにはMuse Code用の組み込みモデル一覧がありません。セッションを開かず、書き込みとシェル実行を無効にした接続の`model/list`で一覧を取得し、認証後にモデルと推論レベルを表示します。Muse Codeのサーバーはキャッシュ済み一覧を読みます。ログイン後、一覧の再読み込み時、一覧がMuse Codeの組み込み候補のとき、またはキャッシュが12時間を超えたときは、Cockpitが空の一時フォルダでMuse Codeのターミナルアプリを短時間、非表示で起動して更新します。プロンプトは送らず、モデルも呼び出しません。更新に失敗すると利用可能な一覧を保ち、10分後に再試行します。
 
-モデル未指定のネイティブUIは、一覧のcontributor以外の既定モデルで開始します。contributor以外の候補がないときだけMuse Code自身の既定設定を使います。contributorモデルを明示的に選ぶと、適用時にデータ利用について一行の通知を表示します。contributor設定と利用条件はMuse Codeが管理します。
+Contributorモデルは既定でモデル一覧に表示されません。**設定 → エージェント → Muse Code → Contributor モデルを表示**、または `cockpit settings set agents.museContributorModelsEnabled true` で表示できます。この設定は選択済みのモデルを変更しません。モデル未指定のネイティブUIは、一覧のcontributor以外の既定モデルで開始します。ネイティブUIでは、Contributorモデルを明示的に選んだときだけ、そのセッションのContributorモードを有効にします。会話やコードが学習に使われる場合があるため、選択時はMuse Codeの利用条件を確認してください。適用時には会話内に一行のデータ利用通知を表示します。
 
 `cockpit task create --agent muse --ui-mode visual --model <id>`と`cockpit task model <id> --model <model-id>`は、Muse Codeの未掲載モデルIDも受け付けます。入力したIDをそのまま渡して会話に通知し、利用できない場合は次のメッセージでMuse Codeのエラーを表示します。未掲載モデルはMuse Codeの既定推論レベルで実行し、`task model`での明示的な`--effort`指定を拒否します。掲載モデルで未対応のレベルを指定すると、そのモデルの既定値を使い、推論レベルのないモデルには指定しません。Muse Codeには速度tier、カスタムシステムプロンプト、Goal、外部セッション取り込みの選択肢はありません。
 

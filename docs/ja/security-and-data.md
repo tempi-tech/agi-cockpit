@@ -56,7 +56,7 @@ PWAのスキル表示は、タスクの作業場所からホストが検出し�
 
 「設定」→「Ask通知」でDiscordまたはSlackへの転送を有効にすると、Askの概要、質問、選択肢、タスク名、Cockpitへのlinkと、許可した場合はAskの画像・動画を、選択したチャンネルへ送ります。チャンネルを閲覧できるメンバーは投稿内容を読めますが、Cockpitが回答を受け付けるのは設定した一人の`allowedUserId`だけです。転送は既定で無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 
-Muse Codeのcontributorモデル（ID末尾が`-contributor`）では、Muse Codeの利用条件に基づき、Metaが内容を製品改善に使う場合があります。モデル一覧があるとき、Cockpitはcontributorを明示的に選ばない限り、それ以外の既定モデルを選びます。contributor以外の候補がないときはMuse Code自身の既定設定を使います。contributorモデルの開始・切り替え位置に一行の通知を表示しますが、会話とともにスクロールし、同じモデルの利用中は再開時も繰り返しません。CockpitはMuse Codeのcontributor設定を変更しません。
+Muse CodeのContributorモデル（ID末尾が`-contributor`）では、利用条件に基づき、会話やコードが学習に使われる場合があります。モデル一覧では既定で非表示で、設定の「Contributor モデルを表示」をオンにすると選べます。表示設定だけでは選択中のモデルは変わりません。ネイティブUIでは、選択したモデルに応じてセッションのContributorモードを明示的にオン・オフし、モデル未指定ならオフで起動します。Contributorモデルの開始・切り替え位置に一行の通知を表示しますが、会話とともにスクロールし、同じモデルの利用中は再開時も繰り返しません。
 
 ## ゲスト利用時の匿名データ
 
