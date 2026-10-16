@@ -12,7 +12,7 @@ English is the primary language for these generated release notes. Download the 
 - Added Muse Code sign-in and Meta API key authentication.
 - Added model selection for Muse Code.
 - Added usage information for Muse Code.
-- Made desktop and mobile task lists more compact.
+- Changed desktop and mobile task lists to a more compact layout.
 - Fixed clipped sidebar tooltips.
 
 <details>
