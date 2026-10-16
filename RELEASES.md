@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.107.0 — 2026-10-16
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Muse Code as an agent for running tasks in Native UI and Terminal UI.
 - Added Muse Code sign-in and Meta API key authentication.
