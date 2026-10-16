@@ -10,7 +10,7 @@ English is the primary language for these generated release notes. Download the 
 
 - Added a Muse Code setting to show Contributor models in model menus.
 - Fixed Contributor mode switching to match the selected Muse Code model.
-- You can now send another message after Muse Code responds while background checks continue.
+- Added support for sending another message after Muse Code responds while background checks continue.
 - Fixed a processing indicator that could remain after Muse Code compacted a conversation.
 
 <details>
