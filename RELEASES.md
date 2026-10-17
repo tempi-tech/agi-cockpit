@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.108.1 — 2026-10-18
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed incomplete Antigravity continuations being shown as successful after a tracking timeout.
+- Fixed Fleet automatically retrying Antigravity continuations after a tracking timeout.
+- Fixed recovery of final Antigravity responses that arrive after a tracking timeout, before the next message is sent.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Antigravity の継続処理がタイムアウトした際、未完了の処理を成功と表示する問題を修正しました。
+- Antigravity の継続処理がタイムアウトした際、Fleet が自動再送する問題を修正しました。
+- Antigravity のタイムアウト後に届いた最終応答を、次のメッセージを送る前に反映できるよう修正しました。
+
+</details>
+
 ## v4.108.0 — 2026-10-17
 
 **Type:** minor · **Platforms:** macOS, Linux
