@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.108.0 on 2026-10-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.108.1 on 2026-10-18. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -17,7 +17,7 @@ Task details is where you understand a piece of work selected from the [Task lis
 
 A Terminal task cannot restore its previous shell process, so resume starts a new shell in the same directory. Native UI for Cursor, Qoder, Grok Build, and Muse Code reconnects to its supported saved conversation.
 
-After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
+After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session. Antigravity continuation tracking timeouts (`continuation_timeout`) do not count toward this repeated-failure limit.
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus. After interruption settles, the task returns to a state that can accept the next instruction and the composer can continue.
 
@@ -131,6 +131,8 @@ From the CLI, `cockpit task retry-start <id>` reuses the saved instruction or Te
 When Claude, Codex, Antigravity, Cursor, or Grok Build reports an error that may indicate a service incident, such as a 404, 5xx response, or gateway timeout, the error surface links directly to that provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors; follow the on-screen sign-in, account-switching, or wait guidance instead.
 
 When a Grok Build, Cursor, or Qoder Native UI turn sends no response for 18 minutes while it is not waiting on an approval, question, background operation, or tool call, Cockpit stops it and reports `runtime_error` with reason `stalled`. The task no longer remains running indefinitely, and the next message restarts its session. Cockpit also stops a single turn at the 12-hour limit and restarts the session on the next message.
+
+In Antigravity Native UI, a scheduled or background continuation that times out before a final response is reported as incomplete, with `waitingReason: runtime_error` and `errorReason: continuation_timeout`, even if a partial reply is visible. Cockpit accepts new input without automatically resending the prompt. A final response that arrives later can be reflected before the next message is sent. Before continuing, check running background tasks, subagents, and tool side effects; the timeout does not confirm that they stopped.
 
 A message's copy button includes the visible body and error details. Diagnostics may contain local file paths, session logs, or account information, so inspect the copied content before sharing it externally.
 

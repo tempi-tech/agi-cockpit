@@ -4,7 +4,7 @@
 
 FleetのYAMLで依存関係付きの複数エージェント処理を定義し、ライブグラフで監督し、停止や失敗から安全に復旧する方法を説明します。
 
-> AGI Cockpit 4.106.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
+> AGI Cockpit 4.108.1で2026-10-18に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/fleet)
 
 Fleetは、複数のAIエージェント、コマンドによる検証、人の承認を依存関係グラフとしてYAMLに定義し、一つのRunとして実行する機能です。各エージェントノードは通常のCockpitタスクとして動き、Cockpitが実行順、並列数、待機、再開、履歴を管理します。
 
@@ -136,6 +136,8 @@ Runの見出しにある進捗バーは、全ノードを完了、実行中、�
 agent nodeへ`idle_timeout`または`timeout`を設定すると、runtime eventが指定時間届かない場合、またはnodeの総実行時間を超えた場合にタスクを停止し、`idle_timeout`または`timeout`として失敗させられます。値は`20m`、`2h30m`のように指定し、最短は1分です。Ask、承認、質問への回答待ちは`idle_timeout`へ数えません。失敗後は`cockpit fleet retry`で復旧します。
 
 これらを設定していなくても、Grok Build、Cursor、Qoderのターンが、承認、質問、background処理、tool callを待っていない状態で18分間まったく応答しない場合、Cockpitは`stalled`として停止します。Fleetは一時的なruntime errorとしてbackoff付きで再試行し、同じ会話から再開します。1ターンの12時間上限に達した場合は自動再試行しません。
+
+Antigravityの予約された継続処理やバックグラウンド継続処理がタイムアウトすると、出力を提出済みでも、Fleetは`errorReason: continuation_timeout`としてノードを失敗させます。一時的なプロバイダーエラーとして扱わず、自動再送もしません。`cockpit fleet retry`で再試行するか判断する前に、タスクへ遅れて届いた最終応答と、バックグラウンド処理、サブエージェント、ツールによる変更や外部操作を確認してください。
 
 gateノードを選ぶと、command gateでは実際の終了コード、human gateでは承認または却下と回答本文を詳細画面で確認できます。終了コード0は成功、それ以外は失敗です。Run全体の状態だけで判断せず、該当gateの詳細と出力を確認してください。
 

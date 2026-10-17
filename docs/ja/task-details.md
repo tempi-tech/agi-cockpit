@@ -4,7 +4,7 @@
 
 選択したタスクのプロジェクトフォルダ、会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.108.0で2026-10-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.108.1で2026-10-18に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -17,7 +17,7 @@
 
 Terminalタスクは以前のシェルプロセスを復元できないため、再開すると同じディレクトリで新しいシェルを起動します。Cursor、Qoder、Grok Build、Muse CodeのネイティブUIは、対応する保存済み会話へ再接続します。
 
-Visual Runtimeで同じturn failureが3回続くと、Cockpitはその会話を「セッションを再開できません」として停止し、同じsessionの無限再試行を避けます。表示された最後のエラーを確認し、`cockpit task resume <id> --fresh-session`で、保存済み会話の要約を引き継いだ新しい会話を同じタスク内に開始します。通常の`resume`で拒否済みsessionへ戻らないでください。
+Visual Runtimeで同じturn failureが3回続くと、Cockpitはその会話を「セッションを再開できません」として停止し、同じsessionの無限再試行を避けます。表示された最後のエラーを確認し、`cockpit task resume <id> --fresh-session`で、保存済み会話の要約を引き継いだ新しい会話を同じタスク内に開始します。通常の`resume`で拒否済みsessionへ戻らないでください。Antigravityの継続追跡タイムアウト（`continuation_timeout`）は、この連続失敗の上限へ数えません。
 
 実行中のターンはEscapeで停止できます。複数のタスクペインがある場合は、フォーカスのあるペインだけが対象です。中断処理が終わるとタスクは次の指示を受け取れる状態へ戻り、入力欄から続行できます。
 
@@ -131,6 +131,8 @@ CLIでは`cockpit task retry-start <id>`で保存済みの指示またはTermina
 Claude、Codex、Antigravity、Cursor、Grok Buildで、404、5xx、gateway timeoutなどサービス障害の可能性があるエラーを検出すると、エラー表示から各プロバイダーの稼働状況ページを直接開けます。認証、利用上限、クォータ、レート制限、請求に関するエラーではこのリンクを表示しないため、画面の再ログイン、アカウント切り替え、待機などの案内に従います。
 
 Grok Build、Cursor、QoderのネイティブUIで、承認、質問、background処理、tool callを待っていないターンから18分間まったく応答がない場合、Cockpitは停止させ、`runtime_error`と`stalled`の理由を表示します。タスクを実行中のまま残さず、次のメッセージでsessionを再開します。1ターンが12時間に達した場合も停止し、次のメッセージで再開します。
+
+AntigravityのネイティブUIで、予約された継続処理やバックグラウンド継続処理が最終応答の前にタイムアウトした場合、途中の応答が表示されていても未完了の実行エラーとして扱います。レポートは`waitingReason: runtime_error`、`errorReason: continuation_timeout`となり、入力を再開できますが、プロンプトは自動再送しません。遅れて届いた最終応答は、次のメッセージを送る前に反映できます。続行する前に、実行中のバックグラウンド処理、サブエージェント、ツールによる変更や外部操作を確認してください。タイムアウトは、それらの停止を保証しません。
 
 メッセージのコピーボタンは、表示本文とエラー詳細をまとめてコピーします。診断情報にはローカルのファイルパス、セッションログ、アカウント情報が含まれる場合があるため、外部へ共有する前に確認してください。
 
