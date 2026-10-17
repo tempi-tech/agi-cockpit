@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.108.1 — 2026-10-18
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed incomplete Antigravity continuations being shown as successful after a tracking timeout.
 - Fixed Fleet automatically retrying Antigravity continuations after a tracking timeout.
