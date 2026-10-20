@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.108.2 — 2026-10-21
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed remote tasks to use the send-key preference from your viewing device.
 - Fixed holding the send key inserting unwanted newlines after a message is sent.
