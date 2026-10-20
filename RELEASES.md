@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.108.2 — 2026-10-21
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed remote tasks to use the send-key preference from your viewing device.
+- Fixed holding the send key inserting unwanted newlines after a message is sent.
+- Fixed the usage panel opening too far from its indicator in remote tasks.
+- Fixed unsupported agents being included as Smart Routing candidates.
+- Fixed Smart Routing failures when many workspaces are available.
+- Improved the error message shown when a Smart Routing request is rejected.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 他端末のタスクでも、自分の端末の送信キー設定でメッセージを送れるよう修正しました。
+- 送信キーを長押しした際、送信後の入力欄に不要な改行が入る問題を修正しました。
+- 他端末のタスクで使用量パネルが表示位置から離れて開く問題を修正しました。
+- Smart Routing で、対応していないエージェントが選択候補に含まれる問題を修正しました。
+- ワークスペースが多い場合に Smart Routing が失敗する問題を修正しました。
+- Smart Routing のリクエストが受け付けられない場合、原因に応じたエラーメッセージを表示するよう修正しました。
+
+</details>
+
 ## v4.108.1 — 2026-10-18
 
 **Type:** patch · **Platforms:** macOS, Linux
