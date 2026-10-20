@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.108.0 on 2026-10-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.108.2 on 2026-10-21. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -44,7 +44,7 @@ cockpit settings reset agents.enabled.qoder
 
 ## Choose with Smart routing
 
-Smart routing is for AGI Labo members. If you select it from Desktop **New task** or Quick Task while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member and enabling it, Cockpit chooses a valid combination from the instruction, configured agents, discovered models and reasoning levels, recent and active project workspaces, the Master workspace, and temporary or persistent workspaces. External agents are created in Native UI with an Auto account. Terminal and Creative Studio are not routed automatically.
+Smart routing is for AGI Labo members. If you select it from Desktop **New task** or Quick Task while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member and enabling it, Cockpit chooses a valid combination from the instruction, configured agents, discovered models and reasoning levels, recent and active project workspaces, the Master workspace, and temporary or persistent workspaces. External agents are created in Native UI with an Auto account. Supported candidates are Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, Muse Code, and Cockpit. Terminal and Creative Studio are not routed automatically.
 
 Use **Routing policy** for free-form preferences, such as prioritizing Codex for implementation and Claude for research or writing. The policy and on/off state are stored in Cockpit's local data area for each signed-in AGI account, and the new-task screen and local CLI use the same values. They do not sync to another device. Manually selecting a workspace fixes only the workspace. Turn off Smart routing when you want to choose the agent or model directly.
 
@@ -58,6 +58,10 @@ cockpit task run --instruction-file instruction.md --smart-routing
 ```
 
 Candidates are limited to current CLI detection, model discovery, and configured Cockpit Agent providers. If a requested candidate is unavailable, check the provider and API key or revise the policy. Smart routing does not silently substitute an unconfigured agent or model.
+
+Smart routing considers at most 255 workspaces. It reserves space for the Master, temporary, and persistent workspaces, then includes project workspaces in candidate order in the remaining slots. If your project is outside that set, select its workspace manually.
+
+If the service cannot accept a request (`invalid_routing_request` in the CLI), update Cockpit or contact support. If you reach the per-minute limit, wait a minute and retry. For connection or service failures, retry or turn off Smart routing and choose manually.
 
 ## Native UI and terminal UI
 

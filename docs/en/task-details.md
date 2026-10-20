@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.108.1 on 2026-10-18. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.108.2 on 2026-10-21. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -72,7 +72,7 @@ The Default/Plan interaction-mode picker and the `/plan` and `/default` actions 
 
 ## Enter a message
 
-Desktop's **Send key** setting assigns sending to Enter or Cmd/Ctrl+Enter. Shift+Enter inserts a newline in either mode. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
+Desktop's **Send key** setting assigns sending to Enter or Cmd/Ctrl+Enter. Shift+Enter inserts a newline in either mode. When you open another computer’s task inside Desktop, it uses the viewing Desktop’s Send key setting too. Holding the send key does not add newlines to the cleared composer or send repeatedly. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
 
 Each task keeps its own draft text and attachments. If you switch tasks before a send or interrupt result arrives, failed input returns to the originating task's composer, and a delayed Visual Runtime error appears on that task. Restored text is prepended to any newer draft entered for the same task in the meantime.
 
