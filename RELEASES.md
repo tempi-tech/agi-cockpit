@@ -12,7 +12,7 @@ English is the primary language for these generated release notes. Download the 
 - Fixed local images not appearing in Markdown previews.
 - Fixed file previews briefly disappearing when reloaded after saving.
 - Fixed Antigravity continuing to wait for background tasks that had already finished.
-- Reduced idle CPU usage when many tasks are present.
+- Improved idle CPU usage when many tasks are present.
 
 <details>
 <summary>日本語のリリースノート</summary>
