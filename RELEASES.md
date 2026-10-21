@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.108.3 — 2026-10-22
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed Markdown preview table-of-contents links failing to jump to their headings.
+- Fixed local images not appearing in Markdown previews.
+- Fixed file previews briefly disappearing when reloaded after saving.
+- Fixed Antigravity continuing to wait for background tasks that had already finished.
+- Reduced idle CPU usage when many tasks are present.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Markdown プレビューで目次リンクから該当する見出しへ移動できない問題を修正しました。
+- Markdown プレビューでローカル画像が表示されない問題を修正しました。
+- ファイル保存時の再読み込みでプレビューが一時的に消える問題を修正しました。
+- Antigravity で完了済みのバックグラウンドタスクを待ち続ける問題を修正しました。
+- タスクが多数ある場合の待機中の CPU 負荷を軽減しました。
+
+</details>
+
 ## v4.108.2 — 2026-10-21
 
 **Type:** patch · **Platforms:** macOS, Linux
