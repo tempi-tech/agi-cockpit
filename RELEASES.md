@@ -8,8 +8,8 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- You can now view what changed in a new version from the update notification.
-- The update notification menu now lets you choose to install immediately or after all running tasks have stopped.
+- Added a preview of version changes to the update notification.
+- Added an update notification menu for installing immediately or after all running tasks have stopped.
 - Fixed update notification button labels wrapping in the middle of words.
 
 <details>
