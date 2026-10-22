@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.109.0 — 2026-10-23
+
+**Type:** minor · **Platforms:** macOS
+
+- You can now view what changed in a new version from the update notification.
+- The update notification menu now lets you choose to install immediately or after all running tasks have stopped.
+- Fixed update notification button labels wrapping in the middle of words.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 更新通知から、新しいバージョンの変更内容を確認できるようになりました。
+- 更新通知のメニューで、今すぐインストールするか、実行中のタスクがすべて停止してからインストールするかを選べるようになりました。
+- 更新通知のボタン文字が途中で折り返される問題を修正しました。
+
+</details>
+
 ## v4.108.3 — 2026-10-22
 
 **Type:** patch · **Platforms:** macOS
