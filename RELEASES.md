@@ -4,6 +4,19 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.109.1 — 2026-10-24
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed messages from Autorun to existing tasks remaining queued after the task was ready.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 自動実行から既存タスクへのメッセージ送信が、タスクの準備完了後も待機したままになる問題を修正しました。
+
+</details>
+
 ## v4.109.0 — 2026-10-23
 
 **Type:** minor · **Platforms:** macOS
