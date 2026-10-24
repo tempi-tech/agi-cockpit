@@ -4,6 +4,21 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.110.0 — 2026-10-25
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Autorun history for existing tasks that distinguishes message acceptance from response progress and completion.
+- Autorun history now shows wait reasons, elapsed time, and error details.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 既存タスクへの自動実行で、送信受付と応答・完了状況を分けて確認できる実行履歴を追加しました。
+- 自動実行の履歴で、待機理由や経過時間、エラーの詳細を確認できるようになりました。
+
+</details>
+
 ## v4.109.1 — 2026-10-24
 
 **Type:** patch · **Platforms:** macOS
