@@ -9,7 +9,7 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added Autorun history for existing tasks that distinguishes message acceptance from response progress and completion.
-- Autorun history now shows wait reasons, elapsed time, and error details.
+- Added wait reasons, elapsed time, and error details to Autorun history.
 
 <details>
 <summary>日本語のリリースノート</summary>
