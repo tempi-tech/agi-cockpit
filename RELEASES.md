@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.111.0 — 2026-10-26
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added support for interrupting a running task with a queued Ask answer.
 - Fixed Fleet Git checks timing out under heavy load.
