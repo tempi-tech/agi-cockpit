@@ -4,6 +4,21 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.111.0 — 2026-10-26
+
+**Type:** minor · **Platforms:** macOS
+
+- Queued Ask answers can now interrupt a running task for immediate delivery.
+- Fixed Fleet Git checks timing out under heavy load.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 送信待ちの Ask の回答を、実行中のタスクに割り込んで送信できるようになりました。
+- 負荷が高いときに、Fleet が Git の確認でタイムアウトする問題を修正しました。
+
+</details>
+
 ## v4.110.0 — 2026-10-25
 
 **Type:** minor · **Platforms:** macOS
