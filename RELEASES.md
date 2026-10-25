@@ -8,7 +8,7 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Queued Ask answers can now interrupt a running task for immediate delivery.
+- Added support for interrupting a running task with a queued Ask answer.
 - Fixed Fleet Git checks timing out under heavy load.
 
 <details>
