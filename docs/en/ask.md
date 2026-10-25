@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.111.0 on 2026-10-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -114,6 +114,8 @@ In the PWA **Inbox**, the Ask summary, questions, choices, descriptions, and the
 5. The agent receives the answer and continues the same work.
 
 Until the answer reaches the task, the queue labels it as an Ask and summarizes its selections, free-form input, and attachments first. After delivery, the conversation history also presents the answer first; expand **Question and details** to inspect the original question, responder, and raw payload.
+
+If the task is running, the answer enters the shared Queue as **Answered · waiting to send** and leaves the open Ask list. On Desktop and the PWA, surfaces with interrupt support offer the lightning button, **Interrupt and send this queued message now**, to send the selected answer immediately. Its structured answer, responder, and attachments stay intact, and the remaining queue order is preserved. A pending approval, tool question, or unavailable session shows a reason and leaves the answer queued for automatic delivery. Answers cannot be edited or removed; sending, delivered, and unconfirmed answers cannot be interrupted again. See [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details#follow-up-queue-interrupt-and-resume) for recovery after failed or unconfirmed delivery.
 
 Closing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
 
