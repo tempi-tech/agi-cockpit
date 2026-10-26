@@ -4,6 +4,21 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.112.0 — 2026-10-27
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Shift+Enter as a chat send-key option.
+- Fixed Japanese punctuation being included in automatically linked URLs.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- チャットの送信キーに Shift+Enter を選べるようになりました。
+- 日本語の句読点が URL のリンクに含まれる問題を修正しました。
+
+</details>
+
 ## v4.111.0 — 2026-10-26
 
 **Type:** minor · **Platforms:** macOS, Linux
