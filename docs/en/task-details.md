@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.111.0 on 2026-10-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.112.0 on 2026-10-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -76,7 +76,11 @@ The Default/Plan interaction-mode picker and the `/plan` and `/default` actions 
 
 ## Enter a message
 
-Desktop's **Send key** setting assigns sending to Enter or Cmd/Ctrl+Enter. Shift+Enter inserts a newline in either mode. When you open another computer’s task inside Desktop, it uses the viewing Desktop’s Send key setting too. Holding the send key does not add newlines to the cleared composer or send repeatedly. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
+In Desktop Settings → Shortcuts, **Send key** lets you choose Enter, Cmd+Enter (macOS) / Ctrl+Enter (Windows/Linux), or Shift+Enter. With Cmd/Ctrl+Enter or Shift+Enter selected, plain Enter inserts a line break. With Enter selected, Shift+Enter inserts a line break. When you open another computer’s task inside Desktop, it uses the viewing Desktop’s Send key setting too. Holding the send key does not add newlines to the cleared composer or send repeatedly. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
+
+In the PWA, task composers on devices using a mouse or trackpad also use the connected Desktop's Send key setting. On touch devices, Enter inserts a line break and the Send button sends the message.
+
+From the CLI, read the current value with `cockpit settings get shortcuts.chatSendKey`, or choose Shift+Enter with `cockpit settings set shortcuts.chatSendKey shiftEnter`. Accepted values are `enter`, `modEnter`, and `shiftEnter`.
 
 Each task keeps its own draft text and attachments. If you switch tasks before a send or interrupt result arrives, failed input returns to the originating task's composer, and a delayed Visual Runtime error appears on that task. Restored text is prepended to any newer draft entered for the same task in the meantime.
 
@@ -95,6 +99,8 @@ In a supported Native UI, `/clear` keeps the task but discards its conversation 
 The reset immediately updates every Desktop and PWA view that has the task open. The view that started the reset clears its draft text and attachments; other views keep their drafts. Because the Queue is shared, ordinary messages awaiting delivery or marked as failed are removed from every view. Ask answers and items whose dispatch has started or whose delivery is unconfirmed are not removed by this operation. The conversation shows **Started a new conversation**.
 
 ## Read and quote the conversation
+
+When conversation URLs are automatically linked, Japanese punctuation and brackets mark the end of a link. If the URL itself needs these characters, write an explicit Markdown link as `[name](URL)` or use `<URL>`.
 
 On Desktop, hover over a task-conversation message or move keyboard focus to it to reveal the date and time it was sent. In the PWA, tap a message to reveal the timestamp and tap elsewhere to hide it. Older items without a saved timestamp do not show one.
 
