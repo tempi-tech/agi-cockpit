@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.112.0 — 2026-10-27
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Shift+Enter as a chat send-key option.
 - Fixed Japanese punctuation being included in automatically linked URLs.
