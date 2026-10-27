@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.113.0 — 2026-10-28
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added the option to start a conversation from the Talk Room tab by selecting participating tasks.
 - Added Markdown formatting to Ask text for easier reading.
