@@ -8,9 +8,9 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Start a conversation from the Talk Room tab by selecting participating tasks.
-- Ask text now supports Markdown formatting for easier reading.
-- Send a password once to a supported terminal prompt through a dedicated secure input screen.
+- Added the option to start a conversation from the Talk Room tab by selecting participating tasks.
+- Added Markdown formatting to Ask text for easier reading.
+- Added one-time secure password input for supported terminal prompts.
 
 <details>
 <summary>日本語のリリースノート</summary>
