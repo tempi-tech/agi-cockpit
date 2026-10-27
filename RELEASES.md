@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.113.0 — 2026-10-28
+
+**Type:** minor · **Platforms:** macOS
+
+- Start a conversation from the Talk Room tab by selecting participating tasks.
+- Ask text now supports Markdown formatting for easier reading.
+- Send a password once to a supported terminal prompt through a dedicated secure input screen.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Talk Roomタブから参加するタスクを選んで会話を始められるようになりました。
+- Askの本文をMarkdownで読みやすく表示するようになりました。
+- 対応するターミナルのパスワード入力に、専用画面から一度だけ安全に送信できるようになりました。
+
+</details>
+
 ## v4.112.0 — 2026-10-27
 
 **Type:** minor · **Platforms:** macOS, Linux

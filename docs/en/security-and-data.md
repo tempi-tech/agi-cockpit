@@ -112,6 +112,14 @@ Delivery values stay in transient memory and are not saved in Cockpit conversati
 
 The destination site can retain the value, and tools that read its DOM or evaluate scripts may read it after input. This feature does not guarantee that AI cannot read destination data. Discarding the delivery copy does not clear the site's field. Use trusted PCs, PWA devices, and sites. See the [secure input CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for details.
 
+### Managed terminal password input
+
+For a terminal belonging to the requesting task, use `cockpit secret request --to terminal --terminal <terminalId>`; `--terminal task` explicitly selects its primary terminal. The same secure input surfaces show the terminal, PTY session and foreground process. Confirm that the actual prompt is waiting for a password and that the destination is correct before choosing **Send once and press Enter**. This sends one line, up to 512 UTF-8 bytes without control characters, followed by Enter. A completed request means the terminal accepted the write, not that authentication succeeded.
+
+Delivery requires a managed Unix PTY with echo off, canonical line input enabled and an identifiable foreground process. Windows ConPTY, raw input, echo-on shells and external terminals are unsupported. These checks neither prove a password prompt is waiting nor authenticate a remote host. Cockpit rechecks the original session, process, mode, input/output and deadline before sending; a change invalidates the request. Inspection cannot guarantee what the receiving program reads next. Never retry an unconfirmed delivery automatically.
+
+The exact supplied value is masked in subsequent Cockpit terminal output, including when split across output chunks. This can also mask unrelated text matching a protected prefix. The receiving program can retain or transform the value; encoded or transformed output and compromised destinations are outside this protection. Trust the receiving program and destination. When the destination is the primary task terminal, or the requester is a plain terminal task, check `cockpit secret status`: Cockpit does not inject result notifications into those shells or password prompts.
+
 ## Isolate Browser Identities
 
 The in-app browser grants site permissions such as notifications, geolocation, and clipboard reading and writing by default, without a Cockpit confirmation dialog. OS and Web API restrictions still apply. It denies media capture including camera and microphone, screen capture, fullscreen, automatic fullscreen, permission to open external apps, keyboard lock, and deprecated synchronous clipboard reading. Open only sites you trust. This policy applies to every Browser Identity; separating Identities does not restrict site permissions.

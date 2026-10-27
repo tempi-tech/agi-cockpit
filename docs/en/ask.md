@@ -17,7 +17,7 @@ Ask lets an AI agent pause its work and hand a confirmation or decision to a per
 
 Ask is more than a notification. The question remains available until it is answered, and a person can respond in the dedicated Desktop Ask window or the right-side-panel Ask tab, from **Inbox** in the PWA, or through a configured Discord or Slack relay.
 
-The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A password input request is not an Ask; it delivers a value once to the specified browser field. All three let you open the originating task while that task is still available.
+The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A password input request is not an Ask; it delivers a value once to the specified browser field or managed task terminal. All three let you open the originating task while that task is still available.
 
 ## How Ask differs from other confirmations
 
