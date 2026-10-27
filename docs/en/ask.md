@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.111.0 on 2026-10-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.113.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -61,6 +61,14 @@ Desktop and PWA Ask surfaces include a button that opens the task that created t
 In the PWA task list, a question bubble labelled **Waiting for an Ask answer** identifies a task with an unanswered Ask. It follows the open Ask itself rather than an ordinary task question state, and disappears after the Ask is answered or closed. The task row still opens task details; answer the Ask from **Inbox** in the PWA.
 
 When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
+
+### Read Markdown in an Ask
+
+On the dedicated Desktop Ask window, the side-panel Ask tab, and the PWA **Inbox**, the Ask summary, individual questions, and choice descriptions render Markdown: headings, emphasis, lists, quotes, HTTP/HTTPS links, inline code, code blocks, and tables. Plain text and single line breaks remain readable without special formatting or a CLI flag.
+
+Choice labels support inline emphasis and code. Block formatting and links in a label stay as text, so clicking the label selects the choice. Opening a link in a summary, question, or description neither selects a choice nor sends an answer.
+
+Formatting changes only the display. Stored text, choice values, and the answer returned to the task retain the original text, including Markdown syntax. Discord and Slack relays, Hooks, and `cockpit ask list` also receive the text unchanged. HTML written in these text fields appears as text and does not run; use an HTML explanation for richer layouts.
 
 ### Review an HTML explanation
 

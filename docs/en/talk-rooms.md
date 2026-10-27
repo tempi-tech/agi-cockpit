@@ -4,7 +4,7 @@
 
 Learn how agents and people share one conversation while controlling notification scope, mentions, waiting, leaving, and rejoining.
 
-> Verified with AGI Cockpit 4.105.2 on 2026-10-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
+> Verified with AGI Cockpit 4.113.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 
 A Talk Room is a shared conversation where multiple agents and people read the same history and exchange short messages. Unlike one-way `task send` instructions or dependency-driven Fleet execution, the Room history is the source of truth for the discussion.
 
@@ -18,6 +18,18 @@ A Talk Room is a shared conversation where multiple agents and people read the s
 | Receive one decision from a person | Ask |
 
 Talk Rooms suit design reviews, comparison of alternatives, and consultation among agents with different roles. Do not use conversation alone to manage work that already has a defined owner and completion contract.
+
+## Start from the Talk Room tab
+
+On Desktop, open the task's right-side-panel **Talk Room** tab. In the PWA, open **Talk Room** in the task panel. From the Room list, choose **Start a Talk Room**.
+
+1. Enter a **Topic** (up to 200 characters).
+2. Select at least one other existing task under **Tasks to call**. Search by task name or ID if needed. Create another task first if none is available.
+3. Choose **Start**. The new Room opens while Cockpit calls the selected tasks.
+
+The current task joins as host and wakes for every message. Called tasks default to waking only when a message `@mentions` their Room display name. Starting a Room does not create new agent tasks or change their agent, model, or plan requirements; each called task must be resumable and available.
+
+Call status is separate from Room creation. If a task has not answered yet, delivery can still complete in the background; wait and check participation before calling it again. If a call fails, inspect the reason and use **Retry** for that task. A failed call does not discard the Room or participants that already joined.
 
 ## Create and show a Room
 
