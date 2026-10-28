@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.114.0 — 2026-10-28
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Crews in alpha: persistent agents with their own roles and memory.
 - Added Discord connections for Crews to receive requests from approved people and reply.
