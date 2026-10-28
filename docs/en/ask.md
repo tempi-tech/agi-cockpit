@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.115.0 on 2026-10-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -78,7 +78,7 @@ The explanation is not an answer surface. Scripts, forms, and `data-cockpit-acti
 
 From the CLI, supply exactly one of `--html`, `--html-file`, or `--html-stdin`, with a 512 KiB UTF-8 limit. Cockpit copies the content when the Ask is created, keeps it with the open Ask across restarts, and deletes it when the Ask is answered or closed. See the [`cockpit ask` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask) for exact input rules.
 
-## Review the answer order by priority
+## Check urgency and display order
 
 Each Ask has a priority that describes how urgently its answer is needed, not how important the task itself is. Omitting it uses `medium`.
 
@@ -89,7 +89,7 @@ Each Ask has a priority that describes how urgently its answer is needed, not ho
 | `high` | High | A late answer misses a deadline or holds up several tasks or people |
 | `xhigh` | Urgent | A late answer lets an outage, data loss, or financial loss grow |
 
-The Desktop Ask tab and dedicated windows, the PWA **Inbox**, Discord, and Slack show the priority label. Waiting lists put Urgent, High, Normal, then Low first, with older Asks first within one level. Low never skips or auto-answers an Ask and does not change how the task resumes.
+The Desktop Ask tab and shared Ask window, the PWA **Inbox**, Discord, and Slack show the priority label. The Ask window, side-panel Ask tab, and PWA **Inbox** list questions newest first, regardless of priority. The PWA Inbox also orders Display notices and password input requests by newest first. Low never skips or auto-answers an Ask and does not change how the task resumes.
 
 Do not use High or Urgent merely because the agent's own task is waiting. For either level, begin the question with a short reason such as the deadline or the impact of delay.
 
@@ -97,19 +97,21 @@ Do not use High or Urgent merely because the agent's own task is waiting. For ei
 
 The right-side-panel Ask tab lists every Ask waiting for an answer on this device. Open it from its count badge to answer or close an Ask with the same choices, free-form input, multi-question and whole-Ask replies, attachments, and media as the dedicated window. From the CLI, use `cockpit side-panel ask`.
 
-By default, Cockpit also opens a dedicated window for every new Ask. Turn off **Ask windows on this device** under **Settings → Notifications** to close open Ask windows without closing their Asks or changing relay and answer delivery. Continue answering from the side-panel Ask tab, PWA, CLI, Discord, or Slack. The preference is stored per device. Turning it back on reopens windows for Asks that are still waiting. From the CLI, use `cockpit settings set notifications.askWindow false` or `true`.
+By default, Cockpit also combines all pending Asks in one dedicated window. Use **Previous** and **Next** to switch between questions; the header shows your position and the pending count. Switching preserves each Ask’s selected choices and draft answer. New questions join the same window without replacing the answer you are editing. Answering or closing removes only that Ask; the window closes when none remain. Password input requests and Display notices keep their own separate windows.
 
-**Hide for now** in the dedicated window hides only that window for the current app session. It does not close the Ask or resume its task. While the Ask-window setting is on, use **Open in a separate window** in the side panel to show it again. **Close Ask** is a separate operation that removes the Ask itself.
+Turn off **Ask windows on this device** under **Settings → Notifications** to close the shared Ask window without closing its Asks or changing relay and answer delivery. Continue answering from the side-panel Ask tab, PWA, CLI, Discord, or Slack. The preference is stored per device. Turning it back on reopens the shared window for Asks that are still waiting. From the CLI, use `cockpit settings set notifications.askWindow false` or `true`.
+
+**Hide for now** hides the shared window and leaves every Ask pending. Ordinary synchronization keeps it hidden, but a new Ask can reveal the same window again. It does not close the Ask or resume its task. While the Ask-window setting is on, use **Open in a separate window** in the side panel to show it again. **Close Ask** is a separate operation that removes the Ask itself.
 
 Selections, free-form input, a whole-Ask reply, and attachments are shared between the dedicated window and the side panel before submission. Editing either view updates the latest draft for that Ask in the other. This sharing is limited to an unanswered Ask inside the same Desktop app; it does not synchronize an unsent draft to the PWA, CLI, Discord, Slack, or another device. Answering or closing the Ask discards the draft, and it does not persist after the app exits.
 
-When several dedicated windows are open, higher-priority Asks start in front. An Ask or Display notice that the user clicked or operated with the keyboard, or an Ask opened from the side panel, stays in front when a new Ask arrives. Restacking the windows does not move keyboard focus.
+**Open in a separate window** in the side panel selects that Ask in the shared window. Priority itself does not move keyboard focus or change window visibility.
 
 ## Adjust the Ask window
 
 Drag the handle in the lower-right corner of a Desktop Ask window to change its width and height. Cockpit saves that size for the next Ask window and constrains it to the screen's working area.
 
-Use **A−** and **A+** in the header to change the text size of questions, choices, descriptions, and input fields. This is the same chat text-size setting exposed under **Settings → Display**, so a change also applies to other Ask windows and the main conversation view.
+Use **A−** and **A+** in the header to change the text size of questions, choices, descriptions, and input fields. This is the same chat text-size setting exposed under **Settings → Display**, so a change also applies to the side-panel Ask tab and the main conversation view.
 
 In the PWA **Inbox**, the Ask summary, questions, choices, descriptions, and the HTML explanation's base text follow that same chat text size. A font size explicitly authored in the HTML remains unchanged. Text inputs keep a 16 px minimum to prevent mobile browser focus zoom. Long choices and unbroken strings wrap inside their answer cards instead of overflowing horizontally.
 
