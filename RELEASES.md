@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.115.0 — 2026-10-29
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Improved Ask navigation by combining questions into one window while preserving answers in progress.
 - Changed Ask ordering to newest first in the Ask window, side panel, and PWA Inbox.
