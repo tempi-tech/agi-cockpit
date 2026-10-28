@@ -92,7 +92,7 @@ Cockpit Hooksは、登録したシェルアクションを利用者のローカ�
 
 ## 認証情報を保存する
 
-AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど暗号化ストレージへ保存します。DiscordのBot tokenとSlackのBot token・App-level tokenもこの境界に含まれ、通常の設定値やstatus出力へ値を返しません。安全なストレージを利用できない場合、平文へ切り替えず保存を拒否します。削除に失敗した認証情報は利用を停止し、次回起動時に削除を再試行します。
+AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど暗号化ストレージへ保存します。DiscordのtokenとSlackのアクセストークン・App-level tokenもこの境界に含まれ、通常の設定値やstatus出力へ値を返しません。安全なストレージを利用できない場合、平文へ切り替えず保存を拒否します。削除に失敗した認証情報は利用を停止し、次回起動時に削除を再試行します。
 
 Muse CodeのログインはPC共通の一か所（macOSではKeychain）に保存され、Cockpitのプロファイルでは分離しません。「Muse Code ログイン」方式では、ネイティブUI・ターミナルUIの起動前に継承した`META_API_KEY`を取り除きます。ただしターミナルUIはログインシェル内で動くため、起動ファイルが再びキーをexportする場合があります。「Meta API キー」方式では`agents.credential.meta`に暗号化保存したキーを渡します。これはAGI Laboの認証情報とは別です。CLIの`agents.museAuthMode`（`muse-login`または`api-key`）で方式を選びます。キーの読み取り結果は設定の有無だけです。
 

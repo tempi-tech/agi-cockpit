@@ -133,7 +133,7 @@ Askを回答せずに閉じると、そのAskは削除されますが、元の�
 
 Desktopの「設定」→「Ask通知」では、DiscordとSlackを別々に設定し、同時に有効にできます。どちらも既定では無効で、CockpitからDiscord GatewayまたはSlack Socket Modeへ外向きに接続します。
 
-1. Discordでは、Developer PortalでBotを作成してtokenを貼り、サーバーへ招待します。Slackでは、画面からコピーしたmanifestでアプリを作成し、Bot token（`xoxb-`）と`connections:write`を持つApp-level token（`xapp-`）を貼ります。
+1. Discordでは、Developer Portalでアプリを作成してtokenを貼り、サーバーへ招待します。Slackでは、画面からコピーしたmanifestでアプリを作成し、Slack token（`xoxb-`）と`connections:write`を持つApp-level token（`xapp-`）を貼ります。
 2. 転送先のチャンネルと「回答できる人」を一人選びます。回答者が未設定の場合は転送を開始せず、サーバーやワークスペースのほかのメンバーが操作してもCockpitは回答を受け付けません。
 3. 必要に応じて、Askの画像・動画を転送するか、許可した回答者がチャンネルへ投稿したファイルを回答へ添付するかを切り替えます。
 4. 「テスト Ask」を送り、選択したサービスから回答して往復時間が表示されることを確認してから有効にします。

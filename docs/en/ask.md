@@ -133,7 +133,7 @@ Answer attachments can be added with the paperclip or by dragging files onto the
 
 In Desktop, **Settings → Ask notifications** configures Discord and Slack independently, and both can be enabled at the same time. Both are off by default. Cockpit makes outbound connections to the Discord Gateway or Slack Socket Mode.
 
-1. For Discord, create a bot in the Developer Portal, paste its token, and invite it to the server. For Slack, create an app from the manifest copied from Settings, then paste its bot token (`xoxb-`) and an app-level token (`xapp-`) with `connections:write`.
+1. For Discord, create an app in the Developer Portal, paste its token, and invite it to the server. For Slack, create an app from the manifest copied from Settings, then paste its access token (`xoxb-`) and an app-level token (`xapp-`) with `connections:write`.
 2. Choose the destination channel and one **Who can answer** user. The relay does not start without an allowed user, and Cockpit refuses interactions from other server or workspace members.
 3. Optionally choose whether to send Ask images and videos and whether files posted in the channel by the allowed user can be attached to the answer.
 4. Send a **Test Ask**, answer it from the selected service, and confirm that a round-trip time appears before enabling the relay.

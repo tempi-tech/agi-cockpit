@@ -90,7 +90,7 @@ Settings can disable or remove a hook, but removing it leaves existing run histo
 
 ## Store credentials
 
-AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord bot token and Slack bot and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
+AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord token and Slack access and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
 
 Muse Code keeps one shared login per computer (Keychain on macOS); Cockpit does not isolate Muse Code profiles. In **Muse Code login** mode, Cockpit removes an inherited `META_API_KEY` before launching native or terminal UI. Terminal UI still runs inside your login shell, so startup files can export a key again. In **Meta API key** mode, Cockpit passes the encrypted key saved as `agents.credential.meta`; it is not an AGI Labo credential. Use `agents.museAuthMode` (`muse-login` or `api-key`) to select the method. Reads expose only whether the key is set.
 
