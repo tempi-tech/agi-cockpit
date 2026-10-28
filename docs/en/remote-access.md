@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or another Desktop and operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -116,6 +116,12 @@ A message sent while a task is running enters the queue without stopping the cur
 
 Before adding AGI Cockpit to the home screen, turn on **HTTPS** in Desktop and open the `https://...` URL shown in **Connection info**. An HTTP URL is not a supported configuration for using AGI Cockpit as a PWA. After opening the HTTPS page, select **Add to Home Screen** from Safari's Share menu on iPhone or iPad. In Chrome on Android, open the browser menu and select **Install app** or **Add to Home screen**.
 
+## Operate a Crew from the PWA
+
+Select a Crew in the task list to read its conversation, queue a request, inspect child tasks, and answer approvals or questions. Its settings support the role instructions, agent settings, Discord connection, allowed people and places, periodic checks, and scheduled requests. As on Desktop, changing access can require owner confirmation in Cockpit.
+
+Use the Crew conversation and settings rather than ordinary task controls. A queued request waits while the Crew is stopped and uses the Crew's settings when delivered. The Crew's internal task cannot be directly resumed, renamed, completed, deleted, branched, or have its conversation cleared through ordinary remote task operations. `cockpit crew` commands remain local-only; remote Crew operation uses the PWA. See [Crews (alpha)](https://agi-labo.com/en/tools/cockpit/docs#crews-alpha) and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#crews-access-and-retained-data).
+
 ## Switch between Cockpit computers
 
 ### Update the connected host
@@ -186,7 +192,7 @@ Configuration cannot change while the server is running. If you need to change i
 
 `cockpit devices`, `cockpit devices list`, and `cockpit devices all` list this computer and devices on the same tailnet that answer Cockpit's health check. Each device includes the `os` reported by Tailscale, or `null` when Cockpit cannot recognize it. A device that is online in Tailscale but does not answer Cockpit is omitted from `devices` and reported with a reason under `diagnostics.unreachable`. `diagnostics.notProbed` counts devices that Tailscale reports as offline or without an address. `cockpit devices self` does not probe peers; it returns only this computer and aliases.
 
-An alias is optional. Save one with `cockpit devices alias-set <alias> <host>` when useful, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
+An alias is optional. Save one with `cockpit devices alias-set <alias> <host>` when useful, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask get`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
 
 Remote CLI requests from a computer on the same tailnet with the same Tailscale owner need no token. Other connections need a paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit refuses connections that are neither a Tailscale peer nor loopback, even with a token. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC.
 

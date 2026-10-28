@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.113.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -99,7 +99,7 @@ The right-side-panel Ask tab lists every Ask waiting for an answer on this devic
 
 By default, Cockpit also opens a dedicated window for every new Ask. Turn off **Ask windows on this device** under **Settings → Notifications** to close open Ask windows without closing their Asks or changing relay and answer delivery. Continue answering from the side-panel Ask tab, PWA, CLI, Discord, or Slack. The preference is stored per device. Turning it back on reopens windows for Asks that are still waiting. From the CLI, use `cockpit settings set notifications.askWindow false` or `true`.
 
-**Hide for now** in the dedicated window hides only that window for the current app session. It does not close the Ask or resume its task. While the Ask-window setting is on, use **Open in a separate window** in the side panel to show it again. **Close** is a separate operation that removes the Ask itself.
+**Hide for now** in the dedicated window hides only that window for the current app session. It does not close the Ask or resume its task. While the Ask-window setting is on, use **Open in a separate window** in the side panel to show it again. **Close Ask** is a separate operation that removes the Ask itself.
 
 Selections, free-form input, a whole-Ask reply, and attachments are shared between the dedicated window and the side panel before submission. Editing either view updates the latest draft for that Ask in the other. This sharing is limited to an unanswered Ask inside the same Desktop app; it does not synchronize an unsent draft to the PWA, CLI, Discord, Slack, or another device. Answering or closing the Ask discards the draft, and it does not persist after the app exits.
 
@@ -198,13 +198,26 @@ cockpit ask answer <ask-id> --input "Review the image" --attachment ./screenshot
 cockpit ask close <ask-id>
 ```
 
-Add `--host <host-or-alias>` to `list`, `answer`, or `close` to operate an Ask on another registered Cockpit computer. The target must have member-only Remote Access enabled. Remote control authenticates like remote tasks: a computer on the same tailnet with the same Tailscale owner needs no token, and other connections need the paired bearer token. In Tailscale-only mode, connections that are neither a Tailscale peer nor loopback are refused. Ask creation and relay settings remain local-only. Paths passed to `--attachment` refer to files on the target computer.
+Add `--host <host-or-alias>` to `list`, `get`, `answer`, or `close` to operate an Ask on another registered Cockpit computer. The target must have member-only Remote Access enabled. Remote control authenticates like remote tasks: a computer on the same tailnet with the same Tailscale owner needs no token, and other connections need the paired bearer token. In Tailscale-only mode, connections that are neither a Tailscale peer nor loopback are refused. Ask creation and relay settings remain local-only. Paths passed to `--attachment` refer to files on the target computer.
 
 `list` inspects the question, choices, and attached-media metadata. `answer` acts on the user's behalf and resumes the task that created the Ask. For one question, combine `--choice` or `--choice-index` with `--input` to send a selection and supplementary text together. For several questions, group answers under `--question <id>` and add `--whole-answer` when one reply should apply to the Ask as a whole. `--attachment` imports a local file into the originating task's managed uploads and delivers it in the same format as a UI answer attachment. In a multi-question answer, place the attachment after its target `--question`; an attachment before the first group belongs to the whole-Ask reply.
 
 Use proxy answering only when the answering agent has both the context and the authority to relay the decision, such as a voice agent conveying an explicit answer from the user. Do not answer an Ask with media until the user or proxy has actually inspected that media.
 
 `close` removes an unanswered Ask without resuming its originating task. Use it to clear a stale Ask, not to bypass a decision that still needs an answer.
+
+## Inspect answered or closed Asks
+
+```bash
+cockpit ask get <ask-id>
+cockpit ask get <ask-id> --host <host-or-alias>
+```
+
+`get` returns `pending`, `answered`, or `closed`, with the resolution time, responder, and a short answer summary when available. For answered Asks, `delivery` is `queued`, `failed` (being retried), or `delivered`; an answer does not by itself prove delivery. Finished Asks are retained for 30 days, up to the latest 500. Unknown or expired IDs return `ask_not_found` and exit 1. `list` continues to show open Asks.
+
+On Desktop and the PWA, native chat keeps an Ask card showing its answer or closed state; a terminal task has no card. Crew and child-task Asks appear in the Crew conversation. **Close Ask** dismisses an unanswered Ask without resuming the task; the PWA asks for confirmation first.
+
+Discord profile and channel links opened from Desktop use the installed Discord app when available, otherwise the HTTPS URL.
 
 ## Related pages
 

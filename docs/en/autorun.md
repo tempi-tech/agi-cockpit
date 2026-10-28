@@ -2,11 +2,11 @@
 
 # Autorun
 
-Learn how Autorun starts a new task or sends an instruction to an existing task from a one-time, interval, or cron schedule.
+Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
-Autorun starts a new task or sends an instruction to an existing task at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
+Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
 Use [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) to react to events such as task completion or an Ask, rather than a time or interval.
 
@@ -37,7 +37,7 @@ Expand **Edit the cron expression** to enter or review the five-field expression
 1. Open the app menu in the lower-left corner of Desktop, then select **Autorun tasks**.
 2. Select **New Autorun**.
 3. Enter a name and the instruction to send when the task starts.
-4. Under **Execution target**, choose **Create a new task** or **Send to an existing task**.
+4. Under **Execution target**, choose **New task**, **Existing task**, or **Crew**.
 5. For a new task, choose the working directory and agent, then review any shown UI mode, account, model, reasoning effort, service tier, system prompt, and approval mode. Cockpit uses the Master's working location for Master Agent runs, and **Auto** is the default for agents with account selection.
 6. For an existing task, choose **Target task**. Cockpit creates no new runtime; it uses the target's existing agent, conversation, working directory, and runtime settings.
 7. Choose **Once**, **Interval**, or **Cron** and configure the timing. For Cron, use the daily, weekly, or monthly setup, or expand the raw expression for an advanced schedule.
@@ -66,6 +66,18 @@ Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor'
 Qoder Autoruns can also use **Native UI** or **Terminal**. Native UI exposes Qoder's available model, model-specific reasoning effort, system prompt, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Qoder does not expose service-tier settings.
 
 Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder Autoruns store either **Auto** or a pinned account. Auto is the default for new Autoruns. It is stored as a selection method rather than as one concrete profile, so every execution chooses again from the usage state of signed-in accounts. If the created task reaches a usage limit or returns a plan-restriction response, Cockpit also switches to another available account and continues processing. Use `--account <name|id|default>` to pin an account from the CLI and `--account auto` to select Auto.
+
+## Send a scheduled request to a Crew
+
+In Desktop or the PWA, choose **Crew** as the execution target and select the Crew. The instruction joins that Crew's Queue and uses its settings at delivery. It waits while the Crew is stopped. A run recorded as `delivered` means the request reached the Queue, not that the work finished. Review the Crew's conversation for the result.
+
+```bash
+cockpit autorun create --name "Morning review" --instruction "Review today's work" --target-crew <crew> --type cron --expression "0 9 * * *"
+```
+
+`--target-crew` accepts a Crew ID or name and cannot be combined with `--target-task`. A Crew's internal task cannot be an existing-task target. If the Crew is removed, the Autorun is disabled and marked `target-crew-unavailable`; select an existing Crew before enabling it again. `cockpit autorun get` exposes `executionTarget` and `targetCrewId`.
+
+An Autorun created or changed by a Crew or its child task retains that provenance. Its requests to a Crew are task messages rather than owner requests, and tasks it creates inherit the creating Crew's limits. Removing the creating Crew disables it with `creator-crew-unavailable`; owner re-enablement clears that provenance. See the [Autorun reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/autorun).
 
 ## Review a run
 

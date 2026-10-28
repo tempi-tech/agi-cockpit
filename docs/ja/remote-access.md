@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAや別のDesktopからAGI Cockpitのタスクを監督し、対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.104.0で2026-10-11に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.114.0で2026-10-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -116,6 +116,12 @@ PWAのライト・ダーク表示は、接続先Desktopの「外観」にある�
 
 ホーム画面に追加する前に、Desktopで**HTTPS**をオンにし、接続情報の`https://...` URLを開いてください。HTTPのURLは、AGI CockpitをPWAとして利用する構成の対象外です。HTTPSで開いた後、iPhoneまたはiPadのSafariでは共有メニューから「ホーム画面に追加」、AndroidのChromeではブラウザーメニューから「アプリをインストール」または「ホーム画面に追加」を選びます。
 
+## PWAからクルーを操作する
+
+タスク一覧でクルーを選ぶと、会話を読み、依頼をキューへ追加し、子タスクを確認し、承認や質問へ回答できます。設定では役割の指示、エージェント、Discord接続、許可する人と場所、定期確認、定期的な依頼を操作できます。Desktopと同様、権限を広げる変更ではCockpit内でオーナーの承認が必要になる場合があります。
+
+通常タスクの操作ではなく、クルーの会話と設定を使います。停止中の依頼はキューで待ち、配送時のクルーの設定で動きます。クルーの内部タスクは通常のリモートタスク操作で直接再開・改名・完了・削除・分岐・会話消去できません。`cockpit crew`はローカル専用で、遠隔からのクルー操作にはPWAを使います。[クルー（アルファ版）](https://agi-labo.com/tools/cockpit/docs#クルーアルファ版)と[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#クルーの権限と保存データ)も確認してください。
+
 ## 複数のCockpitを切り替える
 
 ### 接続先のホストを更新する
@@ -186,7 +192,7 @@ cockpit remote-access enable
 
 `cockpit devices`、`cockpit devices list`、`cockpit devices all`は、このコンピューターと、同じtailnet上でCockpitのhealth checkに応答した端末を一覧にします。各端末にはTailscaleから取得した`os`も表示され、判別できない場合は`null`になります。Tailscale上でonlineでもCockpitが応答しない端末は`devices`に含まれず、`diagnostics.unreachable`に理由が表示されます。Tailscaleがofflineまたはaddress未取得の端末数は`diagnostics.notProbed`で確認できます。`cockpit devices self`はほかの端末を探索せず、この端末とaliasだけを返します。
 
-aliasは必須ではありません。必要な場合は`cockpit devices alias-set <alias> <host>`で保存し、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加します。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
+aliasは必須ではありません。必要な場合は`cockpit devices alias-set <alias> <host>`で保存し、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask get`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加します。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
 
 同じtailnetで、Tailscaleの所有者が同じコンピューターからのリモートCLI要求には、tokenは不要です。それ以外の接続には、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続は、tokenがあっても拒否します。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。
 

@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -31,6 +31,12 @@ Remote rows show the task name, instruction preview, state, pending Ask, agent, 
 An open remote task follows navigation to another task on the same device and Desktop Back and Forward history. If synchronization drops briefly, Cockpit keeps the loaded view for a short reconnection period before replacing it with the offline state. Separate states and recovery actions identify an offline or missing device, a removed task, and an unresponsive destination. A device that rejects the connection because it runs an older version or has a different Tailscale owner is shown as unavailable.
 
 Switch back to **This device** to close an open remote task, stop discovering and connecting to other PCs, and show only local tasks. This feature requires an AGI Labo membership and Tailscale. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#protect-remote-access) for the difference between the list and task-control connections, and [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup.
+
+## Filter tasks and Crews
+
+On Desktop, open **Filter** and choose **Type → All**, **Tasks**, or **Crews**. Under **Agent**, select several agents together; a row matches any selected agent. Combine the type and agent choices with search. **Clear** resets the agent selection; **Clear filters** resets the type and agent filters.
+
+Crews appear with their child tasks, inside their project when one is assigned. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (alpha)](https://agi-labo.com/en/tools/cockpit/docs#crews-alpha).
 
 ## Search, sort, and use menus
 
