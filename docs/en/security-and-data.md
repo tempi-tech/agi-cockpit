@@ -88,6 +88,16 @@ The complete event JSON is delivered on standard input. Some values, including t
 
 Settings can disable or remove a hook, but removing it leaves existing run history in place. History rotates at 2,000 lines or 2 MB and keeps the latest 1,000 lines. Capturing selected text from a global hotkey on macOS requires Accessibility permission. Without it, the hook still runs with an empty selection value. Concurrency limits, timeouts, depth limits, and the circuit breaker reduce runaway execution; they do not make a registered command safe.
 
+## Crews: access and retained data
+
+Crews are in alpha and run on the owner's AI account, including turns requested by other people the owner allows. Received chat messages, attachments and the context the Crew reads can be sent to that AI service. Check the account's terms before allowing other people, and tell participants how their messages are used. Discord connections accept only the configured people and places; check Discord user IDs when assigning owners. New people wait for approval, and their earlier messages are not delivered after approval.
+
+A new Crew uses its agent's careful approval default. **Full access** lets it run commands and edit files without asking. Its home folder is not a sandbox: the Crew and its children run as the same OS user as Cockpit. Instructions to treat non-owner requests carefully and to confirm external actions can be missed by an agent. Crew CLI restrictions do not isolate files, secrets, other tasks, Hooks, settings or Remote Access, and can be bypassed by a process acting through the same local OS account. Protect that account and limit the files and capabilities within its reach. Approval waits pause replies and queued messages until the owner responds in Cockpit.
+
+Each Crew keeps its instructions, memory and work in its own home, with Git history. Received chat attachments are retained for seven days, or longer while their message is queued; copies saved in the home, the owner's own files and Ask-answer attachments do not expire under that rule. Stop preserves queued messages. Removing a Crew deletes its settings and attempts to move its home to the Trash; when that fails, the reported home path remains on disk. Disconnecting a chat removes its connection credentials. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for exact limits and operations.
+
+Finished Asks also retain a local status record for up to 30 days, with at most the latest 500 records. It includes the title, task, outcome, responder and an answer summary of up to 500 characters. `cockpit ask get <askId>` exposes the status and answer-delivery state; do not put secrets in Ask answers. This retention is separate from the secure password-input flow.
+
 ## Store credentials
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord token and Slack access and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.

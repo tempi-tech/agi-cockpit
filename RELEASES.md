@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.114.0 — 2026-10-28
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Crews in alpha: persistent agents with their own roles and memory.
+- Added Discord connections for Crews to receive requests from approved people and reply.
+- Added periodic work checks for Crews.
+- Added scheduled requests to Crews through Autorun.
+- Added Crew conversations and settings to the mobile PWA.
+- Added task-list filtering by tasks or Crews.
+- Added task-list filtering by multiple agents at once.
+- Added CLI lookup of answered and closed Asks.
+- Changed Discord profile and channel links to open in the installed Discord app when available.
+- Improved Ask layouts with more compact, readable questions and choices.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 役割や記憶を持って継続的に働く「クルー」をアルファ版として追加しました。
+- クルーにDiscordを接続し、許可した人からの依頼を受けて返信できるようになりました。
+- クルーが定期的に作業状況を確認する機能を追加しました。
+- Autorunからクルーへ定期的に依頼を送れるようになりました。
+- スマートフォンのPWAからクルーの会話や設定を操作できるようになりました。
+- タスク一覧をタスク・クルーの種類で絞り込めるようになりました。
+- タスク一覧で複数のエージェントをまとめて絞り込めるようになりました。
+- 終了したAskの回答・終了状態をCLIから確認できるようになりました。
+- Discordのプロフィールやチャンネルへのリンクを、インストール済みのDiscordアプリで開くようになりました。
+- Askの質問と選択肢を、よりコンパクトで読みやすい表示に改善しました。
+
+</details>
+
 ## v4.113.0 — 2026-10-28
 
 **Type:** minor · **Platforms:** macOS, Linux
