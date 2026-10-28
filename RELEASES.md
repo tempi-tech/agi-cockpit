@@ -4,6 +4,21 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.115.0 — 2026-10-29
+
+**Type:** minor · **Platforms:** macOS
+
+- Combined multiple Asks into one window, with Previous/Next navigation that preserves answers in progress.
+- Changed Ask ordering to newest first in the Ask window, side panel, and PWA Inbox.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 複数のAskを一つのウィンドウにまとめ、入力中の回答を保ったまま前後の質問へ切り替えられるようになりました。
+- Askウィンドウ・サイドパネル・PWAの受信箱で、質問を新しい順に表示するようになりました。
+
+</details>
+
 ## v4.114.0 — 2026-10-28
 
 **Type:** minor · **Platforms:** macOS, Linux
