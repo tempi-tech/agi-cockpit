@@ -8,24 +8,24 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Turn a task into a Crew while keeping its conversation and agent session.
-- Enter a Crew’s Discord connection token in Cockpit without sharing it with the agent.
-- Automatically enable Message Content Intent when possible while connecting Discord.
-- Deliver incoming Discord messages to a Crew while it is working.
-- Change a Crew’s icon or working folder through the CLI.
-- Let the owner’s tasks respond to a Crew’s pending approvals and confirmation Asks.
-- Post to chat as a Crew from the owner’s CLI.
-- Read a Discord message and its surrounding conversation through a Crew using its message link.
-- Open a menu from the Crews list to change a Crew’s name or settings.
-- Show the connected Discord application name in the Crews list.
-- Remember the last settings tab opened for each Crew.
-- Retrieve and show Discord display names for people added to a Crew.
-- Keep unapproved people who mention a Crew in an allowed channel waiting for approval.
-- View and answer an Ask directly in the mobile chat.
-- Fix garbled Japanese text passed to the CLI from Windows PowerShell.
-- Prevent Crew notifications about child tasks that have already been removed.
-- Remove terminal control sequences from retrieved terminal task text.
-- Fix reading a task’s Browser Identity through the CLI unintentionally changing its assignment.
+- Added task-to-Crew conversion while preserving the conversation and agent session.
+- Added secure input for Crew Discord tokens without sharing them with the agent.
+- Added automatic Message Content Intent activation when possible during Discord connection.
+- Improved Crew chat delivery by steering incoming Discord messages into ongoing work.
+- Added CLI options for Crew icons and working folders.
+- Added support for owner tasks to respond to Crew approvals and confirmation Asks.
+- Added chat posting as a Crew from the owner’s CLI.
+- Added Discord message-link lookup with surrounding conversation through a Crew.
+- Added menus in the Crews list for renaming and settings.
+- Added connected Discord application names to the Crews list.
+- Improved Crew settings by remembering the last opened tab.
+- Improved Crew people lists by retrieving Discord display names.
+- Fixed unapproved people mentioning a Crew in allowed channels bypassing the pending-approval list.
+- Added inline Ask forms for answering directly in mobile chat.
+- Fixed garbled Japanese text passed to the CLI from Windows PowerShell.
+- Fixed Crew notifications referring to removed child tasks.
+- Fixed terminal control sequences remaining in retrieved task text.
+- Fixed Browser Identity reads through the CLI unintentionally changing task assignments.
 
 <details>
 <summary>日本語のリリースノート</summary>
