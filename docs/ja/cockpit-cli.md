@@ -84,7 +84,7 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 外部リンク、ファイルアップロード、物理端末、秘密入力には追加の安全境界があります。配送済みの入力を確認せず再送すると二重操作になる可能性があります。
 
-`cockpit secret request`は、DesktopまたはHTTPS接続のPWAへ、指定したブラウザーのパスワード欄またはタスクの管理対象ターミナルへ一度だけ入力する依頼を作ります。CLIは目的と入力先を指定し、`status`と`cancel`で状態を扱いますが、値を受け取る引数、標準入力、取得コマンドはありません。値は利用者がCockpitの画面へ入力します。成功と失敗の応答には接続先の`instance`が含まれ、失敗時は固定の`code`と説明用の`error`を返します。自動処理は翻訳される説明文ではなく`code`で分岐し、再送前に`instance`と失敗理由を確認してください。利用条件と境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)、正確なコードと復旧方法は[`cockpit secret`リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/secret)を参照してください。
+`cockpit secret request`は、DesktopまたはHTTPS接続のPWAへ、指定したブラウザーのパスワード欄、タスクの管理対象ターミナル、またはCrewの接続トークン入力先へ一度だけ入力する依頼を作ります。CLIは目的と入力先を指定し、`status`と`cancel`で状態を扱いますが、値を受け取る引数、標準入力、取得コマンドはありません。値は利用者がCockpitの画面へ入力します。成功と失敗の応答には接続先の`instance`が含まれ、失敗時は固定の`code`と説明用の`error`を返します。自動処理は翻訳される説明文ではなく`code`で分岐し、再送前に`instance`と失敗理由を確認してください。利用条件と境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)、正確なコードと復旧方法は[`cockpit secret`リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/secret)を参照してください。
 
 実践手順は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)、[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 

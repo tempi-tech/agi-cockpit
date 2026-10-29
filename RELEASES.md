@@ -4,6 +4,53 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.116.0 — 2026-10-30
+
+**Type:** minor · **Platforms:** macOS
+
+- Turn a task into a Crew while keeping its conversation and agent session.
+- Enter a Crew’s Discord connection token in Cockpit without sharing it with the agent.
+- Automatically enable Message Content Intent when possible while connecting Discord.
+- Deliver incoming Discord messages to a Crew while it is working.
+- Change a Crew’s icon or working folder through the CLI.
+- Let the owner’s tasks respond to a Crew’s pending approvals and confirmation Asks.
+- Post to chat as a Crew from the owner’s CLI.
+- Read a Discord message and its surrounding conversation through a Crew using its message link.
+- Open a menu from the Crews list to change a Crew’s name or settings.
+- Show the connected Discord application name in the Crews list.
+- Remember the last settings tab opened for each Crew.
+- Retrieve and show Discord display names for people added to a Crew.
+- Keep unapproved people who mention a Crew in an allowed channel waiting for approval.
+- View and answer an Ask directly in the mobile chat.
+- Fix garbled Japanese text passed to the CLI from Windows PowerShell.
+- Prevent Crew notifications about child tasks that have already been removed.
+- Remove terminal control sequences from retrieved terminal task text.
+- Fix reading a task’s Browser Identity through the CLI unintentionally changing its assignment.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 会話とセッションを引き継いで、タスクをCrewへ変換できるようになりました。
+- CrewのDiscord接続トークンを、エージェントへ渡さずCockpitの専用画面から入力できるようになりました。
+- Discord接続時に、可能な場合はMessage Content Intentを自動で有効にするようになりました。
+- 実行中のCrewへ届いたDiscordメッセージを、その場で反映できるようになりました。
+- CrewのCLIから、アイコンや作業フォルダを変更できるようになりました。
+- 所有者のタスクからCrewの承認待ちや確認Askに対応できるようになりました。
+- 所有者側のCLIからCrewとしてチャットへ投稿できるようになりました。
+- Discordのメッセージリンクを指定して、Crewからそのメッセージと前後の会話を読めるようになりました。
+- Crew一覧からメニューを開いて名前や設定を変更できるようになりました。
+- Crew一覧に接続先のDiscordアプリ名を表示するようになりました。
+- Crewの設定で最後に開いたタブを保持するようになりました。
+- Crewに追加した人のDiscord表示名を取得して表示するようになりました。
+- 許可済みチャンネルでCrewにメンションした未承認の人を、承認待ちとして扱うよう修正しました。
+- スマートフォンのチャット内でAskの内容を確認して直接回答できるようになりました。
+- WindowsのPowerShellからCLIへ渡す日本語が文字化けする問題を修正しました。
+- 削除済みの子タスクに関する通知がCrewへ届く問題を修正しました。
+- ターミナルタスクの取得結果に制御文字が残る問題を修正しました。
+- CLIでタスクのBrowser Identityを読み取る際に、割り当てを変更してしまう問題を修正しました。
+
+</details>
+
 ## v4.115.0 — 2026-10-29
 
 **Type:** minor · **Platforms:** macOS, Linux

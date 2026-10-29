@@ -130,6 +130,16 @@ Delivery requires a managed Unix PTY with echo off, canonical line input enabled
 
 The exact supplied value is masked in subsequent Cockpit terminal output, including when split across output chunks. This can also mask unrelated text matching a protected prefix. The receiving program can retain or transform the value; encoded or transformed output and compromised destinations are outside this protection. Trust the receiving program and destination. When the destination is the primary task terminal, or the requester is a plain terminal task, check `cockpit secret status`: Cockpit does not inject result notifications into those shells or password prompts.
 
+### Crew connection tokens and authority
+
+`cockpit crew connect <crew> --platform discord --secure-input` asks you to enter the Discord bot token in Cockpit. Review the Crew and the connected account being replaced before selecting **Connect with this token**. Cockpit checks the token with Discord and, when possible, enables Message Content Intent. After Discord accepts it, Cockpit saves the token as that Crew's credentials in secure storage. This is an intentional storage exception to one-time password delivery. The requesting agent receives only the result, never the token. A removed Crew or a changed connection invalidates the request.
+
+An owner's task or the master can request this input. A Crew can request it for itself only during a turn started by its owner; its child tasks cannot. The owner's authenticated tasks can also answer a Crew's owner-confirmation Ask and decide its pending approvals. Crew sessions and their children cannot grant themselves those permissions. CLI checks prevent accidental misuse but do not isolate processes running as the same operating-system user. Protect local access accordingly.
+
+People who mention a Crew in a Discord channel must still be approved before their requests are delivered; allowing a channel does not approve everyone in it. Discord messages that interrupt a running Crew retain the least trusted authority of the interrupted turn and the new message.
+
+Turning a task into a Crew preserves its conversation and agent session, transfers its child tasks, and redirects its Autoruns to the Crew. This conversion cannot be undone; removing the Crew also removes the converted task. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for eligibility and permissions.
+
 ## Isolate Browser Identities
 
 The in-app browser grants site permissions such as notifications, geolocation, and clipboard reading and writing by default, without a Cockpit confirmation dialog. OS and Web API restrictions still apply. It denies media capture including camera and microphone, screen capture, fullscreen, automatic fullscreen, permission to open external apps, keyboard lock, and deprecated synchronous clipboard reading. Open only sites you trust. This policy applies to every Browser Identity; separating Identities does not restrict site permissions.
