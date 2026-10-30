@@ -8,12 +8,12 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Each task can now keep up to five Asks awaiting answers.
-- Crews can now edit the text of their own Discord messages.
-- Crews can now delete their own Discord messages.
-- Crews can now add and remove reactions on Discord messages in places they participate in.
-- Crew chat history access is now restricted according to the requester and the authority of the turn.
-- Reduced in-app browser overhead by making state saving more efficient.
+- Added support for up to five unanswered Asks per task.
+- Added support for Crews to edit their own Discord messages.
+- Added support for Crews to delete their own Discord messages.
+- Added support for Crews to add and remove Discord reactions in places they participate in.
+- Changed Crew history access to follow the requester and the authority of the turn.
+- Improved in-app browser performance by making state saving more efficient.
 
 <details>
 <summary>日本語のリリースノート</summary>
