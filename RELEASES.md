@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.117.0 — 2026-10-30
+
+**Type:** minor · **Platforms:** macOS
+
+- Added an optional limit on consecutive replies between Crews.
+- Changed Crew threads to require a mention by default.
+- Added separate response settings for threads a Crew creates and joins.
+- Added support for Crews to rename Discord threads they created.
+- Fixed Crew instruction and memory links opening files from the wrong folder.
+- Added mobile previews for chat links to Crew home files and additional folders.
+- Added mobile folder browsing from chat links.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Crew同士の返信が続く回数に上限を設定できるようになりました。
+- Crewが作成・参加したスレッドでは、既定でメンションが必要になりました。
+- 作成したスレッドと参加したスレッドの応答設定を、それぞれ変更できるようになりました。
+- Crewが自分で作成したDiscordスレッドの名前を変更できるようになりました。
+- Crewの会話内にある指示・メモリーなどのリンクが、正しいホーム内のファイルを開くよう修正しました。
+- スマートフォンでも、会話内のリンクからCrewのホームや追加フォルダのファイルを確認できるようになりました。
+- スマートフォンで会話内のフォルダリンクを開くと、そのフォルダを表示できるようになりました。
+
+</details>
+
 ## v4.116.0 — 2026-10-30
 
 **Type:** minor · **Platforms:** macOS, Linux
