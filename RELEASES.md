@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.118.0 — 2026-10-31
+
+**Type:** minor · **Platforms:** macOS
+
+- Each task can now keep up to five Asks awaiting answers.
+- Crews can now edit the text of their own Discord messages.
+- Crews can now delete their own Discord messages.
+- Crews can now add and remove reactions on Discord messages in places they participate in.
+- Crew chat history access is now restricted according to the requester and the authority of the turn.
+- Reduced in-app browser overhead by making state saving more efficient.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 1つのタスクで、回答待ちのAskを最大5件まで保持できるようになりました。
+- Crewが自分で投稿したDiscordメッセージの本文を編集できるようになりました。
+- Crewが自分で投稿したDiscordメッセージを削除できるようになりました。
+- Crewが参加する場所で、Discordメッセージにリアクションを付けたり外したりできるようになりました。
+- Crewの会話履歴の閲覧範囲を、依頼者とターンの権限に応じて制限するようになりました。
+- アプリ内ブラウザの状態保存を効率化し、利用中の負荷を軽減しました。
+
+</details>
+
 ## v4.117.0 — 2026-10-30
 
 **Type:** minor · **Platforms:** macOS, Linux
