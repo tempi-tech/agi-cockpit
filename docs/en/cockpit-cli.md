@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.105.0 on 2026-10-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.116.0 on 2026-10-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -41,6 +41,8 @@ The PowerShell `cockpit` launcher decodes responses as UTF-8 and prints exactly 
 ```powershell
 Get-Content report.html -Raw -Encoding UTF8 | cockpit html show --stdin
 ```
+
+Japanese and other non-ASCII command arguments and pipeline input are passed as UTF-8, including from Windows PowerShell 5.1. For files, keep specifying `-Encoding UTF8` when PowerShell reads them.
 
 The Windows CLI does not require a separate Node.js installation for its internal helpers. The launcher uses the AGI Cockpit executable as its runtime and can find the installed Microsoft Store package even while the app is closed. `cockpit doctor` reports the actual `path` and `source` under `nodeRuntime`. If no runtime is available, commands that need one return `node_runtime_unavailable`; a runtime that returns no JSON produces `node_runtime_failed`.
 

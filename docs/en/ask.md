@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.115.0 on 2026-10-29. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.116.0 on 2026-10-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -17,7 +17,7 @@ Ask lets an AI agent pause its work and hand a confirmation or decision to a per
 
 Ask is more than a notification. The question remains available until it is answered, and a person can respond in the dedicated Desktop Ask window or the right-side-panel Ask tab, from **Inbox** in the PWA, or through a configured Discord or Slack relay.
 
-The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A password input request is not an Ask; it delivers a value once to the specified browser field or managed task terminal. All three let you open the originating task while that task is still available.
+The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A secure input request is not an Ask; it delivers a password once to the specified browser field or managed task terminal, or saves a Crew connection token through the dedicated Crew flow. All three let you open the originating task while that task is still available.
 
 ## How Ask differs from other confirmations
 
@@ -58,7 +58,7 @@ Desktop opens a clicked Ask URL in the system browser without navigating the Ask
 
 Desktop and PWA Ask surfaces include a button that opens the task that created the question. Navigating there does not answer or close the Ask. The button is unavailable after the source task has been deleted.
 
-In the PWA task list, a question bubble labelled **Waiting for an Ask answer** identifies a task with an unanswered Ask. It follows the open Ask itself rather than an ordinary task question state, and disappears after the Ask is answered or closed. The task row still opens task details; answer the Ask from **Inbox** in the PWA.
+In the PWA task list, a question bubble labelled **Waiting for an Ask answer** identifies a task with an unanswered Ask. It follows the open Ask itself rather than an ordinary task question state, and disappears after the Ask is answered or closed. The task row still opens task details; answer the Ask directly in the task chat or from **Inbox** in the PWA. The chat shows the full question and answer form, including choices, free text, attachments, and explanations; answering or closing it updates the other Ask surfaces.
 
 When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
 

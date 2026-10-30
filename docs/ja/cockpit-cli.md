@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.105.0で2026-10-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.116.0で2026-10-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -45,6 +45,8 @@ PowerShellの`cockpit`ランチャーは、応答をUTF-8として読み取り�
 ```powershell
 Get-Content report.html -Raw -Encoding UTF8 | cockpit html show --stdin
 ```
+
+日本語などの非ASCII文字を含む引数とパイプ入力は、Windows PowerShell 5.1でもUTF-8で渡します。PowerShellでファイルを読む場合は、引き続き`-Encoding UTF8`を指定してください。
 
 Windows版CLIの内部処理にNode.jsを別途インストールする必要はありません。ランチャーはAGI Cockpitの実行ファイルをランタイムとして使い、アプリを閉じている場合もインストール済みのMicrosoft Store版を検出できます。`cockpit doctor`の`nodeRuntime`で、実際に使った`path`と`source`を確認できます。利用可能なランタイムがない場合は`node_runtime_unavailable`、ランタイムがJSONを返さない場合は`node_runtime_failed`になります。
 

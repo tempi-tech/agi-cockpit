@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.116.0 on 2026-10-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -38,6 +38,12 @@ On Desktop, open **Filter** and choose **Type → All**, **Tasks**, or **Crews**
 
 Crews appear with their child tasks, inside their project when one is assigned. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (alpha)](https://agi-labo.com/en/tools/cockpit/docs#crews-alpha).
 
+### Turn a task into a Crew
+
+Choose **Turn into a Crew** from a task’s menu, or use `cockpit crew create --from-task <task-id>`. This preserves the conversation and agent session, agent settings, folder, and project. Child tasks move to the Crew, Autoruns targeting the task are redirected to it, and the task leaves its parent if it had one. Cockpit asks the Crew to propose instructions from that history before saving them.
+
+Conversion is available to supported Native UI agent tasks and Cockpit Agent tasks after work, tool approvals, questions, and pending agent switches have ended. Terminal, Antigravity, Master Agent, Fleet nodes, Creative Studio, and tasks already owned by a Crew are ineligible. Conversion cannot be undone; removing the Crew removes the converted task too. See the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for exact eligibility and session handling.
+
 ## Search, sort, and use menus
 
 For tasks on this device, task-list search partially matches displayed task and project names. A task ID becomes searchable after at least four characters. It does not inspect a local task's instruction, working directory, or internal metadata. When another device is visible, search also partially matches the task name, instruction preview, and working folder received from that device, but not its remote task ID.
@@ -46,7 +52,7 @@ The **Pinned** heading on Desktop and the PWA shows the total number of unfinish
 
 In the PWA, select a project heading to collapse or expand that project's tasks. A collapsed heading keeps the task count and running or unread indicators visible. The choice is stored in that browser for each project and survives a reload, but it does not sync to other devices. Search can hide groups that do not match without changing their saved collapsed state. A new or reintroduced project starts expanded; completed-only sections and the Pinned group keep their existing behavior.
 
-In the PWA task list, a question-bubble marker labelled **Waiting for an Ask answer** appears while that task has an unanswered Ask. It follows the actual open Ask rather than inferring from `waitingReason: question`, so it clears after the Ask is answered or closed. Selecting the row still opens the task; open **Confirm** to answer the Ask. A session-unrecoverable warning or usage-limit warning takes display priority over the Ask marker because it identifies a separate recovery blocker.
+In the PWA task list, a question-bubble marker labelled **Waiting for an Ask answer** appears while that task has an unanswered Ask. It follows the actual open Ask rather than inferring from `waitingReason: question`, so it clears after the Ask is answered or closed. Selecting the row opens the task; answer the Ask directly in its chat or from **Inbox**. A session-unrecoverable warning or usage-limit warning takes display priority over the Ask marker because it identifies a separate recovery blocker.
 
 On Desktop, Command/Ctrl+K opens a search palette across projects. In addition to task names, first instruction lines, and project names, it searches app destinations such as **New task**, **Settings**, **Agent settings**, **Ask notifications**, **Hooks**, **Display**, **Remote access**, **Autorun tasks**, **History**, **Fleet list**, **Official documentation**, and **Updates**. Results include completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. With an empty query, the palette shows recent tasks and primary destinations. The default key can be changed in Shortcut settings.
 
