@@ -154,7 +154,7 @@ cockpit ask relay test slack
 
 ## Constraints
 
-- A task can hold only one active Ask at a time.
+- A task can hold up to five open Asks at a time. Each is answered or closed on its own, and a sixth is refused with `ask_limit_reached` and the IDs of the open Asks.
 - A completed task cannot create an Ask.
 - Ask is available to resumable AI-agent tasks, not Terminal tasks.
 - After creating an Ask, the agent waits and does not continue work that depends on the answer.
