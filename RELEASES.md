@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.117.0 — 2026-10-30
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added an optional limit on consecutive replies between Crews.
 - Changed Crew threads to require a mention by default.
