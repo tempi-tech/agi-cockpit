@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.118.0 — 2026-10-31
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added support for up to five unanswered Asks per task.
 - Added support for Crews to edit their own Discord messages.
