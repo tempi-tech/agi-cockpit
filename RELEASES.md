@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.120.0 — 2026-10-31
+
+**Type:** minor · **Platforms:** macOS
+
+- Added display and copying of the application ID on Crew Discord connections.
+- Added Crew conversations in Discord forum and media channels.
+- Added buttons to Crew Discord posts with delivery of who pressed each button.
+- Fixed new Crews to start with the account selected during creation.
+- Added answers to task-specific Asks from the PWA task panel.
+- Changed the PWA task list to the left side, with an opening and closing drawer on phones.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CrewのDiscord接続にアプリケーションIDを表示し、コピーできるようになりました。
+- CrewがDiscordのフォーラム・メディアチャンネルで会話できるようになりました。
+- Crewの投稿にボタンを付け、誰がどのボタンを押したか受け取れるようになりました。
+- Crew作成時に選んだアカウントで起動するようになりました。
+- PWAのタスクパネルから、そのタスクのAskに回答できるようになりました。
+- PWAのタスク一覧を左側へ移し、スマートフォンでは一覧を開閉できるようになりました。
+
+</details>
+
 ## v4.119.0 — 2026-10-31
 
 **Type:** minor · **Platforms:** macOS, Linux

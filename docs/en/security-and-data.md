@@ -146,6 +146,8 @@ A Crew can edit the text of its own Discord messages and delete those messages w
 
 An owner's task or the master can request this input. A Crew can request it for itself only during a turn started by its owner; its child tasks cannot. The owner's authenticated tasks can also answer a Crew's owner-confirmation Ask and decide its pending approvals. Crew sessions and their children cannot grant themselves those permissions. CLI checks prevent accidental misuse but do not isolate processes running as the same operating-system user. Protect local access accordingly.
 
+Pressing a button on a Crew’s Discord post sends the person and button ID to the Crew. The same sender and place permissions as ordinary messages apply; pressing a button does not grant owner authority. Forum and media-channel posts follow the same permissions.
+
 People who mention a Crew in a Discord channel must still be approved before their requests are delivered; allowing a channel does not approve everyone in it. Discord messages that interrupt a running Crew retain the least trusted authority of the interrupted turn and the new message.
 
 Turning a task into a Crew preserves its conversation and agent session, transfers its child tasks, and redirects its Autoruns to the Crew. This conversion cannot be undone; removing the Crew also removes the converted task. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for eligibility and permissions.
