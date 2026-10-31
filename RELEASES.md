@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.121.0 — 2026-11-01
+
+**Type:** minor · **Platforms:** macOS
+
+- Added restrictions on who can press buttons on Crew Discord posts, including owners or specific users.
+- Added the ability to add, replace, or remove buttons after a Crew Discord post is sent.
+- Added stopping only a Crew’s active turn while keeping its connections and conversation.
+- Fixed recovery when a Claude turn stays running after an interruption, allowing queued messages and pending restarts to proceed.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CrewのDiscord投稿で、ボタンを押せる人をオーナーや指定したユーザーに制限できるようになりました。
+- CrewのDiscord投稿後に、ボタンを追加・置き換え・削除できるようになりました。
+- Crewの接続と会話を保ったまま、実行中の処理だけを停止できるようになりました。
+- Claudeの処理が中断後も実行中のままになる場合に復旧し、待機中のメッセージや再起動を進めるようになりました。
+
+</details>
+
 ## v4.120.0 — 2026-10-31
 
 **Type:** minor · **Platforms:** macOS, Linux

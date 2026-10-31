@@ -148,6 +148,8 @@ An owner's task or the master can request this input. A Crew can request it for 
 
 Pressing a button on a Crew’s Discord post sends the person and button ID to the Crew. The same sender and place permissions as ordinary messages apply; pressing a button does not grant owner authority. Forum and media-channel posts follow the same permissions.
 
+A Crew can further restrict a post’s buttons or individual buttons with `--pressable-by`, allowing its current owners (`owner`), specific Discord users, or everyone already allowed to talk to it (`everyone`, the default). These limits never widen sender or place permissions. Cockpit saves the limits across restarts and rejects presses with an unknown reference or from a different message. Editing a post to replace or remove its buttons, or deleting it, invalidates its old buttons before contacting Discord; those buttons remain unavailable even if Discord rejects the change or does not respond. Button presses do not replace owner approvals in Cockpit.
+
 People who mention a Crew in a Discord channel must still be approved before their requests are delivered; allowing a channel does not approve everyone in it. Discord messages that interrupt a running Crew retain the least trusted authority of the interrupted turn and the new message.
 
 Turning a task into a Crew preserves its conversation and agent session, transfers its child tasks, and redirects its Autoruns to the Crew. This conversion cannot be undone; removing the Crew also removes the converted task. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for eligibility and permissions.
