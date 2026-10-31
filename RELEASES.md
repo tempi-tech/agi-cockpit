@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.119.0 — 2026-10-31
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added account and Auto selection from Crew conversations and the CLI.
 - Fixed Crews remaining paused after Auto switches to another account at a usage limit.
