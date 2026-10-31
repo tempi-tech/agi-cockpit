@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.120.0 — 2026-10-31
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added display and copying of the application ID on Crew Discord connections.
 - Added Crew conversations in Discord forum and media channels.
