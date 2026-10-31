@@ -125,6 +125,12 @@ The transfer fails safely if the source conversation is missing, busy, unreadabl
 
 After switching a task that stopped at a usage limit, send a follow-up to continue. While Auto is still switching an account, a Fleet node remains running and becomes `interrupted` only if recovery cannot complete. Switching does not merge provider-side billing or unrelated conversation histories.
 
+## Choose a Crew account
+
+Use the account picker below a Crew’s composer to choose an account or Auto. The CLI equivalent is `cockpit crew update <crew> --account <name|default|auto>`. A switch requested during a reply takes effect after the turn, preserving the conversation, Queue, and chat connections. When Auto recovers from a usage limit, the Crew continues through its Queue. Changing agents keeps Auto but resets a fixed account to the new agent’s default. If the account cannot be applied, message delivery pauses and `cockpit crew get <crew>` reports the reason in `account.error`. Repeat the account setting to retry.
+
+The usage-limit option to continue with another agent checks a model available to the selected account. Crews are offered only supported agents. Switching a Crew’s agent starts a new session without transferring the full previous conversation; a notice at the front of its Queue asks it to check its state and continue. If the check takes more than 20 seconds, the switch is not accepted.
+
 ## Sign out of Antigravity
 
 `cockpit accounts logout` supports Antigravity only. Without `--confirm`, it is a read-only preview that reports the target Keychain or keyring items and token files, shared state, and impact. Review that result before repeating the same command with `--confirm`.

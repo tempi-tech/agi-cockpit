@@ -136,6 +136,8 @@ The exact supplied value is masked in subsequent Cockpit terminal output, includ
 
 ### Crew connection tokens and authority
 
+The owner can change a Crew’s execution account from its composer or with `cockpit crew update --account`. The Crew itself can do so only during an owner-started turn; child tasks cannot. Auto can switch to another available signed-in account, so check that account’s quota and terms too. Changing a Crew’s agent starts a new session without transplanting its full prior conversation to the other provider.
+
 From v4.118.0, Crew history reads follow the caller and the authority of the turn. The owner’s side and owner-started turns can read any place the Crew can see in Discord. Turns requested by another allowed person are limited to reply-place channels and their threads, joined threads unless their parent channel is off, and the DM with that requester. Turns with no requester or mixed requesters, and child tasks, can read only the eligible channels and threads, never DMs. Out-of-scope requests are refused before message contents are read.
 
 A Crew can edit the text of its own Discord messages and delete those messages with their attachments. It cannot edit or delete messages posted by another person or bot. Its standard instructions permit deleting its own posts without asking the owner; other deletions still require confirmation. Edits preserve attachments and do not notify people again. Adding or removing reactions is restricted to places the Crew participates in.

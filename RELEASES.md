@@ -4,6 +4,29 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.119.0 — 2026-10-31
+
+**Type:** minor · **Platforms:** macOS
+
+- Added account and Auto selection from Crew conversations and the CLI.
+- Fixed Crews remaining paused after Auto switches to another account at a usage limit.
+- Fixed usage-limit recovery to choose a model available to the selected account.
+- Changed Crew conversations to offer only supported agents as switch targets.
+- Fixed agent changes from Crew conversations to update the Crew settings.
+- Added a 20-second timeout when checking agent switches after a usage limit.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Crewの会話画面とCLIから、実行アカウントやAutoを選べるようになりました。
+- CrewがAutoで別アカウントへ切り替えた後、利用上限で止まった処理を続けられるようになりました。
+- 利用上限から別のエージェントへ切り替える際、選んだアカウントで使えるモデルを選ぶよう修正しました。
+- Crewの会話で選べる切り替え先を、Crewが対応するエージェントだけに限定しました。
+- Crewの会話からエージェントを切り替えた際、Crewの設定にも正しく反映されるよう修正しました。
+- 利用上限時の切り替え先の確認が長引く場合、20秒で打ち切るようになりました。
+
+</details>
+
 ## v4.118.0 — 2026-10-31
 
 **Type:** minor · **Platforms:** macOS, Linux
