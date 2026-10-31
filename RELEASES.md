@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.121.0 — 2026-11-01
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added restrictions on who can press buttons on Crew Discord posts, including owners or specific users.
 - Added the ability to add, replace, or remove buttons after a Crew Discord post is sent.
