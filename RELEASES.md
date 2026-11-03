@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.122.0 — 2026-11-03
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added receiving and answering Asks from Crews and their child tasks in owners’ Discord DMs.
 - Added owner approval through Ask for people waiting for permission to talk to a Crew.
