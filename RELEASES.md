@@ -10,9 +10,9 @@ English is the primary language for these generated release notes. Download the 
 
 - Added receiving and answering Asks from Crews and their child tasks in owners’ Discord DMs.
 - Added owner approval through Ask for people waiting for permission to talk to a Crew.
-- Changing a Crew’s name now also updates its Discord bot name.
+- Added automatic Discord bot name updates when a Crew is renamed.
 - Added attachment URLs to Crew conversation history.
-- Crews can now rename threads created by others when Discord permissions allow it.
+- Added renaming threads created by others when Discord permissions allow it.
 - Fixed the CLI to stop when an explicitly configured connection is incomplete instead of sending to another Cockpit instance.
 - Fixed results from interrupted Antigravity work affecting the next turn.
 
