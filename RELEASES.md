@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.123.0 — 2026-11-04
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added pairing a remote CLI with Cockpit using a pairing code from another device.
 - Added persistent PWA and remote CLI pairing across app restarts.
