@@ -9,8 +9,8 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added pairing a remote CLI with Cockpit using a pairing code from another device.
-- PWA and remote CLI pairing now persists across app restarts.
-- Strengthened Ask answer authentication to distinguish task answers from owner answers.
+- Added persistent PWA and remote CLI pairing across app restarts.
+- Improved Ask answer authentication to distinguish task answers from owner answers.
 - Fixed background subagents stopping when interrupting Claude work.
 
 <details>
