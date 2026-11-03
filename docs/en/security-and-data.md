@@ -102,6 +102,8 @@ Each Crew keeps its instructions, memory and work in its own home, with Git hist
 
 Finished Asks also retain a local status record for up to 30 days, with at most the latest 500 records. It includes the title, task, outcome, responder and an answer summary of up to 500 characters. `cockpit ask get <askId>` exposes the status and answer-delivery state; do not put secrets in Ask answers. This retention is separate from the secure password-input flow.
 
+Crew Ask DMs are on by default and send questions and supported media to each connection owner through the Crew's bot. Only the DM recipient, while still an owner, may answer. New-person approval Asks also accept an owner's DM answer; approval grants access to DMs and all places the Crew listens to. General Ask relays exclude owner-only questions, and Crew settings-change approvals stay in Cockpit. Secret requests send only a notice and a token-free PWA address when HTTPS Remote Access runs, never the request details or value. Disable these DMs with `cockpit crew update <crew> --ask-dm off`. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask#crew-questions-in-discord-dms).
+
 ## Store credentials
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord token and Slack access and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.

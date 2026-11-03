@@ -37,6 +37,14 @@ A request from `cockpit secret request` appears in a dedicated Desktop window, t
 
 Sharing presentation does not make it an Ask. It is absent from `cockpit ask list`, cannot be answered with `cockpit ask answer`, and is never sent to Discord or Slack. It also does not fire an `ask.*` Hook or `cockpit.ask.resolved` event and accepts no attachments. Never put a password or another secret in an Ask answer; use the dedicated input request. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for destination and storage boundaries.
 
+## Crew questions in Discord DMs
+
+A Crew sends its own and its child tasks' Asks to each owner of its Discord connection through its own bot. This is on by default; use `cockpit crew update <crew> --ask-dm off` to disable it. Ask text and supported media leave Cockpit for those owners' DMs. Only the recipient, while still an owner, may answer that DM. Answering or closing anywhere updates the other copies; removing an owner or disabling Ask DMs closes their copies.
+
+Cockpit also asks whether to approve a new person waiting to talk to the Crew. Only an owner can answer, including in their DM. Approval allows that person in DMs and every channel the Crew listens to, not just the place where they requested access. Earlier messages are not delivered. Owner-only Asks never go to the general Discord or Slack relay. Requests to approve Crew settings changes, device approvals, and Fleet gates stay in Cockpit.
+
+A Crew's secret input request is never sent to chat. When HTTPS Remote Access is running, owners receive only a notice and the PWA address, without a token, request ID, label, summary, destination, or secret value. Enter the secret in Cockpit's dedicated input surface. This notice also follows the Ask DM setting.
+
 ## Question and answer formats
 
 Ask can combine:

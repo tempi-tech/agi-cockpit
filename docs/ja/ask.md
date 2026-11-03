@@ -37,6 +37,14 @@ Askへの回答は、OSや外部サービスへの実行権限そのものでは
 
 表示場所を共有してもAskではありません。`cockpit ask list`には含まれず、`cockpit ask answer`では回答できません。Discord・SlackへのAsk転送、`ask.*` Hook、`cockpit.ask.resolved`イベント、添付にも対応しません。パスワードやほかの秘密情報をAskの回答へ書かず、必ず専用の入力依頼を使ってください。配送先と保存の境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#パスワードを一度だけ入力する)を参照してください。
 
+## Crewの質問をDiscord DMで回答する
+
+Crewとその子タスクのAskを、Crew自身のBotからDiscord接続の各オーナーへDMで送ります。既定で有効です。無効にするには`cockpit crew update <crew> --ask-dm off`を使います。Askの本文と対応するメディアがCockpitからオーナーのDMへ送られます。そのDMの受信者が引き続きオーナーである場合だけ回答できます。どこかで回答・終了するとほかのコピーにも反映され、オーナーの削除やDM通知の無効化で対象のコピーも閉じます。
+
+Crewと話す許可を待つ人についても、Cockpitが承認するかをAskで確認します。DMを含め、回答できるのはオーナーだけです。承認すると、申請した場所だけでなく、DMとCrewが受信するすべてのチャンネルでその人が話せるようになります。承認前の発言は配送されません。オーナー限定のAskは一般のDiscord・Slack転送には送りません。Crewの設定変更、端末承認、Fleetゲートの承認はCockpitで行います。
+
+Crewの秘密情報の入力依頼自体はチャットへ送りません。HTTPSのRemote Accessが動いている場合だけ、オーナーへ通知とPWAのアドレスを送り、トークン・依頼ID・ラベル・概要・配送先・秘密の値は含めません。入力はCockpitの専用画面で行います。この通知もAskのDM設定に従います。
+
 ## 質問と回答の形式
 
 Askは次の形式を組み合わせられます。

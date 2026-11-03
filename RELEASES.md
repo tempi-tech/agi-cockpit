@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.122.0 — 2026-11-03
+
+**Type:** minor · **Platforms:** macOS
+
+- Added receiving and answering Asks from Crews and their child tasks in owners’ Discord DMs.
+- Added owner approval through Ask for people waiting for permission to talk to a Crew.
+- Changing a Crew’s name now also updates its Discord bot name.
+- Added attachment URLs to Crew conversation history.
+- Crews can now rename threads created by others when Discord permissions allow it.
+- Fixed the CLI to stop when an explicitly configured connection is incomplete instead of sending to another Cockpit instance.
+- Fixed results from interrupted Antigravity work affecting the next turn.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Crewとその子タスクのAskを、オーナーのDiscord DMで受け取り回答できるようになりました。
+- Crewと話す許可を待つ人を、オーナーがAskから承認できるようになりました。
+- Crewの名前を変更すると、DiscordのBot名にも反映されるようになりました。
+- Crewの会話履歴から、添付ファイルのURLを取得できるようになりました。
+- Discordの権限がある場合、Crewがほかの人の作成したスレッド名も変更できるようになりました。
+- CLIで明示した接続先が不完全な場合、別のCockpitへ誤送信せず停止するよう修正しました。
+- Antigravityの処理を中断した際、古い処理の結果が次のターンに影響する問題を修正しました。
+
+</details>
+
 ## v4.121.0 — 2026-11-01
 
 **Type:** minor · **Platforms:** macOS, Linux
