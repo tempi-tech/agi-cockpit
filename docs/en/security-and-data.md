@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.108.0 on 2026-10-17. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
 
@@ -79,6 +79,8 @@ The CLI can also decide pending tool approvals. Inspect `turnRequests` with `coc
 `cockpit task clear <id> --confirm` discards the conversation and hides its original instruction in all open desktop and mobile views. Drafts in other views are preserved. Clearing and compacting refuse a turn that is running or waiting for an approval or question. `task cancel` stops the current turn while keeping the task. Verify the exact task and preserve needed history before clearing it.
 
 MCP tool confirmations in visual tasks always grant one-time approval, including when the CLI receives `--scope always`. MCP forms are runtime questions: answer them with `task answer`, or decline them in the desktop or PWA question card. `task deny` only selects approvals.
+
+Ask answer identity comes from verified credentials. Task answers retain task identity and cannot impersonate an owner. The shared local Ask token alone cannot answer, and Hooks receive no task credential. The PWA requires pairing even for same-owner Tailscale peers. Paired PWA and remote CLI tokens grant owner authority; do not share them with agents. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask) for details.
 
 ## Run Cockpit Hooks safely
 
@@ -206,7 +208,7 @@ The recommended configuration is Tailscale-only access over HTTPS. Cockpit authe
 
 Only while HTTPS Remote Access is running, Cockpit checks the certificate at startup and every 24 hours and renews it through Tailscale when 30 days or less remain. Existing connections stay open, and the renewed certificate applies to new connections. Failure retries after six hours and produces a reason-specific warning when expiry is within 14 days or has passed. Renewal history does not store certificate contents, private keys, command output, or personal account details.
 
-Remote CLI control accepts a computer on the same tailnet with the same Tailscale owner without a token. Other connections need the paired bearer token, and in Tailscale-only mode the target refuses connections that are neither a Tailscale peer nor loopback. Protect the token as control of the target Cockpit. Remote file paths refer to the target computer, and the transport does not fall back to local file IPC.
+Remote CLI control accepts a computer on the same tailnet with the same Tailscale owner without a token. Other connections need the paired bearer token, and in Tailscale-only mode the target refuses connections that are neither a Tailscale peer nor loopback. Protect the token as control of the target Cockpit. Remote file paths refer to the target computer, and the transport does not fall back to local file IPC. Remote `cockpit ask answer` always requires a paired token, including on loopback and same-owner Tailscale peers; see [Ask authentication](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask).
 
 Local Wi-Fi mode is unencrypted and activates only after explicit confirmation. Do not use it on public or untrusted networks. Stopping Remote Access ends connected sessions and saves standalone state.
 

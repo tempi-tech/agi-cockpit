@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 4.108.0で2026-10-17に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 4.123.0で2026-11-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -81,6 +81,8 @@ CLIからも保留中のツール承認を操作できます。`task approve`や
 `cockpit task clear <id> --confirm`は会話を破棄し、開いているすべてのデスクトップ・モバイル画面で最初の指示を非表示にします。ほかの画面で入力中の下書きは保持します。実行中、承認待ち、質問への回答待ちのターンは、会話のリセットも圧縮も拒否します。`task cancel`はタスクを残して現在のターンを中断します。リセット前に対象タスクを確認し、必要な履歴を保存してください。
 
 ビジュアルタスクのMCPツール確認は一回限りの承認です。CLIで`--scope always`を指定しても一回限りになります。MCPフォームは実行環境の質問として`task answer`で回答するか、デスクトップ・PWAの質問カードで辞退します。`task deny`の対象は承認だけです。
+
+Askの回答者は送信時の認証情報から判定します。タスクからの回答はタスクに帰属し、所有者の回答を装えません。ローカルの共有Ask tokenだけでは回答できず、Hookもタスク認証情報を受け取りません。PWAはTailscaleの所有者が同じでもペアリングが必要です。ペアリング済みPWA・リモートCLIは所有者権限を持つため、そのtokenをエージェントへ渡さないでください。詳細は[Ask](https://agi-labo.com/tools/cockpit/docs/ask)を参照してください。
 
 ## Cockpit Hooksを安全に実行する
 
@@ -208,7 +210,7 @@ Desktopのデバイスフィルターで他のPCを表示すると、同じTails
 
 HTTPSのRemote Accessが実行中の場合だけ、Cockpitは証明書を開始時と24時間ごとに確認し、残り30日以下ならTailscaleから更新します。既存接続を切断せず、更新後の証明書は新しい接続へ適用します。失敗時は6時間後に再試行し、期限が14日以内または期限切れなら理由を含む警告を表示します。更新履歴には証明書、秘密鍵、コマンド出力、個人アカウント情報を保存しません。
 
-リモートCLI制御は、同じtailnetで、Tailscaleの所有者が同じコンピューターからならtokenなしで使えます。それ以外の接続にはペアリング済みBearer tokenが必要で、Tailscale限定モードではTailscale peerでもloopbackでもない接続を拒否します。tokenは接続先Cockpitの操作権限として保護してください。リモートのfile pathは接続先コンピューター上の値で、transportはローカルfile IPCへfallbackしません。
+リモートCLI制御は、同じtailnetで、Tailscaleの所有者が同じコンピューターからならtokenなしで使えます。それ以外の接続にはペアリング済みBearer tokenが必要で、Tailscale限定モードではTailscale peerでもloopbackでもない接続を拒否します。tokenは接続先Cockpitの操作権限として保護してください。リモートのfile pathは接続先コンピューター上の値で、transportはローカルfile IPCへfallbackしません。 ただし、リモートの`cockpit ask answer`はloopbackや同じ所有者のTailscale端末でもペアリング済みtokenが必須です。[Askの認証手順](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
 
 ローカルWi-Fiモードは通信が暗号化されず、明示確認後にだけ有効になります。公共または信頼できないネットワークでは使わないでください。Remote Accessを停止すると接続中セッションは終了し、standalone状態が保存されます。
 

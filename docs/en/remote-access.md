@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or another Desktop and operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -86,7 +86,7 @@ A failed automatic renewal retries after six hours. When failure occurs with 14 
 3. Scan the QR code or open the displayed URL on the remote device.
 4. If device pairing appears, enter the six-digit pairing code from the Desktop Remote access panel.
 
-A Tailscale device owned by the same user in the same tailnet may be authenticated automatically from its Tailscale identity. A connection that Cockpit cannot authenticate automatically requires the pairing code. The code refreshes after five minutes; select **Regenerate** to replace it immediately.
+The PWA requires pairing even on a same-owner Tailscale device. A stored token authenticates automatically. Otherwise, enter the six-digit code shown on Desktop from another device. New pairing from the target computer itself is refused. Codes refresh after five minutes and can be regenerated; regenerating a code does not revoke existing credentials.
 
 Before pairing succeeds, Cockpit does not send task notifications, full task state, or recent folder lists to that connection, and it closes an unpaired connection after two minutes. If the connection drops while the PWA is pairing, the form keeps the entered code and reconnects. A code already submitted before the authentication reply is sent again automatically, so do not regenerate it unless it has expired or Cockpit rejects it.
 
@@ -160,7 +160,7 @@ The computer is only kept awake while remote access is running. Turning remote a
 
 ## Stop remote access
 
-Select **Off** in the Desktop Remote access panel. Cockpit disconnects active sessions and returns the target to local-only use. After you enable it again, a device that is not authenticated automatically must use the new pairing code.
+Select **Off** in the Desktop Remote access panel to disconnect active sessions. Paired tokens survive app restarts and Remote Access off/on. The PWA stores its token in browser localStorage; the target stores only SHA-256 hashes in `pairing-credentials.json` inside its Cockpit data directory. To revoke all paired credentials, stop Remote Access, remove that file, restart Remote Access, and pair trusted devices again. Credentials from versions without durable pairing may require one new pairing.
 
 Cockpit also stops a running remote-access server and returns to Off if the AGI Labo sign-in or membership becomes invalid. A temporary membership-verification outage preserves a running connection and shows an action to check again instead of stopping it immediately.
 
@@ -194,7 +194,7 @@ Configuration cannot change while the server is running. If you need to change i
 
 An alias is optional. Save one with `cockpit devices alias-set <alias> <host>` when useful, then add `--host <host-or-alias>` to supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands or to `ask list`, `ask get`, `ask answer`, and `ask close`. Remote Ask creation remains unsupported. Browser, App Surface, display, settings, and other local-control families still operate only the local Cockpit.
 
-Remote CLI requests from a computer on the same tailnet with the same Tailscale owner need no token. Other connections need a paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit refuses connections that are neither a Tailscale peer nor loopback, even with a token. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC.
+Remote CLI requests from a computer on the same tailnet with the same Tailscale owner need no token. Other connections need a paired bearer token in `AGI_COCKPIT_TASK_REMOTE_TOKEN` or `AGI_COCKPIT_SYNC_TOKEN`. In Tailscale-only mode, Cockpit refuses connections that are neither a Tailscale peer nor loopback, even with a token. File paths and directories refer to the target computer, and remote responses include its device identity. The remote transport does not fall back to local file IPC. Remote `cockpit ask answer` is an exception: it always requires a paired token, including on loopback and same-owner Tailscale peers. See [Ask authentication](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask).
 
 ## Troubleshooting
 

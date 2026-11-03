@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAや別のDesktopからAGI Cockpitのタスクを監督し、対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.114.0で2026-10-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.123.0で2026-11-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -86,7 +86,7 @@ HTTPSのRemote Accessを開始すると証明書を確認し、実行中は24時
 3. 接続元でQRコードを読み取るか、表示されたURLを開きます。
 4. デバイス認証が表示された場合は、Desktopのリモートアクセス画面にある6桁のペアリングコードを入力します。
 
-同じ利用者とtailnetに属するTailscale端末は、Tailscaleの端末情報で自動的に認証される場合があります。自動認証できない接続ではペアリングコードが必要です。コードは5分で更新され、「再生成」を選ぶとその場で新しくできます。
+PWAは同じ所有者のTailscale端末でもペアリングが必要です。保存済みtokenがあれば自動で認証します。未ペアリングの場合は、別の端末からDesktopに表示された6桁コードを入力してください。接続先コンピューター自身からの新規ペアリングは拒否されます。コードは5分で更新され、「再生成」で交換できますが、既存のペアリングは失効しません。
 
 ペアリングが成功する前は、その接続へタスク通知、タスク状態全体、最近使ったフォルダの一覧を送信せず、未ペアリングの接続は2分後に閉じます。PWAのペアリング中に接続が切れた場合、画面と入力済みコードを保持して再接続します。認証結果が届く前に送信済みだったコードは自動で再送するため、有効期限切れまたは拒否された場合だけ再生成してください。
 
@@ -160,7 +160,7 @@ Desktopのリモートアクセス画面で「このコンピューターをス�
 
 ## 接続を停止する
 
-Desktopのリモートアクセス画面で「オフ」を選ぶと、接続中のセッションが切断され、接続先はローカル利用だけに戻ります。再び有効にした後、自動認証されない端末は新しいペアリングコードで認証します。
+Desktopのリモートアクセス画面で「オフ」を選ぶと、接続中のセッションを切断します。ペアリング済みtokenはアプリ再起動やRemote Accessのオフ・オン後も有効です。PWAはブラウザーのlocalStorageへtokenを保存し、接続先はCockpitのデータディレクトリの`pairing-credentials.json`へSHA-256ハッシュだけを保存します。すべてのペアリングを失効させるにはRemote Accessを停止し、このファイルを削除してから再開し、信頼する端末を再ペアリングしてください。永続保存に未対応の旧バージョンから更新した場合は、一度だけ再ペアリングが必要になることがあります。
 
 AGIラボのサインインまたは会員資格が無効になった場合も、Cockpitは実行中のリモートアクセスを停止し、オフの状態へ戻します。一時的な会員確認障害では、実行中の接続を直ちに停止せず、画面に再確認の案内を表示します。
 
@@ -194,7 +194,7 @@ cockpit remote-access enable
 
 aliasは必須ではありません。必要な場合は`cockpit devices alias-set <alias> <host>`で保存し、対応する`task`、`autorun`、`accounts`、`fleet`、`hooks`コマンドと、`ask list`、`ask get`、`ask answer`、`ask close`へ`--host <host-or-alias>`を追加します。Askの作成はリモートに対応しません。Browser、App Surface、display、settingsなどのローカル制御は、引き続き実行元のCockpitだけを操作します。
 
-同じtailnetで、Tailscaleの所有者が同じコンピューターからのリモートCLI要求には、tokenは不要です。それ以外の接続には、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続は、tokenがあっても拒否します。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。
+同じtailnetで、Tailscaleの所有者が同じコンピューターからのリモートCLI要求には、tokenは不要です。それ以外の接続には、`AGI_COCKPIT_TASK_REMOTE_TOKEN`または`AGI_COCKPIT_SYNC_TOKEN`のペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続は、tokenがあっても拒否します。ファイルパスとディレクトリは接続先コンピューター上の値で、リモート応答には接続先deviceの情報が含まれます。リモートtransportはローカルfile IPCへfallbackしません。 ただし、リモートの`cockpit ask answer`はloopbackや同じ所有者のTailscale端末でもペアリング済みtokenが必須です。[Askの認証手順](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
 
 ## 接続できない場合
 

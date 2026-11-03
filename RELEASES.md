@@ -4,6 +4,25 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.123.0 — 2026-11-04
+
+**Type:** minor · **Platforms:** macOS
+
+- Added pairing a remote CLI with Cockpit using a pairing code from another device.
+- PWA and remote CLI pairing now persists across app restarts.
+- Strengthened Ask answer authentication to distinguish task answers from owner answers.
+- Fixed background subagents stopping when interrupting Claude work.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 別の端末のCLIから、ペアリングコードを使ってCockpitに接続できるようになりました。
+- PWAとリモートCLIのペアリングを、アプリ再起動後も保持するようになりました。
+- Ask回答者の認証を強化し、タスクの回答と所有者の回答を区別するようになりました。
+- Claudeの処理に割り込んだ際、バックグラウンドの子エージェントが停止する問題を修正しました。
+
+</details>
+
 ## v4.122.0 — 2026-11-03
 
 **Type:** minor · **Platforms:** macOS, Linux

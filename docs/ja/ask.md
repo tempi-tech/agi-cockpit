@@ -4,7 +4,7 @@
 
 AskがAIエージェントから人へ確認と判断を安全に受け渡し、回答後に同じタスクを再開する仕組みを説明します。
 
-> AGI Cockpit 4.116.0で2026-10-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
+> AGI Cockpit 4.123.0で2026-11-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/ask)
 
 Askは、AIエージェントが作業をいったん止め、人に確認と判断を委ねるための仕組みです。回答は元のタスクへ構造化されたイベントとして返り、その同じタスクが続きから再開します。
 
@@ -208,7 +208,11 @@ cockpit ask answer <ask-id> --input "画像を確認してください" --attach
 cockpit ask close <ask-id>
 ```
 
-`list`、`get`、`answer`、`close`へ`--host <host-or-alias>`を追加すると、登録済みの別のCockpitコンピューターにあるAskを操作できます。接続先では会員向けRemote Accessを有効にしておく必要があります。リモート操作はリモートのタスクと同じ方法で認証します。同じtailnetで、Tailscaleの所有者が同じコンピューターにはtokenは不要で、それ以外の接続にはペアリング済みBearer tokenが必要です。Tailscale限定モードでは、Tailscale peerでもloopbackでもない接続を拒否します。Askの作成とrelay設定は引き続きローカル専用です。`--attachment`のパスは接続先コンピューター上のファイルを指します。
+`list`、`get`、`answer`、`close`へ`--host <host-or-alias>`を追加すると、別のCockpitのAskを操作できます。接続先ではRemote Accessを有効にしてください。`list`、`get`、`close`は従来どおり同じ所有者のTailscale端末からtokenなしで利用できますが、`answer`にはloopbackや同じ所有者のTailscale端末でもペアリング済みtokenが必要です。未認証の回答は`ask_answer_authentication_required`で拒否されます。Tailscale限定モードの接続制限も適用されます。Ask作成とrelay設定はローカル専用で、添付パスは接続先のファイルを指します。
+
+別の端末から`cockpit ask pair --host <host-or-alias> --code-stdin`へ、接続先Desktopのリモートアクセス画面に表示された6桁コードを標準入力で渡します。返された`data.token`を秘密として保持し、`AGI_COCKPIT_TASK_REMOTE_TOKEN`に設定してください。新規ペアリングは接続先自身のloopback・LAN・Tailscaleアドレスからはできません。既存のtokenは再接続に利用できます。保存、失効、再ペアリングの手順は[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)と[Askリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
+
+ローカルCLIからの回答には、発行元Cockpitで実行中のタスクの認証情報が必要です。現在のCLIはそれを自動で送ります。共有Ask tokenやタスクIDだけを渡す旧スクリプト、タスク外のCLI、Hookからは回答できません。タスクは自分のAskへ回答できず、回答はそのタスクに帰属します。ペアリング済みPWA・リモートCLIの回答は所有者に帰属するため、ペアリングtokenをタスクへ渡すことは所有者権限を与えることになります。
 
 `list`は質問、選択肢、添付メディアの情報を確認する操作です。`answer`は利用者の代理として回答し、作成元のタスクを再開します。一つの質問では、`--choice`または`--choice-index`と`--input`を組み合わせ、選択と補足文を一緒に送ります。複数質問では、`--question <id>`ごとに回答をまとめ、Ask全体へ適用する返信がある場合は`--whole-answer`を加えます。`--attachment`はローカルファイルを作成元タスクの管理領域へ取り込み、UIからの回答添付と同じ形式で渡します。複数質問では対象の`--question`の後へ添付を指定し、最初のグループより前の添付はAsk全体への返信に属します。
 

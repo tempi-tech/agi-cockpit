@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.116.0 on 2026-10-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -208,7 +208,11 @@ cockpit ask answer <ask-id> --input "Review the image" --attachment ./screenshot
 cockpit ask close <ask-id>
 ```
 
-Add `--host <host-or-alias>` to `list`, `get`, `answer`, or `close` to operate an Ask on another registered Cockpit computer. The target must have member-only Remote Access enabled. Remote control authenticates like remote tasks: a computer on the same tailnet with the same Tailscale owner needs no token, and other connections need the paired bearer token. In Tailscale-only mode, connections that are neither a Tailscale peer nor loopback are refused. Ask creation and relay settings remain local-only. Paths passed to `--attachment` refer to files on the target computer.
+Add `--host <host-or-alias>` to `list`, `get`, `answer`, or `close` to operate an Ask on another Cockpit with Remote Access enabled. `list`, `get`, and `close` still allow same-owner Tailscale peers without a token. `answer` always requires a paired token, including from loopback and same-owner Tailscale peers; unauthenticated answers return `ask_answer_authentication_required`. Tailscale-only network restrictions also apply. Ask creation and relay settings remain local-only; attachment paths refer to the target computer.
+
+From another device, pipe the six-digit code shown in the target Desktop Remote access panel to `cockpit ask pair --host <host-or-alias> --code-stdin`. Keep the returned `data.token` private and set it as `AGI_COCKPIT_TASK_REMOTE_TOKEN`. New pairing from the target computer itself, including its loopback, LAN, and Tailscale addresses, is refused. Existing tokens can reconnect from those addresses. See [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) and the [Ask reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask) for storage, revocation, and pairing recovery.
+
+Local CLI answers require a running task credential from the issuing Cockpit; current launchers send it automatically. Older scripts that send only a shared Ask token or task ID, task-external CLIs, and Hooks cannot answer that way. A task cannot answer its own Ask, and its answers remain attributed to the task. Paired PWA and remote CLI answers have owner identity, so giving a task a pairing token grants owner authority.
 
 `list` inspects the question, choices, and attached-media metadata. `answer` acts on the user's behalf and resumes the task that created the Ask. For one question, combine `--choice` or `--choice-index` with `--input` to send a selection and supplementary text together. For several questions, group answers under `--question <id>` and add `--whole-answer` when one reply should apply to the Ask as a whole. `--attachment` imports a local file into the originating task's managed uploads and delivers it in the same format as a UI answer attachment. In a multi-question answer, place the attachment after its target `--question`; an attachment before the first group belongs to the whole-Ask reply.
 

@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.122.0 on 2026-11-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -118,7 +118,7 @@ Choose the Cockpit Agent provider from `openrouter`, `opencode-go`, `opencode`, 
 
 Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can target a device host or saved alias through `--host`. `ask list`, `ask answer`, and `ask close` also support remote targets, while Ask creation and relay configuration remain local. Commands without host support, including browser, App Surface, display, settings, usage, and update operations, affect only the local Cockpit instance.
 
-Remote control needs no token from a computer on the same tailnet with the same Tailscale owner; other connections use the paired bearer token. When the target is Tailscale-only, connections that are neither a Tailscale peer nor loopback are refused. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC.
+Remote control needs no token from a computer on the same tailnet with the same Tailscale owner; other connections use the paired bearer token. When the target is Tailscale-only, connections that are neither a Tailscale peer nor loopback are refused. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC. Remote `cockpit ask answer` is an exception: it always requires a paired token, including on loopback and same-owner Tailscale peers. See [Ask authentication](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask).
 
 Stopping Remote Access, clearing Identity data, deleting an account, and uninstalling the CLI require explicit confirmation flags. A confirmation flag is not a substitute for user authorization; verify the requested action and exact target first.
 
