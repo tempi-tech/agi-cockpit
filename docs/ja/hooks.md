@@ -4,7 +4,7 @@
 
 タスクの完了、Ask、ホットキーなどをきっかけに処理を実行するHooksの使い方と、設定・実行履歴の確認方法を説明します。
 
-> AGI Cockpit 4.106.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/hooks)
+> AGI Cockpit 4.123.0で2026-11-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/hooks)
 
 Hooksは、タスクの完了やAskの作成など、Cockpitで起きたイベントをきっかけに、登録した処理を自動実行する機能です。「この出来事が起きたら、この処理をする」というルールをHookとして保存できます。ホットキーをきっかけにすることもできます。
 
@@ -75,6 +75,8 @@ cockpit hooks add --event task.completed \
 短いコマンドには`--run`、管理するスクリプトには`--run-file`を使います。複数のフィルターを指定すると、すべてに一致するイベントが対象になります。スクリプトはイベント情報を標準入力のJSONや`COCKPIT_TASK_ID`などの環境変数から受け取れます。
 
 イベントの`task.stopReason`には、タスク一覧と同じ`approval`、`turn_ended`、`usage_limit`、`question`、`terminal_prompt`、`runtime_error`、`unknown`が入り、実行中・完了後は`null`です。たとえば`--event task.waiting --filter task.stopReason=approval`で承認待ちに絞れます。Askイベントに含まれるタスクにも同じフィールドがあります。これは状態のフィルターであり、承認を許可する操作ではありません。
+
+Hookが受け取るイベント情報には、タスクの回答資格情報は含まれません。イベントのタスクIDや共有Ask tokenだけでローカルの`cockpit ask answer`を呼んでも、`ask_answer_authentication_required`で拒否されます。Slackから回答する場合は、回答者を検証する組み込みの[Ask通知](https://agi-labo.com/tools/cockpit/docs/ask)を使ってください。Hookは`ask.created`や`ask.resolved`を使って、依頼や回答結果を外部へ転送できます。ペアリングtokenは所有者権限を持つため、外部サービスの回答者を検証する代わりに使わないでください。
 
 ## 設定画面と実行履歴
 

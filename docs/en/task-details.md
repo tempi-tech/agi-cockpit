@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.112.0 on 2026-10-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -21,9 +21,11 @@ After three consecutive identical turn failures in Visual Runtime, Cockpit marks
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus. After interruption settles, the task returns to a state that can accept the next instruction and the composer can continue.
 
-In Claude Native UI, Claude's completion result after an interrupt is recorded as `interrupted`, not as a failed turn, and the same task can accept the next instruction. If the interrupt request fails or times out, Cockpit closes that runtime session so a late interrupt cannot affect the replacement instruction. Send the message returned to the composer again to reconnect to the saved conversation and continue.
+In Claude Native UI, Claude's completion result after an interrupt is recorded as `interrupted`, not as a failed turn, and the same task can accept the next instruction. When only background subagents remain, Stop leaves their session running and you can send the next instruction. If interrupting the main work fails, or its completion result times out after interruption, Cockpit also keeps the session while a background subagent is running. A late result from earlier work does not complete the new turn.
 
-Stopping a turn, completing or removing a task, or quitting the app also stops descendant processes launched by that task. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
+When no background subagent is running, an interrupt failure or timeout closes the runtime session. Send the message returned to the composer again to reconnect to the saved conversation and continue.
+
+Stopping a turn also stops descendant processes launched by that task, except for the Claude background subagents described above. Completing or removing a task, or quitting the app, stops its descendant processes. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
 
 The **Follow-up behavior** setting under Appearance chooses whether an ordinary follow-up sent during a reply waits in the **Queue** or **Steers** the current reply. Queue is the default. When it does not conflict with the configured send or steer shortcut, Cmd/Ctrl+Enter uses the opposite behavior for that one message.
 
