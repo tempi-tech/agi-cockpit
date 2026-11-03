@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.108.2 on 2026-10-21. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.122.0 on 2026-11-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -72,6 +72,8 @@ Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code suppor
 On Windows, the Antigravity and Grok Build launch-command fields under **Agents** accept a full executable path that contains spaces. Cockpit accepts the path quoted, prefixed with PowerShell's `&`, or unquoted when that executable exists. Working and additional project folders passed to Antigravity also remain one argument each when their paths contain spaces. Launch behavior on macOS and Linux is unchanged.
 
 In Antigravity Native UI, a failed tool item remains marked as failed, but the turn can still complete when the agent recovers and continues its response. When the agent returns an interim answer while waiting for a background command, Cockpit does not close the turn on the CLI success signal alone. It follows the completion notice, later tool calls, and final answer in that same turn. If the agent checks a persistent server and then gives a final answer, the turn can still finish while that server remains running.
+
+After you interrupt an Antigravity Native UI turn, a delayed result from that interrupted turn does not complete or change the next turn.
 
 ## Use folders across a project
 

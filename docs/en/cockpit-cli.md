@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.116.0 on 2026-10-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.122.0 on 2026-11-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -15,6 +15,8 @@ The packaged app installs a common launcher under `~/.agi-tools/bin`. A task sta
 On macOS and Linux, CLI installation and uninstallation change only Cockpit's managed shell block. Other shell settings, existing `PATH` entries, blank lines, and line endings are preserved. If `~/.agi-tools/bin` is already present in a user-managed `PATH` entry, Cockpit does not rewrite the shell file.
 
 The CLI does not silently fall back to another Cockpit instance when the selected one is unavailable. Treat `instance_mismatch` as a target error and inspect the connection instead of resending the command elsewhere.
+
+When specifying the connection through environment variables, supply the values required by that command. For example, `task`, `accounts`, and `doctor` need `AGI_COCKPIT_TASK_PORT` and `AGI_COCKPIT_TASK_TOKEN`. If the explicit connection points at a different instance from the CLI’s runtime file and lacks required values, the command stops with `instance_mismatch` before any request is sent. It does not fill those gaps from the other instance’s runtime file. File IPC uses only the explicitly supplied `AGI_COCKPIT_IPC_DIR`. To reach Cockpit with a relocated data directory, use that directory’s `master/bin/cockpit` instead of setting ports and tokens manually. See [Choosing the local instance](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/transport#choosing-the-local-instance) for the full selection rules.
 
 For local commands, the CLI first authenticates over loopback. If a sandbox blocks loopback or process visibility, it automatically uses file IPC through a directory supplied by that same Cockpit instance. File IPC writes one request ID once and waits for its matching response, so commands such as `task create` and `task send` are not duplicated. No broader sandbox permission is required.
 

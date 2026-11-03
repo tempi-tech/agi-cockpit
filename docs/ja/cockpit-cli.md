@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.116.0で2026-10-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.122.0で2026-11-03に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -21,6 +21,8 @@ cockpit help
 ```
 
 Cockpitから起動したタスクには、正しいローカルインスタンスと呼び出し元タスクの接続情報が渡されます。別インスタンスへ誤送信しそうな場合は`instance_mismatch`で停止し、接続不能時に別のローカルインスタンスへ自動で切り替えません。
+
+接続先を環境変数で明示する場合は、そのコマンドが必要とする接続情報を揃えてください。たとえば`task`、`accounts`、`doctor`には`AGI_COCKPIT_TASK_PORT`と`AGI_COCKPIT_TASK_TOKEN`が必要です。明示した接続先がCLIのruntimeファイルとは別のインスタンスで、必要な値が不足している場合、不足分をそのruntimeファイルから補わず、送信前に`instance_mismatch`で停止します。file IPCも明示された`AGI_COCKPIT_IPC_DIR`だけを使います。データディレクトリを変更したCockpitへ接続する場合は、そのディレクトリの`master/bin/cockpit`を使うと、portやtokenを手動指定せずに接続できます。詳しくは[接続先の選択](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/transport#choosing-the-local-instance)を参照してください。
 
 ローカルCLIは認証付きloopbackへ先に接続し、sandboxがloopbackまたはプロセス確認を制限している場合は、同じCockpitが渡したディレクトリのfile IPCへ自動で切り替えます。file IPCは一つのrequest IDを一度だけ書き、同じ応答を待つため、`task create`や`task send`を再送して重複実行しません。権限拡張は不要です。
 
