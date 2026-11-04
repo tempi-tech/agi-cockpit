@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.124.0 — 2026-11-05
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added a choice of owners who receive a Crew’s Ask DMs.
 - Added active Discord thread listing for Crews.
