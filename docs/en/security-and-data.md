@@ -16,6 +16,8 @@ The agent process reads and writes its workspace. Depending on the approval mode
 
 Cockpit owns the local OpenCode servers that it starts for Cockpit Agent connections to OpenCode Go or OpenCode Zen and stops them when Cockpit quits. It does not stop a server that the user started independently outside Cockpit.
 
+In the v4.124.0 Windows Store package, quitting or crashing Cockpit also stops processes launched from Cockpit, including VS Code or development servers opened by an agent. Detaching from a task alone does not keep them running. Save work before quitting, and start applications independently outside Cockpit if they must outlive it. Applications that explicitly leave the Windows process group are outside this cleanup. This applies only when the installed Store version is v4.124.0 or later.
+
 From v4.90.0, Cockpit Agent stores its conversation database at `opencode/v1/opencode.db` inside Cockpit's data directory. On first startup, it copies an existing legacy OpenCode database to preserve conversations. That source can include conversations from OpenCode used outside Cockpit. The original database is left unchanged, and subsequent conversations do not sync between the two databases. If compatibility cannot be verified, Cockpit shows an error and stops Cockpit Agent startup.
 
 PWA task search queries and recent searches are stored in the current browser’s localStorage separately for each connected host. They do not sync to other devices. **Clear search** and **Clear history** are separate actions; use both to remove both the current query and history.

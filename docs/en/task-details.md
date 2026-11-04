@@ -27,6 +27,8 @@ When no background subagent is running, an interrupt failure or timeout closes t
 
 Stopping a turn also stops descendant processes launched by that task, except for the Claude background subagents described above. Completing or removing a task, or quitting the app, stops its descendant processes. A process explicitly launched outside the task lifecycle is outside Cockpit's cleanup boundary, so detach one only when it is intended to remain running.
 
+In the v4.124.0 Windows Store package, quitting or crashing Cockpit also stops processes launched from Cockpit, including VS Code or development servers opened by an agent. Detaching from a task alone does not keep them running. Save work before quitting, and start applications independently outside Cockpit if they must outlive it. Applications that explicitly leave the Windows process group are outside this cleanup. This applies only when the installed Store version is v4.124.0 or later.
+
 The **Follow-up behavior** setting under Appearance chooses whether an ordinary follow-up sent during a reply waits in the **Queue** or **Steers** the current reply. Queue is the default. When it does not conflict with the configured send or steer shortcut, Cmd/Ctrl+Enter uses the opposite behavior for that one message.
 
 In Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
