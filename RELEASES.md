@@ -9,14 +9,14 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added a choice of owners who receive a Crew’s Ask DMs.
-- Crews can now list active threads in a Discord channel.
-- Crews now catch up on Discord messages received while their connection was lost.
-- File links in HTML surfaces now open in the side panel.
+- Added active Discord thread listing for Crews.
+- Improved Crew recovery by catching up on Discord messages received while disconnected.
+- Added side-panel previews for file links in HTML surfaces.
 - Fixed refreshable Claude accounts being marked expired and unavailable.
-- Autorun now recalculates its next run when timing settings change.
+- Fixed Autorun next-run times not being recalculated after timing changes.
 - Fixed conversation log updates being delayed by log writes from other tasks.
-- Ask media uploads from the CLI now work over file IPC connections.
-- Reduced memory use by stopping idle agent sessions and avoiding startup just to display a task.
+- Added CLI Ask media uploads over file IPC connections.
+- Improved memory use by stopping idle agent sessions and avoiding startup just to display a task.
 - Fixed child processes remaining after exiting the Windows Store version of Cockpit.
 - Fixed dollar-sign math in Asks blanking the inbox or main window.
 
