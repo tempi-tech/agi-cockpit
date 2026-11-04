@@ -4,6 +4,39 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.124.0 — 2026-11-05
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a choice of owners who receive a Crew’s Ask DMs.
+- Crews can now list active threads in a Discord channel.
+- Crews now catch up on Discord messages received while their connection was lost.
+- File links in HTML surfaces now open in the side panel.
+- Fixed refreshable Claude accounts being marked expired and unavailable.
+- Autorun now recalculates its next run when timing settings change.
+- Fixed conversation log updates being delayed by log writes from other tasks.
+- Ask media uploads from the CLI now work over file IPC connections.
+- Reduced memory use by stopping idle agent sessions and avoiding startup just to display a task.
+- Fixed child processes remaining after exiting the Windows Store version of Cockpit.
+- Fixed dollar-sign math in Asks blanking the inbox or main window.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CrewのAsk DMを受け取るオーナーを選べるようになりました。
+- CrewからDiscordチャンネルのアクティブなスレッド一覧を取得できるようになりました。
+- Crewが接続を失っている間に届いたDiscordメッセージを、復旧後に取り込むようになりました。
+- HTML画面内のファイルリンクをサイドパネルで開けるようになりました。
+- 更新可能なClaudeアカウントが期限切れと表示され、選べなくなる問題を修正しました。
+- Autorunの時刻設定を変更すると、次回実行時刻を再計算するようになりました。
+- 別のタスクのログ更新によって、会話ログの反映が遅れる問題を修正しました。
+- CLIのAsk添付がファイルIPC接続でもアップロードできるようになりました。
+- 待機中のエージェントを停止し、タスクを表示するだけで起動しないようにしてメモリ使用量を抑えました。
+- Windows Store版でCockpitを終了した際、起動した子プロセスが残る問題を修正しました。
+- ドル記号を含む数式がAskにあると、受信箱やメイン画面が空白になる問題を修正しました。
+
+</details>
+
 ## v4.123.0 — 2026-11-04
 
 **Type:** minor · **Platforms:** macOS, Linux
