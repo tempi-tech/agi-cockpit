@@ -14,16 +14,16 @@ English is the primary language for these generated release notes. Download the 
 - Added an owners-only option for Crew DMs.
 - Added Crew child tasks to the right side panel.
 - Added Crew avatars for Talk Room participants.
-- Prevented incoming messages from interrupting Crew posts and replies while sending.
+- Fixed incoming messages interrupting Crew posts and replies while sending.
 - Added owner-request attribution to requests sent by a Crew during an owner-started turn.
-- Enabled pairing from the host computer’s browser using the pairing code.
-- Preserved Codex automatic review when resuming a conversation.
-- Excluded network project folders from Codex sandbox writable roots on Windows.
+- Added pairing from the host computer’s browser using the pairing code.
+- Fixed Codex automatic review not being preserved when resuming a conversation.
+- Changed Codex sandbox writable roots on Windows to exclude network project folders.
 - Added recovery guidance when Codex sandbox setup fails on Windows.
 - Added usage display for Claude accounts without a five-hour window.
 - Fixed the app becoming unresponsive while recording Git state at task startup.
-- Unified onboarding, sign-in, subscription, and update screens in the dark theme.
-- Kept onboarding action buttons visible in short windows.
+- Changed onboarding, sign-in, subscription, and update screens to use the dark theme.
+- Fixed onboarding action buttons being hidden in short windows.
 - Fixed onboarding disappearing or its progress dots shifting during sign-in checks.
 - Added errors for missing CLI option values and unsupported task command options.
 
