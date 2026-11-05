@@ -84,9 +84,9 @@ A failed automatic renewal retries after six hours. When failure occurs with 14 
 1. Turn on **HTTPS**.
 2. Confirm that the connection URL now has the form `https://device-name.tailnet-name.ts.net:47280`.
 3. Scan the QR code or open the displayed URL on the remote device.
-4. If device pairing appears, enter the six-digit pairing code from the Desktop Remote access panel.
+4. If device pairing appears, enter the six-digit pairing code from the Desktop Remote access panel. On the computer running Cockpit, open it with the **Remote access** button at the bottom left of the sidebar, next to your account. The code appears only while Remote access is on.
 
-The PWA requires pairing even on a same-owner Tailscale device. A stored token authenticates automatically. Otherwise, enter the six-digit code shown on Desktop from another device. New pairing from the target computer itself is refused. Codes refresh after five minutes and can be regenerated; regenerating a code does not revoke existing credentials.
+The PWA requires pairing even on a same-owner Tailscale device. A stored token authenticates automatically. Otherwise, enter the six-digit code shown on Desktop. A browser on the target computer itself can also pair with the code. Without a code or a stored token, Cockpit does not authenticate a connection, even one from the target computer itself. Codes refresh after five minutes and can be regenerated; regenerating a code does not revoke existing credentials.
 
 Before pairing succeeds, Cockpit does not send task notifications, full task state, or recent folder lists to that connection, and it closes an unpaired connection after two minutes. If the connection drops while the PWA is pairing, the form keeps the entered code and reconnects. A code already submitted before the authentication reply is sent again automatically, so do not regenerate it unless it has expired or Cockpit rejects it.
 
@@ -207,7 +207,7 @@ Remote CLI requests from a computer on the same tailnet with the same Tailscale 
 | You cannot change the Tailscale settings | Ask a tailnet Owner, Admin, or Network admin |
 | A certificate is issued but the URL is HTTP | Turn on **HTTPS** and confirm that Connection info changes to an HTTPS URL |
 | No URL or QR code appears | Confirm that **Tailscale only** or **Allow local Wi-Fi too** is selected and the target shows as running |
-| Cockpit rejects the pairing code | Use the latest code within five minutes. After **Regenerate**, enter the new code. After three failed attempts, wait 30 seconds |
+| Cockpit rejects the pairing code | Use the latest code within five minutes. After **Regenerate**, enter the new code. After three failed attempts, wait 30 seconds. The target computer's own loopback, LAN, and Tailscale addresses count as one address |
 | The PWA shows **Disconnected** | Confirm that Cockpit, remote access, and Tailscale are running on the target, then select **Retry now** |
 | Another Cockpit is missing | Enable remote access on each computer, connect them to the same tailnet, then select **Scan again** |
 | Cockpit cannot verify membership | Check the network connection and select **Check membership again** |
