@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.125.0 — 2026-11-06
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added other computers’ Crews and their child tasks to the task list.
 - Added CLI access to Crews and projects on other computers.
