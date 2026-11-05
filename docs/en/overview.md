@@ -31,7 +31,7 @@ The in-app browser stores sign-in state and site data in the local persistent ar
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
 | `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, App Surface, and other Cockpit surfaces | AI agents and people |
 
-Every local feature is free and unlimited, with no account required. Claude Code, Codex, and other agents require their own plans. An AGI Labo membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing.
+Every local feature is free and unlimited, with no account required. Claude Code, Codex, and other agents require their own plans. An AGI Lab membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing.
 
 ## Crews (alpha)
 
@@ -77,14 +77,14 @@ Stopping preserves the Queue; starting delivers its messages. Removing a Crew de
 - Separate website sign-in state: [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identities)
 - Operate Cockpit from an AI agent or script: [Cockpit CLI](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
-## Free access and AGI Labo membership
+## Free access and AGI Lab membership
 
 | Access | Scope covered by these docs |
 | --- | --- |
 | Free access | Create a task in Desktop, run an agent, and review the result and history dashboard. Every local feature is free and unlimited |
-| AGI Labo membership | Everything in free access, plus Autorun, PWA remote access, and smart routing |
+| AGI Lab membership | Everything in free access, plus Autorun, PWA remote access, and smart routing |
 
-A lock on a feature means that feature requires an active AGI Labo membership. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Labo sign-in.
+A lock on a feature means that feature requires an active AGI Lab membership. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Lab sign-in.
 
 ## Next step
 

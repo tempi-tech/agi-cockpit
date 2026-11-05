@@ -40,7 +40,7 @@ To open the PWA from a phone, that phone also needs Tailscale installed and sign
 
 | Requirement | What to confirm |
 | --- | --- |
-| AGI Labo membership | Desktop is signed in to an active member account |
+| AGI Lab membership | Desktop is signed in to an active member account |
 | Tailscale | It is installed on the target and remote devices, and both are connected to the same tailnet |
 | Tailscale administration | An Owner, Admin, or Network admin is available when HTTPS must be enabled for the first time |
 | Browser | The remote device uses a current version of Safari, Chrome, Edge, or another modern browser |
@@ -162,7 +162,7 @@ The computer is only kept awake while remote access is running. Turning remote a
 
 Select **Off** in the Desktop Remote access panel to disconnect active sessions. Paired tokens survive app restarts and Remote Access off/on. The PWA stores its token in browser localStorage; the target stores only SHA-256 hashes in `pairing-credentials.json` inside its Cockpit data directory. To revoke all paired credentials, stop Remote Access, remove that file, restart Remote Access, and pair trusted devices again. Credentials from versions without durable pairing may require one new pairing.
 
-Cockpit also stops a running remote-access server and returns to Off if the AGI Labo sign-in or membership becomes invalid. A temporary membership-verification outage preserves a running connection and shows an action to check again instead of stopping it immediately.
+Cockpit also stops a running remote-access server and returns to Off if the AGI Lab sign-in or membership becomes invalid. A temporary membership-verification outage preserves a running connection and shows an action to check again instead of stopping it immediately.
 
 ## Inspect and configure it from the CLI
 
@@ -200,7 +200,7 @@ Remote CLI requests from a computer on the same tailnet with the same Tailscale 
 
 | Message or state | What to check |
 | --- | --- |
-| Remote access shows a lock | Sign in to Desktop with an active AGI Labo member account |
+| Remote access shows a lock | Sign in to Desktop with an active AGI Lab member account |
 | Tailscale is missing, stopped, or signed out | Install, start, or sign in from the on-screen action. Connect the remote device to the same tailnet too |
 | `your Tailscale account does not support getting TLS certs` | Enable MagicDNS and HTTPS Certificates in [Tailscale DNS settings](https://login.tailscale.com/admin/dns), then get the certificate again in Cockpit |
 | Cockpit does not have its own copy of the HTTPS certificate yet | Starting HTTPS Remote Access asks Tailscale for a copy before the server listens. If it is still missing, get the certificate again in Remote Access. **Get certificate** stays available while HTTPS is on, even when the server is stopped. Full Disk Access is not required |

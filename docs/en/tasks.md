@@ -30,7 +30,7 @@ Remote rows show the task name, instruction preview, state, pending Ask, agent, 
 
 An open remote task follows navigation to another task on the same device and Desktop Back and Forward history. If synchronization drops briefly, Cockpit keeps the loaded view for a short reconnection period before replacing it with the offline state. Separate states and recovery actions identify an offline or missing device, a removed task, and an unresponsive destination. A device that rejects the connection because it runs an older version or has a different Tailscale owner is shown as unavailable.
 
-Switch back to **This device** to close an open remote task, stop discovering and connecting to other PCs, and show only local tasks. This feature requires an AGI Labo membership and Tailscale. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#protect-remote-access) for the difference between the list and task-control connections, and [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup.
+Switch back to **This device** to close an open remote task, stop discovering and connecting to other PCs, and show only local tasks. This feature requires an AGI Lab membership and Tailscale. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#protect-remote-access) for the difference between the list and task-control connections, and [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup.
 
 ## Filter tasks and Crews
 

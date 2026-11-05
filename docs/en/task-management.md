@@ -37,7 +37,7 @@ After `create` succeeds, it returns the new `taskId` and the account Cockpit act
 
 ## Create with Smart Routing
 
-When Cockpit is signed in with an AGI Labo membership, add `--smart-routing` to `create` or `run` to choose the agent, model, and reasoning effort from the registered routing policy and instruction. If both `--directory` and `--project` are omitted, it also chooses a workspace from the same candidates as **Auto** on the new-task screen. Supplying either option fixes only the workspace while the runtime is chosen. A routed external-agent task uses Native UI and an Auto account.
+When Cockpit is signed in with an AGI Lab membership, add `--smart-routing` to `create` or `run` to choose the agent, model, and reasoning effort from the registered routing policy and instruction. If both `--directory` and `--project` are omitted, it also chooses a workspace from the same candidates as **Auto** on the new-task screen. Supplying either option fixes only the workspace while the runtime is chosen. A routed external-agent task uses Native UI and an Auto account.
 
 ```bash
 cockpit task run \

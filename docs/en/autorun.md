@@ -12,7 +12,7 @@ Use [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) to react to events
 
 ## Requirements
 
-Autorun requires an AGI Labo membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Labo in Desktop.
+Autorun requires an AGI Lab membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Lab in Desktop.
 
 Schedules run inside the AGI Cockpit app process. Closing every window on macOS does not stop the scheduler. The operating-system scheduler does not launch Cockpit after the process exits, but Cockpit performs one catch-up per Autorun when it restarts or resumes within 24 hours of an unhandled scheduled time. Older occurrences are recorded as missed instead of silently starting stale work.
 

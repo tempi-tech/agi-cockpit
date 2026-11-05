@@ -6,7 +6,7 @@ Understand local execution, external and Ask-relay transmission, approvals, Cock
 
 > Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
-AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Labo authentication and membership checks, and anonymous usage events.
+AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
 ## What stays local
 
@@ -112,7 +112,7 @@ Crew Ask DMs are on by default and send questions and supported media to each co
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord token and Slack access and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
 
-Muse Code keeps one shared login per computer (Keychain on macOS); Cockpit does not isolate Muse Code profiles. In **Muse Code login** mode, Cockpit removes an inherited `META_API_KEY` before launching native or terminal UI. Terminal UI still runs inside your login shell, so startup files can export a key again. In **Meta API key** mode, Cockpit passes the encrypted key saved as `agents.credential.meta`; it is not an AGI Labo credential. Use `agents.museAuthMode` (`muse-login` or `api-key`) to select the method. Reads expose only whether the key is set.
+Muse Code keeps one shared login per computer (Keychain on macOS); Cockpit does not isolate Muse Code profiles. In **Muse Code login** mode, Cockpit removes an inherited `META_API_KEY` before launching native or terminal UI. Terminal UI still runs inside your login shell, so startup files can export a key again. In **Meta API key** mode, Cockpit passes the encrypted key saved as `agents.credential.meta`; it is not an AGI Lab credential. Use `agents.museAuthMode` (`muse-login` or `api-key`) to select the method. Reads expose only whether the key is set.
 
 Named agent profiles isolate authentication. Antigravity keeps conversations, logs, cache, and usage history under a profile-specific home. On macOS, each profile stores its OAuth token in a dedicated Keychain, and Cockpit verifies that Keychain is first in the search order before starting a task. The host login Keychain remains later in the list for tools such as GitHub CLI, but Antigravity resolves the profile Keychain placeholder or token first. On Windows and Linux, the OS keyring itself is shared, so its host login is used by every profile. To rely on separate profile token files there, first log the default account out of the shared login.
 

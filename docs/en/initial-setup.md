@@ -24,7 +24,7 @@ This updates each agent's user-level skill directory and the applicable user-lev
 
 ## 3. Sign in to the agent
 
-An AI agent's plan and authentication are separate from AGI Cockpit's local features and AGI Labo sign-in. Obtain an eligible plan from the provider and sign in to that provider account for Claude Code, Codex, or another selected agent.
+An AI agent's plan and authentication are separate from AGI Cockpit's local features and AGI Lab sign-in. Obtain an eligible plan from the provider and sign in to that provider account for Claude Code, Codex, or another selected agent.
 
 If a Claude Code, Codex, or Grok Build Native UI task starts before authentication, task details shows sign-in guidance and retries the first instruction after authentication. Terminal UI and Terminal do not provide this retry flow; complete the CLI sign-in inside the terminal, then resume or recreate the task.
 
@@ -32,7 +32,7 @@ For Muse Code, open **Settings → Agents → Muse Code → Authentication**. Ch
 
 ## 4. Choose how to use Cockpit
 
-For local features only, select **Start without signing in** on the final screen. Sign in as an AGI Labo member if you want Smart routing, Autorun, or remote access from another device.
+For local features only, select **Start without signing in** on the final screen. Sign in as an AGI Lab member if you want Smart routing, Autorun, or remote access from another device.
 
 ## 5. Continue recent work or skip
 

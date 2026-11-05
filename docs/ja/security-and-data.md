@@ -114,7 +114,7 @@ Crew同士の返信回数制限は既定でオフです。有効にした場合�
 
 AGI Cockpit自身のtokenとAPIキーは、OSのKeychainまたはkeyringなど暗号化ストレージへ保存します。DiscordのtokenとSlackのアクセストークン・App-level tokenもこの境界に含まれ、通常の設定値やstatus出力へ値を返しません。安全なストレージを利用できない場合、平文へ切り替えず保存を拒否します。削除に失敗した認証情報は利用を停止し、次回起動時に削除を再試行します。
 
-Muse CodeのログインはPC共通の一か所（macOSではKeychain）に保存され、Cockpitのプロファイルでは分離しません。「Muse Code ログイン」方式では、ネイティブUI・ターミナルUIの起動前に継承した`META_API_KEY`を取り除きます。ただしターミナルUIはログインシェル内で動くため、起動ファイルが再びキーをexportする場合があります。「Meta API キー」方式では`agents.credential.meta`に暗号化保存したキーを渡します。これはAGI Laboの認証情報とは別です。CLIの`agents.museAuthMode`（`muse-login`または`api-key`）で方式を選びます。キーの読み取り結果は設定の有無だけです。
+Muse CodeのログインはPC共通の一か所（macOSではKeychain）に保存され、Cockpitのプロファイルでは分離しません。「Muse Code ログイン」方式では、ネイティブUI・ターミナルUIの起動前に継承した`META_API_KEY`を取り除きます。ただしターミナルUIはログインシェル内で動くため、起動ファイルが再びキーをexportする場合があります。「Meta API キー」方式では`agents.credential.meta`に暗号化保存したキーを渡します。これはAGIラボの認証情報とは別です。CLIの`agents.museAuthMode`（`muse-login`または`api-key`）で方式を選びます。キーの読み取り結果は設定の有無だけです。
 
 名前付きエージェントプロファイルは認証を分離します。Antigravityは会話、ログ、キャッシュ、利用履歴をプロファイル専用homeへ保存します。macOSでは各プロファイルのOAuth tokenを専用Keychainへ保存し、そのKeychainが検索順の先頭であることをタスク開始前に確認します。ホストのlogin KeychainはGitHub CLIなどのため後段に残りますが、Antigravityの項目はprofile Keychainのplaceholderまたはtokenが先に解決します。WindowsとLinuxではOS keyring自体が共有されるため、host loginが全profileで使われます。profileごとのtoken fileへ分離したい場合は、先にdefaultアカウントから共有loginをlogoutします。
 
