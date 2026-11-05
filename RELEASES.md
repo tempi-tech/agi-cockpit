@@ -4,6 +4,53 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.125.0 — 2026-11-06
+
+**Type:** minor · **Platforms:** macOS
+
+- Added other computers’ Crews and their child tasks to the task list.
+- Added CLI access to Crews and projects on other computers.
+- Added CLI requests to Crews on other computers.
+- Added an owners-only option for Crew DMs.
+- Added Crew child tasks to the right side panel.
+- Added Crew avatars for Talk Room participants.
+- Prevented incoming messages from interrupting Crew posts and replies while sending.
+- Added owner-request attribution to requests sent by a Crew during an owner-started turn.
+- Enabled pairing from the host computer’s browser using the pairing code.
+- Preserved Codex automatic review when resuming a conversation.
+- Excluded network project folders from Codex sandbox writable roots on Windows.
+- Added recovery guidance when Codex sandbox setup fails on Windows.
+- Added usage display for Claude accounts without a five-hour window.
+- Fixed the app becoming unresponsive while recording Git state at task startup.
+- Unified onboarding, sign-in, subscription, and update screens in the dark theme.
+- Kept onboarding action buttons visible in short windows.
+- Fixed onboarding disappearing or its progress dots shifting during sign-in checks.
+- Added errors for missing CLI option values and unsupported task command options.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 別のコンピューターのCrewと子タスクをタスク一覧に表示できるようになりました。
+- CLIから別のコンピューターのCrewとプロジェクトを確認できるようになりました。
+- CLIから別のコンピューターのCrewへ依頼を送れるようになりました。
+- Crewが受け付けるDMをオーナーだけに限定できるようになりました。
+- Crewの子タスクを右サイドパネルで確認できるようになりました。
+- Talk RoomのCrew参加者にアバターを表示するようになりました。
+- Crewの投稿・返信中に新しいメッセージが届いても、送信処理が中断されないようにしました。
+- オーナーの依頼を受けたCrewからの依頼に、その出所を表示するようになりました。
+- 接続先のコンピューター自身のブラウザーでも、コードを入力してペアリングできるようになりました。
+- Codexの会話を再開したときに、自動レビュー設定を維持するようにしました。
+- WindowsのCodexでネットワーク上のプロジェクトフォルダをサンドボックスの書き込み対象から除外しました。
+- WindowsのCodexでサンドボックスの準備に失敗した際、対処方法を表示するようになりました。
+- 5時間枠がないClaudeアカウントでも使用量を表示できるようになりました。
+- タスク開始時のGit状態の記録中に、アプリの操作が固まる問題を修正しました。
+- 初期設定・サインイン・契約案内・更新案内の画面をダークテーマに統一しました。
+- 高さの低いウィンドウでも、初期設定画面の操作ボタンを表示できるようにしました。
+- 初期設定中のサインイン確認で画面が閉じたり、進行表示がずれたりする問題を修正しました。
+- CLIで値のないオプションやタスク操作の未対応オプションを指定すると、エラーを返すようにしました。
+
+</details>
+
 ## v4.124.0 — 2026-11-05
 
 **Type:** minor · **Platforms:** macOS, Linux
