@@ -206,7 +206,7 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 
 `approval_resolved`は待機の解除を示し、承認された、成功した、という意味ではありません。中断、エラー、利用上限、完了による解除も含みます。複数の承認要求があれば最後の1件が解消するまで承認待ちが続きます。通知は要求を自動承認せず、権限やモデル、親のエージェント切替予約も変更しません。
 
-`approvalEvent`を受け取ったら成果として扱わず、その`seq`を指定した`task wait --since <seq>`で待機を続けます。エラー・完了へ移る際の解除通知は直前の非終端状態を保持し、実際のエラー・完了内容は通常レポートが返します。現在の状態は`task get`で確認します。Fleetは承認通知を自動で読み飛ばして成果を待ち続けます。
+`approvalEvent`を受け取ったら成果として扱わず、その`seq`を指定した`task wait <task-id> --since <seq>`で待機を続けます。エラー・完了へ移る際の解除通知は直前の非終端状態を保持し、実際のエラー・完了内容は通常レポートが返します。現在の状態は`task get`で確認します。Fleetは承認通知を自動で読み飛ばして成果を待ち続けます。
 
 ## 追加指示を送る
 
@@ -276,7 +276,7 @@ cockpit task browser-identity <task-id> work
 | `task retry-start` | 起動に失敗したタスクを、保存された指示またはコマンドで再試行する |
 | `task resume` | 停止したタスクを同じ履歴で再開する |
 | `task complete` | プロセスを止めて完了へ移す。CLIではWorktreeを既定で削除する |
-| `task complete --keep-worktree` | Worktreeを残して完了へ移す |
+| `task complete <task-id> --keep-worktree` | Worktreeを残して完了へ移す |
 | `task remove` | タスクと履歴をCockpitから削除する |
 
 完了や削除は、利用者が明示的に求めた場合だけ行います。差分、生成物、レポート、公開URLなど必要な成果を保存し、対象IDを再確認してから実行してください。

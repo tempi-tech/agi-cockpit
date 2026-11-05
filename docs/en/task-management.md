@@ -206,7 +206,7 @@ A child entering or leaving approval waiting also appends a report with `approva
 
 `approval_resolved` means the wait ended, not that approval was granted or work succeeded. It also covers interruption, errors, usage limits, and completion. Multiple approval requests keep the child waiting until the last one is resolved. Notifications never approve a request or change permissions, model selection, or the parent's pending agent switch.
 
-After an `approvalEvent`, keep waiting for the result with `task wait --since <seq>` using that notice's sequence. An exit notice into error or completion retains the previous nonterminal status; the ordinary result report carries the actual error or completion output. Use `task get` for current state. Fleet automatically skips approval notices and continues waiting for results.
+After an `approvalEvent`, keep waiting for the result with `task wait <task-id> --since <seq>` using that notice's sequence. An exit notice into error or completion retains the previous nonterminal status; the ordinary result report carries the actual error or completion output. Use `task get` for current state. Fleet automatically skips approval notices and continues waiting for results.
 
 ## Send a follow-up
 
@@ -276,7 +276,7 @@ cockpit task browser-identity <task-id> work
 | `task retry-start` | Retries a startup failure with the saved instruction or command |
 | `task resume` | Restarts a stopped task with the same history |
 | `task complete` | Stops the process and moves it to completed. The CLI removes its Worktree by default |
-| `task complete --keep-worktree` | Moves it to completed while retaining the Worktree |
+| `task complete <task-id> --keep-worktree` | Moves it to completed while retaining the Worktree |
 | `task remove` | Deletes the task and its Cockpit history |
 
 Complete or remove a task only when the user explicitly requests it. Save required diffs, artifacts, reports, and publication URLs, then verify the target id before acting.

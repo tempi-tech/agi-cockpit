@@ -34,7 +34,7 @@ AGI Cockpitでは、同じタスク作成面から9種類のエージェント�
 
 そのエージェントをすでに使っているチャットは引き続き実行でき、現在のエージェントとして表示されます。インストール済みのエージェントは少なくとも一つオンにする必要があります。デフォルトエージェントをオフにすると、オンになっている最初のインストール済みエージェントが新しいデフォルトになります。
 
-同じ設定はCLIの`agents.enabled.<agent>`から読み書きできます。これは作成画面とモデル取得を整理する設定であり、実行権限を取り消すものではありません。オフのエージェントも`cockpit task create --agent <agent>`で明示すれば起動できます。
+同じ設定はCLIの`agents.enabled.<agent>`から読み書きできます。これは作成画面とモデル取得を整理する設定であり、実行権限を取り消すものではありません。オフのエージェントも`cockpit task create --agent-type <agent>`で明示すれば起動できます。
 
 ```bash
 cockpit settings set agents.enabled.qoder false
@@ -134,7 +134,7 @@ CockpitにはMuse Code用の組み込みモデル一覧がありません。セ�
 
 Contributorモデルは既定でモデル一覧に表示されません。**設定 → エージェント → Muse Code → Contributor モデルを表示**、または `cockpit settings set agents.museContributorModelsEnabled true` で表示できます。この設定は選択済みのモデルを変更しません。モデル未指定のネイティブUIは、一覧のcontributor以外の既定モデルで開始します。ネイティブUIでは、Contributorモデルを明示的に選んだときだけ、そのセッションのContributorモードを有効にします。通常モデルとContributorモデルを切り替えるときは、応答後のバックグラウンド確認を含め、Muse Codeの処理が完了するまで待ってください。会話やコードが学習に使われる場合があるため、選択時はMuse Codeの利用条件を確認してください。適用時には会話内に一行のデータ利用通知を表示します。
 
-`cockpit task create --agent muse --ui-mode visual --model <id>`と`cockpit task model <id> --model <model-id>`は、Muse Codeの未掲載モデルIDも受け付けます。入力したIDをそのまま渡して会話に通知し、利用できない場合は次のメッセージでMuse Codeのエラーを表示します。未掲載モデルはMuse Codeの既定推論レベルで実行し、`task model`での明示的な`--effort`指定を拒否します。掲載モデルで未対応のレベルを指定すると、そのモデルの既定値を使い、推論レベルのないモデルには指定しません。Muse Codeには速度tier、カスタムシステムプロンプト、Goal、外部セッション取り込みの選択肢はありません。
+`cockpit task create --agent-type muse --ui-mode visual --model <id>`と`cockpit task model <id> --model <model-id>`は、Muse Codeの未掲載モデルIDも受け付けます。入力したIDをそのまま渡して会話に通知し、利用できない場合は次のメッセージでMuse Codeのエラーを表示します。未掲載モデルはMuse Codeの既定推論レベルで実行し、`task model`での明示的な`--effort`指定を拒否します。掲載モデルで未対応のレベルを指定すると、そのモデルの既定値を使い、推論レベルのないモデルには指定しません。Muse Codeには速度tier、カスタムシステムプロンプト、Goal、外部セッション取り込みの選択肢はありません。
 
 Grok Buildのモデル一覧を取得するとき、Cockpitは対話ログインが必要な状態ではGrok CLIを起動せず、ログイン画面を開きません。未ログインの場合は組み込み候補と、Settingsからサインインすると最新のモデルを取得できる案内を表示します。期限切れのaccess tokenに利用可能なrefresh tokenがある場合も、モデル一覧の取得だけでは更新処理を開始せず、既知または組み込みの候補を表示します。実際のタスク開始時にGrok CLIがtokenを更新します。
 

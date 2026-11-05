@@ -34,7 +34,7 @@ Open **Settings → Agents → Common → Agents in use** to turn each of the ni
 
 Chats that already use the agent continue to run and show it as their current agent. At least one installed agent must stay on. If you turn off the default agent, the first installed agent that is still on becomes the new default.
 
-The same setting is available from the CLI as `agents.enabled.<agent>`. It controls creation choices and model discovery; it does not revoke permission to run that agent. An explicit `cockpit task create --agent <agent>` can still start a turned-off agent.
+The same setting is available from the CLI as `agents.enabled.<agent>`. It controls creation choices and model discovery; it does not revoke permission to run that agent. An explicit `cockpit task create --agent-type <agent>` can still start a turned-off agent.
 
 ```bash
 cockpit settings set agents.enabled.qoder false
@@ -134,7 +134,7 @@ Cockpit has no built-in Muse Code model list. It retrieves the catalog with `mod
 
 Contributor models are hidden from model menus by default. Enable **Settings → Agents → Muse Code → Show Contributor models**, or run `cockpit settings set agents.museContributorModelsEnabled true`, to show them. This setting does not change the selected model. Without a chosen model, Native UI uses the catalog's non-contributor default. Native UI enables Contributor mode for a session only when you explicitly select a Contributor model. Wait for Muse Code to finish its current work before switching between standard and Contributor models, including any background checks after a reply. Conversations and code may be used for training under Muse Code's terms; a one-line data-use notice appears in the conversation when the model takes effect.
 
-`cockpit task create --agent muse --ui-mode visual --model <id>` and `cockpit task model <id> --model <model-id>` accept an unlisted Muse Code model ID. Cockpit passes it through and posts a notice; Muse Code reports an error on the next message if it cannot serve it. Unlisted models use Muse Code's default reasoning level and `task model` rejects an explicit `--effort` for them. For a listed model, an unsupported level falls back to that model's default; a model without levels runs without an effort. Muse Code has no service-tier selector, custom system-prompt selector, Goal, or external-session import.
+`cockpit task create --agent-type muse --ui-mode visual --model <id>` and `cockpit task model <id> --model <model-id>` accept an unlisted Muse Code model ID. Cockpit passes it through and posts a notice; Muse Code reports an error on the next message if it cannot serve it. Unlisted models use Muse Code's default reasoning level and `task model` rejects an explicit `--effort` for them. For a listed model, an unsupported level falls back to that model's default; a model without levels runs without an effort. Muse Code has no service-tier selector, custom system-prompt selector, Goal, or external-session import.
 
 When discovering Grok Build models, Cockpit does not start the Grok CLI or open a sign-in page if discovery would require interactive authentication. While signed out, it shows built-in candidates and guidance to sign in from Settings for the current catalog. If an expired access token has a usable refresh token, model discovery also uses known or built-in candidates instead of starting a refresh. The Grok CLI refreshes the token when an actual task starts.
 
