@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.114.0 on 2026-10-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -22,25 +22,25 @@ Schedules run inside the AGI Cockpit app process. Closing every window on macOS 
 | --- | --- | --- |
 | Once (`once`) | Date and time | Starts once, then disables itself |
 | Interval (`interval`) | Minutes, hours, or days | Starts after the selected interval from the previous scheduling pass |
-| Cron (`cron`) | `minute hour day month weekday` | Starts at the next time that matches the cron expression |
+| Scheduled (`cron`) | `minute hour day month weekday` | Starts at the next time that matches the cron expression |
 
 In the cron weekday field, `0` means Sunday. For example, `0 9 * * 1-5` runs at 9:00 a.m. on weekdays.
 
 ### Configure a recurring schedule in Desktop or the PWA
 
-When **Cron** is selected, the simple setup offers **Daily**, **Weekly**, and **Monthly** patterns plus a time. Weekly schedules can include several weekdays. Monthly schedules select a day from 1 through 31; a month without that day is skipped. Cockpit shows a plain-language summary, the next run, and the clock and time zone used by the computer running Cockpit. In the PWA, the next run waits for the host time zone instead of guessing from the phone's clock.
+When **Scheduled** is selected, the simple setup offers **Daily**, **Weekly**, and **Monthly** patterns plus a time. Weekly schedules can include several weekdays. Monthly schedules select a day from 1 through 31; a month without that day is skipped. Cockpit shows a plain-language summary, the next run, and the clock and time zone used by the computer running Cockpit. In the PWA, the next run waits for the host time zone instead of guessing from the phone's clock.
 
 Expand **Edit the cron expression** to enter or review the five-field expression directly. A valid expression that the simple setup cannot represent remains authoritative and is saved as written. An invalid expression blocks saving. **Use the simple setup** replaces an unsupported or invalid expression with the default daily schedule, so review the resulting time before saving. This editor changes only how the schedule is entered; stored schedules and `cockpit autorun --expression` continue to use the same five-field cron format.
 
 ## Create an Autorun
 
-1. Open the app menu in the lower-left corner of Desktop, then select **Autorun tasks**.
+1. Select **Autorun tasks** above the task list in Desktop.
 2. Select **New Autorun**.
 3. Enter a name and the instruction to send when the task starts.
 4. Under **Execution target**, choose **New task**, **Existing task**, or **Crew**.
 5. For a new task, choose the working directory and agent, then review any shown UI mode, account, model, reasoning effort, service tier, system prompt, and approval mode. Cockpit uses the Master's working location for Master Agent runs, and **Auto** is the default for agents with account selection.
 6. For an existing task, choose **Target task**. Cockpit creates no new runtime; it uses the target's existing agent, conversation, working directory, and runtime settings.
-7. Choose **Once**, **Interval**, or **Cron** and configure the timing. For Cron, use the daily, weekly, or monthly setup, or expand the raw expression for an advanced schedule.
+7. Choose **Once**, **Interval**, or **Scheduled** and configure the timing. For Scheduled, use the daily, weekly, or monthly setup, or expand the raw expression for an advanced schedule.
 8. Save the Autorun and confirm that the list shows its next run time.
 
 In Desktop and the PWA, open **Target task** and search by task name, project, instruction text, or task ID. Review the name, status, project, and shortened ID in the results, then select the target. A unique ID prefix resolves to the full task ID; when several tasks match, select the intended result. Arrow keys move through the results, Enter selects, and Escape closes the picker.

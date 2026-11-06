@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.122.0 on 2026-11-03. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -169,6 +169,8 @@ Antigravity named profiles use browser-based Google OAuth and keep conversations
 `supervised` asks for approval when a tool action requires it, `accept-edits` permits supported editing operations, and `full-access` permits a broader range of actions. Exact support depends on the agent and UI mode.
 
 `auto` (Auto) is available in Native UI for Claude, Codex, and Grok. The agent’s own reviewer evaluates commands and edits, allows routine actions, and blocks risky actions or sends them for human approval. It never answers questions or Asks. Other agents reject `auto`. Changes apply immediately for Claude and from the next turn for Codex. Grok restarts its idle session while preserving the conversation; changes are rejected while work or a pending request remains. If model, account, or organization restrictions prevent Claude or Codex from using Auto, Cockpit displays the effective mode and posts a chat notice. Grok’s runtime mode cannot be read back, so that check does not cover Grok. Cockpit never automatically falls back to full access.
+
+In Codex native UI, `supervised`, `accept-edits`, and `auto` run inside Codex's sandbox. The sandbox allows writes to the working folder and the project's additional folders (and, on macOS and Linux, temporary directories) and blocks network access. As a result, even in `supervised`, file edits inside the working folder and commands that stay inside the sandbox proceed without asking. Codex asks for approval when it needs to run outside the sandbox, such as writing outside the working folder or accessing the network. `accept-edits` automatically approves the file-edit requests among these. `full-access` does not use the sandbox and does not ask for approval.
 
 Muse Code native UI offers only `accept-edits` (the default) and `full-access`. Muse Code never asks before editing files inside the workspace, so Cockpit does not present a `supervised` mode it could not enforce. With `accept-edits`, Muse Code asks you — not an AI reviewer — before commands and other actions its rules do not already allow; **Deny** rejects that call and Muse Code continues the turn. `full-access` additionally turns off Muse Code's shell sandbox and approves its remaining prompts.
 

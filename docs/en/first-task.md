@@ -4,13 +4,13 @@
 
 Choose a project, working folder, and agent, safely run your first task, review its result, and mark the task complete.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/first-task)
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
 ## 1. Create a new task
 
-1. Open **New task** at the top of the window.
+1. Select **Create new** (+) at the top left of the window, above the task list.
 2. Under **Workspace**, choose an existing project, select **Create project**, choose an existing temporary folder, or select **New temporary folder**. If the project contains several folders, select the working folder for this task.
 3. Select an AI agent.
 4. For supported agents, use **Mode** to choose **Native UI** or **Terminal**.
@@ -35,7 +35,7 @@ Smart routing creates ordinary AI-agent tasks in Native UI and uses Auto for the
 
 For an agent that reports usage, the area near the composer shows the allowances for the selected agent and account. A fixed account shows that profile. Auto previews the account chosen by the same selection method used when the task is created and labels it **Auto · account name**. Do not interpret an unavailable value as 0% remaining; open the details to inspect authentication state, source, and reset time when needed.
 
-Draft instructions and attachments remain available until the task is created or the creation screen is explicitly closed. You can inspect Settings or another screen and return to **New task** without re-entering them. This draft does not persist after the app quits.
+Draft instructions and attachments remain available until the task is created or the creation screen is explicitly closed. You can inspect Settings or another screen and return to the **Create new** screen without re-entering them. This draft does not persist after the app quits.
 
 A temporary folder is deleted automatically when the task is completed. In a project, the task starts in the selected working folder. Supported agents can also use other folders in that project, so include only folders the task is allowed to access.
 
