@@ -31,7 +31,7 @@ The in-app browser stores sign-in state and site data in the local persistent ar
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
 | `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, App Surface, and other Cockpit surfaces | AI agents and people |
 
-Every local feature is free and unlimited, with no account required. Claude Code, Codex, and other agents require their own plans. An AGI Lab membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing.
+Local features such as parallel task management, every supported agent, and Master Agent are free, with no task cap and no account required. One Crew is free; additional Crews require an AGI Lab membership. Claude Code, Codex, and other agents require their own plans. An AGI Lab membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing. It also removes the limit on Crews.
 
 ## Crews (alpha)
 
@@ -81,8 +81,8 @@ Stopping preserves the Queue; starting delivers its messages. Removing a Crew de
 
 | Access | Scope covered by these docs |
 | --- | --- |
-| Free access | Create a task in Desktop, run an agent, and review the result and history dashboard. Every local feature is free and unlimited |
-| AGI Lab membership | Everything in free access, plus Autorun, PWA remote access, and smart routing |
+| Free access | Create a task in Desktop, run an agent, and review the result and history dashboard. Local features are free with no task cap, including one Crew |
+| AGI Lab membership | Everything in free access, plus Autorun, PWA remote access, smart routing, and no limit on Crews |
 
 A lock on a feature means that feature requires an active AGI Lab membership. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Lab sign-in.
 
