@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -33,6 +33,8 @@ For tasks launched by Cockpit, CLI error messages follow the app's display langu
 Exit code 7 or `Cannot reach AGI Cockpit` means the app is not reachable through either available local transport, or the installed CLI is too old for the fallback transport. It is not a filesystem-permission error.
 
 Use `--stdin`, `--instruction-file`, or `--text-file` instead of embedding long instructions, Markdown, quotes, backticks, or `$` in a shell argument.
+
+An option that requires a value fails before sending a request if the value is missing or the next argument starts with `--`. Task commands also reject unsupported options instead of ignoring them. Use `--name` to name a task; `--title` is an Ask option. A quoted empty string is a supplied value, though the command may reject it during validation.
 
 ## Run on Windows
 
@@ -121,6 +123,21 @@ Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can targe
 Remote control needs no token from a computer on the same tailnet with the same Tailscale owner; other connections use the paired bearer token. When the target is Tailscale-only, connections that are neither a Tailscale peer nor loopback are refused. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC. Remote `cockpit ask answer` is an exception: it always requires a paired token, including on loopback and same-owner Tailscale peers. See [Ask authentication](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask).
 
 Stopping Remote Access, clearing Identity data, deleting an account, and uninstalling the CLI require explicit confirmation flags. A confirmation flag is not a substitute for user authorization; verify the requested action and exact target first.
+
+## Read and message Crews on another computer
+
+Use `--host <host|alias>` with `crew list|get|status|invite-url|channels|groups|send` or `project list|get`. Remote `crew status` requires a Crew ID or name, and remote `invite-url` does not support `--open`. Other Crew and project operations remain local.
+
+```bash
+cockpit crew list --host studio
+cockpit crew status <crew> --host studio
+cockpit project list --host studio
+cockpit crew send <crew> --host studio --text "Check the latest build"
+```
+
+These requests go through the local Cockpit. Both computers must be untagged devices with the same known Tailscale owner; the destination must be running Cockpit with Remote Access on. A paired token alone cannot authorize this relay, and `--host` cannot name this computer. Responses identify the destination in `device` instead of `instance`. Paths belong to that destination.
+
+Crew read restrictions still apply to the authenticated caller. A Crew child can list other Crews only as brief summaries; it cannot inspect their details. Remote sending delivers text and sender provenance, without attachments. To reply, the receiving Crew uses the sender’s Crew ID and device with `crew send --host`; that return destination also needs Remote Access enabled. See the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew#crews-on-another-computer) for exact permissions and errors.
 
 ## Command reference
 

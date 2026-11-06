@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -106,6 +106,8 @@ From v4.117.0, threads require a mention by default, including threads the Crew 
 
 The optional Crew-to-Crew reply limit is off by default. When enabled, the default limit is 10 consecutive messages from bots or webhooks in the same place without a person speaking there. At the limit, further bot messages are not delivered; a person's message resets the count. This limits repeated replies, not operating-system access. A Crew may tighten its own limit at any time, but disabling it or raising the limit requires a turn started by its owner.
 
+A request relayed by a Crew during an owner-started turn carries `origin="owner"` and an `origin_ref` identifying its source. A receiving Crew can perform the changes allowed for such a relayed request even under `memberTrust: strict`, but this is not a direct owner turn: owner-only actions, such as changing accounts or Ask DM recipients, remain unavailable. Widening permissions still requires owner approval. Unmarked task messages and child-task sends do not gain this authority. Interrupting messages keep the least trusted authority of the combined turn. The [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) lists the exact boundaries.
+
 Each Crew keeps its instructions, memory and work in its own home, with Git history. Received chat attachments are retained for seven days, or longer while their message is queued; copies saved in the home, the owner's own files and Ask-answer attachments do not expire under that rule. Stop preserves queued messages. Removing a Crew deletes its settings and attempts to move its home to the Trash; when that fails, the reported home path remains on disk. Disconnecting a chat removes its connection credentials. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for exact limits and operations.
 
 Finished Asks also retain a local status record for up to 30 days, with at most the latest 500 records. It includes the title, task, outcome, responder and an answer summary of up to 500 characters. `cockpit ask get <askId>` exposes the status and answer-delivery state; do not put secrets in Ask answers. This retention is separate from the secure password-input flow.
@@ -204,7 +206,7 @@ Local `task create` and `task send` can attach files through repeatable `--media
 
 ## Protect Remote Access
 
-When the Desktop device filter displays another PC, it receives task-list metadata from a PC authenticated as the same Tailscale owner, including task names, states, agents, working paths, instruction previews, timestamps, and whether an Ask is pending. This dedicated list connection does not synchronize conversation bodies or attachments and does not control tasks. Received lists are cleared when the connection drops.
+When the Desktop device filter displays another PC, it receives task-list metadata from a PC authenticated as the same Tailscale owner, including task names, states, agents, working paths, instruction previews, timestamps, and whether an Ask is pending. Crew summaries also include their avatar, Crew state and connection status, and child-task relationships. This dedicated list connection does not synchronize conversation bodies or attachments and does not control tasks. Received lists are cleared when the connection drops.
 
 Opening a remote task from that list creates a separate PWA connection to the other PC's Remote Access page. This connection uses the same authentication boundary as the PWA. After authentication, it can read the conversation and task detail and send messages, Ask answers, stop, and completion actions to the target PC. Confirm the displayed device name, and protect Tailscale devices and paired connections as authority to operate that Cockpit.
 

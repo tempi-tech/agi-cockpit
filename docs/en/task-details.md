@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -16,6 +16,8 @@ Task details is where you understand a piece of work selected from the [Task lis
 - **Resume** reconnects an unfinished task to its saved session after its process stopped, such as after an app restart.
 
 A Terminal task cannot restore its previous shell process, so resume starts a new shell in the same directory. Native UI for Cursor, Qoder, Grok Build, and Muse Code reconnects to its supported saved conversation.
+
+Codex Native UI preserves the task’s automatic-review setting when resuming its conversation. If Codex reports a different effective reviewer, Cockpit reconciles the approval mode and shows a notice; resuming does not silently grant full access.
 
 After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session. Antigravity continuation tracking timeouts (`continuation_timeout`) do not count toward this repeated-failure limit.
 
@@ -44,6 +46,8 @@ An Ask answer is summarized with its selections, free-form input, and attachment
 On Desktop and the PWA, surfaces with interrupt support let you send an unsent answer immediately with the lightning button, **Interrupt and send this queued message now**. Only the selected answer is sent, preserving its question, responder, and attachments. Remaining items keep their order and wait until the replacement turn finishes or Stop confirms its cancellation. A pending approval, tool question, or unavailable session shows a reason and leaves the answer queued for automatic delivery. Sending, delivered, and unconfirmed answers cannot be interrupted again.
 
 Failed delivery can be retried. If delivery cannot be confirmed, automatic resend stops to prevent duplicates; check the conversation first. Choose **Mark as handled without resending** to move past that item without sending it again. Completing or deleting a task cancels its remaining Queue without delivering those items.
+
+While a Crew is posting or replying in chat, incoming messages wait for its send operation to settle before interrupting it. If a post’s delivery is uncertain after a timeout or interruption, inspect the chat history before retrying to avoid duplicate posts.
 
 ### Configure follow-up behavior from the CLI
 

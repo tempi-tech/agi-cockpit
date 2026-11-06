@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.123.0で2026-11-04に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.125.0で2026-11-06に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -37,6 +37,8 @@ Cockpitから起動したタスクには、正しいローカルインスタン�
 Cockpitから起動したタスクでは、CLIのエラーメッセージがアプリの表示言語に従います。表示言語を変更した場合は、その後に起動するタスクから新しい言語が使われます。自動処理では翻訳された`error`本文ではなく、利用できる場合は安定した`code`で分岐してください。
 
 `--json`はすべてのコマンドで一貫して受け付けます。長い指示、Markdown、引用、バッククォート、`$`を含む内容はシェル引数へ埋め込まず、`--stdin`または`--instruction-file`、`--text-file`を使います。
+
+値が必要なオプションで値を省略した場合や、次の引数が`--`で始まる場合は、要求を送信する前にエラーになります。タスク操作では未対応のオプションも無視せず拒否します。タスク名には`--name`を使い、Ask用の`--title`は使えません。引用符で指定した空文字列は値として扱いますが、操作ごとの検証で拒否される場合があります。
 
 ## Windowsで実行する
 
@@ -137,6 +139,21 @@ Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`�
 リモート制御は、同じtailnetで、Tailscaleの所有者が同じコンピューターからならtokenなしで使えます。それ以外の接続はペアリング済みBearer tokenを使います。接続先がTailscale限定の場合、Tailscale peerでもloopbackでもない接続は拒否されます。ファイルパスとディレクトリは接続先コンピューターで解決されます。リモート応答にはdevice identityが含まれ、ローカルfile IPCへfallbackしません。 ただし、リモートの`cockpit ask answer`はloopbackや同じ所有者のTailscale端末でもペアリング済みtokenが必須です。[Askの認証手順](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
 
 Remote Accessの停止、Identityデータの消去、アカウント削除、CLIアンインストールなどは明示的な確認フラグを要求します。フラグがあることを実行許可の代わりにせず、利用者の指示と正確な対象を確認してください。
+
+## ほかのコンピューターのクルーを確認して依頼する
+
+`crew list|get|status|invite-url|channels|groups|send`と`project list|get`は、`--host <host|alias>`でほかのコンピューターを指定できます。リモートの`crew status`にはクルーIDまたは名前が必要で、`invite-url`の`--open`は使えません。それ以外のクルー・プロジェクト操作はローカル専用です。
+
+```bash
+cockpit crew list --host studio
+cockpit crew status <crew> --host studio
+cockpit project list --host studio
+cockpit crew send <crew> --host studio --text "最新のビルドを確認してください"
+```
+
+要求はローカルのCockpitを経由します。両方がタグ付きでない端末で、Tailscaleの所有者が判別でき、同じ所有者である必要があります。接続先ではCockpitを起動し、Remote Accessをオンにしてください。ペアリング済みtokenだけではこの中継を認証できず、`--host`に自分自身は指定できません。応答には`instance`の代わりに接続先の`device`を含み、パスは接続先のものです。
+
+クルーの読み取り制限は認証済みの呼び出し元にも適用します。クルーの子タスクは、ほかのクルーを概要一覧で確認できますが、詳細は読めません。リモート送信は本文と送信元情報を届け、添付は送りません。受信したクルーは、送信元のクルーIDと端末を指定した`crew send --host`で返信でき、返信先でもRemote Accessをオンにする必要があります。権限とエラーの詳細は[クルーのリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/crew#crews-on-another-computer)を参照してください。
 
 ## コマンド別Reference
 

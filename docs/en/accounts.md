@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -55,6 +55,8 @@ Named Antigravity profiles use browser-based Google OAuth and keep conversations
 Antigravity retrieves Gemini model quota percentages and reset times from its API using the effective account credential, without requiring a running Agy session. If no usable API quota is available, Cockpit falls back to a running local Agy session when available, then that home’s usage history. The CLI reports the source in `usage.account.source` and `isolation.quotaSource` as `api`, `local_session`, `history`, or `none`. Check this source together with the credential source and quota scope; API retrieval does not change account isolation or make a shared host login profile-specific.
 
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows its remaining percentage directly below the ring. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again. Cockpit does not invent a percentage for an unknown quota, authentication error, observation-only status row, or the Cockpit Agent balance display.
+
+Claude accounts whose plans have no five-hour window still show the usage windows the provider supplies, including weekly or model-specific limits. The CLI omits `usage.fiveHour` for those accounts. Auto evaluates their available windows rather than treating the missing five-hour window as exhausted.
 
 When Claude reports limit resets, each Claude account in Desktop shows the total unused count. Expand its details to see the remaining count, label, and expiration date for each grant. The CLI exposes the same information as `limitResetsAvailable` and `limitResets` in `cockpit usage` and `cockpit accounts list --agent-type claude`. Paused and expired grants are not counted. An omitted field means the account is ineligible, Claude did not provide the data, or Cockpit could not read it; it does not mean zero. Zero appears only when Claude explicitly reports an eligible account with no unused resets. Cockpit can only read these resets and cannot spend them.
 
