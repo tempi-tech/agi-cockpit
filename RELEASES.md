@@ -4,6 +4,77 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.126.0 — 2026-11-07
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Missions for assigning ongoing work to a Crew and reviewing its progress.
+- Added first-Crew creation to onboarding.
+- Added task-kind and agent filters to the PWA task list.
+- Added support for a Crew to configure its child Crews during owner-started turns.
+- Added Send now to Crew conversations.
+- Changed the free plan to allow creating one Crew; existing Crews remain available.
+- Fixed duplicate Crews when retrying their first message during creation.
+- Fixed the Crew limit notice remaining after a Crew is deleted.
+- Changed Crew names to use a consistent 32-character limit.
+- Fixed Crew typing indicators remaining where no reply is awaited.
+- Added removal of answered or closed Ask DMs by the Crew that sent them.
+- Fixed pending Asks remaining open after their Mission ends.
+- Fixed retargeted Autoruns updating the previous Mission’s last activity time.
+- Fixed repeated reloads of Crew conversations filtered by workplace.
+- Fixed Crew homes being selected automatically as ordinary task workplaces.
+- Improved Discord connection health reporting and reconnection after waking from sleep.
+- Added a rendering fallback to keep the app running after repeated GPU crashes.
+- Improved responsiveness when counting changes in workspaces with large diffs.
+- Fixed unchanged files appearing in a task’s diff.
+- Fixed hidden Ask windows reopening for ordinary new questions.
+- Changed Ask window text sizing to follow the chat text size setting.
+- Improved Codex and Antigravity approval-mode descriptions to match their behavior.
+- Improved guidance on where to find approval mode in a new Crew’s composer.
+- Improved the New Task layout in narrow windows and the PWA.
+- Added a fallback for update notes when the website has not caught up.
+- Fixed selected folder paths with trailing spaces resolving to the wrong folder.
+- Added device-name resolution for CLI remote hosts.
+- Fixed CLI commands accepting invalid options or extra arguments before starting operations.
+- Improved consistency of CLI read results and error output between Bash and PowerShell.
+- Fixed cases where sign-in could not return to the app.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Crewに継続的な仕事をMissionとして任せ、進捗を確認できるようになりました。
+- 初期設定で最初のCrewを作成できるようになりました。
+- PWAのタスク一覧を種類とエージェントで絞り込めるようになりました。
+- オーナーからの依頼で、Crewが配下のCrewの設定を変更できるようになりました。
+- Crewの会話に「今すぐ送信」を追加しました。
+- 無料プランで作成できるCrewは1体になりました。既存のCrewはそのまま利用できます。
+- Crew作成時の最初のメッセージを再試行しても、Crewが重複しないようにしました。
+- Crewを削除した後、作成上限の案内が正しく解除されるようにしました。
+- Crew名の入力を32文字までに統一しました。
+- Crewの返信待ちが終わった場所では、入力中の表示を終了するようにしました。
+- 回答済み・終了済みのAskをCrewがDiscordのDMから削除できるようになりました。
+- 終了したMissionに残る確認待ちのAskを閉じるようにしました。
+- Autorunの送信先を変更したとき、以前のMissionの最終活動日時が更新される問題を修正しました。
+- 作業場所で絞り込んだCrewの会話が繰り返し読み込まれる問題を修正しました。
+- 通常のタスクの作業場所にCrewのホームが自動で選ばれる問題を修正しました。
+- Discord接続の状態表示と、スリープ復帰後の再接続を改善しました。
+- GPUの異常終了が繰り返されても、描画方法を切り替えてアプリを継続できるようにしました。
+- 大きな変更を含む作業フォルダで、差分の集計が重くなる問題を改善しました。
+- 変更していないファイルがタスクの差分に含まれる問題を修正しました。
+- 「今は非表示」にしたAskウィンドウは、通常の質問が追加されても非表示を維持するようにしました。
+- Askウィンドウの文字サイズは、設定のチャット文字サイズから変更する形に統一しました。
+- CodexとAntigravityの承認モードの説明を、実際の動作に合わせて見直しました。
+- 新しいCrewの案内から、入力欄の承認モードを確認しやすくしました。
+- 狭いウィンドウとPWAで、新規タスク画面の表示を改善しました。
+- サイトの更新が遅れている場合も、更新案内に変更内容を表示できるようにしました。
+- 末尾に空白を含むフォルダを選んだとき、正しいフォルダを使用するようにしました。
+- CLIの接続先にデバイス名を指定できるようにしました。
+- CLIの不正なオプションや余分な引数を、処理を始める前に拒否するようにしました。
+- CLIの読み取り結果とエラー出力を、BashとPowerShellで揃えました。
+- サインイン後にアプリへ戻れなくなる場合がある問題を修正しました。
+
+</details>
+
 ## v4.125.0 — 2026-11-06
 
 **Type:** minor · **Platforms:** macOS, Linux
