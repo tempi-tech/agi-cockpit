@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.125.0で2026-11-06に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -38,7 +38,9 @@ Cockpitから起動したタスクでは、CLIのエラーメッセージがア�
 
 `--json`はすべてのコマンドで一貫して受け付けます。長い指示、Markdown、引用、バッククォート、`$`を含む内容はシェル引数へ埋め込まず、`--stdin`または`--instruction-file`、`--text-file`を使います。
 
-値が必要なオプションで値を省略した場合や、次の引数が`--`で始まる場合は、要求を送信する前にエラーになります。タスク操作では未対応のオプションも無視せず拒否します。タスク名には`--name`を使い、Ask用の`--title`は使えません。引用符で指定した空文字列は値として扱いますが、操作ごとの検証で拒否される場合があります。
+値が必要なオプションで値を省略した場合や、次の引数が`--`で始まる場合は、要求を送信する前にエラーになります。未対応のオプション、大文字・小文字が異なるオプション名、余分な位置引数も、接続先の解決やリクエストの送信前に拒否します。タスク名には`--name`を使い、Ask用の`--title`は使えません。引用符で指定した空文字列は値として扱いますが、操作ごとの検証で拒否される場合があります。
+
+BashとPowerShellの読み取り結果とエラーは、同じJSON形式で扱えます。成功した空の一覧は結果がないことを示します。シェル固有の表示ではなく、JSONと終了コードで判断してください。接続と失敗時の詳細は[接続リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/transport)を参照してください。
 
 ## Windowsで実行する
 
@@ -139,6 +141,10 @@ Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`�
 リモート制御は、同じtailnetで、Tailscaleの所有者が同じコンピューターからならtokenなしで使えます。それ以外の接続はペアリング済みBearer tokenを使います。接続先がTailscale限定の場合、Tailscale peerでもloopbackでもない接続は拒否されます。ファイルパスとディレクトリは接続先コンピューターで解決されます。リモート応答にはdevice identityが含まれ、ローカルfile IPCへfallbackしません。 ただし、リモートの`cockpit ask answer`はloopbackや同じ所有者のTailscale端末でもペアリング済みtokenが必須です。[Askの認証手順](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
 
 Remote Accessの停止、Identityデータの消去、アカウント削除、CLIアンインストールなどは明示的な確認フラグを要求します。フラグがあることを実行許可の代わりにせず、利用者の指示と正確な対象を確認してください。
+
+### デバイス名で接続先を選ぶ
+
+リモート操作に対応するコマンドの`--host`には、エイリアス・ホスト名・アドレスに加えて、`cockpit devices`に表示されるデバイス名を指定できます。エイリアス、デバイス名の順で解決します。同じ名前の端末がある場合は、一意なエイリアスまたは完全なホスト名を使ってください。端末一覧を取得できない場合や一致しない場合は、指定値をホスト名として使います。リモート接続に失敗しても、この端末への操作には切り替えません。アドレス形式と認証は[タスクの接続リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task)を参照してください。
 
 ## ほかのコンピューターのクルーを確認して依頼する
 

@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.96.0 on 2026-10-01. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -125,6 +125,10 @@ See [Browser Identity](https://agi-labo.com/en/tools/cockpit/docs/browser-identi
 An `offline` or `stale` Surface keeps only the last frame and cannot accept input. Prepare the target with platform tools and reattach; Cockpit does not start or stop the target or its app.
 
 See [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for details.
+
+## Graphics processing keeps stopping
+
+After repeated GPU failures, Cockpit can switch to software rendering and continue. A brief notice says it switched how it draws the screen. If display problems persist, include the time and GPU-related entries from diagnostic logs when reporting the problem.
 
 ## Report a problem
 

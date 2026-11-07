@@ -4,7 +4,7 @@
 
 Autorunが一度、一定間隔、cronのスケジュールに基づいて新しいタスクを起動するか、既存タスクやクルーへ指示を送る仕組みを説明します。
 
-> AGI Cockpit 4.125.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
+> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/autorun)
 
 Autorunは、指定した時刻、一定間隔、cron式に基づいて、新しいタスクを起動するか、既存タスクやクルーへ指示を送る仕組みです。複数エージェントを連携させる機能ではなく、同じ仕事を必要なタイミングで開始または継続するための独立した機能です。
 
@@ -78,6 +78,10 @@ cockpit autorun create --name "朝の確認" --instruction "今日の作業を�
 `--target-crew`はクルーのIDまたは名前を受け取り、`--target-task`とは併用できません。クルーの内部タスクを既存タスクの送信先に指定することもできません。クルーが削除されるとAutorunは無効になり、`target-crew-unavailable`で要確認になります。存在するクルーを選び直してから有効にしてください。`cockpit autorun get`の`executionTarget`と`targetCrewId`で実行先を確認できます。
 
 クルーや子タスクが作成・変更したAutorunは、その由来を保持します。クルー宛ての依頼はオーナーの指示ではなくタスクからの発言として届き、新規タスクは作成元クルーの制限を引き継ぎます。作成元クルーを削除すると`creator-crew-unavailable`で無効になり、オーナーが再び有効にすると由来が解除されます。[Autorunリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/autorun)も参照してください。
+
+### Missionのチェックインを紐づける
+
+クルーは`cockpit autorun create`または`update`の`--mission <id>`で、自分の進行中のMissionに仕事を紐づけられます。対象は自分宛てのAutorun、または自分が作成し、ほかのクルーを宛先にしていないAutorunです。指示本文にもMissionのIDを記載してください。Missionのタブでは「日時指定済み」に表示されます。Missionの一時停止・終了は紐づくAutorunも止めます。送信先を別のクルーへ変えると元のMissionから外れ、元のMissionを止めたり終えたりしても、そのAutorunは止まりません。オーナーの操作と非会員のチェックインは[Mission](https://agi-labo.com/tools/cockpit/docs#missionミッション)を参照してください。
 
 ## 実行結果を確認する
 

@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -36,7 +36,9 @@ Switch back to **This device** to close an open remote task, stop discovering an
 
 ## Filter tasks and Crews
 
-On Desktop, open **Filter** and choose **Type → All**, **Tasks**, or **Crews**. Under **Agent**, select several agents together; a row matches any selected agent. Combine the type and agent choices with search. **Clear** resets the agent selection; **Clear filters** resets the type and agent filters.
+On Desktop or in the PWA task list, open **Filter** and choose **Type → All**, **Tasks**, or **Crews**. Under **Agent**, select several agents together; a row matches any selected agent. Combine the type and agent choices with search. **Clear** resets the agent selection; **Clear filters** resets the type and agent filters.
+
+The PWA saves type and agent filters in that browser separately for each connected host and restores them after returning from task details or reloading. These choices do not sync to other devices.
 
 Crews appear with their child tasks, inside their project when one is assigned. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (alpha)](https://agi-labo.com/en/tools/cockpit/docs#crews-alpha).
 

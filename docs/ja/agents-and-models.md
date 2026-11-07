@@ -4,7 +4,7 @@
 
 9種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.125.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から9種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -174,7 +174,7 @@ CodexのネイティブUIでは、`supervised`、`accept-edits`、`auto`はCodex
 
 Muse CodeのネイティブUIは`accept-edits`（既定）と`full-access`だけを提供します。Muse Codeはワークスペース内のファイル編集の前に確認しないため、Cockpitは実際に守れない`supervised`を表示しません。`accept-edits`では、ルールで許可されていないコマンドなどの操作の前に、AIレビューではなく利用者に確認します。「拒否」はその呼び出しだけを拒否し、Muse Codeはturnを続けます。`full-access`はさらにMuse Codeのシェルsandboxを無効にし、残りの確認も承認します。
 
-AntigravityのネイティブUIは実行中に承認を質問できないため、`supervised`では承認が必要なツールを自動拒否します。編集やコマンドが必要なタスクでは、目的とリスクを確認したうえで`accept-edits`または`full-access`を選びます。Askへの回答は承認モードの変更ではありません。
+AntigravityのネイティブUIは実行中に承認を質問できないため、`supervised`では承認が必要なツールを自動拒否します。`accept-edits`では編集を自動承認しますが、それ以外の承認が必要なツールは引き続き拒否します。そのようなコマンドが必要な場合は、目的とリスクを確認したうえで`full-access`を選びます。Askへの回答は承認モードの変更ではありません。
 
 ## 再開、使用量、Goal
 

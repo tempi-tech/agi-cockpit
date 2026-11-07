@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.116.0 on 2026-10-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -49,6 +49,20 @@ Each turn uses the owner's AI account, including requests from other allowed peo
 A Discord message can reach a running Crew immediately when its agent supports interrupting the current turn; approval and question waits still hold delivery. New messages retain the least trusted authority of the interrupted turn and the incoming request. Adding a person fetches their Discord display name; check the user ID when deciding access, including for someone who first mentions the Crew in an allowed channel.
 
 The Crew list’s **…** menu supports renaming and opening settings, and the list shows the connected Discord application’s name. Settings remember the last tab opened. From the CLI, `cockpit crew update <crew> --icon <image>` changes its icon; `--project`, `--directory`, or `--home` changes where it works. Changing that location starts a new session carrying the conversation. The owner’s authenticated tasks can inspect and answer the Crew’s approval waits and confirmation Asks, and post as the Crew with `cockpit crew post`. A post is sent immediately as that account; verify the destination and content first. `cockpit crew history <crew> --link <Discord-message-URL>` reads the linked message with nearby conversation when the Crew has access. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for exact options and limits.
+
+### Missions
+
+Use a Mission to give a Crew a long-term goal (`goal`) or continuing responsibility (`ongoing`). Open the Crew's **Missions** tab, choose **New Mission**, describe the work, and select **Tell the Crew**. This sends a request to its conversation; answer its short questions about the objective, deadline, authority, and check-ins before it creates the Mission.
+
+The tab shows **Now**, **Next step**, **Waiting for**, the deadline, recent activity, log, and **Needs you** Asks. The Crew keeps its brief in `missions/<id>/README.md` and advances active Missions through periodic checks. If periodic checks are off, it will not advance them by itself. Members can use Mission-linked Autoruns for check-ins at set times; without membership, check-ins use periodic checks and their approximate timing.
+
+The owner can pause and resume a Mission, or mark it achieved or cancelled. A Crew's request to pause, resume, or end one waits for owner approval. Pausing stops linked Autoruns; resuming restores them. Ending stops linked Autoruns and closes outstanding Mission Asks. An ended Mission cannot be resumed; create another to continue. See the [Mission reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew-missions).
+
+### Names, queue, and free limit
+
+Crew names are limited to 32 characters. **Send now** on a queued message interrupts the current work when supported. If the Crew is waiting for an approval or question, Cockpit asks before cancelling that pending request and sending the message. Stopped Crews keep queued messages until started.
+
+The free limit counts stopped Crews too. Existing Crews remain usable even if you already exceed the limit; it restricts new creation. Deleting a Crew frees its slot, but removes its settings and home as described below.
 
 Stopping preserves the Queue; starting delivers its messages. Removing a Crew deletes its settings and attempts to move its home to the Trash. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for connection setup, memory, restart, and removal details.
 

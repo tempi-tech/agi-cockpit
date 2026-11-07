@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -78,6 +78,10 @@ cockpit autorun create --name "Morning review" --instruction "Review today's wor
 `--target-crew` accepts a Crew ID or name and cannot be combined with `--target-task`. A Crew's internal task cannot be an existing-task target. If the Crew is removed, the Autorun is disabled and marked `target-crew-unavailable`; select an existing Crew before enabling it again. `cockpit autorun get` exposes `executionTarget` and `targetCrewId`.
 
 An Autorun created or changed by a Crew or its child task retains that provenance. Its requests to a Crew are task messages rather than owner requests, and tasks it creates inherit the creating Crew's limits. Removing the creating Crew disables it with `creator-crew-unavailable`; owner re-enablement clears that provenance. See the [Autorun reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/autorun).
+
+### Link a check-in to a Mission
+
+A Crew can associate work with its active Mission using `--mission <id>` on `cockpit autorun create` or `update`. It can link its own Autoruns addressed to itself, or ones it created without another Crew as the target. Write the Mission ID in the instruction too. The Mission tab lists linked check-ins under **Scheduled**. Pausing or ending the Mission stops linked Autoruns; moving an Autorun to another Crew removes it from the former Mission, whose later pause or end no longer stops that Autorun. See [Missions](https://agi-labo.com/en/tools/cockpit/docs#missions) for the owner controls and non-member check-ins.
 
 ## Review a run
 

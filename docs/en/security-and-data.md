@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -149,6 +149,8 @@ The exact supplied value is masked in subsequent Cockpit terminal output, includ
 ### Crew connection tokens and authority
 
 The owner can change a Crew’s execution account from its composer or with `cockpit crew update --account`. The Crew itself can do so only during an owner-started turn; child tasks cannot. Auto can switch to another available signed-in account, so check that account’s quota and terms too. Changing a Crew’s agent starts a new session without transplanting its full prior conversation to the other provider.
+
+During a turn started directly by the owner, a parent Crew can update its direct child's name, agent, model, effort, speed, periodic checks, workplace, icon, instructions, and stricter approval mode, and start or stop it. A more permissive approval mode still requires owner approval. Requests merely marked as originating from the owner do not grant this parent authority. It cannot change grandchildren, the child's accounts, connections, people and places, parent assignment, or remove it. Reassigning the child invalidates pending parent-change approvals. See the [Crew permissions reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew-settings).
 
 From v4.118.0, Crew history reads follow the caller and the authority of the turn. The owner’s side and owner-started turns can read any place the Crew can see in Discord. Turns requested by another allowed person are limited to reply-place channels and their threads, joined threads unless their parent channel is off, and the DM with that requester. Turns with no requester or mixed requesters, and child tasks, can read only the eligible channels and threads, never DMs. Out-of-scope requests are refused before message contents are read.
 

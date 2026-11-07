@@ -4,7 +4,7 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
@@ -16,7 +16,7 @@ If Cockpit cannot find the agent you want, select **Install**. Cockpit Agent and
 
 ## 2. Configure the Cockpit integration
 
-The integration step installs or refreshes the Cockpit skill for detected external agents and makes the `cockpit` command available. It adds the command directory to shell configuration on macOS and Linux or to the user `PATH` on Windows.
+Setup automatically installs or refreshes the Cockpit skill for detected external agents and makes the `cockpit` command available. It adds the command directory to shell configuration on macOS and Linux or to the user `PATH` on Windows.
 
 On macOS and Linux, Cockpit adds or removes only its managed block. It preserves other shell settings, existing `PATH` lines, blank lines, and line endings. When the command directory is already present in a user-managed `PATH` entry, Cockpit does not rewrite the shell file.
 
@@ -38,7 +38,15 @@ For local features only, select **Start without signing in** on the **Sign in wi
 
 The **Continue where you left off** step lists up to 200 Claude Code and Codex sessions updated in the last 30 days, grouped by workspace. Select individual sessions or an entire workspace, then choose **Import selected**. Imported tasks resume in Terminal UI. You can also create a project for a listed workspace before importing, or choose **Skip for now**.
 
-Importing reads the original session files locally without changing or deleting them, and it does not start an agent. Setup is then complete. If you have no tasks yet, the **Create new** screen opens. Continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+Importing reads the original session files locally without changing or deleting them, and it does not start an agent.
+
+## 6. Create your first Crew or continue later
+
+If you have no Crew yet, setup offers **Create your first Crew**. Enter a name of up to 32 characters and what it should take on, or choose an example. Choose a ready agent: Claude Code, Codex, Grok Build, Cursor, Qoder, or Muse Code. Review the approval mode shown below the form, then select **Create Crew**. If none is ready, return to the agent step or choose **Create later**.
+
+The Crew opens its conversation, records the role you supplied, does one job, and proposes continuing work. You can change the role and approval mode later from the conversation. If sending the first message fails after creation, retry it in setup; Cockpit reuses the Crew already created. **Continue later** leaves that Crew available.
+
+One Crew is free, including stopped Crews; an AGI Lab membership is required to create more. If you skip creation, continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
 ## If setup does not complete
 

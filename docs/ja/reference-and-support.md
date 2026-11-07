@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.96.0で2026-10-01に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -125,6 +125,10 @@ command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ロ
 `offline`または`stale`では最後の画面だけが残り、操作できません。対象やアプリをCockpitから起動・終了せず、プラットフォームのツールで準備してから再接続します。
 
 詳しくは[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
+
+## グラフィックの処理が繰り返し止まる
+
+GPUの異常終了が繰り返された場合、Cockpitはソフトウェアによる描画へ切り替えて継続できます。画面の描画を切り替えたことを短い通知で表示します。表示の問題が続く場合は、発生時刻と診断ログのGPU関連の記録を添えて報告してください。
 
 ## 問題を報告する
 

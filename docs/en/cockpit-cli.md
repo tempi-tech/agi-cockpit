@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -34,7 +34,9 @@ Exit code 7 or `Cannot reach AGI Cockpit` means the app is not reachable through
 
 Use `--stdin`, `--instruction-file`, or `--text-file` instead of embedding long instructions, Markdown, quotes, backticks, or `$` in a shell argument.
 
-An option that requires a value fails before sending a request if the value is missing or the next argument starts with `--`. Task commands also reject unsupported options instead of ignoring them. Use `--name` to name a task; `--title` is an Ask option. A quoted empty string is a supplied value, though the command may reject it during validation.
+An option that requires a value fails before sending a request if the value is missing or the next argument starts with `--`. Commands also reject unsupported options, option names with the wrong case, and surplus positional arguments before resolving a destination or sending a request. Use `--name` to name a task; `--title` is an Ask option. A quoted empty string is a supplied value, though the command may reject it during validation.
+
+Bash and PowerShell use the same JSON result contract for reads and errors. Treat a successful empty list as an empty result, and inspect the command's JSON and exit status rather than shell-specific formatting. See the [transport reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/transport) for connection and failure details.
 
 ## Run on Windows
 
@@ -123,6 +125,10 @@ Supported `task`, `autorun`, `accounts`, `fleet`, and `hooks` commands can targe
 Remote control needs no token from a computer on the same tailnet with the same Tailscale owner; other connections use the paired bearer token. When the target is Tailscale-only, connections that are neither a Tailscale peer nor loopback are refused. File paths and directories are resolved on the target computer. Remote responses include the device identity and do not fall back to local file IPC. Remote `cockpit ask answer` is an exception: it always requires a paired token, including on loopback and same-owner Tailscale peers. See [Ask authentication](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask).
 
 Stopping Remote Access, clearing Identity data, deleting an account, and uninstalling the CLI require explicit confirmation flags. A confirmation flag is not a substitute for user authorization; verify the requested action and exact target first.
+
+### Select a remote device by name
+
+For commands that support remote control, `--host` accepts a device name shown by `cockpit devices`, as well as an alias, hostname, or address. Cockpit resolves aliases first, then device names. Use a unique alias or full hostname when device names overlap. If registry lookup is unavailable or finds no match, the supplied value is used as a hostname. Remote connection failure never redirects the command to this computer. See the [task connection reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task) for accepted address forms and authentication.
 
 ## Read and message Crews on another computer
 

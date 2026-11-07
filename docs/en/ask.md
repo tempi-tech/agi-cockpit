@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -114,6 +114,10 @@ Turn off **Ask windows on this device** under **Settings → Notifications** to 
 Selections, free-form input, a whole-Ask reply, and attachments are shared between the dedicated window and the side panel before submission. Editing either view updates the latest draft for that Ask in the other. This sharing is limited to an unanswered Ask inside the same Desktop app; it does not synchronize an unsent draft to the PWA, CLI, Discord, Slack, or another device. Answering or closing the Ask discards the draft, and it does not persist after the app exits.
 
 **Open in a separate window** in the side panel selects that Ask in the shared window. Priority itself does not move keyboard focus. It changes window visibility only when a new `high` or `xhigh` Ask arrives while the window is hidden: the window shows again and is no longer hidden.
+
+## Clean up Crew Ask DMs
+
+By default, a Crew keeps its answered or closed Discord Ask DMs with the result and no answer buttons. Set `cockpit crew update <crew> --ask-dm-cleanup delete` to delete their header and question messages after the Ask is answered, closed, or withdrawn; use `keep` to restore the default. Deleted Discord messages cannot be recovered, but Cockpit retains the Ask and answer. If deletion fails, remaining messages show the result. A Crew can change this setting only during an owner-started turn.
 
 ## Adjust the Ask window
 

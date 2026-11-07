@@ -4,7 +4,7 @@
 
 Reopen presented diffs, files, HTML Surfaces, and browser tabs from conversation cards, then safely review terminals, logs, and other task results.
 
-> Verified with AGI Cockpit 4.104.0 on 2026-10-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -27,6 +27,8 @@ An HTML Surface card opens the saved Surface. File and diff cards read current c
 ## Review diffs and files
 
 The diff surface shows changes recognized by Git. Review additions, modifications, and deletions by file, and compare the actual scope with the agent's explanation before accepting completion. Untracked temporary files and files outside the project may not appear in the diff.
+
+For very large changes, Cockpit may skip counting changed lines and show **Too many changes to count**. This does not mean there are no changes; inspect the files and Git diff before accepting the result.
 
 File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. After focusing a file body on Desktop or the PWA, Cmd+A / Ctrl+A selects only that file body, excluding the chat, file list, and viewer controls. Inputs, search fields, and the active text editor keep their normal select-all behavior. Selecting text shows a quote action without shifting the preview or losing the selection; use it to add the file path and line range to the task composer. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
 

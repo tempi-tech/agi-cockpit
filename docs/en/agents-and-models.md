@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -174,7 +174,7 @@ In Codex native UI, `supervised`, `accept-edits`, and `auto` run inside Codex's 
 
 Muse Code native UI offers only `accept-edits` (the default) and `full-access`. Muse Code never asks before editing files inside the workspace, so Cockpit does not present a `supervised` mode it could not enforce. With `accept-edits`, Muse Code asks you — not an AI reviewer — before commands and other actions its rules do not already allow; **Deny** rejects that call and Muse Code continues the turn. `full-access` additionally turns off Muse Code's shell sandbox and approves its remaining prompts.
 
-Antigravity native UI cannot ask an approval question while it runs, so `supervised` automatically rejects tools that require approval. Choose `accept-edits` or `full-access` for work that needs editing or commands only after checking the objective and risk. An Ask answer does not change the approval mode.
+Antigravity native UI cannot ask an approval question while it runs, so `supervised` automatically rejects tools that require approval. With `accept-edits`, edits are automatically approved, but other tools that need approval are still rejected. Choose `full-access` for such commands only after checking the objective and risk. An Ask answer does not change the approval mode.
 
 ## Resume, usage, and Goals
 
