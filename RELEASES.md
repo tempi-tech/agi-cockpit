@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.126.0 — 2026-11-07
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Missions for assigning ongoing work to a Crew and reviewing its progress.
 - Added first-Crew creation to onboarding.
