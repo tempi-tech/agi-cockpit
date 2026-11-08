@@ -12,17 +12,17 @@ English is the primary language for these generated release notes. Download the 
 - Added checks before the first profile update to preserve descriptions edited on Discord.
 - Added links from Crew post cards to the original Discord messages.
 - Added role, @everyone, and @here notifications to Crew Discord posts, with mass notifications suppressed in turns involving members.
-- Allowed Crews to read other Crews during automatic turns, while restricting member-involved turns in strict mode.
+- Changed Crews to read other Crews during automatic turns, while restricting member-involved turns in strict mode.
 - Added interim Crew replies that keep the working indicator active.
 - Changed Crews to remove Discord acknowledgement reactions after replying or ending the turn.
-- Kept pinned projects visible in the sidebar when they have no tasks.
-- Kept tasks retryable when Codex rejects a model during session startup.
+- Changed the sidebar to keep pinned projects visible when they have no tasks.
+- Fixed retrying tasks when Codex rejects a model during session startup.
 - Fixed Codex usage lookups to use the configured executable.
-- Kept expired sign-in guidance available after restarting.
-- Prevented external navigation from replacing the main app screen.
+- Changed expired sign-in guidance to remain available after restarting.
+- Improved protection against external navigation replacing the main app screen.
 - Added a dedicated viewer for PDFs created by external pages.
-- Prevented cleanup of worktrees containing another worktree or replaced at the same path.
-- Aligned CLI HTTP and Fleet wait error handling between Bash and PowerShell.
+- Improved safety checks to prevent cleanup of worktrees containing another worktree or replaced at the same path.
+- Improved consistency of CLI HTTP and Fleet wait error handling between Bash and PowerShell.
 
 <details>
 <summary>日本語のリリースノート</summary>
