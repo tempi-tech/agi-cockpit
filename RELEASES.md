@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.128.0 — 2026-11-09
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added synchronization of Crew profile descriptions and owner names to Discord.
 - Added checks before the first profile update to preserve descriptions edited on Discord.
