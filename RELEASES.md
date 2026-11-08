@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.127.0 — 2026-11-08
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Claude Code and Codex sign-in directly from onboarding.
 - Added installation progress and failure explanations to agent setup during onboarding.
