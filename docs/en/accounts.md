@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -49,6 +49,12 @@ For agents that expose the default account's email address, Cockpit shows it on 
 For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server in a read-only sandbox without approval prompts. This retrieval path supports Codex CLI 0.153.
 
 Named Antigravity profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a profile-specific home. On macOS, Cockpit puts a profile-specific Keychain first in the search list and verifies that order before a task starts, preventing fallback to the host Antigravity login and its quota. The OS keyring is shared on Windows and Linux, so a host login stored there still takes precedence for every profile.
+
+## Respond to a sign-in notice
+
+For Claude Code, Codex, Antigravity, Cursor, Qoder, and Grok Build profiles, Cockpit shows a desktop notification and an in-app notice when it detects expired sign-in. If task creation fails because every profile is signed out, it also explains that sign-in is missing. The notice identifies the agent and named profile when applicable. Select **Sign in** to open the relevant agent in **Settings → Agents**, then sign in to that account. Confirm `authState: ok` with `cockpit accounts list --agent-type <type>` before retrying.
+
+The same state notifies once rather than on every refresh. Successful sign-in clears the notice and allows a later expiry to notify again. A usage-fetch error alone does not mean sign-in expired. AGI Lab membership sign-in is separate; see the [account reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/account).
 
 ## Check remaining quotas
 

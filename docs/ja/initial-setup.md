@@ -4,15 +4,15 @@
 
 利用するAIエージェントを確認し、Cockpit skillとcockpitコマンドを準備して、最初のタスクを作れる状態にする手順です。
 
-> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/initial-setup)
+> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/initial-setup)
 
 この手順を終えると、利用するエージェントとCockpit連携が準備され、最初のタスクを作成できます。初回起動時に自動で開かなかった場合は、画面左下のアプリメニューから「セットアップ」→「初回セットアップ」を開きます。
 
 ## 1. エージェントを確認する
 
-セットアップはClaude Code、Codex CLI、Grok Build、Antigravity CLI、Cursor CLI、Qoder CLI、Muse Code（macOS/Linux）を確認します。各CLIのインストール状態と、一部エージェントではサインイン状態も表示します。CLIを検出しても利用準備が終わっていない場合は「契約とサインインが必要」と表示します。利用可能なエージェントが一つあれば続行できます。
+セットアップはClaude Code、Codex CLI、Grok Build、Antigravity CLI、Cursor CLI、Qoder CLI、Muse Code（macOS/Linux）を確認します。各CLIのインストール状態と、一部エージェントではサインイン状態も表示します。CLIを検出しても利用準備が終わっていない場合は「契約とサインインが必要」と表示します。利用準備のできたエージェントが一つあればクルーを作成できます。まだ準備できていなくても「あとで設定する」でセットアップを進められます。この場合、最初のクルー作成は後回しになります。
 
-使いたいエージェントが見つからない場合は「インストール」を選びます。Cockpit AgentとTerminalは外部CLIを必要としません。
+使いたいエージェントが見つからない場合は「インストール」を選びます。進行状況と、失敗した場合は通信、必要なコマンドの不足、書き込み権限などの理由を表示します。原因を解消して再試行するか、「ターミナルで開く」で確認してください。Cockpit AgentとTerminalは外部CLIを必要としません。
 
 ## 2. Cockpit連携を設定する
 
@@ -25,6 +25,10 @@ macOSとLinuxではCockpitが管理する専用ブロックだけを追加また
 ## 3. エージェントへサインインする
 
 AIエージェント側の契約と認証は、AGI Cockpitのローカル機能やAGIラボへのサインインとは別です。Claude Code、Codexなどは、それぞれの提供元で利用可能なプランを用意し、そのアカウントへサインインします。
+
+エージェントの確認画面でClaude CodeまたはCodexの「サインイン」を選びます。Codexは対応する全OS、Claude CodeはmacOSとLinuxでブラウザーのサインインを開きます。ブラウザーで認証を完了すると、自動でエージェント一覧へ戻ります。ブラウザーが開かない場合は表示されたURLをコピーして開きます。Claude Codeでブラウザーにコードが表示された場合は、セットアップ画面へ貼り付けて送信します。WindowsのClaude Codeは案内付きのターミナルを使い、テーマ選択を進めて「Select login method」で「Claude account with subscription」を選びます。
+
+失敗した場合は画面の理由を確認して「もう一度」を選びます。Claude Codeでは一部の失敗時にターミナルでのサインインも選べます。キャンセルして未認証のままセットアップへ戻ることもできます。
 
 Claude Code、Codex、Grok BuildのネイティブUIは、未認証でタスクを開始した場合もタスク詳細にログイン案内を表示し、認証後に最初の指示を再試行します。ターミナルUIとTerminalでは、表示されたターミナル内で対象CLIのログインを完了してからタスクを再開または作り直します。
 

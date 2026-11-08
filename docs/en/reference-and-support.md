@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -57,6 +57,12 @@ If Cockpit says **The system keychain did not respond. Try again.**, bring any m
 
 Cockpit stops waiting for an unresponsive Keychain after about two seconds instead of hanging indefinitely. This timeout does not clear the pending OAuth state or disable encrypted storage, so retry after resolving the prompt. Cockpit does not bypass the Keychain by falling back to plaintext storage.
 
+## AGI Lab sign-in expires
+
+AGI Lab sign-in and agent-provider sign-in are separate. When AGI Lab reports an expiry within three days, Cockpit shows a notice and desktop notification. An expired or revoked sign-in shows renewal guidance; select **Sign in** and complete browser authorization to restore member features. Each state notifies once and clears after successful sign-in. Dismissing the notice does not renew authentication.
+
+Use `cockpit account status` to inspect `refreshRequired`, `notice`, `expiresAt`, and the last membership-check reason; `cockpit account login` starts browser sign-in. Autorun keeps an authentication retry one minute later rather than consuming a one-time schedule. `~/.agi-tools/data/cockpit/logs/auth-session.jsonl` records rejected membership checks and failed renewals with time, HTTP status, and failure category, without tokens or email addresses. See the [account reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/account).
+
 ## An agent is missing or does not launch
 
 1. Under **Settings → Updates**, use **Agent CLIs** to inspect the installed version, latest version, and update status. Select **Check** to refresh the result and **Update CLI** when an update is available.
@@ -76,6 +82,8 @@ Merely checking the Grok Build model list does not launch the Grok CLI or open a
 For a possible temporary service incident from Claude, Codex, Antigravity, Cursor, or Grok Build, such as a 404, 5xx response, or gateway timeout, follow **Check provider status** from the error surface to the provider's status page. Cockpit does not show this link for authentication, usage-limit, quota, rate-limit, or billing errors.
 
 An invalid credential appears as **Session expired** or `authState: expired`, with `loggedIn: false`. Sign in again with `cockpit accounts login <account> --agent-type <type>`, then confirm `authState: ok` in `cockpit accounts list`. `cockpit doctor` also lists affected accounts under `accounts.expired`.
+
+For an unavailable model, inspect the error in the conversation and use the offered **Switch to Codex default** or **Choose another model** action. Switching to the default also clears a fixed model on the owning Crew or Autorun. Check the conversation before resending a failed message with attachments or an unidentified message after restart. See [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details#inspect-errors-and-tool-runs). For agent expiry or missing-sign-in notices, **Sign in** opens that agent's Settings; see [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts#respond-to-a-sign-in-notice).
 
 A usage limit puts the task in `waiting_confirmation` with `usage_limit`. If Auto cannot recover, add or choose another available profile, then send a new instruction. After a known reset time, Cockpit re-evaluates usage and resumes the task when capacity has recovered. If it remains stopped, check whether the guidance says the account is still exhausted, usage could not be checked, or the account must sign in again, then wait, retry, or sign in again as directed.
 

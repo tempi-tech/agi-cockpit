@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.125.0で2026-11-06に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -49,6 +49,12 @@ Grok Buildのaccess tokenは約6時間で期限切れになりますが、refres
 Codexの利用状況とレート制限は、承認を要求しないread-only sandboxでCodex CLIのapp serverから取得します。この取得経路はCodex CLI 0.153に対応しています。
 
 Antigravityの名前付きプロファイルはブラウザーでGoogle OAuthを行い、会話、ログ、キャッシュ、利用履歴をプロファイル専用のhomeへ分離します。macOSではプロファイル専用Keychainを検索順の先頭に固定し、タスク開始前にも確認するため、ホストのAntigravityログインとクォータへフォールバックしません。WindowsとLinuxのOS keyringは共有されるため、ホストログインが残っている場合は各プロファイルからも同じ認証情報が優先されます。
+
+## サインインの通知に対応する
+
+Claude Code、Codex、Antigravity、Cursor、Qoder、Grok Buildのプロファイルでサインイン切れを検出すると、デスクトップ通知とアプリ内の案内を表示します。すべてのプロファイルが未認証でタスクを作成できない場合も、サインインが必要なことを案内します。対象エージェントと、該当する場合はプロファイル名を確認し、「サインイン」から設定の「エージェント」を開いて、そのアカウントへサインインしてください。再試行前に`cockpit accounts list --agent-type <type>`で`authState: ok`を確認できます。
+
+同じ状態の通知は繰り返しません。再サインインに成功すると案内が消え、次の期限切れには再び通知します。利用枠の取得エラーだけを認証切れとは扱いません。AGIラボ会員としてのサインインは別です。[account Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/account)を参照してください。
 
 ## 利用枠の残量を確認する
 

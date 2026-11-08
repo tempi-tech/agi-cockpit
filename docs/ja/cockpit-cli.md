@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -41,6 +41,10 @@ Cockpitから起動したタスクでは、CLIのエラーメッセージがア�
 値が必要なオプションで値を省略した場合や、次の引数が`--`で始まる場合は、要求を送信する前にエラーになります。未対応のオプション、大文字・小文字が異なるオプション名、余分な位置引数も、接続先の解決やリクエストの送信前に拒否します。タスク名には`--name`を使い、Ask用の`--title`は使えません。引用符で指定した空文字列は値として扱いますが、操作ごとの検証で拒否される場合があります。
 
 BashとPowerShellの読み取り結果とエラーは、同じJSON形式で扱えます。成功した空の一覧は結果がないことを示します。シェル固有の表示ではなく、JSONと終了コードで判断してください。接続と失敗時の詳細は[接続リファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/transport)を参照してください。
+
+BashとPowerShellはどちらもHTTPエラー時にCockpitのJSON本文を返して非ゼロで終了します。失敗やwaitのタイムアウトを含むローカル応答には接続先の`instance`が付き、`--host`のリモート応答にはこのローカルの項目は付きません。作業場所の登録・作成・整理では、末尾の空白を含めてフォルダパスをそのまま渡してください。
+
+先頭が`--`の値は引用符で囲んでも別のオプションとして扱われる場合があります。対応するファイルまたは標準入力のオプションを使ってください。PowerShellの`system-prompt add --prompt`は、そのような値も直接受け付けます。文字コードと応答の詳細は[transport Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/transport)を参照してください。
 
 ## Windowsで実行する
 
@@ -101,6 +105,17 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 `cockpit autorun`は一度、間隔、cronで新規タスクを起動するか、既存タスクへ指示を送ります。会員確認は作成時だけでなく実行時にも行われます。保存済みのランタイム設定を利用できなくなった場合、別設定へ無言で切り替えずAutorunを無効にします。
 
 `cockpit fleet`は依存関係付きの複数タスクをRunとして実行します。YAMLの検証、gate、再試行、再開、Runタイトル、各ノードの進捗を扱います。完了・失敗・停止・一時停止したRunでは、`complete-tasks --dry-run`で対象を確認してから残るタスクをまとめて完了できます。単純な定期起動にはAutorun、依存する複数処理にはFleetを使います。実践手順は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)、全構文は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
+
+## CLIからAGIラボへサインインする
+
+`cockpit account`は会員機能を使うためのローカルのAGIラボ認証、`cockpit accounts`はエージェントのプロファイルを管理します。
+
+```bash
+cockpit account status
+cockpit account login
+```
+
+`login`はブラウザーで認証を開き、完了を待たずに戻ります。ブラウザーで承認してから`status`を確認してください。`login --print-url`はブラウザーを開かずURLを返します。同じコンピューターで30分以内に完了し、再度開始すると前の要求を置き換えます。`--host`には対応せず、tokenは返しません。クルーのlogin・logoutはオーナーのメッセージで始まったターンだけ利用でき、クルーの子タスクでは拒否します。状態、権限、エラーは[account Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/account)を参照してください。
 
 ## 認証情報とCockpitプロバイダーを設定する
 

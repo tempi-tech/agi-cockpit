@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -13,6 +13,8 @@ Use [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) to react to events
 ## Requirements
 
 Autorun requires an AGI Lab membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Lab in Desktop.
+
+Guests who try Autorun see that it is a member feature, with links to membership plans and member sign-in. If AGI Lab reports an approaching sign-in expiry, Cockpit notifies you three days before it and shows a **Sign in** action. An expired or revoked sign-in produces separate renewal guidance; scheduled work waits for authentication as described below.
 
 Schedules run inside the AGI Cockpit app process. Closing every window on macOS does not stop the scheduler. The operating-system scheduler does not launch Cockpit after the process exits, but Cockpit performs one catch-up per Autorun when it restarts or resumes within 24 hours of an unhandled scheduled time. Older occurrences are recorded as missed instead of silently starting stale work.
 
@@ -58,6 +60,8 @@ For a new task, Desktop and the PWA show only settings supported by the selected
 Before saving a new-task Autorun, Cockpit checks the selected model and reasoning effort against the available catalog. If a value is unavailable, saving is blocked and the affected setting is shown; select a supported value or reload the list after updating the agent CLI. A failed lookup can show built-in fallback candidates, so inspect the list’s source and retrieval status. Unlisted Codex models follow the exception described below; reasoning values are still validated. These checks do not change the runtime of an existing-task Autorun.
 
 For Codex Native UI, selecting a pinned account loads the latest model catalog available to that account and lets the Autorun store its supported reasoning level and service tier. The service tier can be `standard`, `fast`, or `ultrafast`; `fast` and `ultrafast` are available only when that model advertises them. While editing, Auto uses the default account's catalog; at execution, Cockpit revalidates the stored values against the catalog of the account that Auto selects. Saving waits while discovery is in progress, and a failed discovery falls back to the built-in candidates. Cockpit Agent likewise reflects models from the connected OpenRouter, OpenCode Go, OpenCode Zen, or LM Studio provider and exposes only the reasoning levels advertised for the selected model.
+
+**Codex default** leaves the model to Codex; `--model default` selects it from the CLI. Supported reasoning levels and service tiers are checked against the default reported by Codex. For Native UI, `service_tier = "priority"` or `service_tier = "fast"` in Codex's `config.toml` does not enable Fast: choose Fast in Cockpit to use it. A model left to Codex follows its default rather than pinning today's resolved model.
 
 Codex can retain a saved model as **not in list** when it is absent from the retrieved catalog. If capabilities are unknown, the picker offers `low`, `medium`, `high`, `xhigh`, `max`, and `ultra`. Absence alone does not block saving; Codex decides actual availability at runtime. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models) to check a custom catalog.
 
@@ -112,6 +116,8 @@ If the agent fails to start, the task remains in the task list with an **Error**
 
 If Cockpit confirms that the account is a guest or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If the sign-in session needs renewal or a temporary network or API failure prevents membership verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so authentication renewal or a temporary outage does not consume its only run.
 
+Directory paths selected in Desktop or the PWA, or passed through `--directory`, preserve trailing spaces. Use the exact folder name; do not trim its path when scripting.
+
 ## Create from the CLI
 
 ```bash
@@ -138,6 +144,15 @@ cockpit autorun run <id>
 cockpit autorun toggle <id>
 cockpit autorun update <id> --browser-identity default
 ```
+
+For multiline instructions, shell-sensitive text, or text beginning with `--`, use a file or stdin on `create` and `update`:
+
+```bash
+cockpit autorun create --name "Daily review" --instruction-file review.md --directory /path/to/project --type cron --expression "0 9 * * *"
+cat review.md | cockpit autorun update <id> --stdin
+```
+
+Give exactly one of `--instruction`, `--instruction-file`, or `--stdin`. Conflicting or repeated sources return `input_source_conflict`; `--stdin` without piped text returns `stdin_no_input`. One leading byte order mark is removed and NUL characters are dropped; Autorun trims leading and trailing instruction whitespace. Directory whitespace is preserved separately.
 
 To send to an existing task, specify the execution target and task ID:
 

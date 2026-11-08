@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -141,6 +141,10 @@ Use `cockpit pinned-answers list <task-id> --all` to obtain answer IDs, then `pi
 Select **Find in content**, or press Cmd+F on macOS / Ctrl+F on Windows and Linux while the chat is active. Enter literal text to highlight matches and show the match count. Enter moves forward, Shift+Enter moves backward, and Esc closes search. For a long conversation, Cockpit also searches saved history page by page and loads the required range when you move to a match. If it could not read the complete conversation, use the displayed retry action. Search covers conversation content available to that task, not every task or unavailable archived output. This in-content search is a Desktop feature, distinct from PWA task-list search.
 
 ## Inspect errors and tool runs
+
+Native UI displays the agent's error reason in the conversation, including a failed turn that returned no reply. Inspect that reason before retrying. Recognized credential patterns are redacted from these displayed errors.
+
+When a supported stopped Native UI task reports an unavailable model, choose **Switch to Codex default** (or the corresponding agent default) or **Choose another model**. Switching to the default also clears the fixed model on the Crew or Autorun that owns the task and retries the failed message when it can be identified safely. Codex uses its reported default; other agents use their Settings default. If the message had attachments, cannot be identified after a restart, or another turn has started, Cockpit does not resend it automatically; check the conversation and resend as needed. Terminal tasks and Cockpit Agent tasks do not offer the default-model action. The CLI equivalent is `cockpit task switch-to-default-model <id>`; see the [task reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task#switch-to-the-default-model).
 
 If a new task cannot start, Desktop and the PWA keep the task in `error` instead of discarding its instruction. The error card shows the cause, lets you edit the saved prompt or Terminal command, and provides **Run again**. For an unstarted standalone task, you can also choose another working folder before retrying the same task. Existing sessions, child tasks, Master Agent tasks, branches, worktrees, and Creative Studio tasks cannot change folders this way. Correct the cause, input, or folder before retrying. The failed-start instruction and attachments are retained and have not run yet.
 

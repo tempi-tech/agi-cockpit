@@ -4,7 +4,7 @@
 
 9種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.126.0で2026-11-07に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から9種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -91,13 +91,15 @@ ClaudeのネイティブUIは、実行時の候補取得で返されないモデ
 
 Claudeの推論レベル**Ultracode**は、Claude Codeのultracodeモードで実行します。`xhigh`の推論に加えて、実質的なタスクごとにマルチエージェントのワークフローを使うため、利用枠を大きく消費します。`xhigh`に対応するモデルで、インストール済みのClaude Codeがultracodeを利用可能と報告した場合に表示し、Claude Codeで動的ワークフローが無効な場合は表示しません。ほかのClaudeの推論レベルと同じく、既存タスクをUltracodeへ切り替えた場合は、次にセッションを開始したときに反映されます。1回のターンだけでマルチエージェントのワークフローを使う場合は、Claude Codeと同じく、Cockpitで入力するメッセージに`ultracode`と書きます。
 
+CodexのネイティブUIで「Codexの既定」を選ぶと、CockpitのモデルIDへ固定せずCodexに選択を任せます。エージェント設定、新規タスク、Autorunで利用でき、モデル未指定の場合も、そのアカウントでCodexが示す既定モデルを使います。明示的に選んだモデルは固定したままです。Autorunでは`--model default`で保存済みモデルを解除でき、推論レベルと速度tierはCodexが示す既定モデルの対応範囲で検証します。
+
 Codexのモデル選択肢は、組み込み候補と実行時に取得した候補のどちらも、新しいGPT世代とバージョンを先にし、同じバージョンでは標準モデルから用途別variantの順に並びます。モデル名をアルファベット順に探すのではなく、上から性能と用途を比較できます。現在選択中の有効なモデルを、並べ替えだけで変更することはありません。
 
 CodexのネイティブUIでは、選択中のアカウントから取得したモデル一覧を、設定の「エージェント」にあるデフォルト設定、新しいタスク、Autorun、実行中タスクで共通して使います。新しいタスクは一覧の取得完了を待たず、現在の有効な選択で開始できます。同じアカウントで最後に取得できた一覧はアプリ再起動後もすぐ表示し、backgroundで更新します。再取得が失敗または空でも前回の一覧を維持します。固定アカウントを変更すると、そのprofileの以前の一覧だけを破棄して新しい候補を取得し、遅れて届いた古い結果で上書きしません。tokenの期限切れやログイン取消だけでは同じprofileの一覧を破棄しません。確定済み一覧が一度もない場合は、組み込み候補または取得済みのデフォルトアカウント一覧を未確認の代替として表示することがあります。これは選択中アカウントの取得結果ではなく、そのアカウントで利用できる保証もありません。新しく提供されたモデルは、background更新後に、取得結果が示す推論レベルと`fast`対応を含めて選択できます。
 
 作成済みのCodexタスクでは、一覧の取得失敗または20秒の時間切れが起きても、タスクに保存されたモデルを代替候補へ加え、保存済みの推論レベルとservice tierを維持します。この間は候補の利用可否が「未確認」と表示されるため、実際に利用できる保証ではありません。「モデルを再読み込み」はそのタスクのアカウントで再試行し、時間切れ後に結果が届いた場合も、取得済みの候補と能力情報へ置き換えます。
 
-Codexのservice tierは`standard`、`fast`、`ultrafast`に対応します。選択中モデルの取得済み能力がそのtierを提示する場合だけ`fast`または「Ultrafast」を表示し、未対応の値を明示的に指定すると拒否します。CockpitはCodexの`config.toml`にある速さ（`service_tier`）を既定にしないため、Codexのタスク、クルー、AutorunはCockpitでFastを選ぶまで標準で動きます。ターミナルUIはCodex自身の設定のままです。システムプロンプトはClaude、Codex、Qoder、CockpitのネイティブUIで利用できます。`append`はCockpit標準の指示を維持し、`replace`は標準指示を置き換えるため、Cockpit CLIの知識はインストール済みskillからだけ利用できる状態になります。
+Codexのservice tierは`standard`、`fast`、`ultrafast`に対応します。選択中モデルの取得済み能力がそのtierを提示する場合だけ`fast`または「Ultrafast」を表示し、未対応の値を明示的に指定すると拒否します。CockpitはCodexの`config.toml`に`service_tier = "priority"`または`service_tier = "fast"`があっても速さの既定にしないため、Codexのタスク、クルー、AutorunはCockpitでFastを選ぶまで標準で動きます。ターミナルUIはCodex自身の設定のままです。システムプロンプトはClaude、Codex、Qoder、CockpitのネイティブUIで利用できます。`append`はCockpit標準の指示を維持し、`replace`は標準指示を置き換えるため、Cockpit CLIの知識はインストール済みskillからだけ利用できる状態になります。
 
 Cockpit AgentのモデルIDは、OpenRouterが`openrouter/<id>`、OpenCode Goが`opencode-go/<id>`、OpenCode Zenが`opencode/<id>`、LM Studioが`lmstudio/<id>`です。OpenCode GoとOpenCode Zenは別のプロバイダーで、設定の**OpenCode Go API Key**と**OpenCode Zen API Key**も共有しません。選択したプロバイダーのkeyがない場合、そのモデル一覧とタスクは利用できません。
 

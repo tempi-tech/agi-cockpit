@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -37,6 +37,10 @@ Use `--stdin`, `--instruction-file`, or `--text-file` instead of embedding long 
 An option that requires a value fails before sending a request if the value is missing or the next argument starts with `--`. Commands also reject unsupported options, option names with the wrong case, and surplus positional arguments before resolving a destination or sending a request. Use `--name` to name a task; `--title` is an Ask option. A quoted empty string is a supplied value, though the command may reject it during validation.
 
 Bash and PowerShell use the same JSON result contract for reads and errors. Treat a successful empty list as an empty result, and inspect the command's JSON and exit status rather than shell-specific formatting. See the [transport reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/transport) for connection and failure details.
+
+Bash and PowerShell both preserve Cockpit's JSON error body for HTTP failures and exit nonzero. Local replies, including failures and wait timeouts, identify the selected `instance`; remote `--host` replies do not carry that local field. Preserve folder paths exactly, including trailing spaces, when registering, creating, or reorganizing workspaces.
+
+A direct option value beginning with `--` may be parsed as another option even when quoted. Use the command's file or stdin input instead. For `system-prompt add --prompt`, PowerShell also accepts such a value directly. See the [transport reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/transport) for encoding and response details.
 
 ## Run on Windows
 
@@ -85,6 +89,17 @@ See [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser), [Brow
 `cockpit autorun` starts a new task or sends instructions to an existing task once, on an interval, or from cron. Membership is checked both when the Autorun is created and when it runs. If a saved runtime setting becomes unavailable, Cockpit disables the Autorun instead of silently choosing another runtime.
 
 `cockpit fleet` executes dependency-aware tasks as a Run. It covers YAML validation, gates, retries, resume, Run titles, and node progress. For a completed, failed, stopped, or paused Run, use `complete-tasks --dry-run` to inspect targets before completing its remaining tasks in bulk. Use Autorun for simple scheduled starts and Fleet for dependent multi-step work. See [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) for the practical workflow and the [`cockpit fleet` reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/fleet) for exact syntax.
+
+## Sign in to AGI Lab from the CLI
+
+`cockpit account` manages the local AGI Lab sign-in for member features; `cockpit accounts` manages agent profiles.
+
+```bash
+cockpit account status
+cockpit account login
+```
+
+`login` opens browser authorization and returns before authentication finishes. Approve it in the browser, then check `status`. Use `login --print-url` to get a URL without opening it; complete it on the same computer within 30 minutes. Starting another login replaces the previous request. These commands support no `--host` and return no tokens. Crew login and logout are limited to owner-started turns and are refused for Crew child tasks. See the [account reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/account) for status fields, permissions, and errors.
 
 ## Configure credentials and the Cockpit provider
 

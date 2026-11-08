@@ -4,15 +4,15 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
 ## 1. Check an agent
 
-Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, Qoder CLI, and Muse Code (macOS/Linux). It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One available agent is enough to continue.
+Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, Qoder CLI, and Muse Code (macOS/Linux). It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One ready agent is enough to create a Crew. You can also choose **Set up later** to continue setup without a ready agent; the first-Crew step is skipped until you configure one later.
 
-If Cockpit cannot find the agent you want, select **Install**. Cockpit Agent and Terminal do not require an external CLI.
+If Cockpit cannot find the agent you want, select **Install**. The row shows installation progress and, if it fails, a reason such as network trouble, missing commands, or insufficient write permission. Retry after correcting the cause, or choose **Open in a terminal** to inspect the installation. Cockpit Agent and Terminal do not require an external CLI.
 
 ## 2. Configure the Cockpit integration
 
@@ -25,6 +25,10 @@ This updates each agent's user-level skill directory and the applicable user-lev
 ## 3. Sign in to the agent
 
 An AI agent's plan and authentication are separate from AGI Cockpit's local features and AGI Lab sign-in. Obtain an eligible plan from the provider and sign in to that provider account for Claude Code, Codex, or another selected agent.
+
+In the agent step, select **Sign in** for Claude Code or Codex. Codex opens browser sign-in on every supported OS; Claude Code does so on macOS and Linux. Complete authentication in the browser and Cockpit returns to the agent list automatically. If the browser did not open, copy the displayed URL. For Claude Code, paste the browser code into the setup screen if requested. On Windows, Claude Code uses the guided terminal sign-in: pass the theme choice, then choose **Claude account with subscription** at **Select login method**.
+
+If sign-in fails, follow its displayed reason and select **Try again**. Claude Code also offers terminal sign-in for supported failures. You can cancel and return to setup without signing in.
 
 If a Claude Code, Codex, or Grok Build Native UI task starts before authentication, task details shows sign-in guidance and retries the first instruction after authentication. Terminal UI and Terminal do not provide this retry flow; complete the CLI sign-in inside the terminal, then resume or recreate the task.
 
