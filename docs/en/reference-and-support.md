@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -62,6 +62,8 @@ Cockpit stops waiting for an unresponsive Keychain after about two seconds inste
 AGI Lab sign-in and agent-provider sign-in are separate. When AGI Lab reports an expiry within three days, Cockpit shows a notice and desktop notification. An expired or revoked sign-in shows renewal guidance; select **Sign in** and complete browser authorization to restore member features. Each state notifies once and clears after successful sign-in. Dismissing the notice does not renew authentication.
 
 Use `cockpit account status` to inspect `refreshRequired`, `notice`, `expiresAt`, and the last membership-check reason; `cockpit account login` starts browser sign-in. Autorun keeps an authentication retry one minute later rather than consuming a one-time schedule. `~/.agi-tools/data/cockpit/logs/auth-session.jsonl` records rejected membership checks and failed renewals with time, HTTP status, and failure category, without tokens or email addresses. See the [account reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/account).
+
+The requirement to sign in again after expiry or revocation survives an app restart. Restarting alone does not restore member features; complete sign-in.
 
 ## An agent is missing or does not launch
 

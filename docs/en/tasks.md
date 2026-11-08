@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -21,6 +21,8 @@ Desktop places the task list, the selected task's work area, and a contextual pa
 Overview searches across tasks, projects, and agents, including completed work. Select the **Running**, **Waiting**, **Completed**, or **Error** status badge at the top to move matching tasks ahead of the others while preserving their project sections. This prioritizes rather than filters: tasks in other states remain below them. Select the active badge again to restore the usual order.
 
 The header's Back and Forward buttons remain available while Overview is open. Navigating to a task from that history closes Overview and opens the task. In the task list, filter by agent and pin a task or project. Switching the selected task does not stop the other agents; each continues independently.
+
+The Desktop sidebar also shows pinned projects with no tasks. Empty projects are not added while search or a type or agent filter narrows the list.
 
 ### Open and operate tasks on another PC
 
@@ -105,6 +107,8 @@ Quick Task opens a compact creation window from a global shortcut without leavin
 A Git worktree isolates changes in another checkout, but the same branch cannot be checked out in multiple worktrees. Completing from Desktop preserves the worktree. `cockpit task complete <id>` deletes it by default and preserves it only with `--keep-worktree`.
 
 From v4.127.0, removal is limited to folders verified as linked worktrees registered with Git. The main repository and unregistered folders are not removed. If Git removal fails and Cockpit cannot verify that a fallback deletion is safe, it leaves the folder and reports an error. Save needed changes before completion, and use `--keep-worktree` to retain the folder.
+
+From v4.128.0, Cockpit also retains a worktree when another worktree from the same repository is nested inside it or its identity differs from the one recorded at creation, including one recreated at the same path. Older tasks without recorded identity check only for nested worktrees. Task completion or deletion still proceeds, and the main-process log records why cleanup was skipped. Review the retained folder before cleaning it up manually.
 
 ## Read task states
 

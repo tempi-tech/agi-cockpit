@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -49,6 +49,18 @@ Each turn uses the owner's AI account, including requests from other allowed peo
 A Discord message can reach a running Crew immediately when its agent supports interrupting the current turn; approval and question waits still hold delivery. New messages retain the least trusted authority of the interrupted turn and the incoming request. Adding a person fetches their Discord display name; check the user ID when deciding access, including for someone who first mentions the Crew in an allowed channel.
 
 The Crew list’s **…** menu supports renaming and opening settings, and the list shows the connected Discord application’s name. Settings remember the last tab opened. From the CLI, `cockpit crew update <crew> --icon <image>` changes its icon; `--project`, `--directory`, or `--home` changes where it works. Changing that location starts a new session carrying the conversation. The owner’s authenticated tasks can inspect and answer the Crew’s approval waits and confirmation Asks, and post as the Crew with `cockpit crew post`. A post is sent immediately as that account; verify the destination and content first. `cockpit crew history <crew> --link <Discord-message-URL>` reads the linked message with nearby conversation when the Crew has access. See the [Crew CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for exact options and limits.
+
+A Crew's own session can inspect other Crews' settings, instructions, people, pending requests, and missions during automatic turns too. Strict mode refuses this in turns involving a member. Other Crews' chat history and credentials remain unavailable.
+
+### Discord profiles and posts
+
+In settings, save **Profile description** and choose **Include the owner's name** to include an owner line. Discord shows this description when someone opens the Crew's icon. The limit is 400 characters, including the owner line. New Crews include the owner line by default; existing Crews start with it off and leave the bot's description untouched until you change the description or this setting.
+
+Before its first successful write, Cockpit reads the Discord description again. If the field is empty, it imports the existing text without owner lines. If it finds a different description, it holds the write: review the displayed text, decide what to keep, and save. A failed read also prevents writing. After the first successful write, Cockpit's text takes precedence; an edit in Developer Portal lasts only until the next write. Settings shows connection errors and retry guidance.
+
+On Desktop and the PWA, choose **Open in the app** or **Open on the web** on a post card to open its original Discord message. Discord posts can notify roles, `@everyone`, and `@here`. Grant the bot's role Discord's mention permission, or invite it again using the link in connection settings. Turns involving a member suppress mass notifications. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for the authority boundaries.
+
+Use `--interim` with `cockpit crew reply` or `post` to send progress while keeping the working indicator active. An ordinary reply stops that indicator. Discord receipt reactions are removed when the Crew replies or the turn ends.
 
 ### Missions
 

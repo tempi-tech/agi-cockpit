@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -183,6 +183,8 @@ Antigravity native UI cannot ask an approval question while it runs, so `supervi
 Supported native UI agents can resume a saved session. A Terminal task cannot restore its former shell process and instead opens a new shell in the same directory. Cursor, Qoder, Grok Build, and Muse Code also restore the connected provider's saved conversation, and an in-progress Grok Build workflow returns as in progress. Muse Code terminal tasks record the session they start and reopen it with `muse resume`. When an Antigravity Native UI continuation scheduled by a timer or similar condition survives a restart, Cockpit synchronizes it from the saved transcript into its original turn instead of displaying a duplicate new turn.
 
 Provider quota usage and limits appear only when the runtime reports current values. Muse Code has no remaining-quota query; it reports its five-hour and weekly usage only while it answers. Cockpit shows the newest report from a Muse Code native-UI conversation with the time it was received, marks it stale after 15 minutes, and does not show a window once its reset time has passed. A report is shown only while Muse Code uses the account or API key it came from. A pay-as-you-go Muse Code account has no such windows, so none appear. Conversations in Muse Code's terminal app or in a terminal-mode task are not counted. Do not treat an authentication requirement, retrieval failure, or stale update as zero remaining usage.
+
+Codex usage checks use the Codex command configured under **Settings → Agents**. Check that setting when using a custom executable or wrapper.
 
 For Claude, Desktop and the CLI can show the unused limit-reset count and expiration dates. Desktop, the PWA, and the CLI can show this month's extra-usage spend and monthly limit. Both appear only when Claude reports them and are separate from regular quota windows. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts#check-remaining-quotas) for omission rules and CLI fields.
 

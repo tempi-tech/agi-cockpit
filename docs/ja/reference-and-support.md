@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.128.0で2026-11-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -62,6 +62,8 @@ Cockpitは応答のないキーチェーンを待ち続けず、約2秒でこの
 AGIラボとエージェント提供元のサインインは別です。AGIラボから期限が通知され、残り3日以内になると、アプリ内の案内とデスクトップ通知を表示します。期限切れや失効の場合は認証の更新を案内します。「サインイン」からブラウザー認証を完了して会員機能を復旧してください。同じ状態の通知は繰り返さず、再サインインすると消えます。案内を閉じるだけでは認証は更新されません。
 
 `cockpit account status`で`refreshRequired`、`notice`、`expiresAt`、最後の会員確認の理由を確認し、`cockpit account login`でブラウザー認証を始められます。Autorunは認証更新待ちの予定を1分後に再試行し、1回実行の予定も失いません。`~/.agi-tools/data/cockpit/logs/auth-session.jsonl`には、会員確認の拒否や認証更新失敗の日時、HTTP状態、失敗の分類を記録し、tokenやメールアドレスは記録しません。[account Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/account)を参照してください。
+
+期限切れ・失効による再サインインの案内は、アプリを再起動しても維持します。再起動だけでは会員機能は復旧しないため、サインインを完了してください。
 
 ## エージェントが表示されない、起動しない
 

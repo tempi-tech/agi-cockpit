@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -161,6 +161,8 @@ A message's copy button includes the visible body and error details. Diagnostics
 When several tool runs are grouped and only some fail, the heading shows the failed count. Do not treat the successful entries as proof that the whole group succeeded; inspect each failed operation and its effect.
 
 When an MCP server asks for tool confirmation in a Codex visual task, Desktop and the PWA identify the server, tool, and target and offer one-time allow or deny. A supported MCP input schema becomes a text, number, single-choice, or multi-choice form. Cockpit declines unsupported schemas. From the CLI, inspect `turnRequests` in `task get`, use `task approve` or `task deny` for approval, and use `task answer` for a form. MCP approval remains one-time even when `--scope always` is supplied.
+
+If Codex rejects a model during startup, the error remains on the same task. Change the model or switch to the default and retry with the saved instruction; you can recover without creating another task.
 
 ## Review and edit files
 
