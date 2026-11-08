@@ -32,6 +32,10 @@ A project can contain multiple folders. When an agent session starts or resumes,
 
 Deleting a project removes its grouping only: tasks and folders remain. A task folder registered in a project is preserved when its task is completed or deleted.
 
+From v4.127.0, removal is limited to folders verified as linked worktrees registered with Git. The main repository and unregistered folders are not removed. If Git removal fails and Cockpit cannot verify that a fallback deletion is safe, it leaves the folder and reports an error. Save needed changes before completion, and use `--keep-worktree` to retain the folder.
+
+From v4.127.0, temporary workspace removal verifies that the folder is inside a managed workspace base. Paths containing parent traversal (`..`) or symbolic links below that base are rejected. When the location cannot be verified, Cockpit leaves the folder instead of deleting it.
+
 ## Importing existing sessions
 
 **Continue where you left off**, at the end of onboarding and on an empty task board, lists up to 200 Claude Code and Codex sessions from the last 30 days, grouped by workspace. Select sessions individually or by workspace, then import them together, or skip. Workspace suggestions can also be registered using the existing project creation dialog. Imported tasks resume in Terminal UI.

@@ -4,6 +4,57 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.127.0 — 2026-11-08
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Claude Code and Codex sign-in directly from onboarding.
+- Added installation progress and failure explanations to agent setup during onboarding.
+- Added an option to continue onboarding and set up agents later.
+- Added notices when an AGI Lab sign-in is nearing expiry or has expired.
+- Added notices for expired or missing agent sign-ins with guidance to sign in again from Settings.
+- Added agent error details to the conversation.
+- Added a switch to the default model in supported tasks when a model is unavailable.
+- Changed unspecified Codex models to use the default selected by Codex.
+- Changed Codex to use standard speed until Fast is selected in Cockpit, even when config.toml sets service_tier to "priority" or "fast".
+- Improved the explanation that Autorun requires membership when used by a guest.
+- Fixed the approval-mode menu heading being hidden on the new-task screen.
+- Fixed folder names with trailing spaces in Autoruns, folder creation, and skill lookup.
+- Added support for removing worktrees with Japanese characters in their paths.
+- Improved worktree removal checks to protect the main repository and unregistered folders.
+- Added AGI Lab sign-in from the CLI.
+- Added file and standard-input support for Autorun instructions in the CLI.
+- Improved consistency of CLI date, error, and instance output between Bash and PowerShell.
+- Added support for system-prompt text starting with -- in PowerShell.
+- Fixed folder names with trailing spaces when registering, creating, or organizing workspaces through the CLI.
+- Improved safety checks to keep temporary workspace removal inside its managed base folder.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 初期設定の画面からClaude CodeとCodexにサインインできるようになりました。
+- エージェントのインストール状況と失敗理由を初期設定に表示するようになりました。
+- エージェントを後で設定する場合も、初期設定を進められるようになりました。
+- AGIラボへのサインイン期限が近づいたときや期限切れになったときに案内するようになりました。
+- エージェントのサインイン切れや未設定を通知し、設定画面から再サインインしやすくしました。
+- エージェントのエラー理由を会話内に表示するようになりました。
+- モデルが利用できない場合、対応するタスクで既定モデルに切り替えられるようになりました。
+- Codexのモデルを未指定の場合、Codex自身の既定モデルを使うようにしました。
+- Codexのconfig.tomlに service_tier = "priority" または "fast" がある場合も、CockpitでFastを選ぶまでは標準速度で動くようにしました。
+- ゲストがAutorunを利用しようとした場合、会員向け機能であることを案内するようにしました。
+- 新規タスク画面で承認モードのメニュー見出しが隠れる問題を修正しました。
+- Autorun、フォルダ作成、スキル参照で、末尾の空白を含むフォルダ名を正しく扱うようにしました。
+- 日本語のパスを含むWorktreeを削除できるようにしました。
+- Worktree削除時に元のリポジトリや未登録のフォルダを誤って削除しないよう、安全確認を強化しました。
+- CLIからAGIラボへのサインインを開始できるようになりました。
+- CLIでAutorunの指示をファイルや標準入力から渡せるようになりました。
+- CLIの日付やエラー、接続先の出力をBashとPowerShellで揃えました。
+- PowerShellのシステムプロンプト追加で、先頭が「--」の指示を渡せるようにしました。
+- CLIで作業場所を登録・作成・整理するとき、末尾に空白を含むフォルダ名を正しく扱うようにしました。
+- 一時作業フォルダの削除が管理用フォルダの外へ及ばないよう、安全確認を強化しました。
+
+</details>
+
 ## v4.126.0 — 2026-11-07
 
 **Type:** minor · **Platforms:** macOS, Linux

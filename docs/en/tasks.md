@@ -104,6 +104,8 @@ Quick Task opens a compact creation window from a global shortcut without leavin
 
 A Git worktree isolates changes in another checkout, but the same branch cannot be checked out in multiple worktrees. Completing from Desktop preserves the worktree. `cockpit task complete <id>` deletes it by default and preserves it only with `--keep-worktree`.
 
+From v4.127.0, removal is limited to folders verified as linked worktrees registered with Git. The main repository and unregistered folders are not removed. If Git removal fails and Cockpit cannot verify that a fallback deletion is safe, it leaves the folder and reports an error. Save needed changes before completion, and use `--keep-worktree` to retain the folder.
+
 ## Read task states
 
 | State | Meaning | What to check next |

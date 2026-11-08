@@ -104,6 +104,8 @@ Quick Taskはグローバルショートカットから小さな作成ウィン�
 
 Git Worktreeは変更を別checkoutへ分離しますが、同じブランチを複数のWorktreeで同時にcheckoutできません。Desktopで完了するとWorktreeを維持します。`cockpit task complete <id>`は既定でWorktreeを削除し、`--keep-worktree`を付けた場合だけ維持します。
 
+v4.127.0から、削除対象はGitに登録された追加のWorktreeとして確認できるフォルダに限ります。元のリポジトリや未登録のフォルダは削除しません。Gitによる削除に失敗した場合も、安全性を確認できなければフォルダを残してエラーを表示します。必要な変更は完了前に保存し、フォルダを残す場合は`--keep-worktree`を指定してください。
+
 ## タスク状態を読む
 
 | 状態 | 意味 | 次の確認 |
