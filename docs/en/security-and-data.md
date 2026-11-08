@@ -251,3 +251,14 @@ The paired PWA can browse and preview files in the folders actually supplied to 
 HTML Surfaces block scripts by default on Desktop and the PWA. A Surface containing `<meta name="cockpit-scripts" content="isolated">` can run inline JavaScript for local calculations and display changes inside an isolated frame. It cannot access Cockpit, Node, local files, authentication, cookies, or app storage. Network requests, external resources, embedded pages, navigation, downloads, and popups are blocked. Inline event attributes and JavaScript URLs remain blocked. Display notices never run scripts.
 
 Only a genuine user click on a declared action or validated submit control can send action and field values to the owning task. Script-generated clicks and messages cannot send, and `--non-interactive` disables sending while allowing local calculations. Reopening or replacing a Surface starts a fresh script context. See the [HTML reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/html) for limits and recovery. HTML file previews are separate: their sandbox can run scripts but does not grant access to the PWA, its storage, or its parent page.
+
+
+## Operation and permission changes in v4.128.0
+
+Worktree cleanup leaves the folder when another worktree of the same repository is nested inside it, or when the original worktree was moved and another was created at its old path. Task completion or removal still proceeds; the reason cleanup was skipped is recorded in the app's main-process log. Older tasks without recorded worktree identity receive only the nested-worktree check.
+
+A Crew's own session can read other Crews' settings, instructions, people, pending requests, and missions, including in automatic turns. A turn involving a non-owner member is refused when `memberTrust: strict`. Other Crews' chat history remains unavailable, and credentials are never returned. This limit does not track requests carried into another turn or Crew; keep confidential information restricted to owner requests.
+
+Crew posts on Discord can notify roles, `@everyone`, and `@here` when Discord permissions allow it. Turns involving a member suppress these mass notifications while allowing user mentions and reply notifications. This limit does not track a request carried into a later turn. Ask relay posts and DMs do not send mass notifications.
+
+The Desktop main window blocks navigation and redirects to external pages. New-window requests follow the external-link policy. PDFs created by external pages are checked for content and size and opened in a separate isolated viewer.

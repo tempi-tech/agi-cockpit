@@ -4,6 +4,47 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.128.0 — 2026-11-09
+
+**Type:** minor · **Platforms:** macOS
+
+- Added synchronization of Crew profile descriptions and owner names to Discord.
+- Added checks before the first profile update to preserve descriptions edited on Discord.
+- Added links from Crew post cards to the original Discord messages.
+- Added role, @everyone, and @here notifications to Crew Discord posts, with mass notifications suppressed in turns involving members.
+- Allowed Crews to read other Crews during automatic turns, while restricting member-involved turns in strict mode.
+- Added interim Crew replies that keep the working indicator active.
+- Changed Crews to remove Discord acknowledgement reactions after replying or ending the turn.
+- Kept pinned projects visible in the sidebar when they have no tasks.
+- Kept tasks retryable when Codex rejects a model during session startup.
+- Fixed Codex usage lookups to use the configured executable.
+- Kept expired sign-in guidance available after restarting.
+- Prevented external navigation from replacing the main app screen.
+- Added a dedicated viewer for PDFs created by external pages.
+- Prevented cleanup of worktrees containing another worktree or replaced at the same path.
+- Aligned CLI HTTP and Fleet wait error handling between Bash and PowerShell.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Crewのプロフィール説明とオーナー名をDiscordへ反映できるようになりました。
+- Discordで編集済みのBot説明を、Cockpitの初回更新前に読み直して保護するようにしました。
+- Crewの投稿カードから元のDiscordメッセージを開けるようになりました。
+- CrewのDiscord投稿でロール・@everyone・@hereへ通知できるようになりました。メンバーが関わるターンでは一斉通知を抑制します。
+- Crewが自動実行中も他のCrewの情報を参照できるようになりました。厳格モードでメンバーが関わるターンは制限します。
+- Crewが途中経過を返信した後も、作業中の表示を続けられるようになりました。
+- Crewが返信するかターンを終えると、Discordの受信確認リアクションを外すようにしました。
+- タスクがないピン留め済みプロジェクトもサイドバーに表示するようにしました。
+- Codexが起動時にモデルを拒否した場合も、同じタスクでモデルを変更して再試行できるようにしました。
+- Codexの使用量確認で、設定したCodexコマンドを使用するようにしました。
+- サインイン期限切れの案内が再起動後も維持されるようにしました。
+- メイン画面が外部ページへ移動することを防ぐようにしました。
+- 外部ページが作成したPDFを専用ビューアーで開くようにしました。
+- 内側に別のWorktreeがある場合や同じパスに作り直された場合に、Worktreeの削除を見送るようにしました。
+- CLIのHTTPエラーとFleet待機時のエラー出力をBashとPowerShellで揃えました。
+
+</details>
+
 ## v4.127.0 — 2026-11-08
 
 **Type:** minor · **Platforms:** macOS, Linux
