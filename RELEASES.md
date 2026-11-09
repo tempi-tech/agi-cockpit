@@ -4,6 +4,63 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.129.0 — 2026-11-10
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Slack connections for Crew conversations in DMs, channels, and threads.
+- Added shortcuts to prefilled Slack app creation and token setup pages.
+- Added Crew description and owner-name synchronization to Slack profiles.
+- Added links from Crew post cards to the original Slack messages.
+- Added user-group, @here, and @channel notifications to Crew Slack posts, with mass notifications suppressed in turns involving members.
+- Added tables to Crew posts on Discord and Slack.
+- Added charts to Crew posts on Discord and Slack.
+- Added cards to Crew posts on Discord and Slack.
+- Added organization charts showing people, agents, roles, and relationships on desktop and mobile.
+- Added configurable days and hours for Crew responses to other people.
+- Changed Crew periodic checks to wait for the configured interval after the last conversation.
+- Changed pending Crew conversation requests to use reactions and deliver held requests after approval.
+- Added handling of Slack mentions made before a Crew joins the channel.
+- Changed replies to Crew Discord messages to be handled like mentions.
+- Changed the Crew channel picker to show only channels the Crew can view.
+- Changed onboarding to start the first Crew as a single secretary.
+- Fixed navigation in Crew creation and menus.
+- Fixed cleanup of Ask messages after answers on Discord and Slack.
+- Fixed sign-in notice buttons overlapping the window drag region.
+- Fixed preservation of spaces and other characters in working-folder and attachment paths.
+- Added the verified owner of default Claude credentials to account displays.
+- Changed mobile host-update notices to show changes as a bulleted list.
+- Added opening the Microsoft Store app from the Store update check.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CrewをSlackへ接続し、DMやチャンネル、スレッドで会話できるようになりました。
+- CrewのSlack接続で、設定済みのアプリ作成画面やトークン取得ページを開けるようになりました。
+- CrewのSlackプロフィールへ説明とオーナー名を反映できるようになりました。
+- Crewの投稿カードから元のSlackメッセージを開けるようになりました。
+- CrewのSlack投稿でユーザーグループ・@here・@channelへ通知できるようになりました。メンバーが関わるターンでは一斉通知を抑制します。
+- CrewがDiscordとSlackへ表を投稿できるようになりました。
+- CrewがDiscordとSlackへグラフを投稿できるようになりました。
+- CrewがDiscordとSlackへカードを投稿できるようになりました。
+- Crewの組織図で、人やエージェントの役割・関係をデスクトップとスマートフォンから確認できるようになりました。
+- Crewがほかの人へ応答する曜日と時間帯を設定できるようになりました。
+- Crewの定期確認を、最後の会話から設定した間隔が過ぎるまで延期するようになりました。
+- Crewの会話許可待ちをリアクションで示し、承認後に保留中の依頼を届けるようになりました。
+- CrewがSlackのチャンネルへ参加する前のメンションも受け取れるようになりました。
+- DiscordでCrewのメッセージに返信すると、メンションと同様に依頼を届けるようになりました。
+- Crewのチャンネル追加には、Crewが閲覧できるチャンネルだけを表示するようになりました。
+- 初回設定で、最初のCrewを1人の秘書として開始するようになりました。
+- Crew作成画面とメニューの移動を修正しました。
+- DiscordとSlackのAsk回答後のメッセージ整理を修正しました。
+- サインイン案内のボタンがウィンドウのドラッグ領域と重ならないようにしました。
+- 作業フォルダや添付ファイルのパスに含まれる空白などをそのまま保持するようにしました。
+- Claudeの既定アカウントで、確認できた認証情報の所有者を各画面へ表示するようになりました。
+- スマートフォンの本体更新案内で、変更内容を箇条書きで表示するようになりました。
+- Windows Store版の更新確認からMicrosoft Storeアプリを開けるようになりました。
+
+</details>
+
 ## v4.128.0 — 2026-11-09
 
 **Type:** minor · **Platforms:** macOS, Linux
