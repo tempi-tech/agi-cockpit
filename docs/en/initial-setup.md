@@ -10,7 +10,7 @@ By the end of this guide, an agent and the Cockpit integration will be ready for
 
 ## 1. Check an agent
 
-Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, Qoder CLI, and Muse Code (macOS/Linux). It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One ready agent is enough to create a Crew. You can also choose **Set up later** to continue setup without a ready agent; the first-Crew step is skipped until you configure one later.
+Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, Qoder CLI, and Muse Code (macOS/Linux). It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One ready agent is enough for setup to create an Assistant Crew at the end. You can also choose **Set up later** to continue setup without a ready agent; setup then creates no Assistant.
 
 If Cockpit cannot find the agent you want, select **Install**. The row shows installation progress and, if it fails, a reason such as network trouble, missing commands, or insufficient write permission. Retry after correcting the cause, or choose **Open in a terminal** to inspect the installation. Cockpit Agent and Terminal do not require an external CLI.
 
@@ -44,13 +44,17 @@ The **Continue where you left off** step lists up to 200 Claude Code and Codex s
 
 Importing reads the original session files locally without changing or deleting them, and it does not start an agent.
 
-## 6. Create your first Crew or continue later
+## 6. Start talking with your Assistant Crew
 
-If you have no Crew yet, setup offers **Create your first Crew**. Enter a name of up to 32 characters and what it should take on, or choose an example. Choose a ready agent: Claude Code, Codex, Grok Build, Cursor, Qoder, or Muse Code. Review the approval mode shown below the form, then select **Create Crew**. If none is ready, return to the agent step or choose **Create later**.
+If you have no Crew yet, **Continue** on the last step makes Cockpit create one Assistant Crew. It is named **Assistant** in English and helps with research, summaries, drafts, and notes. It runs on the agent you made ready in the agent step, and on Claude Code when both Claude Code and Codex are ready.
 
-The Crew opens its conversation, records the role you supplied, does one job, and proposes continuing work. You can change the role and approval mode later from the conversation. If sending the first message fails after creation, retry it in setup; Cockpit reuses the Crew already created. **Continue later** leaves that Crew available.
+Setup then finishes and the Assistant's conversation opens on the Crew screen. At the top of the conversation, the first instructions Cockpit sent the Assistant appear as one line, **First instructions**; select it to read them. The Assistant briefly introduces itself, gives three examples of what you can ask, and asks what you would like it to do. Its first reply is an AI response, so it takes from a few seconds to a few tens of seconds.
 
-One Crew is free, including stopped Crews; an AGI Lab membership is required to create more. If you skip creation, continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+When you send a request, the Assistant does that job first and shows the result. It then confirms a role and a name that fit the job with an Ask. **Use this role** writes the role down and changes the name; **Keep as Assistant** leaves both as they are. Either way, it proposes one job to keep doing: an Autorun for AGI Lab members, and a periodic check for everyone else. If you close the conversation without talking to the Assistant, it stays with its fixed name and role, and you can talk with it from the Crew list.
+
+When you already have a Crew, or you chose **Set up later** without a ready agent, setup finishes without creating the Assistant. When the Assistant cannot be set up, the reason is shown. **Retry** tries again, reusing the Assistant if it was already created. **Not now** finishes setup and opens the Assistant's conversation if it was already created.
+
+One Crew is free, including stopped Crews, and the Assistant is that Crew; an AGI Lab membership is required to create more. To start with a task instead, continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
 ## If setup does not complete
 

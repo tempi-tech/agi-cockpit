@@ -8,6 +8,8 @@ Choose a project, working folder, and agent, safely run your first task, review 
 
 This guide runs one short read-only request from task creation through result review and completion. If preparation is not finished, complete [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started) and [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) first.
 
+If initial setup created an Assistant Crew, its conversation is open when setup finishes. Work you ask the Assistant for continues in that conversation. Create a task separately from **Create new**, as in the steps below.
+
 ## 1. Create a new task
 
 1. Select **Create new** (+) at the top left of the window, above the task list.
