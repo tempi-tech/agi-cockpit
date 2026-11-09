@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.129.0 — 2026-11-10
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Slack connections for Crew conversations in DMs, channels, and threads.
 - Added shortcuts to prefilled Slack app creation and token setup pages.
@@ -26,7 +26,7 @@ English is the primary language for these generated release notes. Download the 
 - Changed onboarding to start the first Crew as a single secretary.
 - Fixed navigation in Crew creation and menus.
 - Fixed cleanup of Ask messages after answers on Discord and Slack.
-- Fixed sign-in notice buttons overlapping the window drag region.
+- Added a mitigation for unresponsive sign-in notice buttons.
 - Fixed preservation of spaces and other characters in working-folder and attachment paths.
 - Added the verified owner of default Claude credentials to account displays.
 - Changed mobile host-update notices to show changes as a bulleted list.
@@ -53,7 +53,7 @@ English is the primary language for these generated release notes. Download the 
 - 初回設定で、最初のCrewを1人の秘書として開始するようになりました。
 - Crew作成画面とメニューの移動を修正しました。
 - DiscordとSlackのAsk回答後のメッセージ整理を修正しました。
-- サインイン案内のボタンがウィンドウのドラッグ領域と重ならないようにしました。
+- サインイン案内のボタンが押せない問題への対策を追加しました。
 - 作業フォルダや添付ファイルのパスに含まれる空白などをそのまま保持するようにしました。
 - Claudeの既定アカウントで、確認できた認証情報の所有者を各画面へ表示するようになりました。
 - スマートフォンの本体更新案内で、変更内容を箇条書きで表示するようになりました。
