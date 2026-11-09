@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -62,11 +62,13 @@ Enabling a Discord or Slack relay under **Settings → Ask notifications** sends
 
 Muse Code Contributor models (IDs ending in `-contributor`) may allow conversations and code to be used for training under Muse Code's terms. They are hidden from model menus by default; enable **Show Contributor models** in Settings to make them available. Enabling this setting does not change the selected model. Native UI explicitly turns session Contributor mode on or off according to the selected model and starts with it off when no model is selected. A one-line notice appears where a Contributor model starts or changes; it scrolls with the conversation and is not repeated while that model remains selected, including on resume.
 
-## Anonymous data in guest use
+## Anonymous usage and setup events
 
-Packaged guest use sends a random installation ID, app version, a daily session check, and onboarding events for steps reached, abandonment, guest selection, and sign-in to AGI Backend. Task instructions, conversations, file content, and project names are not included in these anonymous events.
+Packaged guest use sends a random installation ID, app version, and a daily session check to AGI Backend. First-run setup also sends events for steps reached, abandonment, guest selection, sign-in, session import counts, and skipping import. Setup events can continue after signing in during that flow; replaying setup does not send them.
 
-An onboarding abandonment event that could not be sent is kept temporarily in the OS application-data area for retry. Anonymous events are sent only for guest use of a packaged app. Signed-in use sends the app version during authentication session checks.
+These events include Assistant creation, the first request being sent, and whether its proposed role was accepted or kept as Assistant. They record the step reached without the request text, proposed role, name, or Ask answer text. Task instructions, conversations, file content, and project names are not included.
+
+Queued setup events are saved temporarily in the OS application-data area for retry. Until the first request and role decision have been recorded, Cockpit also keeps a local progress record containing the installation ID, Assistant task ID, related Ask IDs, and progress flags; it removes that record when both milestones are reached. Signed-in use also sends the app version during authentication session checks.
 
 ## Distinguish approvals from Ask
 
@@ -100,7 +102,7 @@ Settings can disable or remove a hook, but removing it leaves existing run histo
 
 ## Crews: access and retained data
 
-Crews are in alpha and run on the owner's AI account, including turns requested by other people the owner allows. Received chat messages, attachments and the context the Crew reads can be sent to that AI service. Check the account's terms before allowing other people, and tell participants how their messages are used. Discord connections accept only the configured people and places; check Discord user IDs when assigning owners. New people wait for approval, and their earlier messages are not delivered after approval.
+Crews are in alpha and run on the owner's AI account, including turns requested by other people the owner allows. Received chat messages, attachments and the context the Crew reads can be sent to that AI service. Check the account's terms before allowing other people, and tell participants how their messages are used. Discord and Slack connections accept only the configured people and places; check the platform’s user IDs when assigning owners. A new person’s first DM or mention gets ⏳. Approval delivers only that request after rechecking permissions, place, and attachment availability. Other messages sent while waiting are not delivered. If delivery is impossible, for example because the Crew is stopped or attachments cannot be fetched again, diagnostics record the reason without the message text.
 
 Configure Crew DM intake with `cockpit crew place dm <crew> --mode all|owners|off`. `all` accepts allowed people, `owners` accepts only owners, and `off` accepts nobody. In `owners`, other people’s DMs do not enter the approval queue. With no owner, no DMs are delivered, although initial owner confirmation remains available during setup. A Crew requesting a change from `owners` to `all` needs its owner’s approval in Cockpit.
 
@@ -116,7 +118,7 @@ Each Crew keeps its instructions, memory and work in its own home, with Git hist
 
 Finished Asks also retain a local status record for up to 30 days, with at most the latest 500 records. It includes the title, task, outcome, responder and an answer summary of up to 500 characters. `cockpit ask get <askId>` exposes the status and answer-delivery state; do not put secrets in Ask answers. This retention is separate from the secure password-input flow.
 
-Crew Ask DMs are on by default and send questions and supported media to each connection owner through the Crew's bot. Crew settings or `cockpit crew update <crew> --ask-dm-to <user-id>` can narrow the recipients. An empty selection sends to nobody; `--ask-dm-to all` restores all owners. This selection also covers approval Asks and secret-input notices. Removing a recipient closes their unanswered DMs and clears question text, choices, and attachments. An agent may change recipients only during an owner-started turn. Only the DM recipient, while still an owner, may answer. New-person approval Asks also accept an owner's DM answer; approval grants access to DMs and all places the Crew listens to. General Ask relays exclude owner-only questions, and Crew settings-change approvals stay in Cockpit. Secret requests send only a notice and a token-free PWA address when HTTPS Remote Access runs, never the request details or value. Disable these DMs with `cockpit crew update <crew> --ask-dm off`. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask#crew-questions-in-discord-dms).
+Crew Ask DMs are on by default and send questions and supported media to each connection owner through the Crew's bot. Crew settings or `cockpit crew update <crew> --ask-dm-to <user-id>` can narrow the recipients. An empty selection sends to nobody; `--ask-dm-to all` restores all owners. This selection also covers approval Asks and secret-input notices. Removing a recipient closes their unanswered DMs and clears question text, choices, and attachments. An agent may change recipients only during an owner-started turn. Only the DM recipient, while still an owner, may answer. New-person approval Asks also accept an owner's DM answer; approval grants access to DMs and all places the Crew listens to. General Ask relays exclude owner-only questions, and Crew settings-change approvals stay in Cockpit. Secret requests send only a notice and a token-free PWA address when HTTPS Remote Access runs, never the request details or value. Disable these DMs with `cockpit crew update <crew> --ask-dm off`. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask#crew-questions-in-discord-and-slack-dms).
 
 ## Store credentials
 

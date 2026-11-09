@@ -4,7 +4,7 @@
 
 Check and apply AGI Cockpit updates on Windows, macOS, or Linux, then inspect update state and diagnostic logs if an update fails.
 
-> Verified with AGI Cockpit 4.107.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
+> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
 
 The update method depends on how AGI Cockpit is distributed. This guide identifies the method for your environment and verifies the result after updating.
 
@@ -45,11 +45,11 @@ cockpit update cancel-install-when-idle
 
 The schedule exists only for the current app session and is cleared by an AGI Cockpit restart. If no task or Fleet Run is already running, installation can begin immediately after arming. A task awaiting input or an Ask, and a paused Fleet Run, do not block it. When installation begins, every task ends, including waiting tasks. Inspect the count and armed state under `scheduledInstall` in `cockpit update status`; cancel it on screen or with `cancel-install-when-idle` before installation starts. This schedule is available only on packaged macOS builds that support automatic installation.
 
-On Linux, open the language-matched download page from **Update manually** or the update notice, then replace the AppImage or `.deb` with the package for the current CPU architecture. On Windows, update AGI Cockpit from the Microsoft Store library.
+On Linux, open the language-matched download page from **Update manually** or the update notice, then replace the AppImage or `.deb` with the package for the current CPU architecture. For the Windows Store edition, the update-check guidance can open the Microsoft Store app. Update AGI Cockpit from the Store library.
 
 ### Update from a phone
 
-With an active AGI Lab membership and an authenticated PWA connection, open the connection target in the header and select **Host updates**. You can check the host version, release notes, and download progress. Automatic installation is available for packaged macOS hosts after the download completes. **Update now** requires a separate confirmation because it restarts the host and terminates every running task.
+With an active AGI Lab membership and an authenticated PWA connection, open the connection target in the header and select **Host updates**. You can check the host version, release notes as a bulleted list, and download progress. Automatic installation is available for packaged macOS hosts after the download completes. **Update now** requires a separate confirmation because it restarts the host and terminates every running task.
 
 After the download completes, **Install when idle** arms installation for the point when no task or Fleet Run is running. The PWA shows the current blocking count and lets you cancel the schedule before installation starts. The schedule is session-only; a host restart clears it. Tasks waiting for input or an Ask and paused Fleet Runs do not block installation, and every task ends once installation begins.
 

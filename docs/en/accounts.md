@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -49,6 +49,8 @@ For agents that expose the default account's email address, Cockpit shows it on 
 For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server in a read-only sandbox without approval prompts. This retrieval path supports Codex CLI 0.153.
 
 Named Antigravity profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a profile-specific home. On macOS, Cockpit puts a profile-specific Keychain first in the search list and verifies that order before a task starts, preventing fallback to the host Antigravity login and its quota. The OS keyring is shared on Windows and Linux, so a host login stored there still takes precedence for every profile.
+
+For Claude’s default account, when Cockpit can verify the owner of the current credentials, it uses that email address in Settings, usage, task creation, and conversation account displays. When verification is unavailable, it may use the existing account record; the displayed address alone does not prove that the current owner was verified. Check the intended account before use.
 
 ## Respond to a sign-in notice
 

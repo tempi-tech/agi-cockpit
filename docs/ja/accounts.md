@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 4.129.0で2026-11-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、Autorun、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -49,6 +49,8 @@ Grok Buildのaccess tokenは約6時間で期限切れになりますが、refres
 Codexの利用状況とレート制限は、承認を要求しないread-only sandboxでCodex CLIのapp serverから取得します。この取得経路はCodex CLI 0.153に対応しています。
 
 Antigravityの名前付きプロファイルはブラウザーでGoogle OAuthを行い、会話、ログ、キャッシュ、利用履歴をプロファイル専用のhomeへ分離します。macOSではプロファイル専用Keychainを検索順の先頭に固定し、タスク開始前にも確認するため、ホストのAntigravityログインとクォータへフォールバックしません。WindowsとLinuxのOS keyringは共有されるため、ホストログインが残っている場合は各プロファイルからも同じ認証情報が優先されます。
+
+Claudeのデフォルトアカウントでは、現在の認証情報の所有者を確認できた場合、そのメールアドレスを設定・使用量・タスク作成・会話のアカウント表示へ反映します。確認できない場合は既存のアカウント記録を使うことがあり、表示だけで現在の所有者を確認できたとは限りません。利用前に対象アカウントを確認してください。
 
 ## サインインの通知に対応する
 

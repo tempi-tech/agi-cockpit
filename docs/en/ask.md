@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -37,11 +37,11 @@ A request from `cockpit secret request` appears in a dedicated Desktop window, t
 
 Sharing presentation does not make it an Ask. It is absent from `cockpit ask list`, cannot be answered with `cockpit ask answer`, and is never sent to Discord or Slack. It also does not fire an `ask.*` Hook or `cockpit.ask.resolved` event and accepts no attachments. Never put a password or another secret in an Ask answer; use the dedicated input request. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for destination and storage boundaries.
 
-## Crew questions in Discord DMs
+## Crew questions in Discord and Slack DMs
 
-A Crew sends its own and its child tasks' Asks to owners of its Discord connection through its own bot. All owners receive them by default. Choose recipients in Crew settings, or repeat `cockpit crew update <crew> --ask-dm-to <user-id>` for the intended owners. Use `--ask-dm-to all` to restore all owners. An empty chosen list sends to nobody. This is on by default; use `cockpit crew update <crew> --ask-dm off` to disable it. Ask text and supported media leave Cockpit for those owners' DMs. Only the recipient, while still an owner, may answer that DM. Answering or closing anywhere updates the other copies; removing an owner, excluding a recipient, or disabling Ask DMs closes their copies and clears withdrawn question text, choices, and attachments. The recipient selection also applies to new-person approval Asks and secret-input notices. An agent may change recipients only during an owner-started turn.
+A Crew sends its own and its child tasks' Asks to owners of its Discord or Slack connection through its own app. All owners receive them by default. Choose recipients in Crew settings, or repeat `cockpit crew update <crew> --ask-dm-to <user-id>` for the intended owners. Use `--ask-dm-to all` to restore all owners. An empty chosen list sends to nobody. This is on by default; use `cockpit crew update <crew> --ask-dm off` to disable it. Ask text and supported media leave Cockpit for those owners' DMs. Only the recipient, while still an owner, may answer that DM. Answering or closing anywhere updates the other copies; removing an owner, excluding a recipient, or disabling Ask DMs closes their copies and clears withdrawn question text, choices, and attachments. The recipient selection also applies to new-person approval Asks and secret-input notices. An agent may change recipients only during an owner-started turn.
 
-Cockpit also asks whether to approve a new person waiting to talk to the Crew. Only an owner can answer, including in their DM. Approval allows that person in DMs and every channel the Crew listens to, not just the place where they requested access. Earlier messages are not delivered. Owner-only Asks never go to the general Discord or Slack relay. Requests to approve Crew settings changes, device approvals, and Fleet gates stay in Cockpit.
+Cockpit also asks whether to approve a new person waiting to talk to the Crew. Only an owner can answer, including in their DM. Approval allows that person in DMs and every channel the Crew listens to, not just the place where they requested access. Approval delivers the first request marked ⏳ after rechecking permissions, place, and attachment availability. Other messages sent while waiting are not delivered. If delivery is impossible, for example because the Crew is stopped, ask the person to resend after approval. Owner-only Asks never go to the general Discord or Slack relay. Requests to approve Crew settings changes, device approvals, and Fleet gates stay in Cockpit.
 
 A Crew's secret input request is never sent to chat. When HTTPS Remote Access is running, owners receive only a notice and the PWA address, without a token, request ID, label, summary, destination, or secret value. Enter the secret in Cockpit's dedicated input surface. This notice also follows the Ask DM setting.
 
@@ -117,7 +117,7 @@ Selections, free-form input, a whole-Ask reply, and attachments are shared betwe
 
 ## Clean up Crew Ask DMs
 
-By default, a Crew keeps its answered or closed Discord Ask DMs with the result and no answer buttons. Set `cockpit crew update <crew> --ask-dm-cleanup delete` to delete their header and question messages after the Ask is answered, closed, or withdrawn; use `keep` to restore the default. Deleted Discord messages cannot be recovered, but Cockpit retains the Ask and answer. If deletion fails, remaining messages show the result. A Crew can change this setting only during an owner-started turn.
+By default, a Crew keeps its answered or closed Discord and Slack Ask DMs with the result and no answer buttons. Set `cockpit crew update <crew> --ask-dm-cleanup delete` to delete their header and question messages after the Ask is answered, closed, or withdrawn; use `keep` to restore the default. Deleted chat messages cannot be recovered, but Cockpit retains the Ask and answer. If deletion fails, remaining messages show the result. A Crew can change this setting only during an owner-started turn.
 
 ## Adjust the Ask window
 
