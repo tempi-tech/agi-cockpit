@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.130.0 — 2026-11-11
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Crew mentions from the @ picker in task chats.
 - Added right-click menus for copy, paste, and link actions.
