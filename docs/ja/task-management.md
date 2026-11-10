@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.106.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.130.0で2026-11-11に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -208,6 +208,8 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 
 `approvalEvent`を受け取ったら成果として扱わず、その`seq`を指定した`task wait <task-id> --since <seq>`で待機を続けます。エラー・完了へ移る際の解除通知は直前の非終端状態を保持し、実際のエラー・完了内容は通常レポートが返します。現在の状態は`task get`で確認します。Fleetは承認通知を自動で読み飛ばして成果を待ち続けます。
 
+Terminalタスクを`--command`で開始すると、コマンド終了時に終了コード`exitCode`と出力の末尾を一度だけ報告します。出力が途切れただけでは終了と判断しません。サーバーなどの長時間コマンドでは`task run`や`task wait`が通常のタイムアウトになるため、稼働中の出力は`task get`で確認してください。実行中は`terminalCommandRunId`、レポートでは`commandRunId`で実行を識別します。アプリの再起動後は終了コード不明として報告する場合があります。シェルやコマンドによって終了を捕捉できず、ターミナル終了まで報告しない場合の条件は[Delegate And Wait](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task#delegate-and-wait-preferred)を参照してください。
+
 ## 追加指示を送る
 
 タスクが次の指示を受け取れる状態なら`task send`を使います。そのターンのレポートまで必要な場合は`--wait`を付けます。
@@ -219,6 +221,21 @@ cockpit task send <task-id> --text "失敗したテストだけ修正し、再�
 ```
 
 複数行の指示は`--stdin`または`--text-file`で渡します。`task send`の`--media`にも作成時と同じ件数、サイズ、ローカルファイル、エージェント対応範囲が適用されます。確認画面に対してEnterを送るだけなら、本文を付けず`cockpit task send <task-id>`を実行します。送信前に`waitingReason`を読み、質問への回答なのか、ツール許可なのか、通常の追加指示なのかを区別してください。
+
+## キューをオーナーとして操作する
+
+オーナーはタスクの外のシェルから、キューの一覧と、対象メッセージの編集・削除・即時送信を操作できます。
+
+```bash
+cockpit task queue <task-id>
+cockpit task queue <task-id> edit <item-id> --text-file revised-message.txt
+cockpit task queue <task-id> remove <item-id>
+cockpit task queue <task-id> send-now <item-id>
+```
+
+編集できるのはエージェントやCockpitから届いたメッセージです。本文を変えるとオーナーのメッセージとして届け、添付と送信元の表示を残し、「オーナーが編集」と表示します。同じ本文の保存では権限を変えません。自分の通常メッセージはアプリで編集してください。Ask回答は編集・削除できず、DiscordとSlackのメッセージは編集・即時送信できません。削除しても送信元には通知しません。
+
+通常のオーナータスクを含むすべてのタスク認証、Crew、その子タスクからの操作は`owner_only`（403）で拒否します。エージェントからキューは操作できません。`--host`も未対応です。承認や質問への回答待ちではCLIの`send-now`は`queue_action_refused`を返すため、先に回答するか、アプリの確認画面で待機を取り消してください。適用条件とエラーは[task Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task#queue)を参照してください。
 
 ## ターンと会話をCLIから管理する
 

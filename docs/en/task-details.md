@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -38,6 +38,8 @@ In Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code Native U
 In Muse Code Native UI on Desktop and the PWA, once Muse Code reports that its reply is complete and only background checks remain, the composer returns to Send and hides the processing indicator. You can send the next message while those checks continue. This does not mean all background work has finished; switching between standard and Contributor models, `/compact`, and `/clear` still require the current work to finish.
 
 Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
+
+The owner can also edit, remove, or send now messages queued by an agent or Cockpit. These show their sender; saving changed text delivers it as the owner's message and marks it **Edited by the owner**. Attachments remain. Saving unchanged text preserves the sender's authority. While its inline editor is open, the message waits for up to 10 minutes; **Cancel** releases it. Removing it does not notify the sender. Ask answers cannot be edited or removed, and Discord or Slack messages cannot be edited or sent now this way. The CLI operations are owner-only: see [Manage a Queue](https://agi-labo.com/en/tools/cockpit/docs/task-management#manage-a-queue-as-the-owner).
 
 The Queue is shared by Desktop and the PWA, with Ask answers and ordinary messages in registration order. Entries that still need attention, including waiting, delivering, and failed entries, survive closing a view or restarting Cockpit. Once delivery is confirmed and the entry appears in the conversation, it leaves the Queue instead of remaining as a sent item.
 
@@ -83,6 +85,10 @@ Earlier messages, tool inputs and outputs, file changes, images, and compaction 
 The Default/Plan interaction-mode picker and the `/plan` and `/default` actions are no longer available. Describe any planning request in your message.
 
 ## Enter a message
+
+In supported task chats on Desktop and the PWA, type `@` and select a Crew to insert a mention. Search by name and check the device name when several Crews share a name. Available Crews on connected computers can also appear. The mention identifies the Crew to the current agent; ask the agent to contact it when delegation is intended. Selecting a Crew mention in the conversation opens that Crew's conversation; an unavailable Crew or computer shows an explanation.
+
+On Desktop, right-click selected text or an editable field for **Copy**, **Paste**, **Cut**, **Undo**, **Redo**, and **Select All**, as applicable. A link offers **Copy Link** and, when permitted, **Open Link**. Images offer **Copy Image** and, where supported, **Save Image As…**. Available actions depend on the clicked content.
 
 In Desktop Settings → Shortcuts, **Send key** lets you choose Enter, Cmd+Enter (macOS) / Ctrl+Enter (Windows/Linux), or Shift+Enter. With Cmd/Ctrl+Enter or Shift+Enter selected, plain Enter inserts a line break. With Enter selected, Shift+Enter inserts a line break. When you open another computer’s task inside Desktop, it uses the viewing Desktop’s Send key setting too. Holding the send key does not add newlines to the cleared composer or send repeatedly. On supported Desktop systems, the microphone records up to 90 seconds and transcribes locally. Review the inserted text before sending.
 

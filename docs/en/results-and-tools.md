@@ -4,7 +4,7 @@
 
 Reopen presented diffs, files, HTML Surfaces, and browser tabs from conversation cards, then safely review terminals, logs, and other task results.
 
-> Verified with AGI Cockpit 4.126.0 on 2026-11-07. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -16,7 +16,7 @@ The Desktop Ask tab lists every Ask waiting for an answer on this device, not on
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
-In the PWA, **Task panel** in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, diff, Cockpit Browser, App Surface, side terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, general files, project explorer, and background logs are not tabs in this PWA panel.
+In the PWA, **Task panel** in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, file preview, diff, Cockpit Browser, App Surface, side terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, project explorer, and background logs are not tabs in this PWA panel.
 
 ## Reopen content from conversation cards
 
@@ -33,6 +33,10 @@ For very large changes, Cockpit may skip counting changed lines and show **Too m
 File preview supports text, images, audio, video, PDFs, and other recognized formats. Its toolbar stays in a separate row above the document and wraps its controls in a narrow panel, so it does not cover the content. After focusing a file body on Desktop or the PWA, Cmd+A / Ctrl+A selects only that file body, excluding the chat, file list, and viewer controls. Inputs, search fields, and the active text editor keep their normal select-all behavior. Selecting text shows a quote action without shifting the preview or losing the selection; use it to add the file path and line range to the task composer. A writable regular text file up to 1 MB can be edited with the pencil button. Changes save automatically, and Cockpit does not provide an undo action, so confirm the path and Git scope first.
 
 When a Markdown link in a Desktop conversation points to a recognized local file target, selecting it opens the preview in the right-side panel. On Windows this supports `C:\\...` and `C:/...` drive paths, `\\\\server\\share\\...` UNC paths, and the corresponding Windows `file:` URLs. Cockpit checks a drive path before presenting an active link. It does not contact a UNC path merely to render the conversation; the first read occurs only after you select the link, and an unavailable share reports an error in the preview. Unsupported or unsafe destinations render as ordinary text instead of an active link. Previewing never executes the file.
+
+On the PWA, a changed image or other supported media file can be previewed from the diff even when it has no text diff. File previews also load images referenced by Markdown relative to that document. If a file link cannot be opened in the current view, selecting it shows why; unsupported binary files, permission restrictions, and size limits are explained instead of showing an empty preview.
+
+For `cockpit side-panel file <path>`, a relative path is resolved from the CLI command's working directory. A missing target returns `file_not_found` without changing the panel. Confirm the resolved path when the command runs in a subfolder.
 
 Desktop initially fits an image preview to the panel. Select the image to zoom to 2× around that point, and select it again to return to the fitted view. You can also use **Zoom in**, **Zoom out**, and **Fit to panel**, or press `+` / `=`, `-`, and `0` / Esc while the image is focused. A zoomed image scrolls inside the panel.
 

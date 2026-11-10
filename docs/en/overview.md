@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -52,13 +52,15 @@ The Crew list’s **…** menu supports renaming and opening settings, and the l
 
 A Crew's own session can inspect other Crews' settings, instructions, people, pending requests, and missions during automatic turns too. Strict mode refuses this in turns involving a member. Other Crews' chat history and credentials remain unavailable.
 
+Crew settings use separate **Discord** and **Slack** tabs under the connection tab; choose the chat before changing its connection or allowed people and places. The last selected chat is remembered. The **Who gets Ask DMs** choices show each owner's destination chat so you can distinguish Discord and Slack recipients.
+
 ### Connect to Slack
 
 On Desktop, choose Slack in the Crew’s connection settings and select **Connect to Slack**. Cockpit prepares the official Slack CLI in its own folder. Send the displayed line in a Slack channel or your own DM, allow the request in Slack, and paste Slack’s code into Cockpit. The line expires in about a minute; get a new one if it expires. Your workspace may require an administrator to approve the app. The PWA shows progress, but setup takes place on the computer.
 
 You can also connect manually. Use **Create the app with these settings**, then get the Bot OAuth token (`xoxb-`) from **Install App** and the App-Level token (`xapp-`, with `connections:write`) from **Basic Information** of the same app. Setup includes buttons to open these pages. Enable Socket Mode and enter both tokens in the dedicated fields. Do not paste tokens into a conversation.
 
-Finally, send the Crew a Slack DM and verify your user ID before confirming ownership. Invite it to channels with `/invite @name`. Mentions received before it joins can also reach it, subject to the same people and place permissions. On Discord, replying to the Crew’s own post also counts as a mention. The channel picker lists only channels the Crew can view; it hides channel names when Discord permissions cannot be checked.
+Finally, send the Crew a Slack DM and verify your user ID before confirming ownership. Invite it to channels with `/invite @name`. Mentions received before it joins can also reach it, subject to the same people and place permissions. On Discord, replying to the Crew’s own post or mentioning its own bot role also counts as a mention, subject to the same people and place permissions. When a Discord message is a reply, the Crew receives the referenced message when it can be fetched; unavailable references do not block delivery. The channel picker lists only channels the Crew can view; it hides channel names when Discord permissions cannot be checked.
 
 ### Choose when it responds to other people
 
@@ -70,7 +72,7 @@ In settings, save **Profile description** and choose **Include the owner's name*
 
 Before its first successful write, Cockpit reads the Discord description again. If the field is empty, it imports the existing text without owner lines. If it finds a different description, it holds the write: review the displayed text, decide what to keep, and save. A failed read also prevents writing. After the first successful write, Cockpit's text takes precedence; an edit in Developer Portal lasts only until the next write. Settings shows connection errors and retry guidance.
 
-On Desktop and the PWA, choose **Open in the app** or **Open on the web** on a post card to open its original Discord message. Discord posts can notify roles, `@everyone`, and `@here`. Grant the bot's role Discord's mention permission, or invite it again using the link in connection settings. Turns involving a member suppress mass notifications. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for the authority boundaries.
+On Desktop and the PWA, choose **Open in the app** or **Open on the web** on a sent or received message card to open its original Discord message. Discord posts can notify roles, `@everyone`, and `@here`. Grant the bot's role Discord's mention permission, or invite it again using the link in connection settings. Turns involving a member suppress mass notifications. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data) for the authority boundaries.
 
 Use `--interim` with `cockpit crew reply` or `post` to send progress while keeping the working indicator active. An ordinary reply stops that indicator. Discord receipt reactions are removed when the Crew replies or the turn ends.
 
@@ -78,7 +80,7 @@ Use `--interim` with `cockpit crew reply` or `post` to send progress while keepi
 
 Cockpit can write **Profile description**, including the owner’s name, to Slack apps it created. Slack allows 139 UTF-8 bytes for the app description and 300 for the agent description; longer text is truncated. A Japanese character usually takes about three bytes. For a manually connected app, copy the text to **Short description** under **Basic Information** and the description under **Agents & AI Apps** in Slack; Cockpit cannot write it automatically.
 
-Post cards on Desktop and the PWA can open the original Slack message. Slack posts can notify User Groups, `@here`, and `@channel`; turns involving a member suppress mass notifications.
+Sent and received message cards on Desktop and the PWA can open the original Slack message. Slack posts can notify User Groups, `@here`, and `@channel`; turns involving a member suppress mass notifications.
 
 Crews can post tables, charts, and cards to Discord and Slack. Supply structured content to `cockpit crew post` or `reply` with `--ui-file` or `--ui-stdin`. Conversion to images or messages differs by platform. See the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for supported formats and limits.
 
@@ -97,6 +99,8 @@ The owner can pause and resume a Mission, or mark it achieved or cancelled. A Cr
 ### Names, queue, and free limit
 
 Crew names are limited to 32 characters. **Send now** on a queued message interrupts the current work when supported. If the Crew is waiting for an approval or question, Cockpit asks before cancelling that pending request and sending the message. Stopped Crews keep queued messages until started.
+
+When a Crew is stopped at a usage limit, an owner message triggers one immediate attempt instead of waiting only for the reset. If capacity is still unavailable, the message stays in the Queue for the reset; this does not bypass the provider's usage limit. See [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for editing and sending queued messages.
 
 The free limit counts stopped Crews too. Existing Crews remain usable even if you already exceed the limit; it restricts new creation. Deleting a Crew frees its slot, but removes its settings and home as described below.
 

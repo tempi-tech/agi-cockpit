@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -29,6 +29,8 @@ The Desktop sidebar also shows pinned projects with no tasks. Empty projects are
 The **Device** filter in the Desktop task list shows only **This device** by default. Choose **All devices** or one device to inspect task summaries from another PC that uses the same Tailscale account and has Remote Access enabled. Cockpit must also be running on the other PC.
 
 Remote rows show the task name, instruction preview, state, pending Ask, agent, working folder, and time, and follow the current search, sort order, and agent filter. Select a row to open that device's PWA task detail in the Desktop work area. Confirm the displayed device name before reading the conversation, sending a message, answering an Ask, or stopping or completing the task. The remote row itself has no action menu.
+
+By default, tasks under each remote device are grouped by that device's project, falling back to their folder when no project is supplied. Crew children stay under their Crew; completed tasks remain in the device's single **Completed** section. In the Device menu, switch the grouping off for a flat list, or use `cockpit settings set taskList.otherDeviceGrouping none`; `project` restores the default. Collapsing a remote group is temporary. Older devices that cannot share Crews show an update notice; update Cockpit on that device to include them.
 
 Remote lists also include Crews and their child tasks. Crew rows show their avatar and state; hover for chat-connection status and the number of running child tasks. An unanswered Ask in a child also marks its Crew. The **Type** filter applies to remote rows too, and child tasks appear beneath their parent with **Show more** and **Collapse** when needed.
 
@@ -89,6 +91,8 @@ When the task board is empty, select **Continue where you left off** to scan up 
 ## Create and manage projects
 
 A project has a name and one or more folders. The first folder is primary: new tasks start there unless you select another folder in the project. A folder can belong to more than one project, and projects can share a name. Create and edit projects from **Settings → Projects**, **Project details** in a project menu or New task picker, **Manage projects** in the PWA, or `cockpit project`.
+
+The same project **…** menu is available in task-list headings, **Settings → Projects**, and the PWA project list. Pin projects there, including projects without tasks, or use `cockpit project pin <id|name>` and `cockpit project unpin <id|name>`. Settings and the PWA project list place pinned projects first, sorting each group by name. Pinned Crews also appear before unpinned Crews in Crew lists. Pins are shared between Desktop and the PWA.
 
 Project details can rename the project, add or remove folders, reorder them, and change the primary folder. Changes save immediately. A running agent receives the current folder set when its next session starts; reconnect a supported Native UI task when it must pick up the change now. Deleting a project removes only the grouping: its folders remain and its tasks move to **No project**.
 

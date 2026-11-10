@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.106.0 on 2026-10-16. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -208,6 +208,8 @@ A child entering or leaving approval waiting also appends a report with `approva
 
 After an `approvalEvent`, keep waiting for the result with `task wait <task-id> --since <seq>` using that notice's sequence. An exit notice into error or completion retains the previous nonterminal status; the ordinary result report carries the actual error or completion output. Use `task get` for current state. Fleet automatically skips approval notices and continues waiting for results.
 
+A Terminal task started with `--command` reports once when the command ends, with `exitCode` and the tail of its output. Idle output gaps do not report completion. A long-running server may therefore make `task run` or `task wait` time out normally; use `task get` for live output. The run is identified by `terminalCommandRunId` while active and `commandRunId` in its report. After an interrupted app session, the command may report an unknown exit code. Some shell commands cannot have their exit captured and report only when the terminal exits; see [Delegate And Wait](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task#delegate-and-wait-preferred) for shell and command restrictions.
+
 ## Send a follow-up
 
 Use `task send` after the task can accept another instruction. Add `--wait` when the next report is required in the same control flow.
@@ -219,6 +221,21 @@ cockpit task send <task-id> --text "Fix only the failing test and run it again" 
 ```
 
 Use `--stdin` or `--text-file` for multiline content. `--media` on `task send` follows the same count, size, local-file, and agent-support limits as creation. To send only Enter to an agent confirmation, run `cockpit task send <task-id>` with no text. Read `waitingReason` first so you know whether you are answering a question, approving a tool, or sending an ordinary follow-up.
+
+## Manage a Queue as the owner
+
+From a shell outside any task, the owner can list a task's Queue and edit, remove, or send an eligible message now:
+
+```bash
+cockpit task queue <task-id>
+cockpit task queue <task-id> edit <item-id> --text-file revised-message.txt
+cockpit task queue <task-id> remove <item-id>
+cockpit task queue <task-id> send-now <item-id>
+```
+
+Editing applies to messages from agents or Cockpit. Changed text is delivered as the owner's message, retaining attachments and the original sender label with **Edited by the owner**. Unchanged text retains its original authority. Edit your own queued messages in the app. Ask answers cannot be edited or removed; Discord and Slack messages cannot be edited or sent now. Removing a message does not notify its sender.
+
+Every task identity, including an ordinary owner task, a Crew, or its child task, is refused with `owner_only` (403). Agents cannot manage the Queue. `--host` is unsupported. During an approval or question wait, CLI **send-now** returns `queue_action_refused`; answer first, or use the app's confirmation to cancel the wait. See [task Reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task#queue) for eligibility and errors.
 
 ## Manage the turn and conversation from the CLI
 
