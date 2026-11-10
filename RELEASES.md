@@ -12,24 +12,24 @@ English is the primary language for these generated release notes. Download the 
 - Added right-click menus for copy, paste, and link actions.
 - Added project and folder grouping for tasks on other devices.
 - Added update guidance when an older device cannot share its Crews.
-- Unified project action menus in Settings.
-- Moved pinned projects and Crews to the top of lists.
+- Improved consistency of project action menus in Settings.
+- Changed lists to show pinned projects and Crews first.
 - Added chat tabs to Crew connection settings.
 - Added links from received Crew messages to their original chats.
 - Improved table splitting and row labels in Crew posts.
 - Fixed clipped axis labels in Crew charts.
-- Strengthened protection of pending Crew messages and approval DMs.
+- Improved protection of pending Crew messages and approval DMs.
 - Added handling of mentions of a Crew bot’s own Discord role.
 - Added each owner’s destination chat to Crew Ask notifications.
 - Changed Crews at a usage limit to try owner messages immediately.
 - Changed Cockpit Slack apps to appear online.
 - Added reply-target context for Crews receiving Discord replies.
 - Added editing, removal, and immediate sending of queued messages through agents and the CLI.
-- Standardized the Japanese name for Autorun as 自動実行.
+- Changed Japanese Autorun labels to use consistent terminology.
 - Improved changed-media previews and explanations for unavailable file previews on mobile.
 - Fixed relative file-panel paths to resolve from the command’s working folder.
-- Updated agent installation guidance for each operating system.
-- Made the primary sign-in button easier to distinguish from guest access.
+- Improved agent installation guidance for each operating system.
+- Improved the distinction between the primary sign-in button and guest access.
 - Fixed unresponsive notices at the top of the window.
 - Changed Terminal child tasks to report their result once, with the exit code.
 - Added bounded waits for remote CLI connections and responses.
