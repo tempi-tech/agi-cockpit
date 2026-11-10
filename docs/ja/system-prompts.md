@@ -6,7 +6,7 @@ Cockpit、Claude Code、Cowork、Codexなどの組み込みプリセットと、
 
 > AGI Cockpit 4.107.0で2026-10-16に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/system-prompts)
 
-システムプロンプトは、個別タスクの依頼より前に、エージェントの役割、判断基準、出力方針、作業規則を与える指示です。AGI Cockpitの標準プロンプトに加えて、用途別のカスタムプロンプトを登録し、新しいタスクやAutorunで選択できます。
+システムプロンプトは、個別タスクの依頼より前に、エージェントの役割、判断基準、出力方針、作業規則を与える指示です。AGI Cockpitの標準プロンプトに加えて、用途別のカスタムプロンプトを登録し、新しいタスクや自動実行で選択できます。
 
 ## タスクの依頼と区別する
 
@@ -39,7 +39,7 @@ cockpit settings set agents.systemPromptPreset.codex codex-friendly
 cockpit settings reset agents.systemPromptPreset.claude
 ```
 
-`reset`すると既定の**Cockpit**へ戻ります。設定変更は既存タスクや保存済みAutorunのランタイム設定を書き換えません。個別タスクだけ変更する場合は、作成時に`--system-prompt claude-code`や`--system-prompt codex-pragmatic`を指定します。
+`reset`すると既定の**Cockpit**へ戻ります。設定変更は既存タスクや保存済み自動実行のランタイム設定を書き換えません。個別タスクだけ変更する場合は、作成時に`--system-prompt claude-code`や`--system-prompt codex-pragmatic`を指定します。
 
 ## appendとreplaceを選ぶ
 
@@ -65,7 +65,7 @@ cockpit system-prompt list
 
 名前は選択肢として表示され、同名の既存プロンプトや組み込みプロンプトを上書きできません。内容は利用者所有のMarkdownとしてAGI Toolsのデータ領域に保存され、Cockpitの再配備では上書きされません。
 
-## タスクとAutorunで使う
+## タスクと自動実行で使う
 
 DesktopまたはPWAの新しいタスク画面で、対応エージェントを選ぶとシステムプロンプトの選択肢が表示されます。CLIでは`--system-prompt`を指定します。
 
@@ -76,7 +76,7 @@ cockpit autorun create --name "Daily review" --instruction "最近の変更を�
 
 新規タスクで選べるのはClaude、Codex、Qoder、CockpitのネイティブUIです。Cursor、Grok Build、Muse Code、Antigravity、Terminalと、各エージェントのターミナルUIでは選択できません。画面に選択欄が表示されない場合、そのエージェントと実行面では利用できません。
 
-Autorunは保存時のシステムプロンプト名をランタイム設定として保持します。プロンプトを削除したり対応条件が変わったりした場合、既存タスクの再開では標準プロンプトへ戻したことが表示され、Autorunは設定の再確認が必要になる場合があります。
+自動実行は保存時のシステムプロンプト名をランタイム設定として保持します。プロンプトを削除したり対応条件が変わったりした場合、既存タスクの再開では標準プロンプトへ戻したことが表示され、自動実行は設定の再確認が必要になる場合があります。
 
 ## Codexでカスタムシステムプロンプトを使う
 
@@ -91,7 +91,7 @@ Cockpitは、このプロンプトをCodexへdeveloper instructionsとして渡�
 
 カスタムプロンプトはCodexのプリセットに追加されるのではなく、プリセットの代わりに使われます。選択すると、**Codex (Friendly)**や**Codex (Pragmatic)**の`friendly`・`pragmatic` personalityは適用されません。応答のトーンを指定したい場合は、カスタムプロンプトの本文に書きます。
 
-SettingsのAgentsにあるエージェントごとの既定と`agents.systemPromptPreset.codex`で選べるのは、組み込みの**Cockpit**、**Codex (Friendly)**、**Codex (Pragmatic)**だけです。カスタムプロンプトはタスクやAutorunごとに選びます。Autorunでは`--ui-mode visual --system-prompt <name>`を指定します。
+SettingsのAgentsにあるエージェントごとの既定と`agents.systemPromptPreset.codex`で選べるのは、組み込みの**Cockpit**、**Codex (Friendly)**、**Codex (Pragmatic)**だけです。カスタムプロンプトはタスクや自動実行ごとに選びます。自動実行では`--ui-mode visual --system-prompt <name>`を指定します。
 
 CodexのターミナルUIではCockpitのシステムプロンプト選択を使えず、CLIも`--system-prompt`を拒否します。この場合はCodex CLI自身の指示と設定が適用されます。
 
@@ -107,6 +107,6 @@ CodexのターミナルUIではCockpitのシステムプロンプト選択を使
 cockpit system-prompt remove reviewer
 ```
 
-削除できるのは完全一致する名前のカスタムプロンプトだけです。組み込みプロンプトは削除できません。削除前に、新しいタスク、Autorun、既存タスクの再開で使われていないか確認してください。
+削除できるのは完全一致する名前のカスタムプロンプトだけです。組み込みプロンプトは削除できません。削除前に、新しいタスク、自動実行、既存タスクの再開で使われていないか確認してください。
 
 対応エージェント全体の比較は[エージェントとモデル](https://agi-labo.com/tools/cockpit/docs/agents-and-models)、正確なコマンド契約は[`cockpit system-prompt` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/system-prompt)、データ境界は[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)を参照してください。

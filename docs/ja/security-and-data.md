@@ -10,7 +10,7 @@ AGI Cockpitは、タスクとエージェントプロセスを利用者のコン
 
 ## ローカルに残るもの
 
-タスク状態、会話履歴、Autorun、Fleet、Cockpit Hooksの定義と実行履歴、テンプレート、CLIランタイム情報、ログなどCockpitの主要データは`~/.agi-tools/data/cockpit`配下に保存されます。添付やElectronのブラウザープロファイルなど一部データはOSのアプリデータ領域に保存されます。作業ファイルは選択したプロジェクト、一時フォルダ、Git Worktreeにあります。AntigravityのネイティブUIへ送る作業場所外の画像だけは、読み取り用の一時コピーも作業場所内へ置かれます。
+タスク状態、会話履歴、自動実行、Fleet、Cockpit Hooksの定義と実行履歴、テンプレート、CLIランタイム情報、ログなどCockpitの主要データは`~/.agi-tools/data/cockpit`配下に保存されます。添付やElectronのブラウザープロファイルなど一部データはOSのアプリデータ領域に保存されます。作業ファイルは選択したプロジェクト、一時フォルダ、Git Worktreeにあります。AntigravityのネイティブUIへ送る作業場所外の画像だけは、読み取り用の一時コピーも作業場所内へ置かれます。
 
 エージェントプロセスはその作業場所を読み書きします。Cockpit内に表示されていないファイルでも、選択した承認モードとエージェントの権限でアクセスできる場合があります。タスクへ必要なディレクトリだけを指定してください。
 
@@ -54,7 +54,7 @@ v4.127.0から、一時作業フォルダの削除では、管理用フォルダ
 
 新規タスク画面またはローカルCLIからスマートルーティングを実行すると、タスクの指示、ルーティング方針、利用可能なエージェント・モデル・推論レベル、候補ワークスペースの表示名・ローカルパス・種類を、認証済みのAGI Backendへ送って組み合わせを選びます。ファイル内容と添付内容はルーティング要求へ含めません。指示が空で添付だけがある場合は、添付のファイル名を指示の代わりに送ります。ローカルパスを外部へ送信したくない場合は、スマートルーティングをオフにして作業場所と実行条件を手動で選択してください。
 
-アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは、接続中のPWAまたは対応するリモートCLIコマンドに必要なタスク、Ask、Autorun、Fleet、Hook、アカウントの情報が転送されます。リモートのHooksコマンドは、接続先コンピューターへshell codeを登録・実行できます。
+アプリ内ブラウザーで開いたサイトには、入力、アップロード、Cookie、WebAuthnなど通常のブラウザー通信が発生します。Remote Accessでは、接続中のPWAまたは対応するリモートCLIコマンドに必要なタスク、Ask、自動実行、Fleet、Hook、アカウントの情報が転送されます。リモートのHooksコマンドは、接続先コンピューターへshell codeを登録・実行できます。
 
 PWAのCockpit Browser表示では、認証済みRemote Access接続へホストtabのviewport画像と限定したmetadataを送ります。task、割り当て済みBrowser Identity、session、tabの所属を要求ごとに検証し、一般browser RPC、storage、完全なURLは公開しません。画像は最大1280px・256KiBのJPEGへ制限し、ホストのディスクにもPWAのbrowser storageにも保存しません。PWAからのスクロールはホストページの位置を変更しますが、link、入力、送信は操作しません。
 
@@ -174,19 +174,19 @@ Crewは`--pressable-by`で、投稿全体または個別のボタンを押せる
 
 DiscordのチャンネルでCrewへメンションした人も、承認されるまで依頼は届きません。チャンネルの許可だけで全員が承認されるわけではありません。実行中のCrewへDiscordメッセージが割り込む場合は、元のターンと新しいメッセージのうち信頼度が低い方の権限を引き継ぎます。
 
-タスクをCrewにすると、会話とエージェントのセッションを保持し、子タスクを移し、Autorunの送信先もCrewへ変わります。この変換は元に戻せず、Crewを削除すると変換元のタスクも削除されます。対象条件と権限は[CrewのCLIリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/crew)を参照してください。
+タスクをCrewにすると、会話とエージェントのセッションを保持し、子タスクを移し、自動実行の送信先もCrewへ変わります。この変換は元に戻せず、Crewを削除すると変換元のタスクも削除されます。対象条件と権限は[CrewのCLIリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/crew)を参照してください。
 
 ## Browser Identityを分離する
 
 アプリ内ブラウザーは、通知、位置情報、クリップボードの読み取り・書き込みなどのサイト権限を、Cockpitの確認画面を出さずに既定で許可します。OSやWeb API側の制約は引き続き適用されます。カメラ・マイクを含むメディア取得、画面収録、全画面化、自動全画面化、外部アプリを開く権限、キーボードロック、旧式の同期クリップボード読み取りは拒否します。信頼できるサイトだけを開いてください。この方針はすべてのBrowser Identityに共通で、Identityの分離によってサイト権限が制限されるわけではありません。
 
-Browser IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証、ブラウザーセッションが永続領域へ保存されます。タスクには複数のIdentityと一つのプライマリIdentityを割り当てられ、各sessionは一つのIdentityに属します。エージェントは割り当て済みのIdentityだけを操作できます。Autorunは新規タスクの初期Identityを指定し、指定しない場合はDefault Identityを使います。
+Browser IdentityごとにCookie、キャッシュ、localStorage、権限、プロキシ認証、ブラウザーセッションが永続領域へ保存されます。タスクには複数のIdentityと一つのプライマリIdentityを割り当てられ、各sessionは一つのIdentityに属します。エージェントは割り当て済みのIdentityだけを操作できます。自動実行は新規タスクの初期Identityを指定し、指定しない場合はDefault Identityを使います。
 
 Chromeからの`import-session`は、表示中サイトのregistrable domainに属するCookieと、正確なoriginのlocalStorageを選択したIdentityへ取り込みます。sessionStorage、IndexedDB、拡張機能状態、device-bound認証、パスキー自体は取り込みません。
 
 macOSではBrave、Edge、Arc、Vivaldi、Opera、Firefoxも取込元に選べます。`cockpit browser import-sources`で候補を確認し、`--browser`と`--profile-id`で明示的に指定できます。取込元を省略すると、検出した各ブラウザーの優先profileのうち、最も最近使われたものを選びます。Chromium系ではCookieと正確なoriginのlocalStorage、FirefoxではCookieのみを取り込み、制限を結果に表示します。Chromium系はブラウザーごとに別のSafe Storage Keychain項目を使い、FirefoxのCookie取込はKeychainへアクセスしません。
 
-Identityのデータ消去はそのIdentityのセッションを閉じます。削除は永続データも削除します。実行中タスクやAutorunから参照されるIdentityは、置換先を指定しない限り削除できません。Default Identityは削除できません。
+Identityのデータ消去はそのIdentityのセッションを閉じます。削除は永続データも削除します。実行中タスクや自動実行から参照されるIdentityは、置換先を指定しない限り削除できません。Default Identityは削除できません。
 
 割り当てと削除の手順は[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)を参照してください。
 

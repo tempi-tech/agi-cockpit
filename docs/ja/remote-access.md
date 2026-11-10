@@ -98,7 +98,7 @@ PWAは同じ所有者のTailscale端末でもペアリングが必要です。�
 | --- | --- |
 | 受信箱 | 保留中のAskへ選択、自由入力、添付を含む回答を返し、Display通知を確認・クローズする |
 | タスク | タスクの作成、一覧と詳細の確認、追加指示または次のメッセージのキュー送信、権限や質問への回答、タスクパネルでの成果確認、完了、削除を行う |
-| 自動実行 | Autorunの作成、編集、有効化、今すぐ実行、削除、結果確認を行う |
+| 自動実行 | 自動実行の作成、編集、有効化、今すぐ実行、削除、結果確認を行う |
 
 PWAは、外出先や別の部屋から進行状況と判断待ちを確認するための操作面です。リモートアクセス自体の有効化、通信モード、HTTPS証明書はDesktopで設定します。Desktopにあるすべての設定画面や結果表示がPWAにもあるわけではありません。
 
@@ -140,7 +140,7 @@ PWA上部の接続先を選び、「ホストのアップデート」を開き�
 
 複数のコンピューターでリモートアクセスを有効にしている場合、PWA上部の接続先を選ぶと、Tailscale上で検出できたほかのCockpitを確認できます。「開く」で別の接続先へ移動し、「再検出」で一覧を更新します。
 
-各Cockpitは独立した接続先です。切り替えても、タスク、Autorun、設定、作業ファイルがコンピューター間で統合または移動することはありません。
+各Cockpitは独立した接続先です。切り替えても、タスク、自動実行、設定、作業ファイルがコンピューター間で統合または移動することはありません。
 
 ## ローカルWi-Fiで接続する
 
@@ -218,7 +218,7 @@ Tailscale本体は動作していても、CockpitがTailscale CLIの状態を取
 
 - 通常は「Tailscale限定」とHTTPSを利用します。
 - Tailscaleのアクセス制御では、Cockpitへ接続できる端末と利用者だけを許可します。
-- PWAからはタスクの指示、Askへの回答、Autorunの変更などを実行できます。接続済み端末をロックし、共有端末には認証情報を残さないでください。
+- PWAからはタスクの指示、Askへの回答、自動実行の変更などを実行できます。接続済み端末をロックし、共有端末には認証情報を残さないでください。
 - HTTPS証明書を取得する前に、公開ログへ記録されてもよい端末名か確認します。
 - ローカルWi-Fi接続は暗号化されません。必要な時間とネットワークに限定し、使い終わったらオフにします。
 
@@ -228,5 +228,5 @@ Tailscale本体は動作していても、CockpitがTailscale CLIの状態を取
 - [タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)
 - [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
 - [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
-- [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- [自動実行](https://agi-labo.com/tools/cockpit/docs/autorun)
 - [cockpit CLI](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)

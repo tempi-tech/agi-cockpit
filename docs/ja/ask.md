@@ -240,4 +240,4 @@ DesktopでDiscordのプロフィールやチャンネルへのリンクを開く
 ## 関連ページ
 
 - [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
-- [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- [自動実行](https://agi-labo.com/tools/cockpit/docs/autorun)

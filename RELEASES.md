@@ -139,13 +139,13 @@ English is the primary language for these generated release notes. Download the 
 - モデルが利用できない場合、対応するタスクで既定モデルに切り替えられるようになりました。
 - Codexのモデルを未指定の場合、Codex自身の既定モデルを使うようにしました。
 - Codexのconfig.tomlに service_tier = "priority" または "fast" がある場合も、CockpitでFastを選ぶまでは標準速度で動くようにしました。
-- ゲストがAutorunを利用しようとした場合、会員向け機能であることを案内するようにしました。
+- ゲストが自動実行を利用しようとした場合、会員向け機能であることを案内するようにしました。
 - 新規タスク画面で承認モードのメニュー見出しが隠れる問題を修正しました。
-- Autorun、フォルダ作成、スキル参照で、末尾の空白を含むフォルダ名を正しく扱うようにしました。
+- 自動実行、フォルダ作成、スキル参照で、末尾の空白を含むフォルダ名を正しく扱うようにしました。
 - 日本語のパスを含むWorktreeを削除できるようにしました。
 - Worktree削除時に元のリポジトリや未登録のフォルダを誤って削除しないよう、安全確認を強化しました。
 - CLIからAGIラボへのサインインを開始できるようになりました。
-- CLIでAutorunの指示をファイルや標準入力から渡せるようになりました。
+- CLIで自動実行の指示をファイルや標準入力から渡せるようになりました。
 - CLIの日付やエラー、接続先の出力をBashとPowerShellで揃えました。
 - PowerShellのシステムプロンプト追加で、先頭が「--」の指示を渡せるようにしました。
 - CLIで作業場所を登録・作成・整理するとき、末尾に空白を含むフォルダ名を正しく扱うようにしました。
@@ -203,7 +203,7 @@ English is the primary language for these generated release notes. Download the 
 - Crewの返信待ちが終わった場所では、入力中の表示を終了するようにしました。
 - 回答済み・終了済みのAskをCrewがDiscordのDMから削除できるようになりました。
 - 終了したMissionに残る確認待ちのAskを閉じるようにしました。
-- Autorunの送信先を変更したとき、以前のMissionの最終活動日時が更新される問題を修正しました。
+- 自動実行の送信先を変更したとき、以前のMissionの最終活動日時が更新される問題を修正しました。
 - 作業場所で絞り込んだCrewの会話が繰り返し読み込まれる問題を修正しました。
 - 通常のタスクの作業場所にCrewのホームが自動で選ばれる問題を修正しました。
 - Discord接続の状態表示と、スリープ復帰後の再接続を改善しました。
@@ -295,7 +295,7 @@ English is the primary language for these generated release notes. Download the 
 - Crewが接続を失っている間に届いたDiscordメッセージを、復旧後に取り込むようになりました。
 - HTML画面内のファイルリンクをサイドパネルで開けるようになりました。
 - 更新可能なClaudeアカウントが期限切れと表示され、選べなくなる問題を修正しました。
-- Autorunの時刻設定を変更すると、次回実行時刻を再計算するようになりました。
+- 自動実行の時刻設定を変更すると、次回実行時刻を再計算するようになりました。
 - 別のタスクのログ更新によって、会話ログの反映が遅れる問題を修正しました。
 - CLIのAsk添付がファイルIPC接続でもアップロードできるようになりました。
 - 待機中のエージェントを停止し、タスクを表示するだけで起動しないようにしてメモリ使用量を抑えました。
@@ -544,7 +544,7 @@ English is the primary language for these generated release notes. Download the 
 - 役割や記憶を持って継続的に働く「クルー」をアルファ版として追加しました。
 - クルーにDiscordを接続し、許可した人からの依頼を受けて返信できるようになりました。
 - クルーが定期的に作業状況を確認する機能を追加しました。
-- Autorunからクルーへ定期的に依頼を送れるようになりました。
+- 自動実行からクルーへ定期的に依頼を送れるようになりました。
 - スマートフォンのPWAからクルーの会話や設定を操作できるようになりました。
 - タスク一覧をタスク・クルーの種類で絞り込めるようになりました。
 - タスク一覧で複数のエージェントをまとめて絞り込めるようになりました。
@@ -1232,7 +1232,7 @@ English is the primary language for these generated release notes. Download the 
 - Desktopのタスク一覧でAskへの回答待ちを確認できるようにしました
 - チャットで選択した文章の横から引用できるようにしました
 - メッセージの送信日時を「たった今」「昨日」など分かりやすく表示するようにしました
-- Autorunの実行予定を分かりやすい言葉で表示するようにしました
+- 自動実行の実行予定を分かりやすい言葉で表示するようにしました
 - 内容がないサイドパネルのタブを非表示にしました
 - Default/Planの操作モード選択を廃止しました。計画はメッセージで依頼できます
 - 音声入力の録音・文字起こし中に送信されないようにしました
@@ -1335,7 +1335,7 @@ English is the primary language for these generated release notes. Download the 
 
 - Askで選択肢と補足の自由文を一緒に回答できるようにしました
 - Askで各質問への回答と全体への返信を一緒に送れるようにしました
-- Autorunで毎日・毎週・毎月の実行予定を簡単に設定できるようにしました
+- 自動実行で毎日・毎週・毎月の実行予定を簡単に設定できるようにしました
 - 未確認のHTML Surfaceを表示し、最新の成果をすぐに開けるようにしました
 - PWAでFleetの進捗・依存関係・各ステップの詳細を確認できるようにしました
 - PWAのタスク一覧をプロジェクトごとに折りたためるようにしました
@@ -1715,7 +1715,7 @@ English is the primary language for these generated release notes. Download the 
 - macOSで起動時や終了時にアプリが応答しにくくなる問題を改善しました
 - 長いチャットを開いているときの操作の遅延を改善しました
 - Codexのクレジット残高不足をアカウントの利用制限として正しく認識するように修正しました
-- Autorunの実行先選択でラベルが折り返されてはみ出す問題を修正しました
+- 自動実行の実行先選択でラベルが折り返されてはみ出す問題を修正しました
 
 </details>
 
@@ -1733,7 +1733,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Autorunの実行先タスクを名前やタスクIDで検索できるようになりました
+- 自動実行の実行先タスクを名前やタスクIDで検索できるようになりました
 - 使用量一覧で各利用枠の残量をリング表示で確認できるようになりました
 - 使用量一覧に利用枠のリセットまでの残り時間を表示するようになりました
 - ビジュアルモードのキューメッセージを、直前の応答完了後に独立したターンとして送信するように改善しました
@@ -1792,7 +1792,7 @@ English is the primary language for these generated release notes. Download the 
 - Antigravity、Cursor、Qoderで、/compactによる会話コンテキストの圧縮に対応しました
 - モデル一覧の取得元や取得状況を確認し、一覧を再読み込みできるようになりました
 - 新しいモデルの利用に必要なエージェントCLIの更新を案内し、デスクトップから更新できるようになりました
-- オートランの保存時に、選択したモデルと推論レベルが利用可能かを確認するようになりました
+- 自動実行の保存時に、選択したモデルと推論レベルが利用可能かを確認するようになりました
 - PWAのペアリングや再接続後に、画面の高さや入力欄の位置が崩れる問題を修正しました
 - macOSのホットキーで選択テキストを取得する際、修飾キーを離してからコピーするように改善しました
 
@@ -1809,8 +1809,8 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Cockpit Agentで、接続中のプロバイダーが対応するモデルと推論レベルを新規タスクやオートランへ正しく反映するように改善
-- Codexで、選択中のアカウントが利用できる最新のモデルを新規タスク、タスク設定、オートランから選べるように改善
+- Cockpit Agentで、接続中のプロバイダーが対応するモデルと推論レベルを新規タスクや自動実行へ正しく反映するように改善
+- Codexで、選択中のアカウントが利用できる最新のモデルを新規タスク、タスク設定、自動実行から選べるように改善
 - cockpit task createとtask runで応答が失われても作成済みタスクを照合し、重複作成を防ぐように改善
 
 </details>
@@ -1997,13 +1997,13 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Cockpit Hooksでタスク、Ask、Autorun、Fleet、アプリ、ホットキーのイベントからコマンドを自動実行できるように対応
+- Cockpit Hooksでタスク、Ask、自動実行、Fleet、アプリ、ホットキーのイベントからコマンドを実行できるように対応
 - 設定画面からCockpit Hooksの有効化、無効化、実行履歴の確認、削除を行えるように対応
 - Fleetの実行状況を進捗バーで確認し、ゲートの終了コードや承認結果を詳細画面で確認できるように改善
 - Fleet定義の読み込みエラーに原因、対象パス、ファイルを開く操作、再読み込み操作を表示するように改善
 - 別のタスクへ切り替えた後に届いたVisual Runtimeのエラーや入力内容が、元のタスクへ正しく保持されるように修正
 - 空のセッションでも各エージェントに対応するモデル一覧を表示し、遅れて届いた一覧で選択中のモデルが戻らないように修正
-- PWAのAutorun作成・更新が失敗したとき、ダイアログを閉じずに理由と必要な案内を表示するように改善
+- PWAで自動実行の作成・更新が失敗したとき、ダイアログを閉じずに理由と必要な案内を表示するように改善
 - PWAのAsk画像を横に動かしたときにRemoteタブが意図せず切り替わる問題を修正
 - アプリの表示言語に合わせてCockpit CLIのエラーメッセージを表示するように改善
 - type: moduleを使用するプロジェクトでもCockpit CLIの内部通信を正しく起動できるように修正
@@ -2076,7 +2076,7 @@ English is the primary language for these generated release notes. Download the 
 - アプリ内ブラウザーでTouch IDに一致するパスキーがない場合に理由と代替手段を表示するように改善
 - 回答中のFollow-upをキュー待機または現在の回答への割り込みから選べる設定を追加
 - 送信待ちのキューメッセージを編集できるように改善
-- 新規タスクを作るAutorunで、実行終了後に作成したタスクを自動的に完了できるオプションを追加
+- 新規タスクを作る自動実行で、実行終了後に作成したタスクを自動的に完了できるオプションを追加
 
 </details>
 
@@ -2121,7 +2121,7 @@ English is the primary language for these generated release notes. Download the 
 - Fleetのコマンドゲートが一時的な失敗を自動再試行するように改善
 - 並列ツール実行の一部が失敗した場合に失敗件数を表示するように改善
 - アップデーターの診断ログを保存し、インストールが応答しない場合を検知して再試行するように改善
-- ログイン済みでもセッション更新の競合でAutorun管理が失敗する問題を修正
+- ログイン済みでもセッション更新の競合で自動実行の管理が失敗する問題を修正
 - Codexのワークスペースクレジット枯渇を検出し、Autoアカウントで復旧できるように改善
 - Antigravityの利用枠とアカウント情報を正しい認証情報と最新の観測結果から表示するように修正
 - Cursor Visualのコンテキスト使用量を正しく表示するように修正
@@ -2229,7 +2229,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Antigravityで複数アカウントを登録し、タスクやAutorunで自動選択・切り替えできるように
+- Antigravityで複数アカウントを登録し、タスクや自動実行で自動選択・切り替えできるように
 - Talk Roomに後から参加したエージェントの通知をメンションのみにし、参加者ごとの通知設定を表示するように
 - 複数ペインを開いているとき、Escキーがフォーカス中のペインのタスクだけを停止するように修正
 - Fleetのループ内で失敗したノードを、完了済みの成果を保持したまま再試行できるように
@@ -2313,7 +2313,7 @@ English is the primary language for these generated release notes. Download the 
 - Talk Roomの新しいメッセージが、ターンを終えた参加者を起こして内容を届けるように
 - Fleetのretryとresumeで、保存済みの実行設定を--unsetで解除できるように
 - Autoアカウントがプラン制限の応答を検知し、利用可能な別アカウントへ切り替えるように
-- Autorunで、前回作成したタスクが未完了でも次回のスケジュールを実行するように
+- 自動実行で、前回作成したタスクが未完了でも次回のスケジュールを実行するように
 - Antigravity Visualで、agy 1.1.15以降にメッセージを送信できない問題を修正
 - Grok Visualで、MCPツール単体の失敗によってタスク全体が終了する問題を修正
 - Grok Visualで、長時間のツール更新によって会話履歴が失われる問題を修正
@@ -2367,7 +2367,7 @@ English is the primary language for these generated release notes. Download the 
 - 使用量パネルにQoderのアカウントメールを表示するように
 - タスク一覧の「さらに表示」と子タスクを20件ずつ展開するように
 - タスクのAskが途中で見えなくならないよう、未回答のAskを再表示するように
-- Autorunが予定より早くタイマー発火しても、その回の実行を飛ばさないように修正
+- 自動実行が予定より早くタイマー発火しても、その回の実行を飛ばさないように修正
 - Fleetのretryで付与する反復回数がRunの上限を超えないように制限
 
 </details>
@@ -2475,10 +2475,10 @@ English is the primary language for these generated release notes. Download the 
 - WindowsのGit Bashからcockpit task sendで日本語や複数行の指示を正しく送れるように
 - FleetのコマンドGateで、アプリ起動環境にかかわらずログインシェルのPATHを利用するように修正
 - macOSのMission ControlやSpaces切替後も、アプリ内ブラウザーが他の画面へ残らないように修正
-- オートランで、アプリ停止中に逃した実行を24時間以内なら1回だけ補完するように
-- オートランの前回結果・前回タスク・未実行や失敗の理由をDesktop、PWA、CLIで確認できるように
-- オートランで対応が必要な未実行や失敗をDesktop通知で知らせるように
-- オートランを、macOSで全ウィンドウを閉じた後も動作させ、スリープ復帰時に次回実行を再設定するように
+- 自動実行で、アプリ停止中に逃した実行を24時間以内なら1回だけ補完するように
+- 自動実行の前回結果・前回タスク・未実行や失敗の理由をDesktop、PWA、CLIで確認できるように
+- 自動実行で対応が必要な未実行や失敗をDesktop通知で知らせるように
+- 自動実行を、macOSで全ウィンドウを閉じた後も動作させ、スリープ復帰時に次回実行を再設定するように
 - タスク一覧・オーバービュー・右サイドパネルの横レイアウトが、幅変更時にもずれないように修正
 - ネイティブUIの再開済み会話で、復元メッセージの完了順序が前後しないように修正
 - Fleetの一覧を簡潔化し、実行状態・未読結果・操作メニューを1行で確認できるように
@@ -2487,7 +2487,7 @@ English is the primary language for these generated release notes. Download the 
 - Fleetフローをコンパクトにし、エージェント・Gate・ループを形と状態で区別しやすく
 - 多数のタスクが更新される環境で状態保存の負荷を抑え、書き込み失敗から安全に回復するように
 - Claude、Codex、Qoder、Cockpit Agent向けのカスタムシステムプロンプトを登録・選択できるように
-- オートランから、新規タスク作成に加えて既存タスクへ指示を送信できるように
+- 自動実行から、新規タスク作成に加えて既存タスクへ指示を送信できるように
 - Fleetノードの結果をJSON Schemaで検証し、後続ノード・Gate・ループで構造化データとして利用できるように
 - Fleetの回数制限付きループで、上限到達時に最終判定ノードへ処理を引き継げるように
 - Fleetのループで同じエージェントセッションを継続し、反復ごとのフォローアップ指示を送れるように
@@ -2533,10 +2533,10 @@ English is the primary language for these generated release notes. Download the 
 - Cockpit CLIから、リモートアクセスを設定・操作できるように
 - Cockpit CLIから、アップデートの確認・ダウンロード・インストールができるように
 - Cockpit CLIから、CLIと組み込みスキルのセットアップを確認・管理できるように
-- Cockpit CLIから、設定・使用状況・リモートアクセス・オートランの各画面を直接開けるように
+- Cockpit CLIから、設定・使用状況・リモートアクセス・自動実行の各画面を直接開けるように
 - Fleetで、実行時の引数に応じてノードを安全に除外できる enabled / excluded 機構を追加
 - 利用上限で停止したタスクを失敗扱いにせず、別アカウントへ切り替えて再開できるように
-- タスク・Fleet・オートランで、利用状況に応じてログイン済みアカウントを自動選択するAutoを追加
+- タスク・Fleet・自動実行で、利用状況に応じてログイン済みアカウントを自動選択するAutoを追加
 - Autoで選択したアカウントが利用上限に達した際、別アカウントへ自動切り替えして処理を続行するように
 - Grokビジュアルで、対応モデルの推論レベルを選べるように
 - 新しいGrokビジュアルタスクの既定モデルをGrok 4.6、既定の推論レベルをxhighに更新
@@ -2655,7 +2655,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Grok Build、Cursor、Qoderでも複数のアカウントプロファイルを作成し、タスク・Autorun・Fleetごとに選択または切り替えられるように
+- Grok Build、Cursor、Qoderでも複数のアカウントプロファイルを作成し、タスク・自動実行・Fleetごとに選択または切り替えられるように
 - Fleetに、終了条件を満たすまで処理を繰り返せる回数制限付きループを追加
 - Fleet内のエージェントが確認を求めた際、回答前にノードが完了扱いになる問題を修正
 - Fleetで無効なモデル・推論レベル・サービスティアを実行前に正しく検出できるように改善
@@ -2689,7 +2689,7 @@ English is the primary language for these generated release notes. Download the 
 - 新機能Fleetと、Fleetの設計・実行を支援するFleetスキルを追加
 - ヘルプメニューから、プロンプトや認証情報を含まない安全な診断データをエクスポートできるように
 - Qoderの使用量を、他のエージェントと同じ画面で確認できるように
-- 有効なオートランを一覧の先頭に表示し、実行中の設定を見つけやすく改善
+- 有効な自動実行を一覧の先頭に表示し、実行中の設定を見つけやすく改善
 - Codexのモデル一覧がタスク作成前に読み込まれず、最新モデルを選べないことがある問題を修正
 - Claudeのコンテキスト圧縮時に、長い処理がタイムアウトしてタスクが失敗する問題を修正
 - Grokのネイティブ認証が利用可能でも、誤ってAPIキー認証が選ばれる問題を修正
@@ -2734,7 +2734,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Qoderをタスクとオートランで利用できるエージェントとして追加
+- Qoderをタスクと自動実行で利用できるエージェントとして追加
 - タスク一覧・作業エリア・設定操作を3列に整理し、主要な情報と操作へアクセスしやすい画面構成に刷新
 - ファイルプレビューから、プロジェクト外を含むテキストファイルを直接編集・自動保存できるように
 - タスク作成画面で利用可能なエージェントだけを表示するように改善
@@ -2784,7 +2784,7 @@ English is the primary language for these generated release notes. Download the 
 <summary>日本語のリリースノート</summary>
 
 - 起動済みのAndroidエミュレーター・Android実機・iOS Simulatorをタスクに接続し、画面の確認と操作をエージェントに任せられるApp Surfaceを追加
-- タスクやAutorunごとに独立したBrowser Identityを割り当て、ログイン状態とサイトデータを分離できるように対応
+- タスクや自動実行ごとに独立したBrowser Identityを割り当て、ログイン状態とサイトデータを分離できるように対応
 - Browser Identityを設定画面とCLIから作成・編集・消去・削除できるように対応
 - アプリ内ブラウザーのクリック後にURL、表示テキスト、要素状態、通信結果を待って検証できるように対応
 - HTML Surfaceの全画面表示で操作ボタンをクリックできない問題を修正
@@ -2825,7 +2825,7 @@ English is the primary language for these generated release notes. Download the 
 - アプリ内ブラウザーのサイドパネルをリサイズする領域をつかみやすく改善
 - アップデート確認で一時的な通信エラーを再試行し、失敗理由と手動更新の案内を表示するように改善
 - サインインや会員資格の更新後にリモートアクセスが復旧しない問題を修正
-- 認証切れや一時的な会員資格確認エラーでAutorunが不適切に停止する問題を修正
+- 認証切れや一時的な会員資格確認エラーで自動実行が不適切に停止する問題を修正
 - CursorのVisualタスクを再開した際に履歴が正しく復元されない問題を修正
 - Grok BuildのVisualタスクを再開した際に履歴や進行中のワークフローが正しく復元されない問題を修正
 
@@ -2885,19 +2885,19 @@ English is the primary language for these generated release notes. Download the 
 <summary>日本語のリリースノート</summary>
 
 - チャット詳細のテキストコピーを安定化
-- Autorunごとにモデル・推論レベル・service tier・system prompt・承認モード・アカウントを固定し、Desktop・PWA・CLIから確認・編集できるように対応
+- 自動実行ごとにモデル・推論レベル・service tier・system prompt・承認モード・アカウントを固定し、Desktop・PWA・CLIから確認・編集できるように対応
 - タスクへテキスト・ソースコード・JSON・CSV・PDF・音声・動画・Office文書を安全に添付できるように対応
 - Askの回答へテキスト・ソースコード・JSON・CSV・PDF・音声・動画・Office文書を安全に添付できるように対応
 - 選択したチャット本文を引用として入力欄へ追加できるように対応
 - ターミナルを右サイドパネルの独立したワークスペースへ統合
 - タスク間メッセージに送信元タスクを表示し、送信元へ移動できるように対応
 - 履歴ダッシュボードをゲスト利用でも開けるように変更
-- エージェントごとの対応設定をDesktop・PWA・CLI・Autorunで統一し、非対応の組み合わせを作成前に案内するよう改善
+- エージェントごとの対応設定をDesktop・PWA・CLI・自動実行で統一し、非対応の組み合わせを作成前に案内するよう改善
 - WindowsでCodex CLIの検出とインストールが失敗する場合がある問題を修正
 - アップデート画面で言語に合ったリリースノートとダウンロード先を表示するように改善
 - ローカルWi-Fiの非暗号化接続に明示確認と常時警告を追加
 - HTTPS証明書を利用できない場合にHTTPへ自動降格しないように変更
-- Autorunの会員資格をDesktop・PWA・CLI・API・スケジュール実行時に確認するように変更
+- 自動実行の会員資格をDesktop・PWA・CLI・API・スケジュール実行時に確認するように変更
 - タスク更新中もチャット本文の選択範囲を維持するように修正
 - HTML Surfaceの切り替えをサイドパネルのヘッダーに維持するように修正
 
@@ -3115,7 +3115,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- Codexで複数アカウントを登録し、タスク作成時・実行中・オートランで使い分けられるように
+- Codexで複数アカウントを登録し、タスク作成時・実行中・自動実行で使い分けられるように
 - 利用状況画面でCodexのアカウント別使用量とCursorの使用量を確認でき、一覧性も向上
 - Grok Buildのコンテキスト使用量とバックグラウンド処理を表示し、ツール実行の内容を読み取りやすく改善
 - PWAからGrok Buildへメッセージを送信できるようにし、コピー操作の安定性も改善
@@ -3303,8 +3303,8 @@ English is the primary language for these generated release notes. Download the 
 - cockpit CLI からタスク作成時にモデルと推論エフォートを指定し、タスク情報から確認できるように
 - ヘッダーに戻る・進むボタンを追加し、タスク間の移動履歴をたどれるように
 - Claude Code / Codex の外部セッションを Cockpit のタスクとして取り込めるように
-- オートランを PWA や cockpit CLI からリモート操作できるように
-- オートランに Claude アカウントプロファイルを指定できるように
+- 自動実行を PWA や cockpit CLI からリモート操作できるように
+- 自動実行に Claude アカウントプロファイルを指定できるように
 - PWA のタスク作成とメッセージ送信をデスクトップ版と同等機能に拡張（モデル・エフォート・承認モード・ブランチ・プロファイル・スキル等）
 - PWA に最新指示バーを追加し、リモートタスク表示へジャンプできるように
 - Codex Visual: GPT-5.6 モデルで Fast フォールバックに対応
@@ -3744,7 +3744,7 @@ English is the primary language for these generated release notes. Download the 
 - PWAからCreative Studioの生成物をレビューできるように
 - Creative Studio関連のcockpit CLI操作を追加
 - Claude Codeの信頼確認ダイアログ検出を改善
-- オートランの一回実行日時編集を修正
+- 自動実行の一回実行日時編集を修正
 - cockpit displayコマンドのヘルプ表示を改善
 
 </details>
@@ -4125,7 +4125,7 @@ English is the primary language for these generated release notes. Download the 
 
 - PWAでタスクを長押しした時の動作を改善
 - PWAでのタスク表示幅を最適化
-- Autorun バッジ表示を簡素化
+- 自動実行バッジ表示を簡素化
 - PWA の不具合を複数修正（子タスクレールのスクロール、git サマリーの重複表示、長いインラインコードの折り返し）
 
 </details>
@@ -4271,7 +4271,7 @@ English is the primary language for these generated release notes. Download the 
 - フォーカスモードでタスクをピン留めできるように
 - Codex がアイドル状態のときに結果が報告されない問題を修正
 - ステータス再生時に同じ報告が重複する問題を修正
-- Autorun を AGI Cockpit 起動中のみ動作するように変更（OS スケジューラ登録を廃止）
+- 自動実行を AGI Cockpit 起動中のみ動作するように変更（OS スケジューラ登録を廃止）
 
 </details>
 
@@ -4291,10 +4291,10 @@ English is the primary language for these generated release notes. Download the 
 <summary>日本語のリリースノート</summary>
 
 - タスク作成画面を刷新
-- Autorun で Visual / Terminal モード選択に対応
-- Visual mode の Autorun が正しく起動・完了判定されない問題を修正
-- Autorun が AGI Cockpit 終了後も OS スケジューラから起動してしまう問題を修正
-- Autorun 実行時に AGI Cockpit が前面へ移動してしまう問題を修正
+- 自動実行で Visual / Terminal モード選択に対応
+- Visual mode の自動実行が正しく起動・完了判定されない問題を修正
+- 自動実行が AGI Cockpit 終了後も OS スケジューラから起動してしまう問題を修正
+- 自動実行の実行時に AGI Cockpit が前面へ移動してしまう問題を修正
 - フォーカスモードの注目ランクに自動実行バッジを表示
 - チャット内のプラグイン由来スキルチップをクリック可能に
 
@@ -4638,7 +4638,7 @@ English is the primary language for these generated release notes. Download the 
 - タスクカードのホバープレビューを追加
 - PWA askのURLをクリッカブルに
 - ヘッダードラッグ領域の修正
-- オートランのマスターエージェント表示を修正
+- 自動実行のマスターエージェント表示を修正
 
 </details>
 
@@ -4779,7 +4779,7 @@ English is the primary language for these generated release notes. Download the 
 - PWAにask確認タブを追加し、保留中の確認リクエストへモバイルから応答可能に改善
 - askダイアログにタスクタイトルと起動ディレクトリ名を表示し、確認内容の文脈を強化
 - cockpit CLIがruntime情報を自動解決するようになり、master agent外のshellからask/autorun系コマンドを実行可能に改善
-- PWAでもautorun実行タスクを通常タスク一覧へ統合し、desktop Kanbanと表示構成を統一
+- PWAでも自動実行タスクを通常タスク一覧へ統合し、desktop Kanbanと表示構成を統一
 
 </details>
 
@@ -4807,8 +4807,8 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- autorunタスクを右側の専用リストからメインKanbanボードへ統合
-- autorunタスクに自動実行バッジを追加し、進行中・完了タスク上で識別しやすく改善
+- 自動実行タスクを右側の専用リストからメインKanbanボードへ統合
+- 自動実行タスクに自動実行バッジを追加し、進行中・完了タスク上で識別しやすく改善
 - インストール版でClaude usage取得がPATHや初回trust promptの影響で失敗する問題を修正
 
 </details>
@@ -4903,7 +4903,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- autorunで作成されたタスクに名前が引き継がれないバグを修正
+- 自動実行で作成されたタスクに名前が引き継がれないバグを修正
 
 </details>
 
@@ -5012,7 +5012,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- アプリ再起動・OS復帰時にautorunが重複発火する問題を修正
+- アプリ再起動・OS復帰時に自動実行が重複発火する問題を修正
 
 </details>
 
@@ -5028,8 +5028,8 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- autorun無限スポーン防止（実行ロックの導入）
-- autorunのenabled チェック・ロック安全性・once タイプのクリーンアップを強化
+- 自動実行の無限スポーン防止（実行ロックの導入）
+- 自動実行のenabled チェック・ロック安全性・once タイプのクリーンアップを強化
 - 手動キル時のロックリーク修正
 - 設定パネルにCLIコマンドインストールボタンを追加
 
@@ -5178,7 +5178,7 @@ English is the primary language for these generated release notes. Download the 
 - 包括的なWindows対応の改善
 - Windows PATH修正（EncodedCommandによるcmd.exeのクォート問題回避）
 - レジストリからWindowsのPATHを取得して確実にツールを検出
-- autorun重複実行防止のガードを追加
+- 自動実行の重複実行防止のガードを追加
 
 </details>
 
@@ -5193,7 +5193,7 @@ English is the primary language for these generated release notes. Download the 
 <details>
 <summary>日本語のリリースノート</summary>
 
-- autorunでのマスターエージェントサポート
+- 自動実行でのマスターエージェントサポート
 - task list に isYou マーカーを追加
 - WindowsターミナルをPowerShellに切り替え
 
@@ -5314,7 +5314,7 @@ English is the primary language for these generated release notes. Download the 
 - memory.mdによるセッション横断の永続メモ
 - エージェント別のKanbanカードラベルカラー
 - タスク作成UXの改善（ディレクトリ選択・説明入力）
-- マスター/タスク/autorunのナビゲーション分離
+- マスター/タスク/自動実行のナビゲーション分離
 - タスク作成時のデフォルトエージェント自動適用
 
 </details>

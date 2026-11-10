@@ -2,7 +2,7 @@
 
 # Browser Identity
 
-ブラウザーのログイン状態をIdentityごとに分離し、タスクとAutorunへ割り当て、取込・消去・削除する方法です。
+ブラウザーのログイン状態をIdentityごとに分離し、タスクと自動実行へ割り当て、取込・消去・削除する方法です。
 
 > AGI Cockpit 4.93.0で2026-09-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser-identities)
 
@@ -24,7 +24,7 @@ popupとOAuth windowは親タブのIdentityを引き継ぎます。別のIdentit
 
 ## Default Identity
 
-Identityを明示しないタスクとAutorunはDefault Identityを使います。Defaultは従来の`persist:in-app-browser`領域と既存のログイン状態を維持します。
+Identityを明示しないタスクと自動実行はDefault Identityを使います。Defaultは従来の`persist:in-app-browser`領域と既存のログイン状態を維持します。
 
 Default Identityは名前と色を確認できますが、削除できません。ログインなしの公開状態を検証する場合は、DefaultのCookieを消すのではなく、専用の空のIdentityを作る方が安全です。
 
@@ -46,7 +46,7 @@ cockpit browser identity create --name work --color "#3B82F6" --json
 cockpit browser identity update work --name client-a --color "#8B5CF6" --json
 ```
 
-`list`は使用数を返し、すべて、使用中、未使用で絞り込めます。`get`と`usages`はIdentityのmetadata、使用数、参照しているタスク、Autorun、browser sessionを返します。
+`list`は使用数を返し、すべて、使用中、未使用で絞り込めます。`get`と`usages`はIdentityのmetadata、使用数、参照しているタスク、自動実行、browser sessionを返します。
 
 ## タスクへ割り当てる
 
@@ -64,9 +64,9 @@ cockpit task browser-identity <taskId>
 
 `cockpit browser open ... --browser-identity work`は割り当て済みのIdentityを選びます。割り当て自体や別Identityのtabは変更しません。未割り当てのIdentityへの操作は拒否されます。明示したsessionやtabと`--browser-identity`が異なる場合は`browser_identity_mismatch`、tabが明示した`--session`に属さない場合は`browser_session_mismatch`で失敗します。操作対象はコマンド開始時に確定するため、途中でプライマリIdentityやサイドパネルを切り替えても実行中の操作先は変わりません。
 
-## AutorunとFleetへ割り当てる
+## 自動実行とFleetへ割り当てる
 
-新規タスクを作るAutorunはBrowser Identityの割り当てを保存し、発火時に作成する各タスクへ引き継ぎます。Identityを指定しないAutorunはDefaultを使います。既存タスクへ送るAutorunは、そのタスクの割り当てを変更しません。
+新規タスクを作る自動実行はBrowser Identityの割り当てを保存し、発火時に作成する各タスクへ引き継ぎます。Identityを指定しない自動実行はDefaultを使います。既存タスクへ送る自動実行は、そのタスクの割り当てを変更しません。
 
 Fleetでは各task nodeへBrowser Identityを割り当てられます。異なるログイン状態が必要なnodeは、同じIdentityを共有させず、用途別のIdentityを明示します。
 
@@ -99,13 +99,13 @@ cockpit browser identity remove client-a --replace-with default --confirm --json
 
 `clear`は対象Identityのlive sessionを閉じてから、all、cookies、cacheのいずれかを消去します。`remove`はすべての永続データを消去してIdentity自体を削除します。
 
-実行中タスクまたはAutorunが参照するIdentityは、`--replace-with`で移行先を指定しない限り削除できません。移行後の削除に失敗した場合は割り当てを元へ戻します。複数のIdentityを持つタスクでは削除対象だけを置き換え、対象がプライマリなら置換先をプライマリにします。完了済みタスクだけが参照するIdentityを移行先なしで削除すると、その割り当てを外し、プライマリを削除したタスクはDefaultへ戻ります。
+実行中タスクまたは自動実行が参照するIdentityは、`--replace-with`で移行先を指定しない限り削除できません。移行後の削除に失敗した場合は割り当てを元へ戻します。複数のIdentityを持つタスクでは削除対象だけを置き換え、対象がプライマリなら置換先をプライマリにします。完了済みタスクだけが参照するIdentityを移行先なしで削除すると、その割り当てを外し、プライマリを削除したタスクはDefaultへ戻ります。
 
-削除前に`usages`で影響するタスク、Autorun、sessionを確認してください。
+削除前に`usages`で影響するタスク、自動実行、sessionを確認してください。
 
 ## 関連ページ
 
 - [cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)
-- [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)
+- [自動実行](https://agi-labo.com/tools/cockpit/docs/autorun)
 - [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)
 - [セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)

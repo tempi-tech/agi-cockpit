@@ -2,11 +2,11 @@
 
 # cockpit CLI
 
-AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を安全に操作する方法を説明します。
+AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、自動実行、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
 > AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
-`cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、Autorun、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
+`cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、自動実行、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
 ## セットアップと接続
 
@@ -100,11 +100,11 @@ Webページは`cockpit browser`、起動済みAndroidまたはiOS Simulatorは`
 
 実践手順は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、[Browser Identity](https://agi-labo.com/tools/cockpit/docs/browser-identities)、[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)を参照してください。
 
-## AutorunとFleetを使う
+## 自動実行とFleetを使う
 
-`cockpit autorun`は一度、間隔、cronで新規タスクを起動するか、既存タスクへ指示を送ります。会員確認は作成時だけでなく実行時にも行われます。保存済みのランタイム設定を利用できなくなった場合、別設定へ無言で切り替えずAutorunを無効にします。
+`cockpit autorun`は一度、間隔、cronで新規タスクを起動するか、既存タスクへ指示を送ります。会員確認は作成時だけでなく実行時にも行われます。保存済みのランタイム設定を利用できなくなった場合、別設定へ無言で切り替えず自動実行を無効にします。
 
-`cockpit fleet`は依存関係付きの複数タスクをRunとして実行します。YAMLの検証、gate、再試行、再開、Runタイトル、各ノードの進捗を扱います。完了・失敗・停止・一時停止したRunでは、`complete-tasks --dry-run`で対象を確認してから残るタスクをまとめて完了できます。単純な定期起動にはAutorun、依存する複数処理にはFleetを使います。実践手順は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)、全構文は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
+`cockpit fleet`は依存関係付きの複数タスクをRunとして実行します。YAMLの検証、gate、再試行、再開、Runタイトル、各ノードの進捗を扱います。完了・失敗・停止・一時停止したRunでは、`complete-tasks --dry-run`で対象を確認してから残るタスクをまとめて完了できます。単純な定期起動には自動実行、依存する複数処理にはFleetを使います。実践手順は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)、全構文は[`cockpit fleet` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/fleet)を参照してください。
 
 ## CLIからAGIラボへサインインする
 
@@ -125,7 +125,7 @@ cockpit account login
 cockpit accounts rename work "Work (EU)" --agent-type codex
 ```
 
-変更されるのは表示名だけで、ID、認証情報、タスクとAutorunの割り当ては維持されます。defaultアカウントは変更できません。Fleet YAMLは実行時に`account: <name>`を名前で解決するため、変更前の名前を参照するFleetも更新してください。名前の制約と画面からの操作は[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts#プロファイル名を変更する)を参照してください。
+変更されるのは表示名だけで、ID、認証情報、タスクと自動実行の割り当ては維持されます。defaultアカウントは変更できません。Fleet YAMLは実行時に`account: <name>`を名前で解決するため、変更前の名前を参照するFleetも更新してください。名前の制約と画面からの操作は[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts#プロファイル名を変更する)を参照してください。
 
 `cockpit settings`はOpenRouter、OpenCode Go、OpenCode Zen、AnthropicのAPIキーを暗号化ストレージへ保存・削除できます。キーはコマンド引数へ書かず、`--stdin`または`--key-file`だけで渡します。取得結果は設定の有無だけを返し、値は返しません。
 
@@ -141,7 +141,7 @@ Cockpit Agentのプロバイダーは`openrouter`、`opencode-go`、`opencode`�
 
 ## Hooksでイベントに反応する
 
-`cockpit hooks`は、タスク完了、Ask、Autorun、Fleet、アプリの起動・終了、ホットキーをきっかけにローカルの処理を実行します。登録・テスト・対象の絞り込みと、設定画面での管理は[Hooks](https://agi-labo.com/tools/cockpit/docs/hooks)を参照してください。全イベント、オプション、実行結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)にあります。
+`cockpit hooks`は、タスク完了、Ask、自動実行、Fleet、アプリの起動・終了、ホットキーをきっかけにローカルの処理を実行します。登録・テスト・対象の絞り込みと、設定画面での管理は[Hooks](https://agi-labo.com/tools/cockpit/docs/hooks)を参照してください。全イベント、オプション、実行結果は[`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)にあります。
 
 ## 使用量を確認し、Codexの利用枠をリセットする
 

@@ -61,7 +61,7 @@ Continue through [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/doc
 | Browser profiles | [Browser Identity](./docs/en/browser-identities.md) | [Browser Identity](./docs/ja/browser-identities.md) |
 | Mobile app control | [App Surface](./docs/en/app-surface.md) | [App Surface](./docs/ja/app-surface.md) |
 | Human approval | [Ask](./docs/en/ask.md) | [Ask](./docs/ja/ask.md) |
-| Scheduled work | [Autorun](./docs/en/autorun.md) | [オートラン](./docs/ja/autorun.md) |
+| Scheduled work | [Autorun](./docs/en/autorun.md) | [自動実行](./docs/ja/autorun.md) |
 | Updates | [Update AGI Cockpit](./docs/en/updates.md) | [AGI Cockpitを更新する](./docs/ja/updates.md) |
 | Releases | [Release history](./docs/en/releases.md) | [リリース履歴](./docs/ja/releases.md) |
 

@@ -23,19 +23,19 @@
 
 ## 設定とショートカット
 
-画面左下のアプリメニューから、外観、通知、ショートカット、エージェント、セットアップ、スキル、Browser Identity、履歴、Remote Access、Autorunを開けます。CLIでは`cockpit settings list`と`cockpit settings describe`で公開設定と値の制約を確認できます。
+画面左下のアプリメニューから、外観、通知、ショートカット、エージェント、セットアップ、スキル、Browser Identity、履歴、Remote Access、自動実行を開けます。CLIでは`cockpit settings list`と`cockpit settings describe`で公開設定と値の制約を確認できます。
 
 Desktopのアプリケーションメニューで「View」→「ウィンドウを再読み込み」を選ぶと、エージェントやメインプロセスを止めずに表示だけを読み直せます。選択中のタスク、タスクごとの未送信入力、選択中タスクで開いていた右サイドパネルは復元されます。誤操作を避けるためCmd/Ctrl+Rには割り当てられていないので、メニューから実行します。
 
 主要なショートカットにはQuick Task、タスク検索、送信キーがあります。送信キーはEnterまたはCmd/Ctrl+Enterを選択でき、Shift+Enterは改行です。ショートカットの競合やOS登録失敗は保存前に拒否されます。
 
-設定を変更した後は、返された保存値を確認してください。数値設定は許容範囲へ丸められる場合があり、既存のAutorunは保存時のランタイム設定を保持するため、グローバル設定変更では自動更新されません。
+設定を変更した後は、返された保存値を確認してください。数値設定は許容範囲へ丸められる場合があり、既存の自動実行は保存時のランタイム設定を保持するため、グローバル設定変更では自動更新されません。
 
 ## データ保存場所
 
 | 種類 | 主な場所 |
 | --- | --- |
-| Cockpitのタスク、Autorun、Fleet、テンプレート、CLI、ログ | `~/.agi-tools/data/cockpit` |
+| Cockpitのタスク、自動実行、Fleet、テンプレート、CLI、ログ | `~/.agi-tools/data/cockpit` |
 | ユーザー共通のCLIランチャー | `~/.agi-tools/bin` |
 | 永続ワークスペース | `~/.agi-tools/workspaces` |
 | 作業プロジェクトとGit Worktree | タスク作成時に選んだ場所 |
@@ -61,7 +61,7 @@ Cockpitは応答のないキーチェーンを待ち続けず、約2秒でこの
 
 AGIラボとエージェント提供元のサインインは別です。AGIラボから期限が通知され、残り3日以内になると、アプリ内の案内とデスクトップ通知を表示します。期限切れや失効の場合は認証の更新を案内します。「サインイン」からブラウザー認証を完了して会員機能を復旧してください。同じ状態の通知は繰り返さず、再サインインすると消えます。案内を閉じるだけでは認証は更新されません。
 
-`cockpit account status`で`refreshRequired`、`notice`、`expiresAt`、最後の会員確認の理由を確認し、`cockpit account login`でブラウザー認証を始められます。Autorunは認証更新待ちの予定を1分後に再試行し、1回実行の予定も失いません。`~/.agi-tools/data/cockpit/logs/auth-session.jsonl`には、会員確認の拒否や認証更新失敗の日時、HTTP状態、失敗の分類を記録し、tokenやメールアドレスは記録しません。[account Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/account)を参照してください。
+`cockpit account status`で`refreshRequired`、`notice`、`expiresAt`、最後の会員確認の理由を確認し、`cockpit account login`でブラウザー認証を始められます。自動実行は認証更新待ちの予定を1分後に再試行し、1回実行の予定も失いません。`~/.agi-tools/data/cockpit/logs/auth-session.jsonl`には、会員確認の拒否や認証更新失敗の日時、HTTP状態、失敗の分類を記録し、tokenやメールアドレスは記録しません。[account Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/account)を参照してください。
 
 期限切れ・失効による再サインインの案内は、アプリを再起動しても維持します。再起動だけでは会員機能は復旧しないため、サインインを完了してください。
 
@@ -85,7 +85,7 @@ Claude、Codex、Antigravity、Cursor、Grok Buildで404、5xx、gateway timeout
 
 期限切れの認証情報は「セッション期限切れ」または`authState: expired`と表示され、`loggedIn`は`false`になります。`cockpit accounts login <account> --agent-type <type>`で再ログインし、`cockpit accounts list`で`authState: ok`を確認します。`cockpit doctor`の`accounts.expired`でも対象を確認できます。
 
-モデルを利用できない場合は会話内のエラー理由を確認し、「Codexの既定に切り替える」または「別のモデルを選ぶ」を使います。既定への切り替えは、そのタスクのクルーやAutorunの固定モデルも解除します。添付付きや再起動後に特定できないメッセージを再送する場合は、先に会話を確認してください。[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details#エラーとツール実行を確認する)を参照してください。エージェントのサインイン切れ・未設定の案内では「サインイン」から対象エージェントの設定を開けます。[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts#サインインの通知に対応する)を参照してください。
+モデルを利用できない場合は会話内のエラー理由を確認し、「Codexの既定に切り替える」または「別のモデルを選ぶ」を使います。既定への切り替えは、そのタスクのクルーや自動実行の固定モデルも解除します。添付付きや再起動後に特定できないメッセージを再送する場合は、先に会話を確認してください。[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details#エラーとツール実行を確認する)を参照してください。エージェントのサインイン切れ・未設定の案内では「サインイン」から対象エージェントの設定を開けます。[アカウントとAuto](https://agi-labo.com/tools/cockpit/docs/accounts#サインインの通知に対応する)を参照してください。
 
 利用上限ではタスクは`waiting_confirmation`と`usage_limit`になります。Autoで復旧できない場合は、利用可能な別プロファイルを追加または選択してから、新しい指示を送ります。リセット時刻を過ぎるとCockpitは利用状況を再評価し、回復済みならタスクを再開します。再開しない場合は、画面の案内が「まだ利用上限」「利用状況を確認できない」「再ログインが必要」のどれを示しているか確認し、待機、再試行、再ログインを使い分けます。
 

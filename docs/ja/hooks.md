@@ -8,15 +8,15 @@
 
 Hooksは、タスクの完了やAskの作成など、Cockpitで起きたイベントをきっかけに、登録した処理を自動実行する機能です。「この出来事が起きたら、この処理をする」というルールをHookとして保存できます。ホットキーをきっかけにすることもできます。
 
-## Autorunとの使い分け
+## 自動実行との使い分け
 
 | やりたいこと | 使う機能 | 例 |
 | --- | --- | --- |
-| 時刻や間隔に合わせて仕事を始める | [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun) | 毎朝9時にレポートを作成する |
+| 時刻や間隔に合わせて仕事を始める | [自動実行](https://agi-labo.com/tools/cockpit/docs/autorun) | 毎朝9時にレポートを作成する |
 | 出来事に反応して処理を実行する | Hooks | タスクが完了したら結果をまとめるスクリプトを動かす |
 | 複数タスクを依存関係に沿って進める | [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet) | 調査が終わったら執筆とレビューへ進む |
 
-組み合わせることもできます。たとえば、Autorunで始めたタスクの完了にHooksで反応したり、Fleet全体の終了をきっかけに後処理を実行したりできます。
+組み合わせることもできます。たとえば、自動実行で始めたタスクの完了にHooksで反応したり、Fleet全体の終了をきっかけに後処理を実行したりできます。
 
 ## きっかけを選ぶ
 
@@ -24,7 +24,7 @@ Hooksは、タスクの完了やAskの作成など、Cockpitで起きたイベ�
 | --- | --- | --- |
 | タスクの状態が変わる | `task.completed`、`task.waiting`、`task.error` | 完了後の処理や、確認待ち・エラーの通知を実行する |
 | Askが作成・回答される | `ask.created`、`ask.resolved` | 外部サービスへ判断依頼や回答結果を連携する |
-| Autorunが実行される | `autorun.triggered` | スケジュールの実行を記録する |
+| 自動実行が実行される | `autorun.triggered` | スケジュールの実行を記録する |
 | Fleetが開始・終了する | `fleet.run.started`、`fleet.run.completed` | 一連の作業の終了後に後処理を実行する |
 | アプリが起動・終了する | `app.ready`、`app.quit` | 起動時の準備処理を実行する |
 | ショートカットキーを押す | `hotkey` | よく使う処理をキー操作で呼び出す |
@@ -106,7 +106,7 @@ cockpit hooks disable <hookId>
 
 ## 関連ページ
 
-- [Autorun](https://agi-labo.com/tools/cockpit/docs/autorun)：時刻や間隔に基づく自動化
+- [自動実行](https://agi-labo.com/tools/cockpit/docs/autorun)：時刻や間隔に基づく自動化
 - [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)：複数タスクの実行順序と依存関係
 - [`cockpit hooks` Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/hooks)：全イベント、フィルター、ホットキー、実行制御の詳細
 - [セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)：実行権限とデータの保存範囲
