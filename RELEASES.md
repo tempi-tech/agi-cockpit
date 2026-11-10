@@ -4,6 +4,69 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.130.0 — 2026-11-11
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Crew mentions from the @ picker in task chats.
+- Added right-click menus for copy, paste, and link actions.
+- Added project and folder grouping for tasks on other devices.
+- Added update guidance when an older device cannot share its Crews.
+- Unified project action menus in Settings.
+- Moved pinned projects and Crews to the top of lists.
+- Added chat tabs to Crew connection settings.
+- Added links from received Crew messages to their original chats.
+- Improved table splitting and row labels in Crew posts.
+- Fixed clipped axis labels in Crew charts.
+- Strengthened protection of pending Crew messages and approval DMs.
+- Added handling of mentions of a Crew bot’s own Discord role.
+- Added each owner’s destination chat to Crew Ask notifications.
+- Changed Crews at a usage limit to try owner messages immediately.
+- Changed Cockpit Slack apps to appear online.
+- Added reply-target context for Crews receiving Discord replies.
+- Added editing, removal, and immediate sending of queued messages through agents and the CLI.
+- Standardized the Japanese name for Autorun as 自動実行.
+- Improved changed-media previews and explanations for unavailable file previews on mobile.
+- Fixed relative file-panel paths to resolve from the command’s working folder.
+- Updated agent installation guidance for each operating system.
+- Made the primary sign-in button easier to distinguish from guest access.
+- Fixed unresponsive notices at the top of the window.
+- Changed Terminal child tasks to report their result once, with the exit code.
+- Added bounded waits for remote CLI connections and responses.
+- Fixed light-theme styling in mobile host-update notices.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスクのチャットで@からCrewを選び、メンションできるようになりました。
+- コピー・貼り付けやリンク操作を右クリックメニューから使えるようになりました。
+- 別端末のタスクをプロジェクトやフォルダごとにまとめて表示できるようになりました。
+- 古い端末でCrewを表示できない場合、更新案内を表示するようになりました。
+- 設定画面のプロジェクト操作メニューを統一しました。
+- ピン留めしたプロジェクトとCrewを先頭に表示するようになりました。
+- Crewの接続設定をチャットごとのタブで切り替えられるようになりました。
+- Crewが受信したメッセージから元のチャットを開けるようになりました。
+- Crewが投稿する表の分割と見出し表示を改善しました。
+- Crewが投稿するグラフの軸ラベルが欠ける問題を修正しました。
+- Crewの承認待ちメッセージと承認DMの保護を強化しました。
+- DiscordでCrew自身のロールへのメンションにも応答するようになりました。
+- CrewのAsk通知で各オーナーの送信先チャットを表示するようになりました。
+- Crewが利用上限に達したときも、オーナーのメッセージをすぐに試すようになりました。
+- Slack上のCockpitアプリをオンライン表示にしました。
+- Discordの返信で、Crewが返信先のメッセージを把握できるようになりました。
+- 待機中のメッセージをエージェントやCLIから編集・削除・即時送信できるようになりました。
+- 日本語のAutorun表記を「自動実行」に統一しました。
+- スマートフォンのファイルパネルで変更された画像などを表示し、開けない理由を案内するようになりました。
+- ファイルパネルの相対パスをコマンドの実行フォルダから解決するようにしました。
+- エージェントのインストール案内をOSに合わせました。
+- サインイン画面の主ボタンとゲスト操作を見分けやすくしました。
+- 画面上部の通知をクリックできない問題を修正しました。
+- Terminal子タスクの終了結果を終了コード付きで一度だけ報告するようにしました。
+- 別端末へのCLI接続が応答を待ち続ける問題を修正しました。
+- スマートフォンの本体更新案内をライトテーマに合わせました。
+
+</details>
+
 ## v4.129.0 — 2026-11-10
 
 **Type:** minor · **Platforms:** macOS, Linux
