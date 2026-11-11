@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.128.0で2026-11-09に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.131.0で2026-11-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -99,6 +99,12 @@ AntigravityのネイティブUIで画像添付だけが開始前に失敗する�
 
 command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ログを開く**、または`cockpit fleet output <runId> --node <gateId> --attempt <n>`を使います。各試行は`fleet-runs/<runId>/gates/`へ別fileで保存され、20 MBを超えると中央を省略して先頭と末尾を残します。`logs --node`の要約だけでは見えない最初のエラーを全量logから確認してください。
 
+## メモリ使用量とメモリガードの停止を調べる
+
+`cockpit doctor --memory` でCockpitとタスクの現在のメモリ使用量、ガードのモード・状態、最近の記録を確認できます。macOSではRSSより `footprintBytes` を基準にしてください。RSSは共有ページを重複して数え、圧縮・スワップされたメモリを含まない場合があります。VM・シミュレーター・Dockerのシステムプロセス内のメモリはCockpitへ計上しません。コマンドラインは返しません。
+
+ガードが動作するのはmacOSだけです。代替プローブでは推定値となる場合があり、通知だけで停止しません。停止したタスクは原因を確認してから「再開」を選んでください。Cockpitを再起動しても停止保留は解除されません。復旧は[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks#メモリガードで停止したタスクを再開する)、出力項目と診断の制約は[doctorリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/doctor)を参照してください。
+
 ## タスクが再開しない
 
 `needsResume`と`waitingReason`を確認し、`cockpit task resume <id>`で保存済みセッションを再開します。Terminalタスクでは新しいシェルが同じディレクトリで起動するため、以前のforeground processは戻りません。Antigravityが待っているbackground commandは、完了通知と最終回答まで同じturnで追跡されるため、中間回答だけをturn完了と判断しないでください。
@@ -145,3 +151,5 @@ GPUの異常終了が繰り返された場合、Cockpitはソフトウェアに�
 再現手順、期待した結果、実際の結果、AGI Cockpitのバージョン、OSとアーキテクチャ、対象エージェントとUIモード、エラーコードを揃えます。必要に応じて`cockpit doctor`、アップデーターログ、診断レポートの該当部分を添付します。
 
 token、Cookie、ペアリングコード、ローカルの個人名、秘密のファイル内容は除去してください。既知の修正が公開済みか[バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)を確認してから、AGI CockpitのGitHub Issueへ報告します。
+
+AGIラボにサインインしている場合は、`cockpit feedback send --kind bug --title "短い件名" --stdin` でCockpitの不具合をスタッフへ直接送れます。要望は `--kind request` を使い、本文は標準入力から渡します。ローカル専用で、確認画面なしにすぐ送信し、添付は使えません。送信前に[フィードバックのデータ範囲](https://agi-labo.com/tools/cockpit/docs/security-and-data#agiラボへ不具合要望を送る)を確認してください。`inbox` と `get` はスタッフ専用で、自分の送信履歴ではありません。

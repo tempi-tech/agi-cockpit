@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -99,6 +99,12 @@ For `Fleet run accounts are unusable`, sign in to every node and account named i
 
 For a failed command gate, inspect the failed files and choose **Open full log** in the Fleet panel, or run `cockpit fleet output <runId> --node <gateId> --attempt <n>`. Each attempt has a separate file under `fleet-runs/<runId>/gates/`; a log over 20 MB keeps its head and tail and omits the middle. Use that full saved output to find errors omitted from the `logs --node` summary.
 
+## Inspect memory use and guard stops
+
+Run `cockpit doctor --memory` for a current sample of Cockpit and task memory use, the guard's mode and state, and recent guard events. Prefer `footprintBytes` to RSS on macOS; RSS can count shared pages repeatedly and omit compressed or swapped memory. VM, simulator, and Docker memory in system processes is not attributed to Cockpit. Command lines are not returned.
+
+The guard operates only on macOS. With a fallback probe, measurements can be estimates and the guard only notifies. For a stopped task, review the cause before selecting **Resume**; restarting Cockpit does not clear the hold. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#resume-a-task-stopped-by-the-memory-guard) for recovery and [doctor reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/doctor) for fields and diagnostic limits.
+
 ## A task does not resume
 
 Inspect `needsResume` and `waitingReason`, then use `cockpit task resume <id>` to restore a saved session. A Terminal task starts a new shell in the same directory, so its previous foreground process is not restored. When Antigravity is waiting for a background command, it tracks the completion notice and final answer in the same turn; do not treat the interim answer as turn completion.
@@ -145,3 +151,5 @@ After repeated GPU failures, Cockpit can switch to software rendering and contin
 Collect reproduction steps, expected and actual results, AGI Cockpit version, OS and architecture, selected agent and UI mode, and error codes. Include relevant portions of `cockpit doctor`, updater logs, or a diagnostic report when needed.
 
 Remove tokens, cookies, pairing codes, personal names in local paths, and secret file content. Check [Release notes](https://agi-labo.com/en/tools/cockpit/docs/releases) for an already published fix, then report the problem in the AGI Cockpit GitHub Issues.
+
+When signed in to AGI Lab, you can also send an AGI Cockpit bug report or feature request directly to staff with `cockpit feedback send --kind bug --title "Short title" --stdin` (use `--kind request` for a request). Pipe the report body through stdin. This is local-only, sends immediately without a confirmation dialog, and accepts no attachments. Review the [feedback data boundaries](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#send-feedback-to-agi-lab) before sending. `inbox` and `get` are staff-only; they are not a personal sent-report list.

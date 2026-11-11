@@ -4,7 +4,7 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
@@ -55,6 +55,14 @@ When you send a request, the Assistant does that job first and shows the result.
 When you already have a Crew, or you chose **Set up later** without a ready agent, setup finishes without creating the Assistant. When the Assistant cannot be set up, the reason is shown. **Retry** tries again, reusing the Assistant if it was already created. **Not now** finishes setup and opens the Assistant's conversation if it was already created.
 
 One Crew is free, including stopped Crews, and the Assistant is that Crew; an AGI Lab membership is required to create more. To start with a task instead, continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+
+## Open Cockpit at login
+
+On an installed macOS or Linux copy, enable **Settings → Setup → Open at login** to start Cockpit when you sign in to this computer. It is off by default. Crews that were running start again when Cockpit starts; tasks held by the memory guard still require manual resumption.
+
+On macOS, move Cockpit to **Applications** first. On Linux, keep the AppImage outside temporary folders or install the deb package. Windows does not support this setting yet. You can also disable it in the operating system's login or startup applications settings; Cockpit reads that state.
+
+Use `cockpit settings get app.launchAtLogin`, `cockpit settings set app.launchAtLogin true`, or `cockpit settings reset app.launchAtLogin` from the CLI. See the [settings reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/settings) for installation checks and Linux autostart storage.
 
 ## If setup does not complete
 

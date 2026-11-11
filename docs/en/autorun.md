@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -117,6 +117,12 @@ If the agent fails to start, the task remains in the task list with an **Error**
 If Cockpit confirms that the account is a guest or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If the sign-in session needs renewal or a temporary network or API failure prevents membership verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so authentication renewal or a temporary outage does not consume its only run.
 
 Directory paths selected in Desktop or the PWA, or passed through `--directory`, preserve trailing spaces. Use the exact folder name; do not trim its path when scripting.
+
+## Clean up finished Crew schedules
+
+In a Crew's **Schedule** settings on Desktop or the PWA, expand **Finished (count)** to review completed one-time schedules, their run times, and failures. **Delete all** asks for confirmation and deletes only finished one-time schedules for that Crew. Upcoming, paused-before-running, recurring, queued, and still-running schedules are excluded. The current state is checked again before deletion.
+
+Use `cockpit autorun delete --finished-once --target-crew <crew>` for the same scope from the CLI. Omitting `--target-crew` includes all targets and requires `--confirm`. Deletion removes schedule records; preserve any schedule information you need first.
 
 ## Create from the CLI
 

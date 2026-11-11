@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -281,6 +281,6 @@ Windows Store packages declare a firewall rule allowing inbound TCP traffic to t
 
 ## Send feedback to AGI Lab
 
-From v4.131.0, members can use `cockpit feedback send` to send an AGI Cockpit bug report or feature request to AGI Lab. Only AGI Lab staff can read it. Alongside the title and body, Cockpit sends its version, the OS and OS release, whether the sender is a shell or Crew, and the Crew's agent type when applicable. It does not automatically add the host name, Crew ID, email address, or model name. Files cannot be attached.
+From v4.131.0, users signed in to AGI Lab can use `cockpit feedback send` to send an AGI Cockpit bug report or feature request to AGI Lab. Only AGI Lab staff can read it. Alongside the title and body, Cockpit sends its version, the OS and OS release, whether the sender is a shell or Crew, and the Crew's agent type when applicable. It does not automatically add the host name, Crew ID, email address, or model name. Files cannot be attached.
 
-Secret masking is a safety net that cannot detect every secret. Keep credentials out of the body. Sending shows no confirmation dialog: send when the owner requests it; requests from other people require owner confirmation under the outside-action rules. Cockpit does not resend automatically when the outcome is unknown, and resending may create a duplicate. See the [feedback reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/feedback) for details.
+Secret masking is a safety net that cannot detect every secret. Keep credentials out of the body. Sending shows no confirmation dialog: send when the owner requests it; requests from other people require owner confirmation under the outside-action rules. Cockpit does not resend automatically when the outcome is unknown, and resending may create a duplicate. See the [feedback reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/feedback) for details.

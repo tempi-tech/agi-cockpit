@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -137,7 +137,7 @@ When a test runner or dev server started by a task is responsible, the guard sto
 
 A stopped task keeps its conversation and session and never resumes automatically. Autoruns, Fleet prompts, and queued messages wait for resumption. Check that the same work will not exhaust memory again, then select Resume in the stop notice. Sending a message also resumes a Native UI or Cockpit Agent task. An agent or Hook must obtain user confirmation before passing `--confirm-memory-guard` to resume it. Resumption is refused until stopping has finished.
 
-Use `cockpit doctor --memory` to inspect memory use and stop records. See the [task reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task) and [settings reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/settings) for detailed conditions and CLI operations.
+Use `cockpit doctor --memory` to inspect memory use and stop records. See the [task reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task) and [settings reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/settings) for detailed conditions and CLI operations.
 
 ## Distinguish Fleet Runs
 

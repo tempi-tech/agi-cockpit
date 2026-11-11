@@ -4,7 +4,7 @@
 
 利用するAIエージェントを確認し、Cockpit skillとcockpitコマンドを準備して、最初のタスクを作れる状態にする手順です。
 
-> AGI Cockpit 4.129.0で2026-11-10に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/initial-setup)
+> AGI Cockpit 4.131.0で2026-11-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/initial-setup)
 
 この手順を終えると、利用するエージェントとCockpit連携が準備され、最初のタスクを作成できます。初回起動時に自動で開かなかった場合は、画面左下のアプリメニューから「セットアップ」→「初回セットアップ」を開きます。
 
@@ -55,6 +55,14 @@ Claude Code、Codex、Grok BuildのネイティブUIは、未認証でタスク�
 すでにクルーがいる場合と、「あとで設定する」で使えるエージェントがないまま進めた場合は、秘書を作らずにセットアップを終えます。秘書を用意できなかった場合は理由が表示されます。「再試行」は作成済みの秘書があればそれを使ってやり直します。「あとにする」はそのままセットアップを終え、作成済みの秘書があればその会話を開きます。
 
 停止中を含め、無料で作れるクルーは1体で、秘書がその1体になります。追加作成にはAGIラボ会員資格が必要です。タスクから始める場合は[最初のタスク](https://agi-labo.com/tools/cockpit/docs/first-task)へ進みます。
+
+## ログイン時にCockpitを起動する
+
+インストール済みのmacOS・Linux版では、「設定」→「セットアップ」→「ログイン時に起動」を有効にすると、このコンピューターへのログイン時にCockpitが起動します。既定では無効です。起動時には、動いていたクルーも再開します。メモリガードで停止したタスクは、引き続き手動での再開が必要です。
+
+macOSでは、先にCockpitを「アプリケーション」フォルダへ移してください。LinuxではAppImageを一時フォルダ以外に置くか、debパッケージを使います。Windowsではまだ利用できません。OS側のログイン項目・自動起動設定で無効にした場合も、Cockpitはその状態を読み取ります。
+
+CLIでは `cockpit settings get app.launchAtLogin` で確認し、`cockpit settings set app.launchAtLogin true` で有効化、`cockpit settings reset app.launchAtLogin` で解除できます。インストール条件とLinuxの保存先は[設定のリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/settings)を参照してください。
 
 ## セットアップを完了できない場合
 

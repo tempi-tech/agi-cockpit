@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -61,6 +61,14 @@ On Desktop, choose Slack in the Crew’s connection settings and select **Connec
 You can also connect manually. Use **Create the app with these settings**, then get the Bot OAuth token (`xoxb-`) from **Install App** and the App-Level token (`xapp-`, with `connections:write`) from **Basic Information** of the same app. Setup includes buttons to open these pages. Enable Socket Mode and enter both tokens in the dedicated fields. Do not paste tokens into a conversation.
 
 Finally, send the Crew a Slack DM and verify your user ID before confirming ownership. Invite it to channels with `/invite @name`. Mentions received before it joins can also reach it, subject to the same people and place permissions. On Discord, replying to the Crew’s own post or mentioning its own bot role also counts as a mention, subject to the same people and place permissions. When a Discord message is a reply, the Crew receives the referenced message when it can be fetched; unavailable references do not block delivery. The channel picker lists only channels the Crew can view; it hides channel names when Discord permissions cannot be checked.
+
+### Choose the Crew's chat writing
+
+In the Crew's settings, choose **Chat writing → Readable** (the default) or **Concise**. Readable puts the conclusion first and uses bullets, bold key words, and blank lines; Concise asks for only a brief conclusion. A change applies from the next session. The CLI equivalent is `cockpit crew update <crew> --chat-style readable` or `--chat-style concise`. Only the owner can change this setting.
+
+On Desktop and the PWA, the conversation's place filter includes the names of DM participants when available, so you can distinguish direct conversations. Discord forwards provide the Crew with the forwarded text, source link when available, and attachments. Forwarding does not bypass the existing people and place permissions.
+
+Crew instructions now ask it to reply to its original post when correcting or adding information, and to consider what it can do itself before asking a person to do work. These are agent instructions, so the result still depends on the agent.
 
 ### Choose when it responds to other people
 

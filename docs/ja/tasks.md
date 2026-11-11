@@ -4,7 +4,7 @@
 
 プロジェクト、タスクの整理と移動、タスク一覧、オーバービュー、検索、状態、完了、削除の違いを説明します。
 
-> AGI Cockpit 4.130.0で2026-11-11に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.131.0で2026-11-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は、複数の仕事から「次にどれを見るか」を選ぶ場所です。個々の会話や追加入力は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)で扱います。
 

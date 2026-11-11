@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -34,6 +34,8 @@ An Ask answer is not itself permission to operate on the OS or an external servi
 ## How password input requests differ
 
 A request from `cockpit secret request` appears in a dedicated Desktop window, the right side panel's Ask tab, and the PWA **Inbox**. Its dedicated window follows the Ask-window setting, and the request uses the Ask notification sound and a Normal priority badge. As soon as input completes, fails, is cancelled, or expires, its input surface disappears everywhere. Check the result through `cockpit secret status` or the notification sent to the requesting task.
+
+Use the source-task button in the secure input screen to open the requesting task or Crew without submitting the secret. It becomes unavailable if the source has been removed.
 
 Sharing presentation does not make it an Ask. It is absent from `cockpit ask list`, cannot be answered with `cockpit ask answer`, and is never sent to Discord or Slack. It also does not fire an `ask.*` Hook or `cockpit.ask.resolved` event and accepts no attachments. Never put a password or another secret in an Ask answer; use the dedicated input request. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#enter-a-password-once) for destination and storage boundaries.
 
@@ -152,7 +154,11 @@ In Desktop, **Settings → Ask notifications** configures Discord and Slack inde
 3. Optionally choose whether to send Ask images and videos and whether files posted in the channel by the allowed user can be attached to the answer.
 4. Send a **Test Ask**, answer it from the selected service, and confirm that a round-trip time appears before enabling the relay.
 
-Buttons, select menus, and free-input modals can answer an Ask. A multi-question Ask is submitted only after every question has an answer. Answering or closing from Desktop, the PWA, CLI, Discord, or Slack updates the other relayed messages to **Answered** or **Closed**. Discord displays the first 25 choices and Slack the first 100; use a Cockpit surface when the needed choice is beyond that service's limit.
+Buttons, select menus, and free-input forms can answer an Ask. Long choices appear as numbered text in the message with matching numbered controls, so read the text before choosing. Service message limits still apply: Discord offers the first 25 choices and Slack the first 100; use Cockpit when a choice is unavailable or text exceeds the service's limits. Selected answers are marked in the message.
+
+For an Ask with two or more questions, **📝 Reply to the whole ask** opens a form with one multiline field (up to 4,000 characters on Discord and 3,000 on Slack). Submitting sends that reply together with answers already selected; questions left blank remain unanswered. Staged files attach to the whole-Ask reply. **📤 Submit** alone still requires an answer to every question. Crew Ask DMs offer the same whole-Ask form to their owner.
+
+**Close without answering** closes the Ask and leaves its task waiting. Answering or closing from Desktop, the PWA, CLI, Discord, or Slack updates the relayed message to **Answered** or **Closed**. Successful answers do not add a separate reply visible only to you; check the updated Ask message for the result.
 
 After a temporary Discord disconnect, Cockpit resumes the same Gateway session when possible and receives events delivered during the gap. Cockpit still applies an Ask answer when Discord cannot acknowledge the button interaction, including when Discord's three-second response window has expired. Discord may show that the interaction failed; use the Ask message's answered state and Cockpit's state as the result.
 
