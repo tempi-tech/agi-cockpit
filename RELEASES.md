@@ -4,6 +4,53 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.131.0 — 2026-11-12
+
+**Type:** minor · **Platforms:** macOS
+
+- Added an option to open Cockpit at login on macOS and Linux.
+- Added a memory guard on macOS to notify about and stop runaway processes during memory shortages.
+- Added manual resumption with conversation history preserved for tasks stopped by the memory guard.
+- Added memory usage inspection for Cockpit and its tasks through the CLI.
+- Added a CLI command to send Cockpit bug reports and feature requests to AGI Lab.
+- Added readable and concise chat styles for each Crew.
+- Improved identification of DM recipients in Crew conversation filters.
+- Changed Crews to reply to their own posts when correcting or adding information.
+- Changed Crews to consider handling work themselves before asking someone else.
+- Added grouping and bulk deletion of finished one-off Crew schedules.
+- Added source context and attachments for Discord forwarded messages received by Crews.
+- Changed Discord and Slack Asks to show long choices in full.
+- Added a form to answer an entire Ask from Discord or Slack.
+- Clarified the selected answer and the meaning of closing an Ask on Discord and Slack.
+- Removed the private acknowledgment after answering an Ask on Discord or Slack.
+- Added navigation to the requesting task or Crew from the secure input window.
+- Changed remote tasks to always be grouped by project.
+- Fixed screenshots hanging for background browser tabs.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- macOSとLinuxで、ログイン時にCockpitを自動起動できるようになりました。
+- Macのメモリ不足時に、増え続けるプロセスを通知・停止するメモリガードを追加しました。
+- メモリガードが停止したタスクは会話を保持し、手動で再開できるようになりました。
+- CLIからCockpitとタスクのメモリ使用量を確認できるようになりました。
+- AGIラボへCockpitの不具合や要望をCLIから送れるようになりました。
+- Crewごとにチャットの書き方を「読みやすく」「簡潔に」から選べるようになりました。
+- Crewの会話フィルターでDMの相手を見分けやすくしました。
+- Crewが自分の投稿を訂正・補足するときに、元の投稿へ返信するようにしました。
+- Crewが人に作業を頼む前に、自分で対応できるか確認するようにしました。
+- Crewの終了済みの単発スケジュールをまとめて表示・削除できるようになりました。
+- Discordの転送メッセージで、Crewが転送元と添付を確認できるようになりました。
+- DiscordとSlackのAskで、長い選択肢を全文表示するようになりました。
+- DiscordとSlackのAskに、質問全体へフォームから回答する操作を追加しました。
+- DiscordとSlackのAskで、選んだ回答と「閉じる」の意味をわかりやすくしました。
+- DiscordとSlackでAskに回答した後の、本人だけに見える返信を省きました。
+- 安全な入力画面から、依頼元のタスクやCrewを開けるようになりました。
+- 別端末のタスクを常にプロジェクトごとにまとめて表示するようにしました。
+- 背景のブラウザータブでスクリーンショットが待ち続ける問題を修正しました。
+
+</details>
+
 ## v4.130.0 — 2026-11-11
 
 **Type:** minor · **Platforms:** macOS, Linux

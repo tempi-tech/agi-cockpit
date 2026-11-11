@@ -129,6 +129,16 @@ Desktop and PWA task and child-task lists use compact rows with names and status
 
 `needsResume` is not another state. It means an unfinished task lost its runtime process and must reconnect to a saved session.
 
+## Resume a task stopped by the memory guard
+
+From v4.131.0, macOS offers Off, Notify only, and Notify and stop under Settings → Agents → Common → Memory guard. The default is Notify and stop. It stops one runaway at a time only when memory pressure persists, Cockpit accounts for most of the growth, and exact measurements confirm sustained growth. It does not run on Linux or Windows.
+
+When a test runner or dev server started by a task is responsible, the guard stops that process and its eligible children while the task keeps running. It stops the task when the agent itself is responsible, or another stop is needed for the same task within 30 minutes after a successful stop. It requests termination, then forcibly ends remaining targets after five seconds, interrupting their work. It never stops Terminal tasks, excluded tasks, Cockpit itself, the in-app browser, or shared servers. Use Exclude from memory guard in a task's menu for work intended to use substantial memory.
+
+A stopped task keeps its conversation and session and never resumes automatically. Autoruns, Fleet prompts, and queued messages wait for resumption. Check that the same work will not exhaust memory again, then select Resume in the stop notice. Sending a message also resumes a Native UI or Cockpit Agent task. An agent or Hook must obtain user confirmation before passing `--confirm-memory-guard` to resume it. Resumption is refused until stopping has finished.
+
+Use `cockpit doctor --memory` to inspect memory use and stop records. See the [task reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task) and [settings reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/settings) for detailed conditions and CLI operations.
+
 ## Distinguish Fleet Runs
 
 A titled Fleet Run shows its title in the task-list Fleet group and Fleet details. Each node task is named **Run title / node name**, so the Run title is searchable like an ordinary task name.

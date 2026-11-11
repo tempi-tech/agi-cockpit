@@ -10,7 +10,7 @@ body:
     id: version
     attributes:
       label: AGI Cockpit version
-      placeholder: 4.130.0
+      placeholder: 4.131.0
     validations:
       required: true
   - type: dropdown
