@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.131.0 — 2026-11-12
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added an option to open Cockpit at login on macOS and Linux.
 - Added a memory guard on macOS to notify about and stop runaway processes during memory shortages.
