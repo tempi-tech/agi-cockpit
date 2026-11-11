@@ -21,7 +21,7 @@ English is the primary language for these generated release notes. Download the 
 - Added source context and attachments for Discord forwarded messages received by Crews.
 - Changed Discord and Slack Asks to show long choices in full.
 - Added a form to answer an entire Ask from Discord or Slack.
-- Clarified the selected answer and the meaning of closing an Ask on Discord and Slack.
+- Improved clarity of the selected answer and the meaning of closing an Ask on Discord and Slack.
 - Removed the private acknowledgment after answering an Ask on Discord or Slack.
 - Added navigation to the requesting task or Crew from the secure input window.
 - Changed remote tasks to always be grouped by project.
