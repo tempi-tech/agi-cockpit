@@ -120,6 +120,16 @@ Finished Asks also retain a local status record for up to 30 days, with at most 
 
 Crew Ask DMs are on by default and send questions and supported media to each connection owner through the Crew's bot. Crew settings or `cockpit crew update <crew> --ask-dm-to <user-id>` can narrow the recipients. An empty selection sends to nobody; `--ask-dm-to all` restores all owners. This selection also covers approval Asks and secret-input notices. Removing a recipient closes their unanswered DMs and clears question text, choices, and attachments. An agent may change recipients only during an owner-started turn. Only the DM recipient, while still an owner, may answer. New-person approval Asks also accept an owner's DM answer; approval grants access to DMs and all places the Crew listens to. General Ask relays exclude owner-only questions, and Crew settings-change approvals stay in Cockpit. Secret requests send only a notice and a token-free PWA address when HTTPS Remote Access runs, never the request details or value. Disable these DMs with `cockpit crew update <crew> --ask-dm off`. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask#crew-questions-in-discord-and-slack-dms).
 
+### Chatwork connections and data flow
+
+Chatwork integration requires signing in to an AGI Lab member account and a dedicated Chatwork account for the Crew. Enter its API token in the dedicated input screen, never in a conversation. Cockpit saves the API token in encrypted storage. The webhook signing token is sent to AGI Backend for signature verification. Share the webhook URL only with the person configuring the connection.
+
+Chatwork events pass through AGI Backend. Cockpit uses the received notices and its locally stored API token to fetch message text and attachments from Chatwork. Edits and deletions after delivery do not reach the Crew; send a new message to correct or cancel a request. Disconnecting or removing the Crew also deletes its receiving configuration at AGI Backend. Delete the webhook in Chatwork separately. Accessing sensitive connection settings through Remote Access requires HTTPS.
+
+### Approving bots and webhooks
+
+Requests from Crews, bots, and webhooks absent from the people list also enter pending approval. Approval expands that sender's access to the Crew. When the Crew requests such approval itself, the change waits for its owner to confirm in Cockpit. Check the sender ID and allowed places before approving.
+
 ## Store credentials
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord token and Slack access and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.

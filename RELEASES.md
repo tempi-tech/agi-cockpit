@@ -4,6 +4,47 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.132.0 — 2026-11-13
+
+**Type:** minor · **Platforms:** macOS
+
+- Added Chatwork connections for Crews as an AGI Lab member feature.
+- Added editing and deletion of queued Ask answers.
+- Added a choice of everyone or owners only for interrupting a working Crew.
+- Added continuation choices through Discord and Slack DMs when a Crew reaches a usage limit.
+- Changed requests from unlisted Crews, bots, and webhooks to require approval.
+- Changed Crews to stop a post and review new messages when unseen messages are found before sending.
+- Changed suppressed Discord mass mentions to appear as plain text.
+- Fixed tasks without a session being lost after restarting.
+- Added fresh conversation startup when opening terminal-mode agent tasks without a session.
+- Added attribution when someone else completes a task.
+- Fixed enlarged Ask images and controls fitting within the window.
+- Added a link from Claude usage to its usage settings.
+- Changed expired organization authentication to refresh before requesting another sign-in.
+- Fixed default agent accounts using authentication directories specified by environment variables.
+- Fixed the environment used to start the Grok sign-in terminal.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CrewをChatworkへ接続できるようになりました。AGIラボの会員向け機能です。
+- 送信待ちのAsk回答を編集・削除できるようになりました。
+- Crewの作業に割り込める人を、全員またはオーナーだけから選べるようになりました。
+- Crewが利用上限に達したとき、DiscordやSlackのDMから続行方法を選べるようになりました。
+- 未登録のCrew・Bot・Webhookからの依頼を承認待ちにするようにしました。
+- Crewが送信前に未読の発言を検出した場合、投稿を止めて新しい発言を確認するようにしました。
+- Discordで一斉通知を抑制したメンションを通常の文字として表示するようにしました。
+- セッションがまだ作られていないタスクが再起動後も残るようにしました。
+- セッションがないターミナル表示のエージェントタスクを開くと、新しい会話で開始できるようにしました。
+- 自分以外が完了したタスクに、完了した人を表示するようにしました。
+- Askの拡大画像と操作ボタンが画面内に収まるようにしました。
+- Claudeの利用状況から、Claudeの利用上限設定を開けるようになりました。
+- 組織情報の認証期限切れで、再ログインを求める前に認証を更新するようにしました。
+- エージェントの既定アカウントで、環境変数で指定された認証フォルダを使うようにしました。
+- Grokのサインイン用ターミナルの起動環境を修正しました。
+
+</details>
+
 ## v4.131.0 — 2026-11-12
 
 **Type:** minor · **Platforms:** macOS, Linux
