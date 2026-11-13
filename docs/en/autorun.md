@@ -75,6 +75,8 @@ Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder Autoruns store either 
 
 In Desktop or the PWA, choose **Crew** as the execution target and select the Crew. The instruction joins that Crew's Queue and uses its settings at delivery. It waits while the Crew is stopped. A run recorded as `delivered` means the request reached the Queue, not that the work finished. Review the Crew's conversation for the result.
 
+For when to use a Crew's periodic check instead, see [Periodic checks and Autoruns](https://agi-labo.com/en/tools/cockpit/docs/crew-schedule).
+
 ```bash
 cockpit autorun create --name "Morning review" --instruction "Review today's work" --target-crew <crew> --type cron --expression "0 9 * * *"
 ```

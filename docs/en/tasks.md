@@ -52,6 +52,8 @@ To inspect a Crew’s active child tasks, open its **Child tasks** tab in the ri
 
 Choose **Turn into a Crew** from a task’s menu, or use `cockpit crew create --from-task <task-id>`. This preserves the conversation and agent session, agent settings, folder, and project. Child tasks move to the Crew, Autoruns targeting the task are redirected to it, and the task leaves its parent if it had one. Cockpit asks the Crew to propose instructions from that history before saving them.
 
+To create a new Crew instead, see [Create your first Crew](https://agi-labo.com/en/tools/cockpit/docs/crew-first).
+
 Conversion is available to supported Native UI agent tasks and Cockpit Agent tasks after work, tool approvals, questions, and pending agent switches have ended. Terminal, Antigravity, Master Agent, Fleet nodes, Creative Studio, and tasks already owned by a Crew are ineligible. Conversion cannot be undone; removing the Crew removes the converted task too. See the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) for exact eligibility and session handling.
 
 ## Search, sort, and use menus

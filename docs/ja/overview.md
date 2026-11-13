@@ -37,6 +37,8 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 
 クルーは、継続的な役割・記憶・専用フォルダを持つエージェントです。依頼を自分で進めたり、子タスクへ委任したりします。アルファ版のため、挙動や設定は変わる場合があります。
 
+クルーの使い方は、[クルー](https://agi-labo.com/tools/cockpit/docs/crew-about)の章で画面の操作から順に説明しています。初めての人は[承認モードと権限](https://agi-labo.com/tools/cockpit/docs/crew-approval)を先に読んでください。
+
 1. 作成画面で「タスク」ではなく「クルー」を選びます。プロジェクトまたは専用フォルダと、対応エージェントを選びます。TerminalとAntigravityではクルーを動かせません。
 2. 役割を伝えるか、クルーからの質問に答えます。名前と`AGENTS.md`の指示案を確認し、合意してから保存させます。
 3. Cockpit内から話しかけます。Discord・Slack・Chatworkへの接続は任意で、同じクルーを三つへ接続できます。Discordの場合はクルーの設定を開き、アプリを作成し、Cockpitの専用入力画面へbotトークンを入力して、サーバーへ招待します。Cockpitは**Message Content Intent**の自動有効化を試みます。できない場合はDeveloper Portalで有効にして保存し、再検証してください。エージェントは`cockpit crew connect <crew> --platform discord --secure-input`で画面を開けますが、受け取るのは結果だけです。最後にDMを送り、ユーザーIDを確認してオーナーとして承認します。

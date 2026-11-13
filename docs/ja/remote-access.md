@@ -120,6 +120,8 @@ PWAのライト・ダーク表示は、接続先Desktopの「外観」にある�
 
 タスク一覧でクルーを選ぶと、会話を読み、依頼をキューへ追加し、子タスクを確認し、承認や質問へ回答できます。設定では役割の指示、エージェント、Discord接続、許可する人と場所、定期確認、定期的な依頼を操作できます。Desktopと同様、権限を広げる変更ではCockpit内でオーナーの承認が必要になる場合があります。
 
+クルーそのものの使い方は[クルーとは](https://agi-labo.com/tools/cockpit/docs/crew-about)から、ほかのコンピューターのクルーとのやり取りは[複数のクルー](https://agi-labo.com/tools/cockpit/docs/crew-multiple)で説明しています。
+
 通常タスクの操作ではなく、クルーの会話と設定を使います。停止中の依頼はキューで待ち、配送時のクルーの設定で動きます。クルーの内部タスクは通常のリモートタスク操作で直接再開・改名・完了・削除・分岐・会話消去できません。`cockpit crew`はローカル専用で、遠隔からのクルー操作にはPWAを使います。[クルー（アルファ版）](https://agi-labo.com/tools/cockpit/docs#クルーアルファ版)と[セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data#クルーの権限と保存データ)も確認してください。
 
 ## 複数のCockpitを切り替える

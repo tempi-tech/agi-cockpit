@@ -75,6 +75,8 @@ Claude、Codex、Grok Build、Antigravity、Cursor、Qoderでは、「Auto」ま
 
 DesktopまたはPWAで、実行先に「クルー」を選び、送信先のクルーを指定します。指示はクルーのキューに入り、配送時のクルーの設定で動きます。停止中はキューで待ちます。実行結果の`delivered`はキューへ届いたことを示し、作業完了ではありません。成果はクルーの会話で確認してください。
 
+クルーの定期確認との使い分けは、[定期確認と自動実行](https://agi-labo.com/tools/cockpit/docs/crew-schedule)で説明しています。
+
 ```bash
 cockpit autorun create --name "朝の確認" --instruction "今日の作業を確認してください" --target-crew <crew> --type cron --expression "0 9 * * *"
 ```

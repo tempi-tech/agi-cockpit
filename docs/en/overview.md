@@ -37,6 +37,8 @@ Local features such as parallel task management, every supported agent, and Mast
 
 A Crew is an agent with a continuing role, memory, and its own home folder. It can work on requests itself or delegate to child tasks. Crews are in alpha: behavior and settings may change.
 
+The [Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-about) chapter explains how to use Crews, starting from the screens. If you are new to Crews, read [Approval modes and permissions](https://agi-labo.com/en/tools/cockpit/docs/crew-approval) first.
+
 1. Open the creation screen and choose **Crew** instead of **Task**. Choose a project or the Crew's own folder and a supported agent. Terminal and Antigravity cannot run a Crew.
 2. Describe its role, or let it ask you. Review the proposed name and `AGENTS.md` instructions before agreeing to save them.
 3. Talk to it inside Cockpit. Discord, Slack, and Chatwork are optional, and one Crew can connect to all three; open the Crew's settings to connect it. For Discord, create an application, enter its bot token in Cockpit’s dedicated input screen, invite it to a server, and send it a DM to identify the owner. Cockpit tries to enable **Message Content Intent** automatically; if it cannot, enable it in the Developer Portal, save, and verify again. An agent can request this screen with `cockpit crew connect <crew> --platform discord --secure-input` and receives only the result. Verify the user ID before confirming ownership.

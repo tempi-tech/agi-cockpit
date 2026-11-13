@@ -46,15 +46,9 @@ Importing reads the original session files locally without changing or deleting 
 
 ## 6. Start talking with your Assistant Crew
 
-If you have no Crew yet, **Continue** on the last step makes Cockpit create one Assistant Crew. It is named **Assistant** in English and helps with research, summaries, drafts, and notes. It runs on the agent you made ready in the agent step, and on Claude Code when both Claude Code and Codex are ready.
+If you have no Crew yet, finishing the last step makes Cockpit create one Assistant Crew and open its conversation. The first exchange with the Assistant, how to decide its role, and what happens when no Assistant is created or it cannot be created are explained in [Create your first Crew](https://agi-labo.com/en/tools/cockpit/docs/crew-first).
 
-Setup then finishes and the Assistant's conversation opens on the Crew screen. At the top of the conversation, the first instructions Cockpit sent the Assistant appear as one line, **First instructions**; select it to read them. The Assistant briefly introduces itself, gives three examples of what you can ask, and asks what you would like it to do. Its first reply is an AI response, so it takes from a few seconds to a few tens of seconds.
-
-When you send a request, the Assistant does that job first and shows the result. It then confirms a role and a name that fit the job with an Ask. **Use this role** writes the role down and changes the name; **Keep as Assistant** leaves both as they are. Either way, it proposes one job to keep doing: an Autorun for AGI Lab members, and a periodic check for everyone else. If you close the conversation without talking to the Assistant, it stays with its fixed name and role, and you can talk with it from the Crew list.
-
-When you already have a Crew, or you chose **Set up later** without a ready agent, setup finishes without creating the Assistant. When the Assistant cannot be set up, the reason is shown. **Retry** tries again, reusing the Assistant if it was already created. **Not now** finishes setup and opens the Assistant's conversation if it was already created.
-
-One Crew is free, including stopped Crews, and the Assistant is that Crew; an AGI Lab membership is required to create more. To start with a task instead, continue to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
+Including stopped Crews, you can create one Crew for free, and the Assistant is that one. Creating more requires an AGI Lab membership. To start from a task instead, go to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
 ## Open Cockpit at login
 
