@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.128.0 on 2026-11-09. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.133.0 on 2026-11-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -84,6 +84,8 @@ Muse Code Native UI receives current additional workspace roots on every turn, s
 ## Models and reasoning settings
 
 Models, reasoning levels, service tiers, and system prompts are displayed within the support reported by the capability registry and runtime discovery. The model picker groups candidates under agent tabs and opens on the agent currently used by the task. In task details, choosing a model under another supported agent schedules an agent switch for the next message. Even before a Native UI conversation has any messages, the picker shows candidates for that task's agent. If runtime candidates arrive later, Cockpit does not revert a valid model selected in the meantime to the default. Validation depends on the agent; Muse Code also accepts unlisted model IDs as described below.
+
+Antigravity model discovery uses the selected account and configured launch command. New tasks on Desktop and the PWA use the account selected by Auto or the fixed profile for discovery. Changing the command or updating its executable refreshes the catalog. A model that advertises no reasoning levels runs without one; task creation rejects an explicitly requested `--effort` for such a model. If Antigravity rejects a model as unknown, Cockpit refreshes that account's list and shows the available model IDs, or explains that the list could not be read. Choose another model; Cockpit does not silently substitute one.
 
 Antigravity Native UI keeps the reasoning level selected for that task after a turn completes and after switching tasks. For example, the next follow-up after a `high` turn remains `high` even when the refreshed candidate list defaults to `low`. Cockpit moves to the current supported default only when the refreshed candidates no longer offer the saved level.
 
