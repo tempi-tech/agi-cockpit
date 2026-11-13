@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -13,7 +13,7 @@ Muse Code uses one shared login per computer (Keychain on macOS) or a Meta API k
 
 ## Understand default and named profiles
 
-Each provider has a default account that uses its existing environment. You can add named profiles such as `work` and `personal`. A profile name is Cockpit's local selection label, not the AI service's plan name or email address.
+Each provider has a default account that uses its existing environment. Cockpit respects `CLAUDE_CONFIG_DIR`, `CODEX_HOME`, `GROK_HOME`, `CURSOR_CONFIG_DIR` (or `CURSOR_DATA_DIR`), and `QODER_CONFIG_DIR` inherited at launch for the corresponding default account. Authentication checks, usage reads, and execution use that location. Named profiles keep their own isolated directories. You can add named profiles such as `work` and `personal`. A profile name is Cockpit's local selection label, not the AI service's plan name or email address.
 
 An agent account profile is separate from a Browser Identity. An account profile isolates execution authentication for Claude, Codex, or another task agent. A Browser Identity isolates cookies, localStorage, and other website state in the in-app browser.
 
@@ -75,6 +75,8 @@ When Codex reports the purchased credit balance for a ChatGPT account, Usage dis
 The Desktop and PWA new-task screens show the same allowances for the selected agent and account before creation. A fixed account shows that profile. Auto does not substitute the default account's quota; it previews the account chosen by the same selection method used at runtime and labels it **Auto · account name**.
 
 An exhausted quota remains visible at 0%. An unknown value appears as unavailable, and a missing reset time has no countdown. Check the reported authentication or retrieval status before deciding that an account is exhausted. These provider allowances are separate from conversation context usage.
+
+When unused Claude limit resets are available, their details offer a link to [Claude usage settings](https://claude.ai/settings/usage). The browser uses whichever Claude account is signed in there; confirm it before using a reset. Cockpit does not spend Claude resets itself.
 
 ### Sign in from Usage
 
@@ -140,6 +142,8 @@ After switching a task that stopped at a usage limit, send a follow-up to contin
 Use the account picker below a Crew’s composer to choose an account or Auto. The CLI equivalent is `cockpit crew update <crew> --account <name|default|auto>`. A switch requested during a reply takes effect after the turn, preserving the conversation, Queue, and chat connections. When Auto recovers from a usage limit, the Crew continues through its Queue. Changing agents keeps Auto but resets a fixed account to the new agent’s default. If the account cannot be applied, message delivery pauses and `cockpit crew get <crew>` reports the reason in `account.error`. Repeat the account setting to retry.
 
 The usage-limit option to continue with another agent checks a model available to the selected account. Crews are offered only supported agents. Switching a Crew’s agent starts a new session without transferring the full previous conversation; a notice at the front of its Queue asks it to check its state and continue. If the check takes more than 20 seconds, the switch is not accepted.
+
+When a Crew stops at a usage limit, selected Ask DM recipients on Discord, Slack, and Chatwork can choose to continue with another available account (when not already using Auto), choose another supported agent with a usable account, or wait for the reset. Only current owners can act. Unavailable or stale choices must be made again in Cockpit. These controls do not bypass the provider's limits; switching agents starts a new session as described above.
 
 ## Sign out of Antigravity
 

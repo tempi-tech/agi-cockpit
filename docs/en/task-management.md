@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -233,7 +233,7 @@ cockpit task queue <task-id> remove <item-id>
 cockpit task queue <task-id> send-now <item-id>
 ```
 
-Editing applies to messages from agents or Cockpit. Changed text is delivered as the owner's message, retaining attachments and the original sender label with **Edited by the owner**. Unchanged text retains its original authority. Edit your own queued messages in the app. Ask answers cannot be edited or removed; Discord and Slack messages cannot be edited or sent now. Removing a message does not notify its sender.
+Editing applies to messages from agents or Cockpit. Changed text is delivered as the owner's message, retaining attachments and the original sender label with **Edited by the owner**. Unchanged text retains its original authority. Edit your own queued messages in the app. For an Ask answer that has not started sending, `remove` withdraws it and reopens the Ask blank. CLI `edit` returns `ask_answer_not_editable`; use Edit in the app to restore the previous answer as a draft. Sending, sent, unconfirmed answers and device-connection approvals cannot be withdrawn. Discord, Slack, and Chatwork messages cannot be edited or sent now. Removing a message does not notify its sender.
 
 Every task identity, including an ordinary owner task, a Crew, or its child task, is refused with `owner_only` (403). Agents cannot manage the Queue. `--host` is unsupported. During an approval or question wait, CLI **send-now** returns `queue_action_refused`; answer first, or use the app's confirmation to cancel the wait. See [task Reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task#queue) for eligibility and errors.
 

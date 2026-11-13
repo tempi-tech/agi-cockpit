@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -150,6 +150,8 @@ The Fleet group's running indicator and status sort follow the state of the Run 
 ## Complete and delete
 
 Complete moves a task from active work to completed work. Delete removes the task record from Cockpit. They are separate operations.
+
+When someone else completes a task, its conversation and completion notification identify who completed it. The CLI exposes this as `completedBy` in `cockpit task get`. To continue a completed task, send a message in its conversation or use `cockpit task send`; `resume` refuses completed tasks with `task_completed`.
 
 When saved tasks exist, AGI Cockpit does not overwrite them with an empty list unless you explicitly delete the final task. If `state.json` cannot be read at startup, Cockpit stops before writing and shows recovery steps using the data folder and adjacent `backups` directory.
 

@@ -4,7 +4,7 @@
 
 プロジェクト、タスクの整理と移動、タスク一覧、オーバービュー、検索、状態、完了、削除の違いを説明します。
 
-> AGI Cockpit 4.131.0で2026-11-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.132.0で2026-11-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は、複数の仕事から「次にどれを見るか」を選ぶ場所です。個々の会話や追加入力は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)で扱います。
 
@@ -150,6 +150,8 @@ Runの「Runを削除」は保存済みRun履歴だけを削除し、関連タ�
 ## 完了と削除
 
 「完了」はタスクを稼働中の仕事から完了済みへ移します。「削除」はCockpitからタスク記録を取り除きます。別の操作です。
+
+自分以外が完了したタスクでは、会話と完了通知に完了した人を表示します。CLIでは`cockpit task get`の`completedBy`で確認できます。完了済みタスクを続けるには、会話からメッセージを送るか`cockpit task send`を使います。`resume`は完了済みタスクを`task_completed`として拒否します。
 
 保存済みタスクがある場合、AGI Cockpitは最後のタスクを明示的に削除しない限り、空のタスク一覧で既存データを上書きしません。起動時に`state.json`を読めない場合も書き込み前に停止し、データフォルダーと隣接する`backups`からの復旧手順を表示します。
 

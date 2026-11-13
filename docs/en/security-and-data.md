@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -119,6 +119,8 @@ Each Crew keeps its instructions, memory and work in its own home, with Git hist
 Finished Asks also retain a local status record for up to 30 days, with at most the latest 500 records. It includes the title, task, outcome, responder and an answer summary of up to 500 characters. `cockpit ask get <askId>` exposes the status and answer-delivery state; do not put secrets in Ask answers. This retention is separate from the secure password-input flow.
 
 Crew Ask DMs are on by default and send questions and supported media to each connection owner through the Crew's bot. Crew settings or `cockpit crew update <crew> --ask-dm-to <user-id>` can narrow the recipients. An empty selection sends to nobody; `--ask-dm-to all` restores all owners. This selection also covers approval Asks and secret-input notices. Removing a recipient closes their unanswered DMs and clears question text, choices, and attachments. An agent may change recipients only during an owner-started turn. Only the DM recipient, while still an owner, may answer. New-person approval Asks also accept an owner's DM answer; approval grants access to DMs and all places the Crew listens to. General Ask relays exclude owner-only questions, and Crew settings-change approvals stay in Cockpit. Secret requests send only a notice and a token-free PWA address when HTTPS Remote Access runs, never the request details or value. Disable these DMs with `cockpit crew update <crew> --ask-dm off`. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask#crew-questions-in-discord-and-slack-dms).
+
+The **Interrupting its work** setting chooses **Everyone** or **Owners only** among senders already allowed to reach the Crew. It changes delivery timing, not access or turn authority. Non-owner requests wait in the Queue when only owners may interrupt. The unread-message check before channel or thread posts is also a coordination aid: DMs and owner-side sends are excluded, and failed history reads permit sending with a warning.
 
 ### Chatwork connections and data flow
 

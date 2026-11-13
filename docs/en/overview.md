@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -39,7 +39,7 @@ A Crew is an agent with a continuing role, memory, and its own home folder. It c
 
 1. Open the creation screen and choose **Crew** instead of **Task**. Choose a project or the Crew's own folder and a supported agent. Terminal and Antigravity cannot run a Crew.
 2. Describe its role, or let it ask you. Review the proposed name and `AGENTS.md` instructions before agreeing to save them.
-3. Talk to it inside Cockpit. Discord and Slack are optional, and one Crew can connect to both; open the Crew's settings to connect it. Create a Discord application, enter its bot token in Cockpit’s dedicated input screen, invite it to a server, and send it a DM to identify the owner. Cockpit tries to enable **Message Content Intent** automatically; if it cannot, enable it in the Developer Portal, save, and verify again. An agent can request this screen with `cockpit crew connect <crew> --platform discord --secure-input` and receives only the result. Verify the user ID before confirming ownership.
+3. Talk to it inside Cockpit. Discord, Slack, and Chatwork are optional, and one Crew can connect to all three; open the Crew's settings to connect it. For Discord, create an application, enter its bot token in Cockpit’s dedicated input screen, invite it to a server, and send it a DM to identify the owner. Cockpit tries to enable **Message Content Intent** automatically; if it cannot, enable it in the Developer Portal, save, and verify again. An agent can request this screen with `cockpit crew connect <crew> --platform discord --secure-input` and receives only the result. Verify the user ID before confirming ownership.
 4. Review the allowed people and places before accepting requests. A new person’s DM or mention waits for approval, with ⏳ on the first request. Approval delivers that request after rechecking permissions, place, and attachment availability; other messages sent while waiting are not delivered. If it cannot be delivered, for example because the Crew is stopped, ask the person to send it again after approval. Use the channel's mention, all-message, or off setting to choose where it listens.
 
 Each turn uses the owner's AI account, including requests from other allowed people. Check that service's terms and tell participants how their messages are used. A careful approval mode can pause replies until the owner answers in Cockpit; **Full access** permits commands and edits without asking. The home folder and Crew CLI restrictions are not a sandbox. Read [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#crews-access-and-retained-data) before connecting other people.
@@ -52,7 +52,7 @@ The Crew list’s **…** menu supports renaming and opening settings, and the l
 
 A Crew's own session can inspect other Crews' settings, instructions, people, pending requests, and missions during automatic turns too. Strict mode refuses this in turns involving a member. Other Crews' chat history and credentials remain unavailable.
 
-Crew settings use separate **Discord** and **Slack** tabs under the connection tab; choose the chat before changing its connection or allowed people and places. The last selected chat is remembered. The **Who gets Ask DMs** choices show each owner's destination chat so you can distinguish Discord and Slack recipients.
+Crew settings use separate **Discord**, **Slack**, and **Chatwork** tabs under the connection tab; choose the chat before changing its connection or allowed people and places. The last selected chat is remembered. The **Who gets Ask DMs** choices show each owner's destination chat so you can distinguish recipients on Discord, Slack, and Chatwork.
 
 ### Connect to Slack
 
@@ -61,6 +61,24 @@ On Desktop, choose Slack in the Crew’s connection settings and select **Connec
 You can also connect manually. Use **Create the app with these settings**, then get the Bot OAuth token (`xoxb-`) from **Install App** and the App-Level token (`xapp-`, with `connections:write`) from **Basic Information** of the same app. Setup includes buttons to open these pages. Enable Socket Mode and enter both tokens in the dedicated fields. Do not paste tokens into a conversation.
 
 Finally, send the Crew a Slack DM and verify your user ID before confirming ownership. Invite it to channels with `/invite @name`. Mentions received before it joins can also reach it, subject to the same people and place permissions. On Discord, replying to the Crew’s own post or mentioning its own bot role also counts as a mention, subject to the same people and place permissions. When a Discord message is a reply, the Crew receives the referenced message when it can be fetched; unavailable references do not block delivery. The channel picker lists only channels the Crew can view; it hides channel names when Discord permissions cannot be checked.
+
+### Connect Chatwork
+
+Chatwork requires AGI Lab membership and a Chatwork account dedicated to the Crew. Sign in to AGI Lab in Cockpit, open the Crew's connection settings, and choose **Chatwork**. Create the Crew's account, then paste its API token from Chatwork's integration settings into Cockpit's dedicated input screen. Never send tokens in a conversation.
+
+Follow the setup screen to prepare a receiving address. While signed in as the Crew in Chatwork, create a webhook with **Account event**, paste that address as its URL, and paste the webhook token back into Cockpit. Through Remote Access, exchanging the receiving address and webhook token requires HTTPS. From your own Chatwork account, send the Crew a contact request and confirm your identity in Cockpit.
+
+DMs, TO mentions, and replies to the Crew can reach it under the configured people and room permissions; TO-ALL alone does not count as a mention. Chatwork has no threads, reactions, or typing indicator, and Cockpit does not change its account profile. To correct or cancel a delivered request, send a new message: later edits and deletions are not delivered. Disconnecting removes receiving configuration at AGI Backend; delete the webhook separately in Chatwork. See [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#chatwork-connections-and-data-flow) and the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew#on-chatwork).
+
+Chatwork Ask DMs show numbered choices. Reply to the Ask message with a number, comma-separated numbers for multiple choices, or text when allowed. Multiple questions arrive one at a time; a reply to the first message can answer the whole Ask. An ordinary DM without a reply to the Ask reaches the Crew as a normal request.
+
+### Control interruptions and check new messages
+
+In **Interrupting its work**, choose **Everyone** (the default) or **Owners only**. This controls which allowed chat messages and button presses interrupt supported running turns. With Owners only, other people's and Crews' messages wait in the Queue. It does not grant access to new senders. The CLI equivalent is `cockpit crew update <crew> --chat-interrupt everyone|owner`; the Crew can change it only during an owner-started turn.
+
+Before the Crew's own session posts or replies in a channel or thread, Cockpit checks for unread messages. If it finds any, the post is stopped with `unseen_messages` so the Crew can read them and decide whether to revise, retry, or cancel. DMs and posts sent from the owner's side are excluded. A failed or unauthorized history read allows sending with a warning, so this is not a guarantee that every intervening message was read.
+
+On Discord, mentions whose mass notifications were suppressed appear as ordinary text. Requests from unregistered Crews, bots, and webhooks wait for approval too; a Crew's request to approve them requires owner confirmation in Cockpit.
 
 ### Choose the Crew's chat writing
 
@@ -144,7 +162,7 @@ Stopping preserves the Queue; starting delivers its messages. Removing a Crew de
 | Access | Scope covered by these docs |
 | --- | --- |
 | Free access | Create a task in Desktop, run an agent, and review the result and history dashboard. Local features are free with no task cap, including one Crew |
-| AGI Lab membership | Everything in free access, plus Autorun, PWA remote access, smart routing, and no limit on Crews |
+| AGI Lab membership | Everything in free access, plus Autorun, PWA remote access, smart routing, Chatwork connections, and no limit on Crews |
 
 A lock on a feature means that feature requires an active AGI Lab membership. Authentication for Claude Code, Codex, or another task agent is managed separately from your AGI Lab sign-in.
 

@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -47,6 +47,9 @@ Cockpit also asks whether to approve a new person waiting to talk to the Crew. O
 
 A Crew's secret input request is never sent to chat. When HTTPS Remote Access is running, owners receive only a notice and the PWA address, without a token, request ID, label, summary, destination, or secret value. Enter the secret in Cockpit's dedicated input surface. This notice also follows the Ask DM setting.
 
+
+For Crew questions on Chatwork, reply to the numbered Ask message in the Crew's DM. See [Chatwork setup and answers](https://agi-labo.com/en/tools/cockpit/docs#connect-chatwork) for the connection and reply procedure. This is separate from the general Discord and Slack Ask relays.
+
 ## Question and answer formats
 
 Ask can combine:
@@ -71,6 +74,8 @@ Desktop and PWA Ask surfaces include a button that opens the task that created t
 In the PWA task list, a question bubble labelled **Waiting for an Ask answer** identifies a task with an unanswered Ask. It follows the open Ask itself rather than an ordinary task question state, and disappears after the Ask is answered or closed. The task row still opens task details; answer the Ask directly in the task chat or from **Inbox** in the PWA. The chat shows the full question and answer form, including choices, free text, attachments, and explanations; answering or closing it updates the other Ask surfaces.
 
 When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
+
+Enlarged Ask images fit within the viewport on Desktop and the PWA. Close and navigation buttons stay inside the screen, including on narrow displays.
 
 ### Read Markdown in an Ask
 
@@ -139,7 +144,9 @@ In the PWA **Inbox**, the Ask summary, questions, choices, descriptions, and the
 
 Until the answer reaches the task, the queue labels it as an Ask and summarizes its selections, free-form input, and attachments first. After delivery, the conversation history also presents the answer first; expand **Question and details** to inspect the original question, responder, and raw payload.
 
-If the task is running, the answer enters the shared Queue as **Answered · waiting to send** and leaves the open Ask list. On Desktop and the PWA, surfaces with interrupt support offer the lightning button, **Interrupt and send this queued message now**, to send the selected answer immediately. Its structured answer, responder, and attachments stay intact, and the remaining queue order is preserved. A pending approval, tool question, or unavailable session shows a reason and leaves the answer queued for automatic delivery. Answers cannot be edited or removed; sending, delivered, and unconfirmed answers cannot be interrupted again. See [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details#follow-up-queue-interrupt-and-resume) for recovery after failed or unconfirmed delivery.
+If the task is running, the answer enters the shared Queue as **Answered · waiting to send** and leaves the open Ask list. On Desktop and the PWA, surfaces with interrupt support offer the lightning button, **Interrupt and send this queued message now**, to send the selected answer immediately. Its structured answer, responder, and attachments stay intact, and the remaining queue order is preserved. A pending approval, tool question, or unavailable session shows a reason and leaves the answer queued for automatic delivery.
+
+Before sending starts, **Edit** withdraws the queued answer and reopens the Ask with its selections, text, and attachments as a shared draft. **Delete** withdraws it and reopens the Ask blank. Neither delivers the old answer. Editing does not reserve the Ask for you: another client can answer it. Reopening closes the old Discord and Slack copies, whose buttons and forms no longer work. Device-connection approvals take effect when answered and cannot be withdrawn. Sending, delivered, and unconfirmed answers cannot be edited, deleted, or interrupted again. See [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details#follow-up-queue-interrupt-and-resume) for recovery after failed or unconfirmed delivery.
 
 Closing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
 

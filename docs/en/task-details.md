@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -16,6 +16,8 @@ Task details is where you understand a piece of work selected from the [Task lis
 - **Resume** reconnects an unfinished task to its saved session after its process stopped, such as after an app restart.
 
 A Terminal task cannot restore its previous shell process, so resume starts a new shell in the same directory. Native UI for Cursor, Qoder, Grok Build, and Muse Code reconnects to its supported saved conversation.
+
+Tasks without a session yet remain in the task list after restarting Cockpit. Opening a terminal UI agent task that has no saved session starts a new conversation in the same task; a notice makes this explicit. This also applies to `cockpit task resume`. A task marked `startFailed` instead requires `cockpit task retry-start <id>`.
 
 Codex Native UI preserves the task’s automatic-review setting when resuming its conversation. If Codex reports a different effective reviewer, Cockpit reconciles the approval mode and shows a notice; resuming does not silently grant full access.
 
@@ -39,11 +41,11 @@ In Muse Code Native UI on Desktop and the PWA, once Muse Code reports that its r
 
 Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
 
-The owner can also edit, remove, or send now messages queued by an agent or Cockpit. These show their sender; saving changed text delivers it as the owner's message and marks it **Edited by the owner**. Attachments remain. Saving unchanged text preserves the sender's authority. While its inline editor is open, the message waits for up to 10 minutes; **Cancel** releases it. Removing it does not notify the sender. Ask answers cannot be edited or removed, and Discord or Slack messages cannot be edited or sent now this way. The CLI operations are owner-only: see [Manage a Queue](https://agi-labo.com/en/tools/cockpit/docs/task-management#manage-a-queue-as-the-owner).
+The owner can also edit, remove, or send now messages queued by an agent or Cockpit. These show their sender; saving changed text delivers it as the owner's message and marks it **Edited by the owner**. Attachments remain. Saving unchanged text preserves the sender's authority. While its inline editor is open, the message waits for up to 10 minutes; **Cancel** releases it. Removing it does not notify the sender. Unsent Ask answers have separate Edit and Delete actions described below. Discord, Slack, and Chatwork messages cannot be edited or sent now this way. The CLI operations are owner-only: see [Manage a Queue](https://agi-labo.com/en/tools/cockpit/docs/task-management#manage-a-queue-as-the-owner).
 
 The Queue is shared by Desktop and the PWA, with Ask answers and ordinary messages in registration order. Entries that still need attention, including waiting, delivering, and failed entries, survive closing a view or restarting Cockpit. Once delivery is confirmed and the entry appears in the conversation, it leaves the Queue instead of remaining as a sent item.
 
-An Ask answer is summarized with its selections, free-form input, and attachments first. Expand it to inspect the full answer together with the question, responder, and raw payload. You cannot edit or remove it.
+An Ask answer is summarized with its selections, free-form input, and attachments first. Expand it to inspect the full answer together with the question, responder, and raw payload. Before sending starts, **Edit** reopens the Ask with the previous selections, text, and attachments as a draft; **Delete** reopens it blank. The task does not receive the withdrawn answer. See [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask) for restrictions.
 
 On Desktop and the PWA, surfaces with interrupt support let you send an unsent answer immediately with the lightning button, **Interrupt and send this queued message now**. Only the selected answer is sent, preserving its question, responder, and attachments. Remaining items keep their order and wait until the replacement turn finishes or Stop confirms its cancellation. A pending approval, tool question, or unavailable session shows a reason and leaves the answer queued for automatic delivery. Sending, delivered, and unconfirmed answers cannot be interrupted again.
 

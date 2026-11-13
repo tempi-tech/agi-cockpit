@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.130.0で2026-11-11に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.132.0で2026-11-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -233,7 +233,7 @@ cockpit task queue <task-id> remove <item-id>
 cockpit task queue <task-id> send-now <item-id>
 ```
 
-編集できるのはエージェントやCockpitから届いたメッセージです。本文を変えるとオーナーのメッセージとして届け、添付と送信元の表示を残し、「オーナーが編集」と表示します。同じ本文の保存では権限を変えません。自分の通常メッセージはアプリで編集してください。Ask回答は編集・削除できず、DiscordとSlackのメッセージは編集・即時送信できません。削除しても送信元には通知しません。
+編集できるのはエージェントやCockpitから届いたメッセージです。本文を変えるとオーナーのメッセージとして届け、添付と送信元の表示を残し、「オーナーが編集」と表示します。同じ本文の保存では権限を変えません。自分の通常メッセージはアプリで編集してください。送信開始前のAsk回答は`remove`で取り下げ、Askを空欄で開き直せます。CLIの`edit`は`ask_answer_not_editable`を返すため、元の回答を下書きへ戻す場合はアプリの「編集」を使います。送信中・送信済み・送信結果が未確認の回答と端末接続の承認は取り下げられません。Discord・Slack・Chatworkのメッセージは編集・即時送信できません。削除しても送信元には通知しません。
 
 通常のオーナータスクを含むすべてのタスク認証、Crew、その子タスクからの操作は`owner_only`（403）で拒否します。エージェントからキューは操作できません。`--host`も未対応です。承認や質問への回答待ちではCLIの`send-now`は`queue_action_refused`を返すため、先に回答するか、アプリの確認画面で待機を取り消してください。適用条件とエラーは[task Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task#queue)を参照してください。
 
