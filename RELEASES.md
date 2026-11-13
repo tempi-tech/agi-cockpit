@@ -8,8 +8,8 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Remote access now pauses with settings retained when AGI Lab sign-in ends and resumes automatically after signing in again.
-- Prevented API keys in queued messages from appearing in task data and CLI responses.
+- Added automatic Remote Access pause when AGI Lab sign-in ends and resume with saved settings after signing in again.
+- Fixed API keys in queued messages appearing in task data and CLI responses.
 - Fixed Antigravity model and reasoning effort selection to match the selected account and executable.
 - Removed unnecessary replies after pressing buttons in Crew Ask notification DMs.
 - Improved compatibility for search and other PWA interactions in older browsers.
