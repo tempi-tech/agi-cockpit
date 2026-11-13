@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.133.0 — 2026-11-14
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added automatic Remote Access pause when AGI Lab sign-in ends and resume with saved settings after signing in again.
 - Fixed API keys in queued messages appearing in task data and CLI responses.
