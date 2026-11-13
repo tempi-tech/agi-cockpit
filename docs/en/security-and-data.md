@@ -148,6 +148,8 @@ Switching an active Claude, Codex, Grok Build, Antigravity, Cursor, or Qoder tas
 
 The CLI can set the OpenRouter, OpenCode Go, OpenCode Zen, Anthropic, and Meta API keys with `cockpit settings set agents.credential.<name> --stdin` or `--key-file`. Never put a key in a command argument or task message. Reads report only whether a key is set. `settings reset agents.credential.<name>` removes that key from the same encrypted store used by Settings. These commands operate locally; protect local CLI access as authority to replace or remove provider credentials. CLI request bodies are passed without temporary request-body files. Internal credentials such as Cockpit's local tokens and authentication headers are not placed in child-process command-line arguments; the CLI passes them through standard input or a short-lived temporary file. For the latter, only the temporary path appears in the child arguments, and the file is removed after handoff.
 
+Task get, list, create, and wait CLI responses, Hooks task payloads, and task data sent to Desktop or the PWA omit OpenRouter, OpenCode Go, and OpenCode Zen API keys from queued messages. This exclusion applies to output; it does not change how messages are saved or sent to providers.
+
 ## Enter a password once
 
 When an agent uses `cockpit secret request`, you can deliver a value once to a specified browser password field from the dedicated Desktop window and Ask tab, or from the **Inbox** in an HTTPS-connected PWA. The dedicated window follows the Ask-window setting, but this remains separate from an Ask answer. Review the PC, task, purpose, Browser Identity, actual URL, destination, and deadline, then select **Fill this field once**. It does not click a login button or submit the form automatically.
@@ -243,6 +245,8 @@ Remote CLI control accepts a computer on the same tailnet with the same Tailscal
 Local Wi-Fi mode is unencrypted and activates only after explicit confirmation. Do not use it on public or untrusted networks. Stopping Remote Access ends connected sessions and saves standalone state.
 
 See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup details.
+
+Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, HTTPS settings, and paired credentials are retained. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
 
 ## Protect App Surface
 

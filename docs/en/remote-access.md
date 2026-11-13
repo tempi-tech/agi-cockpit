@@ -22,6 +22,8 @@ The AGI Cockpit process and remote access must remain running on the target comp
 
 When Cockpit runs on several PCs under the same Tailscale account, the **Device** filter in the Desktop task list can show task summaries from the other PCs. Selecting a row opens that device's PWA inside Desktop, where you can read the conversation, send messages, answer Asks, stop the task, or complete it. The list feed and the interactive task detail use separate connections. The task view identifies the target device; confirm it before acting. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#open-and-operate-tasks-on-another-pc) for the workflow.
 
+Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, HTTPS settings, and paired credentials are retained. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
+
 ## What Tailscale is
 
 Tailscale is a service that securely connects your own devices to each other. When you sign in to the same Tailscale account on your computers and phones, those devices form a private network of their own (a tailnet), and traffic between them is encrypted.

@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.133.0 — 2026-11-14
+
+**Type:** minor · **Platforms:** macOS
+
+- Remote access now pauses with settings retained when AGI Lab sign-in ends and resumes automatically after signing in again.
+- Prevented API keys in queued messages from appearing in task data and CLI responses.
+- Fixed Antigravity model and reasoning effort selection to match the selected account and executable.
+- Removed unnecessary replies after pressing buttons in Crew Ask notification DMs.
+- Improved compatibility for search and other PWA interactions in older browsers.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- AGIラボのサインインが終了したとき、設定を保持してリモートアクセスを一時停止し、再サインイン後に自動再開するようになりました。
+- 送信待ちのメッセージのAPIキーが、タスク情報やCLI応答に含まれないようにしました。
+- Antigravityで、選択したアカウントと実行環境に対応するモデル・思考レベルを使用するようにしました。
+- CrewのAsk案内DMでボタンを押した後、不要な返信が残らないようにしました。
+- PWAで、古いブラウザーでも検索や画面操作を利用できるよう互換性を改善しました。
+
+</details>
+
 ## v4.132.0 — 2026-11-13
 
 **Type:** minor · **Platforms:** macOS, Linux
