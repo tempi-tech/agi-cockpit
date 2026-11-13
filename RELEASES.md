@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.132.0 — 2026-11-13
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added Chatwork connections for Crews as an AGI Lab member feature.
 - Added editing and deletion of queued Ask answers.
