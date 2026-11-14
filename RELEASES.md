@@ -8,7 +8,7 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- When a Crew is mentioned in an unregistered Discord or Slack channel, owners can now use an Ask to choose where it responds and who may talk to it.
+- Added owner Asks to choose where a Crew responds and who may talk to it when mentioned in an unregistered Discord or Slack channel.
 
 <details>
 <summary>日本語のリリースノート</summary>
