@@ -4,6 +4,19 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.134.0 — 2026-11-15
+
+**Type:** minor · **Platforms:** macOS
+
+- When a Crew is mentioned in an unregistered Discord or Slack channel, owners can now use an Ask to choose where it responds and who may talk to it.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Discord・Slackの未登録チャンネルでクルーがメンションされたとき、オーナーがAskで反応する場所と話せる人の範囲を選べるようになりました。
+
+</details>
+
 ## v4.133.0 — 2026-11-14
 
 **Type:** minor · **Platforms:** macOS, Linux

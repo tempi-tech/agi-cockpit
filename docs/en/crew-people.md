@@ -136,6 +136,17 @@ Choose from the list with **Add a channel**.
 - **Discord:** The list shows only channels the Crew can see. A missing channel appears once you give the Crew the **View Channel** permission in Discord
 - **Slack:** The list shows public channels and private channels the Crew has joined. For a channel the Crew has not joined, send `/invite @(Slack handle)` in that channel
 
+### A mention in a channel you have not added
+
+On Discord and Slack, when **Other channels** is **Off**, a mention in a channel you have not added waits for an owner's answer. Cockpit marks the first message with ⏳ and sends an Ask showing the channel, sender, first 100 characters, and message link. In a thread, the Ask concerns its parent channel.
+
+- **React when mentioned** is the recommended default. **React to every message** also allows future messages from people who may talk to the Crew without a mention.
+- If the sender may not talk to the Crew yet, the same Ask offers **In this channel only**, **Everywhere** (DMs and every place the Crew listens to), or **Don't add**. Adding the channel alone does not give everyone permission to talk.
+- Cockpit holds the oldest 10 mentions in that channel. After approval, it checks current permissions again and delivers eligible mentions in arrival order.
+- **Don't add** for the channel sets it to **Off**, discards the waiting mentions, and stops future approval requests there. Closing the Ask without answering discards those mentions; a new mention can ask again.
+
+Only the owner can answer. These Asks can arrive by DM when Ask DMs are enabled. Explicitly disabled channels do not produce an Ask. This channel approval flow does not apply to Chatwork.
+
 ### When it does not reply in a thread
 
 **In Discord, even when a channel is set to Everything, threads need a mention at first.** To have the Crew respond without a mention inside threads too, set the thread option to **Everything**.
