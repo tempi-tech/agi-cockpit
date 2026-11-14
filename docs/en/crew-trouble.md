@@ -4,7 +4,7 @@
 
 What to check when a Crew does not reply, "typing" stays, it stops for approval, cannot connect, or stops at a usage limit or the memory guard, and what common errors mean.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
+> Verified with AGI Cockpit 4.134.0 on 2026-11-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
 
 First, open the Crew's conversation in Cockpit. Most reasons appear there.
 
@@ -25,7 +25,7 @@ Check these from the top.
 
 **When nothing arrives in the conversation**, the message has not reached Cockpit. Check the following.
 
-- Whether the person is in **Who can talk**. If not, they are in **Waiting for approval**. Go to [A message got ⏳ (waiting for approval)](#a-message-got-waiting-for-approval) below
+- Whether the person is in **Who can talk**. If not, check **Waiting for approval** and the owner's Asks. Go to [A message got ⏳ (waiting for approval)](#a-message-got-waiting-for-approval) below
 - Whether the place is **Off**. If the parent channel is off, the Crew does not respond either
 - Whether they mentioned the Crew in a place that needs a mention. **Inside threads, a mention is needed at first, even if the channel is set to Everything**
 - Whether the message got 🌙. Go to [A message got 🌙 (outside active hours)](#a-message-got-outside-active-hours) below
@@ -35,7 +35,7 @@ For details, see [People and places](https://agi-labo.com/en/tools/cockpit/docs/
 
 ## A message got ⏳ (waiting for approval)
 
-When someone who is not in **Who can talk** sends a DM or mentions the Crew, Cockpit adds ⏳ to that message instead of replying. It does not reach the Crew. The same goes for messages from Crews and apps that are not in **Who can talk**.
+When someone who is not in **Who can talk** sends a DM or mentions the Crew in a place where it listens, Cockpit adds ⏳ to that message instead of replying. It does not reach the Crew. The same goes for messages from Crews and apps that are not in **Who can talk**.
 
 The owner chooses in **Waiting for approval** in the settings.
 
@@ -43,6 +43,8 @@ The owner chooses in **Waiting for approval** in the settings.
 - Press **Decline** to remove the ⏳ and deliver nothing
 
 ⏳ is added only once per person. If you write text in **Reply for people waiting for approval** in the settings, that text is sent back once along with the ⏳.
+
+On Discord and Slack, ⏳ can also mean a channel is waiting for approval: when **Other channels** is **Off** and a mention arrives in an unlisted channel, the owner receives an Ask about where the Crew responds and, if needed, who may talk. Answer that Ask; allowing the person alone does not add the channel. Explicitly disabled channels do not ask. See [Asks about unlisted channels](https://agi-labo.com/en/tools/cockpit/docs/crew-ask#asks-about-unlisted-channels).
 
 ## A message got 🌙 (outside active hours)
 
@@ -201,7 +203,7 @@ To resume, press **Resume** in the Crew's conversation in Cockpit, or have the o
 | A message including **They may not accept DMs from server members in their Discord settings.** | Check in Discord's settings whether DMs from server members are accepted |
 | A message including **Slack may not allow this app to message them.** | Check in Slack whether DMs from the app are accepted |
 
-Even if a DM does not arrive, Asks can be answered in Cockpit. Confirmations that widen what the Crew can do, such as approving a settings change, are never sent to DMs in the first place.
+Even if a DM does not arrive, Asks can be answered in Cockpit. Approvals of settings changes requested by the Crew are not sent to DMs. Asks about people waiting for approval and unlisted channels can arrive by DM.
 
 ## Periodic checks do not run
 

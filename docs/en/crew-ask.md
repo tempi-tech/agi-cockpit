@@ -4,7 +4,7 @@
 
 How owners answer Asks from Crews and child tasks in Discord, Slack, or Chatwork (for members) DMs, choose recipients, clean up answered DMs, and what never goes to DMs.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-ask)
+> Verified with AGI Cockpit 4.134.0 on 2026-11-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-ask)
 
 When a Crew needs a decision, it asks an owner through an Ask. The same goes for Asks from child tasks the Crew hands work to, from the Crew's Autorun tasks, and from Fleets the Crew runs. For how Ask itself works, see [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask).
 
@@ -54,7 +54,7 @@ With **Every owner**, owners added later also receive them.
 
 When the Crew is connected to two or more chats, owners appear separately, such as "name (Discord)" and "name (Chatwork)". **Choose which chat receives the DMs by choosing that chat's owner.** For example, if you choose only the Slack owner, DMs arrive only in Slack.
 
-The chosen recipients are also used for Asks about letting in people waiting for approval and for secret input notices.
+The chosen recipients are also used for Asks about letting in people waiting for approval, Asks about unlisted channels, and secret input notices.
 
 The Crew can change the recipients on request only when an owner asked.
 
@@ -80,7 +80,7 @@ Use this when you want to keep your chat DMs tidy.
 | Secret input (passwords and tokens) | Only a notice that input is waiting | Cockpit's secure input screen |
 | HTML explanations attached to an Ask | Only one line saying it can be viewed in Cockpit | Cockpit |
 
-Approving a settings change confirms widening what the Crew can do. It is answered only in Cockpit so that it cannot go through even if a chat account is taken over.
+Approving a settings change requested by the Crew confirms widening what the Crew can do. It is answered only in Cockpit so that it cannot go through even if a chat account is taken over.
 
 Secret input notices arrive only while HTTPS Remote Access is running. A notice contains only the PWA address. It does not contain the value, label, or summary. When the input request ends, Cockpit tells you that too. To enter it from the PWA, you need [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access).
 
@@ -88,12 +88,22 @@ Content written only in an HTML explanation cannot be read in a DM. Ask the Crew
 
 ## Asks about letting in people waiting for approval
 
-When someone who may not talk to the Crew talks to it, Cockpit shows owners an Ask titled "Let someone talk to (Crew)?" It includes the first 100 characters of the message and a link to the original message. This Ask also arrives in owners' DMs.
+When someone who may not talk to the Crew sends it a DM or mentions it in a place where it listens, Cockpit shows owners an Ask titled "Let someone talk to (Crew)?" It includes the first 100 characters of the message and a link to the original message. This Ask also arrives in owners' DMs.
 
 - **Approve** adds that person to the people who may talk to it. The message marked ⏳ reaches the Crew
 - **Deny** removes them from Waiting for approval
 
 Only owners can answer. The Crew itself and its child tasks cannot. For details, see [People and places](https://agi-labo.com/en/tools/cockpit/docs/crew-people).
+
+## Asks about unlisted channels
+
+On Discord and Slack, when **Other channels** is **Off** and the Crew is mentioned in a channel you have not added, Cockpit asks the owner whether to add that channel. A mention inside a thread asks about its parent channel. This Ask can also arrive in owners' DMs under the Ask DM settings.
+
+- Choose **React when mentioned**, **React to every message**, or **Don't add** for the channel
+- If the sender may not talk to the Crew yet, also choose **In this channel only**, **Everywhere**, or **Don't add** for that sender. Adding a channel alone does not allow everyone to talk
+- Only owners can answer; the Crew and its child tasks cannot. This differs from approval of a settings change requested by the Crew, which can only be answered in Cockpit
+
+The first message gets ⏳. Cockpit holds up to 10 mentions per channel and checks current permissions before delivering them after approval. **Don't add** for the channel sets it to **Off** and discards the waiting mentions. Closing without answering discards them but allows a new mention to ask again. Explicitly disabled channels do not produce an Ask. This flow does not apply to Chatwork. See [People and places](https://agi-labo.com/en/tools/cockpit/docs/crew-people).
 
 ## Other notices that arrive by DM
 
@@ -148,7 +158,7 @@ When you press a button in a DM and see "Only this Crew's owners can answer this
 ## Common pitfalls
 
 - **Only owners can answer by DM.** People only added to the people who may talk to it do not receive Ask DMs
-- **Approvals of settings changes do not come by DM.** When the Crew says it is waiting for an owner's approval, open Cockpit
+- **Approvals of settings changes requested by the Crew do not come by DM.** When the Crew says it is waiting for an owner's approval, open Cockpit
 - **Messages deleted with Delete Ask DMs once answered cannot be restored.** The record of answers can be viewed in Cockpit
 - **Ask notifications and Ask DMs are different things.** Ask notifications send Asks to the channel chosen in **Ask notifications** in the settings. Ask DMs are sent from the Crew's app only to the Crew's owners
 
