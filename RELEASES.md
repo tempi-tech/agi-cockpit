@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.134.0 — 2026-11-15
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added owner Asks to choose where a Crew responds and who may talk to it when mentioned in an unregistered Discord or Slack channel.
 
