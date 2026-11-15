@@ -23,7 +23,7 @@ The scope of the people who may talk to it is an instruction to the Crew. **The 
 A Crew can have several owners, or none.
 
 - The person who pressed **Yes, it's me** in the last step of the connection becomes the owner
-- In **Who can talk**, you can make other people owners too. Owners can ask the Crew from chat for changes only owners can ask for and changes that need approval in Cockpit
+- In **Who can talk**, you can make other people owners too. Owners can ask the Crew from chat for owner-only changes. Verified owner requests also widen access without a settings-confirmation Ask
 - Without an owner, no one can ask from chat for changes only owners can ask for. They can still be made from Cockpit
 
 **If someone takes over an owner's Discord, Slack, or Chatwork account, the Crew sees them as the owner.** Keep owners' accounts secure.
@@ -196,7 +196,7 @@ However, changes that widen access follow these rules.
 | --- | --- |
 | Removing, turning off, setting DMs to **Owners only** | Anyone's |
 | Adding one user, allowing a person waiting for approval, adding a channel as **When mentioned** | Owners and people who may talk to it. If you set **Changes asked for in chat** in the settings to **Only the owner**, only owners |
-| Adding roles, user groups, everyone, or apps, setting **Everything**, allowing Crews, apps, or webhooks waiting for approval | Needs an owner's approval in Cockpit |
+| Adding roles, user groups, everyone, or apps, setting **Everything**, allowing Crews, apps, or webhooks waiting for approval | Applies directly for an owner request. An allowed person’s request needs the owner’s approval in Cockpit |
 
 For changes that need an owner's approval, an approval Ask appears in Cockpit. This Ask is not sent to Discord, Slack, or Chatwork DMs.
 

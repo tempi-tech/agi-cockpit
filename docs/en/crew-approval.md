@@ -40,7 +40,7 @@ Some points trip people up.
 
 - **You cannot approve from a chat.** Approval confirmations do not reach Discord, Slack, or Chatwork DMs either
 - **While it waits for an approval, later requests wait too.** Until you allow it, neither that reply nor the next request moves forward
-- **A Crew cannot answer its own approvals.** If it is waiting, only the owner can answer
+- **In ordinary turns, a Crew cannot answer its own approvals.** A verified owner-request turn and child tasks carrying its mark may answer the Crew’s approvals and questions
 
 ### The owner's message cancels a pending approval
 
@@ -105,11 +105,11 @@ When you change the agent, the current mode is kept if the new agent has it. Oth
 
 You can also ask the Crew to change it. The Crew can make a change that makes it more careful as it is.
 
-**A change that loosens it needs the owner's approval.** Cockpit shows the confirmation "The Crew “(name)” asks you to approve a change to its own settings. Nothing changes until you approve it." Press **Approve** to make the change, or **Decline** to change nothing. Either way, the Crew is told the result.
+**A verified owner-request turn applies loosening changes directly.** When an allowed person requests the change, it needs the owner’s approval. Cockpit shows the confirmation "The Crew “(name)” asks you to approve a change to its own settings. Nothing changes until you approve it." Press **Approve** to make the change, or **Decline** to change nothing. Either way, the Crew is told the result.
 
 Answer this confirmation on the Cockpit screen (on this computer, or in the Remote access PWA). It appears neither in a chat nor in an Ask DM.
 
-Switching to an agent whose mode would be looser also counts as a loosening change. For example, switching a Supervised Crew to Muse Code makes it Auto-accept edits, so it needs the owner's approval.
+Switching to an agent whose mode would be looser also counts as a loosening change. For example, switching a Supervised Crew to Muse Code makes it Auto-accept edits, so an allowed person’s request needs the owner’s approval.
 
 ## Child task modes
 

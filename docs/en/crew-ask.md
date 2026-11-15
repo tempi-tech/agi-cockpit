@@ -80,7 +80,7 @@ Use this when you want to keep your chat DMs tidy.
 | Secret input (passwords and tokens) | Only a notice that input is waiting | Cockpit's secure input screen |
 | HTML explanations attached to an Ask | Only one line saying it can be viewed in Cockpit | Cockpit |
 
-Approving a settings change requested by the Crew confirms widening what the Crew can do. It is answered only in Cockpit so that it cannot go through even if a chat account is taken over.
+Widening what the Crew can do at an allowed person’s request requires an approval answered only in Cockpit. Verified owner-request turns proceed without this settings-confirmation Ask. Anyone who can use an owner’s chat account can make owner requests, so protect that account. See [Safety and treating people differently](https://agi-labo.com/en/tools/cockpit/docs/crew-safety).
 
 Secret input notices arrive only while HTTPS Remote Access is running. A notice contains only the PWA address. It does not contain the value, label, or summary. When the input request ends, Cockpit tells you that too. To enter it from the PWA, you need [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access).
 

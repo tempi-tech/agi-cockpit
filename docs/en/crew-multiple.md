@@ -54,8 +54,8 @@ There are rules for what a Crew can do with other Crews.
 | --- | --- |
 | Send a message to another Crew | Yes |
 | Read another Crew's settings or `AGENTS.md` | Yes. However, a Crew whose **Changes asked for in chat** is **Only the owner** cannot read them in a turn that involves people who may talk to it |
-| Change another Crew's settings | No. The only exception is Crews under it ([below](#having-a-crew-create-crews)) |
-| A child task reads another Crew | Only its name and status. It cannot read the settings |
+| Change another Crew's settings | Yes, in a verified owner-request turn ([below](#having-a-crew-create-crews)) |
+| A child task reads another Crew | A child carrying the owner-request mark may read settings too. An unmarked child sees only name and status |
 
 You can also have them discuss things in [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms).
 
@@ -94,32 +94,16 @@ If the owner asks, a Crew can create a new Crew. Ask in the Cockpit conversation
 
 The created Crew is **under** the Crew that created it. The parent's name appears in **Parent Crew** in the settings of the Crew under it. Only the owner can change or remove the parent.
 
-### Letting a Crew manage the Crews under it
+### Letting a Crew manage Crew settings
 
-In a turn that started from the owner's request, the parent Crew can change the following settings of the Crews under it.
-
-- Name, agent, model, effort, and speed
-- Periodic check, place it works in, icon, and profile description
-- `AGENTS.md`
-- Starting and stopping
-- Setting the approval mode to the same as now or more cautious
-
-Examples of requests:
+In a verified owner-request turn, a Crew can change other Crews, whether or not they are under it. This includes names, models, instructions, starting and stopping, approval mode, people and places, connections, accounts, owners, parent relationships and removal. Loosening approval mode or widening access proceeds without a settings-confirmation Ask. Per-action checks, such as preventing parent cycles, still apply.
 
 - "Change the accounting Crew's model"
 - "Add the month-end steps to the accounting Crew's AGENTS.md"
 
-**A change that makes the approval mode less cautious waits for the owner's approval in Cockpit.** The approval prompt shows the names of both Crews.
+The target Crew’s conversation records who changed what. `AGENTS.md` is committed in the target’s home.
 
-Changes appear in the conversation of the Crew under it, showing which Crew changed what. `AGENTS.md` is committed in the home of the Crew under it.
-
-For Crews under another Crew too, only the owner changes the following.
-
-- People who may talk to it and places, chat connections, accounts, and Ask DMs
-- **Changes asked for in chat**, **Replies between Crews**, and the parent Crew
-- A new session, and deletion
-
-This reaches only the Crews directly under it. It cannot change Crews under those. It also cannot make changes in a turn that started from another Crew's message, so requests are not passed down level after level.
+Children carrying the owner-request mark and messages from other Crews that Cockpit marks as owner requests have the same authority. Unmarked requests and allowed people’s requests do not. See [Safety and treating people differently](https://agi-labo.com/en/tools/cockpit/docs/crew-safety).
 
 ## Crews on other computers
 
@@ -134,7 +118,7 @@ The conditions are:
 There are limits on what you can do.
 
 - Only text can be sent. Attachments cannot be sent
-- A message from another computer never counts as a request from the owner personally
+- A message marked by Cockpit as an owner request from another computer of the same Tailscale owner also counts as an owner request at the receiver. Unmarked messages remain ordinary data
 - You can read the other Crew's status and settings, but you cannot change them. To change them, use that computer's Cockpit or the [PWA](https://agi-labo.com/en/tools/cockpit/docs/remote-access#operate-a-crew-from-the-pwa)
 
 You ask the same way. Say, "Tell the Crew on the studio computer about this."

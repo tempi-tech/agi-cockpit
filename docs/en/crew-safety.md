@@ -10,6 +10,12 @@ Learn what the Crew rules can and cannot stop, two ways to treat people differen
 
 Crews and their child tasks run as the same OS user as the owner. In general, anything the owner can touch, the Crew can touch too. Do not put secrets you do not want the Crew to see, or things you do not want broken, within the Crew's reach.
 
+## Operations requested by the owner
+
+In an owner-request turn, a Crew may act on itself, its children, and other Crews once Cockpit has verified the request as the owner’s. Loosening approval mode, widening people or places, changing connections, accounts or owners, and removing a Crew proceed without a settings-confirmation Ask. Per-action validation and secure secret input still apply. The target Crew’s conversation records who changed what.
+
+Cockpit carries its owner-request mark into child tasks, descendants, Autoruns and Fleet nodes. Message text cannot grant the mark. Mixed input uses the weakest authority in the turn. A non-owner-request send to a child or an update to an Autorun removes the mark; later owner actions do not restore it. Ordinary notices, periodic checks and self-started work have no such authority.
+
 ## What can and cannot be stopped
 
 This section separates what Cockpit's mechanisms stop from what is only an instruction to the Crew.
@@ -21,7 +27,7 @@ This section separates what Cockpit's mechanisms stop from what is only an instr
 | A message from someone who may not talk to it reaching the Crew | Messages from people not on the list are not delivered and go into **Waiting for approval**. This is decided by the sender ID that the chat reports |
 | A message in a place that is off reaching the Crew | The place settings for where it responds do not deliver it |
 | Pretending to be the owner through the text of a message | Cockpit attaches the "owner" mark based on the sender ID. It cannot be attached from the message text |
-| Allowing an action waiting for approval through a chat message | Actions can be allowed only in Cockpit |
+| Allowing an action waiting for approval through a chat message | Approval controls are in Cockpit. Verified owner-request turns may also answer the Crew’s approvals and questions |
 | Approving a settings change requested by the Crew that widens what it can do through chat | This approval can be answered only in Cockpit (including the PWA). It is not sent to Ask DMs either |
 | A request to enter a secret appearing in the chat | The owner is only told by DM that something is waiting |
 | Codex writing and network access outside the place it works | In every mode other than Full access, Codex runs with writing limited to the place it works and added folders, and with the network cut off |
@@ -34,10 +40,10 @@ Crews and child tasks are stopped from accidentally doing the following through 
 
 | What is stopped | Notes |
 | --- | --- |
-| A Crew or child task answering its own approval | A Crew cannot press **Allow** itself |
-| A child task changing the Crew's settings or the people who may talk to it | It can make requests to the Crew |
-| A Crew changing Crews other than itself and the Crews under it. A Crew deleting a Crew | The owner does these in Cockpit. For Crews under it, see [Multiple Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-multiple) |
-| Making the approval mode less cautious, or greatly widening who may talk to it | Waits for the owner's approval |
+| A Crew or child task answering its own approval | Verified owner-request turns and children carrying their mark are exceptions |
+| A child task changing the Crew's settings or the people who may talk to it | A child carrying the owner-request mark may make changes; an unmarked child can make requests to the Crew |
+| A Crew changing Crews other than itself and the Crews under it. A Crew deleting a Crew | Verified owner-request turns may do these. See [Multiple Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-multiple) |
+| Making the approval mode less cautious, or greatly widening who may talk to it | Waits for approval for an allowed person’s request; applies directly for an owner request |
 | Giving a child task a less cautious approval mode than the Crew | See [Approval modes and permissions](https://agi-labo.com/en/tools/cockpit/docs/crew-approval) |
 | Reading DMs with other people, or outside the place it replies, in a turn not started by the owner | Refused with `history_not_allowed` |
 | Making a change only the owner can ask for, at the request of people who may talk to it | Refused with `owner_request_required`. Nothing changes |
@@ -95,7 +101,7 @@ Among the kinds of handling that differ by person, the following can be set in t
 | **Interrupting its work** | **Everyone**, **Owners only** | Who can stop the Crew's current work and have their message delivered right away |
 | **DM** under **Where it responds** | **Owners only** and others | Who can talk to it in a DM |
 
-When **Changes asked for in chat** is **Only the owner**, a turn started by a request from people who may talk to it is treated as a turn that did not come from a person's request. In a turn that involves people who may talk to it, the Crew also does not read other Crews' settings. With either choice, a change that makes the approval mode less cautious and a change that greatly widens who may talk to it wait for the owner's approval in Cockpit.
+When **Changes asked for in chat** is **Only the owner**, a turn started by a request from people who may talk to it is treated as a turn that did not come from a person's request. In a turn that involves people who may talk to it, the Crew also does not read other Crews' settings. Owner requests may make changes with either choice. An allowed person’s request to loosen approval mode or greatly widen who may talk still waits for the owner’s approval in Cockpit.
 
 When **Interrupting its work** is **Owners only**, messages from other people and other Crews wait and arrive in order after the current work ends.
 

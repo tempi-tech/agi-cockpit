@@ -4,6 +4,27 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.135.0 — 2026-11-16
+
+**Type:** minor · **Platforms:** macOS
+
+- AGI Lab members can now connect Crews to Google Chat.
+- AGI Cockpit now requires sign-in with a free AGI Lab account.
+- Crews can now change other Crews’ settings and connections at the owner’s request.
+- Owner requests can now continue through child tasks, Autoruns, and Fleets.
+- Fixed the Chatwork working indicator disappearing after a reply while other requests were still waiting.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- AGIラボ会員向けに、クルーをGoogle Chatにつなげるようになりました。
+- AGI Cockpitの利用に無料のAGI Labアカウントでのサインインが必要になりました。
+- オーナーの依頼で、クルーがほかのクルーの設定や接続を変更できるようになりました。
+- オーナーの依頼を子タスク・自動実行・Fleetへ引き継いで進められるようになりました。
+- Chatworkで複数の依頼を待っている間、先の返信で作業中の表示が消える問題を修正しました。
+
+</details>
+
 ## v4.134.0 — 2026-11-15
 
 **Type:** minor · **Platforms:** macOS, Linux
