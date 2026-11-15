@@ -55,7 +55,7 @@ Some AI services forbid letting other people use your account. Whether to add ot
 
 ## Pricing and the number of Crews
 
-- AGI Cockpit's local features are free (up to 1 Crew). No account registration is needed
+- AGI Cockpit's local features are free (up to 1 Crew) with a free AGI Lab account
 - The 1 Crew includes stopped Crews and Crews created by a Crew. Crews you already created keep working, however many there are. The limit only refuses creating a new one
 - AGI Lab members have no limit on the number of Crews. Membership is $20/month or $200/year, with a 7-day free trial
 - The cost of running the AI is covered by the owner's agent subscriptions or keys (Claude, ChatGPT, and others). It is separate from the membership fee

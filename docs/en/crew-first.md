@@ -22,7 +22,7 @@ When you open Cockpit for the first time, the **Welcome to AGI Cockpit** screen 
 
 1. Press **Get started**.
 2. In **Set up an agent**, sign in to the agent you will use and press **Continue**. One agent, such as Claude Code or Codex, is enough to start.
-3. If you are not signed in to AGI Lab, the **Sign in with AGI Lab** screen appears. To go on without signing in, press **Start without signing in**.
+3. If you are not signed in to AGI Lab, the **Sign in with AGI Lab** screen appears. Sign in with your AGI Lab account (free to create).
 4. If there is earlier agent work Cockpit can bring in, the **Continue where you left off** screen appears. To skip it, press **Skip for now**.
 5. Cockpit shows **Setting up your Assistant…**, creates the Assistant Crew, and opens its conversation.
 

@@ -14,7 +14,7 @@ AGI Cockpit's local features are free (up to 1 Crew). With an AGI Lab membership
 
 - **Stopped Crews count too**
 - **Crews created by a Crew count too**
-- When you are not signed in, the limit is also 1
+- When continuing locally because AGI Lab cannot be reached, the limit is also 1 unless membership was confirmed within the last 24 hours
 - When you reach the limit, a notice beginning with "Without an AGI Lab membership, you can have up to 1 Crew, including stopped ones." appears when you try to create one
 - Only creating is blocked. **Crews you already have keep working, however many there are.** Starting and stopping them work as usual
 - If you delete one of your current Crews, you can create one again

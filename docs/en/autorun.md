@@ -14,7 +14,7 @@ Use [Hooks](https://agi-labo.com/en/tools/cockpit/docs/hooks) to react to events
 
 Autorun requires an AGI Lab membership. Cockpit verifies membership not only at the Desktop entry point, but also in the PWA, `cockpit autorun`, the local API, and each scheduled execution. Authentication that needs renewal, an inactive membership, and a temporary verification failure produce distinct errors during an operation. Cockpit rejects an operation safely when a network or API failure prevents verification, but it does not cache that failure and block a member after service recovers. Existing members can use the CLI while signed in to AGI Lab in Desktop.
 
-Guests who try Autorun see that it is a member feature, with links to membership plans and member sign-in. If AGI Lab reports an approaching sign-in expiry, Cockpit notifies you three days before it and shows a **Sign in** action. An expired or revoked sign-in produces separate renewal guidance; scheduled work waits for authentication as described below.
+People who are not members and try Autorun see that it is a member feature, with links to membership plans and member sign-in. If AGI Lab reports an approaching sign-in expiry, Cockpit notifies you three days before it and shows a **Sign in** action. An expired or revoked sign-in produces separate renewal guidance; scheduled work waits for authentication as described below.
 
 Schedules run inside the AGI Cockpit app process. Closing every window on macOS does not stop the scheduler. The operating-system scheduler does not launch Cockpit after the process exits, but Cockpit performs one catch-up per Autorun when it restarts or resumes within 24 hours of an unhandled scheduled time. Older occurrences are recorded as missed instead of silently starting stale work.
 
@@ -116,7 +116,7 @@ For a new task, the Desktop form requires a directory unless the Autorun runs as
 
 If the agent fails to start, the task remains in the task list with an **Error** state. A one-time Autorun still becomes disabled; an interval or cron Autorun remains enabled and calculates its next run. Open the created task details to inspect the cause.
 
-If Cockpit confirms that the account is a guest or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If the sign-in session needs renewal or a temporary network or API failure prevents membership verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so authentication renewal or a temporary outage does not consume its only run.
+If Cockpit confirms that the account is not a member or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If the sign-in session needs renewal or a temporary network or API failure prevents membership verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so authentication renewal or a temporary outage does not consume its only run.
 
 Directory paths selected in Desktop or the PWA, or passed through `--directory`, preserve trailing spaces. Use the exact folder name; do not trim its path when scripting.
 

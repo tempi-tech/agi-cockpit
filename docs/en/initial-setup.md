@@ -34,9 +34,9 @@ If a Claude Code, Codex, or Grok Build Native UI task starts before authenticati
 
 For Muse Code, open **Settings → Agents → Muse Code → Authentication**. Choose **Muse Code login** and **Sign in to Muse Code** to run `muse login` in a terminal, or choose **Meta API key** and save your key. API-key mode cannot start tasks until a key is saved. After authentication, reload models and choose Native UI or terminal UI. See [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models) for defaults and permission limits.
 
-## 4. Choose how to use Cockpit
+## 4. Sign in to AGI Lab
 
-For local features only, select **Start without signing in** on the **Sign in with AGI Lab** screen. Sign in as an AGI Lab member if you want Smart routing, Autorun, or remote access from another device.
+On the **Sign in with AGI Lab** screen, sign in with your AGI Lab account. If you don't have one, the same steps create a free account. Sign in as an AGI Lab member for Smart routing, Autorun, or remote access from another device. If AGI Cockpit can't reach AGI Lab, select **Continue locally** to use local features until you quit the app.
 
 ## 5. Continue recent work or skip
 

@@ -64,7 +64,7 @@ Muse Code Contributor models (IDs ending in `-contributor`) may allow conversati
 
 ## Anonymous usage and setup events
 
-Packaged guest use sends a random installation ID, app version, and a daily session check to AGI Backend. First-run setup also sends events for steps reached, abandonment, guest selection, sign-in, session import counts, and skipping import. Setup events can continue after signing in during that flow; replaying setup does not send them.
+Before sign-in and while continuing locally, packaged Cockpit sends a random installation ID, app version, and a daily session check to AGI Backend. First-run setup also sends events for steps reached, abandonment, the sign-in screen being shown, continuing locally, sign-in, session import counts, and skipping import. Setup events can continue after signing in during that flow; replaying setup does not send them.
 
 These events include Assistant creation, the first request being sent, and whether its proposed role was accepted or kept as Assistant. They record the step reached without the request text, proposed role, name, or Ask answer text. Task instructions, conversations, file content, and project names are not included.
 

@@ -35,7 +35,7 @@ The mobile PWA connects to the Cockpit running on your computer. It is designed 
 | --- | --- |
 | ![AGI Cockpit mobile task list](./assets/cockpit-mobile-tasks.png) | ![AGI Cockpit mobile Ask](./assets/cockpit-mobile-ask.png) |
 
-Local features such as parallel task management, every supported agent, and Master Agent are free, with no task cap and no account required. One Crew is free; additional Crews require an AGI Lab membership. An [AGI Lab membership](https://agi-labo.com/en?ref=cockpit-app#pricing) ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing. It also removes the limit on Crews.
+Local features such as parallel task management, every supported agent, and Master Agent are free with a free AGI Lab account, with no task cap. One Crew is free; additional Crews require an AGI Lab membership. An [AGI Lab membership](https://agi-labo.com/en?ref=cockpit-app#pricing) ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing. It also removes the limit on Crews.
 
 ## Get started
 
