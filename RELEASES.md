@@ -8,10 +8,10 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- AGI Lab members can now connect Crews to Google Chat.
-- AGI Cockpit now requires sign-in with a free AGI Lab account.
-- Crews can now change other Crews’ settings and connections at the owner’s request.
-- Owner requests can now continue through child tasks, Autoruns, and Fleets.
+- Added Google Chat connections for Crews for AGI Lab members.
+- Changed AGI Cockpit to require sign-in with a free AGI Lab account.
+- Added support for Crews to change other Crews’ settings and connections at the owner’s request.
+- Added support for continuing owner requests through child tasks, Autoruns, and Fleets.
 - Fixed the Chatwork working indicator disappearing after a reply while other requests were still waiting.
 
 <details>
