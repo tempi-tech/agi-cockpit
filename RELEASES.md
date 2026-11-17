@@ -4,6 +4,39 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.136.0 — 2026-11-18
+
+**Type:** minor · **Platforms:** macOS
+
+- Added diagnostics export from Settings and the CLI with sensitive information redacted.
+- Added sender names and avatars to messages from Crews.
+- Added Crew avatars to Asks owned directly by a Crew.
+- Added automatic retries for temporary Remote Access startup failures and an Ask when recovery fails.
+- Changed task lists to show only direct child tasks, with deeper descendants available from their parent details.
+- Fixed side-panel presentation cards to follow the loaded conversation history.
+- Added a clear error when resuming a task whose working folder is missing.
+- Fixed Crew DM notification cleanup after secret input completes to respect the configured setting.
+- Fixed gcloud launch failures during Google Chat setup on macOS.
+- Fixed process inspection on Linux.
+- Fixed the startup recovery dialog failing to display correctly.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 設定とCLIから、機密情報を伏せた診断情報を保存できるようになりました。
+- クルーから届くメッセージに、送信者名とアイコンを表示するようになりました。
+- クルーからのAskに、そのクルーのアイコンを表示するようになりました。
+- リモートアクセスの一時的な開始失敗を自動で再試行し、復旧できない場合はAskで知らせるようになりました。
+- タスク一覧には子タスクまでを表示し、孫以下のタスクは親の詳細から確認する形にそろえました。
+- 会話の読み込み範囲に合わせて、サイドパネルを開くカードを表示するように修正しました。
+- 作業フォルダがなくなったタスクを再開すると、原因が分かるエラーを表示するようにしました。
+- 秘密の入力が終了した後、クルーのDM通知を設定に従って削除するように修正しました。
+- macOSでGoogle Chatの接続に使うgcloudが起動しない問題を修正しました。
+- Linuxでプロセスの状態を正しく取得できない問題を修正しました。
+- 起動時の復旧ダイアログが正しく表示されない問題を修正しました。
+
+</details>
+
 ## v4.135.0 — 2026-11-16
 
 **Type:** minor · **Platforms:** macOS
