@@ -33,9 +33,9 @@ The in-app browser stores sign-in state and site data in the local persistent ar
 
 Local features such as parallel task management, every supported agent, and Master Agent are free with a free AGI Lab account, with no task cap. One Crew is free; additional Crews require an AGI Lab membership. Claude Code, Codex, and other agents require their own plans. An AGI Lab membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing. It also removes the limit on Crews.
 
-## Crews (alpha)
+## Crews (beta)
 
-A Crew is an agent with a continuing role, memory, and its own home folder. It can work on requests itself or delegate to child tasks. Crews are in alpha: behavior and settings may change.
+A Crew is an agent with a continuing role, memory, and its own home folder. It can work on requests itself or delegate to child tasks. Crews are in beta: behavior and settings may change.
 
 The [Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-about) chapter explains how to use Crews, starting from the screens. If you are new to Crews, read [Approval modes and permissions](https://agi-labo.com/en/tools/cockpit/docs/crew-approval) first.
 

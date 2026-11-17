@@ -8,7 +8,7 @@ Learn what a Crew can and cannot do, how it differs from tasks and the Master Ag
 
 A Crew is an AI agent that lives in AGI Cockpit. It has a role and memory, and it works on what you ask either by itself or by handing it to child tasks, then returns the result. You can talk with it inside Cockpit without connecting a chat. Connect it to Discord, Slack, or Chatwork (Chatwork is for members), and you can also talk with it there.
 
-Crews are in alpha. How they work and their settings may change.
+Crews are in beta. How they work and their settings may change.
 
 If you do not have a Crew yet, start with [Create your first Crew](https://agi-labo.com/en/tools/cockpit/docs/crew-first).
 

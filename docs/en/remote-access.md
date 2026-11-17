@@ -124,7 +124,7 @@ Select a Crew in the task list to read its conversation, queue a request, inspec
 
 To learn how Crews work, start with [What is a Crew](https://agi-labo.com/en/tools/cockpit/docs/crew-about). Talking with Crews on another computer is covered in [Multiple Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-multiple).
 
-Use the Crew conversation and settings rather than ordinary task controls. A queued request waits while the Crew is stopped and uses the Crew's settings when delivered. The Crew's internal task cannot be directly resumed, renamed, completed, deleted, branched, or have its conversation cleared through ordinary remote task operations. `cockpit crew` commands remain local-only; remote Crew operation uses the PWA. See [Crews (alpha)](https://agi-labo.com/en/tools/cockpit/docs#crews-alpha) and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#crews-access-and-retained-data).
+Use the Crew conversation and settings rather than ordinary task controls. A queued request waits while the Crew is stopped and uses the Crew's settings when delivered. The Crew's internal task cannot be directly resumed, renamed, completed, deleted, branched, or have its conversation cleared through ordinary remote task operations. `cockpit crew` commands remain local-only; remote Crew operation uses the PWA. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta) and [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#crews-access-and-retained-data).
 
 ## Switch between Cockpit computers
 

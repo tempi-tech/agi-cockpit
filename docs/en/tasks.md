@@ -44,7 +44,7 @@ On Desktop or in the PWA task list, open **Filter** and choose **Type → All**,
 
 The PWA saves type and agent filters in that browser separately for each connected host and restores them after returning from task details or reloading. These choices do not sync to other devices.
 
-Crews appear with their child tasks, inside their project when one is assigned. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (alpha)](https://agi-labo.com/en/tools/cockpit/docs#crews-alpha).
+Crews appear with their child tasks, inside their project when one is assigned. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
 
 To inspect a Crew’s active child tasks, open its **Child tasks** tab in the right side panel. Selecting a child shows its details there. Crew settings remain available in their own tab; opening a Crew still selects its settings by default.
 
