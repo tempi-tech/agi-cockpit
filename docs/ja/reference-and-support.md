@@ -40,7 +40,6 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 | 永続ワークスペース | `~/.agi-tools/workspaces` |
 | 作業プロジェクトとGit Worktree | タスク作成時に選んだ場所 |
 | Electronの認証、添付、ブラウザープロファイル | OSのAGI Cockpitアプリデータ領域 |
-| AntigravityネイティブUI向けの作業場所外画像の一時コピー | 作業場所の`.agi-cockpit-attachments`。セッション単位でGitから除外し、停止時に削除 |
 | 認証tokenとAPIキー | OSのKeychainまたはkeyring |
 
 `cockpit doctor`は現在接続するインスタンス、CLIランタイム、`pidVisibility`、loopbackとfile IPCの認証結果、実際に選ばれた`effectiveTransport`を表示します。診断ログにはローカルパス、エージェント名、セッション状態が含まれる場合があるため、外部共有前に確認してください。
@@ -91,7 +90,7 @@ Claude、Codex、Antigravity、Cursor、Grok Buildで404、5xx、gateway timeout
 
 Antigravityのクォータが想定したprofileと一致しない場合は、Usageまたは`cockpit accounts list --agent-type antigravity`でcredentialとquotaのsource、home、scopeを確認します。`quotaScope: host_login`は共有認証のクォータです。`cockpit accounts logout <account> --agent-type antigravity`で対象をpreviewし、共有先への影響を確認してから`--confirm`を付けます。
 
-AntigravityのネイティブUIで画像添付だけが開始前に失敗する場合は、タスクの作業場所へ書き込めるか、`.agi-cockpit-attachments`が通常のディレクトリかを確認します。Cockpitは作業場所外の画像をこのディレクトリへ一時配置するため、読み取り専用の作業場所や同名のファイル・シンボリックリンクでは安全のため送信を拒否します。
+AntigravityのネイティブUIで画像を送れない場合は、選択した画像を読み取れるかと対応形式を確認します。画像はACPの画像データとして送るため、作業場所内の一時配置ディレクトリは不要です。
 
 ## Fleetを開始できない、gateの原因が分からない
 

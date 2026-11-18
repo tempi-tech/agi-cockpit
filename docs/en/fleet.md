@@ -137,7 +137,7 @@ Set `idle_timeout` or `timeout` on an agent node to stop and fail it when no run
 
 Even without those fields, Cockpit stops a Grok Build, Cursor, or Qoder turn as `stalled` after 18 minutes with no response when it is not waiting on approval, a question, background work, or a tool call. Fleet treats that as a transient runtime error, retries with backoff, and continues from the same conversation. Reaching the 12-hour limit for one turn is not retried automatically.
 
-If an Antigravity scheduled or background continuation times out, Fleet fails the node with `errorReason: continuation_timeout`, even if it already submitted output. Fleet does not treat this as a transient provider error or resend automatically. Inspect the task for a late final response and check background tasks, subagents, and tool side effects before deciding whether to use `cockpit fleet retry`.
+Antigravity uses the shared ACP stall limits: 18 minutes without activity while no approval or tool is pending, and a 12-hour turn limit. A timeout stops the session; inspect outstanding work before continuing.
 
 Select a gate node to see the actual exit code for a command gate, or the approved or rejected result and answer text for a human gate. Exit code 0 passes; any other code fails. Inspect the gate details and output instead of inferring the result only from the overall Run status.
 

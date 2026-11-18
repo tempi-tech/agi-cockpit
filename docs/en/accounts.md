@@ -48,7 +48,7 @@ For agents that expose the default account's email address, Cockpit shows it on 
 
 For Codex, Cockpit retrieves usage and rate limits from the Codex CLI app server in a read-only sandbox without approval prompts. This retrieval path supports Codex CLI 0.153.
 
-Named Antigravity profiles use browser-based Google OAuth and keep conversations, logs, cache, and usage history under a profile-specific home. On macOS, Cockpit puts a profile-specific Keychain first in the search list and verifies that order before a task starts, preventing fallback to the host Antigravity login and its quota. The OS keyring is shared on Windows and Linux, so a host login stored there still takes precedence for every profile.
+Antigravity sign-in runs the official `agy acp --login`; Agy owns authentication and credential storage. Cockpit does not read, refresh, copy, or reinject its credential contents. Additional profiles are available only on macOS, where Cockpit verifies the profile Keychain is first before launching. Windows and Linux support the default account only because their OS keyring is shared. Existing profiles remain available for explicit rename or removal. Additional-profile login and native Windows/Linux ACP operation remain unverified.
 
 For Claude’s default account, when Cockpit can verify the owner of the current credentials, it uses that email address in Settings, usage, task creation, and conversation account displays. When verification is unavailable, it may use the existing account record; the displayed address alone does not prove that the current owner was verified. Check the intended account before use.
 
@@ -60,7 +60,7 @@ The same state notifies once rather than on every refresh. Successful sign-in cl
 
 ## Check remaining quotas
 
-Antigravity retrieves Gemini model quota percentages and reset times from its API using the effective account credential, without requiring a running Agy session. If no usable API quota is available, Cockpit falls back to a running local Agy session when available, then that home’s usage history. The CLI reports the source in `usage.account.source` and `isolation.quotaSource` as `api`, `local_session`, `history`, or `none`. Check this source together with the credential source and quota scope; API retrieval does not change account isolation or make a shared host login profile-specific.
+Antigravity usage is checked only when the Desktop or PWA Usage panel opens, using `agy -p "/usage" --output-format json`. Account lists, CLI reads, automatic refreshes, and account selection use the cached reading or show unknown. Unsupported output and failures stay unknown; no private API, language-server, or history fallback is queried. The signed-in CLI output format is unverified, so some versions may report unknown. You can check `/usage` directly in Agy.
 
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows its remaining percentage directly below the ring. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again. Cockpit does not invent a percentage for an unknown quota, authentication error, observation-only status row, or the Cockpit Agent balance display.
 
@@ -96,7 +96,7 @@ Reset credits are earned, finite, and expiring. Spending one cannot be undone or
 
 ## Use Auto
 
-When account selection is available, new tasks, Autoruns, and Fleet nodes default to **Auto**. Auto is a selection method, not one named profile. At runtime it compares available usage across signed-in accounts and chooses an execution account.
+For Claude, Codex, Grok Build, Cursor, and Qoder, new tasks, Autoruns, and Fleet nodes default to **Auto**. Antigravity always uses a fixed account; omitted or legacy `auto` selectors mean the default account, with no automatic rotation or usage-limit recovery. Select another Antigravity account manually when available.
 
 Auto first requires remaining capacity in every applicable window, including shorter limits. It then compares accounts by the window with the latest reset and favors the account with the most remaining percentage per minute until that reset. This helps consume an underused weekly or other long-term quota that expires sooner. Shorter windows remain an immediate availability gate; they do not override the long-term ranking.
 
@@ -156,7 +156,11 @@ cockpit accounts logout work --agent-type antigravity --confirm
 
 Logging out a named profile targets only that profile's storage and does not change the host login. Logging out the default account removes the host Antigravity credential, which also signs out any other profile or ordinary terminal-launched Agy process that relied on that shared login. On Windows, Linux, or a macOS profile whose profile Keychain is unavailable, the profile preview reports the effective host item as `sharedCredential` and points to the default-account logout procedure. Cockpit never logs an account out automatically.
 
-Antigravity usage reports the credential source and home, quota source, and quota scope. `quotaScope: host_login` means the displayed quota is not profile-specific. If an exhausted quota appears to belong to the wrong account, inspect this provenance before signing out or signing in again.
+Existing Antigravity profiles are never signed out automatically. Profiles created through the earlier Cockpit sign-in show a notice: review `cockpit accounts logout <profile> --agent-type antigravity`, repeat with `--confirm`, then use `cockpit accounts login <profile> --agent-type antigravity` on macOS. The default account needs no migration. Consumer plan terms may restrict third-party access and account suspension remains possible.
+
+An existing profile Keychain item without Cockpit's placeholder fingerprint is unconfirmed. Its metadata alone cannot distinguish a signed-out placeholder from a login, so Cockpit keeps it without treating it as sign-in evidence. Use the explicit profile logout and sign-in procedure above; Cockpit does not inspect credential contents.
+
+The logout preview includes an existing unconfirmed or signed-out profile item. Explicit confirmation resets its placeholder baseline; cancelling writes nothing. A profile logout never adds the host item to its removal targets.
 
 ## Remove a profile
 

@@ -40,7 +40,6 @@ After changing a setting, inspect the returned saved value. Numeric settings can
 | Persistent workspaces | `~/.agi-tools/workspaces` |
 | Project files and Git Worktrees | Location selected when creating the task |
 | Electron authentication, attachments, and browser profiles | OS AGI Cockpit application-data area |
-| Temporary copies of external images for Antigravity Native UI | Workspace `.agi-cockpit-attachments`; Git-ignored per session and removed when it stops |
 | Authentication tokens and API keys | OS Keychain or keyring |
 
 `cockpit doctor` reports the connected instance, CLI runtime, `pidVisibility`, loopback and file-IPC authentication results, and the selected `effectiveTransport`. Diagnostic logs can contain local paths, agent names, and session state, so inspect them before external sharing.
@@ -91,7 +90,7 @@ A usage limit puts the task in `waiting_confirmation` with `usage_limit`. If Aut
 
 If Antigravity quota appears to belong to the wrong profile, inspect credential and quota source, home, and scope in Usage or `cockpit accounts list --agent-type antigravity`. `quotaScope: host_login` identifies shared authentication. Preview the targets with `cockpit accounts logout <account> --agent-type antigravity`, inspect its shared impact, and only then add `--confirm`.
 
-If only image attachments fail before an Antigravity Native UI turn starts, confirm that the task workspace is writable and that `.agi-cockpit-attachments` is a normal directory. Cockpit stages an image from outside the workspace there temporarily, so it safely rejects a read-only workspace, a file with that name, or a symbolic link.
+If image attachments fail in Antigravity Native UI, check that the selected image is readable and uses a supported format. Images are sent as ACP image data, so a staging directory inside the workspace is unnecessary.
 
 ## A Fleet cannot start or a gate failure is unclear
 

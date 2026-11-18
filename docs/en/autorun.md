@@ -69,7 +69,7 @@ Cursor Autoruns can use **Native UI** or **Terminal**. Native UI exposes Cursor'
 
 Qoder Autoruns can also use **Native UI** or **Terminal**. Native UI exposes Qoder's available model, model-specific reasoning effort, system prompt, approval mode, and account profiles in Desktop, the PWA, and CLI-backed creation. Qoder does not expose service-tier settings.
 
-Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder Autoruns store either **Auto** or a pinned account. Auto is the default for new Autoruns. It is stored as a selection method rather than as one concrete profile, so every execution chooses again from the usage state of signed-in accounts. If the created task reaches a usage limit or returns a plan-restriction response, Cockpit also switches to another available account and continues processing. Use `--account <name|id|default>` to pin an account from the CLI and `--account auto` to select Auto.
+Claude, Codex, Grok Build, Cursor, and Qoder Autoruns store either **Auto** or a pinned account. Auto is the default for new Autoruns. It is stored as a selection method rather than as one concrete profile, so every execution chooses again from the usage state of signed-in accounts. If the created task reaches a usage limit or returns a plan-restriction response, Cockpit also switches to another available account and continues processing. Use `--account <name|id|default>` to pin an account from the CLI and `--account auto` to select Auto. Antigravity uses a fixed default or manually selected account; legacy Auto selectors resolve to default without rotation.
 
 ## Send a scheduled request to a Crew
 

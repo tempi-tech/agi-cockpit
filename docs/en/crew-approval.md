@@ -154,7 +154,7 @@ With Codex on Windows, commands run inside the sandbox in every mode except Full
 
 **Muse Code:** Only Auto-accept edits (the starting mode) and Full access. Muse Code does not confirm before editing files inside the workspace, so Cockpit does not offer Supervised.
 
-**Antigravity (child tasks only):** It cannot ask for approval while running, so in Supervised it automatically denies tools that need approval. It is not suited to child tasks that need edits or commands.
+**Antigravity (child tasks only):** Official ACP supports permission prompts. Supervised asks before tools that need approval; approval-mode Auto is distinct from account Auto selection, which Antigravity does not support.
 
 For details, see [Agents and models](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models).
 

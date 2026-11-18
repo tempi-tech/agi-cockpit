@@ -21,7 +21,7 @@ Tasks without a session yet remain in the task list after restarting Cockpit. Op
 
 Codex Native UI preserves the task’s automatic-review setting when resuming its conversation. If Codex reports a different effective reviewer, Cockpit reconciles the approval mode and shows a notice; resuming does not silently grant full access.
 
-After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session. Antigravity continuation tracking timeouts (`continuation_timeout`) do not count toward this repeated-failure limit.
+After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus. After interruption settles, the task returns to a state that can accept the next instruction and the composer can continue.
 
@@ -66,7 +66,7 @@ Except for Muse Code Native UI, which updates additional workspace roots every t
 
 ## Confirm the execution account
 
-New Claude, Codex, Grok Build, Antigravity, Cursor, and Qoder tasks default to **Auto**. Auto uses shorter usage windows to confirm current availability, then chooses among available accounts from the remaining capacity and reset time of the longest window. After detecting a usage or plan limit, it can switch to another available account and continue the saved session.
+New Claude, Codex, Grok Build, Cursor, and Qoder tasks default to **Auto**. Auto uses shorter usage windows to confirm current availability, then chooses among available accounts from the remaining capacity and reset time of the longest window. After detecting a usage or plan limit, it can switch to another available account and continue the saved session. Antigravity uses a fixed default or manually selected account; legacy Auto selectors resolve to default without rotation.
 
 The selection made when the task is created is saved with that task and remains the selection used for display, resume, and execution. Desktop and PWA show **Auto · account name** near the composer. The account menu can select Auto, the default account, or a named profile. A manual switch stops current execution, moves the saved conversation to the chosen profile, and resumes it.
 
@@ -162,7 +162,7 @@ When Claude, Codex, Antigravity, Cursor, or Grok Build reports an error that may
 
 When a Grok Build, Cursor, or Qoder Native UI turn sends no response for 18 minutes while it is not waiting on an approval, question, background operation, or tool call, Cockpit stops it and reports `runtime_error` with reason `stalled`. The task no longer remains running indefinitely, and the next message restarts its session. Cockpit also stops a single turn at the 12-hour limit and restarts the session on the next message.
 
-In Antigravity Native UI, a scheduled or background continuation that times out before a final response is reported as incomplete, with `waitingReason: runtime_error` and `errorReason: continuation_timeout`, even if a partial reply is visible. Cockpit accepts new input without automatically resending the prompt. A final response that arrives later can be reflected before the next message is sent. Before continuing, check running background tasks, subagents, and tool side effects; the timeout does not confirm that they stopped.
+Antigravity uses the shared ACP stall limits: 18 minutes without activity while no approval or tool is pending, and a 12-hour turn limit. A timeout stops the session; inspect outstanding work before continuing.
 
 A message's copy button includes the visible body and error details. Diagnostics may contain local file paths, session logs, or account information, so inspect the copied content before sharing it externally.
 
@@ -186,7 +186,7 @@ On Desktop, select an image attachment thumbnail before sending to open an enlar
 
 From the CLI, pass repeatable `--media <path>` options to `task create` and `task send`. Cockpit copies local files into the same managed area used by the GUI and neither moves nor deletes the source. Remote attachment delivery through `--host` is unsupported.
 
-For an image sent to Antigravity Native UI, Cockpit uses an image already inside the workspace in place. It temporarily copies an external image into a per-session, Git-ignored directory under `.agi-cockpit-attachments` in the workspace. This makes it readable in `supervised` mode. Cockpit removes the temporary copy when the session, CLI, or app stops, and sweeps old leftover directories when another session starts in that workspace. If the workspace is not writable or the staging location is not a real directory, Cockpit reports an error without sending the image.
+Antigravity Native UI sends explicit image attachments as ACP image content, without staging a copy in the workspace. Check that the selected image is readable and supported.
 
 One message accepts up to eight files, each up to 512 MB and 1 GB in total. JSON files are limited to 25 MB. All file types are accepted, including archives, executables, and unknown extensions. Cockpit enforces actual size and file-count limits and stores files unchanged under randomized names. It does not reject extensions or verify that content matches the declared MIME type or file format.
 
