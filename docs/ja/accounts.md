@@ -158,7 +158,7 @@ cockpit accounts logout work --agent-type antigravity --confirm
 
 名前付きプロファイルのlogoutは、そのプロファイルの保存場所だけを対象にし、ホストログインを変更しません。defaultアカウントのlogoutはホストのAntigravity認証を消すため、その共有ログインを利用しているほかのプロファイルや、通常のterminalから起動したAgyもサインアウトします。Windows、Linux、またはmacOSでプロファイルKeychainを利用できない状態では、profileのpreviewが実際の共有認証を`sharedCredential`として示し、defaultアカウント側のlogout手順を案内します。Cockpitが自動でlogoutすることはありません。
 
-既存のAntigravityプロファイルから自動でログアウトすることはありません。旧Cockpitのログインで作成したプロファイルには再ログインを案内します。macOSで `cockpit accounts logout <profile> --agent-type antigravity` の対象を確認し、`--confirm` で実行した後に `cockpit accounts login <profile> --agent-type antigravity` を使ってください。既定アカウントの移行は不要です。個人向けプランでは第三者アプリからの利用が制限され、アカウント停止につながる場合があります。
+既存のAntigravityプロファイルから自動でログアウトすることはありません。旧Cockpitのログインで作成したプロファイルには再ログインを案内します。macOSで `cockpit accounts logout <profile> --agent-type antigravity` の対象を確認し、`--confirm` で実行した後に `cockpit accounts login <profile> --agent-type antigravity` を使ってください。既定アカウントの移行は不要です。
 
 Cockpitのplaceholder識別用fingerprintがない既存プロファイルのKeychain項目は、ログインを確認できない状態として扱います。metadataだけでは未ログインのplaceholderと区別できないため、項目を残したまま、ログインの根拠には使いません。上記の明示的なプロファイルlogoutと再ログインの手順を使ってください。資格情報の内容は読み取りません。
 

@@ -156,7 +156,7 @@ cockpit accounts logout work --agent-type antigravity --confirm
 
 Logging out a named profile targets only that profile's storage and does not change the host login. Logging out the default account removes the host Antigravity credential, which also signs out any other profile or ordinary terminal-launched Agy process that relied on that shared login. On Windows, Linux, or a macOS profile whose profile Keychain is unavailable, the profile preview reports the effective host item as `sharedCredential` and points to the default-account logout procedure. Cockpit never logs an account out automatically.
 
-Existing Antigravity profiles are never signed out automatically. Profiles created through the earlier Cockpit sign-in show a notice: review `cockpit accounts logout <profile> --agent-type antigravity`, repeat with `--confirm`, then use `cockpit accounts login <profile> --agent-type antigravity` on macOS. The default account needs no migration. Consumer plan terms may restrict third-party access and account suspension remains possible.
+Existing Antigravity profiles are never signed out automatically. Profiles created through the earlier Cockpit sign-in show a notice: review `cockpit accounts logout <profile> --agent-type antigravity`, repeat with `--confirm`, then use `cockpit accounts login <profile> --agent-type antigravity` on macOS. The default account needs no migration.
 
 An existing profile Keychain item without Cockpit's placeholder fingerprint is unconfirmed. Its metadata alone cannot distinguish a signed-out placeholder from a login, so Cockpit keeps it without treating it as sign-in evidence. Use the explicit profile logout and sign-in procedure above; Cockpit does not inspect credential contents.
 

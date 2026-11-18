@@ -121,7 +121,7 @@ All of a Crew's work, including requests from other people, runs on the owner's 
 
 Some AI services forbid letting others use an account, or using it through automated means. Check each service's terms, and the owner decides whether to add other people and which account to run on.
 
-Crews cannot run on Antigravity. Google's terms treat use from software other than Google's as a violation that can lead to account suspension.
+Crews cannot run on Antigravity.
 
 ## What to tell the people in the chat
 
