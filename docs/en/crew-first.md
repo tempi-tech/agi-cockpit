@@ -33,7 +33,7 @@ Cockpit does not create the Assistant in these cases.
 - You already have a Crew
 - You went ahead with **Set up later** without any available agent
 
-If the Assistant could not be set up, **Couldn't set up your Assistant** appears with the reason. Use **Try again** to retry, or **Not now** to finish setup.
+If the Assistant could not be set up, **Couldn't set up your Assistant** appears with the reason. If Git is unavailable, follow the OS-specific installation action, then select **Check and continue**; **Error details** keeps the diagnostic available. On macOS, the developer-tools action only requests installation: complete the OS confirmation and installation yourself. See [Initial setup](https://agi-labo.com/en/tools/cockpit/docs/initial-setup) for the Windows, Linux, and other macOS Git instructions. Other failures offer **Try again**. You can always choose **Not now** to finish setup.
 
 ## Give the Assistant its first job
 

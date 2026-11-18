@@ -50,6 +50,11 @@ If you have no Crew yet, finishing the last step makes Cockpit create one Assist
 
 Including stopped Crews, you can create one Crew for free, and the Assistant is that one. Creating more requires an AGI Lab membership. To start from a task instead, go to [Your first task](https://agi-labo.com/en/tools/cockpit/docs/first-task).
 
+
+The Assistant’s home needs Git. If Git is unavailable, this step explains what is missing and keeps **Error details** available. On macOS, **Install developer tools** requests Apple’s tools, including Git; you complete the macOS confirmation and installation yourself. If the problem is another missing Git installation, **Open Git installation instructions** opens the [official macOS guide](https://git-scm.com/install/mac). On Windows, **Open the Git installation page** opens the [official Windows page](https://git-scm.com/install/windows). On Linux, the instructions open the [official Linux guide](https://git-scm.com/install/linux). Cockpit does not download an installer or run winget or sudo. You do not need a GitHub account or GitHub CLI.
+
+After installation, select **Check and continue** to refresh detection and continue creating the same Assistant. Sending the macOS installation request does not mean installation is finished. If you cancel, installation is unfinished, or the request fails, stay here and check again or choose **Not now**. There is no automatic polling. Other errors, such as a folder permission or disk problem, retain their own details and do not ask you to reinstall Git.
+
 ## Open Cockpit at login
 
 On an installed macOS or Linux copy, enable **Settings → Setup → Open at login** to start Cockpit when you sign in to this computer. It is off by default. Crews that were running start again when Cockpit starts; tasks held by the memory guard still require manual resumption.
