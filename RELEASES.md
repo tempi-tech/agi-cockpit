@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.137.0 — 2026-11-19
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added the option to pin tasks and Crews at the top of their project.
 - Changed completed task lists to group tasks by project or working folder.
