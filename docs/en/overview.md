@@ -4,7 +4,7 @@
 
 Learn where AGI Cockpit runs AI agents and how the task list and task details connect human decisions with result review.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
+> Verified with AGI Cockpit 4.137.0 on 2026-11-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs)
 
 AGI Cockpit is a desktop app for handing work to multiple AI agents and supervising their progress, requests for decisions, and results in one place. Creating a task, reviewing its result, sending follow-up instructions, and completing it all stay within the same unit of work.
 
@@ -31,7 +31,7 @@ The in-app browser stores sign-in state and site data in the local persistent ar
 | PWA | Reviews and operates tasks, Asks, and Autoruns from another device | People |
 | `cockpit` CLI | Operates tasks, Asks, Autoruns, the browser, App Surface, and other Cockpit surfaces | AI agents and people |
 
-Local features such as parallel task management, every supported agent, and Master Agent are free with a free AGI Lab account, with no task cap. One Crew is free; additional Crews require an AGI Lab membership. Claude Code, Codex, and other agents require their own plans. An AGI Lab membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing. It also removes the limit on Crews.
+Local features such as parallel task management, every supported agent, and the deprecated Master Agent are free with a free AGI Lab account, with no task cap. One Crew is free; additional Crews require an AGI Lab membership. Claude Code, Codex, and other agents require their own plans. An AGI Lab membership ($20/month or $200/year, with a 7-day free trial) adds three Cockpit features: Autorun, remote access through the PWA, and smart routing. It also removes the limit on Crews.
 
 ## Crews (beta)
 
@@ -145,7 +145,8 @@ Stopping preserves the Queue; starting delivers its messages. Removing a Crew de
 - Operate a running mobile screen: [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface)
 - Hand a decision from an agent to a person: [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask)
 - Delegate and supervise one task from the CLI: [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management)
-- Delegate decomposition and integration of a broad objective: [Master Agent](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
+- Delegate a continuing role and child-task supervision: [Create your first Crew](https://agi-labo.com/en/tools/cockpit/docs/crew-first)
+- Continue existing Master workflows and read the deprecation notice: [Master Agent](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
 - Reuse dependency-aware multi-agent workflows: [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet)
 - Discuss in one shared conversation with agents and people: [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 - Start a new task or send an instruction to an existing task at a set time or interval: [Autorun](https://agi-labo.com/en/tools/cockpit/docs/autorun)

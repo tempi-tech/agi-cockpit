@@ -2,9 +2,11 @@
 
 # Master Agent
 
-Learn how to give a Master Agent a broad objective and supervise its task decomposition, progress tracking, result integration, and recurring operation.
+Understand the deprecated Master Agent, move new work to Crews, and supervise existing Master tasks.
 
-> Verified with AGI Cockpit 4.95.0 on 2026-09-30. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
+> Verified with AGI Cockpit 4.137.0 on 2026-11-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/master-agent)
+
+From v4.137.0, Master is marked **Deprecated · Going away** in Desktop and PWA creation and task-list screens. Use a [Crew](https://agi-labo.com/en/tools/cockpit/docs/crew-first) for new work that needs a continuing role or child-task supervision. **Create a Crew** in the notice opens Crew creation. It does not convert an existing Master or transfer its conversation, memory, or children. Masters remain available in this release; existing conversations, child tasks, CLI operations, and scheduled runs continue to work.
 
 The Master Agent is an agent launched in a Master directory containing a dedicated `AGENTS.md` with instructions for starting and supervising Cockpit tasks. Like a skill, this `AGENTS.md` gives the agent its role and operating procedures.
 
@@ -15,10 +17,11 @@ It divides a broad objective into multiple tasks, tracks their progress, and bri
 | Choice | Best for |
 | --- | --- |
 | Normal task | One clear result from one agent |
-| Master Agent | Deciding how to divide an objective and adjusting assignments or priorities while work progresses |
+| Master Agent (deprecated) | Continuing existing Master workflows |
+| Crew | A continuing role that can divide work and supervise child tasks |
 | Fleet | Fixing known dependencies in YAML so the same workflow can be rerun and recovered |
 
-Choose Fleet when the procedure is stable. Choose the Master Agent when decomposition itself requires judgment. [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) is enough for one delegated task.
+Choose Fleet when the procedure is stable. Use a Crew for new work when decomposition itself requires judgment. [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) is enough for one delegated task.
 
 ## Create a Master Agent
 
@@ -34,6 +37,8 @@ cockpit autorun create \
   --type interval \
   --minutes 60
 ```
+
+CLI creation with `--directory master`, and Autorun creation with `--master` or `--directory master`, are also deprecated. Successful requests retain one JSON document on standard output with `deprecated: true`, plus a warning on standard error. Updating an Autorun with `--directory master` behaves the same way.
 
 Autorun controls when work starts. How the Master Agent decomposes and supervises work after launch is a separate responsibility.
 

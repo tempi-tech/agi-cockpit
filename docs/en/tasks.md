@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.137.0 on 2026-11-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -60,11 +60,13 @@ Conversion is available to supported Native UI agent tasks and Cockpit Agent tas
 
 For tasks on this device, task-list search partially matches displayed task and project names. A task ID becomes searchable after at least four characters. It does not inspect a local task's instruction, working directory, or internal metadata. When another device is visible, search also partially matches the task name, instruction preview, and working folder received from that device, but not its remote task ID.
 
-The **Pinned** heading on Desktop and the PWA shows the total number of unfinished pinned tasks. When search or the agent filter narrows the list, it shows **visible / total**; without filtering, it shows the total. The total remains visible when the group is collapsed or no pinned task matches the filter.
+On Desktop and the PWA, a task or Crew menu offers **Pin to top** and **Pin to top of project**. The first places it in the top **Pinned** section; the second keeps it at the start of its project, folder, or **No project** group. An existing pin can be moved with **Move to top of project** or **Move to top**, or removed with **Unpin**. Earlier pins stay in the top section. Placement syncs between Desktop and the PWA. A pinned child under a pinned parent stays beneath that parent, while retaining its own placement for when it appears independently.
+
+The **Pinned** heading on Desktop and the PWA counts unfinished pins in the top section; project pins are counted in their own groups. When search or the agent filter narrows the list, it shows **visible / total**; without filtering, it shows the total. The total remains visible when the group is collapsed or no pinned task matches the filter.
 
 In the PWA, select a project heading to collapse or expand that project's tasks. A collapsed heading keeps the task count and running or unread indicators visible. The choice is stored in that browser for each project and survives a reload, but it does not sync to other devices. Search can hide groups that do not match without changing their saved collapsed state. A new or reintroduced project starts expanded; completed-only sections and the Pinned group keep their existing behavior.
 
-In the PWA task list, a question-bubble marker labelled **Waiting for an Ask answer** appears while that task has an unanswered Ask. It follows the actual open Ask rather than inferring from `waitingReason: question`, so it clears after the Ask is answered or closed. Selecting the row opens the task; answer the Ask directly in its chat or from **Inbox**. A session-unrecoverable warning or usage-limit warning takes display priority over the Ask marker because it identifies a separate recovery blocker.
+In Desktop and PWA task lists, a yellow **?** marker labelled **Waiting for an Ask answer** appears while that task has an unanswered Ask. It follows the actual open Ask rather than inferring from `waitingReason: question`, so it clears after the Ask is answered or closed. Selecting the row opens the task; answer the Ask directly in its chat or from **Inbox**. A session-unrecoverable warning or usage-limit warning takes display priority over the Ask marker because it identifies a separate recovery blocker.
 
 On Desktop, Command/Ctrl+K opens a search palette across projects. In addition to task names, first instruction lines, and project names, it searches app destinations such as **New task**, **Settings**, **Agent settings**, **Ask notifications**, **Hooks**, **Display**, **Remote access**, **Autorun tasks**, **History**, **Fleet list**, **Official documentation**, and **Updates**. Results include completed tasks. Use the arrow keys to select, Enter to open, and Escape to close. With an empty query, the palette shows recent tasks and primary destinations. The default key can be changed in Shortcut settings.
 
@@ -153,6 +155,8 @@ The Fleet group's running indicator and status sort follow the state of the Run 
 
 Complete moves a task from active work to completed work. Delete removes the task record from Cockpit. They are separate operations.
 
+On this device, expand **Completed** in the Desktop task list, Overview, or PWA to see tasks grouped under project headings. Cockpit-managed folders, Master, and **No project** use the same grouping as active tasks. Each heading can be collapsed independently and shows its count. Search and filters still apply. With the default order, groups with the most recently completed tasks appear first; selecting another sort order also changes the headings' order. The outer **Completed** section keeps its total count and existing bulk actions. Remote-device lists keep one flat **Completed** section per device.
+
 When someone else completes a task, its conversation and completion notification identify who completed it. The CLI exposes this as `completedBy` in `cockpit task get`. To continue a completed task, send a message in its conversation or use `cockpit task send`; `resume` refuses completed tasks with `task_completed`.
 
 When saved tasks exist, AGI Cockpit does not overwrite them with an empty list unless you explicitly delete the final task. If `state.json` cannot be read at startup, Cockpit stops before writing and shows recovery steps using the data folder and adjacent `backups` directory.
@@ -162,8 +166,11 @@ When saved tasks exist, AGI Cockpit does not overwrite them with an empty list u
 ```bash
 cockpit task list
 cockpit task get <id>
+cockpit task pin <id> --where project
 cockpit task complete <id> --keep-worktree
 ```
+
+`task pin <id>` defaults to the top Pinned section; `--where project` pins within the current group. `task unpin <id>` removes either pin. `task get` reports `isPinned` and `pinPlacement` (`top`, `project`, or `null`). See the [task reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task) for Crew IDs and list behavior.
 
 `task get` returns `status`, `waitingReason`, `readyForNextPrompt`, and `needsResume`, together with the latest conversation and terminal output.
 

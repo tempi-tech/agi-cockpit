@@ -4,7 +4,7 @@
 
 AGI CockpitがどこでAIエージェントを動かし、タスク一覧とタスク詳細を通じて人の判断と成果確認をつなぐのかを説明します。
 
-> AGI Cockpit 4.132.0で2026-11-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs)
+> AGI Cockpit 4.137.0で2026-11-19に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs)
 
 AGI Cockpitは、複数のAIエージェントへ仕事を渡し、進捗、判断要求、成果を一つの場所で監督するデスクトップアプリです。タスクを作るところから、結果を確認し、追加指示を送り、完了にするところまでを同じ作業単位で扱います。
 
@@ -31,7 +31,7 @@ Cockpitが仕事そのものをクラウドへ移すのではありません。�
 | PWA | 別端末からタスク、Ask、自動実行を確認・操作する | 利用者 |
 | `cockpit` CLI | タスク、Ask、自動実行、ブラウザー、App SurfaceなどをCockpit経由で操作する | AIエージェントと利用者 |
 
-タスクの並列管理・各エージェント・Master Agent などのローカル機能は無料で、タスク数の上限もありません。無料の AGIラボのアカウントで使えます。クルーは無料で 1 体まで、2 体目からは AGIラボ会員です。Claude CodeやCodexなどを使う場合は、各エージェントの契約が別途必要です。AGIラボ会員（$20/月または$200/年、7日間無料トライアル付き）になると、自動実行、PWAによるリモートアクセス、スマートルーティングの3つが加わり、クルーの数の上限もなくなります。
+タスクの並列管理・各エージェント・非推奨のMaster Agentなどのローカル機能は無料で、タスク数の上限もありません。無料の AGIラボのアカウントで使えます。クルーは無料で 1 体まで、2 体目からは AGIラボ会員です。Claude CodeやCodexなどを使う場合は、各エージェントの契約が別途必要です。AGIラボ会員（$20/月または$200/年、7日間無料トライアル付き）になると、自動実行、PWAによるリモートアクセス、スマートルーティングの3つが加わり、クルーの数の上限もなくなります。
 
 ## クルー（ベータ版）
 
@@ -145,7 +145,8 @@ AGIラボ会員は、クルーの「組織」タブで人・Crew・ほかのエ�
 - 起動済みのモバイル画面を扱う: [App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)
 - エージェントから人へ判断を渡す: [Ask](https://agi-labo.com/tools/cockpit/docs/ask)
 - 一件のタスクをCLIから委任・監督する: [タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)
-- 大きな目的の分解と統合を任せる: [Master Agent](https://agi-labo.com/tools/cockpit/docs/master-agent)
+- 継続的な役割と子タスクの監督を任せる: [最初のクルーを作る](https://agi-labo.com/tools/cockpit/docs/crew-first)
+- 既存マスターの運用と非推奨の案内を確認する: [Master Agent](https://agi-labo.com/tools/cockpit/docs/master-agent)
 - 依存関係付きの複数エージェント処理を再利用する: [Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)
 - 複数のエージェントと人が同じ会話で議論する: [Talk Rooms](https://agi-labo.com/tools/cockpit/docs/talk-rooms)
 - 時刻や間隔に基づいて新しいタスクを起動する、または既存タスクへ指示を送る: [自動実行](https://agi-labo.com/tools/cockpit/docs/autorun)

@@ -2,9 +2,11 @@
 
 # Master Agent
 
-Master Agentへ大きな目的を渡し、複数タスクへの分解、進捗監督、結果統合、自動実行での継続監督を任せる方法を説明します。
+非推奨になったMaster Agent、クルーへの移行案内、既存のマスタータスクの監督方法を説明します。
 
-> AGI Cockpit 4.95.0で2026-09-30に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/master-agent)
+> AGI Cockpit 4.137.0で2026-11-19に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/master-agent)
+
+v4.137.0から、DesktopとPWAの作成画面やタスク一覧で、マスターに「非推奨・今後なくなります」と表示します。継続的な役割や子タスクの監督を任せる新しい仕事には、[クルー](https://agi-labo.com/tools/cockpit/docs/crew-first)を使ってください。案内の「クルーを作る」はクルーの作成画面を開きます。既存マスターの変換や、会話・メモリ・子タスクの移行は行いません。このリリースではマスターも引き続き利用でき、既存の会話・子タスク・CLI操作・自動実行は維持されます。
 
 Master Agentは、Cockpitのタスクを起動・監督するための専用の`AGENTS.md`が用意された、マスターディレクトリで起動するエージェントです。この`AGENTS.md`は、スキルと同じように、エージェントへ役割や操作手順を伝えるものです。
 
@@ -15,10 +17,11 @@ Master Agentは、Cockpitのタスクを起動・監督するための専用の`
 | 選択肢 | 向いている仕事 |
 | --- | --- |
 | 通常タスク | 一つの明確な成果を一つのエージェントへ依頼する |
-| Master Agent | 目的から分解方法を考え、進行中に担当や優先順位を調整する |
+| Master Agent（非推奨） | 既存のマスターによる運用を続ける |
+| クルー | 継続的な役割を持ち、仕事を分けて子タスクを監督する |
 | Fleet | 既知の依存関係をYAMLに固定し、同じ手順を再利用・復旧する |
 
-手順が毎回同じならFleet、分け方そのものに判断が必要ならMaster Agentを選びます。一件だけの委任は[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)で十分です。
+手順が毎回同じならFleet、分け方そのものに判断が必要な新しい仕事ならクルーを選びます。一件だけの委任は[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)で十分です。
 
 ## Master Agentを作成する
 
@@ -34,6 +37,8 @@ cockpit autorun create \
   --type interval \
   --minutes 60
 ```
+
+CLIでの`--directory master`によるタスク作成、自動実行の`--master`または`--directory master`による作成も非推奨です。成功時は標準出力の単一JSONに`deprecated: true`を付け、標準エラーへ警告を出します。自動実行を`--directory master`で更新する場合も同じです。
 
 自動実行は開始時刻を管理する機能です。Master Agentが起動後にどう分解・監督するかとは別の責務です。
 

@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 4.137.0 on 2026-11-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -60,7 +60,7 @@ The same state notifies once rather than on every refresh. Successful sign-in cl
 
 ## Check remaining quotas
 
-Antigravity usage is checked only when the Desktop or PWA Usage panel opens, using `agy -p "/usage" --output-format json`. Account lists, CLI reads, automatic refreshes, and account selection use the cached reading or show unknown. Unsupported output and failures stay unknown; no private API, language-server, or history fallback is queried. The signed-in CLI output format is unverified, so some versions may report unknown. You can check `/usage` directly in Agy.
+Antigravity usage is checked only when the Desktop or PWA Usage panel opens, using `agy -p "/usage" --output-format json`. Account lists, CLI reads, automatic refreshes, and account selection use the cached reading or show unknown. Unsupported output and failures stay unknown; no private API, language-server, or history fallback is queried. Cockpit displays the model groups returned by Agy, such as **Gemini Models** and **Claude and GPT models**, with their five-hour and weekly remaining percentages and reset times when provided. Models within one group share that group’s limits. The command output was checked with Agy 1.5.11; unsupported versions can still report unknown. Refreshing an already open panel uses the cached reading; close and reopen it for another query. You can also check `/usage` directly in Agy.
 
 Open **Usage** in Desktop to compare the reported allowances for each provider and account. Each quota shows its remaining percentage directly below the ring. Hover over or select a quota to see its account, allowance, reset time, and **Resets in** countdown when a reset time is available. The details also show the data source and last update; use **Refresh usage** to retrieve usage again. Cockpit does not invent a percentage for an unknown quota, authentication error, observation-only status row, or the Cockpit Agent balance display.
 
