@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.137.0 — 2026-11-19
+
+**Type:** minor · **Platforms:** macOS
+
+- Added the option to pin tasks and Crews at the top of their project.
+- Changed completed task lists to group tasks by project or working folder.
+- Added deprecation notices for Master and guidance for moving to Crews.
+- Fixed the New Task model list overlapping the controls at the top of the screen.
+- Fixed task lists to show a yellow question mark while waiting for an Ask answer.
+- Fixed Antigravity usage display to show five-hour and weekly remaining usage by model group.
+- Fixed the CLI on Linux to return an error instead of crashing when input encoding fails.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスクとクルーを、自分のプロジェクトの先頭にもピン留めできるようになりました。
+- 完了したタスクを、プロジェクトや作業フォルダごとにまとめて表示するようになりました。
+- マスターを非推奨として表示し、クルーへの移行案内を追加しました。
+- 新しいタスクのモデル一覧が画面上部の切り替えに重ならないように修正しました。
+- タスク一覧のAsk待ちの印を、黄色い「?」で表示するように修正しました。
+- Antigravityの使用量を、モデルグループ別の5時間・週の残量とともに表示するように修正しました。
+- LinuxでCLIの入力処理に失敗した際、異常終了せずエラーを返すように修正しました。
+
+</details>
+
 ## v4.136.0 — 2026-11-18
 
 **Type:** minor · **Platforms:** macOS
