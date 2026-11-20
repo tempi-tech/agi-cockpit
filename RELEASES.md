@@ -18,6 +18,12 @@ English is the primary language for these generated release notes. Download the 
 - Added a typing indicator in Discord DMs after an Ask answer, until the Crew replies.
 - Added visual-mode tasks using the default Antigravity account.
 - Added command approvals before execution in Antigravity visual mode.
+- Fixed file names containing Japanese and other special characters, staged status, and changed-line counts in the changed files list.
+- Changed Crews to reply in the channel without automatically creating a thread, using thread replies only when explicitly requested.
+- Changed ordinary Google Chat replies to replace the Thinking message with the reply instead of deleting it.
+- Fixed answering Asks using buttons in Google Chat.
+- Fixed additional instructions sent to busy Antigravity, Cursor, and Qoder visual-mode tasks to queue and arrive in order.
+- Added immediate instructions to running Antigravity turns through Send now without stopping the turn.
 
 <details>
 <summary>日本語のリリースノート</summary>
@@ -32,6 +38,12 @@ English is the primary language for these generated release notes. Download the 
 - DiscordのDMでAskに答えると、Crewが返事をするまでそのDMに入力中の表示が出るようになりました。
 - Antigravityの既定のアカウントで、画面モードのタスク実行に対応しました。
 - Antigravityの画面モードで、コマンド実行前の承認に対応しました。
+- 変更ファイル一覧で、日本語などを含むファイル名、ステージ済みの状態、変更行数を正しく表示するように修正しました。
+- クルーがチャンネルで呼ばれたときに自動でスレッドを作らず、スレッドへの返信を指定した場合だけ使うようにしました。
+- Google Chatの通常の返事では、「考えています…」を削除せず、そのメッセージを返事に書き換えるようにしました。
+- Google Chatに届いたAskのボタンから回答できない問題を修正しました。
+- 作業中のAntigravity・Cursor・Qoderの画面モードへ送った追加の指示を、順番に届けるように修正しました。
+- Antigravityで「割り込んで今すぐ送信」を使うと、実行中のターンを止めずに追加の指示を届けるようになりました。
 
 </details>
 
@@ -46,6 +58,20 @@ English is the primary language for these generated release notes. Download the 
 - Fixed task lists to show a yellow question mark while waiting for an Ask answer.
 - Fixed Antigravity usage display to show five-hour and weekly remaining usage by model group.
 - Fixed the CLI on Linux to return an error instead of crashing when input encoding fails.
+- Improved Crew organization charts by stacking Crews with no reports vertically to reduce width.
+- Fixed nonexistent origin entries in branch lists and incorrect handling of branch names on Windows.
+- Fixed text pasting and clearing input fields in Android App Surface.
+- Fixed Google sign-in failing to start during Google Chat connection setup.
+- Added the option to answer owner identity confirmations through Ask when connecting a Crew to chat.
+- Added Git installation guidance and a check-and-continue action when Git is missing during setup.
+- Improved session handling so temporary failures to save refreshed sign-in details do not trigger repeated refresh requests.
+- Added a typing indicator in Discord DMs after an Ask answer, until the Crew replies.
+- Fixed terminal-mode tasks failing to start with instructions beginning with a hyphen.
+- Improved Ask priority indicators in Discord, Slack, Google Chat, and Chatwork with colored circles and emphasized labels.
+- Added visual-mode tasks and command approvals before execution for Antigravity.
+- Changed sign-in for additional Antigravity accounts to use the official CLI. Windows and Linux support only the default account.
+- Removed automatic account switching for Antigravity, including switching at usage limits; tasks use the selected account.
+- Fixed choices with descriptions disappearing from Asks created through the CLI, and added errors for invalid choices.
 
 <details>
 <summary>日本語のリリースノート</summary>
@@ -57,6 +83,20 @@ English is the primary language for these generated release notes. Download the 
 - タスク一覧のAsk待ちの印を、黄色い「?」で表示するように修正しました。
 - Antigravityの使用量を、モデルグループ別の5時間・週の残量とともに表示するように修正しました。
 - LinuxでCLIの入力処理に失敗した際、異常終了せずエラーを返すように修正しました。
+- クルーの組織図で、配下を持たないクルーを縦に並べ、横幅を抑えるようにしました。
+- ブランチ一覧に実在しない「origin」が表示される問題と、Windowsでブランチ名を正しく扱えない問題を修正しました。
+- AndroidのApp Surfaceで、文字の貼り付けや入力欄の消去が正しく働かない問題を修正しました。
+- Google Chatの接続設定で、Googleのサインインを開始できない問題を修正しました。
+- クルーのチャット接続で、オーナー本人かどうかの確認にAskから答えられるようになりました。
+- 初期設定でGitが見つからないときに、導入の案内と、導入後に確認して続ける操作を表示するようになりました。
+- サインイン情報の更新後に保存が失敗しても、更新を繰り返さずに利用を続けられるようにしました。
+- DiscordのDMでAskに答えると、Crewが返事をするまでそのDMに入力中の表示が出るようになりました。
+- ターミナルモードで「-」から始まる指示文を送ると、タスクを開始できない問題を修正しました。
+- Discord・Slack・Google Chat・Chatworkに届くAskで、優先度を色の丸と強調表示で見分けやすくしました。
+- Antigravityの画面モードで、タスクの実行とコマンド実行前の承認に対応しました。
+- Antigravityの追加アカウントのサインインを公式CLIで行う形に変更しました。WindowsとLinuxでは既定のアカウントのみ利用できます。
+- Antigravityではアカウントを明示して使う形に変更し、使用上限に達したときの自動切り替えを終了しました。
+- CLIからAskを作るとき、説明付きの選択肢が消える問題を修正しました。不正な選択肢はエラーで知らせるようになりました。
 
 </details>
 
