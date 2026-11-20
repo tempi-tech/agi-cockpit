@@ -229,7 +229,7 @@ cockpit ask close <ask-id>
 
 `list`、`get`、`answer`、`close`へ`--host <host-or-alias>`を追加すると、別のCockpitのAskを操作できます。接続先ではRemote Accessを有効にしてください。`list`、`get`、`close`は従来どおり同じ所有者のTailscale端末からtokenなしで利用できますが、`answer`にはloopbackや同じ所有者のTailscale端末でもペアリング済みtokenが必要です。未認証の回答は`ask_answer_authentication_required`で拒否されます。Tailscale限定モードの接続制限も適用されます。Ask作成とrelay設定はローカル専用で、添付パスは接続先のファイルを指します。
 
-別の端末から`cockpit ask pair --host <host-or-alias> --code-stdin`へ、接続先Desktopのリモートアクセス画面に表示された6桁コードを標準入力で渡します。返された`data.token`を秘密として保持し、`AGI_COCKPIT_TASK_REMOTE_TOKEN`に設定してください。新規ペアリングは接続先自身のloopback・LAN・Tailscaleアドレスからはできません。既存のtokenは再接続に利用できます。保存、失効、再ペアリングの手順は[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)と[Askリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
+`cockpit ask pair --host <host-or-alias> --sign-in`を実行します。ブラウザーの確認画面で接続先PCの名前とアドレスを確認し、そのPCと同じAGIラボアカウントへサインインしてください。返された`data.token`を秘密として保持し、`AGI_COCKPIT_TASK_REMOTE_TOKEN`へ設定します。接続先PC自身からも同じサインイン手順を使い、自己アドレスだけでは所有者権限を得られません。既存のtokenも引き続き使えます。開始回数の制限はPWAと共有し、同じアドレスから3回開始した後は30秒待ちます。保存、取消、復旧は[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)と[Askリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。以前のコード入力オプションは使いません。
 
 ローカルCLIからの回答には、発行元Cockpitで実行中のタスクの認証情報が必要です。現在のCLIはそれを自動で送ります。共有Ask tokenやタスクIDだけを渡す旧スクリプト、タスク外のCLI、Hookからは回答できません。タスクは自分のAskへ回答できず、回答はそのタスクに帰属します。ペアリング済みPWA・リモートCLIの回答は所有者に帰属するため、ペアリングtokenをタスクへ渡すことは所有者権限を与えることになります。
 

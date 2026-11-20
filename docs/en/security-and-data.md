@@ -236,9 +236,9 @@ When the Desktop device filter displays another PC, it receives task-list metada
 
 Opening a remote task from that list creates a separate PWA connection to the other PC's Remote Access page. This connection uses the same authentication boundary as the PWA. After authentication, it can read the conversation and task detail and send messages, Ask answers, stop, and completion actions to the target PC. Confirm the displayed device name, and protect Tailscale devices and paired connections as authority to operate that Cockpit.
 
-Task notifications, full state synchronization, and recent folder lists are sent only to authenticated sync connections. An unpaired connection is closed after two minutes. The PWA keeps the pairing form and entered code while reconnecting, and resends a submitted code if the connection drops before the authentication reply.
+Task notifications, full state synchronization, and recent folder lists are sent only to authenticated sync connections. An unauthenticated connection is closed after two minutes. A saved PWA token reconnects automatically; without one, the browser must sign in with the same AGI Lab account as the PC. Tailscale ownership and the PC's own network addresses do not grant owner authority to a PWA or an Ask answer.
 
-The recommended configuration is Tailscale-only access over HTTPS. Cockpit authenticates devices with Tailscale device information and a six-digit pairing code, with expiration and failure limits. It does not silently downgrade to HTTP when an HTTPS certificate cannot be obtained.
+The recommended configuration is Tailscale-only access over HTTPS. PWA and owner CLI connections use AGI Lab sign-in instead of a six-digit code. Existing code-issued credentials remain valid. The CLI and embedded PWA show a confirmation page naming the PC before sign-in; confirm only requests you initiated. Treat a returned connection token as authority to operate that Cockpit. Review and revoke connections in Remote Access or with `cockpit remote-access paired list` and `cockpit remote-access paired revoke <id>`. A credential-store read failure blocks authentication without replacing the file. Cockpit does not silently downgrade to HTTP when an HTTPS certificate cannot be obtained.
 
 Only while HTTPS Remote Access is running, Cockpit checks the certificate at startup and every 24 hours and renews it through Tailscale when 30 days or less remain. Existing connections stay open, and the renewed certificate applies to new connections. Failure retries after six hours and produces a reason-specific warning when expiry is within 14 days or has passed. Renewal history does not store certificate contents, private keys, command output, or personal account details.
 
@@ -248,7 +248,7 @@ Local Wi-Fi mode is unencrypted and activates only after explicit confirmation. 
 
 See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for setup details.
 
-Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, HTTPS settings, and paired credentials are retained. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
+Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, and HTTPS settings are retained. Credentials issued through AGI Lab sign-in are revoked when the PC signs out or its sign-in expires or is revoked; credentials issued through the previous pairing-code system remain valid. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
 
 ## Protect App Surface
 

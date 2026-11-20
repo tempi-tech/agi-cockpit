@@ -116,7 +116,7 @@ CLI connections are not forwarded automatically to another instance. Inspect `in
 2. In Tailscale-only mode, confirm both devices are authenticated in the same tailnet.
 3. For HTTPS, enable MagicDNS and HTTPS Certificates. Run `cockpit remote-access certificate status` and inspect `expired`, `daysRemaining`, `renewal.failed`, and `renewal.lastAttempt.error`. If automatic renewal failed, follow the displayed reason and select **Renew**.
 4. Confirm the QR code or connection URL uses HTTPS.
-5. Check for an expired pairing code or the 30-second lock after three failures.
+5. Sign in with the same AGI Lab account as the target PC. Select the sign-in button again to switch accounts. After three sign-in starts, wait 30 seconds. A credential-store error requires restoring access to the store, not a new pairing code.
 6. Run `cockpit remote-access status --verbose` to isolate mode, scope, certificate, and membership state. Automatic renewal retries after six hours, but resolve authentication, membership, Tailscale, or TLS reload failures first.
 
 Do not switch casually to local Wi-Fi mode. Restore the certificate or Tailscale setup. See [Remote Access](https://agi-labo.com/en/tools/cockpit/docs/remote-access).
@@ -149,6 +149,6 @@ After repeated GPU failures, Cockpit can switch to software rendering and contin
 
 Collect reproduction steps, expected and actual results, AGI Cockpit version, OS and architecture, selected agent and UI mode, and error codes. Include relevant portions of `cockpit doctor`, updater logs, or a diagnostic report when needed.
 
-Remove tokens, cookies, pairing codes, personal names in local paths, and secret file content. Check [Release notes](https://agi-labo.com/en/tools/cockpit/docs/releases) for an already published fix, then report the problem in the AGI Cockpit GitHub Issues.
+Remove tokens, cookies, sign-in links and secrets, personal names in local paths, and secret file content. Check [Release notes](https://agi-labo.com/en/tools/cockpit/docs/releases) for an already published fix, then report the problem in the AGI Cockpit GitHub Issues.
 
 When signed in to AGI Lab, you can also send an AGI Cockpit bug report or feature request directly to staff with `cockpit feedback send --kind bug --title "Short title" --stdin` (use `--kind request` for a request). Pipe the report body through stdin. This is local-only, sends immediately without a confirmation dialog, and accepts no attachments. Review the [feedback data boundaries](https://agi-labo.com/en/tools/cockpit/docs/security-and-data#send-feedback-to-agi-lab) before sending. `inbox` and `get` are staff-only; they are not a personal sent-report list.

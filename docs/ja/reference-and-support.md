@@ -116,7 +116,7 @@ command gateが失敗した場合は、Fleetパネルの失敗fileと**全量ロ
 2. Tailscale限定では両端末が同じtailnetで認証済みか確認します。
 3. HTTPSではMagicDNSとHTTPS Certificatesを有効にし、`cockpit remote-access certificate status`で`expired`、`daysRemaining`、`renewal.failed`、`renewal.lastAttempt.error`を確認します。自動更新に失敗している場合は画面の理由に従い、「更新」を実行します。
 4. QRコードまたは接続URLがHTTPSであることを確認します。
-5. ペアリングコードの期限切れ、3回失敗後の30秒ロックを確認します。
+5. 接続先PCと同じAGIラボアカウントへサインインします。切り替えるにはサインインボタンを再度押し、3回開始した後は30秒待ちます。保存先エラーの場合は、コードの再取得ではなく保存先へのアクセスを復旧してください。
 6. `cockpit remote-access status --verbose`でmode、scope、証明書、会員確認を切り分けます。自動更新の失敗は6時間後にも再試行されますが、認証、会員資格、Tailscale、TLSへの反映エラーは先に解消します。
 
 ローカルWi-Fiモードへ安易に切り替えず、証明書またはTailscale設定を復旧します。詳しくは[リモートアクセス](https://agi-labo.com/tools/cockpit/docs/remote-access)を参照してください。
@@ -149,6 +149,6 @@ GPUの異常終了が繰り返された場合、Cockpitはソフトウェアに�
 
 再現手順、期待した結果、実際の結果、AGI Cockpitのバージョン、OSとアーキテクチャ、対象エージェントとUIモード、エラーコードを揃えます。必要に応じて`cockpit doctor`、アップデーターログ、診断レポートの該当部分を添付します。
 
-token、Cookie、ペアリングコード、ローカルの個人名、秘密のファイル内容は除去してください。既知の修正が公開済みか[バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)を確認してから、AGI CockpitのGitHub Issueへ報告します。
+token、Cookie、サインイン用のリンクや秘密情報、ローカルの個人名、秘密のファイル内容は除去してください。既知の修正が公開済みか[バージョン履歴](https://agi-labo.com/tools/cockpit/docs/releases)を確認してから、AGI CockpitのGitHub Issueへ報告します。
 
 AGIラボにサインインしている場合は、`cockpit feedback send --kind bug --title "短い件名" --stdin` でCockpitの不具合をスタッフへ直接送れます。要望は `--kind request` を使い、本文は標準入力から渡します。ローカル専用で、確認画面なしにすぐ送信し、添付は使えません。送信前に[フィードバックのデータ範囲](https://agi-labo.com/tools/cockpit/docs/security-and-data#agiラボへ不具合要望を送る)を確認してください。`inbox` と `get` はスタッフ専用で、自分の送信履歴ではありません。

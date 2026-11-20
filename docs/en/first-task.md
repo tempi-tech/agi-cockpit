@@ -13,7 +13,7 @@ If initial setup created an Assistant Crew, its conversation is open when setup 
 ## 1. Create a new task
 
 1. Select **Create new** (+) at the top left of the window, above the task list.
-2. Under **Workspace**, choose an existing project, select **Create project**, choose an existing temporary folder, or select **New temporary folder**. If the project contains several folders, select the working folder for this task.
+2. **Workspace** starts with **No project**. To inspect existing files, select a project containing them or add their folder through **Create project**. If the project contains several folders, select the working folder for this task.
 3. Select an AI agent.
 4. For supported agents, use **Mode** to choose **Native UI** or **Terminal**.
 5. If account selection is available, keep **Auto**. Keep the built-in system prompt.
@@ -23,11 +23,11 @@ If initial setup created an Assistant Crew, its conversation is open when setup 
 Inspect this folder and describe its main files and their roles in no more than five points. Do not change any files.
 ```
 
-The project picker shows current projects, other projects, and recent folders. **Create project** lets you name a project and add one or more existing folders; if you add none, Cockpit creates an empty managed folder for it. The first folder is primary and is selected by default for new tasks. Open **Project details** to review or change the project's folders before creating the task.
+The project picker shows current projects, other projects, and recent folders. **Create project** lets you name a project and add one or more existing folders; if you add none, Cockpit creates an empty managed folder for it. The first folder is primary and becomes the default working folder when you select that project. Open **Project details** to review or change the project's folders before creating the task.
 
-A temporary folder created for an earlier task appears by folder name. Selecting it reuses the folder without clearing its current contents; select **New temporary folder** to start in a different empty location. When unfinished tasks share a temporary folder, completing one of them does not delete the folder while another unfinished task still uses it.
+Select **No project** to start in a new empty location. Cockpit creates a persistent folder under `~/.agi-tools/workspaces` and retains it after task completion. Inheriting the workspace of an existing temporary task reuses its contents. When unfinished tasks share a temporary folder, completing one of them does not delete the folder while another unfinished task still uses it.
 
-When you select an existing working folder, Cockpit checks before task creation that the path exists, is a folder, and can be read and accessed. A missing path, a selected file, insufficient permission, or a failed check blocks creation. Recover with **Choose another folder**, **New temporary folder**, or **Check again**.
+When you select an existing working folder, Cockpit checks before task creation that the path exists, is a folder, and can be read and accessed. A missing path, a selected file, insufficient permission, or a failed check blocks creation. Recover with **Choose another folder**, **Start without a project**, or **Check again**.
 
 Smart routing is for AGI Lab members. If you select **Smart routing** while signed out, Cockpit explains the feature and offers **View membership plans** and **Sign in with a member account**. After signing in as a member, turn it on to let Cockpit choose an AI agent, model, reasoning level, and workspace from the currently available candidates based on the instruction. Manually selecting a workspace fixes only the workspace; agent and model routing remains active. Under **Routing policy**, enter preferences such as agents or models to prioritize. The policy saves automatically and applies to future tasks.
 

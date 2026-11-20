@@ -108,7 +108,7 @@ Use `cockpit project icon get --project <id|name>` to inspect the effective icon
 
 ## Task entry points and workspaces
 
-A regular new task can use a project folder, a Cockpit-managed persistent or temporary folder, or a Git Worktree. For temporary work, choose whether to reuse an existing folder and its contents or create a new empty folder. Persistent folders live under `~/.agi-tools/workspaces`; a temporary folder is deleted on completion after no unfinished task still uses that location. A Worktree task remains assigned to the project of its source folder, and only that source folder is replaced by the Worktree.
+A regular new task starts with **No project**, using a new persistent folder under `~/.agi-tools/workspaces`. You can select a project folder or a Git Worktree; an explicitly supplied project or folder is still used. The Desktop and PWA workspace menu no longer offers a new temporary folder or the master folder. Existing temporary tasks and temporary workspaces created through the CLI or Smart Routing retain their behavior: a temporary folder is deleted on completion after no unfinished task still uses it. Existing master tasks and those created through the CLI or Autorun remain available. A Worktree task remains assigned to the project of its source folder, and only that source folder is replaced by the Worktree.
 
 Quick Task opens a compact creation window from a global shortcut without leaving the current app. After creation, supervise it through the regular task list and task details.
 

@@ -22,7 +22,7 @@ The AGI Cockpit process and remote access must remain running on the target comp
 
 When Cockpit runs on several PCs under the same Tailscale account, the **Device** filter in the Desktop task list can show task summaries from the other PCs. Selecting a row opens that device's PWA inside Desktop, where you can read the conversation, send messages, answer Asks, stop the task, or complete it. The list feed and the interactive task detail use separate connections. The task view identifies the target device; confirm it before acting. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#open-and-operate-tasks-on-another-pc) for the workflow.
 
-Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, HTTPS settings, and paired credentials are retained. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
+Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, and HTTPS settings are retained. Credentials issued through AGI Lab sign-in are revoked when the PC signs out or its sign-in expires or is revoked; credentials issued through the previous pairing-code system remain valid. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
 
 ## What Tailscale is
 
@@ -86,11 +86,11 @@ A failed automatic renewal retries after six hours. When failure occurs with 14 
 1. Turn on **HTTPS**.
 2. Confirm that the connection URL now has the form `https://device-name.tailnet-name.ts.net:47280`.
 3. Scan the QR code or open the displayed URL on the remote device.
-4. If device pairing appears, enter the six-digit pairing code from the Desktop Remote access panel. On the computer running Cockpit, open it with the **Remote access** button at the bottom left of the sidebar, next to your account. The code appears only while Remote access is on.
+4. Select **Sign in with AGI Lab to connect** if asked, then sign in with the same AGI Lab account used on the target PC. You no longer need a pairing code from the PC screen.
 
-The PWA requires pairing even on a same-owner Tailscale device. A stored token authenticates automatically. Otherwise, enter the six-digit code shown on Desktop. A browser on the target computer itself can also pair with the code. Without a code or a stored token, Cockpit does not authenticate a connection, even one from the target computer itself. Codes refresh after five minutes and can be regenerated; regenerating a code does not revoke existing credentials.
+The PWA requires authentication even on a same-owner Tailscale device or in a browser on the target PC itself. A stored token reconnects automatically, including tokens from the previous pairing-code system. An already signed-in browser also tries AGI Lab sign-in automatically. Clicking **Sign in with AGI Lab to connect** always starts a new sign-in, allowing you to switch accounts; this may sign the browser out of AGI Lab in other tabs. The automatic check does not sign you out. Use the displayed Tailscale domain or IP address, or a LAN IP when local access is enabled; `.local` addresses are not supported for sign-in.
 
-Before pairing succeeds, Cockpit does not send task notifications, full task state, or recent folder lists to that connection, and it closes an unpaired connection after two minutes. If the connection drops while the PWA is pairing, the form keeps the entered code and reconnects. A code already submitted before the authentication reply is sent again automatically, so do not regenerate it unless it has expired or Cockpit rejects it.
+Before authentication succeeds, Cockpit does not send task notifications, full task state, or recent folder lists to that connection, and closes an unauthenticated connection after two minutes. A PWA embedded in another page starts sign-in only after you select its sign-in button. It opens a confirmation page in the normal browser that identifies the PC and its address; continue only if you initiated the connection. A normal PWA tab goes directly through sign-in without this confirmation page.
 
 The connection is ready when the PWA header shows the target machine name and **Connected**, and you can open **Inbox**, **Tasks**, and **Autorun**. The browser tab title also starts with the target as `<machine name> - AGI Cockpit`, making several connections distinguishable even in narrow tabs. While disconnected or before a machine name is available, it falls back to `AGI Cockpit`.
 
@@ -148,7 +148,7 @@ Each Cockpit remains independent. Switching targets does not merge or move tasks
 
 ## Connect over local Wi-Fi
 
-When Tailscale is unavailable and you need a temporary connection on a trusted LAN, select **Allow local Wi-Fi too**. Accept the risk in the confirmation, open the displayed `http://local-IP:47280` URL, and enter the six-digit pairing code.
+When Tailscale is unavailable and you need a temporary connection on a trusted LAN, select **Allow local Wi-Fi too**. Accept the risk in the confirmation, open the displayed `http://local-IP:47280` URL, and sign in with the same AGI Lab account used on the target PC.
 
 Local Wi-Fi mode cannot use HTTPS. A third party on the same Wi-Fi network may be able to read the token and task content. Do not use this mode on public Wi-Fi, a shared office network, or a network available to visitors. Do not expose it to the internet with router port forwarding.
 
@@ -164,9 +164,9 @@ The computer is only kept awake while remote access is running. Turning remote a
 
 ## Stop remote access
 
-Select **Off** in the Desktop Remote access panel to disconnect active sessions. Paired tokens survive app restarts and Remote Access off/on. The PWA stores its token in browser localStorage; the target stores only SHA-256 hashes in `pairing-credentials.json` inside its Cockpit data directory. To revoke all paired credentials, stop Remote Access, remove that file, restart Remote Access, and pair trusted devices again. Credentials from versions without durable pairing may require one new pairing.
+Select **Off** in the Desktop Remote access panel to disconnect active sessions. Credentials survive ordinary restarts and Remote Access off/on. The PWA stores its token in browser localStorage; the target stores SHA-256 token hashes and connection metadata in `pairing-credentials.json` inside its Cockpit data directory. Review connections in the Desktop Remote Access screen or with `cockpit remote-access paired list`. Revoke an individual connection there or with `cockpit remote-access paired revoke <id>`; revocation disconnects it immediately. The list and revocation actions are also available while Remote Access is off. They never display the token or its hash.
 
-Cockpit also stops a running remote-access server and returns to Off if the AGI Lab sign-in or membership becomes invalid. A temporary membership-verification outage preserves a running connection and shows an action to check again instead of stopping it immediately.
+AGI Lab sign-out, expired or revoked sign-in, or inactive membership pauses Remote Access while preserving its settings. Sign-in-issued connections are revoked when the PC signs out or its sign-in expires or is revoked. A temporary membership-verification outage preserves a running connection and shows an action to check again. If the credential store cannot be read, Cockpit refuses authentication and new connections without replacing the file; the browser keeps its saved token for recovery. If revocation cannot be saved, Remote Access stays stopped until the pending revocation can be applied. If neither the credential file nor the pending-revocation record could be written before Cockpit exited, review and revoke remaining sign-in connections after restarting.
 
 ## Inspect and configure it from the CLI
 
@@ -211,7 +211,7 @@ Remote CLI requests from a computer on the same tailnet with the same Tailscale 
 | You cannot change the Tailscale settings | Ask a tailnet Owner, Admin, or Network admin |
 | A certificate is issued but the URL is HTTP | Turn on **HTTPS** and confirm that Connection info changes to an HTTPS URL |
 | No URL or QR code appears | Confirm that **Tailscale only** or **Allow local Wi-Fi too** is selected and the target shows as running |
-| Cockpit rejects the pairing code | Use the latest code within five minutes. After **Regenerate**, enter the new code. After three failed attempts, wait 30 seconds. The target computer's own loopback, LAN, and Tailscale addresses count as one address |
+| Sign-in cannot connect | Use the same AGI Lab account as the target PC. Select the sign-in button again to switch accounts. After three starts, wait 30 seconds; the PC's own addresses share this limit |
 | The PWA shows **Disconnected** | Confirm that Cockpit, remote access, and Tailscale are running on the target, then select **Retry now** |
 | Another Cockpit is missing | Enable remote access on each computer, connect them to the same tailnet, then select **Scan again** |
 | Cockpit cannot verify membership | Check the network connection and select **Check membership again** |

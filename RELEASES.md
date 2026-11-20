@@ -4,6 +4,59 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.139.0 — 2026-11-21
+
+**Type:** minor · **Platforms:** macOS
+
+- Added browser connections by signing in with the same AGI Lab account as the target PC.
+- Added a list of connected browsers and CLIs with individual revocation in Remote Access.
+- Added AGI Cockpit and AGI Lab logos to the browser connection screen.
+- Added separate Crews, Tasks, and Fleet filters to the task list.
+- Fixed pinned items to hide child tasks when filtering by Crews or Fleet.
+- Added Open and Copy URL actions for this PC in the network device list.
+- Changed Ask headings to show larger task icons.
+- Changed new tasks to start with No project by default.
+- Removed the new temporary folder option from the task creation screen.
+- Removed the master folder option from the task creation screen.
+- Changed side panel links in conversations to a compact list named after their contents.
+- Changed the task list to show larger Crew icons with adjusted spacing.
+- Added an Explorer tab for the Crew home in Crew tasks.
+- Fixed Antigravity CLI updates to use its own update command, including on Windows.
+- Improved performance when grouping side panel links in long conversations.
+- Added failure details when Slack setup cannot obtain the required line.
+- Added diagnostics for delayed acknowledgements of Discord buttons and Asks.
+- Fixed organization credential read timeouts being treated as invalid authentication.
+- Fixed unnecessary sign-in requests when reading feedback credentials times out.
+- Fixed sign-in state read failures to report a storage error instead of a session mismatch.
+- Added redacted failure details and exit codes to CLI image generation errors.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- ブラウザー版を、接続先PCと同じAGIラボアカウントへのサインインで接続できるようになりました。
+- リモートアクセス画面で、接続済みのブラウザーやCLIを確認し、個別に接続を取り消せるようになりました。
+- ブラウザー版の接続画面に、AGI CockpitとAGI Labのロゴを表示するようになりました。
+- タスク一覧を「クルー・タスク・Fleet」で絞り込めるようになりました。
+- クルーやFleetで絞り込んだとき、ピン留めした項目の子タスクを表示しないように修正しました。
+- ネットワークの端末一覧で、このPCのページを開いたり、URLをコピーしたりできるようになりました。
+- Askの見出しのタスクアイコンを大きくしました。
+- 新しいタスクを、既定で「プロジェクトなし」から開始するようになりました。
+- タスク作成画面の保存先から、新しい一時フォルダーの選択肢を取り除きました。
+- タスク作成画面の保存先から、マスターフォルダーの選択肢を取り除きました。
+- 会話内のサイドパネルへのリンクを、開く内容の名前が付いたコンパクトな一覧にしました。
+- タスク一覧のクルーのアイコンを大きくし、周囲の余白を調整しました。
+- クルーのタスクで、クルーのホームを開くエクスプローラーのタブを追加しました。
+- Antigravity CLIの更新に専用の更新コマンドを使い、Windowsでも更新できるように修正しました。
+- 長い会話でサイドパネルへのリンクをまとめる処理を軽くしました。
+- Slackの接続設定で必要な行を取得できないとき、失敗の種類を表示するようになりました。
+- DiscordのボタンやAskへの応答が遅れたとき、原因調査に使える診断記録を追加しました。
+- 組織の認証情報の読み取りがタイムアウトしたとき、認証が無効と誤って扱わないように修正しました。
+- フィードバックの認証情報の読み取りがタイムアウトしたとき、不要なサインインを求めないように修正しました。
+- サインイン中の状態を読み取れないとき、セッション不一致ではなく保存先のエラーとして案内するように修正しました。
+- 画像生成に失敗したとき、秘密情報を伏せた失敗の詳細と終了コードをCLIで返すようになりました。
+
+</details>
+
 ## v4.138.0 — 2026-11-20
 
 **Type:** minor · **Platforms:** macOS, Linux
