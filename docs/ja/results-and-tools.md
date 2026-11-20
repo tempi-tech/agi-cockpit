@@ -4,7 +4,7 @@
 
 会話内の提示カードから差分、ファイル、HTML Surface、ブラウザーを開き直し、ターミナルやログまで安全に確認する方法を説明します。
 
-> AGI Cockpit 4.130.0で2026-11-11に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
+> AGI Cockpit 4.138.0で2026-11-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/results-and-tools)
 
 タスクの会話だけでなく、変更されたコード、ファイル、レポート、実行中のプロセスを同じタスクから確認できます。このページでは成果確認に共通する面を整理します。Webページの操作は[cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)、接続したモバイル画面は[App Surface](https://agi-labo.com/tools/cockpit/docs/app-surface)で扱います。
 
@@ -104,7 +104,9 @@ CLIからサイドパネルとターミナルを扱う場合は[`cockpit side-pa
 
 ## 文脈依存のパネルを使う
 
-子タスクパネルは親タスクに属する子タスクの状態と報告を確認します。親子関係とreportの扱いは[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)を参照してください。Talk Roomパネルは参加者同士の共有会話を表示します。参加、通知、メンションは[Talk Rooms](https://agi-labo.com/tools/cockpit/docs/talk-rooms)を参照してください。
+子タスクパネルは親タスクに属する子タスクの状態と報告を確認します。Desktopで一覧と詳細が横に並ぶときは、境界線をドラッグして一覧の幅を調整できます。境界線へフォーカスして左右の矢印キーでも調整でき、ダブルクリックすると既定の幅に戻ります。幅はこの端末で保存され、親タスク間で共通です。詳細の表示領域を残す範囲で調整でき、パネルが狭いときは境界線を表示せず一覧と詳細を切り替えて表示します。親子関係とreportの扱いは[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)を参照してください。Talk Roomパネルは参加者同士の共有会話を表示します。参加、通知、メンションは[Talk Rooms](https://agi-labo.com/tools/cockpit/docs/talk-rooms)を参照してください。
+
+CLIでは`cockpit settings get taskList.childTaskListWidthPx`で保存した幅を確認し、`cockpit settings set taskList.childTaskListWidthPx 240`で指定できます。`cockpit settings reset taskList.childTaskListWidthPx`で既定に戻します。保存値は150〜480pxの範囲に収まり、表示幅はパネルに合わせてさらに制限される場合があります。
 
 スキル詳細は、選択したスキルの説明と利用条件を確認する面です。PWAの**スキル**タブでは、このタスクでホストが検出したプロジェクトスキルとグローバルスキルを名前・説明で検索し、説明、引数、定義元の`SKILL.md`、利用するエージェント、本文を閲覧できます。同名スキルの定義ファイルがエージェントごとに異なる場合は切り替えられます。本文は先頭256 KiBまでで、PWAから編集、削除、インストール、入力欄への追加は行いません。スキルの指示がタスクの権限を拡張するわけではありません。公開、削除、外部送信などは通常の承認境界に従います。
 

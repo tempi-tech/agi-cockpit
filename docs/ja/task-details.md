@@ -4,7 +4,7 @@
 
 選択したタスクのプロジェクトフォルダ、会話、追加指示、キュー、割り込み、再開、アカウント、添付、エラーを扱う方法です。
 
-> AGI Cockpit 4.132.0で2026-11-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
+> AGI Cockpit 4.138.0で2026-11-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-details)
 
 タスク詳細は、[タスク一覧](https://agi-labo.com/tools/cockpit/docs/tasks)で選んだ仕事を理解し、次の指示や判断を返す場所です。会話、進捗、確認要求、入力欄と、そのタスクに紐づく右サイドパネルを扱います。
 
@@ -56,6 +56,8 @@ Askへの回答は、選択肢、自由入力、添付を優先した要約で�
 ### CLIで追加指示の送信方法を設定する
 
 `cockpit settings get shortcuts.followUpBehavior`で現在の既定値を確認し、`cockpit settings set shortcuts.followUpBehavior queue`または`cockpit settings set shortcuts.followUpBehavior steer`で変更できます。`queue`は現在のターン終了まで待ち、`steer`は現在のターンへ送ります。既定値は`queue`です。別の設定である`shortcuts.steerTurn`のキー割り当ては変更せず、未対応のエージェントモードに割り込み機能を追加するものでもありません。
+
+別の端末のクルーから届いたメッセージには、利用できる場合に送り手のクルーのアイコンを表示します。取得できない場合は汎用のエージェントアイコンを表示します。アイコンは送り手を示すもので、権限を追加するものではありません。
 
 ## タスクのプロジェクトフォルダを確認する
 

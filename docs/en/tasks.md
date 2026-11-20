@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.137.0 on 2026-11-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -44,7 +44,7 @@ On Desktop or in the PWA task list, open **Filter** and choose **Type → All**,
 
 The PWA saves type and agent filters in that browser separately for each connected host and restores them after returning from task details or reloading. These choices do not sync to other devices.
 
-Crews appear with their child tasks, inside their project when one is assigned. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
+With Type set to **All**, Crews appear with their child tasks, inside their project when one is assigned. With **Crews**, only Crew rows appear; their child tasks are hidden, including on remote devices. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
 
 To inspect a Crew’s active child tasks, open its **Child tasks** tab in the right side panel. Selecting a child shows its details there. Crew settings remain available in their own tab; opening a Crew still selects its settings by default.
 
@@ -155,7 +155,7 @@ The Fleet group's running indicator and status sort follow the state of the Run 
 
 Complete moves a task from active work to completed work. Delete removes the task record from Cockpit. They are separate operations.
 
-On this device, expand **Completed** in the Desktop task list, Overview, or PWA to see tasks grouped under project headings. Cockpit-managed folders, Master, and **No project** use the same grouping as active tasks. Each heading can be collapsed independently and shows its count. Search and filters still apply. With the default order, groups with the most recently completed tasks appear first; selecting another sort order also changes the headings' order. The outer **Completed** section keeps its total count and existing bulk actions. Remote-device lists keep one flat **Completed** section per device.
+On this device, expand **Completed** in the Desktop task list, Overview, or PWA to see tasks grouped under project headings. Cockpit-managed folders, Master, and **No project** use the same grouping as active tasks. Each project group starts collapsed. Select its heading to expand it; Cockpit remembers which completed groups you expand. Each heading can be collapsed independently and shows its count. Search and filters still apply. With the default order, groups with the most recently completed tasks appear first; selecting another sort order also changes the headings' order. The outer **Completed** section keeps its total count and existing bulk actions. Remote-device lists keep one flat **Completed** section per device.
 
 When someone else completes a task, its conversation and completion notification identify who completed it. The CLI exposes this as `completedBy` in `cockpit task get`. To continue a completed task, send a message in its conversation or use `cockpit task send`; `resume` refuses completed tasks with `task_completed`.
 

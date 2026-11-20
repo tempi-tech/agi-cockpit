@@ -4,7 +4,7 @@
 
 クルーと子タスクが判断を聞くAskを、オーナーがDiscord・Slack・Chatwork（Chatworkは会員）のDMで受けて答える方法です。送り先の選び方、答えたDMの片付け、DMに出ないものも説明します。
 
-> AGI Cockpit 4.134.0で2026-11-15に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/crew-ask)
+> AGI Cockpit 4.138.0で2026-11-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/crew-ask)
 
 クルーは、判断が要る時にAskでオーナーに聞きます。クルーが振った子タスク、クルーの自動実行のタスク、クルーが動かすFleetのAskも同じです。Askの仕組みそのものは[Ask](https://agi-labo.com/tools/cockpit/docs/ask)を見てください。
 
@@ -23,6 +23,8 @@ DiscordとSlackのDMでは、Cockpitと同じように答えられます。Chatw
 - Askの画像と動画も、8件まで（1件20MBまで）DMに付きます
 
 選択肢が多すぎてDMに出しきれない時や、全文がDiscordやSlackの文字数の上限を超える時は、Cockpitで答えてください。DMの操作の詳しい形は、[Ask](https://agi-labo.com/tools/cockpit/docs/ask#discordとslackへ転送する)と同じです。
+
+DiscordのDMでAskに答えると、クルーがその答えを受け取って動いている間、返事が届くまでそのDMに「入力中」を表示します。表示は最長30分で止まります。回答がキューで待っている間はまだ始まりません。Cockpit内から答えたときは、そのDMに入力中を出しません。Discordだけの動作で、SlackやChatworkは対象外です。クルーが投稿できる場所や権限は変わりません。
 
 ### Chatworkで答える
 

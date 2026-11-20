@@ -4,7 +4,7 @@
 
 9種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.133.0で2026-11-14に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.138.0で2026-11-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から9種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -70,6 +70,8 @@ cockpit task run --instruction-file instruction.md --smart-routing
 Claude Code、Codex、Antigravity、Cursor、Qoder、Grok Build、Muse Codeは両方のモードに対応します。Terminalはターミナルだけ、CockpitはネイティブUIだけです。設定変更後に作成済みタスクのモードが自動で変わることはありません。
 
 Windowsでは、設定の「エージェント」にあるAntigravityとGrok Buildの起動コマンドへ、空白を含む実行ファイルのフルパスを指定できます。引用符で囲む、PowerShellの`&`を付ける、または実在する実行ファイルを引用符なしで指定する形式に対応します。Antigravityへ渡す作業フォルダと追加のプロジェクトフォルダも、空白を含んでいてもそれぞれ一つの引数として扱います。macOSとLinuxの起動方法は変わりません。
+
+AntigravityのネイティブUIでは、既定のアカウントでタスクを実行し、監視ありモードでコマンド実行前に承認できます。v4.138.0に向けた実環境の確認は、macOSの既定アカウントで同じ会話の2ターンを実行し、コマンドを1回許可するまで実行されないことを確認した範囲です。追加アカウントのサインイン、Windows・Linuxでの実行、拒否、steer、保存済みAutoが監視ありに戻る画面表示は未確認です。以下の対応仕様の説明は、この実確認の範囲を広げるものではありません。
 
 AntigravityのネイティブUIは公式の `agy acp` を共有ACPランタイムで動かします。開始と再開時に承認モードを明示し、実行中のsteerはターンをキャンセルしたり再起動したりせずネイティブのpromptとして送ります。
 

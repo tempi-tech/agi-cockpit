@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.133.0 on 2026-11-14. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -70,6 +70,8 @@ Native UI lets Cockpit display conversation, tool execution, usage, model, and a
 Claude Code, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code support both modes. Terminal supports terminal mode only, and Cockpit supports native UI only. Changing defaults does not migrate the mode of an existing task.
 
 On Windows, the Antigravity and Grok Build launch-command fields under **Agents** accept a full executable path that contains spaces. Cockpit accepts the path quoted, prefixed with PowerShell's `&`, or unquoted when that executable exists. Working and additional project folders passed to Antigravity also remain one argument each when their paths contain spaces. Launch behavior on macOS and Linux is unchanged.
+
+Antigravity Native UI supports task execution with the default account and command approval before execution in Supervised mode. Real-service verification for v4.138.0 covered two turns in the same conversation and allowing one command only after approval, on macOS with the default account. Additional-account sign-in, Windows/Linux execution, denial, steering, and the display of saved Auto falling back to Supervised remain unverified. The capabilities described below do not extend that verification scope.
 
 Antigravity Native UI uses official `agy acp` through the shared ACP runtime. It explicitly applies approval modes at start and resume; running-turn steer sends a native prompt without canceling or restarting the turn.
 

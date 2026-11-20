@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -56,6 +56,8 @@ While a Crew is posting or replying in chat, incoming messages wait for its send
 ### Configure follow-up behavior from the CLI
 
 Use `cockpit settings get shortcuts.followUpBehavior` to read the current default, and `cockpit settings set shortcuts.followUpBehavior queue` or `cockpit settings set shortcuts.followUpBehavior steer` to change it. `queue` waits for the current turn to finish; `steer` sends to the current turn. The default is `queue`. This does not change the separate `shortcuts.steerTurn` key binding or add steering support to an unsupported agent mode.
+
+When a message comes from a Crew on another device, its sender label shows that Crew's icon when available. If the remote icon cannot be loaded, a generic agent icon appears. The icon identifies the sender; it does not grant additional permissions.
 
 ## Check the task's project folders
 

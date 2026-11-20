@@ -4,7 +4,7 @@
 
 How owners answer Asks from Crews and child tasks in Discord, Slack, or Chatwork (for members) DMs, choose recipients, clean up answered DMs, and what never goes to DMs.
 
-> Verified with AGI Cockpit 4.134.0 on 2026-11-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-ask)
+> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-ask)
 
 When a Crew needs a decision, it asks an owner through an Ask. The same goes for Asks from child tasks the Crew hands work to, from the Crew's Autorun tasks, and from Fleets the Crew runs. For how Ask itself works, see [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask).
 
@@ -23,6 +23,8 @@ In Discord and Slack DMs, you can answer the same ways as in Cockpit. For how to
 - Images and videos in the Ask are also attached to the DM, up to 8 (up to 20 MB each)
 
 When there are too many choices to fit in the DM, or the full text exceeds Discord's or Slack's character limit, answer in Cockpit. The DM controls work the same way as in [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask#relay-asks-to-discord-and-slack).
+
+After you answer an Ask in a Discord DM, that DM shows a typing indicator while the Crew works on the answer, until it replies there. The indicator stops after at most 30 minutes. An answer waiting in the Queue does not start it yet. Answering in Cockpit does not start typing in that DM. This behavior applies to Discord, not Slack or Chatwork, and does not change where the Crew is allowed to post.
 
 ### Answer in Chatwork
 

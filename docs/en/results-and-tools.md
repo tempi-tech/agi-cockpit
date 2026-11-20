@@ -4,7 +4,7 @@
 
 Reopen presented diffs, files, HTML Surfaces, and browser tabs from conversation cards, then safely review terminals, logs, and other task results.
 
-> Verified with AGI Cockpit 4.130.0 on 2026-11-11. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -104,7 +104,9 @@ See the [`cockpit side-panel` reference](https://agi-labo.com/en/tools/cockpit/d
 
 ## Use context-specific panels
 
-The child tasks panel shows the state and reports of tasks that belong to a parent. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for parent-child relationships and reports. The Talk Room panel shows a shared participant conversation. See [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms) for participation, notifications, and mentions.
+The child tasks panel shows the state and reports of tasks that belong to a parent. On Desktop, when the list and detail are side by side, drag the divider to adjust the list width. Focus the divider and use the Left or Right arrow key to resize with the keyboard; double-click it to restore the default width. The width is saved and shared across parent tasks on this device, and is limited to leave room for the detail. A narrow panel shows the list and detail separately instead of a resize divider. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for parent-child relationships and reports. The Talk Room panel shows a shared participant conversation. See [Talk Rooms](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms) for participation, notifications, and mentions.
+
+The CLI can read or set the saved width with `cockpit settings get taskList.childTaskListWidthPx` and `cockpit settings set taskList.childTaskListWidthPx 240`; `cockpit settings reset taskList.childTaskListWidthPx` restores the default. Saved values are clamped to 150–480 px, and the visible width can be smaller to fit the panel.
 
 Skill details show the selected skill's instructions and usage conditions. In the PWA, **Skills** lists the project and global skills that the host discovered for the task and searches their names and descriptions. A detail view shows the description, argument hint, defining `SKILL.md` files, agents that use each definition, and the file body. Definitions can be switched when agents use different files. The PWA shows at most the first 256 KiB and cannot edit, delete, install, or insert a skill. A skill does not expand task permissions. Publishing, deletion, and external messaging remain subject to the normal approval boundary.
 
