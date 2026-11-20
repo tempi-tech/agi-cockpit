@@ -4,6 +4,37 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.138.0 — 2026-11-20
+
+**Type:** minor · **Platforms:** macOS
+
+- Added drag resizing for the child task list in the right side panel.
+- Improved task list updates and task switching performance.
+- Completed task groups now start collapsed for each project.
+- Filtering the task list to Crews now hides their child tasks.
+- Messages from a Crew on another device now show that Crew’s icon.
+- Fixed overlapping model and reasoning controls in narrow message composers.
+- Restored the Ask icon on the right side panel and mobile Ask tab.
+- After answering an Ask in a Discord DM, the DM now shows a typing indicator until the Crew replies.
+- Added visual-mode tasks using the default Antigravity account.
+- Added command approvals before execution in Antigravity visual mode.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 右サイドパネルの子タスク一覧の幅を、ドラッグで調整できるようになりました。
+- タスク一覧の更新やタスクの切り替えを軽くしました。
+- 完了したタスクのプロジェクト別グループを、最初は折り畳んで表示するようになりました。
+- 一覧をCrewで絞り込むと、子タスクを表示せずCrewだけを表示するようになりました。
+- 別の端末のCrewから届いたメッセージに、送り手のCrewのアイコンを表示するようになりました。
+- 狭い入力欄でモデルと推論の選択項目が重ならないように修正しました。
+- 右サイドパネルとスマートフォンのAskタブに、Askのアイコンを表示するように修正しました。
+- DiscordのDMでAskに答えると、Crewが返事をするまでそのDMに入力中の表示が出るようになりました。
+- Antigravityの既定のアカウントで、画面モードのタスク実行に対応しました。
+- Antigravityの画面モードで、コマンド実行前の承認に対応しました。
+
+</details>
+
 ## v4.137.0 — 2026-11-19
 
 **Type:** minor · **Platforms:** macOS, Linux
