@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.139.0 — 2026-11-21
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added browser connections by signing in with the same AGI Lab account as the target PC.
 - Added a list of connected browsers and CLIs with individual revocation in Remote Access.
