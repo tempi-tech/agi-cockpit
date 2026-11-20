@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.138.0 — 2026-11-20
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added drag resizing for the child task list in the right side panel.
 - Improved task list updates and task switching performance.
