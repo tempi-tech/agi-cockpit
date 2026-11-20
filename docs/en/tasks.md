@@ -40,11 +40,11 @@ Switch back to **This device** to close an open remote task, stop discovering an
 
 ## Filter tasks and Crews
 
-On Desktop or in the PWA task list, open **Filter** and choose **Type → All**, **Tasks**, or **Crews**. Under **Agent**, select several agents together; a row matches any selected agent. Combine the type and agent choices with search. **Clear** resets the agent selection; **Clear filters** resets the type and agent filters.
+On Desktop or in the PWA task list, open **Filter** and choose **Type → All**, **Crews**, **Tasks**, or **Fleet**. Under **Agent**, select several agents together; a row matches any selected agent. Combine the type and agent choices with search. **Clear** resets the agent selection; **Clear filters** resets the type and agent filters.
 
 The PWA saves type and agent filters in that browser separately for each connected host and restores them after returning from task details or reloading. These choices do not sync to other devices.
 
-With Type set to **All**, Crews appear with their child tasks, inside their project when one is assigned. With **Crews**, only Crew rows appear; their child tasks are hidden, including on remote devices. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
+With Type set to **All**, Crews appear with their child tasks, inside their project when one is assigned. With **Crews**, only Crew rows appear; their child tasks and the Fleets they started are hidden, including on remote devices. **Tasks** shows tasks that belong to neither a Crew nor a Fleet, and **Fleet** shows only Fleet runs, including those a Crew started. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
 
 To inspect a Crew’s active child tasks, open its **Child tasks** tab in the right side panel. Selecting a child shows its details there. Crew settings remain available in their own tab; opening a Crew still selects its settings by default.
 
