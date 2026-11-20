@@ -10,12 +10,12 @@ English is the primary language for these generated release notes. Download the 
 
 - Added drag resizing for the child task list in the right side panel.
 - Improved task list updates and task switching performance.
-- Completed task groups now start collapsed for each project.
-- Filtering the task list to Crews now hides their child tasks.
-- Messages from a Crew on another device now show that Crew’s icon.
+- Changed completed task groups to start collapsed for each project.
+- Changed the Crew filter to hide child tasks in the task list.
+- Added the sender’s Crew icon to messages from Crews on other devices.
 - Fixed overlapping model and reasoning controls in narrow message composers.
-- Restored the Ask icon on the right side panel and mobile Ask tab.
-- After answering an Ask in a Discord DM, the DM now shows a typing indicator until the Crew replies.
+- Fixed the right side panel and mobile Ask tab to show the Ask icon.
+- Added a typing indicator in Discord DMs after an Ask answer, until the Crew replies.
 - Added visual-mode tasks using the default Antigravity account.
 - Added command approvals before execution in Antigravity visual mode.
 
