@@ -2,9 +2,9 @@
 
 # Results and tools
 
-Reopen presented diffs, files, HTML Surfaces, and browser tabs from conversation cards, then safely review terminals, logs, and other task results.
+Reopen presented diffs, files, HTML Surfaces, and browser tabs from compact conversation lists, then safely review terminals, logs, and other task results.
 
-> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
+> Verified with AGI Cockpit 4.139.0 on 2026-11-21. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/results-and-tools)
 
 From the same task, you can inspect more than its conversation: changed code, files, reports, and running processes. This page covers shared result-review surfaces. Use [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser) for web operation and [App Surface](https://agi-labo.com/en/tools/cockpit/docs/app-surface) for a connected mobile screen.
 
@@ -16,13 +16,13 @@ The Desktop Ask tab lists every Ask waiting for an answer on this device, not on
 
 Check the panel type and target path before acting. Closing the panel does not stop the task or its browser session. The panel remembers its width, and narrow layouts make long content and tables horizontally scrollable.
 
-In the PWA, **Task panel** in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, file preview, diff, Cockpit Browser, App Surface, side terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. The attachment list, project explorer, and background logs are not tabs in this PWA panel.
+In the PWA, **Task panel** in task details provides context-dependent tabs for child tasks, HTML Surface, an image opened from the conversation, file preview, diff, Cockpit Browser, App Surface, side terminal, skills, Fleet, Creative Studio artifacts, and Talk Room. On a narrow screen it opens as a bottom sheet with previous and next controls, a horizontally scrolling tab row, and approximately half-height and full-height states. On a wide screen the panel sits beside the chat; a wider layout can also keep the task navigator visible. Changing width or orientation preserves the selected tab, target, drafts, and scroll positions for the task while the presentation switches. Closing the panel unsubscribes the view without terminating its terminal or browser. Crew tasks also offer a **Crew home** explorer tab on Desktop and the PWA; see [Home and memory](https://agi-labo.com/en/tools/cockpit/docs/crew-home). The attachment list, project explorer, and background logs are not tabs in this PWA panel.
 
-## Reopen content from conversation cards
+## Reopen content from conversation lists
 
-When an agent presents a file, diff, HTML Surface, or browser tab, a presentation card remains in the task conversation on Desktop and the PWA. Choose **Open** to reopen the matching right-side panel on Desktop or the target in that task's Task panel on the PWA. A newly arrived card does not switch away from the document or panel you are viewing on the PWA. Closing the panel and reopening a card preserves the conversation position and composer draft.
+When an agent presents a file, diff, HTML Surface, or browser tab, a compact list remains in the task conversation on Desktop and the PWA. Each row names its content, such as a filename or Surface title. Consecutive presentations share a list, repeated consecutive targets show a count, and the currently open target is marked. Choose **Open** on a row to reopen the matching right-side panel on Desktop or the target in that task's Task panel on the PWA. A newly arrived entry does not switch away from the document or panel you are viewing on the PWA. Closing the panel and reopening an entry preserves the conversation position and composer draft.
 
-An HTML Surface card opens the saved Surface. File and diff cards read current content rather than a copy made when the card was created. A browser card refers to the same Browser Identity, session, and tab on the same host, not only to its URL. If the target was deleted or closed, belongs to another host, or is unavailable to this task or device, Cockpit reports the error instead of substituting another target.
+An HTML Surface entry opens the saved Surface. File and diff entries read current content rather than a copy made when the entry was created. A browser entry refers to the same Browser Identity, session, and tab on the same host, not only to its URL. If the target was deleted or closed, belongs to another host, or is unavailable to this task or device, Cockpit reports the error instead of substituting another target.
 
 ## Review diffs and files
 

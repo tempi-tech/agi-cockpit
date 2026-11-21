@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.139.0 on 2026-11-21. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -44,7 +44,7 @@ On Desktop or in the PWA task list, open **Filter** and choose **Type → All**,
 
 The PWA saves type and agent filters in that browser separately for each connected host and restores them after returning from task details or reloading. These choices do not sync to other devices.
 
-With Type set to **All**, Crews appear with their child tasks, inside their project when one is assigned. With **Crews**, only Crew rows appear; their child tasks and the Fleets they started are hidden, including on remote devices. **Tasks** shows tasks that belong to neither a Crew nor a Fleet, and **Fleet** shows only Fleet runs, including those a Crew started. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
+With Type set to **All**, Crews appear with their child tasks, inside their project when one is assigned. With **Crews**, only Crew rows appear; their child tasks and the Fleets they started are hidden, including on remote devices. **Tasks** shows tasks that belong to neither a Crew nor a Fleet, and **Fleet** shows only Fleet runs, including those a Crew started. With **Crews** or **Fleet**, child tasks stay hidden even beneath pinned rows. Older remote hosts that do not identify Fleet tasks show them under **Tasks** instead. Select the Crew to open its conversation and settings. Crew actions use its own menu, rather than the ordinary task completion and deletion workflow. See [Crews (beta)](https://agi-labo.com/en/tools/cockpit/docs#crews-beta).
 
 To inspect a Crew’s active child tasks, open its **Child tasks** tab in the right side panel. Selecting a child shows its details there. Crew settings remain available in their own tab; opening a Crew still selects its settings by default.
 

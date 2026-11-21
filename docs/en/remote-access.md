@@ -60,6 +60,8 @@ If you do not use Tailscale yet, install it on both the target computer and the 
 
 Tailscale-only mode rejects connections that do not come through Tailscale. Tailscale encrypts device-to-device traffic even while the displayed URL uses HTTP, but the browser still treats that page as an HTTP origin. Set up the certificate below to avoid browser warnings and support features that require HTTPS.
 
+In **Devices on the network**, a running device offers **Open** and **Copy URL**. This includes the row marked **This PC** while its Remote Access server is running. Opening the page still requires the AGI Lab sign-in described below. Use the HTTPS connection URL for PWA installation.
+
 ### 2. Get an HTTPS certificate
 
 1. Select **Get certificate** in the Remote access panel.

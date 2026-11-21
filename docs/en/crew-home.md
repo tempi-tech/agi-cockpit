@@ -10,6 +10,12 @@ Each Crew has its own home folder. Its role, memory, work records, and Missions 
 
 To open the home, choose **Open home folder** in the Crew's row menu, or **Open folder** under **Home** in the Crew's settings. The home is on the computer running Cockpit.
 
+## Browse the home inside Cockpit
+
+On Desktop, open **Crew home** in the task’s right side panel; in the PWA, select it in **Task panel**. It is available for the Crew itself and its child and grandchild tasks whose Crew membership can be confirmed, even when they work in a project elsewhere. Browse the tree, search, show hidden files, and select a file to preview it. Links to home files in the conversation can open the matching file there.
+
+If the home is missing or the task’s Crew cannot be confirmed, Cockpit shows an error. Use **Retry** after resolving the problem. Opening this tab does not create a missing home or substitute another folder.
+
 ## What is in the home
 
 | Location | Contents | Who changes it | Git history |

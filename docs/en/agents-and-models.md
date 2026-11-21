@@ -130,6 +130,8 @@ Custom prompts are stored as user-owned Markdown in the AGI Tools data area. The
 
 Under **Settings → Updates**, **Agent CLIs** shows the installed version, latest version Cockpit could check, and update status for Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code. **Check** fetches the current status instead of reusing the saved result. When an update can be run, **Update CLI** opens a terminal that runs that CLI's update command on this device. Cockpit omits the update action when the installed CLI is already current and reports the state as unknown when it cannot obtain or compare the versions.
 
+Antigravity updates use its dedicated `agy update` command on macOS, Linux, and Windows. A configured custom executable is used in place of `agy`. On Windows, Cockpit runs the update through PowerShell.
+
 From the CLI, `cockpit setup agent status <agent>` reads the command, installed version, available latest version, `updateAvailable`, and changelog URL. `updateAvailable` is `true` when an update exists, `false` when the installed version is current or newer, and `null` when the versions cannot be compared. This command is read-only and never updates the agent CLI.
 
 ### Check and reload the model list

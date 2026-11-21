@@ -95,6 +95,8 @@ Discord・Slackでは、チャンネルの承認待ちでも⏳が付きます�
 | 「このアプリは Ask 転送で使っています。」「このアプリはクルー「（名前）」で使っています。」で始まる表示 | 1つのアプリを使えるのは1か所だけです。別のアプリのトークンを使います |
 | 「まだどのサーバーにも入っていません」 | 招待リンクからサーバーに招待します。サーバーの管理権限が要ります |
 
+DiscordのボタンやAskへの応答が遅い場合は、発生時刻を控えて診断ログを確認します。`crew-connections.jsonl`にはクルーのボタンとAskのDMへの応答時間やDiscordのエラーコードを記録します。Askリレーの診断は`cockpit ask relay status discord --verbose`で確認できます。これらは調査の手掛かりで、記録だけで原因が分かるわけではありません。[クルーのリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/crew)と[Askリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/ask)を参照してください。
+
 ### Slackの接続
 
 | 表示 | すること |
@@ -119,6 +121,8 @@ Slackにつなぐ途中で止まった時は、次の表示が出ます。どれ
 | 「このクルーの Slack アプリは、ワークスペースから外されています。」 | Slackのアプリの設定で入れ直すか、アプリを削除してからやり直します |
 | 「アプリは作れましたが、トークンが Cockpit に届きませんでした。」 | やり直します |
 | 「トークンは受け取りましたが、つなげませんでした。」 | やり直します |
+
+Slack CLIから貼る1行を受け取れない場合は、失敗の「詳細」も表示します。既知のSlack CLIのコード、`timeout_reached`、`exit_nonzero`、`unknown`などです。問い合わせにはこの詳細も添えてください。CLIの生の出力ではなく、失敗の種類を示します。
 
 ### Chatworkの接続
 

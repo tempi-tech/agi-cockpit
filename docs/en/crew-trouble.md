@@ -95,6 +95,8 @@ What to do depends on what the **Connection** tab shows.
 | A message beginning with **This app is used for Ask relay.** or **This app is used by the Crew “(name)”.** | One app can be used in only one place. Use a token from a different app |
 | **Not in any server yet** | Invite it to a server with the invite link. You need permission to manage the server |
 
+If a Discord button or Ask response is slow, record when it happened and inspect the diagnostics logs. `crew-connections.jsonl` records acknowledgement timing and Discord error codes for Crew buttons and Ask DMs; Ask relay diagnostics are available with `cockpit ask relay status discord --verbose`. These records help investigate delays but do not identify their cause by themselves. See the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew) and [Ask reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/ask).
+
 ### Slack connection
 
 | What it shows | What to do |
@@ -119,6 +121,8 @@ If connecting to Slack stops partway, one of the following messages appears. In 
 | **This Crew's Slack app is no longer installed in the workspace.** | Install it again from the app's settings on Slack, or delete the app and try again |
 | **Slack created the app, but its tokens did not reach Cockpit.** | Try again |
 | **Cockpit got the tokens but could not connect with them.** | Try again |
+
+When the Slack CLI does not return a line to paste, the failure also shows **Details**. This may be a recognized Slack CLI code, `timeout_reached`, `exit_nonzero`, or `unknown`. Include that detail when requesting support; it is a failure category rather than the raw CLI output.
 
 ### Chatwork connection
 

@@ -130,6 +130,8 @@ cockpit system-prompt list
 
 「設定」→「更新」の「エージェント CLI」には、Claude、Codex、Antigravity、Cursor、Qoder、Grok Build、Muse Codeのインストール済み版、確認できた最新版、更新状態が表示されます。「確認」は保存済みの結果ではなく現在の状態を再取得します。更新できる場合は「CLI を更新」から、その端末上で対象CLIの更新コマンドを実行するターミナルを開けます。すでに最新版の場合は更新操作を表示せず、版を取得または比較できない場合は状態を「不明」として扱います。
 
+Antigravityの更新には、macOS・Linux・Windowsとも専用の`agy update`を使います。実行コマンドを変更している場合は、その実行ファイルを`agy`の代わりに使います。WindowsではPowerShell経由で実行します。
+
 CLIの`cockpit setup agent status <agent>`でもコマンド、インストール済み版、利用可能な最新版、`updateAvailable`、changelog URLを読み取れます。`updateAvailable`は更新ありで`true`、最新版またはそれより新しければ`false`、版を比較できなければ`null`です。このコマンドは状態を読むだけで、CLIを更新しません。
 
 ### モデル一覧を確認・再読み込みする
