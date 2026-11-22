@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or another Desktop and operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.141.0 on 2026-11-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -72,6 +72,8 @@ In **Devices on the network**, a running device offers **Open** and **Copy URL**
 4. Under **HTTPS Certificates**, select **Enable HTTPS** and review the disclosure before confirming.
 5. Return to Cockpit and get the certificate again.
 6. Confirm that Cockpit shows **HTTPS certificate issued** and a domain.
+
+Results and errors from **Get certificate** or **Renew** appear directly below the action button. Check that message before retrying.
 
 You can also open the [Tailscale DNS settings](https://login.tailscale.com/admin/dns) directly. If you cannot change them, ask an Owner, Admin, or Network admin of the target tailnet.
 

@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.141.0 on 2026-11-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -30,6 +30,14 @@ Choose **View → Reload Window** from the Desktop application menu to reload on
 Primary shortcuts include Quick Task, task search, and the send key. The send key can be Enter or Cmd/Ctrl+Enter; Shift+Enter inserts a line break. Shortcut conflicts and OS registration failures are rejected before saving.
 
 After changing a setting, inspect the returned saved value. Numeric settings can be clamped to an accepted range. Existing Autoruns retain their saved runtime configuration and are not automatically changed by new global defaults.
+
+## Open Cockpit at login
+
+In **Settings → Setup**, turn on **Open at login** to start Cockpit when you log in to this computer. It is off by default. Crews that were running resume when Cockpit starts. Use an installed copy: the Applications folder on macOS, a permanent AppImage location or the deb package on Linux.
+
+Windows support is included in the v4.141.0 Microsoft Store submission, which is awaiting certification as of November 23, 2026; it is not yet publicly available. Once that version is installed, Windows uses its Store startup task. Other Windows distributions do not support this setting. If Windows disabled it, enable AGI Cockpit in **Windows Settings → Apps → Startup**. Organization policy can lock it on or off, and Cockpit cannot override that policy.
+
+The CLI uses `cockpit settings get app.launchAtLogin` and `cockpit settings set app.launchAtLogin true`. An unreadable state is shown as **Unknown** rather than off. If a change is unconfirmed, check the current state before retrying: Windows may apply it later, and Cockpit does not retry automatically. See the [settings reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/settings) for OS-managed states and error details.
 
 ## Data locations
 

@@ -4,7 +4,7 @@
 
 Learn which files are in a Crew's home folder, who changes what, what happens when something is deleted, and how to ask a Crew to remember things.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-home)
+> Verified with AGI Cockpit 4.141.0 on 2026-11-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-home)
 
 Each Crew has its own home folder. Its role, memory, work records, and Missions are kept there. Even after its session starts over, the Crew reads its home and continues.
 
@@ -12,7 +12,9 @@ To open the home, choose **Open home folder** in the Crew's row menu, or **Open 
 
 ## Browse the home inside Cockpit
 
-On Desktop, open **Crew home** in the task’s right side panel; in the PWA, select it in **Task panel**. It is available for the Crew itself and its child and grandchild tasks whose Crew membership can be confirmed, even when they work in a project elsewhere. Browse the tree, search, show hidden files, and select a file to preview it. Links to home files in the conversation can open the matching file there.
+On Desktop and the PWA, open the Crew panel and select **Folder** to browse its home files. The button that opens the Crew panel shows that Crew’s icon. The folder view omits the internal-ID root row and shows the home’s contents directly.
+
+For child and grandchild tasks whose Crew membership can be confirmed, open **Crew home** in the task’s right side panel on Desktop, or in **Task panel** in the PWA. The home remains available even when the task works in a project elsewhere. Browse the tree, search, show hidden files, and select a file to preview it. Links to home files in the conversation can open the matching file there.
 
 If the home is missing or the task’s Crew cannot be confirmed, Cockpit shows an error. Use **Retry** after resolving the problem. Opening this tab does not create a missing home or substitute another folder.
 

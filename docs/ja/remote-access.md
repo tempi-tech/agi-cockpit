@@ -4,7 +4,7 @@
 
 TailscaleとHTTPSを使って、PWAや別のDesktopからAGI Cockpitのタスクを監督し、対応CLIコマンドを操作する手順です。
 
-> AGI Cockpit 4.140.0で2026-11-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
+> AGI Cockpit 4.141.0で2026-11-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/remote-access)
 
 リモートアクセスを有効にすると、AGI Cockpitを実行しているコンピューターへ、スマートフォン、タブレット、別のコンピューターのブラウザーから接続できます。この手順では、推奨構成のTailscaleとHTTPSを使い、PWAでタスクを確認できるところまで進めます。
 
@@ -72,6 +72,8 @@ Tailscale限定は、Tailscaleに属さない接続を受け付けません。HT
 4. HTTPS Certificatesで「Enable HTTPS」を選び、表示される説明を確認して有効にします。
 5. Cockpitへ戻り、証明書をもう一度取得します。
 6. 「HTTPS証明書発行済み」とドメインが表示されることを確認します。
+
+「証明書を取得」や「更新」の結果・エラーは、操作ボタンのすぐ下に表示します。再試行する前にその内容を確認してください。
 
 [TailscaleのDNS設定](https://login.tailscale.com/admin/dns)はブラウザーから直接開けます。設定を変更できない場合は、対象tailnetのOwner、Admin、またはNetwork adminへ依頼してください。
 

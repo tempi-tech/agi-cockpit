@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 4.141.0 on 2026-11-23. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -75,7 +75,9 @@ Desktop and PWA Ask surfaces include a button that opens the task that created t
 
 In the PWA task list, a question bubble labelled **Waiting for an Ask answer** identifies a task with an unanswered Ask. It follows the open Ask itself rather than an ordinary task question state, and disappears after the Ask is answered or closed. The task row still opens task details; answer the Ask directly in the task chat or from **Inbox** in the PWA. The chat shows the full question and answer form, including choices, free text, attachments, and explanations; answering or closing it updates the other Ask surfaces.
 
-When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position.
+When switching to another Ask in the PWA, the question starts at the top and the media strip starts at its left edge. An update to the same Ask does not reset your reading position. Attachments still being processed for the previous Ask do not enter the new answer.
+
+In the PWA, choices use the same presentation as Desktop without a surrounding question frame. Free-text fields start as one line and expand as you type. The send button stays at the bottom, and **Close Ask** is on the right side of the header.
 
 Enlarged Ask images fit within the viewport on Desktop and the PWA. Close and navigation buttons stay inside the screen, including on narrow displays.
 
@@ -152,7 +154,7 @@ Before sending starts, **Edit answer in the Ask** withdraws the queued answer an
 
 Closing an Ask without answering removes the Ask, but it does not resume the original task automatically. A person can resume the task later with a normal message if needed.
 
-Answer attachments can be added with the paperclip or by dragging files onto the answer surface. With multiple questions, a drop attaches to the question under the pointer; a drop elsewhere attaches to the first question. Dropping files never submits the answer.
+Answer attachments can be added with the paperclip or by dragging files onto the answer surface. With multiple questions, a drop attaches to the question under the pointer; a drop in the surrounding space attaches to the nearest answer field. A drop on the footer attaches to the whole-Ask reply when available, otherwise to the last question. Cockpit highlights the destination while dragging and reveals it after attachment. Dropping files never submits the answer.
 
 ## Relay Asks to Discord and Slack
 

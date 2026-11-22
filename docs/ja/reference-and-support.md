@@ -4,7 +4,7 @@
 
 タスク状態、設定、保存場所、エージェント認証、Fleet、Remote Access、Browser Identity、App Surfaceの代表的なトラブル解決手順です。
 
-> AGI Cockpit 4.140.0で2026-11-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
+> AGI Cockpit 4.141.0で2026-11-23に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/reference-and-support)
 
 現在の状態を正確に読み、問題を小さな境界へ切り分けるためのReferenceです。最初にタスク、エージェント、接続先、OS、アプリバージョンを確認し、その後に該当する復旧手順へ進みます。
 
@@ -30,6 +30,14 @@ Desktopのアプリケーションメニューで「View」→「ウィンドウ
 主要なショートカットにはQuick Task、タスク検索、送信キーがあります。送信キーはEnterまたはCmd/Ctrl+Enterを選択でき、Shift+Enterは改行です。ショートカットの競合やOS登録失敗は保存前に拒否されます。
 
 設定を変更した後は、返された保存値を確認してください。数値設定は許容範囲へ丸められる場合があり、既存の自動実行は保存時のランタイム設定を保持するため、グローバル設定変更では自動更新されません。
+
+## ログイン時にCockpitを起動する
+
+「設定」→「セットアップ」の「ログイン時に起動」をオンにすると、このコンピューターへのログイン時にCockpitを起動します。既定ではオフです。動いていたクルーもCockpitの起動時に再開します。macOSでは「アプリケーション」フォルダ、Linuxでは一時フォルダ以外に置いたAppImageまたはdebパッケージを使ってください。
+
+Windowsへの対応は、2026年11月23日時点で認定待ちのv4.141.0 Microsoft Store提出版に含まれ、まだ一般公開されていません。この版のインストール後はStoreのスタートアップタスクを使います。Store版以外のWindows配布版では利用できません。Windows側で無効にした場合は「Windowsの設定」→「アプリ」→「スタートアップ」でAGI Cockpitをオンにします。組織のポリシーでオン・オフが固定されている場合、Cockpitからは変更できません。
+
+CLIでは`cockpit settings get app.launchAtLogin`で確認し、`cockpit settings set app.launchAtLogin true`で有効にします。状態を読めない場合は、オフではなく「不明」と表示します。変更の完了を確認できなかった場合は、現在の状態を確認してから再試行してください。Windows側で後から反映される場合があり、Cockpitは自動で再試行しません。OS管理の状態やエラーの詳細は[settingsリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/settings)を参照してください。
 
 ## データ保存場所
 
