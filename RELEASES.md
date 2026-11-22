@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.140.0 — 2026-11-22
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Changed CLI task lists to a lightweight view of 100 tasks by default, with pagination. Scripts that rely on full details need --full and pagination.
 - Reduced the load when deleting completed tasks in bulk.
