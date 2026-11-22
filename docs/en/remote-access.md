@@ -4,7 +4,7 @@
 
 Use Tailscale and HTTPS to supervise AGI Cockpit from the PWA or another Desktop and operate supported CLI commands from another computer.
 
-> Verified with AGI Cockpit 4.123.0 on 2026-11-04. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/remote-access)
 
 Remote access lets you connect to the computer running AGI Cockpit from a phone, tablet, or another computer. This guide uses the recommended Tailscale and HTTPS configuration and ends with a working task view in the PWA.
 
@@ -23,6 +23,8 @@ The AGI Cockpit process and remote access must remain running on the target comp
 When Cockpit runs on several PCs under the same Tailscale account, the **Device** filter in the Desktop task list can show task summaries from the other PCs. Selecting a row opens that device's PWA inside Desktop, where you can read the conversation, send messages, answer Asks, stop the task, or complete it. The list feed and the interactive task detail use separate connections. The task view identifies the target device; confirm it before acting. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#open-and-operate-tasks-on-another-pc) for the workflow.
 
 Remote access pauses when you sign out of AGI Lab, your sign-in expires, or your membership becomes inactive. Connections end, but connection scope, port, and HTTPS settings are retained. Credentials issued through AGI Lab sign-in are revoked when the PC signs out or its sign-in expires or is revoked; credentials issued through the previous pairing-code system remain valid. After you sign in again and membership verification succeeds, remote access resumes automatically with the saved settings. Selecting Off prevents automatic resume. If startup fails, for example because the port is in use, remote access remains paused; check its state in the Desktop Remote Access screen.
+
+In Tailscale-only mode, the Desktop Remote access button warns when Tailscale is disconnected or its status cannot be verified, even if the server is still running. The tooltip distinguishes these states. Select the warning to open the Tailscale guidance in Remote access; it does not turn the server off. Restore Tailscale or retry its status check before relying on remote connectivity.
 
 ## What Tailscale is
 

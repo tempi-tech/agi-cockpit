@@ -4,7 +4,7 @@
 
 Learn how to choose who may talk to a Crew, where it responds, and its active hours, how owners differ from others, and how to let in people waiting for approval.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-people)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-people)
 
 Only messages from people who may talk to the Crew, in places where it responds, reach the Crew. You set both in the **Connection** tab of the Crew's settings, separately for Discord, Slack, and Chatwork (Chatwork is for members). For the steps to connect a chat, see [Connect a chat](https://agi-labo.com/en/tools/cockpit/docs/crew-chat). Inside Cockpit, owners can always talk to the Crew.
 
@@ -147,13 +147,19 @@ On Discord and Slack, when **Other channels** is **Off**, a mention in a channel
 
 Only the owner can answer. These Asks can arrive by DM when Ask DMs are enabled. Explicitly disabled channels do not produce an Ask. This channel approval flow does not apply to Chatwork.
 
-### When it does not reply in a thread
+### Set how an individual thread receives messages
 
-**In Discord, even when a channel is set to Everything, threads need a mention at first.** To have the Crew respond without a mention inside threads too, set the thread option to **Everything**.
+From v4.140.0, **Per-thread settings** in the connection's **Where it responds** lets you choose **Follow defaults**, **All messages**, **Mentions only**, or **Off** for one Discord thread or forum post, or one Slack thread. Add a thread by its link or place ID. Chatwork and Google Chat do not support these settings. Each connection can keep up to 500 explicit thread settings; returning one to **Follow defaults** removes that setting.
 
-In Slack, threads in a channel set to **Everything** reach the Crew without a mention. The Crew replies to a mention in the thread of that message.
+**Follow defaults** follows later changes to the shared settings. Without an individual setting, Discord forum posts and Slack threads under an **Everything** parent receive all messages from allowed people. Other Discord threads follow the created/joined defaults; threads the Crew has not joined and older threads with an unknown origin require mentions.
 
-If the parent channel is **Off**, the Crew does not respond in its threads either.
+A parent channel set to **Off** stops its threads even if a thread is set to **All messages**. If the parent is unlisted and **Other channels** is **Off**, add the parent first: an individual thread setting cannot grant access to it. Every change, including **Off** and **Follow defaults**, must freshly confirm the thread and parent with Discord or Slack. If confirmation fails, nothing is saved. A damaged saved setting receives nothing; an unconfirmed parent is shown as unknown rather than presumed accessible.
+
+The screen shows the effective mode and its reason. **All messages** still accepts only people allowed to talk to the Crew, and existing active-hours and other restrictions remain. Changes affect future arrivals; earlier messages are not delivered again. Slack thread labels use the channel and root-message time, not message text.
+
+When the Crew handles a request from someone other than the owner, widening a thread to receive every message needs owner approval. This includes **Follow defaults** when it would receive everything, and a parent-channel change that re-enables a thread set to **All messages**. The owner's Ask identifies affected threads. If settings change before the answer so that more threads would receive everything, Cockpit refuses the stale approval and asks again. `--confirm` cannot replace owner approval. Narrowing to **Off** applies immediately; changes to mentions follow the existing rules for who may change places.
+
+For CLI operations, use `cockpit crew place set <crew> --thread <link-or-place-id> --mode all|mention|off|inherit`, then inspect `cockpit crew place get <crew> --place <link-or-place-id>`. With multiple connections, specify the platform when the ID does not identify it. See the [Crew reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew).
 
 ### When messages in a channel do not reach it
 

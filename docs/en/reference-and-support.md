@@ -4,7 +4,7 @@
 
 Troubleshoot task state, settings, storage, agent authentication, Fleet, Remote Access, Browser Identities, and App Surface.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support)
 
 Use this reference to read current state accurately and isolate a problem to a small boundary. First record the task, agent, target connection, operating system, and app version, then follow the relevant recovery path.
 
@@ -55,6 +55,14 @@ See the [`cockpit update` reference](https://agi-labo.com/en/tools/cockpit/docs/
 If Cockpit says **The system keychain did not respond. Try again.**, bring any macOS Keychain prompt to the front, unlock the login Keychain if needed, and allow the request. Then run the Cockpit sign-in again.
 
 Cockpit stops waiting for an unresponsive Keychain after about two seconds instead of hanging indefinitely. This timeout does not clear the pending OAuth state or disable encrypted storage, so retry after resolving the prompt. Cockpit does not bypass the Keychain by falling back to plaintext storage.
+
+## Sign-in information cannot be read
+
+From v4.140.0, an unreadable or corrupt AGI Lab credential store is treated as **verification unavailable**, rather than proof that you signed out or the session expired. Cockpit does not delete the saved credentials, revoke existing paired credentials, or reset account preferences merely because a read failed. Explicit sign-out and confirmed expiry or revocation retain their normal effects.
+
+Choose **Retry** after restoring access to the OS Keychain or keyring. The sign-in screen also offers **Continue locally** for local work and voluntary **Sign in** through the browser. Continuing locally does not verify an account or unlock member features. It does not complete onboarding or initialize signed-out account defaults. Cancelling a voluntary sign-in returns to local continuation without deleting saved credentials.
+
+Operations requiring verified authentication or membership cannot proceed while the store is unreadable. For example, `cockpit account status`, Smart Routing task creation, and explicit `smartRouting.*` settings reads or changes return `verification-unavailable` with HTTP 503. An unscoped settings list omits unverifiable Smart Routing values; unrelated settings remain readable. Remote sign-in reports temporary unavailability and cannot issue new paired credentials. Restore storage access and retry rather than treating this state as a confirmed sign-out or repeatedly creating replacement tasks.
 
 ## AGI Lab sign-in expires
 

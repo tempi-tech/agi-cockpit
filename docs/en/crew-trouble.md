@@ -4,7 +4,7 @@
 
 What to check when a Crew does not reply, "typing" stays, it stops for approval, cannot connect, or stops at a usage limit or the memory guard, and what common errors mean.
 
-> Verified with AGI Cockpit 4.134.0 on 2026-11-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
 
 First, open the Crew's conversation in Cockpit. Most reasons appear there.
 
@@ -27,7 +27,7 @@ Check these from the top.
 
 - Whether the person is in **Who can talk**. If not, check **Waiting for approval** and the owner's Asks. Go to [A message got ⏳ (waiting for approval)](#a-message-got-waiting-for-approval) below
 - Whether the place is **Off**. If the parent channel is off, the Crew does not respond either
-- Whether they mentioned the Crew in a place that needs a mention. **Inside threads, a mention is needed at first, even if the channel is set to Everything**
+- Whether they mentioned the Crew in a place that needs a mention. **Check the thread’s individual setting and effective mode. Without an individual setting, Discord forum posts and Slack threads under an Everything parent receive all allowed messages; other threads follow their created/joined defaults or require mentions. A parent set to Off blocks its threads**
 - Whether the message got 🌙. Go to [A message got 🌙 (outside active hours)](#a-message-got-outside-active-hours) below
 - Whether the **Connection** tab shows **Connected**
 

@@ -4,7 +4,7 @@
 
 Learn how to connect to AGI Cockpit, inspect JSON results, supervise tasks, request decisions, and operate browser, app, Autorun, Fleet, and Hooks surfaces.
 
-> Verified with AGI Cockpit 4.127.0 on 2026-11-08. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli)
 
 The `cockpit` CLI is the first-party control plane for tasks, surfaces, settings, automation, and local app operations. Commands return JSON so agents and scripts can verify identifiers, state, and errors without parsing screen text.
 
@@ -60,7 +60,7 @@ The Windows CLI does not require a separate Node.js installation for its interna
 
 Use `cockpit task create` or `cockpit task run` to start work, `task get` and `task list` to inspect it, `task send` for follow-up instructions, and `task wait <task-id> --since <seq>` for incremental reports. Supported agents accept `--ui-mode visual|terminal` at creation. Local `create` and `send` accept repeatable `--media` attachments. Use `retry-start` after startup failure, `resume` after a process stops, and `reconnect` for an existing visual session. Only a visual task that currently supports Goals accepts `task goal start`. Use stdin or a file for multiline instructions rather than embedding them in a shell argument. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management) for the full parent-child, reporting, follow-up, and completion flow.
 
-Use `cockpit task list --parent <id>` for a lightweight status view of a parent and its children. Add `--recursive` for every descendant and `--all` to include completed tasks. Parent queries and ordinary `--summary` lists omit conversation and model settings and include a response-level `generatedAt` snapshot time.
+Use `cockpit task list --parent <id>` for a lightweight status view of a parent and its children. Add `--recursive` for every descendant and `--all` to include completed tasks. All lists now use lightweight summaries by default, omit conversation and model settings, and include a response-level `generatedAt` snapshot time. Use `--full` for full entries. Lists return one page: 100 summary entries or 20 full entries by default, with `--limit` accepting 1–200. Follow `page.nextCursor` with the same options and `--cursor` while `page.hasMore` is true; `--all` includes every status but does not remove pagination. Update automation that assumed one request returned everything. See [Task management](https://agi-labo.com/en/tools/cockpit/docs/task-management#read-state-and-waiting-reasons) for migration details.
 
 On the local Cockpit signed in with an AGI Lab membership, `task create|run --smart-routing` chooses the agent, model, reasoning effort, and, when omitted, the workspace from the registered policy. `cockpit settings` can read and write `smartRouting.enabled` and `smartRouting.policy`, using the same per-account settings as the new-task screen. Use `--stdin` or `--file` for a multiline policy. `--smart-routing` does not support `--host` or options that manually fix the values it chooses. See [Task management (CLI)](https://agi-labo.com/en/tools/cockpit/docs/task-management#create-with-smart-routing) for the workflow and failure conditions.
 

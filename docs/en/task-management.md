@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -138,7 +138,17 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `--parent` returns the named parent and its direct children; add `--recursive` for every descendant. Completed tasks are excluded by default. Add `--all` to include them, or `--status completed` to select only completed tasks. `--directory` and `--name` further filter the result. Recursive traversal still passes through a parent hidden by a filter. An unknown parent returns `task_not_found`, and `--recursive` without `--parent` is invalid.
 
-A parent query always uses the lightweight summary form. Add `--summary` to an ordinary list for the same fields: `id`, `name`, `status`, `stopReason`, `hasPendingAsk`, `parentMasterId`, `directory`, `projectId`, `agentType`, and creation and update times. `projectId` is `null` outside every project. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
+`task list` now returns lightweight summaries by default, including parent queries. `--summary` explicitly selects the same form, while `--full` requests full entries. Combining them is refused with `option_conflict`. Summary fields are: `id`, `name`, `status`, `stopReason`, `hasPendingAsk`, `parentMasterId`, `directory`, `projectId`, `agentType`, and creation and update times. `projectId` is `null` outside every project. The response-level `generatedAt` gives the snapshot time. Instructions, conversation, reports, model settings, and device data are omitted; use `task get` only for tasks that need those details.
+
+From v4.140.0, every list is paginated, newest first. The default is 100 summary entries or 20 full entries per page. `--limit` accepts 1–200; JSON size limits can make a page shorter. Keep the response's `data` array handling, then inspect `page.hasMore` and repeat the same command with `--cursor <page.nextCursor>` until it is false. The CLI does not fetch subsequent pages automatically. `--all` includes every status, but still returns only one page. Automation that previously assumed one complete list must follow the cursor.
+
+```bash
+cockpit task list --all --limit 100
+cockpit task list --all --limit 100 --cursor <nextCursor>
+cockpit task list --full
+```
+
+Keep the same filters, format, and limit on subsequent requests; changing them makes the cursor invalid. Tasks created after the first page require a new listing. Older hosts that do not support pagination return `task_list_pages_unsupported`; update the destination instead of retrying an unbounded list. Use `task get` for an individual task whose full entry exceeds the page size. See the [task reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/task#pages) for response shapes and limits.
 
 | Field | Decision |
 | --- | --- |
@@ -272,6 +282,14 @@ cockpit task goal start <task-id> --objective-file goal.md
 
 The CLI does not stop or clear Goals. After starting one, supervise it through `task get`, `task wait`, and the usual turn controls.
 
+## Resume a blocked Codex Goal
+
+In a Codex task in chat view, **Resume goal** appears above the message box on Desktop and mobile when its Goal is blocked. It continues the same Goal, objective, token budget, and usage in the same conversation and agent thread. It does not create a new Goal or reopen a completed task.
+
+The CLI equivalent is `cockpit task goal resume <task-id>`. Only you or a task acting on your request may resume it; automatic Crew turns, Crew children without an inherited owner request, and Hooks cannot. The Goal must be blocked, have budget remaining, and have no running turn or pending agent approval or question. A task resuming work stopped by the memory guard must first obtain your agreement and add `--confirm-memory-guard`.
+
+Cockpit confirms the same Goal became active before reporting success. A short next turn may already leave it blocked or complete again. If the CLI reports `turnStarted: false`, send a message to continue. `task resume` reconnects a stopped session, and `task goal start` starts a new objective; neither substitutes for this operation.
+
 ## Switch the account or Browser Identity
 
 Supported agents can switch a running task to another signed-in account after a usage limit. Send the appropriate continuation after the switch.
@@ -294,7 +312,7 @@ cockpit task browser-identity <task-id> work
 | `task resume` | Restarts a stopped task with the same history |
 | `task complete` | Stops the process and moves it to completed. The CLI removes its Worktree by default |
 | `task complete <task-id> --keep-worktree` | Moves it to completed while retaining the Worktree |
-| `task remove` | Deletes the task and its Cockpit history |
+| `task remove` | Deletes the task, its Cockpit history, and its Worktree under the cleanup safety checks |
 
 Complete or remove a task only when the user explicitly requests it. Save required diffs, artifacts, reports, and publication URLs, then verify the target id before acting.
 

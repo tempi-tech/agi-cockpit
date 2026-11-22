@@ -4,9 +4,17 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
+
+## Resume a blocked Codex Goal
+
+In a Codex task in chat view, **Resume goal** appears above the message box on Desktop and mobile when its Goal is blocked. It continues the same Goal, objective, token budget, and usage in the same conversation and agent thread. It does not create a new Goal or reopen a completed task.
+
+The CLI equivalent is `cockpit task goal resume <task-id>`. Only you or a task acting on your request may resume it; automatic Crew turns, Crew children without an inherited owner request, and Hooks cannot. The Goal must be blocked, have budget remaining, and have no running turn or pending agent approval or question. A task resuming work stopped by the memory guard must first obtain your agreement and add `--confirm-memory-guard`.
+
+Cockpit confirms the same Goal became active before reporting success. A short next turn may already leave it blocked or complete again. If the CLI reports `turnStarted: false`, send a message to continue. `task resume` reconnects a stopped session, and `task goal start` starts a new objective; neither substitutes for this operation.
 
 ## Follow up, queue, interrupt, and resume
 
@@ -21,7 +29,7 @@ Tasks without a session yet remain in the task list after restarting Cockpit. Op
 
 Codex Native UI preserves the task’s automatic-review setting when resuming its conversation. If Codex reports a different effective reviewer, Cockpit reconciles the approval mode and shows a notice; resuming does not silently grant full access.
 
-After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session.
+After three consecutive identical turn failures in Visual Runtime, Cockpit marks the conversation **Session cannot be resumed** and stops retrying that rejected session. Inspect the last error, then run `cockpit task resume <id> --fresh-session` to start a new conversation in the same task with a summary of the stored conversation. Do not use an ordinary resume to return to the rejected session. Successfully clearing the conversation with `/clear` or `cockpit task clear <id> --confirm` also clears the old session warning and consecutive-failure count on Desktop and the PWA. A failed clear leaves the warning in place.
 
 Escape stops a running turn. With multiple task panes, it applies only to the pane with keyboard focus. After interruption settles, the task returns to a state that can accept the next instruction and the composer can continue.
 

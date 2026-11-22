@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -304,3 +304,13 @@ Windows Store packages declare a firewall rule allowing inbound TCP traffic to t
 From v4.131.0, users signed in to AGI Lab can use `cockpit feedback send` to send an AGI Cockpit bug report or feature request to AGI Lab. Only AGI Lab staff can read it. Alongside the title and body, Cockpit sends its version, the OS and OS release, whether the sender is a shell or Crew, and the Crew's agent type when applicable. It does not automatically add the host name, Crew ID, email address, or model name. Files cannot be attached.
 
 Secret masking is a safety net that cannot detect every secret. Keep credentials out of the body. Sending shows no confirmation dialog: send when the owner requests it; requests from other people require owner confirmation under the outside-action rules. Cockpit does not resend automatically when the outcome is unknown, and resending may create a duplicate. See the [feedback reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/feedback) for details.
+
+## Operation and permission changes in v4.140.0
+
+Discord and Slack threads can have their own receiving mode. **All messages** does not widen who may talk, override an **Off** parent, or grant access to an unlisted parent while other channels are off. Changes must confirm the thread and parent with the service. Damaged settings stop delivery; unverified access is not assumed. Crew turns handling non-owner requests need owner approval to widen all-message delivery, including parent changes that activate such threads and returning to defaults that receive everything. A stale approval cannot authorize additional threads. Thread names are redacted for callers without history access; same-owner remote access alone does not authenticate an owner task. See [People and places](https://agi-labo.com/en/tools/cockpit/docs/crew-people).
+
+Unreadable or corrupt AGI Lab credentials mean verification is unavailable. Read failure alone does not delete credentials, revoke pairings, or reset account preferences, and cannot authorize a new protected operation using an unverified identity or cached account data. Local continuation is available without granting member access. Explicit sign-out and confirmed invalid credentials keep their normal behavior. See [sign-in recovery](https://agi-labo.com/en/tools/cockpit/docs/reference-and-support#sign-in-information-cannot-be-read).
+
+Bulk deletion of completed tasks removes task history and related task files but preserves Git worktree folders, registrations, and uncommitted and untracked files on Desktop and the PWA. PWA cleanup removes eligible temporary workspaces; Desktop bulk cleanup leaves them. Single-task CLI removal can remove the worktree. Confirm the target and save needed output first; kept worktrees need deliberate later cleanup. See [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks#bulk-delete-completed-tasks-safely).
+
+Resuming a blocked Codex Goal requires you or a task acting on your request, preserves its objective and budget, and does not bypass memory-guard consent or resume completed or budget-exhausted Goals. Automatic Crew turns and Hooks cannot resume Goals. See [Task management](https://agi-labo.com/en/tools/cockpit/docs/task-management#resume-a-blocked-codex-goal).

@@ -4,7 +4,7 @@
 
 AIエージェントと利用者がcockpit CLIからタスク、Ask、ブラウザー、App Surface、自動実行、Fleet、Hooks、設定を安全に操作する方法を説明します。
 
-> AGI Cockpit 4.127.0で2026-11-08に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
+> AGI Cockpit 4.140.0で2026-11-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/cockpit-cli)
 
 `cockpit`は、AIエージェントと利用者が実行中のAGI Cockpitを操作するための正式なCLIです。タスク、確認、成果表示、ブラウザー、App Surface、自動実行、Fleet、Hooks、設定を、同じ状態と権限境界で扱います。
 
@@ -64,7 +64,7 @@ Windows版CLIの内部処理にNode.jsを別途インストールする必要は
 
 単発作成には`task create`、別タスクを起動して最初の報告まで待つ場合は`task run`を使います。`turn_complete`は一つの応答ターンが終わったことを示し、タスク全体の完了ではありません。親子タスク、レポート、追加指示、完了の流れは[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management)を参照してください。
 
-親タスクと子タスクの状態だけをまとめて確認する場合は`cockpit task list --parent <id>`を使い、全子孫には`--recursive`、完了済みを含める場合は`--all`を追加します。親指定の応答と通常一覧の`--summary`は、会話やモデル設定を除いた軽量summaryとsnapshot時刻`generatedAt`を返します。
+`cockpit task list --parent <id>`で親と子の状態を軽量に確認できます。`--recursive`で全子孫、`--all`で完了済みも対象にします。現在はすべての一覧が既定で軽量summaryとなり、会話やモデル設定を省略して、応答全体にsnapshot時刻の`generatedAt`を返します。詳細は`--full`で取得します。一覧は1ページずつで、既定はsummaryが100件、詳細が20件です。`--limit`は1〜200を指定できます。`page.hasMore`が`true`の間は、同じ条件に`--cursor <page.nextCursor>`を付けて続きを取得してください。`--all`も全状態を対象にするだけでページ制限はなくなりません。1回で全件が返る前提の自動処理は更新してください。[タスク管理](https://agi-labo.com/tools/cockpit/docs/task-management#状態と待機理由を読む)に移行の詳細があります。
 
 AGIラボ会員としてサインインしているローカルCockpitでは、`task create|run --smart-routing`が登録済み方針からエージェント、モデル、推論レベルと、未指定の場合は作業場所を選びます。`cockpit settings`では`smartRouting.enabled`と`smartRouting.policy`を読み書きでき、新規タスク画面と同じアカウント別設定を扱います。方針の複数行入力には`--stdin`または`--file`を使います。`--smart-routing`は`--host`と、選択対象を手動で固定するオプションには対応しません。手順と失敗条件は[タスク管理（CLI）](https://agi-labo.com/tools/cockpit/docs/task-management#スマートルーティングで作成する)を参照してください。
 

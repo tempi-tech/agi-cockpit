@@ -4,7 +4,7 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.139.0 on 2026-11-21. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
@@ -174,6 +174,14 @@ cockpit task complete <id> --keep-worktree
 
 `task get` returns `status`, `waitingReason`, `readyForNextPrompt`, and `needsResume`, together with the latest conversation and terminal output.
 
+## Bulk-delete completed tasks safely
+
+From Desktop's completed list or Overview, or the PWA's completed group, confirm **Delete all completed tasks** once to remove the selected completed task records. Deletion cannot be undone. Cockpit saves the removal before cleaning related files in the background and shows progress and a final result. If saving fails, tasks remain. File-cleanup failures identify affected tasks and offer **Delete again** for that cleanup; check the result before retrying after a lost connection. A saved cleanup resumes after restart.
+
+Bulk deletion preserves Git worktree folders, their Git registrations, and their uncommitted and untracked files, including when using the PWA while the desktop window is closed. The confirmation and result show how many worktrees are kept. Task records, conversation history, and other task files are still removed. PWA bulk deletion also removes eligible temporary workspaces; Desktop bulk deletion leaves temporary workspaces in place. This is different from single-task CLI `cockpit task remove <id>`, which removes its worktree under the normal cleanup safety checks.
+
+Kept worktrees are not removed automatically later. Before manual cleanup on the PC that owns them, inspect `git worktree list`, the folder contents, and `git status --short` in each folder. Check `cockpit task list --all --directory <worktree-path>` and follow every `page.nextCursor` while `page.hasMore` is true to find other tasks using it. Remove only worktrees you have explicitly chosen after saving needed work; do not infer that a folder is unused from one page of results.
+
 ## Related pages
 
 - [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details)
@@ -182,4 +190,4 @@ cockpit task complete <id> --keep-worktree
 - [cockpit browser](https://agi-labo.com/en/tools/cockpit/docs/browser)
 - [Security and data](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
-In the PWA, the completed group has a delete-all action with a native confirmation. Deletion cannot be undone. Long-press a Fleet group to access its run actions, including removal; review whether the chosen action removes only the run history or its tasks as well.
+Long-press a Fleet group in the PWA to access its run actions, including removal; review whether the chosen action removes only the run history or its tasks as well. Completed-task bulk deletion follows the separate rules above.

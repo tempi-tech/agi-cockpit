@@ -4,7 +4,7 @@
 
 プロジェクト、タスクの整理と移動、タスク一覧、オーバービュー、検索、状態、完了、削除の違いを説明します。
 
-> AGI Cockpit 4.139.0で2026-11-21に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
+> AGI Cockpit 4.140.0で2026-11-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/tasks)
 
 タスク一覧は、複数の仕事から「次にどれを見るか」を選ぶ場所です。個々の会話や追加入力は[タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)で扱います。
 
@@ -174,6 +174,14 @@ cockpit task complete <id> --keep-worktree
 
 `task get`は`status`、`waitingReason`、`readyForNextPrompt`、`needsResume`と、最新の会話・ターミナル出力を返します。
 
+## 完了済みタスクを安全に一括削除する
+
+Desktopの完了済み一覧・Overview、またはPWAの完了済みグループで「完了済みタスクをすべて削除」を選び、1回確認すると対象の完了済みタスク記録を削除します。削除は取り消せません。Cockpitは削除を保存してから関連ファイルをバックグラウンドで整理し、進捗と結果を表示します。保存に失敗した場合はタスクが残ります。ファイル削除に失敗した場合は対象と「もう一度削除」を表示し、その整理を再試行できます。切断した場合も結果を確認してから再試行してください。保存済みの整理はアプリの再起動後も続行します。
+
+一括削除ではGit Worktreeのフォルダ、Gitへの登録、未コミット・未追跡ファイルを保持します。Desktopのウィンドウを閉じてPWAから操作した場合も同じです。確認と結果には保持するWorktreeの件数を表示します。タスク記録、会話履歴、そのほかのタスクファイルは削除します。PWAの一括削除では対象の一時作業フォルダも削除し、Desktopの一括削除では一時作業フォルダを残します。単体のCLI操作`cockpit task remove <id>`は通常の安全確認のもとでWorktreeも削除するため、同じ動作ではありません。
+
+保持されたWorktreeが後から自動削除されることはありません。手動整理の前に、そのPCで`git worktree list`、各フォルダの内容、`git status --short`を確認してください。`cockpit task list --all --directory <worktree-path>`を実行し、`page.hasMore`が`true`の間はすべての`page.nextCursor`をたどって、使用中の別タスクがないか調べます。必要な仕事を保存し、明示的に選んだWorktreeだけを整理してください。1ページだけの結果で未使用とは判断しないでください。
+
 ## 関連ページ
 
 - [タスク詳細](https://agi-labo.com/tools/cockpit/docs/task-details)
@@ -182,4 +190,4 @@ cockpit task complete <id> --keep-worktree
 - [cockpit browser](https://agi-labo.com/tools/cockpit/docs/browser)
 - [セキュリティとデータ](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
-PWAの完了済みグループでは、標準確認ダイアログを経てタスクを一括削除できます。削除は取り消せません。Fleetグループを長押しすると削除などの実行操作を選べます。実行履歴だけを削除するか、関連タスクも削除するかを確認してください。
+PWAでFleetグループを長押しすると削除などの実行操作を選べます。実行履歴だけを削除するか、関連タスクも削除するかを確認してください。完了済みタスクの一括削除は上記の別の規則に従います。

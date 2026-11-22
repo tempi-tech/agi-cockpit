@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.132.0で2026-11-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 4.140.0で2026-11-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -138,7 +138,17 @@ cockpit task get <task-id> --turns 3 --max-lines 500
 
 `--parent`は指定した親自身と直接の子を、`--recursive`を加えるとすべての子孫を返します。完了済みは既定で除外されるため、含める場合は`--all`、完了済みだけなら`--status completed`を指定します。`--directory`と`--name`でさらに絞り込めます。絞り込みで親が非表示でも、再帰探索はその階層を通過します。存在しない親は`task_not_found`、`--parent`のない`--recursive`は入力エラーです。
 
-親指定の一覧は常に軽量summaryです。通常の一覧も`--summary`で同じ形式になり、`id`、`name`、`status`、`stopReason`、`hasPendingAsk`、`parentMasterId`、`directory`、`projectId`、`agentType`、作成・更新時刻だけを返します。どのプロジェクトにも属さない場合、`projectId`は`null`です。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
+`task list`は親指定も含め、既定で軽量summaryを返します。`--summary`は同じ形式を明示し、`--full`は詳細な一覧を要求します。両方の併用は`option_conflict`で拒否されます。summaryは`id`、`name`、`status`、`stopReason`、`hasPendingAsk`、`parentMasterId`、`directory`、`projectId`、`agentType`、作成・更新時刻だけを返します。どのプロジェクトにも属さない場合、`projectId`は`null`です。応答全体の`generatedAt`でsnapshot時刻を確認できます。指示、会話、report、model設定、device情報は含まれないため、詳細が必要なタスクだけ`task get`で読みます。
+
+v4.140.0から、一覧はすべて作成日時の新しい順にページ単位で返します。既定の件数はsummaryが100件、`--full`が20件です。`--limit`は1〜200を指定でき、JSONの容量制限でそれより少なくなる場合もあります。従来の`data`配列を読み、`page.hasMore`が`true`なら同じコマンドに`--cursor <page.nextCursor>`を付け、`false`まで繰り返してください。CLIは次ページを自動取得しません。`--all`も全状態を対象にするだけで、1ページを返します。一度の一覧で全件を得る前提の自動処理は、カーソルをたどるよう変更してください。
+
+```bash
+cockpit task list --all --limit 100
+cockpit task list --all --limit 100 --cursor <nextCursor>
+cockpit task list --full
+```
+
+次ページでも絞り込み、形式、件数を変えないでください。変更するとカーソルは無効になります。最初のページの後に作成されたタスクは、新たに一覧を取得すると含まれます。ページ取得に未対応の古い接続先では`task_list_pages_unsupported`になります。全件取得に戻さず、接続先を更新してください。1件の詳細が容量制限を超える場合は`task get`で読みます。応答形式と制限は[task Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/task#pages)を参照してください。
 
 | フィールド | 判断 |
 | --- | --- |
@@ -272,6 +282,14 @@ cockpit task goal start <task-id> --objective-file goal.md
 
 CLIはGoalの停止や消去には対応しません。開始後は`task get`、`task wait`、通常のターン操作で状態を監督します。
 
+## ブロックされたCodexのGoalを再開する
+
+チャット表示のCodexタスクでGoalがブロックされると、Desktopとモバイルの入力欄の上に「ゴールを再開」が表示されます。同じ会話・エージェントのスレッドで、目標、トークン予算、使用量を保持して同じGoalを続けます。新しいGoalを作成したり、完了済みタスクを復帰させたりする操作ではありません。
+
+CLIでは`cockpit task goal resume <task-id>`を使います。再開できるのは利用者本人か、その依頼に沿って動くタスクです。クルーの自動ターン、所有者の依頼を継承していないクルーの子タスク、Hookからは再開できません。Goalがブロックされ、予算が残り、実行中のターンやエージェントの承認・質問待ちがないことが条件です。メモリ保護で停止した仕事をタスクから再開する場合は、利用者の同意後に`--confirm-memory-guard`を付けます。
+
+Cockpitは同じGoalがactiveになったことを確認して成功を返します。次のターンが短い場合、応答時点ですでにblockedやcompleteへ変わっていることもあります。CLIの`turnStarted`が`false`なら、メッセージを送って続行してください。`task resume`は停止したセッションへの再接続、`task goal start`は新しい目標の開始であり、この操作とは異なります。
+
 ## アカウントとBrowser Identityを切り替える
 
 利用上限などで続行できない場合、対応するエージェントではタスクのアカウントを切り替えられます。切り替え後、停止理由に応じて続行指示を送ります。
@@ -294,7 +312,7 @@ cockpit task browser-identity <task-id> work
 | `task resume` | 停止したタスクを同じ履歴で再開する |
 | `task complete` | プロセスを止めて完了へ移す。CLIではWorktreeを既定で削除する |
 | `task complete <task-id> --keep-worktree` | Worktreeを残して完了へ移す |
-| `task remove` | タスクと履歴をCockpitから削除する |
+| `task remove` | タスクとCockpit内の履歴を削除し、安全確認のもとでWorktreeも削除する |
 
 完了や削除は、利用者が明示的に求めた場合だけ行います。差分、生成物、レポート、公開URLなど必要な成果を保存し、対象IDを再確認してから実行してください。
 
