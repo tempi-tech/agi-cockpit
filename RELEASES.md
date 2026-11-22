@@ -9,7 +9,7 @@ English is the primary language for these generated release notes. Download the 
 **Type:** minor · **Platforms:** macOS
 
 - Added a setting to launch Cockpit at OS sign-in in the Windows Store version.
-- Moved Crew home files into the Folder tab of the Crew panel.
+- Changed Crew home navigation to use the Folder tab of the Crew panel.
 - Removed extra blank space below the Crew panel tabs.
 - Removed the internal ID row from the Crew folder view to make files easier to find.
 - Changed Crew panel buttons to show the Crew’s own icon.
@@ -17,8 +17,8 @@ English is the primary language for these generated release notes. Download the 
 - Fixed pending attachments from a previous Ask appearing in the next answer in the browser app.
 - Removed question frames in browser-app Asks and aligned choice rows with the desktop layout.
 - Changed browser-app Ask text fields to start as one line and expand as you type.
-- Kept the send button at the bottom of browser-app Asks.
-- Moved the close button to the right side of browser-app Ask headers.
+- Changed browser-app Asks to keep the send button at the bottom.
+- Changed browser-app Asks to show the close button on the right side of the header.
 - Changed Remote Access certificate request and renewal results to appear directly below the action button.
 - Fixed image pastes being reported as unsuccessful on some pages despite succeeding in the in-app browser.
 
