@@ -4,6 +4,43 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.141.0 — 2026-11-23
+
+**Type:** minor · **Platforms:** macOS
+
+- Added a setting to launch Cockpit at OS sign-in in the Windows Store version.
+- Moved Crew home files into the Folder tab of the Crew panel.
+- Removed extra blank space below the Crew panel tabs.
+- Removed the internal ID row from the Crew folder view to make files easier to find.
+- Changed Crew panel buttons to show the Crew’s own icon.
+- Changed file drops in Ask margins to attach to the nearest answer field and reveal the target field.
+- Fixed pending attachments from a previous Ask appearing in the next answer in the browser app.
+- Removed question frames in browser-app Asks and aligned choice rows with the desktop layout.
+- Changed browser-app Ask text fields to start as one line and expand as you type.
+- Kept the send button at the bottom of browser-app Asks.
+- Moved the close button to the right side of browser-app Ask headers.
+- Changed Remote Access certificate request and renewal results to appear directly below the action button.
+- Fixed image pastes being reported as unsuccessful on some pages despite succeeding in the in-app browser.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Windows Store版で、OSへのログイン時にCockpitを起動する設定を追加しました。
+- クルーのホーム内のファイルを、クルーパネルの「フォルダ」タブから開けるようにしました。
+- クルーパネルのタブ下にあった余分な空白をなくしました。
+- クルーのフォルダ表示で、内部IDの行を省いてファイルを見つけやすくしました。
+- クルーパネルを開くボタンに、そのクルーのアイコンを表示するようにしました。
+- Askの余白にファイルをドロップしたとき、最も近い回答欄に添付し、添付先を表示するようにしました。
+- ブラウザー版でAskを切り替えたとき、前のAskの添付処理が次の回答に入り込む問題を修正しました。
+- ブラウザー版のAskで質問の枠をなくし、選択肢の表示をデスクトップ版に揃えました。
+- ブラウザー版のAskの自由入力欄を、入力に合わせて伸びる1行表示にしました。
+- ブラウザー版のAskで送信ボタンを下部に固定しました。
+- ブラウザー版のAskを閉じるボタンを、見出しの右側に移しました。
+- リモートアクセスの証明書の取得・更新結果を、操作ボタンのすぐ下に表示するようにしました。
+- 内蔵ブラウザーで画像の貼り付けに成功しても、一部のページで失敗と判定される問題を修正しました。
+
+</details>
+
 ## v4.140.0 — 2026-11-22
 
 **Type:** minor · **Platforms:** macOS, Linux
