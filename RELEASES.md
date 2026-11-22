@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.140.0 — 2026-11-22
+
+**Type:** minor · **Platforms:** macOS
+
+- Changed CLI task lists to a lightweight view of 100 tasks by default, with pagination. Scripts that rely on full details need --full and pagination.
+- Reduced the load when deleting completed tasks in bulk.
+- Changed bulk deletion in the browser app to keep Git worktrees when the desktop app is not open.
+- Added per-thread message delivery settings and current delivery status for Crew conversations in Discord and Slack.
+- Added a way to resume blocked Codex goals in the same task while keeping the objective and budget.
+- Fixed stale session-resume warnings remaining after starting a new conversation.
+- Fixed Crew heartbeats being cancelled just before delivery.
+- Reduced disk writes when saving the in-app browser state.
+- Changed unreadable saved sign-in information to show the reason and retry actions instead of treating it as signed out.
+- Added a warning on the globe icon when Tailscale-only Remote Access is unavailable.
+- Reduced background polling while Tailscale is disconnected and the settings panel is closed.
+- Fixed the entire settings panel closing when searching for an Autorun target.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- CLIのタスク一覧を、既定100件の軽い表示とページ送りに変更しました。詳しい内容を使うスクリプトは、--fullとページ送りへの対応が必要です。
+- 完了したタスクをまとめて削除するときの負荷を軽くしました。
+- デスクトップが開いていない時にブラウザー版から完了タスクをまとめて削除しても、Gitの作業フォルダーを残すようにしました。
+- クルーのDiscord・Slackのスレッドごとに、メッセージの受け取り方を設定し、現在の受信状態を確認できるようになりました。
+- 行き詰まったCodexのゴールを、目的や予算を保ったまま同じタスクで再開できるようになりました。
+- 新しい会話を始めると、以前の「セッションを再開できません」の警告を解除するように修正しました。
+- クルーの定期確認が、配達の直前に取り消される問題を修正しました。
+- 内蔵ブラウザーの状態を保存するときの書き込み量を減らしました。
+- 保存したサインイン情報を読み取れないとき、未サインインと誤って扱わず、確認できない理由と再試行の操作を表示するようにしました。
+- Tailscale限定のリモートアクセスが利用できないとき、地球儀アイコンに警告を表示するようになりました。
+- Tailscaleが接続されていない間、設定パネルを閉じているときの確認間隔を延ばし、負荷を軽くしました。
+- 自動実行の送信先を検索するとき、設定パネル全体が閉じる問題を修正しました。
+
+</details>
+
 ## v4.139.0 — 2026-11-21
 
 **Type:** minor · **Platforms:** macOS, Linux
