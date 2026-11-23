@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 4.141.1 on 2026-11-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -129,6 +129,8 @@ Custom prompts are stored as user-owned Markdown in the AGI Tools data area. The
 ### Check agent CLI versions and update status
 
 Under **Settings → Updates**, **Agent CLIs** shows the installed version, latest version Cockpit could check, and update status for Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code. **Check** fetches the current status instead of reusing the saved result. When an update can be run, **Update CLI** opens a terminal that runs that CLI's update command on this device. Cockpit omits the update action when the installed CLI is already current and reports the state as unknown when it cannot obtain or compare the versions.
+
+When you install or update Codex from Cockpit, Cockpit skips the official installer’s launch confirmation prompt. Signing in to Codex remains a separate step.
 
 Antigravity updates use its dedicated `agy update` command on macOS, Linux, and Windows. A configured custom executable is used in place of `agy`. On Windows, Cockpit runs the update through PowerShell.
 

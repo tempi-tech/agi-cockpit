@@ -4,7 +4,7 @@
 
 9種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.138.0で2026-11-20に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 4.141.1で2026-11-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から9種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -129,6 +129,8 @@ cockpit system-prompt list
 ### エージェントCLIのバージョンと更新状況を確認する
 
 「設定」→「更新」の「エージェント CLI」には、Claude、Codex、Antigravity、Cursor、Qoder、Grok Build、Muse Codeのインストール済み版、確認できた最新版、更新状態が表示されます。「確認」は保存済みの結果ではなく現在の状態を再取得します。更新できる場合は「CLI を更新」から、その端末上で対象CLIの更新コマンドを実行するターミナルを開けます。すでに最新版の場合は更新操作を表示せず、版を取得または比較できない場合は状態を「不明」として扱います。
+
+CockpitからCodexをインストールまたは更新するときは、公式インストーラーの起動確認への返答を待たずに処理を進めます。Codexへのサインインは別途必要です。
 
 Antigravityの更新には、macOS・Linux・Windowsとも専用の`agy update`を使います。実行コマンドを変更している場合は、その実行ファイルを`agy`の代わりに使います。WindowsではPowerShell経由で実行します。
 

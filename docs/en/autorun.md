@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.141.1 on 2026-11-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -93,7 +93,11 @@ A Crew can associate work with its active Mission using `--mission <id>` on `coc
 
 When a new-task Autorun fires, it creates a task in the same form as any regular task. Select it from the task list, then use task details to review its conversation, confirmation requests, errors, and results. The new task keeps a reference to the Autorun ID that created it.
 
-A new-task Autorun can also complete the task it created once that run finishes. The option is off by default; turn it on per Autorun in the Autorun dialog, in the PWA, or with `--complete-on-finish true`. Cockpit treats a `turn_complete` with no Ask, no permission prompt, and no usage limit as the end of the run, and does not depend on the agent running `cockpit task complete`. A task stopped by an Ask, a permission prompt, a usage limit, a process error, or any other state that waits for user input stays open. Existing-task Autoruns never complete their target, and Terminal Autoruns do not offer the option because a terminal task never reports `turn_complete`.
+A new-task Autorun can also complete the task it created once that run finishes. The option is off by default; turn it on per Autorun with **Complete when finished** on Desktop or the PWA, or with `--complete-on-finish true`. Cockpit treats an uninterrupted `turn_complete` with no Ask, no permission prompt, no usage limit, and no message still waiting for delivery as the end of the run, and does not depend on the agent running `cockpit task complete`.
+
+A task stopped by an Ask, a permission prompt, a usage limit, a process error, an interrupted turn (for example, when you send a message or stop the turn), or any other state that waits for user input stays open. Undelivered messages remain in the queue instead of being cancelled. A later uninterrupted turn completes the task once the queue and the other waiting conditions are clear.
+
+Existing-task Autoruns never complete their target, and Terminal Autoruns do not offer the option because a terminal task never reports `turn_complete`.
 
 An existing-task Autorun sends its text as that task's next instruction. If the target can accept input, delivery happens immediately. If it is running or stopped by a usage limit, Cockpit stores the instruction in a persistent main-process queue until the task becomes ready. The queue has no timeout, and completed or errored targets are resumed automatically when possible. Delivery fails, disables the Autorun, and marks it as needing attention if the target is deleted, cannot be resumed, or is a Windows Terminal task whose foreground process cannot be verified safely.
 

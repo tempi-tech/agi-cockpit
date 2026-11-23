@@ -4,7 +4,7 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 4.141.1 on 2026-11-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
 
@@ -13,6 +13,8 @@ By the end of this guide, an agent and the Cockpit integration will be ready for
 Setup checks Claude Code, Codex CLI, Grok Build, Antigravity CLI, Cursor CLI, Qoder CLI, and Muse Code (macOS/Linux). It shows whether each CLI is installed and, for some agents, whether sign-in is ready. When a detected CLI is not yet usable, the screen states **Plan and sign-in required**. One ready agent is enough for setup to create an Assistant Crew at the end. You can also choose **Set up later** to continue setup without a ready agent; setup then creates no Assistant.
 
 If Cockpit cannot find the agent you want, select **Install**. The row shows installation progress and, if it fails, a reason such as network trouble, missing commands, or insufficient write permission. Retry after correcting the cause, or choose **Open in a terminal** to inspect the installation. Cockpit Agent and Terminal do not require an external CLI.
+
+When installing Codex, Cockpit skips the official installer’s launch confirmation prompt. After installation, complete Codex authentication in the sign-in step below.
 
 ## 2. Configure the Cockpit integration
 
