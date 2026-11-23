@@ -4,6 +4,23 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.141.1 — 2026-11-24
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed autorun tasks being marked complete after an interrupted turn.
+- Fixed autorun tasks being marked complete while undelivered messages remain.
+- Changed Codex installation and updates to skip the official installer’s launch confirmation prompt.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 自動実行の「終わったら完了」で、中断されたタスクを完了にしないようにしました。
+- 自動実行の「終わったら完了」で、未配送のメッセージが残るタスクを完了にしないようにしました。
+- Codexのインストールと更新で、公式インストーラーの起動確認の返答待ちを省くようにしました。
+
+</details>
+
 ## v4.141.0 — 2026-11-23
 
 **Type:** minor · **Platforms:** macOS, Linux
