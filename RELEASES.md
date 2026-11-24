@@ -8,18 +8,18 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** minor · **Platforms:** macOS
 
-- Terminal autoruns created by a Crew can now omit parent Crew notifications when they finish successfully.
-- Google Chat connections can now switch to a method that avoids periodic Google sign-ins. Registration and approval are required, and migrated connections do not automatically fall back to the previous method.
+- Added an option to omit successful completion notifications to the parent Crew for Crew-created Terminal autoruns.
+- Added a new Google Chat connection method that avoids periodic Google sign-ins. Registration and approval are required, and migrated connections do not automatically fall back to the previous method.
 - Fixed missing conversation history caused by background updates in long-running tasks.
 - Reduced unnecessary disk writes when reloading conversation history.
-- Messages not yet sent during Codex reconnection are now kept and delivered in order after recovery.
-- Codex send failures caused by a closed connection are now reported without waiting for a timeout.
-- Messages from Crews on other devices now show their sender avatars even when the task list is limited to this device.
-- The task list toggle now stays in the same position in the header, and content no longer shows through when the list is collapsed.
-- The collapsed task list preview now opens only when hovering over its toggle and closes when the pointer leaves the list.
+- Fixed delivery of unsent messages during Codex reconnection, preserving their order after recovery.
+- Improved Codex send errors to report a closed connection without waiting for a timeout.
+- Fixed sender avatars for messages from Crews on other devices when the task list is limited to this device.
+- Fixed the task list toggle position in the header and content showing through when the list is collapsed.
+- Changed the collapsed task list preview to open only when hovering over its toggle and close when the pointer leaves the list.
 - Reduced repeated agent authentication checks and credential reads when opening Settings or initial setup.
-- When a Windows Codex Crew cannot reply because a command was denied at launch, Cockpit now shows the issue and guidance and notifies unanswered recipients and the owner.
-- Changing a Crew’s agent or approval mode now explains when the environment may prevent it from sending replies.
+- Added status guidance and recipient and owner notifications when a Windows Codex Crew cannot reply because a command was denied at launch.
+- Added guidance when changing a Crew’s agent or approval mode could prevent it from sending replies.
 
 <details>
 <summary>日本語のリリースノート</summary>
