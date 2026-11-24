@@ -4,6 +4,41 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.142.0 — 2026-11-25
+
+**Type:** minor · **Platforms:** macOS
+
+- Terminal autoruns created by a Crew can now omit parent Crew notifications when they finish successfully.
+- Google Chat connections can now switch to a method that avoids periodic Google sign-ins. Registration and approval are required, and migrated connections do not automatically fall back to the previous method.
+- Fixed missing conversation history caused by background updates in long-running tasks.
+- Reduced unnecessary disk writes when reloading conversation history.
+- Messages not yet sent during Codex reconnection are now kept and delivered in order after recovery.
+- Codex send failures caused by a closed connection are now reported without waiting for a timeout.
+- Messages from Crews on other devices now show their sender avatars even when the task list is limited to this device.
+- The task list toggle now stays in the same position in the header, and content no longer shows through when the list is collapsed.
+- The collapsed task list preview now opens only when hovering over its toggle and closes when the pointer leaves the list.
+- Reduced repeated agent authentication checks and credential reads when opening Settings or initial setup.
+- When a Windows Codex Crew cannot reply because a command was denied at launch, Cockpit now shows the issue and guidance and notifies unanswered recipients and the owner.
+- Changing a Crew’s agent or approval mode now explains when the environment may prevent it from sending replies.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- Crewが作成したTerminalの自動実行で、正常終了時の親Crewへの通知を省けるようになりました。
+- Google Chatの接続を、Googleへの定期的な再サインインが不要な新方式へ切り替えられるようになりました。切り替えには接続の登録・承認が必要で、切り替え後は旧方式へ自動では戻りません。
+- 長時間続くタスクで、背景処理の更新によって会話の一部が表示・保存から抜け落ちる問題を修正しました。
+- 会話履歴の読み直しに伴う不要なディスク書き込みを減らしました。
+- Codexの再接続中に届いた未送信のメッセージを保持し、接続回復後に順番どおり届けるようにしました。
+- Codexへの送信経路が切れた際に、タイムアウトまで待たずエラーを知らせるようにしました。
+- 手元のタスクだけを表示している場合も、別端末のCrewから届いたメッセージに送り手のアイコンを表示するようにしました。
+- タスク一覧の開閉ボタンをヘッダー内の同じ位置に揃え、一覧を畳んだ際に本文が透ける表示を修正しました。
+- 畳んだタスク一覧のプレビューは開閉ボタンにマウスを重ねた時だけ開き、一覧外へ移動すると閉じるようにしました。
+- 設定や最初の案内を開く際の、エージェントの認証確認と資格情報の重複読み取りを減らしました。
+- WindowsのCodex Crewがコマンドの起動拒否で返信できない際に、状態と対処を表示し、未返信の相手とオーナーへ知らせるようにしました。
+- Crewのエージェントや承認モードを変更する際に、環境によって返信を送れなくなる可能性を案内するようにしました。
+
+</details>
+
 ## v4.141.1 — 2026-11-24
 
 **Type:** patch · **Platforms:** macOS, Linux
