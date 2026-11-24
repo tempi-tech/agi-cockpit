@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.142.0 — 2026-11-25
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added an option to omit successful completion notifications to the parent Crew for Crew-created Terminal autoruns.
 - Added a new Google Chat connection method that avoids periodic Google sign-ins. Registration and approval are required, and migrated connections do not automatically fall back to the previous method.
