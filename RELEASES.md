@@ -4,6 +4,33 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v5.0.0 — 2026-11-26
+
+**Type:** major · **Platforms:** macOS
+
+- Give work to Crews (beta), each with its own role and memory, from AGI Cockpit, Discord, or Slack. You can use your first Crew with a free AGI Lab account.
+- Hand long-term goals to Crews as Missions, and check progress and pending decisions in one place.
+- Connect to AGI Cockpit on your PC from a phone or browser by signing in with the same AGI Lab account (for members; your PC must be running).
+- Open tasks running on another PC in the desktop app on this one to read the conversation, give more instructions, and answer Asks (for members).
+- Split work across multiple AI agents with Fleet, track progress, and resume from where it stopped.
+- Added a prompt to agree to the Terms of Use (revised November 26, 2026) at launch.
+- Fixed the back and forward buttons being unclickable in a narrow window with the right panel open while the collapsed task list is previewed.
+- Fixed Google Chat setup getting stuck on "Could not verify the Crew's Google Cloud project".
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 役割と記憶を持つクルー（β）に、AGI Cockpit や Discord・Slack から仕事を頼めます。1 体目は無料の AGIラボのアカウントで使えます。
+- 長い目標をミッションとしてクルーに任せ、進み具合と判断待ちをまとめて確かめられます。
+- スマートフォンやブラウザーから、PC と同じ AGIラボのアカウントでサインインして、PC の AGI Cockpit につなげます（会員向け。PC が動いている間）。
+- 別の PC で動いているタスクも、手元の PC のアプリで開いて、会話の確認・追加の指示・Ask への回答ができます（会員向け）。
+- 複数の AI に仕事を手分けさせる Fleet で、進み具合を見ながら、止まった所から再開できます。
+- 利用規約（2026年11月26日改定）への同意を、起動の時にお願いするようにしました。
+- タスクの一覧を畳んで一時表示した時、右のパネルを開いた狭い窓でも、戻る・進むのボタンを押せるようにしました。
+- Google Chat の設定が「クルーの Google Cloud プロジェクトを確かめられませんでした」で止まり続ける不具合を直しました。
+
+</details>
+
 ## v4.142.1 — 2026-11-25
 
 **Type:** patch · **Platforms:** macOS, Linux
