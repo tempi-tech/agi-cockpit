@@ -4,7 +4,7 @@
 
 Learn the four approval modes for a Crew and how to choose one, what waiting for approval looks like and how to answer, and how child task approval modes are decided.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-approval)
+> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-approval)
 
 The approval mode decides at which of a Crew's operations it waits for a person's permission. **When a Crew stops replying, first check whether it is waiting for an approval.** This is where newcomers get stuck most often.
 
@@ -151,6 +151,8 @@ Even for modes with the same name, where it stops differs by agent. The menu for
 **Codex:** Supervised, Auto-accept edits, and Auto run inside Codex's sandbox. The sandbox allows writing to the working folder and the project's additional folders (and on macOS and Linux, the temporary directory too), and blocks network access. So **even in Supervised, file edits inside the working folder and commands that stay inside the sandbox go ahead without confirmation.** It asks for approval for operations where Codex asks to run outside the sandbox, such as writing outside the working folder or network access. Auto-accept edits automatically allows the file-edit approvals among these. Full access does not use the sandbox and does not ask for approval.
 
 With Codex on Windows, commands run inside the sandbox in every mode except Full access. Folders on the network (such as shared drives) are not writable locations, and even commands that only read may fail or wait for approval.
+
+On Windows, a Codex Crew in a mode other than **Full access** may be unable to launch the Cockpit CLI and send chat replies in some environments. Changing the Crew’s agent or approval mode shows this risk in its conversation and settings. If replies stop, check its status before changing permissions. Full access removes the sandbox and approval prompts, so review the access implications above. See [Troubleshooting](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble#windows-codex-cannot-send-replies).
 
 **Muse Code:** Only Auto-accept edits (the starting mode) and Full access. Muse Code does not confirm before editing files inside the workspace, so Cockpit does not offer Supervised.
 

@@ -4,13 +4,15 @@
 
 Understand projects, task grouping and movement, the task list, Overview, search, states, completion, and deletion.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
+> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/tasks)
 
 The task list is where you choose which piece of work to inspect next. Use [Task details](https://agi-labo.com/en/tools/cockpit/docs/task-details) for its conversation and follow-up input.
 
 ## Desktop columns and Overview
 
 Desktop places the task list, the selected task's work area, and a contextual panel side by side. The task list can be resized or collapsed, and closing the panel gives the work area more room.
+
+The task-list toggle stays in the same position in the Desktop header whether the list is open or collapsed. When collapsed, hover over that button to preview the list. Moving over the rest of the collapsed strip does not open it. The preview stays open while the pointer is inside the list and closes when the pointer leaves; click the toggle to keep the list open.
 
 | Area | Primary role |
 | --- | --- |

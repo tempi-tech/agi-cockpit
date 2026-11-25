@@ -4,7 +4,7 @@
 
 What to check when a Crew does not reply, "typing" stays, it stops for approval, cannot connect, or stops at a usage limit or the memory guard, and what common errors mean.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
+> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
 
 First, open the Crew's conversation in Cockpit. Most reasons appear there.
 
@@ -80,6 +80,12 @@ When the previous send or turn fails, the Crew holds the next message for a whil
 To send right away, press **Retry delivery** in the Queue, or press **Start a new session**.
 
 When **Delivery unconfirmed** appears, do not resend right away. This is the state where **Check the conversation. Automatic resend is blocked to prevent duplicate delivery.** applies. Check the conversation, and if the message arrived, press **Mark as handled without resending**.
+
+## Windows Codex cannot send replies
+
+When Windows denies a Codex Crew's attempt to launch the Cockpit CLI, its status shows when it happened and explains that chat replies could not be sent. Cockpit notifies the owner through the configured Ask DM notifications and tells people whose messages remain unanswered that the Crew cannot reply right now. A reply in Cockpit's conversation is not proof it reached the chat.
+
+Check the Crew's status and approval mode. Switching to **Full access** may fix the problem, but removes the Codex sandbox and approval prompts; review [Approval modes and permissions](https://agi-labo.com/en/tools/cockpit/docs/crew-approval) first. It is not a guaranteed fix. After resolving the cause, inspect the chat before asking the Crew to resend an unanswered reply.
 
 ## Cannot connect
 

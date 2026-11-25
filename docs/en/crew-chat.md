@@ -2,13 +2,13 @@
 
 # Connect a chat
 
-Connect a Crew to Discord, Slack, or Chatwork (Chatwork for members). Covers what a person does, asking the Crew to connect, failures, and how the chats differ.
+Connect a Crew to Discord, Slack, or Chatwork, and switch an existing Google Chat connection to the new method. Chatwork and Google Chat require membership.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-chat)
+> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-chat)
 
-Connect a Crew to Discord, Slack, or Chatwork (Chatwork is for members) to talk to it there. Even without a chat connection, you can talk to the Crew inside Cockpit. One Crew can be connected to all three.
+Connect a Crew to Discord, Slack, Chatwork, or Google Chat to talk to it there. Chatwork and Google Chat require AGI Lab membership. Even without a chat connection, you can talk to the Crew inside Cockpit. One Crew can be connected to all four.
 
-You connect it in the **Connection** tab of the Crew's settings. Choose **Open settings** from the menu on the Crew's row, then pick the **Discord**, **Slack**, or **Chatwork** tab under **Connection**. If it is not connected yet, **Start setup** appears.
+You connect it in the **Connection** tab of the Crew's settings. Choose **Open settings** from the menu on the Crew's row, then pick the chat under **Connection**. If it is not connected yet, **Start setup** appears.
 
 While you go through the steps, **Connection setup** on screen shows which step you are on (for example, 2/3). Go back to a finished step with **Redo**. To stop, press **Cancel**. This deletes the settings and credentials entered so far.
 
@@ -172,6 +172,18 @@ Messages deleted before they arrive, and messages in rooms the Crew has left, do
 - There are no threads, reactions, or typing indicator
 
 You also answer Ask DMs by replying with a number. For details, see [Asks and Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-ask).
+
+## Google Chat: switch an existing connection
+
+Google Chat is an AGI Lab member feature. Each Crew has its own Chat app and service account in its own Google Cloud project. For initial setup, follow the [Google Chat reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew#on-google-chat). The setup walkthroughs and comparison tables elsewhere on this page cover Discord, Slack, and Chatwork.
+
+An existing Google Chat connection continues using the owner's Google sign-in until you explicitly switch it. Under **Connection → Google Chat**, open the credentials step and choose **Switch to the new method**, then confirm. The CLI equivalent is `cockpit crew setup googlechat <crew> --migrate`.
+
+The new method uses your AGI Lab sign-in and requires AGI Lab to register and approve that connection. It stops until approval is complete. After switching, periodic Google re-sign-in is no longer needed, and Cockpit never automatically returns to the original method, even if the new one fails. Restarting preserves the choice. The existing project, Chat app, service account, people, places, and messages remain.
+
+Use **Check again** (`cockpit crew setup googlechat <crew> --check`) to review the connection's method, last check, and stop reason. Sign in to AGI Lab again if requested; for pending approval or a registration update, contact AGI Lab; for Google permission errors, ask your Google administrator to check the service account. Once the cause is fixed and the check succeeds, press **Reconnect** or run `cockpit crew start <crew>`.
+
+Cockpit requests a short-lived, Chat-only Google token for the Crew's service account. The account's actual permissions are controlled at Google. Revoking registration at AGI Lab stops new proofs, but already issued Google tokens remain valid until they expire. Keep the computer's clock automatic. The [Google Chat reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew#on-google-chat) describes the security boundary and recovery details.
 
 ## Choose an owner
 

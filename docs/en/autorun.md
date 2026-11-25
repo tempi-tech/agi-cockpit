@@ -4,7 +4,7 @@
 
 Learn how Autorun starts a new task or sends an instruction to an existing task or Crew from a one-time, interval, or cron schedule.
 
-> Verified with AGI Cockpit 4.141.1 on 2026-11-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
+> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/autorun)
 
 Autorun starts a new task or sends an instruction to an existing task or Crew at a specified time, interval, or cron schedule. It does not coordinate several agents inside one run. It is an independent way to start or continue the same kind of work when it is needed.
 
@@ -123,6 +123,14 @@ If the agent fails to start, the task remains in the task list with an **Error**
 If Cockpit confirms that the account is not a member or has an inactive membership when a run is due, a one-time Autorun does not start and becomes disabled. An interval or cron Autorun remains enabled and checks again at its next scheduled time. If the sign-in session needs renewal or a temporary network or API failure prevents membership verification, Cockpit does not start the run and checks again one minute later. It keeps a one-time Autorun enabled and persists the retry time, so authentication renewal or a temporary outage does not consume its only run.
 
 Directory paths selected in Desktop or the PWA, or passed through `--directory`, preserve trailing spaces. Use the exact folder name; do not trim its path when scripting.
+
+## Choose when to notify the parent Crew
+
+For a **Terminal** Autorun created by a Crew or its child task that creates a new task on each run, Desktop and the PWA show **Notify parent Crew**. **Every run** is the default. Choose **Unless it ends normally** to omit the parent Crew's notice only when the command exits with code 0.
+
+Nonzero or unknown exit codes, errors, usage limits, memory-guard stops, questions, and task completion still notify the Crew. Run records and task reports remain available; this setting does not complete or delete the task.
+
+From the CLI, use `cockpit autorun update <id> --crew-notify failure --agent-type terminal`, or `--crew-notify always --agent-type terminal` to restore every-run notices. The option is also available on creation by an eligible Crew. It does not apply to schedules created by the owner, agents merely using Terminal UI, or existing-task and Crew targets. It is saved per Autorun, with no global default. See the [Autorun reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/autorun).
 
 ## Clean up finished Crew schedules
 

@@ -4,7 +4,7 @@
 
 Operate the selected task's project folders, conversation, follow-ups, queue, interruption, resume, account, attachments, and errors.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
+> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-details)
 
 Task details is where you understand a piece of work selected from the [Task list](https://agi-labo.com/en/tools/cockpit/docs/tasks) and return the next instruction or decision. It combines the conversation, progress, confirmation requests, composer, and the task's right-side panels.
 
@@ -45,6 +45,8 @@ The **Follow-up behavior** setting under Appearance chooses whether an ordinary 
 
 In Claude, Codex, Antigravity, Cursor, Qoder, Grok Build, and Muse Code Native UI on Desktop and the PWA, each queued message starts its own turn after the preceding response has finished. The next queued message is delivered after that turn finishes. Choose **Steer** when you want to affect the current response.
 
+In Codex Native UI, undelivered messages received during reconnection stay in the Queue. After the connection recovers, they are delivered in registration order, one turn at a time. If the send connection breaks, Cockpit reports the error as soon as it detects the failure instead of waiting for the request timeout. For an unconfirmed delivery, check the conversation before retrying.
+
 In Muse Code Native UI on Desktop and the PWA, once Muse Code reports that its reply is complete and only background checks remain, the composer returns to Send and hides the processing indicator. You can send the next message while those checks continue. This does not mean all background work has finished; switching between standard and Contributor models, `/compact`, and `/clear` still require the current work to finish.
 
 Before delivery, an ordinary queued message can be edited, sent now, or removed. **Edit** returns its text and attachments to the composer and removes that entry from the queue; revise it and send it again when ready.
@@ -65,7 +67,7 @@ While a Crew is posting or replying in chat, incoming messages wait for its send
 
 Use `cockpit settings get shortcuts.followUpBehavior` to read the current default, and `cockpit settings set shortcuts.followUpBehavior queue` or `cockpit settings set shortcuts.followUpBehavior steer` to change it. `queue` waits for the current turn to finish; `steer` sends to the current turn. The default is `queue`. This does not change the separate `shortcuts.steerTurn` key binding or add steering support to an unsupported agent mode.
 
-When a message comes from a Crew on another device, its sender label shows that Crew's icon when available. If the remote icon cannot be loaded, a generic agent icon appears. The icon identifies the sender; it does not grant additional permissions.
+When a message comes from a Crew on another device, its sender label shows that Crew's icon when available. If the remote icon cannot be loaded, a generic agent icon appears. This also works when the task list is set to **This device**. The icon identifies the sender; it does not grant additional permissions.
 
 ## Check the task's project folders
 
