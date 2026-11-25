@@ -4,6 +4,19 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v4.142.1 — 2026-11-25
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed the expand button at the top left not opening the task list when the list is collapsed.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- タスクの一覧を畳んだ時、左上の展開のボタンを押しても一覧が開かない不具合を直しました。
+
+</details>
+
 ## v4.142.0 — 2026-11-25
 
 **Type:** minor · **Platforms:** macOS, Linux
