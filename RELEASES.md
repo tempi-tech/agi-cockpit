@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v5.0.0 — 2026-11-26
 
-**Type:** major · **Platforms:** macOS
+**Type:** major · **Platforms:** macOS, Linux
 
 - Give work to Crews (beta), each with its own role and memory, from AGI Cockpit, Discord, or Slack. You can use your first Crew with a free AGI Lab account.
 - Hand long-term goals to Crews as Missions, and check progress and pending decisions in one place.
