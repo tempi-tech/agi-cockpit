@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v4.142.1 — 2026-11-25
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed the expand button at the top left not opening the task list when the list is collapsed.
 
