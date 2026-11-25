@@ -4,7 +4,7 @@
 
 Connect a Crew to Discord, Slack, or Chatwork, and switch an existing Google Chat connection to the new method. Chatwork and Google Chat require membership.
 
-> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-chat)
+> Verified with AGI Cockpit 5.0.0 on 2026-11-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-chat)
 
 Connect a Crew to Discord, Slack, Chatwork, or Google Chat to talk to it there. Chatwork and Google Chat require AGI Lab membership. Even without a chat connection, you can talk to the Crew inside Cockpit. One Crew can be connected to all four.
 
@@ -177,9 +177,11 @@ You also answer Ask DMs by replying with a number. For details, see [Asks and Cr
 
 Google Chat is an AGI Lab member feature. Each Crew has its own Chat app and service account in its own Google Cloud project. For initial setup, follow the [Google Chat reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/crew#on-google-chat). The setup walkthroughs and comparison tables elsewhere on this page cover Discord, Slack, and Chatwork.
 
+As of v5.0.0, Google Chat self-registration is unavailable: the AGI Backend self-registration endpoint remains closed. A switch that needs it stops as unavailable/off (`wif_unavailable`); installing this release does not enable it. Real Google Chat verification remains pending.
+
 An existing Google Chat connection continues using the owner's Google sign-in until you explicitly switch it. Under **Connection → Google Chat**, open the credentials step and choose **Switch to the new method**, then confirm. The CLI equivalent is `cockpit crew setup googlechat <crew> --migrate`.
 
-The new method uses your AGI Lab sign-in and requires AGI Lab to register and approve that connection. It stops until approval is complete. After switching, periodic Google re-sign-in is no longer needed, and Cockpit never automatically returns to the original method, even if the new one fails. Restarting preserves the choice. The existing project, Chat app, service account, people, places, and messages remain.
+The operator-registered path uses your AGI Lab sign-in and requires AGI Lab to register and approve that connection. It stops until approval is complete. After switching, periodic Google re-sign-in is no longer needed, and Cockpit never automatically returns to the original method, even if the new one fails. Restarting preserves the choice. The existing project, Chat app, service account, people, places, and messages remain.
 
 Use **Check again** (`cockpit crew setup googlechat <crew> --check`) to review the connection's method, last check, and stop reason. Sign in to AGI Lab again if requested; for pending approval or a registration update, contact AGI Lab; for Google permission errors, ask your Google administrator to check the service account. Once the cause is fixed and the check succeeds, press **Reconnect** or run `cockpit crew start <crew>`.
 

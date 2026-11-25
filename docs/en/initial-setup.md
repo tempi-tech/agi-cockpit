@@ -4,9 +4,11 @@
 
 Check an AI agent, prepare the Cockpit skill and cockpit command, and reach the point where you can create your first task.
 
-> Verified with AGI Cockpit 4.141.1 on 2026-11-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
+> Verified with AGI Cockpit 5.0.0 on 2026-11-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/initial-setup)
 
 By the end of this guide, an agent and the Cockpit integration will be ready for your first task. If the flow did not open on first launch, use the app menu in the lower-left corner and select **Setup** → **First-run setup**.
+
+Before setup, complete the Terms of Use agreement in the main window on this PC. AGI Lab sign-in and the agreement are separate. Neither an agent, the CLI, nor a phone can agree for you. See [Install AGI Cockpit](https://agi-labo.com/en/tools/cockpit/docs/getting-started).
 
 ## 1. Check an agent
 

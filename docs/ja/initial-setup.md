@@ -4,9 +4,11 @@
 
 利用するAIエージェントを確認し、Cockpit skillとcockpitコマンドを準備して、最初のタスクを作れる状態にする手順です。
 
-> AGI Cockpit 4.141.1で2026-11-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/initial-setup)
+> AGI Cockpit 5.0.0で2026-11-26に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/initial-setup)
 
 この手順を終えると、利用するエージェントとCockpit連携が準備され、最初のタスクを作成できます。初回起動時に自動で開かなかった場合は、画面左下のアプリメニューから「セットアップ」→「初回セットアップ」を開きます。
+
+セットアップの前に、このパソコンのメイン画面で利用規約への同意を済ませてください。AGIラボへのサインインとは別の手続きです。エージェント、CLI、スマートフォンから代わりに同意することはできません。[インストール](https://agi-labo.com/tools/cockpit/docs/getting-started)を参照してください。
 
 ## 1. エージェントを確認する
 

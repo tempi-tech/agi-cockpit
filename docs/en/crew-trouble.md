@@ -4,9 +4,15 @@
 
 What to check when a Crew does not reply, "typing" stays, it stops for approval, cannot connect, or stops at a usage limit or the memory guard, and what common errors mean.
 
-> Verified with AGI Cockpit 4.142.0 on 2026-11-25. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
+> Verified with AGI Cockpit 5.0.0 on 2026-11-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-trouble)
 
 First, open the Crew's conversation in Cockpit. Most reasons appear there.
+
+## Google Chat setup cannot verify the project
+
+Update to v5.0.0 and retry setup if it keeps showing **Could not verify the Crew's Google Cloud project**. When a previous attempt saved only a proposed project ID and Google gives the specific “no permission or it may not exist” response, Cockpit can create a new project instead of repeatedly checking that proposal. It does not discard an already confirmed project or treat other permission errors as a missing project. This fix still awaits real-service verification.
+
+Google Chat self-registration remains unavailable/off; this fix does not open it. See [Connect to a chat](https://agi-labo.com/en/tools/cockpit/docs/crew-chat#google-chat-switch-an-existing-connection) for the current boundary.
 
 ## No reply
 

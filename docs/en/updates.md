@@ -4,7 +4,7 @@
 
 Check and apply AGI Cockpit updates on Windows, macOS, or Linux, then inspect update state and diagnostic logs if an update fails.
 
-> Verified with AGI Cockpit 4.129.0 on 2026-11-10. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
+> Verified with AGI Cockpit 5.0.0 on 2026-11-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/updates)
 
 The update method depends on how AGI Cockpit is distributed. This guide identifies the method for your environment and verifies the result after updating.
 
@@ -54,6 +54,12 @@ With an active AGI Lab membership and an authenticated PWA connection, open the 
 After the download completes, **Install when idle** arms installation for the point when no task or Fleet Run is running. The PWA shows the current blocking count and lets you cancel the schedule before installation starts. The schedule is session-only; a host restart clears it. Tasks waiting for input or an Ask and paused Fleet Runs do not block installation, and every task ends once installation begins.
 
 The PWA attempts to reconnect automatically after restart. Linux hosts require manual installation on the host, and Windows Store hosts update through Microsoft Store. See [Remote access](https://agi-labo.com/en/tools/cockpit/docs/remote-access) for the full procedure and connection requirements.
+
+### If the Terms of Use screen appears after restart
+
+v5.0.0 asks you to agree to the Terms of Use revised November 26, 2026 on the host PC. A later release that requires a new Terms version asks again. Until agreement is saved there, normal operation and Remote Access stay stopped, so a phone cannot reconnect or agree for you. Open the main AGI Cockpit window on the PC. An older installed CLI may report exit 7 or lack `terms status`; a connection error alone does not prove that agreement is required.
+
+If the record cannot be read or saved, check file access and choose **Load again**. If agreement was saved but startup failed, quit and reopen AGI Cockpit. See the [Terms status reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/terms).
 
 ## 3. Verify the update
 

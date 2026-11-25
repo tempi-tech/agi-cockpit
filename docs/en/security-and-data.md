@@ -4,9 +4,15 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 5.0.0 on 2026-11-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
+
+## Terms of Use agreement on each computer
+
+From v5.0.0, a person must read and agree to the required Terms of Use in the main window on each PC before normal operation starts. This release bundles the November 26, 2026 revision. Until agreement is saved, tasks, terminals, Crews, Autorun, Hooks, Fleet, and Remote Access stay stopped. The CLI can only read status with `cockpit terms status`; it cannot agree, withdraw, reset, or bypass the agreement. Remote clients cannot agree for the host.
+
+`terms-acceptance.json` in Cockpit's data folder records the Terms version, agreement time, app version, and displayed language. The time comes from the PC clock, not a third-party certification. Signing out or changing settings preserves the record; a new or deleted data folder requires agreement again. An unreadable record is not silently overwritten; a damaged record is preserved under another name before saving a new agreement. Settings shows the accepted version and date and can open the full text on the web. See the [Terms status reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/terms) for status and recovery.
 
 ## What stays local
 

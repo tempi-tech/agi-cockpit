@@ -4,7 +4,7 @@
 
 クルーをDiscord・Slack・Chatworkにつなぐ手順と、Google Chatの既存接続を新方式に切り替える方法です。ChatworkとGoogle Chatは会員の機能です。
 
-> AGI Cockpit 4.142.0で2026-11-25に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/crew-chat)
+> AGI Cockpit 5.0.0で2026-11-26に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/crew-chat)
 
 クルーをDiscord・Slack・Chatwork・Google Chatにつなぐと、そこでクルーに話しかけられます。ChatworkとGoogle ChatはAGIラボの会員の機能です。チャットにつながなくても、Cockpitの中ではクルーと話せます。1体のクルーを、4つ全部につなぐこともできます。
 
@@ -177,9 +177,11 @@ AskのDMも、番号を返信して答えます。詳しくは[Askとクルー](
 
 Google ChatはAGIラボの会員の機能です。クルーごとに専用のGoogle Cloudプロジェクト、Chatアプリ、サービスアカウントを使います。初回の接続は[Google Chatのリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/crew#on-google-chat)を参照してください。このページのほかの接続手順と比較表はDiscord・Slack・Chatworkを扱っています。
 
+v5.0.0時点では、Google Chatの自己登録は利用できません。AGI Backendの自己登録用の窓口は閉じたままです。自己登録が必要な切り替えはunavailable/off（`wif_unavailable`）で止まり、この更新を入れるだけでは有効になりません。実際のGoogle Chatを使った検証も未完了です。
+
 既存のGoogle Chat接続は、明示的に切り替えるまでオーナーのGoogleサインインを使います。「接続 → Google Chat」の資格情報の段で「新しい方式に切り替える」を選び、確認します。CLIでは`cockpit crew setup googlechat <crew> --migrate`です。
 
-新しい方式はAGIラボへのサインインを使い、AGIラボによる接続の登録・承認が必要です。承認が済むまでは止まります。切り替え後はGoogleへの定期的な再サインインが不要になり、新方式が失敗しても旧方式へ自動では戻りません。再起動しても選択を保持します。既存のプロジェクト、Chatアプリ、サービスアカウント、話せる人、反応する場所、受信した発言は引き継ぎます。
+AGIラボが登録する経路では、AGIラボへのサインインと、AGIラボによる接続の登録・承認が必要です。承認が済むまでは止まります。切り替え後はGoogleへの定期的な再サインインが不要になり、新方式が失敗しても旧方式へ自動では戻りません。再起動しても選択を保持します。既存のプロジェクト、Chatアプリ、サービスアカウント、話せる人、反応する場所、受信した発言は引き継ぎます。
 
 「もう一度確かめる」（`cockpit crew setup googlechat <crew> --check`）で、接続方式、最後に確かめた時刻、停止理由を確認します。AGIラボへの再サインインを求められたらサインインし、承認待ちや登録の更新が必要ならAGIラボに確認を依頼します。Googleの権限の問題はGoogle管理者にサービスアカウントを確認してもらいます。原因を解消して確認に成功したら、「つなぎ直す」または`cockpit crew start <crew>`で接続します。
 
