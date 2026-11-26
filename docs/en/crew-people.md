@@ -104,7 +104,7 @@ In **Where it responds**, choose how the Crew responds in each place.
 | --- | --- |
 | Added channels | **When mentioned** / **Everything** / **Off** |
 | **Other channels** | **When mentioned** / **Off** |
-| **DM** | **Everything** / **Owners only** / **Off** |
+| **DM** | **Everyone who can talk** / **Owners only** / **Off** |
 | **Threads this Crew created** | **When mentioned** / **Everything** |
 | **Threads joined later** | **When mentioned** / **Everything** |
 
@@ -112,9 +112,11 @@ Each works as follows.
 
 - **When mentioned:** Messages that mention the Crew reach it
 - **Everything:** Every message from people who may talk to it reaches the Crew, even without a mention. This also increases what is sent to the AI service
-- **Everything for DMs:** The Crew receives DMs from people who may talk to it. Not everyone's DMs reach it
+- **Everyone who can talk for DMs:** The Crew receives DMs from people who may talk to it. Not everyone's DMs reach it
 - **Owners only for DMs:** The Crew receives only owners' DMs. Without an owner, this is the same as **Off**
 - **Off for DMs:** The Crew does not receive even owners' DMs
+
+A new Crew's DMs start at **Owners only**. The settings of existing Crews do not change. With **Everyone who can talk**, a request from anyone who can talk runs on your AI account and this computer, and the attachments they send are received too, so Cockpit asks you to confirm first, and the CLI needs `--confirm`.
 
 The DM setting does not affect the Ask DMs the Crew sends to owners.
 
