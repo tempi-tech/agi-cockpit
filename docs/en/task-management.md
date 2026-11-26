@@ -212,7 +212,7 @@ cockpit task wait <task-id> --since <last-seq> --timeout 110
 
 `timeout: true` does not mean the task failed. Inspect current state when needed, then continue from the same `--since`. Use `task wait` for continued monitoring instead of repeatedly polling `task get` at short intervals.
 
-A child entering or leaving approval waiting also appends a report with `approvalEvent: approval_waiting` or `approval_resolved` and queues a notification for its parent. A busy parent receives it when ready for another turn; completed or missing parents are not resumed. Repeated writes of the same state do not duplicate the notification. Ordinary result reports still need to be collected by the parent.
+A child entering or leaving approval waiting also appends a report with `approvalEvent: approval_waiting` or `approval_resolved` and queues a notification for its parent. A busy parent receives it when ready for another turn. While a notice still waits in the parent's queue, a newer approval notice from the same child replaces it, so a busy parent receives only that child's latest approval state; the reports keep every transition. Completed or missing parents are not resumed. Repeated writes of the same state do not duplicate the notification. Ordinary result reports still need to be collected by the parent.
 
 `approval_resolved` means the wait ended, not that approval was granted or work succeeded. It also covers interruption, errors, usage limits, and completion. Multiple approval requests keep the child waiting until the last one is resolved. Notifications never approve a request or change permissions, model selection, or the parent's pending agent switch.
 
