@@ -4,6 +4,21 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v5.0.1 — 2026-11-26
+
+**Type:** patch · **Platforms:** macOS
+
+- Fixed some tasks and Crews staying missing from the task list right after launch.
+- Fixed parts of tool output sometimes appearing twice when earlier conversation history is loaded.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 起動の直後に、タスクの一覧から一部のタスクやクルーが抜けたままになる不具合を直しました。
+- 会話の記録をさかのぼって読み込んだ時に、ツールの出力の一部が二重に表示されることがある不具合を直しました。
+
+</details>
+
 ## v5.0.0 — 2026-11-26
 
 **Type:** major · **Platforms:** macOS, Linux
