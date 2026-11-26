@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v5.0.1 — 2026-11-26
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Fixed some tasks and Crews staying missing from the task list right after launch.
 - Fixed parts of tool output sometimes appearing twice when earlier conversation history is loaded.
