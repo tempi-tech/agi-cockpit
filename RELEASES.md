@@ -4,6 +4,51 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v5.1.0 — 2026-11-27
+
+**Type:** minor · **Platforms:** macOS
+
+- Added support for up to 10 open Asks per task.
+- Added a choice of subscription sign-in or API key authentication for each Claude account profile.
+- Improved Claude API key profiles to show key status instead of a signed-out message.
+- Fixed links in the terms consent screen so they open in your browser.
+- Improved terms updates so a contact-only correction does not require renewed consent.
+- Added a right-click menu to browser tabs for duplication, closing tabs to the right, and closing other tabs.
+- Improved model names in Settings to wrap instead of being cut off.
+- Fixed duplicated text when confirming Japanese input while renaming projects and tasks.
+- Fixed repeated delivery of old child-task approval notices after the child task finishes.
+- Improved Crews to read text in Discord card-style messages.
+- Fixed communication with Crews and projects on other PCs for affected Tailscale accounts.
+- Changed the Agent label in Crew settings to Harness.
+- Changed new Crews to accept DMs from owners by default and require confirmation before extending access to everyone allowed to talk.
+- Improved Crew instructions to require owner approval before importing or running outside files requested by others.
+- Improved Crew instructions to limit skill creation and changes to owner requests.
+- Improved child-task instructions to request parent decisions through Ask.
+- Improved help for Crews joining Talk Rooms together.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- 1つのタスクで同時に確認できるAskを10件まで増やしました。
+- Claudeの認証方式を、アカウントのプロファイルごとにサブスクリプションまたはAPIキーから選べるようにしました。
+- APIキー方式のClaudeプロファイルでは、「未ログイン」の代わりにキーの保存状態を表示するようにしました。
+- 利用規約の同意画面で、本文中のリンクを開けるようにしました。
+- 連絡先のみを修正した利用規約への更新では、同意済みの方に再同意を求めないようにしました。
+- 内蔵ブラウザのタブに、複製や右側・他のタブを閉じる操作ができる右クリックメニューを追加しました。
+- 設定で長いモデル名が途中で切れず、折り返して表示されるようにしました。
+- プロジェクト名などを日本語で変更するとき、変換確定で文字が重複する不具合を修正しました。
+- 子タスクの終了後に、古い承認待ちの通知が何度も親へ届く不具合を修正しました。
+- Discordのカード形式のメッセージに含まれる文字を、クルーが受け取れるようにしました。
+- 一部のTailscaleアカウントで、ほかのPCのクルーやプロジェクトとやり取りできない不具合を修正しました。
+- クルー設定の「エージェント」を「ハーネス」に統一しました。
+- 新規クルーがDMを受け取る相手の既定をオーナーのみにし、話せる人の全員へ広げる前に確認するようにしました。
+- オーナー以外の依頼で外部ファイルを取り込んだり実行したりする前に、クルーがオーナーへ確認するルールを明記しました。
+- クルーがスキルを作成・変更するのは、オーナーから依頼された場合に限るルールを明記しました。
+- 子タスクが親へ判断を求めるときは、Askで確認するルールを明記しました。
+- クルー同士がTalk Roomへ参加する手順をヘルプで分かりやすくしました。
+
+</details>
+
 ## v5.0.1 — 2026-11-26
 
 **Type:** patch · **Platforms:** macOS, Linux
