@@ -4,7 +4,7 @@
 
 クルーに頼んだ時に裏で使われるcockpit crewコマンドを、作る・設定・つなぐ・話せる人と場所・チャットの操作・ミッション・ほかのコンピューターの用途ごとにまとめた地図です。
 
-> AGI Cockpit 4.132.0で2026-11-13に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/crew-cli)
+> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/crew-cli)
 
 クルーを使うのに、コマンドを打つ必要はありません。画面で操作するか、クルーやマスターエージェントに頼めば、エージェントが裏で`cockpit crew`のコマンドを使います。
 
@@ -27,7 +27,7 @@
 
 | コマンド | すること |
 | --- | --- |
-| `cockpit crew update <crew> ...` | 名前、エージェント、モデル、承認モード、アカウント、定期確認、稼働時間、動く場所、アイコン、プロフィールの説明、チャットの書き方、作業中の割り込みなどを変える |
+| `cockpit crew update <crew> ...` | 名前、ハーネス、モデル、承認モード、アカウント、定期確認、稼働時間、動く場所、アイコン、プロフィールの説明、チャットの書き方、作業中の割り込みなどを変える |
 | `cockpit crew instructions <crew> --get` | `AGENTS.md`を読む |
 | `cockpit crew instructions <crew> --set-stdin` | `AGENTS.md`を書き換えて、commitする（4,000字まで） |
 | `cockpit crew start <crew>`・`stop <crew>` | 起動・停止 |

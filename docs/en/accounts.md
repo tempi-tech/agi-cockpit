@@ -4,7 +4,7 @@
 
 Register isolated agent accounts and use Auto selection, pinned profiles, live task switching, and usage-limit recovery safely.
 
-> Verified with AGI Cockpit 4.137.0 on 2026-11-19. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/accounts)
 
 AGI Cockpit account profiles isolate multiple sign-ins for the same agent provider and let tasks, Autoruns, and Fleet runs choose between them. Profiles are supported for Claude, Codex, Antigravity, Cursor, Qoder, and Grok Build.
 
@@ -27,6 +27,32 @@ cockpit accounts create work --agent-type codex
 cockpit accounts login work --agent-type codex
 cockpit accounts list --agent-type codex
 ```
+
+### Choose authentication for a Claude profile
+
+Under **Settings → Agents → Claude Code**, each named profile has an **Authentication** selector. Choose **Claude Code login** to use that profile's subscription sign-in, or **Anthropic API key** to save a key just for that profile. Changes apply when a task next starts or resumes; an active session keeps its current authentication.
+
+A profile with no explicit method inherits the shared Claude authentication setting. If the shared method is API key, that inherited choice runs Native UI tasks as the default account with the shared key. To give the profile its own key in the UI, select **Claude Code login**, then **Anthropic API key**. The default account continues to use the shared setting.
+
+For a profile explicitly using API key authentication:
+
+- Select it explicitly for Native UI tasks, Crews, Autoruns, or Fleet nodes. Native UI Auto and usage-limit recovery never select it, and a failed key never falls back to a subscription, shared key, or another account.
+- Save a key before starting. **Anthropic API key** means a key is saved; **API key not set** means one is missing. These replace the signed-out status and sign-in button in Settings. Saving does not validate the key.
+- Cockpit does not read subscription usage for this profile or report API usage or cost. Charges follow its API key.
+- Terminal UI, including Auto and recovery, continues to use the profile's Claude Code sign-in. Changing the method does not sign out of Claude Code.
+
+If an existing Auto task's current profile is changed to API key, its next start, reconnect, or retry stops with an error. Select that profile explicitly or choose another account. An unrecognized method also prevents Native UI startup.
+
+```bash
+cockpit accounts auth work --agent-type claude --mode api-key --key-file /secure/anthropic-key.txt
+cockpit accounts auth work --agent-type claude --mode claude-code
+cockpit accounts auth work --agent-type claude --mode inherit
+cockpit accounts auth work --agent-type claude --reset-key
+```
+
+Provide keys only through `--stdin` or `--key-file`, never inline arguments or task messages. `auth` is local-only and supports named Claude profiles. Keys use encrypted storage with a separate entry per profile. Renaming preserves the key; removing the profile removes its key. Removing only the key leaves API key mode selected and prevents Native UI startup until another key is saved.
+
+`accounts list` reports `authMode` and `apiKeySet`. Its `loggedIn`, `authState`, and `authReason` still describe Claude Code sign-in, so they are not a verdict on API key readiness. See the [accounts reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/accounts) for all options.
 
 ### Rename a profile
 

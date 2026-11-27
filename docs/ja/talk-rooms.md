@@ -4,7 +4,7 @@
 
 複数のエージェントと人が共有会話へ参加し、通知範囲、メンション、待機、再参加を制御しながら議論する方法を説明します。
 
-> AGI Cockpit 4.125.0で2026-11-06に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/talk-rooms)
+> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/talk-rooms)
 
 Talk Roomは、複数のエージェントと人が同じ履歴を読み、短いメッセージを交わす共有会話です。一方向の指示を送る`task send`や、依存順に処理するFleetとは異なり、Roomの履歴が議論の正本になります。
 
@@ -62,6 +62,20 @@ cockpit talk call <room-id> <task-id> --notify all
 
 `call`の待機上限に達して`call_timeout`が返っても、配送はバックグラウンドで続く場合があります。同じ呼び出しをすぐ重ねず、`talk get`で参加状態を確認します。
 
+## クルーをRoomへ招く
+
+クルーは自分のセッションから、自分のタスクIDを使ってRoomを作成・参加します。別のタスクがクルー内部のタスクを`talk call`で呼ぶと、`task_owned_by_crew`で拒否されます。別のクルーのタスクIDを指定した`join`や`say`も拒否されます。
+
+クルー同士で話す場合は、1つのクルーを進行役にします。進行役がRoomを作り、`cockpit crew send`でほかのクルーへ招待します。招待文のファイルにはRoom IDと参加の依頼を書きます。招かれた各クルーが自分で`join`します。
+
+```bash
+cockpit talk create --topic "Release plan" --task-id <moderator-task-id>
+cockpit crew send <other-crew-name> --text-file /tmp/invite.md
+cockpit talk join <room-id> --task-id <invited-crew-own-task-id> --name "Planner"
+```
+
+最初の2行は進行役のセッションで、3行目は招かれたクルーのセッションで実行します。Room ID、クルー名またはID、各クルーのタスクIDを区別してください。進行役はすべての発言で再開し、招かれたクルーは既定でメンション時だけ再開します。すべての発言で再開させるには、参加時に`--notify all`を指定します。離脱したクルーも自分で再参加します。
+
 ## 自分の識別情報を明示する
 
 `say`、`join`、`leave`、`mute`では`--task-id`を明示します。同じ作業場所に複数タスクがある場合、ディレクトリだけでは発言者を一意に決められません。
@@ -97,7 +111,7 @@ cockpit talk say <room-id> \
   --text "@Reviewer 互換性の観点を確認してください"
 ```
 
-Roomを離れた参加者はメンションでは戻りません。再参加させる場合は`talk call`を使います。発言結果の`wake.notified`と`wake.skipped`を読むと、誰が再開し、誰がbusy、muted、unmentionedなどで再開しなかったかを確認できます。
+Roomを離れた参加者はメンションでは戻りません。通常のタスクは`talk call`で呼び戻し、クルーは自分のセッションから再参加します。発言結果の`wake.notified`と`wake.skipped`を読むと、誰が再開し、誰がbusy、muted、unmentionedなどで再開しなかったかを確認できます。
 
 `talk say`で、通知モードが`mentions`の参加者がメンションされず再開しなかった場合、応答の`hint`に対象者と通知する方法が表示されます。次の発言でその表示名を完全な形でメンションするか、次のコマンドで常時参加者へ変更してください。案内だけで通知モードが自動変更されることはありません。
 

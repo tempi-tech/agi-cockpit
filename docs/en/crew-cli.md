@@ -4,7 +4,7 @@
 
 A map of the cockpit crew commands used behind the scenes when you ask a Crew, by use: creating, settings, connecting, people and places, chat actions, Missions, other computers.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-cli)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-cli)
 
 You do not need to type commands to use Crews. When you use the screens or ask a Crew or the master agent, the agent uses `cockpit crew` commands behind the scenes.
 
@@ -27,7 +27,7 @@ For `<crew>`, enter the Crew's ID or name.
 
 | Command | What it does |
 | --- | --- |
-| `cockpit crew update <crew> ...` | Changes the name, agent, model, approval mode, account, periodic check, active hours, place it works in, icon, profile description, chat writing, interrupting its work, and so on |
+| `cockpit crew update <crew> ...` | Changes the name, harness, model, approval mode, account, periodic check, active hours, place it works in, icon, profile description, chat writing, interrupting its work, and so on |
 | `cockpit crew instructions <crew> --get` | Reads `AGENTS.md` |
 | `cockpit crew instructions <crew> --set-stdin` | Rewrites `AGENTS.md` and commits it (up to 4,000 characters) |
 | `cockpit crew start <crew>` and `stop <crew>` | Starts and stops it |

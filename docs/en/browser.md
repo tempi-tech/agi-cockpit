@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 4.131.0 on 2026-11-12. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -69,6 +69,20 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 Screenshots also work on background tabs without showing them. Cockpit waits up to ten seconds for a frame and limits the complete command, including full-page capture and restoration, to 30 seconds. A stalled capture returns `screenshot_timeout` instead of waiting indefinitely. Retry once; if it times out again, use `show` or `tab recreate <tabId>` before retrying. Recreating the renderer can lose unsaved page state. Use `snapshot` for text checks while the computer is heavily loaded.
 
 Locators traverse open shadow roots. A normal CSS selector works across them, and `host >>> inner` pins an explicit shadow boundary. Closed shadow roots are inaccessible from the page; use screenshot coordinates when necessary.
+
+## Manage tabs from the tab strip
+
+Right-click a browser tab to **Reload**, **Duplicate**, **Close**, **Close all other tabs**, or **Close tabs to the right**. Closing tabs loses their unsaved input. These actions affect only the same session.
+
+A duplicate opens the current URL in the same Browser Identity at the end of the tab strip and selects it. It does not copy navigation history, form input, or other page state. Closing tabs to the right keeps the chosen tab and uses the order in the strip; if it is already last, nothing closes.
+
+```bash
+cockpit browser tab duplicate <tabId>
+cockpit browser tab close <tabId> --right
+cockpit browser tab close <tabId> --others
+```
+
+`--right` requires a tab ID and cannot be combined with `--others`. Other sessions and Browser Identities are unaffected.
 
 ## Find open tabs and control audio
 

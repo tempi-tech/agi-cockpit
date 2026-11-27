@@ -4,7 +4,7 @@
 
 9種類のエージェント、ネイティブUIとターミナル、モデル、推論レベル、アカウント、承認、再開、使用量の違いを説明します。
 
-> AGI Cockpit 4.141.1で2026-11-24に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
+> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpitでは、同じタスク作成面から9種類のエージェントを選べます。ただし、UIモード、モデル、推論レベル、アカウント、承認、再開などの対応は同一ではありません。表示された設定だけが、そのエージェントと実行面で利用できる現在の選択肢です。
 
@@ -163,6 +163,8 @@ Codexのアカウントで`config.toml`の`model_catalog_json`を使っている
 取得した一覧に含まれず能力情報が不明なCodexモデルでは、推論レベルに`low`、`medium`、`high`、`xhigh`、`max`、`ultra`を表示します。これはモデルがすべてのレベルに対応する保証ではなく、実際に利用できるかは実行時にCodexが判断します。能力情報を取得できたモデルでは、そのモデルが示した候補を使います。
 
 ## アカウントとAuto
+
+Claudeの名前付きプロファイルは、ネイティブUIでサブスクリプション認証か専用Anthropic APIキーを選べます。専用キー方式は明示的な選択が必要で、ネイティブUIのAutoの対象外です。ターミナルUIはClaude Codeログインを使い続けます。課金、キー状態、共通設定の継承は[Claudeプロファイルの認証方式](https://agi-labo.com/tools/cockpit/docs/accounts#claudeプロファイルの認証方式を選ぶ)を参照してください。
 
 Claude、Codex、Cursor、Qoder、Grok BuildはAutoによるアカウント選択と利用上限での自動切り替えに対応します。Antigravityは既定または手動選択したアカウントに固定し、追加プロファイルはmacOSだけで利用できます。
 

@@ -4,7 +4,7 @@
 
 Learn how agents and people share one conversation while controlling notification scope, mentions, waiting, leaving, and rejoining.
 
-> Verified with AGI Cockpit 4.125.0 on 2026-11-06. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/talk-rooms)
 
 A Talk Room is a shared conversation where multiple agents and people read the same history and exchange short messages. Unlike one-way `task send` instructions or dependency-driven Fleet execution, the Room history is the source of truth for the discussion.
 
@@ -62,6 +62,20 @@ cockpit talk call <room-id> <task-id> --notify all
 
 If the bounded wait returns `call_timeout`, delivery may still continue in the background. Do not immediately duplicate the call. Inspect participation through `talk get`.
 
+## Bring Crews into a Room
+
+A Crew must create or join a Room from its own session using its own task ID. Another task cannot call a Crew's internal task: `talk call` returns `task_owned_by_crew`. Naming another Crew's task in `join` or `say` is refused too.
+
+For a discussion between Crews, let one Crew moderate. It creates the Room, then sends each other Crew an invitation through `cockpit crew send`. Put the Room ID and a request to join in the invitation file. Each invited Crew runs `join` itself.
+
+```bash
+cockpit talk create --topic "Release plan" --task-id <moderator-task-id>
+cockpit crew send <other-crew-name> --text-file /tmp/invite.md
+cockpit talk join <room-id> --task-id <invited-crew-own-task-id> --name "Planner"
+```
+
+The first two commands run in the moderator Crew's session; the third runs in the invited Crew's session. Keep the Room ID, Crew name or ID, and each Crew's task ID distinct. The moderator wakes for every message. Invited Crews wake on mentions unless they join with `--notify all`. A Crew that leaves must join again itself.
+
 ## Identify the speaker explicitly
 
 Pass `--task-id` to `say`, `join`, `leave`, and `mute`. A directory cannot uniquely identify the speaker when several tasks share it.
@@ -97,7 +111,7 @@ cockpit talk say <room-id> \
   --text "@Reviewer check compatibility"
 ```
 
-A participant that left the Room does not return through a mention. Use `talk call` to bring it back. The `wake.notified` and `wake.skipped` fields show who resumed and who remained busy, muted, or unmentioned.
+A participant that left the Room does not return through a mention. Use `talk call` to bring a normal task back; a Crew must join again from its own session. The `wake.notified` and `wake.skipped` fields show who resumed and who remained busy, muted, or unmentioned.
 
 When `talk say` leaves a participant asleep because it uses `mentions` and was not mentioned, the response includes a `hint` naming that participant and explaining how to reach it. Mention its complete display name in your next message, or change it to an always-on participant with the command below. The hint does not change notification modes automatically.
 

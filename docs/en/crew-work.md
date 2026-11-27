@@ -4,7 +4,7 @@
 
 Learn how a Crew goes from a request to a reply, how it handles messages that arrive while it works, how it hands work to child tasks, and how to stop it or start over.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-work)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-work)
 
 A Crew treats a request as one piece of work: it takes the request, works on it itself or hands it to a child task, and returns the result to the person who asked.
 
@@ -113,6 +113,8 @@ If you give it a link to a Discord, Slack, or Chatwork message, the Crew can rea
 
 To change or cancel a request, say so in a new message. Editing or deleting the original message after it arrived does not reach the Crew.
 
+Discord card-style messages also deliver their text to the Crew, including text in embeds. The same people and place rules apply to that content.
+
 ## How replies are written
 
 In the Crew's settings, **Chat writing** lets you choose how replies are written.
@@ -132,6 +134,8 @@ When comparing options or listing numbers, the Crew can post tables, charts, and
 
 When the Crew corrects or adds to an earlier post, it sends the change as a reply to the original post. For a typo only, it edits that post.
 
+Crew settings calls the runtime choice **Harness** (and **Harness type**). Changing the harness restarts the Crew after its current turn ends; model, effort, and approval mode are changed from the conversation composer.
+
 ## Handing work to child tasks
 
 The Crew hands time-consuming work to child tasks. The Crew decides how to hand it off, but you can also ask:
@@ -141,7 +145,7 @@ The Crew hands time-consuming work to child tasks. The Crew decides how to hand 
 
 Handed-off tasks appear in the Crew's conversation and in the task list. **Open** takes you to that task.
 
-**Child tasks do not see the Crew's conversation.** The Crew writes the information they need into the request.
+**Child tasks do not see the Crew's conversation.** The Crew writes the information they need into the request, including the instruction to use `cockpit ask` when they need a decision from the parent Crew, rather than burying a question in a result report.
 
 **Only the Crew writes in the chat.** The Crew receives a child task's posts or drafts to send, then replies itself.
 

@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 5.0.0 on 2026-11-26. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -13,6 +13,8 @@ AGI Cockpit runs tasks and agent processes on your computer. Features still comm
 From v5.0.0, a person must read and agree to the required Terms of Use in the main window on each PC before normal operation starts. This release bundles the November 26, 2026 revision. Until agreement is saved, tasks, terminals, Crews, Autorun, Hooks, Fleet, and Remote Access stay stopped. The CLI can only read status with `cockpit terms status`; it cannot agree, withdraw, reset, or bypass the agreement. Remote clients cannot agree for the host.
 
 `terms-acceptance.json` in Cockpit's data folder records the Terms version, agreement time, app version, and displayed language. The time comes from the PC clock, not a third-party certification. Signing out or changing settings preserves the record; a new or deleted data folder requires agreement again. An unreadable record is not silently overwritten; a damaged record is preserved under another name before saving a new agreement. Settings shows the accepted version and date and can open the full text on the web. See the [Terms status reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/terms) for status and recovery.
+
+Links in the consent text open in the system browser. A contact-only correction can preserve an earlier agreement when the required Terms explicitly list that earlier version as covered. In that case no renewed consent is requested and the original acceptance record stays unchanged; a substantive revision without such coverage requires agreement again. The consent screen displays the currently required text.
 
 ## What stays local
 
@@ -143,6 +145,8 @@ Chatwork events pass through AGI Backend. Cockpit uses the received notices and 
 Requests from Crews, bots, and webhooks absent from the people list also enter pending approval. Approval expands that sender's access to the Crew. When the Crew requests such approval itself, the change waits for its owner to confirm in Cockpit. Check the sender ID and allowed places before approving.
 
 ## Store credentials
+
+Named Claude profiles can store dedicated Anthropic API keys in separate encrypted entries. They require explicit selection for Native UI, do not fall back to another key or subscription, and do not report API costs. Terminal UI still uses Claude Code sign-in. See [Accounts and Auto](https://agi-labo.com/en/tools/cockpit/docs/accounts) for authentication and billing boundaries, and [Crew safety](https://agi-labo.com/en/tools/cockpit/docs/crew-safety) for owner approval before importing or running outside files and owner-only skill changes.
 
 AGI Cockpit tokens and API keys are stored in encrypted storage such as the OS Keychain or keyring. The Discord token and Slack access and app-level tokens use this same boundary and are not returned as ordinary setting values or in status output. If secure storage is unavailable, Cockpit refuses to save rather than falling back to plaintext. Credentials that fail to delete are disabled and scheduled for deletion again on the next launch.
 

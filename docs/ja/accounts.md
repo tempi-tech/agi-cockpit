@@ -4,7 +4,7 @@
 
 複数のエージェントアカウントを分離して登録し、Auto、固定アカウント、実行中の切り替え、利用上限からの復旧を使う方法です。
 
-> AGI Cockpit 4.137.0で2026-11-19に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
+> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/accounts)
 
 AGI Cockpitのアカウントプロファイルは、同じエージェントプロバイダーへ複数のログインを分離して登録し、タスク、自動実行、Fleetごとに使い分ける機能です。Claude、Codex、Antigravity、Cursor、Qoder、Grok Buildに対応します。
 
@@ -29,6 +29,32 @@ cockpit accounts create work --agent-type codex
 cockpit accounts login work --agent-type codex
 cockpit accounts list --agent-type codex
 ```
+
+### Claudeプロファイルの認証方式を選ぶ
+
+設定の「エージェント → Claude Code」で、名前付きプロファイルごとに「認証方式」を選べます。「Claude Code ログイン」はそのプロファイルのサブスクリプション認証を、「Anthropic API key」はそのプロファイル専用のキーを使います。変更はタスクを次に開始・再開するときから適用され、動作中のセッションは現在の認証を維持します。
+
+方式を明示していないプロファイルは、Claude共通の認証設定を継承します。共通設定がAPIキー方式なら、継承したネイティブUIタスクは共通キーでデフォルトアカウントとして動きます。画面から専用キーを設定するには、一度「Claude Code ログイン」を選んでから「Anthropic API key」を選びます。デフォルトアカウントは引き続き共通設定を使います。
+
+APIキー方式を明示したプロファイルには、次の制約があります。
+
+- ネイティブUIのタスク、クルー、自動実行、Fleetでは明示的に選びます。ネイティブUIのAutoや利用上限からの自動復旧では選ばれず、キーが失敗してもサブスクリプション、共通キー、別アカウントへ切り替わりません。
+- 開始前にキーを保存します。設定には未ログイン表示やサインインボタンの代わりに、保存済みなら「Anthropic API key」、未保存なら「API key 未設定」と表示します。保存時にキーが使えるかは検証しません。
+- このプロファイルのサブスクリプション使用量は取得せず、API使用量や料金も表示しません。料金はそのAPIキーに対して発生します。
+- ターミナルUIは、Autoと自動復旧を含め、そのプロファイルのClaude Codeログインを使い続けます。方式を変えてもClaude Codeからサインアウトしません。
+
+既存のAutoタスクで現在のプロファイルをAPIキー方式へ変えると、次の開始・再接続・再試行でエラーになります。そのプロファイルを明示的に選ぶか、別アカウントを選んでください。保存された方式を認識できない場合も、ネイティブUIは開始しません。
+
+```bash
+cockpit accounts auth work --agent-type claude --mode api-key --key-file /secure/anthropic-key.txt
+cockpit accounts auth work --agent-type claude --mode claude-code
+cockpit accounts auth work --agent-type claude --mode inherit
+cockpit accounts auth work --agent-type claude --reset-key
+```
+
+キーは`--stdin`か`--key-file`で渡し、引数やタスクの本文へ直接書かないでください。`auth`はローカルの名前付きClaudeプロファイルだけに対応します。キーはプロファイルごとに別の暗号化ストレージ項目へ保存します。名前を変えてもキーは維持され、プロファイルを削除すると専用キーも削除されます。キーだけを削除した場合はAPIキー方式が残るため、新しいキーを保存するまでネイティブUIは開始しません。
+
+`accounts list`の`authMode`と`apiKeySet`で方式と保存状態を確認できます。`loggedIn`、`authState`、`authReason`は引き続きClaude Codeのログイン状態を表し、APIキーで実行できるかの判定ではありません。全オプションは[accounts Reference](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/accounts)を参照してください。
 
 ### プロファイル名を変更する
 

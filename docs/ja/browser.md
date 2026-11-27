@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 4.131.0で2026-11-12に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -71,6 +71,20 @@ cockpit browser screenshot <tabId> --full-page --output ./page.png --json
 locatorはopen shadow rootをたどります。通常のCSS selectorに加え、`host >>> inner`でshadow境界を明示できます。closed shadow rootはページ外から参照できないため、必要ならscreenshot座標で操作します。
 
 
+
+## タブの右クリックメニューを使う
+
+ブラウザーのタブを右クリックすると、「再読み込み」「複製」「閉じる」「他のタブをすべて閉じる」「右側のタブを閉じる」を選べます。閉じたタブの未保存入力は失われます。対象は同じセッションのタブだけです。
+
+複製は同じBrowser Identityで現在のURLをタブ列の末尾に開き、選択します。閲覧履歴、フォーム入力などページの状態はコピーしません。右側を閉じる操作は、指定タブを残し、タブ列の順序を使います。指定タブが末尾なら何も閉じません。
+
+```bash
+cockpit browser tab duplicate <tabId>
+cockpit browser tab close <tabId> --right
+cockpit browser tab close <tabId> --others
+```
+
+`--right`にはタブIDが必要で、`--others`とは併用できません。別セッションや別Browser Identityのタブには影響しません。
 
 ## 開いているタブと音声を管理する
 

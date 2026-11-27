@@ -4,7 +4,7 @@
 
 Learn what the Crew rules can and cannot stop, two ways to treat people differently, the terms of AI services, and what to tell the people in the chat.
 
-> Verified with AGI Cockpit 4.134.0 on 2026-11-15. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-safety)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-safety)
 
 **The Crew rules are there to prevent mistakes. They are not a security boundary.**
 
@@ -63,6 +63,14 @@ Crews and child tasks are stopped from accidentally doing the following through 
 | Keeping memory separate for each person | A Crew has one home and one memory. What it learned from one person's request may carry over to later turns through conversations or files |
 
 Ask answers are protected by a separate mechanism. To answer an Ask as the owner, a verified task's credentials or the owner's pairing credentials are required.
+
+## Instructions for outside files and skills
+
+For a request from someone other than an owner, the Crew is instructed to obtain owner approval through Ask before importing outside files, processing imported material with tools, unpacking it, or running it. Simply viewing an image or reading text is exempt.
+
+The Crew is also instructed to create or change skills, and other material that becomes instructions in later conversations, only when an owner requests it. It must not do so on its own initiative or at another person's request. Memory, past conversations, skills, and child reports do not grant new permission.
+
+These are instructions to the agent, not a sandbox or a guarantee that it follows them. Attachments being accepted does not establish that they are safe.
 
 ## What to do to stay safe
 

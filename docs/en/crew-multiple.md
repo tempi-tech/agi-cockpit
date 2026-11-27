@@ -4,7 +4,7 @@
 
 Learn the limit on how many Crews you can have, how to split them, how Crews talk to each other, Crews a Crew creates, mentions from tasks, and Crews on other computers.
 
-> Verified with AGI Cockpit 4.132.0 on 2026-11-13. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-multiple)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-multiple)
 
 You can split Crews by role. Crews can talk to each other both inside Cockpit and in chat.
 
@@ -26,7 +26,7 @@ When Cockpit cannot confirm your membership (for example, when offline), you are
 Each Crew has its own:
 
 - People who may talk to it and places where it responds
-- Place it works in, agent, model, and approval mode
+- Place it works in, harness, model, and approval mode
 - Session, `AGENTS.md`, memory, and work records
 - Chat connections
 

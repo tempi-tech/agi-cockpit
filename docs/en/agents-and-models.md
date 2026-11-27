@@ -4,7 +4,7 @@
 
 Compare nine agents, native and terminal UI, models, reasoning levels, accounts, approvals, resume behavior, and usage reporting.
 
-> Verified with AGI Cockpit 4.141.1 on 2026-11-24. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
+> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/agents-and-models)
 
 AGI Cockpit lets you choose from nine agents on the same task creation surface. Their support for UI modes, models, reasoning levels, accounts, approvals, and resume behavior is not identical. Only settings displayed for the selected agent and execution mode are currently available.
 
@@ -163,6 +163,8 @@ A named Codex account keeps an isolated configuration and a newly created accoun
 For a Codex model missing from the retrieved list whose capabilities are unknown, the reasoning picker offers `low`, `medium`, `high`, `xhigh`, `max`, and `ultra`. This does not guarantee that the model supports every level; Codex determines availability at runtime. Models with known capabilities use their advertised choices.
 
 ## Accounts and Auto
+
+Claude named profiles can choose subscription sign-in or a dedicated Anthropic API key for Native UI. Dedicated-key profiles require explicit selection and are excluded from Native UI Auto; Terminal UI keeps using Claude Code sign-in. See [Claude profile authentication](https://agi-labo.com/en/tools/cockpit/docs/accounts#choose-authentication-for-a-claude-profile) for billing, key status, and inherited settings.
 
 Claude, Codex, Cursor, Qoder, and Grok Build support Auto account selection and usage-limit rotation. Antigravity uses a fixed default or manually selected account; additional profiles are available only on macOS.
 
