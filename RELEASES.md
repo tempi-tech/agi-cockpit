@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v5.1.0 — 2026-11-27
 
-**Type:** minor · **Platforms:** macOS
+**Type:** minor · **Platforms:** macOS, Linux
 
 - Added support for up to 10 open Asks per task.
 - Added a choice of subscription sign-in or API key authentication for each Claude account profile.
