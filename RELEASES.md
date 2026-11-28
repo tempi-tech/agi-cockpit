@@ -8,13 +8,13 @@ English is the primary language for these generated release notes. Download the 
 
 **Type:** patch · **Platforms:** macOS
 
-- You can now send queued Ask answers immediately in Crew conversations.
-- The in-app browser now shows a sign-in dialog for sites that require an ID and password through HTTP authentication.
-- Crews now notify their owner when someone is waiting for a reply while DM intake is off.
-- Sending to a stopped task now returns a clear error and guidance on resuming it.
-- Text wrapping in table images sent by Crews is now easier to read.
-- Crews are now notified when descendant tasks wait for approval or an answer.
-- PWA inbox cards are easier to read and leave more room for their content.
+- Added Send now for queued Ask answers in Crew conversations.
+- Fixed missing sign-in dialogs for sites requiring HTTP authentication in the in-app browser.
+- Added owner notifications when people are waiting for a reply while Crew DM intake is off.
+- Improved errors for messages sent to stopped tasks, with guidance on resuming them.
+- Improved text wrapping in table images sent by Crews.
+- Added Crew notifications when descendant tasks wait for approval or an answer.
+- Improved PWA inbox cards to leave more room for their content.
 
 <details>
 <summary>日本語のリリースノート</summary>
