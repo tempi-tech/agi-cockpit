@@ -4,7 +4,7 @@
 
 Learn how to create and delegate Cockpit tasks, inspect state and reports, send follow-ups, resume work, and finish tasks safely through the CLI.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/task-management)
 
 `cockpit task` lets an AI agent or person create Cockpit tasks, read their state, send the next instruction, and collect results. Use this flow to delegate one job to another task. Use [Fleet](https://agi-labo.com/en/tools/cockpit/docs/fleet) when a reusable YAML workflow needs dependency order.
 
@@ -163,6 +163,8 @@ If `waitingReason` is `permission` or `question`, an agent-side confirmation is 
 
 Full and summary `task list`, `task get`, and the task snapshot in `task wait` return the same `stopReason`: `approval`, `turn_ended`, `usage_limit`, `question`, `terminal_prompt`, `runtime_error`, or `unknown`. It is `null` while running or after completion. `turn_ended` means one turn ended, not that the whole task completed. Without reliable evidence the value is `unknown`; a session ID alone is insufficient. `hasPendingAsk` is independent of approvals.
 
+`task get` exposes `attentionWait` while waiting for approval or an answer, including an unanswered Ask. It contains `reason` (`approval` or `question`) and the start time `since`, or `since: null` for a wait that began before recording. Updates preserve the start time; the field disappears when the wait ends.
+
 ## Retry a task that failed to start
 
 For a task with `startFailed: true`, use `retry-start` instead of creating another task. By default it reuses the saved initial instruction or Terminal command. Supply new text only when replacing that input.
@@ -231,6 +233,8 @@ cockpit task send <task-id> --text "Fix only the failing test and run it again" 
 ```
 
 Use `--stdin` or `--text-file` for multiline content. `--media` on `task send` follows the same count, size, local-file, and agent-support limits as creation. To send only Enter to an agent confirmation, run `cockpit task send <task-id>` with no text. Read `waitingReason` first so you know whether you are answering a question, approving a tool, or sending an ordinary follow-up.
+
+A terminal-mode task whose agent is not running refuses sends with `task_not_running` (exit 1, `details.use: task resume`). Nothing is sent: run `cockpit task resume <task-id>`, then send again. The same applies with `--host`. Completed tasks cannot resume and return the same code without `details`. `task_not_found` means the task does not exist. Native UI and Cockpit Agent tasks reconnect automatically when sent a message.
 
 ## Manage a Queue as the owner
 

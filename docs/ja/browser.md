@@ -4,7 +4,7 @@
 
 タスクのアプリ内ブラウザーでWebページを開き、人とエージェントが同じタブを安全に確認・操作・検証する方法です。
 
-> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
+> AGI Cockpit 5.1.1で2026-11-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/browser)
 
 `cockpit browser`は、タスク単位のアプリ内ブラウザーで実際のWebページを開き、DOM、画像、操作結果を確認するための正式な操作面です。表示専用ではなく、クリック、入力、選択、アップロード、貼り付け、キー操作、スクロールまで行えます。
 
@@ -175,6 +175,14 @@ siteが遅いだけなら待機し、navigation errorならURLや接続を確認
 ```bash
 cockpit browser tab recreate <tabId> --json
 ```
+
+## HTTP認証が必要なサイト
+
+HTTP Basic・Digest認証を求めるページでは、ブラウザーパネルにサイト、レルム（サイトが付けた名前）、ユーザー名とパスワードの欄が出ます。「サインイン」でその要求に一度だけ送り、「キャンセル」でサイトの401ページを表示します。暗号化されていないHTTP接続には警告が出ます。
+
+エージェントは`health.authRequired`で待機を確認できます。`open`・`goto`・`reload`・`back`・`forward`・`snapshot`・`evaluate`は、この間`http_auth_required`と同じhealthを返します。ページはまだ読み込まれていません。値をエージェントに渡さず入力するには、`cockpit secret request --to http-auth --tab <tabId>`を使います。HTTPSまたはループバックHTTPに限り、Desktopの専用画面・Askタブ、HTTPS接続のPWAから入力できます。
+
+Cockpitは認証情報を保存しません。Chromiumは受理された情報を同じBrowser Identityの同じサイトでCockpit終了まで再利用します。別のIdentityには渡しません。間違えると新しい認証要求になり、自動で再送しません。別のページへの移動、読み込み停止、タブを閉じる・作り直す操作でも要求は終わります。プロキシ認証、ほかの認証方式、画像やスクリプトからの認証要求は対象外で、取り消します。
 
 ## ログインと安全境界
 

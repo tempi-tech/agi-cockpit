@@ -4,7 +4,7 @@
 
 Learn how a Crew goes from a request to a reply, how it handles messages that arrive while it works, how it hands work to child tasks, and how to stop it or start over.
 
-> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-work)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-work)
 
 A Crew treats a request as one piece of work: it takes the request, works on it itself or hands it to a child task, and returns the result to the person who asked.
 
@@ -152,6 +152,8 @@ Handed-off tasks appear in the Crew's conversation and in the task list. **Open*
 The Crew follows a child task until it receives the result. Being told "I'll check later" is not enough for it to treat the work as done. A notice reaches the Crew's conversation when a child task completes, asks a question, waits for approval, stops with an error, or stops at a usage limit or because of the memory guard.
 
 For the approval mode of child tasks, see [Approval modes and permissions](https://agi-labo.com/en/tools/cockpit/docs/crew-approval).
+
+The Crew also receives one notice when a descendant below a direct child starts waiting for approval or an answer, including an unanswered Ask, and one when that wait ends. The direct parent still receives its notice. An ended wait does not mean approval, an answer, or success: interruption, error, or completion can also end it. Tasks owned by another Crew notify that Crew instead; Fleet nodes use Fleet notifications. `cockpit crew check` exposes wait duration through `childTasks.waitingSince` and `waitingMs`.
 
 ## Actions that go outside
 

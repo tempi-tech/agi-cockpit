@@ -4,9 +4,9 @@
 
 Learn how to choose who may talk to a Crew, where it responds, and its active hours, how owners differ from others, and how to let in people waiting for approval.
 
-> Verified with AGI Cockpit 4.140.0 on 2026-11-22. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-people)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-people)
 
-Only messages from people who may talk to the Crew, in places where it responds, reach the Crew. You set both in the **Connection** tab of the Crew's settings, separately for Discord, Slack, and Chatwork (Chatwork is for members). For the steps to connect a chat, see [Connect a chat](https://agi-labo.com/en/tools/cockpit/docs/crew-chat). Inside Cockpit, owners can always talk to the Crew.
+Messages reach the Crew when both the person and place are allowed, or when an owner has allowed that person’s DMs individually. You set both in the **Connection** tab of the Crew's settings, separately for Discord, Slack, and Chatwork (Chatwork is for members). For the steps to connect a chat, see [Connect a chat](https://agi-labo.com/en/tools/cockpit/docs/crew-chat). Inside Cockpit, owners can always talk to the Crew.
 
 Open the settings with **Open settings** in the menu on the Crew's row.
 
@@ -68,7 +68,7 @@ If the Crew is stopped, or an attachment has been deleted and cannot be fetched 
 
 **A message from someone who may not talk to it that does not mention the Crew does not go into Waiting for approval.** The same is true in channels set to **Everything**. The message simply does not reach the Crew.
 
-When DMs are set to **Owners only** or **Off**, DMs from other people do not put them into Waiting for approval.
+DMs blocked by the DM setting are held separately from people in **Waiting for approval**. An Ask lets the owner decide whether to allow that person’s DMs; see **Allow DMs from one person** below.
 
 ### Chatwork contact requests
 
@@ -114,11 +114,25 @@ Each works as follows.
 - **Everything:** Every message from people who may talk to it reaches the Crew, even without a mention. This also increases what is sent to the AI service
 - **Everyone who can talk for DMs:** The Crew receives DMs from people who may talk to it. Not everyone's DMs reach it
 - **Owners only for DMs:** The Crew receives only owners' DMs. Without an owner, this is the same as **Off**
-- **Off for DMs:** The Crew does not receive even owners' DMs
+- **Off for DMs:** The Crew does not receive even owners' DMs, except from individually allowed senders
 
 A new Crew's DMs start at **Owners only**. The settings of existing Crews do not change. With **Everyone who can talk**, a request from anyone who can talk runs on your AI account and this computer, and the attachments they send are received too, so Cockpit asks you to confirm first, and the CLI needs `--confirm`.
 
 The DM setting does not affect the Ask DMs the Crew sends to owners.
+
+### Allow DMs from one person
+
+When DMs are **Off**, or **Owners only** and the sender is not an owner, Cockpit marks the first DM with ⏳ and asks the owner whether to accept that person’s DMs. Group DMs need a mention of the Crew. Setup and button presses do not produce these Asks.
+
+- **Allow this person's DMs** allows only that person’s DMs. It does not change the overall DM setting, add them to **Who can talk**, or allow them to talk in channels
+- **Not this time**, or closing without answering, discards the held DMs. Their next DM asks again
+- Only owners can answer. With Ask DMs enabled, the selected owners also receive the Ask by DM. Crews and child tasks cannot grant this permission
+
+The Ask shows the sender, the first 100 characters of the first DM, and the number received. The count updates in Cockpit; an Ask DM already sent keeps its original text. Cockpit holds the oldest 10 DMs per sender and the newest 50 senders. These Asks share the limit of five open approval Asks per connection.
+
+After approval, messages are delivered in arrival order after rechecking current permissions and attachments. DMs received outside active hours are not delivered. If the Crew is stopped or disconnected, approved DMs wait until it reconnects. If permission has been removed by then, the owner is asked again.
+
+Individual permissions appear under the DM setting in **Connection**, where you can remove them. The CLI lists them with `cockpit crew place dm <crew> --list` and removes one with `--remove --user <id>` (`--crew <id>` for an app or bot). There is no CLI command to add one; only an owner’s Ask answer grants it.
 
 ### What counts as a mention
 

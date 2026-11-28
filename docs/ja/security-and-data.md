@@ -4,7 +4,7 @@
 
 ローカル実行、外部サービスとAsk転送への送信、承認、Cockpit Hooks、認証情報、添付、Browser Identity、Remote Accessの保存境界を説明します。
 
-> AGI Cockpit 5.1.0で2026-11-27に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
+> AGI Cockpit 5.1.1で2026-11-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/security-and-data)
 
 AGI Cockpitは、タスクとエージェントプロセスを利用者のコンピューターで実行します。ただし、選択したAIプロバイダー、Webサイト、AGIラボの認証・会員確認、匿名利用状況など、機能に必要な通信は外部サービスへ送られます。
 
@@ -118,7 +118,7 @@ Cockpit Hooksは、登録したシェルアクションを利用者のローカ�
 
 クルーの決まりで止められること・止められないことと、人ごとに扱いを変える方法は、[安全と、人ごとの扱い](https://agi-labo.com/tools/cockpit/docs/crew-safety)にまとめています。
 
-CrewのDM受付は`cockpit crew place dm <crew> --mode all|owners|off`で設定できます。`all`は許可された相手、`owners`はオーナーだけ、`off`は誰からも受け付けません。`owners`ではオーナー以外のDMを承認待ちにも追加しません。オーナー未設定ならDMは届きませんが、初期設定中のオーナー確認は行えます。Crew自身が`owners`から`all`へ広げるには、Cockpitでオーナーの承認が必要です。
+CrewのDM受付は`cockpit crew place dm <crew> --mode all|owners|off`で設定できます。通常は`all`で話せる人、`owners`でオーナーだけ、`off`で誰からも受け付けません。ただし、設定で受け取らないDMは保留し、オーナーにその人のDMを許可するかAskで聞きます。許可はDMだけに適用され、「話せる人」やチャンネルの権限を増やしません。複数の保留DMを順に届け、停止・未接続中に許可した分は再接続まで保持します。活動時間外のDMは届けません。「今回は受け取らない」やAskを閉じる操作では許可も配送もしません。個別許可は設定のDM欄かCLIの`place dm --remove`で外せます。詳しい上限と手順は[話せる人と場所](https://agi-labo.com/tools/cockpit/docs/crew-people#受け取らないdmを個別に許可する)を見てください。Crew自身が`owners`から`all`へ広げるには、Cockpitでオーナーの承認が必要です。
 
 新しいクルーはエージェントの慎重な承認モードで始まります。**フルアクセス**では、確認せずにコマンド実行やファイル編集を行います。専用フォルダはsandboxではなく、クルーと子タスクはCockpitと同じOSユーザーで動きます。オーナー以外の依頼を慎重に扱うことや、外部操作を確認する指示を、エージェントが守れない場合もあります。クルー用CLIの制限はファイル・秘密・ほかのタスク・Hooks・設定・Remote Accessを隔離せず、同じローカルOSアカウントで動くプロセスは別経路で操作できます。OSアカウントを保護し、届く範囲のファイルと権限を絞ってください。承認待ちでは、オーナーがCockpitで回答するまで返信と後続メッセージが止まります。
 
@@ -173,6 +173,12 @@ CLIでは`cockpit settings set agents.credential.<name> --stdin`または`--key-
 値は配送中のメモリーだけで扱い、Cockpitの会話、Ask回答、CLI結果、診断ログ、保存済みタスク、PWAのストレージやAsk転送へ保存しません。再起動後の復元や再送も行いません。配送結果が不明な場合は自動再試行せず、状態を確認してください。取消は入力開始前だけ有効です。入力が完了、失敗、取消、または期限切れになると、入力画面はすべての表示面からすぐに消え、結果は画面に残りません。依頼元は`cockpit secret status`またはタスクへ届く値を含まない通知で結果を確認できます。CLI応答は接続先の`instance`を示し、失敗時は固定の`code`と`error`を返しますが、入力値やページ本文は含めません。
 
 入力先のサイトは値を保持でき、入力後はDOMやスクリプトを読むツールがその値を取得できる場合があります。「AIから絶対に読めない」機能ではありません。配送用のコピーを破棄しても、サイトの入力欄は消去されません。信頼できるPC、PWA端末、サイトで利用してください。詳しくは[安全な入力のCLIリファレンス](https://agi-labo.com/tools/cockpit/docs/cockpit-cli/reference/secret)を参照してください。
+
+### HTTP認証へ一度だけ送信する
+
+`cockpit secret request --to http-auth --tab <tabId>`は、通常のページのパスワード欄とは別に、HTTP Basic・Digest認証のユーザー名とパスワードを受け取ります。依頼元タスクのタブ、Browser Identity、認証要求のID・origin・方式・レルムに固定され、`--selector`は使いません。入力先はHTTPSかループバックHTTPに限ります。専用画面でサイトを確かめて「このサイトに一度だけ送信」を選びます。
+
+`completed`はChromiumへの受け渡し完了で、認証成功ではありません。間違えると新しい要求に対して入力を依頼し直します。パネルでのサインイン・取消、ページ移動、読み込み停止、タブの終了・作り直しで、待機中の入力依頼は1秒以内に`destination_unavailable`で失敗します。Cockpitは両方の値を保存しませんが、Chromiumは受理した情報を同じIdentityでCockpit終了まで再利用します。
 
 ### 管理対象ターミナルへのパスワード入力
 

@@ -4,7 +4,7 @@
 
 Open web pages in a task's in-app browser so people and agents can safely inspect, operate, and verify the same tabs.
 
-> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/browser)
 
 `cockpit browser` is the official surface for opening real web pages in a task-scoped in-app browser and inspecting their DOM, appearance, and outcomes. It is driveable, not just viewable: it can click, type, select, upload, paste, press keys, and scroll.
 
@@ -173,6 +173,14 @@ Wait when the site is merely slow, and inspect the URL or connection after a nav
 ```bash
 cockpit browser tab recreate <tabId> --json
 ```
+
+## Sites requiring HTTP authentication
+
+For HTTP Basic or Digest authentication, the browser panel shows the site, realm (a name chosen by the site), and user name and password fields. **Sign in** sends them for that challenge once; **Cancel** shows the site’s 401 page. Unencrypted HTTP connections show a warning.
+
+Agents can inspect `health.authRequired`. While it waits, `open`, `goto`, `reload`, `back`, `forward`, `snapshot`, and `evaluate` return `http_auth_required` with the same health; the page has not loaded. To enter credentials without passing them to the agent, use `cockpit secret request --to http-auth --tab <tabId>`. This requires HTTPS or loopback HTTP and accepts input through the dedicated Desktop window, Ask tab, or an HTTPS-connected PWA.
+
+Cockpit does not save the credentials. Chromium reuses accepted credentials for that site within the same Browser Identity until Cockpit quits, never in another Identity. Wrong credentials produce a new challenge and are not resent automatically. Navigating away, stopping loading, closing, or recreating the tab ends the challenge. Proxy authentication, other schemes, and challenges from images or scripts are unsupported and are cancelled.
 
 ## Sign-in and safety boundaries
 

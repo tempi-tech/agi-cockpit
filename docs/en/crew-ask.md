@@ -4,7 +4,7 @@
 
 How owners answer Asks from Crews and child tasks in Discord, Slack, or Chatwork (for members) DMs, choose recipients, clean up answered DMs, and what never goes to DMs.
 
-> Verified with AGI Cockpit 4.138.0 on 2026-11-20. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-ask)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-ask)
 
 When a Crew needs a decision, it asks an owner through an Ask. The same goes for Asks from child tasks the Crew hands work to, from the Crew's Autorun tasks, and from Fleets the Crew runs. For how Ask itself works, see [Ask](https://agi-labo.com/en/tools/cockpit/docs/ask).
 
@@ -129,9 +129,11 @@ Whichever choice is made first, in the DM or in Cockpit, takes effect. The same 
 
 When the memory guard stops a Crew on a Mac, a DM tells you when it happened and what was using memory. This DM has no buttons. Resume the Crew in Cockpit.
 
-## Fix an answer waiting to be sent
+## Send or fix an answer waiting to be sent
 
 If you answer an Ask while the Crew is working, the answer goes into the Crew conversation's queue and shows **Answered · waiting to send**. Until sending starts, you can fix it from the queue on Desktop and in Remote Access.
+
+- **Send now** stops the current turn and delivers the answer right away. It appears only when the answer is first in the Queue. If an approval or question is waiting, Cockpit asks whether it may cancel that wait
 
 - **Edit answer in the Ask** withdraws the answer and reopens the Ask with the previous answer filled in
 - **Delete answer** withdraws the answer and returns the Ask to empty

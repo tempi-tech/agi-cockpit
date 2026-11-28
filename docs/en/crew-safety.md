@@ -4,7 +4,7 @@
 
 Learn what the Crew rules can and cannot stop, two ways to treat people differently, the terms of AI services, and what to tell the people in the chat.
 
-> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-safety)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/crew-safety)
 
 **The Crew rules are there to prevent mistakes. They are not a security boundary.**
 
@@ -24,15 +24,15 @@ This section separates what Cockpit's mechanisms stop from what is only an instr
 
 | What is stopped | Mechanism |
 | --- | --- |
-| A message from someone who may not talk to it reaching the Crew | Messages from people not on the list are not delivered and go into **Waiting for approval**. This is decided by the sender ID that the chat reports |
-| A message in a place that is off reaching the Crew | The place settings for where it responds do not deliver it |
+| A message from someone who may not talk to it reaching the Crew | Messages from people not on the list are not delivered and go into **Waiting for approval**, except DMs an owner has individually allowed. This is decided by the sender ID that the chat reports |
+| A message in a place that is off reaching the Crew | The place settings prevent delivery, except DMs from individually allowed senders |
 | Pretending to be the owner through the text of a message | Cockpit attaches the "owner" mark based on the sender ID. It cannot be attached from the message text |
 | Allowing an action waiting for approval through a chat message | Approval controls are in Cockpit. Verified owner-request turns may also answer the Crew’s approvals and questions |
 | Approving a settings change requested by the Crew that widens what it can do through chat | This approval can be answered only in Cockpit (including the PWA). It is not sent to Ask DMs either |
 | A request to enter a secret appearing in the chat | The owner is only told by DM that something is waiting |
 | Codex writing and network access outside the place it works | In every mode other than Full access, Codex runs with writing limited to the place it works and added folders, and with the network cut off |
 
-Owners can answer Asks about people waiting for approval and unlisted Discord or Slack channels in Ask DMs too. A channel approval does not bypass the people settings: Cockpit checks both again before delivering held mentions. The Crew and its child tasks cannot answer these Asks. See [Asks and Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-ask).
+Owners can answer Asks about individually allowing held DMs, people waiting for approval and unlisted Discord or Slack channels in Ask DMs too. A channel approval does not bypass the people settings: Cockpit checks both again before delivering held mentions. The Crew and its child tasks cannot answer these Asks. See [Asks and Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-ask).
 
 ### Stopped by rules that prevent mistakes
 

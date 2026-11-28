@@ -4,7 +4,7 @@
 
 cockpit taskでタスクを作成・委任し、状態とレポートを確認して、追加指示、再開、完了まで安全に管理する方法を説明します。
 
-> AGI Cockpit 4.140.0で2026-11-22に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
+> AGI Cockpit 5.1.1で2026-11-28に確認済み。 [公式ドキュメントを表示](https://agi-labo.com/tools/cockpit/docs/task-management)
 
 `cockpit task`は、AIエージェントや利用者がCockpitのタスクを作成し、状態を読み、次の指示を送り、結果を回収するためのCLIです。一件の仕事を別タスクへ委任する場合は、このページの流れを使います。依存関係付きの処理をYAMLで再利用する場合は[Fleet](https://agi-labo.com/tools/cockpit/docs/fleet)を選びます。
 
@@ -163,6 +163,8 @@ cockpit task list --full
 
 通常・summaryの`task list`、`task get`、`task wait`のタスクsnapshotは、共通の`stopReason`を返します。値は`approval`、`turn_ended`、`usage_limit`、`question`、`terminal_prompt`、`runtime_error`、`unknown`です。実行中・完了後は`null`です。`turn_ended`はタスク全体の完了ではなく、1ターンの終了を示します。確かな記録がなければ`unknown`になり、セッションIDだけでは終了と判断しません。`hasPendingAsk`は承認要求とは独立しています。
 
+承認待ち・質問待ち（未回答のAskを含む）には、`task get`の`attentionWait`が`reason`（`approval`または`question`）と開始時刻`since`を返します。記録開始前からの待機は`since: null`です。同じ待機中は時刻を保ち、待機が終わると項目がなくなります。
+
 ## 起動に失敗したタスクを再試行する
 
 `startFailed: true`のタスクは、新しいタスクを作らず`retry-start`で起動をやり直せます。既定では保存された最初の指示またはTerminalコマンドを再利用します。入力を置き換える場合だけ、新しい本文を渡します。
@@ -231,6 +233,8 @@ cockpit task send <task-id> --text "失敗したテストだけ修正し、再�
 ```
 
 複数行の指示は`--stdin`または`--text-file`で渡します。`task send`の`--media`にも作成時と同じ件数、サイズ、ローカルファイル、エージェント対応範囲が適用されます。確認画面に対してEnterを送るだけなら、本文を付けず`cockpit task send <task-id>`を実行します。送信前に`waitingReason`を読み、質問への回答なのか、ツール許可なのか、通常の追加指示なのかを区別してください。
+
+ターミナル形式でエージェントが動いていないタスクへの送信は、`task_not_running`（終了コード1、`details.use`は`task resume`）で失敗し、何も送りません。`cockpit task resume <task-id>`の後に送り直します。`--host`でも同じです。完了済みタスクは再開できず、同じエラーコードでも`details`は付きません。`task_not_found`はタスク自体が存在しない場合です。ネイティブUIとCockpit Agentのタスクは、送信時に自動で再接続します。
 
 ## キューをオーナーとして操作する
 

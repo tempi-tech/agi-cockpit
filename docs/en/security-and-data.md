@@ -4,7 +4,7 @@
 
 Understand local execution, external and Ask-relay transmission, approvals, Cockpit Hooks, credentials, attachments, Browser Identities, and Remote Access storage boundaries.
 
-> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/security-and-data)
 
 AGI Cockpit runs tasks and agent processes on your computer. Features still communicate with external services when required, including the selected AI provider, websites opened in the browser, AGI Lab authentication and membership checks, and anonymous usage events.
 
@@ -116,7 +116,7 @@ Crews are in beta and run on the owner's AI account, including turns requested b
 
 What a Crew's rules can and cannot stop, and how to treat people differently, are summarized in [Safety and treating people differently](https://agi-labo.com/en/tools/cockpit/docs/crew-safety).
 
-Configure Crew DM intake with `cockpit crew place dm <crew> --mode all|owners|off`. `all` accepts allowed people, `owners` accepts only owners, and `off` accepts nobody. In `owners`, other people’s DMs do not enter the approval queue. With no owner, no DMs are delivered, although initial owner confirmation remains available during setup. A Crew requesting a change from `owners` to `all` needs its owner’s approval in Cockpit.
+Configure Crew DM intake with `cockpit crew place dm <crew> --mode all|owners|off`. Normally, `all` accepts people allowed to talk, `owners` accepts only owners, and `off` accepts nobody. DMs blocked by this setting are held while an Ask lets the owner allow that person’s DMs individually. This grants DM access only, without adding them to **Who can talk** or granting channel access. Multiple held DMs are delivered in order; approved messages stay held while stopped or disconnected until reconnection. DMs received outside active hours are not delivered. **Not this time** and closing the Ask grant nothing and deliver nothing. Remove individual permissions in the DM settings or with CLI `place dm --remove`. See [People and places](https://agi-labo.com/en/tools/cockpit/docs/crew-people#allow-dms-from-one-person) for limits and procedures. A Crew requesting a change from `owners` to `all` needs its owner’s approval in Cockpit.
 
 A new Crew uses its agent's careful approval default. **Full access** lets it run commands and edit files without asking. Its home folder is not a sandbox: the Crew and its children run as the same OS user as Cockpit. Instructions to treat non-owner requests carefully and to confirm external actions can be missed by an agent. Crew CLI restrictions do not isolate files, secrets, other tasks, Hooks, settings or Remote Access, and can be bypassed by a process acting through the same local OS account. Protect that account and limit the files and capabilities within its reach. Approval waits pause replies and queued messages until the owner responds in Cockpit.
 
@@ -171,6 +171,12 @@ The destination must be a unique, visible, enabled password field in the main fr
 Delivery values stay in transient memory and are not saved in Cockpit conversations, Ask answers, CLI results, diagnostic logs, persisted tasks, PWA storage, or Ask forwarding. They are not restored or resent after restart. An unconfirmed delivery is not automatically retried; check its status instead. Cancellation applies only before delivery starts. When a request completes, fails, is cancelled, or expires, its input surface disappears immediately everywhere and leaves no result on screen. The requester can inspect the result with `cockpit secret status` or the value-free notification sent to its task. CLI responses identify the selected `instance`; failures return a stable `code` and `error` without including the input value or page content.
 
 The destination site can retain the value, and tools that read its DOM or evaluate scripts may read it after input. This feature does not guarantee that AI cannot read destination data. Discarding the delivery copy does not clear the site's field. Use trusted PCs, PWA devices, and sites. See the [secure input CLI reference](https://agi-labo.com/en/tools/cockpit/docs/cockpit-cli/reference/secret) for details.
+
+### Send HTTP authentication credentials once
+
+`cockpit secret request --to http-auth --tab <tabId>` collects a user name and password for HTTP Basic or Digest authentication, separately from a page’s password field. It binds to the requesting task’s tab, Browser Identity, and exact challenge ID, origin, scheme, and realm. No `--selector` is used. The destination must be HTTPS or loopback HTTP. Review the site in the secure input screen and choose **Send to this site once**.
+
+`completed` means Chromium received the credentials, not that authentication succeeded. Wrong credentials require a new request for the new challenge. Signing in or cancelling in the panel, navigating, stopping loading, closing, or recreating the tab fails a pending input request within a second with `destination_unavailable`. Cockpit saves neither value; Chromium reuses accepted credentials within that Identity until Cockpit quits.
 
 ### Managed terminal password input
 

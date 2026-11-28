@@ -4,7 +4,7 @@
 
 Learn how Ask safely hands a confirmation or decision from an AI agent to a person and resumes the same task after the answer.
 
-> Verified with AGI Cockpit 5.1.0 on 2026-11-27. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
+> Verified with AGI Cockpit 5.1.1 on 2026-11-28. [View the official documentation](https://agi-labo.com/en/tools/cockpit/docs/ask)
 
 Ask lets an AI agent pause its work and hand a confirmation or decision to a person. Cockpit returns the answer to the original task as a structured event, then resumes that same task from where it stopped.
 
@@ -17,7 +17,9 @@ Ask lets an AI agent pause its work and hand a confirmation or decision to a per
 
 Ask is more than a notification. The question remains available until it is answered, and a person can respond in the dedicated Desktop Ask window or the right-side-panel Ask tab, from **Inbox** in the PWA, or through a configured Discord or Slack relay.
 
-The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A secure input request is not an Ask; it delivers a password once to the specified browser field or managed task terminal, or saves a Crew connection token through the dedicated Crew flow. All three let you open the originating task while that task is still available.
+The PWA **Inbox** combines Asks, read-only Display notices, and one-time password input requests. An Ask returns an answer to its original task and resumes that task. Closing a Display notice sends nothing and resumes no task. A secure input request is not an Ask; it delivers a password once to the specified browser field, HTTP authentication challenge, or managed task terminal, or saves a Crew connection token through the dedicated Crew flow. All three let you open the originating task while that task is still available.
+
+When the PWA Inbox has multiple cards, the previous and next controls and position appear in the card header. Answer controls and closing actions are inside the card, leaving more room for its content.
 
 ## How Ask differs from other confirmations
 
