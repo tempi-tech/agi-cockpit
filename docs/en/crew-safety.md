@@ -45,7 +45,7 @@ Crews and child tasks are stopped from accidentally doing the following through 
 | A Crew changing Crews other than itself and the Crews under it. A Crew deleting a Crew | Verified owner-request turns may do these. See [Multiple Crews](https://agi-labo.com/en/tools/cockpit/docs/crew-multiple) |
 | Making the approval mode less cautious, or greatly widening who may talk to it | Waits for approval for an allowed person’s request; applies directly for an owner request |
 | Giving a child task a less cautious approval mode than the Crew | See [Approval modes and permissions](https://agi-labo.com/en/tools/cockpit/docs/crew-approval) |
-| Reading DMs with other people, or outside the place it replies, in a turn not started by the owner | Refused with `history_not_allowed` |
+| Reading DMs with other people, or outside the place it replies, in a turn not started by the owner | Only the Crew's own messages are returned; a link to someone else's message is refused with `history_not_allowed` |
 | Making a change only the owner can ask for, at the request of people who may talk to it | Refused with `owner_request_required`. Nothing changes |
 
 ### Cannot be stopped
