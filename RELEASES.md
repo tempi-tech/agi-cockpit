@@ -6,7 +6,7 @@ English is the primary language for these generated release notes. Download the 
 
 ## v5.1.1 — 2026-11-28
 
-**Type:** patch · **Platforms:** macOS
+**Type:** patch · **Platforms:** macOS, Linux
 
 - Added Send now for queued Ask answers in Crew conversations.
 - Fixed missing sign-in dialogs for sites requiring HTTP authentication in the in-app browser.
