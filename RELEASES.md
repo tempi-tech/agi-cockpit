@@ -4,6 +4,31 @@
 
 English is the primary language for these generated release notes. Download the latest version from the [official AGI Cockpit page](https://agi-labo.com/en/tools/cockpit).
 
+## v5.1.1 — 2026-11-28
+
+**Type:** patch · **Platforms:** macOS
+
+- You can now send queued Ask answers immediately in Crew conversations.
+- The in-app browser now shows a sign-in dialog for sites that require an ID and password through HTTP authentication.
+- Crews now notify their owner when someone is waiting for a reply while DM intake is off.
+- Sending to a stopped task now returns a clear error and guidance on resuming it.
+- Text wrapping in table images sent by Crews is now easier to read.
+- Crews are now notified when descendant tasks wait for approval or an answer.
+- PWA inbox cards are easier to read and leave more room for their content.
+
+<details>
+<summary>日本語のリリースノート</summary>
+
+- クルーの会話で、待機中の Ask の答えを「今すぐ送信」できるようになりました。
+- 内蔵ブラウザで、ID・パスワードを求めるサイトの入力窓が表示されるようになりました。
+- クルーの DM の受け取りがオフのとき、返信を待っている人がいることを持ち主に知らせるようになりました。
+- 止まっているタスクに送信したとき、停止中だと分かるエラーと再開の案内を返すようになりました。
+- クルーが送る表の画像で、文の折り返しを読みやすくしました。
+- 孫以下のタスクが承認待ち・質問待ちになったとき、上のクルーにも知らせるようになりました。
+- PWA の受信箱のカードを見やすくし、本文を表示できる範囲を広げました。
+
+</details>
+
 ## v5.1.0 — 2026-11-27
 
 **Type:** minor · **Platforms:** macOS, Linux
